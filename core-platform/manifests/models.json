@@ -1,0 +1,15 @@
+{
+  "default_coder_model": "qwen2.5-coder:7b",
+  "default_general_model": "qwen2.5:7b",
+  "fallback_model": "qwen2.5:7b",
+  "models": [
+    {
+      "name": "qwen2.5-coder:7b",
+      "role": "code"
+    },
+    {
+      "name": "qwen2.5:7b",
+      "role": "general"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+repo,category,priority,note
+HKUDS/OpenHarness,core-high,P1,本地agent底座候选
+shareAI-lab/learn-claude-code,reference-high,P1,harness设计参考
+NousResearch/hermes-agent,learning-high,P1,自学习闭环参考
+affaan-m/everything-claude-code,optimization-high,P1,优化体系参考
+Panniantong/Agent-Reach,plugin-mid,P2,开放网络信息读取插件候选
+lyogavin/airllm,inference-mid,P2,低显存推理优化候选
+microsoft/qlib,domain-finance,P3,金融垂直能力候选
+shiyu-coder/Kronos,domain-finance,P3,金融模型参考
+NanmiCoder/MediaCrawler,plugin-mid,P3,内容采集插件候选
+public-apis/public-apis,resource,P3,免费API索引

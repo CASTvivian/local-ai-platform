@@ -1,0 +1,12 @@
+.DS_Store
+*.log
+logs/
+references/
+core-platform/.venv/
+core-platform/data/sqlite/*.db
+core-platform/__pycache__/
+core-platform/**/__pycache__/
+core-platform/**/*.pyc
+status_snapshot.txt
+plugin_eval_snapshot.txt
+tree.txt
