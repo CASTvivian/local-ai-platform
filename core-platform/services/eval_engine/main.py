@@ -2,6 +2,7 @@ from pathlib import Path
 import sqlite3
 
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
 BASE_DIR = Path(__file__).resolve().parents[2]
@@ -9,6 +10,13 @@ DB_PATH = BASE_DIR / "data" / "sqlite" / "platform.db"
 
 app = FastAPI()
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://127.0.0.1:19000", "http://localhost:19000", "*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 class TaskRunReq(BaseModel):
     task_type: str
@@ -16,23 +24,19 @@ class TaskRunReq(BaseModel):
     model_used: str
     response_text: str
 
-
 class EvaluationReq(BaseModel):
     task_run_id: int
     score: float
     feedback_text: str = ""
-
 
 def get_conn():
     if not DB_PATH.exists():
         raise RuntimeError(f"Database not found: {DB_PATH}")
     return sqlite3.connect(DB_PATH)
 
-
 @app.get("/health")
 def health():
     return {"ok": True}
-
 
 @app.post("/task-runs")
 def create_task_run(req: TaskRunReq):
@@ -47,7 +51,6 @@ def create_task_run(req: TaskRunReq):
     conn.close()
     return {"ok": True, "task_run_id": row_id}
 
-
 @app.get("/task-runs")
 def list_task_runs():
     conn = get_conn()
@@ -59,16 +62,15 @@ def list_task_runs():
     return {
         "items": [
             {
-                "id": row[0],
-                "task_type": row[1],
-                "prompt": row[2],
-                "model_used": row[3],
-                "created_at": row[4],
+                "id": r[0],
+                "task_type": r[1],
+                "prompt": r[2],
+                "model_used": r[3],
+                "created_at": r[4],
             }
-            for row in rows
+            for r in rows
         ]
     }
-
 
 @app.post("/evaluations")
 def create_evaluation(req: EvaluationReq):
@@ -89,7 +91,6 @@ def create_evaluation(req: EvaluationReq):
     conn.close()
     return {"ok": True, "evaluation_id": row_id}
 
-
 @app.get("/evaluations")
 def list_evaluations():
     conn = get_conn()
@@ -106,12 +107,12 @@ def list_evaluations():
     return {
         "items": [
             {
-                "id": row[0],
-                "task_run_id": row[1],
-                "score": row[2],
-                "feedback_text": row[3],
-                "created_at": row[4],
+                "id": r[0],
+                "task_run_id": r[1],
+                "score": r[2],
+                "feedback_text": r[3],
+                "created_at": r[4],
             }
-            for row in rows
+            for r in rows
         ]
     }

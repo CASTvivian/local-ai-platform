@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Local AI Platform</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github-dark.min.css">
   <style>
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -13,7 +14,7 @@
       color: #e2e8f0;
     }
     .wrap {
-      max-width: 980px;
+      max-width: 1100px;
       margin: 0 auto;
     }
     .card {
@@ -23,7 +24,7 @@
       padding: 16px;
       margin-bottom: 16px;
     }
-    textarea, select, button {
+    textarea, select, button, input {
       width: 100%;
       box-sizing: border-box;
       margin-top: 8px;
@@ -41,6 +42,9 @@
       border: none;
       font-weight: 600;
     }
+    .button-secondary {
+      background: #334155;
+    }
     pre {
       white-space: pre-wrap;
       word-wrap: break-word;
@@ -50,20 +54,77 @@
       border: 1px solid #334155;
       overflow-x: auto;
     }
+    .response-content {
+      background: #020617;
+      padding: 16px;
+      border-radius: 10px;
+      border: 1px solid #334155;
+      line-height: 1.75;
+      font-size: 15px;
+      overflow-x: auto;
+    }
+    .response-content h1,
+    .response-content h2,
+    .response-content h3,
+    .response-content h4 {
+      margin-top: 1em;
+      margin-bottom: 0.5em;
+    }
+    .response-content p {
+      margin: 0.7em 0;
+    }
+    .response-content ul,
+    .response-content ol {
+      padding-left: 1.5em;
+    }
+    .response-content code {
+      background: rgba(148, 163, 184, 0.15);
+      padding: 0.15em 0.35em;
+      border-radius: 6px;
+      font-size: 0.95em;
+    }
+    .response-content pre code {
+      background: transparent;
+      padding: 0;
+      border-radius: 0;
+    }
+    .meta {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 8px 12px;
+      background: #020617;
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid #334155;
+      margin-bottom: 12px;
+    }
+    .meta-label {
+      color: #94a3b8;
+    }
     .row {
       display: grid;
       grid-template-columns: 180px 1fr;
       gap: 12px;
       align-items: center;
     }
-    h1, h2 {
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    h1, h2, h3 {
       margin-top: 0;
+    }
+    .small {
+      color: #94a3b8;
+      font-size: 12px;
     }
   </style>
 </head>
 <body>
   <div class="wrap">
     <h1>Local AI Platform</h1>
+    <div class="small">本地模型 + Agent + Plugin + Eval</div>
 
     <div class="card">
       <h2>Ask</h2>
@@ -76,43 +137,115 @@
       </div>
 
       <label for="prompt">Prompt</label>
-      <textarea id="prompt" rows="8" placeholder="输入你的问题，包含 echo / plugin / tool 会自动走插件链路"></textarea>
+      <textarea id="prompt" rows="8" placeholder="输入问题；包含 echo / plugin / tool 会自动走插件链路"></textarea>
 
       <button id="sendBtn">发送</button>
 
-      <h3>Response</h3>
-      <pre id="responseBox">等待请求...</pre>
+      <h3>Response Meta</h3>
+      <div id="responseMeta" class="meta">
+        <div class="meta-label">状态</div>
+        <div>等待请求...</div>
+      </div>
+
+      <h3>Response Content</h3>
+      <div id="responseContent" class="response-content">等待请求...</div>
     </div>
 
-    <div class="card">
-      <h2>Recent Task Runs</h2>
-      <button id="refreshRunsBtn">刷新记录</button>
-      <pre id="runsBox">等待加载...</pre>
+    <div class="grid-2">
+      <div class="card">
+        <h2>Recent Task Runs</h2>
+        <button id="refreshRunsBtn" class="button-secondary">刷新任务记录</button>
+        <pre id="runsBox">等待加载...</pre>
+      </div>
+
+      <div class="card">
+        <h2>Evaluations</h2>
+        <div class="row">
+          <label for="taskRunId">Task Run ID</label>
+          <input id="taskRunId" type="number" placeholder="例如 8" />
+        </div>
+
+        <div class="row">
+          <label for="score">Score</label>
+          <input id="score" type="number" step="0.1" min="0" max="5" value="4.0" />
+        </div>
+
+        <label for="feedbackText">Feedback</label>
+        <textarea id="feedbackText" rows="4" placeholder="输入评价"></textarea>
+
+        <button id="submitEvalBtn">提交评分</button>
+        <button id="refreshEvalBtn" class="button-secondary">刷新评分记录</button>
+
+        <pre id="evalBox">等待加载...</pre>
+      </div>
     </div>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/lib/highlight.min.js"></script>
   <script>
-    const API_BASE = "http://127.0.0.1:18081";
+    const ASK_BASE = "http://127.0.0.1:18081";
     const EVAL_BASE = "http://127.0.0.1:18083";
+
+    marked.setOptions({
+      breaks: true,
+      gfm: true
+    });
+
+    function renderMeta(data) {
+      const box = document.getElementById("responseMeta");
+      box.innerHTML = `
+        <div class="meta-label">task_type</div>
+        <div>${data.task_type || ""}</div>
+        <div class="meta-label">route_used</div>
+        <div>${data.route_used || ""}</div>
+        <div class="meta-label">model_used</div>
+        <div>${data.model_used || ""}</div>
+      `;
+    }
+
+    function renderResponseContent(text) {
+      const box = document.getElementById("responseContent");
+      const raw = text || "";
+      const html = marked.parse(raw);
+      box.innerHTML = DOMPurify.sanitize(html);
+      box.querySelectorAll("pre code").forEach((el) => {
+        hljs.highlightElement(el);
+      });
+    }
 
     async function sendAsk() {
       const taskType = document.getElementById("taskType").value;
       const prompt = document.getElementById("prompt").value;
-      const responseBox = document.getElementById("responseBox");
 
-      responseBox.textContent = "请求中...";
+      renderMeta({
+        task_type: taskType,
+        route_used: "请求中...",
+        model_used: "请求中..."
+      });
+      renderResponseContent("请求中...");
 
       try {
-        const res = await fetch(`${API_BASE}/ask`, {
+        const res = await fetch(`${ASK_BASE}/ask`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ task_type: taskType, prompt })
         });
         const data = await res.json();
-        responseBox.textContent = JSON.stringify(data, null, 2);
+
+        renderMeta(data);
+        renderResponseContent(data.response || "");
+
         await loadRuns();
+        await loadEvaluations();
       } catch (err) {
-        responseBox.textContent = `ERROR: ${err}`;
+        renderMeta({
+          task_type: taskType,
+          route_used: "ERROR",
+          model_used: "ERROR"
+        });
+        renderResponseContent(`ERROR: ${err}`);
       }
     }
 
@@ -123,15 +256,61 @@
         const res = await fetch(`${EVAL_BASE}/task-runs`);
         const data = await res.json();
         runsBox.textContent = JSON.stringify(data, null, 2);
+
+        const first = data?.items?.[0];
+        if (first?.id) {
+          document.getElementById("taskRunId").value = first.id;
+        }
       } catch (err) {
         runsBox.textContent = `ERROR: ${err}`;
       }
     }
 
+    async function submitEvaluation() {
+      const taskRunId = Number(document.getElementById("taskRunId").value);
+      const score = Number(document.getElementById("score").value);
+      const feedbackText = document.getElementById("feedbackText").value;
+      const evalBox = document.getElementById("evalBox");
+
+      evalBox.textContent = "提交中...";
+
+      try {
+        const res = await fetch(`${EVAL_BASE}/evaluations`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            task_run_id: taskRunId,
+            score,
+            feedback_text: feedbackText
+          })
+        });
+        const data = await res.json();
+        evalBox.textContent = JSON.stringify(data, null, 2);
+        await loadEvaluations();
+      } catch (err) {
+        evalBox.textContent = `ERROR: ${err}`;
+      }
+    }
+
+    async function loadEvaluations() {
+      const evalBox = document.getElementById("evalBox");
+      evalBox.textContent = "加载中...";
+      try {
+        const res = await fetch(`${EVAL_BASE}/evaluations`);
+        const data = await res.json();
+        evalBox.textContent = JSON.stringify(data, null, 2);
+      } catch (err) {
+        evalBox.textContent = `ERROR: ${err}`;
+      }
+    }
+
     document.getElementById("sendBtn").addEventListener("click", sendAsk);
     document.getElementById("refreshRunsBtn").addEventListener("click", loadRuns);
+    document.getElementById("submitEvalBtn").addEventListener("click", submitEvaluation);
+    document.getElementById("refreshEvalBtn").addEventListener("click", loadEvaluations);
 
     loadRuns();
+    loadEvaluations();
   </script>
 </body>
 </html>

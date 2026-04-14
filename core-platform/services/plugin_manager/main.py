@@ -4,6 +4,7 @@ from pathlib import Path
 from typing import Any, Dict
 
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
 BASE_DIR = Path(__file__).resolve().parents[2]
@@ -11,19 +12,24 @@ REGISTRY_PATH = BASE_DIR / "manifests" / "plugins" / "registry.json"
 
 app = FastAPI()
 
-PLUGIN_CACHE = {}
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://127.0.0.1:19000", "http://localhost:19000", "*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
+PLUGIN_CACHE = {}
 
 class PluginRunReq(BaseModel):
     plugin_name: str
     payload: Dict[str, Any]
 
-
 def load_registry():
     if not REGISTRY_PATH.exists():
         return {"plugins": []}
     return json.loads(REGISTRY_PATH.read_text(encoding="utf-8"))
-
 
 def load_plugin(entrypoint: str):
     if entrypoint in PLUGIN_CACHE:
@@ -35,25 +41,19 @@ def load_plugin(entrypoint: str):
     PLUGIN_CACHE[entrypoint] = instance
     return instance
 
-
 @app.get("/health")
 def health():
     return {"ok": True}
-
 
 @app.get("/plugins")
 def list_plugins():
     return load_registry()
 
-
 @app.post("/run")
 def run_plugin(req: PluginRunReq):
     registry = load_registry()
     plugins = registry.get("plugins", [])
-    target = next(
-        (p for p in plugins if p["name"] == req.plugin_name and p.get("enabled", False)),
-        None,
-    )
+    target = next((p for p in plugins if p["name"] == req.plugin_name and p.get("enabled", False)), None)
     if not target:
         raise HTTPException(status_code=404, detail=f"Plugin not found or disabled: {req.plugin_name}")
 
@@ -62,5 +62,5 @@ def run_plugin(req: PluginRunReq):
     return {
         "ok": True,
         "plugin": req.plugin_name,
-        "result": result,
+        "result": result
     }
