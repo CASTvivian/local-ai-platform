@@ -1,0 +1,7 @@
+MOCK IMAGE RESULT (ComfyUI unavailable)
+prompt=a cyberpunk city at night, neon lights, cinematic, highly detailed
+backend=ComfyUI
+error=400 Client Error: Bad Request for url: http://127.0.0.1:8188/prompt
+seed=465319885
+width=512x512
+steps=20

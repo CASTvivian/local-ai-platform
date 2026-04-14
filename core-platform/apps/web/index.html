@@ -151,6 +151,9 @@
 
       <h3>Response Content</h3>
       <div id="responseContent" class="response-content">等待请求...</div>
+
+      <h3>Media Preview</h3>
+      <div id="mediaPreview" class="response-content">暂无媒体结果</div>
     </div>
 
     <div class="grid-2">
@@ -215,6 +218,28 @@
       box.querySelectorAll("pre code").forEach((el) => {
         hljs.highlightElement(el);
       });
+    }
+
+    function renderMedia(media) {
+      const box = document.getElementById("mediaPreview");
+      if (!media) {
+        box.innerHTML = "暂无媒体结果";
+        return;
+      }
+
+      if (media.kind === "image" && media.output_url) {
+        box.innerHTML = \`
+          <div style="margin-bottom:12px;">
+            <div><strong>backend:</strong> \${media.backend || ""}</div>
+            <div><strong>mode:</strong> \${media.mode || ""}</div>
+            <div><strong>filename:</strong> \${media.filename || ""}</div>
+          </div>
+          <img src="\${media.output_url}" alt="generated image" style="max-width:100%; border-radius:12px; border:1px solid #334155;" />
+        \`;
+        return;
+      }
+
+      box.innerHTML = \`<pre>\${JSON.stringify(media, null, 2)}</pre>\`;
     }
 
     async function sendAsk() {

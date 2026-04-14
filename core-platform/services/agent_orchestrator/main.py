@@ -28,7 +28,6 @@ def route_plugin(task_type: str, prompt: str):
         return "image_gen_plugin"
     if task_type == "video":
         return "video_gen_plugin"
-
     if any(k in text for k in ["plugin", "tool", "echo"]):
         return "echo_tool"
 
@@ -47,6 +46,7 @@ def ask(req: AskReq):
         model = "qwen2.5-coder:7b"
 
     response_text = ""
+    media = None
 
     try:
         plugin_name = route_plugin(req.task_type, req.prompt)
@@ -62,11 +62,23 @@ def ask(req: AskReq):
                         "source": "agent_orchestrator"
                     }
                 },
-                timeout=120
+                timeout=300
             )
             plugin_resp.raise_for_status()
             plugin_data = plugin_resp.json()
-            response_text = str(plugin_data.get("result", {}))
+            result = plugin_data.get("result", {})
+
+            if req.task_type == "image" and isinstance(result, dict):
+                media = {
+                    "kind": "image",
+                    "output_url": result.get("output_url"),
+                    "filename": result.get("filename"),
+                    "backend": result.get("backend"),
+                    "mode": result.get("mode")
+                }
+                response_text = str(result)
+            else:
+                response_text = str(result)
         else:
             model_resp = requests.post(
                 GATEWAY_URL,
@@ -97,5 +109,6 @@ def ask(req: AskReq):
         "task_type": req.task_type,
         "route_used": route,
         "model_used": model,
-        "response": response_text
+        "response": response_text,
+        "media": media
     }
