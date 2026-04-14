@@ -1,0 +1,3 @@
+MOCK VIDEO RESULT
+prompt=生成一个未来城市夜晚飞行汽车穿梭的视频
+backend=CogVideo-placeholder

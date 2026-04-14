@@ -9,3 +9,7 @@ microsoft/qlib,domain-finance,P3,金融垂直能力候选
 shiyu-coder/Kronos,domain-finance,P3,金融模型参考
 NanmiCoder/MediaCrawler,plugin-mid,P3,内容采集插件候选
 public-apis/public-apis,resource,P3,免费API索引
+Comfy-Org/ComfyUI,image-backend,P1,v1图片生成主后端
+zai-org/CogVideo,video-backend,P1,v1视频生成主后端
+lllyasviel/Fooocus,image-backup,P2,简单图片生成备用后端
+AEON-7/supergemma4-26b-abliterated-multimodal-nvfp4,future-multimodal,P3,后续高端多模态理解/优化候选

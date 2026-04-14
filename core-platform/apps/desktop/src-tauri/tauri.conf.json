@@ -25,6 +25,10 @@
   "bundle": {
     "active": true,
     "targets": "all",
-    "icon": []
+    "icon": [],
+    "resources": [
+      "resources/scripts/start_all.sh",
+      "resources/scripts/stop_all.sh"
+    ]
   }
 }

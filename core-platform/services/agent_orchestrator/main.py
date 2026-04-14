@@ -21,10 +21,18 @@ class AskReq(BaseModel):
     task_type: str
     prompt: str
 
-def should_use_plugin(prompt: str) -> bool:
+def route_plugin(task_type: str, prompt: str):
     text = prompt.lower()
-    keywords = ["plugin", "tool", "echo"]
-    return any(k in text for k in keywords)
+
+    if task_type == "image":
+        return "image_gen_plugin"
+    if task_type == "video":
+        return "video_gen_plugin"
+
+    if any(k in text for k in ["plugin", "tool", "echo"]):
+        return "echo_tool"
+
+    return None
 
 @app.get("/health")
 def health():
@@ -41,19 +49,20 @@ def ask(req: AskReq):
     response_text = ""
 
     try:
-        if should_use_plugin(req.prompt):
+        plugin_name = route_plugin(req.task_type, req.prompt)
+        if plugin_name:
             route = "plugin"
             plugin_resp = requests.post(
                 PLUGIN_URL,
                 json={
-                    "plugin_name": "echo_tool",
+                    "plugin_name": plugin_name,
                     "payload": {
-                        "message": req.prompt,
+                        "prompt": req.prompt,
                         "task_type": req.task_type,
                         "source": "agent_orchestrator"
                     }
                 },
-                timeout=60
+                timeout=120
             )
             plugin_resp.raise_for_status()
             plugin_data = plugin_resp.json()
