@@ -34,10 +34,36 @@ jobs:
         run: |
           npm install
 
+      - name: Prepare static dist
+        working-directory: ./core-platform/apps/desktop
+        shell: pwsh
+        run: |
+          if (Test-Path dist) {
+            Remove-Item dist -Recurse -Force
+          }
+          New-Item -ItemType Directory -Force -Path dist | Out-Null
+
+          if (Test-Path src) {
+            Copy-Item src\* dist -Recurse -Force
+          }
+
+          if (!(Test-Path dist)) {
+            Write-Error "dist folder missing"
+            exit 1
+          }
+
+          Write-Host "Prepared dist:"
+          Get-ChildItem dist -Recurse
+
       - name: Build Tauri Windows bundle
         working-directory: ./core-platform/apps/desktop
         shell: pwsh
         run: |
+          if (!(Test-Path dist)) {
+            Write-Error "dist folder missing before tauri build"
+            exit 1
+          }
+          Write-Host "dist ready, starting tauri build..."
           npm run tauri build
 
       - name: Collect artifacts
