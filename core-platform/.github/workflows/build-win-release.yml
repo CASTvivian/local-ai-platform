@@ -46,11 +46,11 @@ jobs:
         shell: pwsh
         run: |
           if (Test-Path package-lock.json) {
-            npm run tauri build || cargo build --manifest-path src-tauri/Cargo.toml -vv
+            npm run tauri build || cargo build --manifest-path src-tauri/Cargo.toml -vv || cargo build --manifest-path src-tauri/Cargo.toml -vv
           } elseif (Test-Path pnpm-lock.yaml) {
             pnpm tauri build
           } else {
-            npm run tauri build || cargo build --manifest-path src-tauri/Cargo.toml -vv
+            npm run tauri build || cargo build --manifest-path src-tauri/Cargo.toml -vv || cargo build --manifest-path src-tauri/Cargo.toml -vv
           }
 
       - name: Collect artifacts
