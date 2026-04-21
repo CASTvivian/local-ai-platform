@@ -1,0 +1,84 @@
+name: build-win-release
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag_name:
+        description: "Release tag, e.g. win-test-20260419"
+        required: true
+        default: "win-test-manual"
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          submodules: recursive
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install frontend deps
+        working-directory: ./core-platform/apps/desktop
+        shell: pwsh
+        run: |
+          if (Test-Path package-lock.json) {
+            npm ci
+          } elseif (Test-Path pnpm-lock.yaml) {
+            npm install -g pnpm
+            pnpm install --frozen-lockfile
+          } else {
+            npm install
+          }
+
+      - name: Build Tauri Windows bundle
+        working-directory: ./core-platform/apps/desktop
+        shell: pwsh
+        run: |
+          if (Test-Path package-lock.json) {
+            npm run tauri build
+          } elseif (Test-Path pnpm-lock.yaml) {
+            pnpm tauri build
+          } else {
+            npm run tauri build
+          }
+
+      - name: Collect artifacts
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path dist-win | Out-Null
+          $paths = @(
+            "core-platform/apps/desktop/src-tauri/target/release/bundle/msi/*.msi",
+            "core-platform/apps/desktop/src-tauri/target/release/bundle/nsis/*.exe",
+            "core-platform/apps/desktop/src-tauri/target/release/*.exe"
+          )
+          foreach ($p in $paths) {
+            Get-ChildItem $p -ErrorAction SilentlyContinue | Copy-Item -Destination dist-win -Force
+          }
+          Get-ChildItem dist-win
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: local-ai-platform-win
+          path: dist-win/*
+          if-no-files-found: error
+
+      - name: Create GitHub Release
+        if: github.event_name == 'workflow_dispatch'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.event.inputs.tag_name }}
+          files: dist-win/*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
