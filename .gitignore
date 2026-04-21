@@ -10,3 +10,8 @@ core-platform/**/*.pyc
 status_snapshot.txt
 plugin_eval_snapshot.txt
 tree.txt
+
+# Bundle data caches (too large for git)
+core-platform/apps/desktop/bundle/backend/data/
+core-platform/apps/desktop/bundle/backend/references/
+core-platform/apps/desktop/bundle/backend/generated/

@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Local AI Platform</title>
+  <style>
+    body { font-family: Arial, sans-serif; background:#0f172a; color:#e5e7eb; margin:0; padding:24px; }
+    .card { max-width: 1000px; margin:0 auto; background:#111827; border-radius:16px; padding:24px; }
+    .row { margin-bottom: 16px; }
+    button { padding:10px 16px; border:0; border-radius:10px; cursor:pointer; margin-right:8px; background:#3b82f6; color:#fff; }
+    button:hover { background:#2563eb; }
+    button.secondary { background:#6b7280; }
+    button.secondary:hover { background:#4b5563; }
+    pre { background:#020617; padding:16px; border-radius:10px; min-height:240px; white-space:pre-wrap; font-family:monospace; font-size:12px; color:#22c55e; }
+    iframe { width:100%; height:720px; border:0; background:#fff; border-radius:12px; margin-top:16px; }
+    h1 { margin-top:0; color:#f3f4f6; }
+    p { color:#9ca3af; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Local AI Platform</h1>
+    <p>Windows 一体化测试版。先启动后端，再检查健康状态，再打开控制台。</p>
+    <div class="row">
+      <button onclick="startBackend()">启动后端</button>
+      <button onclick="checkHealth()">检查健康状态</button>
+      <button onclick="checkBootstrap()" class="secondary">检查模型状态</button>
+      <button onclick="startBootstrap()" class="secondary">下载模型</button>
+      <button onclick="openConsole()">打开控制台</button>
+    </div>
+    <pre id="box">等待操作...</pre>
+    <iframe id="consoleFrame" src="about:blank"></iframe>
+  </div>
+
+  <script>
+    const HEALTH_PORTS = [18080,18081,18094,18095,18098,18099,18100];
+
+    async function startBackend() {
+      const box = document.getElementById("box");
+      box.textContent = "启动中...";
+      try {
+        const { invoke } = window.__TAURI__.core;
+        const data = await invoke("start_backend");
+        box.textContent = JSON.stringify(data, null, 2);
+      } catch (e) {
+        box.textContent = "ERROR: " + e;
+      }
+    }
+
+    async function checkHealth() {
+      const box = document.getElementById("box");
+      box.textContent = "检查中...";
+      try {
+        const results = [];
+        for (const p of HEALTH_PORTS) {
+          try {
+            const r = await fetch(`http://127.0.0.1:${p}/health`);
+            const t = await r.text();
+            results.push({port:p, ok:r.ok, body:t});
+          } catch (e) {
+            results.push({port:p, ok:false, error:String(e)});
+          }
+        }
+        box.textContent = JSON.stringify(results, null, 2);
+      } catch (e) {
+        box.textContent = "ERROR: " + e;
+      }
+    }
+
+    async function checkBootstrap() {
+      const box = document.getElementById("box");
+      box.textContent = "检查模型状态...";
+      try {
+        const r = await fetch("http://127.0.0.1:18100/bootstrap/status");
+        const d = await r.json();
+        box.textContent = JSON.stringify(d, null, 2);
+      } catch (e) {
+        box.textContent = "ERROR: " + e;
+      }
+    }
+
+    async function startBootstrap() {
+      const box = document.getElementById("box");
+      box.textContent = "开始下载模型...";
+      try {
+        const r = await fetch("http://127.0.0.1:18100/bootstrap/start", {
+          method: "POST",
+          headers: {"Content-Type":"application/json"},
+          body: JSON.stringify({models:["qwen2.5:7b","qwen2.5-coder:7b"]})
+        });
+        const d = await r.json();
+        box.textContent = JSON.stringify(d, null, 2);
+      } catch (e) {
+        box.textContent = "ERROR: " + e;
+      }
+    }
+
+    function openConsole() {
+      document.getElementById("consoleFrame").src = "http://127.0.0.1:19000";
+    }
+  </script>
+</body>
+</html>

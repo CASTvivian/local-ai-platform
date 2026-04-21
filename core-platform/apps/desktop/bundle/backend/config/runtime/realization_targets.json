@@ -1,0 +1,28 @@
+{
+  "rag": {
+    "repo": "/Users/mofamaomi/Documents/本地ai/references/RAG-Anything",
+    "enabled": true,
+    "mode": "shell",
+    "next_step": "connect ingestion + retrieval + qa pipeline"
+  },
+  "vision": {
+    "primary": "Qwen3-VL",
+    "secondary": "Qwen2.5-VL",
+    "alternatives": ["LLaVA-OneVision-1.5", "LLaVA-NeXT"],
+    "enabled": true,
+    "mode": "shell",
+    "next_step": "connect image understanding inference"
+  },
+  "finance": {
+    "repo": "/Users/mofamaomi/Documents/本地ai/references/qlib",
+    "enabled": true,
+    "mode": "shell",
+    "next_step": "connect research dataset + qlib analysis pipeline"
+  },
+  "tts": {
+    "repo": "/Users/mofamaomi/Documents/本地ai/references/VoxCPM",
+    "enabled": true,
+    "mode": "shell",
+    "next_step": "connect real tts inference"
+  }
+}

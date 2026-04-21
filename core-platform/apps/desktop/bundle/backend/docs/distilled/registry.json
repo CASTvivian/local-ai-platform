@@ -1,0 +1,157 @@
+{
+  "items": [
+    {
+      "id": "agent_browser_stack",
+      "title": "Agent Browser Stack",
+      "status": "distilling",
+      "sources": [
+        "agent-browser"
+      ],
+      "notes": "browser-native agent / web interaction abstraction"
+    },
+    {
+      "id": "agent_skill_creator_stack",
+      "title": "Agent Skill Creator Stack",
+      "status": "distilling",
+      "sources": [
+        "agent-skill-creator"
+      ],
+      "notes": "skill generation / skill creation workflow"
+    },
+    {
+      "id": "agent_skills_md_stack",
+      "title": "Agent Skills MD Stack",
+      "status": "distilling",
+      "sources": [
+        "agent-skills-md"
+      ],
+      "notes": "markdown-based skill schema / lightweight skills"
+    },
+    {
+      "id": "antigravity_skills_stack",
+      "title": "Antigravity Skills Stack",
+      "status": "distilling",
+      "sources": [
+        "antigravity-awesome-skills"
+      ],
+      "notes": "awesome skills / reusable skill packs"
+    },
+    {
+      "id": "autoresearch_stack",
+      "title": "AutoResearch Stack",
+      "status": "distilling",
+      "sources": [
+        "autoresearch"
+      ],
+      "notes": "autonomous research / source aggregation / synthesis"
+    },
+    {
+      "id": "claude_memory_compiler_stack",
+      "title": "Claude Memory Compiler Stack",
+      "status": "distilling",
+      "sources": [
+        "claude-memory-compiler"
+      ],
+      "notes": "memory compilation / persistent memory structuring"
+    },
+    {
+      "id": "cognizant_engagement_stack",
+      "title": "Cognizant Engagement Stack",
+      "status": "distilling",
+      "sources": [
+        "Cognizant-Early-Engagement"
+      ],
+      "notes": "engagement workflow / enterprise interaction"
+    },
+    {
+      "id": "darwin_skill_stack",
+      "title": "Darwin Skill Stack",
+      "status": "distilling",
+      "sources": [
+        "darwin-skill"
+      ],
+      "notes": "skill packaging / tool-use / reusable capability design"
+    },
+    {
+      "id": "deer_flow_stack",
+      "title": "Deer Flow Stack",
+      "status": "distilling",
+      "sources": [
+        "deer-flow"
+      ],
+      "notes": "research flow / orchestration / task graph"
+    },
+    {
+      "id": "graphify_stack",
+      "title": "Graphify Stack",
+      "status": "distilling",
+      "sources": [
+        "graphify"
+      ],
+      "notes": "graph memory / graph reasoning / knowledge graph"
+    },
+    {
+      "id": "openalgo_stack",
+      "title": "OpenAlgo Stack",
+      "status": "distilling",
+      "sources": [
+        "openalgo"
+      ],
+      "notes": "algo execution / broker abstraction / quant operations"
+    },
+    {
+      "id": "parlant_stack",
+      "title": "Parlant Stack",
+      "status": "distilling",
+      "sources": [
+        "parlant"
+      ],
+      "notes": "interaction control / customer-facing agent consistency"
+    },
+    {
+      "id": "pskoett_ai_skills_stack",
+      "title": "Pskoett AI Skills Stack",
+      "status": "distilling",
+      "sources": [
+        "pskoett-ai-skills"
+      ],
+      "notes": "skills pack / task-oriented reusable skills"
+    },
+    {
+      "id": "repogenesis_stack",
+      "title": "RepoGenesis Stack",
+      "status": "distilling",
+      "sources": [
+        "RepoGenesis"
+      ],
+      "notes": "repo-level generation benchmark / eval reference"
+    },
+    {
+      "id": "self_improving_agent_stack",
+      "title": "Self Improving Agent Stack",
+      "status": "distilling",
+      "sources": [
+        "self-improving-agent"
+      ],
+      "notes": "reflection / self-improvement / iterative refinement"
+    },
+    {
+      "id": "college_finder_skill_stack",
+      "title": "College Finder Skill Stack",
+      "status": "distilling",
+      "sources": [
+        "skill-sample-nodejs-college-finder"
+      ],
+      "notes": "conversational skill packaging / response design"
+    },
+    {
+      "id": "trendradar_stack",
+      "title": "TrendRadar Stack",
+      "status": "distilling",
+      "sources": [
+        "TrendRadar"
+      ],
+      "notes": "trend monitoring / rss aggregation / alerting / mcp"
+    }
+  ]
+}

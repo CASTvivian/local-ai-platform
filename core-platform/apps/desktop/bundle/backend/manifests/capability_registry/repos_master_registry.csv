@@ -1,0 +1,18 @@
+name,repo_url,category,integration_level,status,notes
+Cognizant-Early-Engagement,https://github.com/thesaravanakumar/Cognizant-Early-Engagement,engagement,lab,tracked,engagement workflow / enterprise interaction reference
+RepoGenesis,https://github.com/pzy2000/RepoGenesis,benchmark_eval,lab,tracked,repo-level microservice generation benchmark reference
+TrendRadar,https://github.com/sansan0/TrendRadar,research_monitoring,lab,tracked,trend monitoring / RSS / alerting / MCP reference
+agent-browser,https://github.com/vercel-labs/agent-browser,browser_agent,lab,tracked,browser-native agent / web automation / UI execution reference
+agent-skill-creator,https://github.com/FrancyJGLisboa/agent-skill-creator,skill_creator,lab,tracked,agent skill creation / skill generation reference
+agent-skills-md,https://github.com/futantan/agent-skills.md,skill,lab,tracked,markdown-based agent skills reference
+antigravity-awesome-skills,https://github.com/sickn33/antigravity-awesome-skills,skill,lab,tracked,awesome skills collection / reusable skill reference
+autoresearch,https://github.com/karpathy/autoresearch,research,lab,tracked,agentic research workflow reference
+claude-memory-compiler,https://github.com/coleam00/claude-memory-compiler,memory,lab,tracked,memory compiler / long-term memory structuring reference
+darwin-skill,https://github.com/alchaincyf/darwin-skill,skill,lab,tracked,skills / tool-use / capability packaging reference
+deer-flow,https://github.com/bytedance/deer-flow,workflow,lab,tracked,ByteDance research / flow / orchestration reference
+graphify,https://github.com/safishamsi/graphify,knowledge_graph,lab,tracked,graph / graph reasoning / knowledge graph reference
+openalgo,https://github.com/marketcalls/openalgo,finance,lab,tracked,algo trading / broker / strategy execution reference
+parlant,https://github.com/emcie-co/parlant,agent_control,lab,tracked,controlled customer-facing agent interaction harness reference
+pskoett-ai-skills,https://github.com/pskoett/pskoett-ai-skills,skill,lab,tracked,AI skills pack reference
+self-improving-agent,https://github.com/peterskoett/self-improving-agent,self_improvement,lab,tracked,self-improving agent loop / iterative improvement reference
+skill-sample-nodejs-college-finder,https://github.com/alexa-samples/skill-sample-nodejs-college-finder,skill_sample,lab,tracked,sample skill architecture / conversational skill packaging reference

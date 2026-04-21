@@ -55,6 +55,16 @@ jobs:
           Write-Host "Prepared dist:"
           Get-ChildItem dist -Recurse
 
+      - name: Prepare bundled backend resources
+        working-directory: ./core-platform/apps/desktop
+        shell: pwsh
+        run: |
+          if (!(Test-Path bundle)) {
+            Write-Error "bundle folder missing"
+            exit 1
+          }
+          Get-ChildItem bundle -Recurse
+
       - name: Build Tauri Windows bundle
         working-directory: ./core-platform/apps/desktop
         shell: pwsh
