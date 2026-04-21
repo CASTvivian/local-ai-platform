@@ -65,6 +65,22 @@ jobs:
           }
           Get-ChildItem bundle -Recurse
 
+      - name: Debug bundle tree
+        working-directory: ./core-platform/apps/desktop
+        shell: pwsh
+        run: |
+          Write-Host "PWD:"
+          Get-Location
+          Write-Host "bundle tree:"
+          if (Test-Path bundle) {
+            Get-ChildItem bundle -Recurse | Select-Object -First 10 Name, Length
+          } else {
+            Write-Error "bundle folder missing"
+            exit 1
+          }
+          Write-Host "src-tauri tree:"
+          Get-ChildItem src-tauri -Recurse | Select-Object -First 10 Name, Length
+
       - name: Build Tauri Windows bundle
         working-directory: ./core-platform/apps/desktop
         shell: pwsh
