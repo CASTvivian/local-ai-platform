@@ -1,139 +1,201 @@
-# Local AI Platform
+# MAOMIAI Local AI Platform
 
-本仓库用于维护本地 AI 平台的主工程、自动化脚本、构建流程与交付产物说明。
+MAOMIAI Local AI Platform 是一套本地运行的 AI 工作台与智能体平台，目标是在本地电脑或私有服务器上完成任务路由、模型调用、文档处理、工作流、代码审查、产物管理、仓库记忆、设计系统和模型设置等能力。
+
+当前版本已经完成 **P3.14 跨平台演示包封口**，可用于内部演示和后续迭代验证。
+
+---
+
+## 当前阶段状态
+
+| 模块 | 状态 |
+|---|---|
+| macOS Desktop App | ✅ 已打包 |
+| macOS DMG | ✅ 已生成 |
+| Windows GitHub Actions 打包 | ✅ 已生成 artifact |
+| 本地模型 qwen2.5:7b | ✅ 已接通 |
+| Model Gateway 18080 | ✅ 已接通 |
+| Ollama 11434 | ✅ 已接通 |
+| 全中文桌面 UI | ✅ 已完成 |
+| 服务健康面板 | ✅ 已完成 |
+| Demo 启停脚本 | ✅ 已完成 |
+| 会话上下文管理 | ⚠️ 已实现，待完整回归 |
+| 页面交互清理 | ⚠️ D7 阶段继续修复 |
+
+---
 
 ## 仓库结构
 
 ```text
 .
-├── .github/workflows/        # GitHub Actions 工作流（含 Windows 打包）
-├── core-platform/            # 本地 AI 平台主工程
-├── generated/                # 本地产物目录（音频 / 视频 / 图片等）
-├── scripts/                  # 仓库级辅助脚本
-└── README.md                 # 当前说明文件
+├── .github/workflows/                 # GitHub Actions，含 Windows 打包
+├── core-platform/                      # 本地 AI 平台主工程
+│   ├── apps/desktop/                   # Tauri 桌面端
+│   ├── services/                       # 后端服务
+│   ├── scripts/                        # 启停 / 验收 / 打包脚本
+│   ├── manifests/                      # 模型与设备配置
+│   ├── docs/                           # 报告与演示文档
+│   └── releases/                       # 本地打包产物
+├── generated/                          # 生成产物目录
+├── scripts/                            # 仓库级辅助脚本
+└── README.md
 ```
 
-## 主要功能
+---
 
-### 核心能力
-- **多 Agent 系统**: Planner、Researcher、Coder、Reviewer、Operator、Synthesizer 六种角色协作
-- **研究服务**: 深度研究与知识提取
-- **TTS 服务**: 语音合成（VoxCPM + macOS say 双后端）
-- **视频生成**: 文本到视频生成
-- **超帧服务**: 视频处理与增强
-- **浏览器代理**: 自动化网页操作
-- **模型引导服务**: Ollama 模型一键初始化
+## 核心能力
 
-### 技术栈
-- **后端**: FastAPI (Python)
-- **前端**: React + Tauri
-- **数据库**: SQLite + JSON 文件存储
-- **模型**: Ollama + 自研模型集成
-- **部署**: Docker + GitHub Actions
+### 1. 本地模型链路
 
-## 快速开始
+```text
+Desktop App
+  -> Model Gateway :18080
+  -> Ollama :11434
+  -> qwen2.5:7b
+```
 
-### 环境要求
-- Python 3.11+
-- Node.js 24+
-- Rust (用于 Tauri 构建)
-- Ollama (可选，用于本地模型运行)
+已验证 `qwen2.5:7b` 可以返回中文自然语言回复。
 
-### 安装依赖
+### 2. 桌面工作台
+
+当前桌面端包含：
+
+- 新建会话
+- 启动中心
+- 大脑状态
+- 技能商店
+- 文档处理
+- 工作流
+- 产物中心
+- 代码审查
+- 仓库记忆
+- 设计系统
+- 模型设置
+- 服务健康检查
+- 右侧 Inspector 面板
+
+### 3. 核心服务
+
+| 端口 | 服务 | 说明 |
+|---|---|---|
+| 18080 | Model Gateway | 本地模型网关 |
+| 18093 | Auto Router | 任务路由 |
+| 18104 | Runtime Execution | 运行时执行 |
+| 18110 | Policy Engine | 策略权限 |
+| 18111 | Trace Observability | 追踪审计 |
+| 18112 | Eval Gateway | 评测网关 |
+| 18120 | Document Ingestion | 文档处理 |
+| 18121 | Skill Store | 技能商店 |
+| 18123 | Artifact Registry | 产物中心 |
+| 18124 | Code Review Gate | 代码审查 |
+| 18125 | Repo Memory | 仓库记忆 |
+| 18126 | Workflow Store | 工作流 |
+| 18127 | Design System | 设计系统 |
+
+---
+
+## 本地启动
+
+### 启动 Demo
 
 ```bash
-# 克隆仓库
-git clone https://github.com/CASTvivian/local-ai-platform.git
-cd local-ai-platform
-
-# 安装 Python 依赖
-cd core-platform
-python -m venv .venv
-source .venv/bin/activate  # Linux/macOS
-# 或 .venv\Scripts\activate  # Windows
-pip install -r requirements.txt
-
-# 安装前端依赖
-cd apps/desktop
-npm install
+cd /Users/mofamaomi/Documents/本地ai/core-platform
+bash scripts/demo/run_desktop_demo.sh
 ```
 
-### 启动服务
+### 停止 Demo
 
 ```bash
-# 启动所有服务
-cd core-platform
-bash scripts/start_all.sh
-
-# 检查服务状态
-bash scripts/status_all.sh
-
-# 停止所有服务
-bash scripts/stop_all.sh
+cd /Users/mofamaomi/Documents/本地ai/core-platform
+bash scripts/demo/stop_desktop_demo.sh
 ```
 
-### 启动桌面应用
+### 只启动后端服务
 
 ```bash
-cd core-platform/apps/desktop
-npm run tauri dev
+cd /Users/mofamaomi/Documents/本地ai/core-platform
+bash scripts/desktop/start_desktop_services.sh
 ```
 
-## 服务端口
-
-| 服务 | 端口 | 说明 |
-|------|------|------|
-| model_gateway | 18080 | 模型网关 |
-| orchestrator | 18081 | 编排器 |
-| agent_team_service | 18094 | Agent 团队服务 |
-| real_impl_service | 18095 | 实现服务 |
-| research_real_service | 18098 | 研究服务 |
-| hyperframes_service | 18099 | 超帧服务 |
-| model_bootstrap_service | 18100 | 模型引导服务 |
-
-## 构建
-
-### 桌面应用
+### 查看服务状态
 
 ```bash
-cd core-platform/apps/desktop
-
-# 开发模式
-npm run tauri dev
-
-# 构建生产版本
-npm run tauri build
+bash scripts/desktop/status_desktop_services.sh
 ```
 
-### Windows 构建（GitHub Actions）
+---
 
-项目配置了自动化的 Windows 构建工作流，可以通过以下方式触发：
+## macOS 打包产物
 
-```bash
-# 使用 GitHub CLI
-gh workflow run build-win-release.yml -f tag_name=win-test-20260421
+当前 macOS 演示包已完成：
 
-# 或在 GitHub 网页界面手动触发
-# https://github.com/CASTvivian/local-ai-platform/actions
+```text
+core-platform/releases/maomiai-desktop-demo/
+core-platform/releases/maomiai-desktop-demo.tar.gz
 ```
 
-## 文档
+包含：
 
-详细的文档和说明请参考：
+- `Local AI Platform.app`
+- `Local AI Platform_0.1.0_aarch64.dmg`
+- 启动 / 停止脚本
+- Demo Guide
+- 验收报告
+- Package Manifest
 
-- [核心平台文档](core-platform/docs/)
-- [插件开发指南](core-platform/plugins/)
-- [API 文档](core-platform/docs/api/)
-- [部署指南](core-platform/docs/deployment/)
+---
 
-## 贡献
+## Windows 打包
 
-欢迎贡献代码、报告问题或提出改进建议！
+Windows 打包通过 GitHub Actions 执行：
 
-## 许可证
+```text
+.github/workflows/build-win-release.yml
+```
 
-[待添加]
+进入 GitHub：
 
-## 联系方式
+```text
+Actions -> build-win-release
+```
 
-- GitHub Issues: [CASTvivian/local-ai-platform/issues](https://github.com/CASTvivian/local-ai-platform/issues)
+构建完成后下载 artifact：
+
+```text
+local-ai-platform-win
+```
+
+已验证 Windows artifact 可包含：
+
+```text
+Local AI Platform_0.1.0_x64-setup.exe
+Local AI Platform_0.1.0_x64_en-US.msi
+desktop_lib.exe
+```
+
+---
+
+## 当前已知问题
+
+当前版本是演示版本，不是最终生产封口。
+
+待 D7 阶段继续处理：
+
+1. 会话上下文完整回归
+2. 新建会话 / 会话隔离 / localStorage 持久化细节修复
+3. 页面交互完整回归
+4. 移除临时 runtime override 层
+5. 页面模块正式化
+6. 18120 文档处理完整硬化
+7. P4 模型下载 / 注册 / 校验链路
+
+---
+
+## 当前阶段结论
+
+```text
+P3.14 Demo Package Freeze ✅
+macOS Demo Package ✅
+Windows Demo Package ✅
+D7 Interaction Regression Pending ⚠️
+```
