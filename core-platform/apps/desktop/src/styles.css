@@ -110,3 +110,37 @@ button {
     background-color: #0f0f0f69;
   }
 }
+
+/* P3.14-D7-C1 product navigation cleanup */
+.hidden-internal {
+  display: none !important;
+}
+.internal-note {
+  color: #64748b;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.auto-start-status {
+  margin-top: 12px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  color: #334155;
+  font-size: 14px;
+}
+.auto-start-status.ok {
+  background: #ecfdf5;
+  border-color: #bbf7d0;
+  color: #166534;
+}
+.auto-start-status.warn {
+  background: #fffbeb;
+  border-color: #fde68a;
+  color: #92400e;
+}
+.auto-start-status.bad {
+  background: #fef2f2;
+  border-color: #fecaca;
+  color: #991b1b;
+}

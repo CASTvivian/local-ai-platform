@@ -17,20 +17,6 @@
     h1 { margin-top:0; color:#f3f4f6; }
     p { color:#9ca3af; }
   </style>
-
-<script>
-// D7-C1: product-level default route cleanup.
-(function () {
-  try {
-    const hiddenViews = new Set(["launch", "brain", "skills", "documents"]);
-    const saved = localStorage.getItem("currentView");
-    if (hiddenViews.has(saved)) {
-      localStorage.setItem("currentView", "chat");
-    }
-  } catch (_) {}
-})();
-</script>
-
 </head>
 <body>
   <div class="card">
@@ -114,6 +100,5 @@
       document.getElementById("consoleFrame").src = "http://127.0.0.1:19000";
     }
   </script>
-  <script src="./js/auto-start-services.js"></script>
 </body>
 </html>
