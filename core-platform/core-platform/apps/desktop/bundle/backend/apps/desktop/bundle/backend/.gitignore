@@ -1,9 +1,0 @@
-__pycache__/
-*.pyc
-.env
-.venv/
-node_modules/
-dist/
-build/
-data/sqlite/*.db
-.DS_Store

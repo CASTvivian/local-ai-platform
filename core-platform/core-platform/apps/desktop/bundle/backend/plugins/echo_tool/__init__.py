@@ -1,1 +1,0 @@
-"""Echo tool plugin package."""
