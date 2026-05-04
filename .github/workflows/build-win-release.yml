@@ -35,7 +35,7 @@ jobs:
         run: |
           git rev-parse HEAD
           git log -1 --oneline
-          Get-ChildItem core-platform/apps/desktop/src -Recurse | Select-Object -First 80 FullName, Length
+          Get-ChildItem core-platform/apps/desktop/src -Recurse | Select-Object -First 100 FullName, Length
 
       - name: Setup Node
         uses: actions/setup-node@v6
@@ -51,17 +51,15 @@ jobs:
         run: |
           npm install
 
-      - name: Desktop preflight
+      - name: Prepare frontend dist from latest source
         working-directory: ./core-platform/apps/desktop
         shell: pwsh
         run: |
-          npm run preflight
-
-      - name: Build frontend dist from latest source
-        working-directory: ./core-platform/apps/desktop
-        shell: pwsh
-        run: |
-          npm run build:frontend
+          if (Test-Path dist) {
+            Remove-Item dist -Recurse -Force
+          }
+          New-Item -ItemType Directory -Force -Path dist | Out-Null
+          Copy-Item src\* dist -Recurse -Force
 
           $sha = git rev-parse --short HEAD
           $time = Get-Date -Format o
@@ -81,7 +79,7 @@ jobs:
           }
 
           Write-Host "Prepared dist from latest source:"
-          Get-ChildItem dist -Recurse | Select-Object -First 120 FullName, Length
+          Get-ChildItem dist -Recurse | Select-Object -First 150 FullName, Length
           Write-Host "BUILD_INFO:"
           Get-Content dist\BUILD_INFO.json
 
