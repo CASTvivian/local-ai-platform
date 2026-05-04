@@ -4,11 +4,21 @@ on:
   workflow_dispatch:
     inputs:
       tag_name:
-        description: "Release tag, e.g. win-test-20260419"
-        required: true
-        default: "win-test-manual"
+        description: "Build label, e.g. win-d7-c1"
+        required: false
+        default: "win-artifact-only"
   push:
     branches: [ "main" ]
+    paths:
+      - "core-platform/apps/desktop/**"
+      - ".github/workflows/build-win-release.yml"
+
+permissions:
+  contents: read
+  actions: read
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
 
 jobs:
   build-windows:
@@ -19,6 +29,13 @@ jobs:
         uses: actions/checkout@v6
         with:
           submodules: recursive
+
+      - name: Show commit and tree
+        shell: pwsh
+        run: |
+          git rev-parse HEAD
+          git log -1 --oneline
+          Get-ChildItem core-platform/apps/desktop/src -Recurse | Select-Object -First 80 FullName, Length
 
       - name: Setup Node
         uses: actions/setup-node@v6
@@ -34,62 +51,62 @@ jobs:
         run: |
           npm install
 
-      - name: Prepare static dist
+      - name: Desktop preflight
         working-directory: ./core-platform/apps/desktop
         shell: pwsh
         run: |
-          if (Test-Path dist) {
-            Remove-Item dist -Recurse -Force
-          }
-          New-Item -ItemType Directory -Force -Path dist | Out-Null
+          npm run preflight
 
-          if (Test-Path src) {
-            Copy-Item src\* dist -Recurse -Force
-          }
-
-          if (!(Test-Path dist)) {
-            Write-Error "dist folder missing"
-            exit 1
-          }
-
-          Write-Host "Prepared dist:"
-          Get-ChildItem dist -Recurse
-
-      - name: Prepare bundled backend resources
+      - name: Build frontend dist from latest source
         working-directory: ./core-platform/apps/desktop
         shell: pwsh
         run: |
-          if (!(Test-Path bundle)) {
-            Write-Error "bundle folder missing"
-            exit 1
-          }
-          Get-ChildItem bundle -Recurse
+          npm run build:frontend
 
-      - name: Debug bundle tree
+          $sha = git rev-parse --short HEAD
+          $time = Get-Date -Format o
+          $meta = @{
+            commit = $sha
+            built_at = $time
+            workflow = "build-win-release"
+            label = "${{ github.event.inputs.tag_name }}"
+          } | ConvertTo-Json
+          Set-Content -Path dist\BUILD_INFO.json -Value $meta -Encoding UTF8
+
+          if (!(Test-Path dist\index.html)) {
+            throw "dist/index.html missing"
+          }
+          if (!(Test-Path dist\js)) {
+            throw "dist/js missing"
+          }
+
+          Write-Host "Prepared dist from latest source:"
+          Get-ChildItem dist -Recurse | Select-Object -First 120 FullName, Length
+          Write-Host "BUILD_INFO:"
+          Get-Content dist\BUILD_INFO.json
+
+      - name: Verify D7-C1 UI changes are in dist
         working-directory: ./core-platform/apps/desktop
         shell: pwsh
         run: |
-          Write-Host "PWD:"
-          Get-Location
-          Write-Host "bundle tree:"
-          if (Test-Path bundle) {
-            Get-ChildItem bundle -Recurse | Select-Object -First 10 Name, Length
-          } else {
-            Write-Error "bundle folder missing"
-            exit 1
+          if (!(Select-String -Path dist\index.html -Pattern "hidden-internal" -Quiet)) {
+            throw "D7-C1 hidden-internal marker not found in dist/index.html; Windows package would be old"
           }
-          Write-Host "src-tauri tree:"
-          Get-ChildItem src-tauri -Recurse | Select-Object -First 10 Name, Length
+          if (!(Test-Path dist\js\auto-start-services.js)) {
+            throw "auto-start-services.js missing from dist; Windows package would be old"
+          }
+          Write-Host "D7-C1 markers verified in dist."
+
+      - name: Debug Tauri config
+        working-directory: ./core-platform/apps/desktop
+        shell: pwsh
+        run: |
+          Get-Content src-tauri\tauri.conf.json
 
       - name: Build Tauri Windows bundle
         working-directory: ./core-platform/apps/desktop
         shell: pwsh
         run: |
-          if (!(Test-Path dist)) {
-            Write-Error "dist folder missing before tauri build"
-            exit 1
-          }
-          Write-Host "dist ready, starting tauri build..."
           npm run tauri build
 
       - name: Collect artifacts
@@ -104,20 +121,19 @@ jobs:
           foreach ($p in $paths) {
             Get-ChildItem $p -ErrorAction SilentlyContinue | Copy-Item -Destination dist-win -Force
           }
-          Get-ChildItem dist-win
 
-      - name: Upload artifact
+          Copy-Item "core-platform/apps/desktop/dist/BUILD_INFO.json" -Destination dist-win -Force
+
+          Write-Host "Collected Windows artifacts:"
+          Get-ChildItem dist-win | Select-Object FullName, Length
+
+          if (!(Get-ChildItem dist-win -ErrorAction SilentlyContinue)) {
+            throw "No Windows artifacts collected"
+          }
+
+      - name: Upload Windows artifact
         uses: actions/upload-artifact@v4
         with:
           name: local-ai-platform-win
           path: dist-win/*
           if-no-files-found: error
-
-      - name: Create GitHub Release
-        if: github.event_name == 'workflow_dispatch'
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: ${{ github.event.inputs.tag_name }}
-          files: dist-win/*
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
