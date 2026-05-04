@@ -1,0 +1,442 @@
+from __future__ import annotations
+from pathlib import Path
+from datetime import datetime
+import os
+import subprocess
+import shutil
+import json
+import threading
+import uuid
+import requests
+
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
+REF_DIR = Path("/Users/mofamaomi/Documents/本地ai/references/hyperframes")
+GEN_DIR = Path("/Users/mofamaomi/Documents/本地ai/generated/hyperframes")
+SHARED_VENDOR_DIR = GEN_DIR / "_shared" / "vendor"
+LOCAL_FFMPEG = Path("/Users/mofamaomi/Documents/本地ai/core-platform/.venv/bin/ffmpeg")
+TTS_URL = "http://127.0.0.1:18095/tts/speak"
+VIDEO_RUNS = {}
+
+app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://127.0.0.1:19000", "http://localhost:19000", "*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+def ts():
+    return datetime.now().strftime("%Y%m%d_%H%M%S")
+
+def cmd_exists(name: str) -> bool:
+    return shutil.which(name) is not None
+
+def ffmpeg_path() -> str | None:
+    if LOCAL_FFMPEG.exists():
+        return str(LOCAL_FFMPEG)
+    return shutil.which("ffmpeg")
+
+def command_env():
+    env = os.environ.copy()
+    ffmpeg_dir = str(LOCAL_FFMPEG.parent)
+    env["PATH"] = f"{ffmpeg_dir}:{env.get('PATH', '')}"
+    return env
+
+def write_json(payload: dict):
+    GEN_DIR.mkdir(parents=True, exist_ok=True)
+    out = GEN_DIR / f"hyperframes_{ts()}.json"
+    out.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+    return str(out)
+
+def run_cmd(cmd, cwd=None, timeout=300):
+    proc = subprocess.run(
+        cmd,
+        cwd=cwd,
+        env=command_env(),
+        timeout=timeout,
+        capture_output=True,
+        text=True
+    )
+    return {
+        "cmd": cmd,
+        "cwd": cwd,
+        "returncode": proc.returncode,
+        "stdout": proc.stdout[-12000:],
+        "stderr": proc.stderr[-12000:]
+    }
+
+def project_dir(project_name: str) -> Path:
+    return GEN_DIR / project_name
+
+def ensure_project(project_name: str):
+    pdir = project_dir(project_name)
+    pdir.mkdir(parents=True, exist_ok=True)
+    return pdir
+
+
+def video_run_file(run_id: str) -> Path:
+    runs_dir = GEN_DIR / "_runs"
+    runs_dir.mkdir(parents=True, exist_ok=True)
+    return runs_dir / f"{run_id}.json"
+
+
+def persist_video_run(run_id: str):
+    video_run_file(run_id).write_text(
+        json.dumps(VIDEO_RUNS[run_id], ensure_ascii=False, indent=2),
+        encoding="utf-8",
+    )
+
+
+def complete_video_run(run_id: str, result: dict):
+    VIDEO_RUNS[run_id]["status"] = "completed"
+    VIDEO_RUNS[run_id]["finished_at"] = datetime.now().isoformat()
+    VIDEO_RUNS[run_id]["result"] = result
+    persist_video_run(run_id)
+
+
+def fail_video_run(run_id: str, error: str):
+    VIDEO_RUNS[run_id]["status"] = "failed"
+    VIDEO_RUNS[run_id]["finished_at"] = datetime.now().isoformat()
+    VIDEO_RUNS[run_id]["error"] = error
+    persist_video_run(run_id)
+
+
+def run_research_to_video_async(run_id: str, payload: dict):
+    try:
+        result = research_to_video(payload)
+        complete_video_run(run_id, result)
+    except Exception as exc:
+        fail_video_run(run_id, str(exc))
+
+
+def list_project_outputs(pdir: Path):
+    files = []
+    if not pdir.exists():
+        return files
+    for item in sorted(pdir.rglob("*")):
+        if item.is_file():
+            files.append(
+                {
+                    "path": str(item),
+                    "name": item.name,
+                    "size": item.stat().st_size,
+                }
+            )
+    return files
+
+
+def ensure_vendor_assets(pdir: Path):
+    vendor_dir = pdir / "vendor"
+    vendor_dir.mkdir(parents=True, exist_ok=True)
+
+    shared_gsap = SHARED_VENDOR_DIR / "gsap.min.js"
+    project_gsap = vendor_dir / "gsap.min.js"
+
+    if shared_gsap.exists() and not project_gsap.exists():
+        project_gsap.write_bytes(shared_gsap.read_bytes())
+
+    return {
+        "vendor_dir": str(vendor_dir),
+        "gsap_local": str(project_gsap),
+        "gsap_exists": project_gsap.exists(),
+    }
+
+
+def chunk_list(items: list[str], size: int):
+    return [items[i:i + size] for i in range(0, len(items), size)]
+
+
+def write_multi_page_composition(
+    pdir: Path,
+    title: str,
+    subtitle: str,
+    bullets: list[str],
+    subtitle_lines: list[str] | None = None,
+):
+    pages = chunk_list(bullets or ["暂无内容"], 3)
+    page_blocks = []
+
+    for idx, page in enumerate(pages, start=1):
+        subtitle_html = ""
+        if subtitle_lines:
+            line = subtitle_lines[min(idx - 1, len(subtitle_lines) - 1)]
+            subtitle_html = f'<div class="subtitle-line">{line}</div>'
+
+        page_blocks.append(
+            f"""
+        <section class="page">
+          <div class="card">
+            <div class="meta">Page {idx} / {len(pages)}</div>
+            <h1>{title}</h1>
+            <h2>{subtitle}</h2>
+            {subtitle_html}
+            <ul>
+              {''.join(f'<li>{x}</li>' for x in page)}
+            </ul>
+            <div class="footer">Generated by Local AI Platform / HyperFrames Batch 3</div>
+          </div>
+        </section>
+        """
+        )
+
+    html = f"""<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <script src="./vendor/gsap.min.js"></script>
+  <style>
+    html, body {{
+      margin: 0; padding: 0;
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      color: #f8fafc;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }}
+    .page {{
+      width: 100vw; height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      padding: 48px; box-sizing: border-box;
+      page-break-after: always;
+    }}
+    .card {{
+      width: 88%; max-width: 1200px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 28px;
+      padding: 48px;
+      box-sizing: border-box;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 24px 80px rgba(0,0,0,0.35);
+    }}
+    .meta {{
+      font-size: 16px; opacity: 0.7; margin-bottom: 14px;
+    }}
+    h1 {{
+      font-size: 52px; line-height: 1.15; margin: 0 0 12px;
+    }}
+    h2 {{
+      font-size: 26px; font-weight: 500; opacity: 0.9; margin: 0 0 22px;
+    }}
+    .subtitle-line {{
+      font-size: 22px;
+      color: #cbd5e1;
+      margin: 0 0 20px;
+      padding: 14px 18px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 14px;
+    }}
+    ul {{
+      margin: 0; padding-left: 28px;
+      font-size: 28px; line-height: 1.7;
+    }}
+    li {{ margin: 10px 0; }}
+    .footer {{
+      margin-top: 28px; font-size: 18px; opacity: 0.7;
+    }}
+  </style>
+</head>
+<body>
+  {''.join(page_blocks)}
+</body>
+</html>
+"""
+    (pdir / "composition.html").write_text(html, encoding="utf-8")
+
+
+def try_tts(summary: str, preset: str = "default_cn"):
+    try:
+        response = requests.post(
+            TTS_URL,
+            json={"prompt": summary, "preset": preset, "voice": ""},
+            timeout=600,
+        )
+        response.raise_for_status()
+        return {"ok": True, "data": response.json()}
+    except Exception as exc:
+        return {"ok": False, "error": str(exc)}
+
+@app.get("/health")
+def health():
+    ffmpeg_exists = bool(ffmpeg_path())
+    return {
+        "ok": True,
+        "repo_exists": REF_DIR.exists(),
+        "node_exists": cmd_exists("node"),
+        "npx_exists": cmd_exists("npx"),
+        "ffmpeg_exists": ffmpeg_exists,
+        "render_ready": bool(REF_DIR.exists() and cmd_exists("node") and cmd_exists("npx") and ffmpeg_exists),
+    }
+
+@app.get("/probe")
+def probe():
+    attempts = []
+    if REF_DIR.exists() and cmd_exists("node"):
+        try:
+            attempts.append(run_cmd(["node", "--version"], cwd=str(REF_DIR), timeout=20))
+        except Exception as e:
+            attempts.append({"cmd": ["node", "--version"], "error": str(e)})
+    if REF_DIR.exists() and cmd_exists("npx"):
+        try:
+            attempts.append(run_cmd(["npx", "hyperframes", "--help"], cwd=str(REF_DIR), timeout=60))
+        except Exception as e:
+            attempts.append({"cmd": ["npx", "hyperframes", "--help"], "error": str(e)})
+
+    result = {
+        "ok": True,
+        "kind": "hyperframes_probe",
+        "attempts": attempts
+    }
+    result["output_path"] = write_json(result)
+    return result
+
+@app.post("/render")
+def render(payload: dict):
+    prompt = payload.get("prompt", "")
+    project_name = payload.get("project_name", f"hf_{ts()}")
+    title = payload.get("title", "研究摘要视频")
+    subtitle = payload.get("subtitle", prompt[:80] if prompt else "自动生成")
+    subtitle_lines = payload.get("subtitle_lines") or []
+    bullets = payload.get("bullets") or [
+        "这是 HyperFrames Batch 3 生成的视频模板",
+        "当前支持多页 composition",
+        "后续将继续增强 render 输出",
+    ]
+
+    pdir = ensure_project(project_name)
+    attempts = []
+
+    if not REF_DIR.exists():
+        result = {"ok": False, "error": "hyperframes repo missing"}
+        result["output_path"] = write_json(result)
+        return result
+
+    if not cmd_exists("npx"):
+        result = {"ok": False, "error": "npx missing"}
+        result["output_path"] = write_json(result)
+        return result
+
+    # Step1: init project
+    try:
+        attempts.append(run_cmd(["npx", "hyperframes", "init", project_name], cwd=str(GEN_DIR), timeout=180))
+    except Exception as e:
+        attempts.append({"cmd": ["npx", "hyperframes", "init", project_name], "error": str(e)})
+
+    # Step2: write composition
+    vendor_info = ensure_vendor_assets(pdir)
+    write_multi_page_composition(pdir, title, subtitle, bullets, subtitle_lines=subtitle_lines)
+
+    # Step3: preview probe
+    preview_attempt = None
+    try:
+        preview_attempt = run_cmd(["npx", "hyperframes", "preview"], cwd=str(pdir), timeout=120)
+    except Exception as e:
+        preview_attempt = {"cmd": ["npx", "hyperframes", "preview"], "error": str(e)}
+
+    # Step4: render probe
+    render_attempt = None
+    try:
+        render_attempt = run_cmd(["npx", "hyperframes", "render"], cwd=str(pdir), timeout=300)
+    except Exception as e:
+        render_attempt = {"cmd": ["npx", "hyperframes", "render"], "error": str(e)}
+
+    outputs = list_project_outputs(pdir)
+
+    result = {
+        "ok": True,
+        "kind": "hyperframes_render",
+        "prompt": prompt,
+        "project_name": project_name,
+        "workdir": str(pdir),
+        "composition_path": str(pdir / "composition.html"),
+        "title": title,
+        "subtitle": subtitle,
+        "bullets": bullets,
+        "subtitle_lines": subtitle_lines,
+        "init_attempts": attempts,
+        "preview_attempt": preview_attempt,
+        "render_attempt": render_attempt,
+        "render_ready": bool(ffmpeg_path()),
+        "vendor_info": vendor_info,
+        "outputs": outputs,
+        "note": "Phase 2 Step 2：已接入本地 vendor 资源，降低 CDN 依赖",
+    }
+    result["output_path"] = write_json(result)
+    return result
+
+@app.post("/research_to_video")
+def research_to_video(payload: dict):
+    topic = payload.get("topic", "研究摘要")
+    summary = payload.get("summary", "")
+    subtitle_preset = payload.get("tts_preset", "default_cn")
+    raw_bullets = [x.strip() for x in summary.replace("\n", "。").split("。") if x.strip()]
+    bullets = payload.get("bullets") or raw_bullets[:9]
+    if not bullets:
+        bullets = ["暂无研究摘要内容", "请补充 summary 后再渲染"]
+    subtitle_lines = raw_bullets[:max(1, min(6, len(raw_bullets)))] if raw_bullets else []
+
+    tts_result = try_tts(summary or topic, preset=subtitle_preset)
+
+    render_result = render({
+        "prompt": summary or topic,
+        "project_name": payload.get("project_name", f"research_video_{ts()}"),
+        "title": topic,
+        "subtitle": "Research to Video",
+        "bullets": bullets,
+        "subtitle_lines": subtitle_lines,
+    })
+    render_result["tts_result"] = tts_result
+    render_result["kind"] = "research_to_video"
+    render_result["note"] = "Phase 2 Step 1：research_to_video 已带 render 输出扫描结果"
+    return render_result
+
+
+@app.post("/research_to_video_async")
+def research_to_video_async(payload: dict):
+    run_id = uuid.uuid4().hex[:16]
+    VIDEO_RUNS[run_id] = {
+        "run_id": run_id,
+        "status": "running",
+        "started_at": datetime.now().isoformat(),
+        "finished_at": None,
+        "payload": payload,
+        "result": None,
+        "error": None,
+    }
+    persist_video_run(run_id)
+
+    worker = threading.Thread(
+        target=run_research_to_video_async,
+        args=(run_id, payload),
+        daemon=True,
+    )
+    worker.start()
+
+    return {"ok": True, "run_id": run_id, "status": "running"}
+
+
+@app.get("/video_run/{run_id}")
+def video_run_status(run_id: str):
+    if run_id in VIDEO_RUNS:
+        return {"ok": True, **VIDEO_RUNS[run_id]}
+    path = video_run_file(run_id)
+    if path.exists():
+        return {"ok": True, **json.loads(path.read_text(encoding="utf-8"))}
+    return {"ok": False, "error": "run_id not found"}
+
+
+@app.get("/latest")
+def latest():
+    runs = sorted(GEN_DIR.glob("hyperframes_*.json"), reverse=True)
+    if not runs:
+        return {"ok": True, "latest": None}
+
+    latest_file = runs[0]
+    try:
+        data = json.loads(latest_file.read_text(encoding="utf-8"))
+        return {"ok": True, "latest_file": str(latest_file), "latest": data}
+    except Exception as exc:
+        return {"ok": False, "error": str(exc), "latest_file": str(latest_file)}

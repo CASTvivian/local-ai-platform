@@ -1,0 +1,40 @@
+{
+  "items": [
+    {
+      "id": "autoresearch_stack",
+      "title": "AutoResearch Stack",
+      "status": "distilling",
+      "sources": [
+        "autoresearch"
+      ],
+      "notes": "autonomous research / source aggregation / synthesis"
+    },
+    {
+      "id": "darwin_skill_stack",
+      "title": "Darwin Skill Stack",
+      "status": "distilling",
+      "sources": [
+        "darwin-skill"
+      ],
+      "notes": "skill packaging / tool-use / reusable capability design"
+    },
+    {
+      "id": "deer_flow_stack",
+      "title": "Deer Flow Stack",
+      "status": "distilling",
+      "sources": [
+        "deer-flow"
+      ],
+      "notes": "research flow / orchestration / task graph"
+    },
+    {
+      "id": "openalgo_stack",
+      "title": "OpenAlgo Stack",
+      "status": "distilling",
+      "sources": [
+        "openalgo"
+      ],
+      "notes": "algo execution / broker abstraction / quant operations"
+    }
+  ]
+}

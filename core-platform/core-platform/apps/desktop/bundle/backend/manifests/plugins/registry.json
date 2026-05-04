@@ -1,0 +1,25 @@
+{
+  "plugins": [
+    {
+      "name": "echo_tool",
+      "version": "0.1.0",
+      "enabled": true,
+      "entrypoint": "plugins.echo_tool.plugin:EchoToolPlugin",
+      "description": "A minimal echo plugin for testing plugin manager."
+    },
+    {
+      "name": "image_gen_plugin",
+      "version": "0.1.0",
+      "enabled": true,
+      "entrypoint": "plugins.image_gen_plugin.plugin:ImageGenPlugin",
+      "description": "Image generation plugin backed by ComfyUI placeholder/mock mode."
+    },
+    {
+      "name": "video_gen_plugin",
+      "version": "0.1.0",
+      "enabled": true,
+      "entrypoint": "plugins.video_gen_plugin.plugin:VideoGenPlugin",
+      "description": "Video generation plugin backed by CogVideo placeholder/mock mode."
+    }
+  ]
+}
