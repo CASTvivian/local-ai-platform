@@ -20,7 +20,7 @@
 </script>
 
 </head>
-<body>
+<body data-ui-version="d7-c3-chatgpt-like">
 <div class="window">
   <aside class="sidebar">
     <div class="brand">
@@ -28,17 +28,17 @@
       <div>MAOMIAI</div>
     </div>
     <div class="nav">
-      <button id="nav-chat" class="active" onclick="setView('chat')">✎ New Chat</button>
-      <button id="nav-launch" class="hidden-internal" onclick="setView('launch')">🚀 Launch</button>
-      <button id="nav-brain" class="hidden-internal" onclick="setView('brain')">🧠 Brain Status</button>
-      <button id="nav-skills" class="hidden-internal" onclick="setView('skills')">🧩 Skill Store</button>
-      <button id="nav-documents" class="hidden-internal" onclick="setView('documents')">📄 Documents</button>
-      <button id="nav-workflows" onclick="setView('workflows')">🧬 Workflows</button>
-      <button id="nav-artifacts" onclick="setView('artifacts')">📦 Artifacts</button>
-      <button id="nav-code-review" onclick="setView('code-review')">🛡️ Code Review</button>
-      <button id="nav-design-system" onclick="setView('design-system')">🎨 Design System</button>
-      <button id="nav-models" onclick="setView('models')">🦙 Models</button>
-      <button id="nav-settings" onclick="setView('settings')">⚙️ Settings</button>
+      <button id="nav-chat" class="active" onclick="setView('chat')">✦ 新对话</button>
+      <button id="nav-launch" class="hidden-internal hidden-internal" onclick="setView('launch')">🚀 Launch</button>
+      <button id="nav-brain" class="hidden-internal hidden-internal" onclick="setView('brain')">🧠 Brain Status</button>
+      <button id="nav-skills" class="hidden-internal hidden-internal" onclick="setView('skills')">🧩 Skill Store</button>
+      <button id="nav-documents" class="hidden-internal hidden-internal" onclick="setView('documents')">📄 Documents</button>
+      <button id="nav-workflows" class="hidden-internal hidden-internal" onclick="setView('workflows')">🧬 Workflows</button>
+      <button id="nav-artifacts" onclick="setView('artifacts')">📁 文件与结果</button>
+      <button id="nav-code-review" onclick="setView('code-review')">🛡️ 代码检查</button>
+      <button id="nav-design-system" class="hidden-internal hidden-internal" onclick="setView('design-system')">🎨 Design System</button>
+      <button id="nav-models" onclick="setView('models')">⚙️ 本地模型</button>
+      <button id="nav-settings" onclick="setView('settings')">⋯ 设置</button>
     </div>
     <div class="section-title">Sessions</div>
     <div id="sessions" class="sessions"></div>
@@ -58,7 +58,7 @@
     <div id="content" class="content"></div>
     <div class="composer">
       <div class="composer-inner">
-        <textarea id="prompt" placeholder="输入任务，例如：帮我整理项目目录并生成报告..."></textarea>
+        <textarea id="prompt" placeholder="给 MAOMIAI 发送消息，或让它处理文档、检查代码、整理结果..."></textarea>
         <button class="btn-primary" onclick="submitTask()">发送</button>
       </div>
     </div>
@@ -2477,5 +2477,6 @@ render();
 refreshServices();
 </script>
 <script src="./js/auto-start-services.js"></script>
+  <script src="./js/chatgpt-like-ui.js"></script>
 </body>
 </html>
