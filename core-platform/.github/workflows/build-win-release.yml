@@ -1,58 +1,115 @@
 name: build-win-release
-
 on:
   workflow_dispatch:
     inputs:
       tag_name:
-        description: "Release tag, e.g. win-test-20260419"
-        required: true
-        default: "win-test-manual"
+        description: "Build label"
+        required: false
+        default: "win-current-ui"
   push:
-    branches: ["main"]
-
+    branches: [ "main" ]
+    paths:
+      - "apps/desktop/**"
+      - "scripts/windows/**"
+      - "services/model_bootstrap_service/**"
+      - "services/model_gateway/**"
+      - ".github/workflows/build-win-release.yml"
+permissions:
+  contents: read
+  actions: read
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
 jobs:
   build-windows:
     runs-on: windows-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v6
-        with:
-          submodules: recursive
-
+      - name: Show commit and tree
+        shell: pwsh
+        run: |
+          git rev-parse HEAD
+          git log -1 --oneline
+          Get-ChildItem apps/desktop/src -Recurse | Select-Object -First 120 FullName, Length
       - name: Setup Node
         uses: actions/setup-node@v6
         with:
           node-version: 24
-
       - name: Setup Rust
         uses: dtolnay/rust-toolchain@stable
-
-      - name: Install frontend deps
-        working-directory: apps/desktop
+      - name: Install desktop deps
+        working-directory: ./apps/desktop
         shell: pwsh
         run: |
-          if (Test-Path package-lock.json) {
-            npm ci
-          } elseif (Test-Path pnpm-lock.yaml) {
-            npm install -g pnpm
-            pnpm install --frozen-lockfile
-          } else {
-            npm install
+          npm install
+      - name: Prepare frontend dist from canonical source
+        working-directory: ./apps/desktop
+        shell: pwsh
+        run: |
+          if (Test-Path dist) {
+            Remove-Item dist -Recurse -Force
           }
-
+          New-Item -ItemType Directory -Force -Path dist | Out-Null
+          Copy-Item src\* dist -Recurse -Force
+          $sha = git rev-parse --short HEAD
+          $time = Get-Date -Format o
+          $meta = @{
+            commit = $sha
+            built_at = $time
+            workflow = "build-win-release"
+            label = "${{ github.event.inputs.tag_name }}"
+            source = "apps/desktop"
+          } | ConvertTo-Json
+          Set-Content -Path dist\BUILD_INFO.json -Value $meta -Encoding UTF8
+          if (!(Test-Path dist\index.html)) {
+            throw "dist/index.html missing"
+          }
+          if (!(Test-Path dist\js)) {
+            throw "dist/js missing"
+          }
+          Write-Host "Prepared dist from apps/desktop/src"
+          Get-ChildItem dist -Recurse | Select-Object -First 160 FullName, Length
+          Get-Content dist\BUILD_INFO.json
+      - name: Verify product UI markers
+        working-directory: ./apps/desktop
+        shell: pwsh
+        run: |
+          if (!(Select-String -Path dist\index.html -Pattern "MAOMIAI|P3 大脑工作台" -Quiet)) {
+            throw "current product UI marker not found in dist/index.html"
+          }
+          if (!(Test-Path dist\js\windows-click-model-setup.js)) {
+            throw "windows-click-model-setup.js missing"
+          }
+          Write-Host "Product UI markers verified."
+      - name: Verify all Windows runtime files exist
+        working-directory: ./apps/desktop
+        shell: pwsh
+        run: |
+          $required = @(
+            "..\..\scripts\windows\ensure_runtime.ps1",
+            "..\..\scripts\windows\bootstrap_runtime.ps1",
+            "..\..\scripts\windows\start_all.ps1",
+            "..\..\scripts\windows\stop_all.ps1",
+            "..\..\scripts\windows\status_all.ps1",
+            "..\..\services\model_bootstrap_service\main.py",
+            "..\..\services\model_gateway\main.py"
+          )
+          foreach ($f in $required) {
+            if (!(Test-Path $f)) {
+              throw "missing runtime file: $f"
+            }
+            Write-Host "OK runtime file: $f"
+          }
+      - name: Debug Tauri config
+        working-directory: ./apps/desktop
+        shell: pwsh
+        run: |
+          Get-Content src-tauri\tauri.conf.json
       - name: Build Tauri Windows bundle
-        working-directory: apps/desktop
+        working-directory: ./apps/desktop
         shell: pwsh
         run: |
-          if (Test-Path package-lock.json) {
-            npm run tauri build || cargo build --manifest-path src-tauri/Cargo.toml -vv || cargo build --manifest-path src-tauri/Cargo.toml -vv
-          } elseif (Test-Path pnpm-lock.yaml) {
-            pnpm tauri build
-          } else {
-            npm run tauri build || cargo build --manifest-path src-tauri/Cargo.toml -vv || cargo build --manifest-path src-tauri/Cargo.toml -vv
-          }
-
+          npm run tauri build
       - name: Collect artifacts
         shell: pwsh
         run: |
@@ -65,31 +122,15 @@ jobs:
           foreach ($p in $paths) {
             Get-ChildItem $p -ErrorAction SilentlyContinue | Copy-Item -Destination dist-win -Force
           }
-          Get-ChildItem dist-win
-
-      - name: Upload artifact
+          Copy-Item "apps/desktop/dist/BUILD_INFO.json" -Destination dist-win -Force
+          Write-Host "Collected Windows artifacts:"
+          Get-ChildItem dist-win | Select-Object FullName, Length
+          if (!(Get-ChildItem dist-win -ErrorAction SilentlyContinue)) {
+            throw "No Windows artifacts collected"
+          }
+      - name: Upload Windows artifact
         uses: actions/upload-artifact@v4
         with:
           name: local-ai-platform-win
           path: dist-win/*
           if-no-files-found: error
-
-
-      - name: Verify packaged runtime source exists
-        working-directory: ./core-platform/apps/desktop
-        shell: pwsh
-        run: |
-          if (!(Test-Path "..\..\..\..\scripts\windows\start_all.ps1")) {
-            throw "missing scripts/windows/start_all.ps1"
-          }
-          if (!(Test-Path "..\..\..\..\scripts\windows\stop_all.ps1")) {
-            throw "missing scripts/windows/stop_all.ps1"
-          }
-          if (!(Test-Path "..\..\..\..\services\model_bootstrap_service\main.py")) {
-            throw "missing services/model_bootstrap_service/main.py"
-          }
-          if (!(Test-Path "..\..\..\..\services\model_gateway\main.py")) {
-            throw "missing services/model_gateway/main.py"
-          }
-          Write-Host "Runtime files verified before Tauri build."
-

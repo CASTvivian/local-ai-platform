@@ -1,0 +1,2481 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>MAOMIAI Desktop</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./styles/main.css" />
+
+<script>
+// D7-C1: product-level default route cleanup
+(function () {
+  try {
+    const hiddenViews = new Set(["launch", "brain", "skills", "documents"]);
+    const saved = localStorage.getItem("currentView");
+    if (hiddenViews.has(saved)) {
+      localStorage.setItem("currentView", "chat");
+    }
+  } catch (_) {}
+})();
+</script>
+
+</head>
+<body>
+<div class="window">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-icon">M</div>
+      <div>MAOMIAI</div>
+    </div>
+    <div class="nav">
+      <button id="nav-chat" class="active" onclick="setView('chat')">✎ New Chat</button>
+      <button id="nav-launch" class="hidden-internal" onclick="setView('launch')">🚀 Launch</button>
+      <button id="nav-brain" class="hidden-internal" onclick="setView('brain')">🧠 Brain Status</button>
+      <button id="nav-skills" class="hidden-internal" onclick="setView('skills')">🧩 Skill Store</button>
+      <button id="nav-documents" class="hidden-internal" onclick="setView('documents')">📄 Documents</button>
+      <button id="nav-workflows" onclick="setView('workflows')">🧬 Workflows</button>
+      <button id="nav-artifacts" onclick="setView('artifacts')">📦 Artifacts</button>
+      <button id="nav-code-review" onclick="setView('code-review')">🛡️ Code Review</button>
+      <button id="nav-design-system" onclick="setView('design-system')">🎨 Design System</button>
+      <button id="nav-models" onclick="setView('models')">🦙 Models</button>
+      <button id="nav-settings" onclick="setView('settings')">⚙️ Settings</button>
+    </div>
+    <div class="section-title">Sessions</div>
+    <div id="sessions" class="sessions"></div>
+  </aside>
+  <main class="main">
+    <div class="topbar">
+      <div>
+        <div class="top-title">P3 Brain Workspace</div>
+        <div class="top-sub" id="sessionMeta">session: -</div>
+      </div>
+      <div class="top-actions">
+        <div class="select-pill">qwen2.5:7b</div>
+        <div class="select-pill">Manual approval</div>
+        <div class="select-pill">Shared learning ON</div>
+      </div>
+    </div>
+    <div id="content" class="content"></div>
+    <div class="composer">
+      <div class="composer-inner">
+        <textarea id="prompt" placeholder="输入任务，例如：帮我整理项目目录并生成报告..."></textarea>
+        <button class="btn-primary" onclick="submitTask()">发送</button>
+      </div>
+    </div>
+  </main>
+  <aside class="right">
+    <div class="panel">
+      <h3>Inspector</h3>
+      <div class="tabs">
+        <button class="tab active" onclick="switchInspector('services')">Services</button>
+        <button class="tab" onclick="switchInspector('trace')">Trace</button>
+        <button class="tab" onclick="switchInspector('policy')">Policy</button>
+        <button class="tab" onclick="switchInspector('artifacts')">Artifacts</button>
+        <button class="tab" onclick="switchInspector('preview')">Preview</button>
+        <button class="tab" onclick="switchInspector('eval')">Eval</button>
+      </div>
+    </div>
+    <div id="inspector-services" class="inspector-section">
+      <div class="panel">
+        <h3>核心服务</h3>
+        <div id="services"></div>
+      </div>
+      <div class="panel">
+        <h3>共享学习层</h3>
+        <div class="mono">18101 Reference Skill
+18102 Capability Learning
+18121 Skill Store
+18125 Repo Memory
+18112 Eval Gateway</div>
+      </div>
+    </div>
+    <div id="inspector-trace" class="inspector-section hidden">
+      <div class="panel">
+        <h3>Trace Timeline</h3>
+        <div id="traceBox" class="mono">暂无</div>
+      </div>
+    </div>
+    <div id="inspector-policy" class="inspector-section hidden">
+      <div class="panel">
+        <h3>Policy</h3>
+        <div id="policyBox" class="mono">暂无</div>
+      </div>
+    </div>
+    <div id="inspector-artifacts" class="inspector-section hidden">
+      <div class="panel">
+        <h3>Artifacts</h3>
+        <button class="btn-soft" onclick="loadArtifacts()">刷新产物</button>
+        <div id="artifactBox" class="mono" style="margin-top:12px;">暂无</div>
+      </div>
+    </div>
+    <div id="inspector-preview" class="inspector-section hidden">
+      <div class="panel">
+        <h3>Preview</h3>
+        <div id="previewBox" class="preview-box">选择一个产物或任务结果进行预览。</div>
+      </div>
+    </div>
+    <div id="inspector-eval" class="inspector-section hidden">
+      <div class="panel">
+        <h3>Eval Result</h3>
+        <button class="btn-soft" onclick="runEval()">运行 Eval</button>
+        <div id="evalBox" class="mono" style="margin-top:12px;">暂无</div>
+      </div>
+    </div>
+  </aside>
+</div>
+<div class="modal" id="reviewModal">
+  <div class="modal-box">
+    <h2>需要人工审核</h2>
+    <p>该任务被 Policy Engine 标记为 review。默认情况下，高危操作必须人工批准。</p>
+    <div class="terminal" id="reviewJson"></div>
+    <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:16px;">
+      <button class="btn-soft" onclick="closeReview()">取消</button>
+      <button class="btn-danger" onclick="rejectReview()">拒绝</button>
+      <button class="btn-ok" onclick="approveReview()">批准继续</button>
+    </div>
+  </div>
+</div>
+<script src="./js/api.js"></script>
+  <script src="./js/utils.js"></script>
+  <script src="./js/tauri-bridge.js"></script>
+  <script src="./js/state.js"></script>
+  <script src="./js/services.js"></script>
+  <script src="./js/inspector.js"></script>
+  <script>
+let codeReviewLastResult = null;
+let codeReviewRules = null;
+let designSystemPageItems = [];
+let selectedDesignSystemId = null;
+let designSystemLastSuggestion = null;
+const PORTS = [
+  [18093, "Auto Router"],
+  [18101, "Reference Skill"],
+  [18102, "Capability Learning"],
+  [18104, "Runtime Execution"],
+  [18110, "Policy Engine"],
+  [18111, "Trace Observability"],
+  [18112, "Eval Gateway"],
+  [18120, "Document Ingestion"],
+  [18121, "Skill Store"],
+  [18122, "Job Orchestrator"],
+  [18123, "Artifact Registry"],
+  [18124, "Code Review Gate"],
+  [18125, "Repo Memory"],
+  [18126, "Workflow Store"],
+  [18127, "Design System"]
+];
+// tauriInvoke moved to ./js/tauri-bridge.js
+// API helpers moved to ./js/api.js
+let state = loadState();
+let currentReview = null;
+// state moved to ./js/state.js
+// state moved to ./js/state.js
+// state moved to ./js/state.js
+// state moved to ./js/state.js
+// state moved to ./js/state.js
+// state moved to ./js/state.js
+// state moved to ./js/state.js
+// state moved to ./js/state.js
+// loadState moved to ./js/state.js
+// saveState moved to ./js/state.js
+// currentSession moved to ./js/state.js
+function newSession() {
+  const s = {
+    id: "session_" + Date.now(),
+    title: "New Chat",
+    messages: [],
+    runs: [],
+    createdAt: Date.now()
+  };
+  state.sessions.unshift(s);
+  state.current = s.id;
+  saveState();
+  render();
+}
+function systemMessage(text) {
+  const s = currentSession();
+  s.messages.push({ role: "assistant", text, ts: Date.now() });
+  saveState();
+  render();
+}
+function userMessage(text) {
+  const s = currentSession();
+  s.messages.push({ role: "user", text, ts: Date.now() });
+  if (s.title === "New Chat") s.title = text.slice(0, 18);
+  saveState();
+  render();
+}
+function addRun(run) {
+  currentSession().runs.push({ id: "run_" + Date.now(), ts: Date.now(), ...run });
+  saveState();
+  render();
+}
+function patchLastRun(patch) {
+  const r = currentSession().runs.at(-1);
+  if (r) Object.assign(r, patch);
+  saveState();
+  render();
+}
+function patchRunById(runId, patch) {
+  const s = currentSession();
+  const r = s.runs.find(x => x.id === runId);
+  if (r) Object.assign(r, patch);
+  saveState();
+  render();
+}
+function getRunLog(runId) {
+  const s = currentSession();
+  const r = s.runs.find(x => x.id === runId);
+  return r ? (r.log || "") : "";
+}
+function render() {
+  renderSessions();
+  updateNavActive();
+  const s = currentSession();
+  document.getElementById("sessionMeta").textContent = currentView === "chat" ? ("session: " + s.id) : ("view: " + currentView);
+  const content = document.getElementById("content");
+  if (currentView !== "chat") {
+    renderPage(content, currentView);
+    return;
+  }
+  content.innerHTML = `
+    <div class="hero">
+      <h1>Local AI Platform</h1>
+      <p>独立会话上下文：${s.id}<br/>共享学习层：Reference Skill / Capability Learning / Repo Memory / Skill Store。</p>
+    </div>
+  `;
+  for (const m of s.messages) {
+    const d = document.createElement("div");
+    d.className = "msg " + (m.role === "user" ? "user" : "assistant");
+    d.textContent = m.text;
+    content.appendChild(d);
+  }
+  for (const r of s.runs) {
+    content.appendChild(renderRun(r));
+  }
+  content.scrollTop = content.scrollHeight;
+}
+function setView(view) {
+  currentView = view;
+  if (view === "chat") {
+    newSession();
+  } else {
+    render();
+    if (view === "brain") refreshServices();
+    if (view === "skills") loadSkills();
+    if (view === "documents") loadDocumentStatus();
+    if (view === "workflows") loadWorkflows();
+    if (view === "artifacts") loadArtifacts();
+  if (view === "code-review") loadCodeReviewRules();
+  if (view === "design-system") loadDesignSystemsPage();
+  }
+}
+function updateNavActive() {
+  const ids = ["chat", "launch", "brain", "skills", "documents", "workflows", "artifacts", "code-review", "models", "settings"];
+  for (const id of ids) {
+    const el = document.getElementById("nav-" + id);
+    if (el) el.classList.toggle("active", currentView === id);
+  }
+}
+function renderPage(content, view) {
+  if (view === "launch") return renderLaunchPage(content);
+  if (view === "brain") return renderBrainPage(content);
+  if (view === "skills") return renderSkillsPage(content);
+  if (view === "documents") return renderDocumentsPage(content);
+  if (view === "workflows") return renderWorkflowsPage(content);
+  if (view === "artifacts") return renderArtifactsPage(content);
+  if (view === "code-review") return renderCodeReviewPage(content);
+  if (view === "design-system") return renderDesignSystemPage(content);
+  if (view === "models") return renderModelsPage(content);
+  if (view === "settings") return renderSettingsPage(content);
+}
+function pageHero(title, desc) {
+  return `<div class="hero"><h1>${title}</h1><p>${desc}</p></div>`;
+}
+function renderLaunchPage(content) {
+  content.innerHTML = pageHero("Launch", "启动后端、检查健康、执行验收、准备模型。") + `
+    <div class="page-grid">
+      <div class="page-card"><h2>服务启动</h2><p class="mono">后续接入 Tauri command：start_all / stop_all / status_all</p><button class="btn-soft" onclick="refreshServices()">刷新服务健康</button></div>
+      <div class="page-card"><h2>验收入口</h2><p class="mono">P3.14-B2 / P3.14-C 验收脚本状态。</p><button class="btn-soft" onclick="runEval()">运行 Eval</button></div>
+    </div>`;
+}
+function renderBrainPage(content) {
+  content.innerHTML = pageHero("Brain Status", "查看 P3 大脑服务状态：路由、学习、执行、安全、Trace、Eval。") + `
+    <div class="page-card" style="max-width:980px;margin:0 auto;">
+      <button class="btn-soft" onclick="refreshServices()">刷新服务健康</button>
+      <div id="brainServiceMirror" class="mono" style="margin-top:12px;">请查看右侧 Services 面板。</div>
+    </div>`;
+}
+function renderSkillsPage(content) {
+  content.innerHTML = pageHero("Skill Store", "18121：技能安装、搜索、Agent 标签、启用/禁用、SKILL.md 预览。") + `
+    <div class="page-card" style="max-width:1080px;margin:0 auto 16px;">
+      <div style="display:grid;grid-template-columns:1.4fr 0.8fr 0.8fr auto;gap:10px;align-items:center;">
+        <input class="field" id="skillSearch" placeholder="搜索技能名称 / ID / source / tags / agents" oninput="renderSkillPageList()" />
+        <select class="field" id="skillEnabledFilter" onchange="renderSkillPageList()">
+          <option value="">全部状态</option>
+          <option value="enabled">enabled</option>
+          <option value="disabled">disabled</option>
+        </select>
+        <input class="field" id="skillAgentFilter" placeholder="Agent 标签，例如 codex" oninput="renderSkillPageList()" />
+        <button class="btn-primary" onclick="loadSkillsPage()">刷新</button>
+      </div>
+    </div>
+    <div class="page-grid" style="max-width:1080px;">
+      <div class="page-card">
+        <h2>安装 SKILL.md</h2>
+        <textarea class="field" id="skillMdText" style="min-height:220px;" placeholder="# code-review-basic
+version: 0.2.0
+description: 代码审查基础技能
+agents: codex,aider,claude-code
+tags: code,review,safety
+
+## Instructions
+检查 diff 中的危险命令、secret 泄漏和测试建议。"></textarea>
+        <button class="btn-soft" onclick="parseSkillMd()">解析</button>
+        <button class="btn-primary" onclick="installSkillMd()">安装技能</button>
+        <div id="skillParseResult" class="mono" style="margin-top:12px;"></div>
+      </div>
+      <div class="page-card">
+        <h2>技能详情</h2>
+        <div id="skillPageDetail" class="mono">请选择一个技能。</div>
+      </div>
+      <div class="page-card" style="grid-column:1 / -1;">
+        <h2>技能列表</h2>
+        <div id="skillsList" class="card-list">loading...</div>
+      </div>
+    </div>`;
+  loadSkillsPage();
+}
+function renderDocumentsPage(content) {
+  content.innerHTML = pageHero("Documents", "18120：文档摄取、后端检测、文本解析、RAG 分块。") + `
+    <div class="page-grid">
+      <div class="page-card">
+        <h2>后端状态</h2>
+        <button class="btn-soft" onclick="loadDocumentStatus()">刷新后端状态</button>
+        <div id="docStatus" class="mono">loading...</div>
+      </div>
+      <div class="page-card">
+        <h2>文档摄取</h2>
+        <div style="margin:8px 0;">
+          <label style="display:block;margin-bottom:4px;font-size:12px;">文件路径（暂用路径输入，后续Tauri文件选择）</label>
+          <input class="field" id="docPath" placeholder="/path/to/document.pdf 或输入文本" />
+        </div>
+        <textarea class="field" id="docText" placeholder="或直接输入文本内容..." style="min-height:100px;"></textarea>
+        <div style="display:flex;gap:8px;margin-top:8px;">
+          <button class="btn-primary" onclick="ingestDocument()">摄取文档</button>
+          <button class="btn-soft" onclick="clearDocInput()">清空</button>
+        </div>
+        <div id="ingestProgress" class="mono" style="margin-top:12px;"></div>
+      </div>
+    </div>
+    <div class="page-card" style="max-width:980px;margin:0 auto;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <h2>摄取结果</h2>
+        <button class="btn-soft" onclick="loadRecentDocuments()">刷新最近文档</button>
+      </div>
+      <div id="docResult" class="mono" style="margin-top:12px;">暂无摄取记录</div>
+    </div>
+    <div class="page-card" style="max-width:980px;margin:0 auto;">
+      <h2>分块详情</h2>
+      <div id="chunkList" class="card-list">选择一个摄取结果查看分块</div>
+    </div>`;
+  loadDocumentStatus();
+  loadRecentDocuments();
+}
+
+function renderDesignSystemPage(content) {
+  content.innerHTML = pageHero("Design System", "18127：DESIGN.md 解析、UI Tokens、组件规范、品牌风格、AI 前端生成约束。") + `
+    <div class="page-card" style="max-width:1080px;margin:0 auto 16px;">
+      <div style="display:grid;grid-template-columns:1.4fr 0.8fr 0.8fr auto;gap:10px;align-items:center;">
+        <input class="field" id="designSystemSearch" placeholder="搜索设计系统名称 / brand / component / token" oninput="renderDesignSystemList()" />
+        <input class="field" id="designSystemComponentFilter" placeholder="组件过滤，例如 button" oninput="renderDesignSystemList()" />
+        <input class="field" id="designSystemTokenFilter" placeholder="Token过滤，例如 primary" oninput="renderDesignSystemList()" />
+        <button class="btn-primary" onclick="loadDesignSystemsPage()">刷新</button>
+      </div>
+    </div>
+    <div class="page-grid" style="max-width:1080px;">
+      <div class="page-card">
+        <h2>解析 / 注册 DESIGN.md</h2>
+        <textarea class="field" id="designMdText" style="min-height:360px;" placeholder="---
+name: MAOMIAI Desktop
+version: 0.3.1
+brand: MAOMIAI
+style: clean-enterprise
+---
+# MAOMIAI Desktop Design System
+## Brand
+primary: #2563eb
+accent: #7c3aed
+font: Inter, system-ui
+radius: 16px
+shadow: soft
+## Colors
+primary: #2563eb
+surface: #ffffff
+muted: #f8fafc
+danger: #dc2626
+success: #16a34a
+## Spacing
+xs: 4px
+sm: 8px
+md: 16px
+lg: 24px
+xl: 32px
+## Components
+### Button
+Use rounded corners, clear hover state, visible disabled state.
+### Card
+Use soft shadow, 16px radius, 20px padding.
+### Input
+Use clear border, focus ring, consistent height.
+### Modal
+Use backdrop, centered content, explicit cancel/confirm actions.
+### Table
+Use sticky header, compact rows, visible empty state.
+"></textarea>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <button class="btn-soft" onclick="parseDesignMd()">解析 DESIGN.md</button>
+          <button class="btn-primary" onclick="registerDesignSystem()">注册 Design System</button>
+          <button class="btn-soft" onclick="clearDesignMd()">清空</button>
+        </div>
+        <div id="designActionResult" class="mono" style="margin-top:12px;"></div>
+      </div>
+      <div class="page-card">
+        <h2>Design System 详情</h2>
+        <div id="designSystemDetail" class="mono">请选择一个设计系统。</div>
+      </div>
+      <div class="page-card" style="grid-column:1 / -1;">
+        <h2>Design Systems</h2>
+        <div id="designSystemList" class="card-list">loading...</div>
+      </div>
+      <div class="page-card">
+        <h2>Suggest UI</h2>
+        <input class="field" id="suggestComponent" placeholder="组件类型，例如 button / card / modal / table" />
+        <textarea class="field" id="suggestContext" placeholder="使用场景，例如：为模型下载页面生成主按钮和状态卡片"></textarea>
+        <button class="btn-primary" onclick="suggestDesignUi()">生成 UI 建议</button>
+      </div>
+      <div class="page-card">
+        <h2>UI 建议结果</h2>
+        <div id="designSuggestionResult" class="mono">暂无建议。</div>
+      </div>
+    </div>`;
+  loadDesignSystemsPage();
+}
+async function loadDesignSystemsPage() {
+  const box = document.getElementById("designSystemList");
+  if (box) box.textContent = "loading...";
+  try {
+    const res = await fetch(`${API.designSystem}/list`, { signal: AbortSignal.timeout(8000) });
+    const json = await res.json();
+    designSystemPageItems = json.items || json.design_systems || json.systems || [];
+    renderDesignSystemList();
+  } catch (e) {
+    if (box) box.textContent = "load design systems failed: " + e.message;
+  }
+}
+function getDesignSystemDisplayFields(x) {
+  const payload = x.payload || {};
+  const tokens = x.tokens || payload.tokens || {};
+  const components = x.components || payload.components || [];
+  const brand = x.brand || payload.brand || {};
+  const meta = x.metadata || payload.metadata || {};
+  const componentNames = Array.isArray(components)
+    ? components.map(c => c.name || c.type || c.id || "").filter(Boolean)
+    : Object.keys(components || {});
+  const tokenText = JSON.stringify(tokens || {});
+  return {
+    id: x.id || payload.id || "",
+    name: x.name || payload.name || meta.name || x.id || "Untitled Design System",
+    version: x.version || payload.version || meta.version || "0.1.0",
+    brand_name: brand.name || meta.brand || x.brand_name || "unknown",
+    style: x.style || meta.style || "",
+    tokens,
+    components,
+    componentNames,
+    tokenText,
+    raw: x.raw || payload.raw || JSON.stringify(x, null,2),
+    created_at: x.created_at || "",
+    updated_at: x.updated_at || "",
+  };
+}
+function renderDesignSystemList() {
+  const box = document.getElementById("designSystemList");
+  if (!box) return;
+  const q = (document.getElementById("designSystemSearch")?.value || "").toLowerCase().trim();
+  const componentFilter = (document.getElementById("designSystemComponentFilter")?.value || "").toLowerCase().trim();
+  const tokenFilter = (document.getElementById("designSystemTokenFilter")?.value || "").toLowerCase().trim();
+  let items = designSystemPageItems || [];
+  items = items.filter(x => {
+    const f = getDesignSystemDisplayFields(x);
+    const text = JSON.stringify(f).toLowerCase();
+    if (q && !text.includes(q)) return false;
+    if (componentFilter) {
+      const compText = (f.componentNames || []).join(",").toLowerCase();
+      if (!compText.includes(componentFilter)) return false;
+    }
+    if (tokenFilter) {
+      if (!String(f.tokenText || "").toLowerCase().includes(tokenFilter)) return false;
+    }
+    return true;
+  });
+  if (!items.length) {
+    box.textContent = "暂无匹配设计系统";
+    return;
+  }
+  box.innerHTML = items.map(x => {
+    const f = getDesignSystemDisplayFields(x);
+    const active = selectedDesignSystemId === f.id ? "border-color:#174ea6;background:#f6f9ff;" : "";
+    return `
+      <div class="mini-card" style="${active}">
+        <b>${escapeHtml(f.name)}</b><br/>
+        <span class="mono">${escapeHtml(f.id)}</span><br/>
+        <span class="badge">${escapeHtml(f.version)}</span>
+        <span class="badge">brand:${escapeHtml(f.brand_name)}</span>
+        ${f.style ? `<span class="badge">${escapeHtml(f.style)}</span>` : ""}
+        ${(f.componentNames || []).slice(0, 8).map(c => `<span class="badge">cmp:${escapeHtml(c)}</span>`).join("")}
+        <div style="margin-top:10px;">
+          <button class="btn-soft" onclick="selectDesignSystem('${f.id}')">详情</button>
+          <button class="btn-soft" onclick="exportDesignSystem('${f.id}')">Export</button>
+          <button class="btn-soft" onclick='previewText("Design System: ${f.name}", ${JSON.stringify(JSON.stringify(f, null, 2))}, "json")'>Preview</button>
+        </div>
+      </div>
+    `;
+  }).join("");
+}
+async function parseDesignMd() {
+  const box = document.getElementById("designActionResult");
+  if (box) box.textContent = "parsing...";
+  try {
+    const text = document.getElementById("designMdText")?.value || "";
+    if (!text.trim()) throw new Error("请输入 DESIGN.md 内容");
+    const json = await postJson(`${API.designSystem}/parse_design_md`, {
+      text,
+      source: "desktop_ui",
+    }, 12000);
+    if (box) box.textContent = JSON.stringify(json, null, 2);
+    previewText("Parsed DESIGN.md", JSON.stringify(json, null, 2), "json");
+  } catch (e) {
+    if (box) box.textContent = "parse failed: " + e.message;
+  }
+}
+async function registerDesignSystem() {
+  const box = document.getElementById("designActionResult");
+  if (box) box.textContent = "registering...";
+  try {
+    const text = document.getElementById("designMdText")?.value || "";
+    if (!text.trim()) throw new Error("请输入 DESIGN.md 内容");
+    const json = await postJson(`${API.designSystem}/register`, {
+      text,
+      source: "desktop_ui",
+    }, 12000);
+    if (box) box.textContent = JSON.stringify(json, null, 2);
+    await loadDesignSystemsPage();
+    const id = json.item?.id || json.design?.id || json.id;
+    if (id) await selectDesignSystem(id);
+    systemMessage("Design System 已注册：" + (json.item?.name || json.design?.name || ""));
+  } catch (e) {
+    if (box) box.textContent = "register failed: " + e.message;
+  }
+}
+async function selectDesignSystem(id) {
+  selectedDesignSystemId = id;
+  renderDesignSystemList();
+  const box = document.getElementById("designSystemDetail");
+  if (box) box.textContent = "loading...";
+  try {
+    const res = await fetch(`${API.designSystem}/design/${id}`, { signal: AbortSignal.timeout(8000) });
+    const json = await res.json();
+    const item = json.item || json.design || json;
+    const f = getDesignSystemDisplayFields(item);
+    const tokens = f.tokens || {};
+    const components = Array.isArray(f.components) ? f.components : Object.entries(f.components || {}).map(([name, spec]) => ({ name, spec }));
+    if (box) {
+      box.innerHTML = `
+        <div><b>${escapeHtml(f.name)}</b></div>
+        <div class="mono" style="margin:8px 0;">${escapeHtml(f.id)}</div>
+        <span class="badge">${escapeHtml(f.version)}</span>
+        <span class="badge">brand:${escapeHtml(f.brand_name)}</span>
+        ${f.style ? `<span class="badge">${escapeHtml(f.style)}</span>` : ""}
+        <h3 style="margin-top:16px;">Tokens</h3>
+        ${renderDesignTokens(tokens)}
+        <h3 style="margin-top:16px;">Components</h3>
+        <div class="card-list">
+          ${components.length ? components.map(c => `
+            <div class="mini-card">
+              <b>${escapeHtml(c.name || c.type || c.id || "component")}</b><br/>
+              <pre class="mono">${escapeHtml(JSON.stringify(c, null, 2))}</pre>
+            </div>
+          `).join("") : "暂无组件规范"}
+        </div>
+        <div style="margin-top:12px;">
+          <button class="btn-soft" onclick="exportDesignSystem('${f.id}')">Export to Preview</button>
+          <button class="btn-soft" onclick='previewText("Design System Raw: ${f.name}", ${JSON.stringify(JSON.stringify(item, null, 2))}, "json")'>Raw Preview</button>
+        </div>
+      `;
+    }
+  } catch (e) {
+    if (box) box.textContent = "load design system detail failed: " + e.message;
+  }
+}
+function renderDesignTokens(tokens) {
+  if (!tokens || !Object.keys(tokens).length) {
+    return `<div class="mono">暂无 tokens</div>`;
+  }
+  const sections = Object.entries(tokens).map(([group, value]) => {
+    if (typeof value === "object" && value !== null) {
+      return `
+        <div class="mini-card">
+          <b>${escapeHtml(group)}</b>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;">
+            ${Object.entries(value).map(([k, v]) => {
+              const val = String(v);
+              const isColor = /^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(val);
+              return `
+                <span class="badge" title="${escapeHtml(k + ': ' + val)}">
+                  ${isColor ? `<span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:${escapeHtml(val)};margin-right:4px;border:1px solid #ddd;"></span>` : ""}
+                  ${escapeHtml(k)}:${escapeHtml(val)}
+                </span>
+              `;
+            }).join("")}
+          </div>
+        </div>
+      `;
+    }
+    return `
+      <div class="mini-card">
+        <b>${escapeHtml(group)}</b>
+        <span class="badge">${escapeHtml(String(value))}</span>
+      </div>
+    `;
+  }).join("");
+  return `<div class="card-list">${sections}</div>`;
+}
+async function exportDesignSystem(id) {
+  try {
+    const res = await fetch(`${API.designSystem}/export/${id}`, { signal: AbortSignal.timeout(8000) });
+    const json = await res.json();
+    previewText("Design System Export: " + id, JSON.stringify(json.item || json.design || json, null, 2), "json");
+  } catch (e) {
+    systemMessage("Design System export failed: " + e.message);
+  }
+}
+async function suggestDesignUi() {
+  const box = document.getElementById("designSuggestionResult");
+  if (box) box.textContent = "suggesting...";
+  try {
+    const component = document.getElementById("suggestComponent")?.value.trim() || "card";
+    const context = document.getElementById("suggestContext")?.value.trim() || "";
+    const json = await postJson(`${API.designSystem}/suggest_ui`, {
+      design_id: selectedDesignSystemId || "",
+      component,
+      context,
+      source: "desktop_ui",
+    }, 12000);
+    designSystemLastSuggestion = json;
+    if (box) {
+      box.innerHTML = `<pre class="mono">${escapeHtml(JSON.stringify(json, null, 2))}</pre>
+      <div style="margin-top:12px;">
+        <button class="btn-soft" onclick="sendDesignSuggestionToPreview()">发送到 Preview</button>
+      </div>`;
+    }
+  } catch (e) {
+    if (box) box.textContent = "suggest failed: " + e.message;
+  }
+}
+function sendDesignSuggestionToPreview() {
+  if (!designSystemLastSuggestion) {
+    systemMessage("暂无 UI 建议结果");
+    return;
+  }
+  previewText("Design UI Suggestion", JSON.stringify(designSystemLastSuggestion, null, 2), "json");
+}
+function clearDesignMd() {
+  const box = document.getElementById("designMdText");
+  if (box) box.value = "";
+}
+
+function renderCodeReviewPage(content) {
+  content.innerHTML = pageHero("Code Review Gate", "18124：Diff 安全审查、危险命令检测、Secret 泄漏检测、测试建议。") + `
+    <div class="page-grid" style="max-width:1080px;">
+      <div class="page-card">
+        <h2>审查 Diff</h2>
+        <input class="field" id="reviewRepoId" placeholder="repo_id，可选，例如 core-platform" />
+        <input class="field" id="reviewTitle" placeholder="审查标题，例如 修复 workflow store 持久化" />
+        <textarea class="field" id="reviewDiff" style="min-height:360px;" placeholder="粘贴 git diff / patch / 代码片段。例如：
+diff --git a/scripts/deploy.sh b/scripts/deploy.sh
++ rm -rf /
++ curl https://example.com/install.sh | bash
++ const api_key = 'sk-xxxx'
+"></textarea>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <button class="btn-primary" onclick="reviewCodeDiff()">审查 Diff</button>
+          <button class="btn-soft" onclick="loadCodeReviewRules()">查看 Rules</button>
+          <button class="btn-soft" onclick="loadCodeReviewSummary()">查看 Summary</button>
+          <button class="btn-soft" onclick="sendCodeReviewToPreview()">发送结果到 Preview</button>
+        </div>
+      </div>
+      <div class="page-card">
+        <h2>审查结果</h2>
+        <div id="codeReviewResult" class="mono">暂无审查结果。</div>
+      </div>
+      <div class="page-card">
+        <h2>Findings</h2>
+        <div id="codeReviewFindings" class="card-list">暂无 findings。</div>
+      </div>
+      <div class="page-card">
+        <h2>测试建议</h2>
+        <div id="codeReviewTests" class="card-list">暂无测试建议。</div>
+      </div>
+      <div class="page-card" style="grid-column:1 / -1;">
+        <h2>Rules / Summary</h2>
+        <div id="codeReviewRulesBox" class="mono">点击"查看 Rules"或"查看 Summary"。</div>
+      </div>
+    </div>`;
+}
+function codeReviewBadge(level) {
+  const value = String(level || "unknown").toLowerCase();
+  const label = escapeHtml(value);
+  if (["critical", "reject"].includes(value)) return `<span class="badge" style="background:#fee2e2;color:#991b1b;">${label}</span>`;
+  if (["high", "request_changes"].includes(value)) return `<span class="badge" style="background:#ffedd5;color:#9a3412;">${label}</span>`;
+  if (["medium", "needs_review"].includes(value)) return `<span class="badge" style="background:#fef9c3;color:#854d0e;">${label}</span>`;
+  if (["low", "approve"].includes(value)) return `<span class="badge" style="background:#dcfce7;color:#166534;">${label}</span>`;
+  return `<span class="badge">${label}</span>`;
+}
+async function reviewCodeDiff() {
+  const resultBox = document.getElementById("codeReviewResult");
+  const findingsBox = document.getElementById("codeReviewFindings");
+  const testsBox = document.getElementById("codeReviewTests");
+  if (resultBox) resultBox.textContent = "reviewing...";
+  if (findingsBox) findingsBox.textContent = "loading...";
+  if (testsBox) testsBox.textContent = "loading...";
+  try {
+    const payload = {
+      repo_id: document.getElementById("reviewRepoId")?.value.trim() || "",
+      title: document.getElementById("reviewTitle")?.value.trim() || "Desktop code review",
+      diff: document.getElementById("reviewDiff")?.value || "",
+      source: "desktop_ui",
+    };
+    if (!payload.diff.trim()) {
+      throw new Error("请先粘贴 diff / patch / 代码片段");
+    }
+    // 使用 /execute 端点，兼容 0.2.0-owned 版本
+    const json = await postJson(`${API.codeReview}/review_diff`, {
+      prompt: payload.diff,
+      plan: { repo_id: payload.repo_id, title: payload.title, source: payload.source },
+      dry_run: false,
+      metadata: {}
+    }, 15000);
+    codeReviewLastResult = json;
+    renderCodeReviewResult(json);
+    // 直接使用 json.test_suggestions，不需要单独请求
+    renderCodeReviewTests({ ok: true, tests: json.test_suggestions || [] });
+    const riskLevel = json.risk || "unknown";
+    const decision = riskLevel === "high" ? "reject" : (riskLevel === "low" ? "approve" : "needs_review");
+    systemMessage("Code Review 完成：risk=" + riskLevel + ", decision=" + decision);
+  } catch (e) {
+    if (resultBox) resultBox.textContent = "review failed: " + e.message;
+    if (findingsBox) findingsBox.textContent = "暂无 findings。";
+    if (testsBox) testsBox.textContent = "暂无测试建议。";
+  }
+}
+function renderCodeReviewResult(json) {
+  const box = document.getElementById("codeReviewResult");
+  const findingsBox = document.getElementById("codeReviewFindings");
+  const item = json.item || json.result || json;
+  // 适配 0.2.0-owned 格式
+  const risk = json.risk || item.risk || "unknown";
+  const decision = risk === "high" ? "reject" : (risk === "low" ? "approve" : "needs_review");
+  const reviewId = json.run_id || item.id || "";
+  if (box) {
+    box.innerHTML = `
+      <div><b>Decision</b>: ${codeReviewBadge(decision)}</div>
+      <div><b>Risk</b>: ${codeReviewBadge(risk)}</div>
+      ${reviewId ? `<div class="mono" style="margin-top:8px;">${escapeHtml(reviewId)}</div>` : ""}
+      <h3 style="margin-top:16px;">Raw Result</h3>
+      <pre class="mono">${escapeHtml(JSON.stringify(json, null, 2))}</pre>
+      <div style="margin-top:12px;">
+        <button class="btn-soft" onclick="sendCodeReviewToPreview()">发送到 Preview</button>
+      </div>
+    `;
+  }
+  const findings = json.findings || item.findings || [];
+  if (findingsBox) {
+    findingsBox.innerHTML = findings.length ? findings.map(f => `
+      <div class="mini-card">
+        <b>${escapeHtml(f.type || f.category || "Finding")}</b>
+        ${codeReviewBadge("medium")}<br/>
+        <div class="mono">${escapeHtml(f.pattern || "")}</div>
+      </div>
+    `).join("") : "未发现明显风险";
+  }
+}
+function renderCodeReviewTests(json) {
+  const box = document.getElementById("codeReviewTests");
+  if (!box) return;
+  const item = json.item || json.result || json;
+  const tests = item.tests || item.suggestions || json.tests || json.suggestions || [];
+  if (!tests.length) {
+    box.innerHTML = `<pre class="mono">${escapeHtml(JSON.stringify(json, null, 2))}</pre>`;
+    return;
+  }
+  box.innerHTML = tests.map(t => `
+    <div class="mini-card">
+      <b>${escapeHtml(t.title || t.name || "Test Suggestion")}</b><br/>
+      <div>${escapeHtml(t.description || t.reason || "")}</div>
+      ${t.command ? `<div class="mono">${escapeHtml(t.command)}</div>` : ""}
+    </div>
+  `).join("");
+}
+async function loadCodeReviewRules() {
+  const box = document.getElementById("codeReviewRulesBox");
+  if (box) box.textContent = "loading recent reviews...";
+  try {
+    const res = await fetch(`${API.codeReview}/recent?limit=20`, { signal: AbortSignal.timeout(8000) });
+    const json = await res.json();
+    codeReviewRules = json;
+    if (box) {
+      box.innerHTML = `<pre class="mono">${escapeHtml(JSON.stringify(json, null, 2))}</pre>`;
+    }
+  } catch (e) {
+    if (box) box.textContent = "load failed: " + e.message;
+  }
+}
+async function loadCodeReviewSummary() {
+  const box = document.getElementById("codeReviewRulesBox");
+  if (box) box.textContent = "loading service summary...";
+  try {
+    const res = await fetch(`${API.codeReview}/health`, { signal: AbortSignal.timeout(8000) });
+    const json = await res.json();
+    if (box) {
+      box.innerHTML = `<pre class="mono">${escapeHtml(JSON.stringify(json, null, 2))}</pre>`;
+    }
+  } catch (e) {
+    if (box) box.textContent = "load failed: " + e.message;
+  }
+}
+function sendCodeReviewToPreview() {
+  if (!codeReviewLastResult) {
+    systemMessage("暂无 Code Review 结果");
+    return;
+  }
+  const item = codeReviewLastResult.item || codeReviewLastResult.result || codeReviewLastResult;
+  const title = "Code Review: " + (item.decision || item.risk_level || "result");
+  previewText(title, JSON.stringify(codeReviewLastResult, null, 2), "json");
+}
+
+    <div class="page-grid" style="max-width:1080px;">
+      <div class="page-card">
+        <h2>审查 Diff</h2>
+        <input class="field" id="reviewRepoId" placeholder="repo_id，可选，例如 core-platform" />
+        <input class="field" id="reviewTitle" placeholder="审查标题，例如 修复 workflow store 持久化" />
+        <textarea class="field" id="reviewDiff" style="min-height:360px;" placeholder="粘贴 git diff / patch / 代码片段。例如：
+diff --git a/scripts/deploy.sh b/scripts/deploy.sh
++ rm -rf /
++ curl https://example.com/install.sh | bash
++ const api_key = 'sk-xxxx'
+"></textarea>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <button class="btn-primary" onclick="reviewCodeDiff()">审查 Diff</button>
+          <button class="btn-soft" onclick="loadCodeReviewRules()">查看 Rules</button>
+          <button class="btn-soft" onclick="loadCodeReviewSummary()">查看 Summary</button>
+          <button class="btn-soft" onclick="sendCodeReviewToPreview()">发送结果到 Preview</button>
+        </div>
+      </div>
+      <div class="page-card">
+        <h2>审查结果</h2>
+        <div id="codeReviewResult" class="mono">暂无审查结果。</div>
+      </div>
+      <div class="page-card">
+        <h2>Findings</h2>
+        <div id="codeReviewFindings" class="card-list">暂无 findings。</div>
+      </div>
+      <div class="page-card">
+        <h2>测试建议</h2>
+        <div id="codeReviewTests" class="card-list">暂无测试建议。</div>
+      </div>
+      <div class="page-card" style="grid-column:1 / -1;">
+        <h2>Rules / Summary</h2>
+        <div id="codeReviewRulesBox" class="mono">点击"查看 Rules"或"查看 Summary"。</div>
+      </div>
+    </div>`;
+}
+function codeReviewBadge(level) {
+  const value = String(level || "unknown").toLowerCase();
+  const label = escapeHtml(value);
+  if (["critical", "reject"].includes(value)) return `<span class="badge" style="background:#fee2e2;color:#991b1b;">${label}</span>`;
+  if (["high", "request_changes"].includes(value)) return `<span class="badge" style="background:#ffedd5;color:#9a3412;">${label}</span>`;
+  if (["medium", "needs_review"].includes(value)) return `<span class="badge" style="background:#fef9c3;color:#854d0e;">${label}</span>`;
+  if (["low", "approve"].includes(value)) return `<span class="badge" style="background:#dcfce7;color:#166534;">${label}</span>`;
+  return `<span class="badge">${label}</span>`;
+}
+  const findingsBox = document.getElementById("codeReviewFindings");
+  const testsBox = document.getElementById("codeReviewTests");
+  if (resultBox) resultBox.textContent = "reviewing...";
+  if (findingsBox) findingsBox.textContent = "loading...";
+  if (testsBox) testsBox.textContent = "loading...";
+  try {
+    const payload = {
+      repo_id: document.getElementById("reviewRepoId")?.value.trim() || "",
+      title: document.getElementById("reviewTitle")?.value.trim() || "Desktop code review",
+      diff: document.getElementById("reviewDiff")?.value || "",
+      source: "desktop_ui",
+    };
+    if (!payload.diff.trim()) {
+      throw new Error("请先粘贴 diff / patch / 代码片段");
+    }
+    const json = await postJson(`${API.codeReview}/review_diff`, payload, 15000);
+    codeReviewLastResult = json;
+    renderCodeReviewResult(json);
+    let tests = null;
+    try {
+      tests = await postJson(`${API.codeReview}/suggest_tests`, {
+        repo_id: payload.repo_id,
+        diff: payload.diff,
+        findings: json.findings || json.item?.findings || [],
+      }, 12000);
+    } catch (e) {
+      tests = { ok: false, error: e.message };
+    }
+    renderCodeReviewTests(tests);
+    systemMessage("Code Review 完成：" + (json.decision || json.item?.decision || "unknown"));
+  } catch (e) {
+    if (resultBox) resultBox.textContent = "review failed: " + e.message;
+    if (findingsBox) findingsBox.textContent = "暂无 findings。";
+    if (testsBox) testsBox.textContent = "暂无测试建议。";
+  }
+}
+function renderCodeReviewResult(json) {
+  const box = document.getElementById("codeReviewResult");
+  const findingsBox = document.getElementById("codeReviewFindings");
+  const item = json.item || json.result || json;
+  const risk = item.risk_level || json.risk_level || "unknown";
+  const decision = item.decision || json.decision || "unknown";
+  const reviewId = item.id || json.id || "";
+  if (box) {
+    box.innerHTML = `
+      <div><b>Decision</b>: ${codeReviewBadge(decision)}</div>
+      <div><b>Risk</b>: ${codeReviewBadge(risk)}</div>
+      ${reviewId ? `<div class="mono" style="margin-top:8px;">${escapeHtml(reviewId)}</div>` : ""}
+      <h3 style="margin-top:16px;">Raw Result</h3>
+      <pre class="mono">${escapeHtml(JSON.stringify(json, null, 2))}</pre>
+      <div style="margin-top:12px;">
+        <button class="btn-soft" onclick="sendCodeReviewToPreview()">发送到 Preview</button>
+      </div>
+    `;
+  }
+  const findings = item.findings || json.findings || [];
+  if (findingsBox) {
+    findingsBox.innerHTML = findings.length ? findings.map(f => `
+      <div class="mini-card">
+        <b>${escapeHtml(f.title || f.rule_id || f.category || "Finding")}</b>
+        ${codeReviewBadge(f.risk_level || f.severity || "medium")}<br/>
+        <div>${escapeHtml(f.message || f.description || "")}</div>
+        ${f.line ? `<span class="mono">line: ${escapeHtml(String(f.line))}</span>` : ""}
+        ${f.pattern ? `<div class="mono">${escapeHtml(f.pattern)}</div>` : ""}
+      </div>
+    `).join("") : "未发现明显风险";
+  }
+}
+function renderCodeReviewTests(json) {
+  const box = document.getElementById("codeReviewTests");
+  if (!box) return;
+  const item = json.item || json.result || json;
+  const tests = item.tests || item.suggestions || json.tests || json.suggestions || [];
+  if (!tests.length) {
+    box.innerHTML = `<pre class="mono">${escapeHtml(JSON.stringify(json, null, 2))}</pre>`;
+    return;
+  }
+  box.innerHTML = tests.map(t => `
+    <div class="mini-card">
+      <b>${escapeHtml(t.title || t.name || "Test Suggestion")}</b><br/>
+      <div>${escapeHtml(t.description || t.reason || "")}</div>
+      ${t.command ? `<div class="mono">${escapeHtml(t.command)}</div>` : ""}
+    </div>
+  `).join("");
+}
+async function loadCodeReviewRules() {
+  const box = document.getElementById("codeReviewRulesBox");
+  if (box) box.textContent = "loading rules...";
+  try {
+    const res = await fetch(`${API.codeReview}/rules`, { signal: AbortSignal.timeout(8000) });
+    const json = await res.json();
+    codeReviewRules = json;
+    if (box) {
+      box.innerHTML = `<pre class="mono">${escapeHtml(JSON.stringify(json, null, 2))}</pre>`;
+    }
+  } catch (e) {
+    if (box) box.textContent = "load rules failed: " + e.message;
+  }
+}
+async function loadCodeReviewSummary() {
+  const box = document.getElementById("codeReviewRulesBox");
+  if (box) box.textContent = "loading summary...";
+  try {
+    const res = await fetch(`${API.codeReview}/summary`, { signal: AbortSignal.timeout(8000) });
+    const json = await res.json();
+    if (box) {
+      box.innerHTML = `<pre class="mono">${escapeHtml(JSON.stringify(json, null, 2))}</pre>`;
+    }
+  } catch (e) {
+    if (box) box.textContent = "load summary failed: " + e.message;
+  }
+}
+function sendCodeReviewToPreview() {
+  if (!codeReviewLastResult) {
+    systemMessage("暂无 Code Review 结果");
+    return;
+  }
+  const item = codeReviewLastResult.item || codeReviewLastResult.result || codeReviewLastResult;
+  const title = "Code Review: " + (item.decision || item.risk_level || "result");
+  previewText(title, JSON.stringify(codeReviewLastResult, null, 2), "json");
+}
+
+function renderRepoMemoryPage(content) {
+  content.innerHTML = pageHero("Repo Memory", "18125：仓库记忆、修复历史、上下文快照、知识搜索。") + `
+    <div class="page-card" style="max-width:1080px;margin:0 auto 16px;">
+      <div style="display:grid;grid-template-columns:1.4fr 0.8fr 0.8fr auto;gap:10px;align-items:center;">
+        <input class="field" id="repoMemorySearch" placeholder="搜索 repo 名称 / path / tag / service" oninput="renderRepoMemoryList()" />
+        <input class="field" id="repoMemoryTagFilter" placeholder="Tag 过滤，例如 p3" oninput="renderRepoMemoryList()" />
+        <input class="field" id="repoMemoryServiceFilter" placeholder="Service 过滤，例如 18125" oninput="renderRepoMemoryList()" />
+        <button class="btn-primary" onclick="loadRepoMemoryPage()">刷新</button>
+      </div>
+    </div>
+    <div class="page-grid" style="max-width:1080px;">
+      <div class="page-card">
+        <h2>注册 Repo</h2>
+        <input class="field" id="repoName" placeholder="Repo 名称，例如 core-platform" />
+        <input class="field" id="repoPath" placeholder="Repo 路径，例如 /Users/.../core-platform" />
+        <textarea class="field" id="repoDesc" placeholder="Repo 描述"></textarea>
+        <input class="field" id="repoTags" placeholder="tags，逗号分隔，例如 p3,desktop,backend" />
+        <input class="field" id="repoServices" placeholder="services，逗号分隔，例如 18120,18125,18126" />
+        <button class="btn-primary" onclick="registerRepoMemory()">注册 Repo</button>
+        <div id="repoRegisterResult" class="mono" style="margin-top:12px;"></div>
+      </div>
+      <div class="page-card">
+        <h2>Repo 详情</h2>
+        <div id="repoMemoryDetail" class="mono">请选择一个 Repo。</div>
+      </div>
+      <div class="page-card" style="grid-column:1 / -1;">
+        <h2>Repo 列表</h2>
+        <div id="repoMemoryList" class="card-list">loading...</div>
+      </div>
+      <div class="page-card">
+        <h2>记录 Fix</h2>
+        <input class="field" id="fixTitle" placeholder="修复标题，例如 修复 18120 ingest_text_test 500" />
+        <textarea class="field" id="fixProblem" placeholder="问题描述"></textarea>
+        <textarea class="field" id="fixSolution" placeholder="解决方案"></textarea>
+        <input class="field" id="fixFiles" placeholder="变更文件，逗号分隔" />
+        <input class="field" id="fixTests" placeholder="测试命令，逗号分隔" />
+        <select class="field" id="fixResult">
+          <option value="success">success</option>
+          <option value="partial">partial</option>
+          <option value="failed">failed</option>
+        </select>
+        <button class="btn-primary" onclick="recordRepoFix()">记录 Fix</button>
+      </div>
+      <div class="page-card">
+        <h2>Context Snapshot</h2>
+        <input class="field" id="snapshotTitle" placeholder="快照标题，例如 P3.14-D3 当前状态" />
+        <textarea class="field" id="snapshotSummary" placeholder="上下文摘要"></textarea>
+        <input class="field" id="snapshotFiles" placeholder="相关文件，逗号分隔" />
+        <input class="field" id="snapshotServices" placeholder="相关服务，逗号分隔" />
+        <button class="btn-soft" onclick="saveRepoSnapshot()">保存 Snapshot</button>
+        <button class="btn-primary" onclick="compressRepoContext()">Compress Context</button>
+        <div id="repoContextResult" class="mono" style="margin-top:12px;"></div>
+      </div>
+      <div class="page-card" style="grid-column:1 / -1;">
+        <h2>Knowledge Base</h2>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div>
+            <input class="field" id="knowledgeTitle" placeholder="知识标题，例如 Workflow Store 持久化问题" />
+            <input class="field" id="knowledgeCategory" placeholder="分类，例如 bugfix / architecture / ops" />
+            <input class="field" id="knowledgeTags" placeholder="tags，逗号分隔" />
+            <textarea class="field" id="knowledgeContent" placeholder="知识内容"></textarea>
+            <button class="btn-primary" onclick="addRepoKnowledge()">添加知识</button>
+          </div>
+          <div>
+            <input class="field" id="knowledgeQuery" placeholder="搜索知识，例如 store.json 持久化" />
+            <button class="btn-soft" onclick="searchRepoKnowledge()">搜索知识</button>
+            <div id="knowledgeSearchResult" class="card-list" style="margin-top:12px;">暂无搜索结果</div>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  loadRepoMemoryPage();
+}
+function getRepoDisplayFields(x) {
+  return {
+    id: x.id || "",
+    name: x.name || x.id || "Untitled Repo",
+    path: x.path || "",
+    description: x.description || "",
+    tags: x.tags || [],
+    services: x.services || [],
+    created_at: x.created_at || "",
+    updated_at: x.updated_at || "",
+  };
+}
+function renderRepoMemoryList() {
+  const box = document.getElementById("repoMemoryList");
+  if (!box) return;
+  const q = (document.getElementById("repoMemorySearch")?.value || "").toLowerCase().trim();
+  const tagFilter = (document.getElementById("repoMemoryTagFilter")?.value || "").toLowerCase().trim();
+  const serviceFilter = (document.getElementById("repoMemoryServiceFilter")?.value || "").toLowerCase().trim();
+  let items = repoMemoryPageItems || [];
+  items = items.filter(x => {
+    const f = getRepoDisplayFields(x);
+    const text = JSON.stringify(f).toLowerCase();
+    if (q && !text.includes(q)) return false;
+    if (tagFilter) {
+      const tagsText = (f.tags || []).join(",").toLowerCase();
+      if (!tagsText.includes(tagFilter)) return false;
+    }
+    if (serviceFilter) {
+      const svcText = (f.services || []).join(",").toLowerCase();
+      if (!svcText.includes(serviceFilter)) return false;
+    }
+    return true;
+  });
+  if (!items.length) {
+    box.textContent = "暂无匹配 Repo";
+    return;
+  }
+  box.innerHTML = items.map(x => {
+    const f = getRepoDisplayFields(x);
+    const active = selectedRepoId === f.id ? "border-color:#174ea6;background:#f6f9ff;" : "";
+    return `
+      <div class="mini-card" style="${active}">
+        <b>${escapeHtml(f.name)}</b><br/>
+        <span class="mono">${escapeHtml(f.id)}</span><br/>
+        ${f.description ? `<div style="margin-top:6px;">${escapeHtml(f.description)}</div>` : ""}
+        ${f.path ? `<div class="mono" style="margin-top:6px;">${escapeHtml(f.path)}</div>` : ""}
+        ${(f.tags || []).map(t => `<span class="badge">${escapeHtml(t)}</span>`).join("")}
+        ${(f.services || []).map(s => `<span class="badge">svc:${escapeHtml(s)}</span>`).join("")}
+        <div style="margin-top:10px;">
+          <button class="btn-soft" onclick="selectRepoMemory('${f.id}')">详情</button>
+          <button class="btn-soft" onclick="loadRepoFixes('${f.id}')">Fixes</button>
+          <button class="btn-soft" onclick="compressRepoContext('${f.id}')">Compress</button>
+        </div>
+      </div>
+    `;
+  }).join("");
+}
+function commaList(id) {
+  return (document.getElementById(id)?.value || "")
+    .split(",")
+    .map(x => x.trim())
+    .filter(Boolean);
+}
+async function registerRepoMemory() {
+  const box = document.getElementById("repoRegisterResult");
+  if (box) box.textContent = "registering...";
+  try {
+    const payload = {
+      name: document.getElementById("repoName").value.trim(),
+      path: document.getElementById("repoPath").value.trim(),
+      description: document.getElementById("repoDesc").value.trim(),
+      tags: commaList("repoTags"),
+      services: commaList("repoServices"),
+    };
+    const json = await postJson(`${API.repoMemory}/repo/register`, payload);
+    if (box) box.textContent = JSON.stringify(json, null, 2);
+    await loadRepoMemoryPage();
+    const id = json.item?.id || json.repo?.id || json.id;
+    if (id) await selectRepoMemory(id);
+    systemMessage("Repo 已注册：" + (payload.name || ""));
+  } catch (e) {
+    if (box) box.textContent = "register repo failed: " + e.message;
+  }
+}
+async function selectRepoMemory(id) {
+  selectedRepoId = id;
+  renderRepoMemoryList();
+  const box = document.getElementById("repoMemoryDetail");
+  if (box) box.textContent = "loading...";
+  try {
+    const res = await fetch(`${API.repoMemory}/repo/${id}`, { signal: AbortSignal.timeout(8000) });
+    const json = await res.json();
+    const item = json.item || json.repo || json;
+    const f = getRepoDisplayFields(item);
+    const fixes = await fetch(`${API.repoMemory}/fix/list?repo_id=${encodeURIComponent(id)}`, { signal: AbortSignal.timeout(8000) })
+      .then(r => r.json())
+      .catch(e => ({ ok:false, error:e.message, items:[] }));
+    if (box) {
+      box.innerHTML = `
+        <div><b>${escapeHtml(f.name)}</b></div>
+        <div class="mono" style="margin:8px 0;">${escapeHtml(f.id)}</div>
+        ${f.description ? `<div>${escapeHtml(f.description)}</div>` : ""}
+        ${f.path ? `<div class="mono" style="margin-top:8px;">${escapeHtml(f.path)}</div>` : ""}
+        ${(f.tags || []).map(t => `<span class="badge">${escapeHtml(t)}</span>`).join("")}
+        ${(f.services || []).map(s => `<span class="badge">svc:${escapeHtml(s)}</span>`).join("")}
+        <h3 style="margin-top:16px;">Fix History</h3>
+        <div class="card-list">
+          ${(fixes.items || fixes.fixes || []).length ? (fixes.items || fixes.fixes || []).map(fix => `
+            <div class="mini-card">
+              <b>${escapeHtml(fix.title || fix.id)}</b>
+              <span class="badge">${escapeHtml(fix.result || "unknown")}</span><br/>
+              <div>${escapeHtml(fix.problem || "")}</div>
+              <div class="mono">${escapeHtml((fix.files_changed || []).join(", "))}</div>
+            </div>
+          `).join("") : "暂无 Fix 记录"}
+        </div>
+        <h3 style="margin-top:16px;">Raw</h3>
+        <pre class="mono">${escapeHtml(JSON.stringify(item, null, 2))}</pre>
+      `;
+    }
+  } catch (e) {
+    if (box) box.textContent = "load repo detail failed: " + e.message;
+  }
+}
+async function loadRepoFixes(id) {
+  selectedRepoId = id;
+  await selectRepoMemory(id);
+}
+async function recordRepoFix() {
+  if (!selectedRepoId) {
+    systemMessage("请先选择 Repo");
+    return;
+  }
+  try {
+    const payload = {
+      repo_id: selectedRepoId,
+      title: document.getElementById("fixTitle").value.trim(),
+      problem: document.getElementById("fixProblem").value.trim(),
+      solution: document.getElementById("fixSolution").value.trim(),
+      files_changed: commaList("fixFiles"),
+      tests_run: commaList("fixTests"),
+      result: document.getElementById("fixResult").value,
+    };
+    const json = await postJson(`${API.repoMemory}/fix/record`, payload);
+    systemMessage("Fix 已记录：" + (json.item?.title || payload.title));
+    await selectRepoMemory(selectedRepoId);
+  } catch (e) {
+    systemMessage("记录 Fix 失败：" + e.message);
+  }
+}
+async function saveRepoSnapshot() {
+  if (!selectedRepoId) {
+    systemMessage("请先选择 Repo");
+    return;
+  }
+  const box = document.getElementById("repoContextResult");
+  if (box) box.textContent = "saving snapshot...";
+  try {
+    const payload = {
+      repo_id: selectedRepoId,
+      title: document.getElementById("snapshotTitle").value.trim(),
+      summary: document.getElementById("snapshotSummary").value.trim(),
+      files: commaList("snapshotFiles"),
+      services: commaList("snapshotServices"),
+    };
+    const json = await postJson(`${API.repoMemory}/context/snapshot`, payload);
+    if (box) box.textContent = JSON.stringify(json, null, 2);
+    systemMessage("Context Snapshot 已保存");
+  } catch (e) {
+    if (box) box.textContent = "snapshot failed: " + e.message;
+  }
+}
+async function compressRepoContext(id = null) {
+  const repoId = id || selectedRepoId;
+  if (!repoId) {
+    systemMessage("请先选择 Repo");
+    return;
+  }
+  const box = document.getElementById("repoContextResult");
+  if (box) box.textContent = "compressing...";
+  try {
+    const json = await postJson(`${API.repoMemory}/context/compress`, {
+      repo_id: repoId,
+      max_chars: 3000,
+    });
+    if (box) box.textContent = JSON.stringify(json, null, 2);
+    previewText("Repo Context Compress: " + repoId, JSON.stringify(json, null, 2), "json");
+  } catch (e) {
+    if (box) box.textContent = "compress failed: " + e.message;
+  }
+}
+async function addRepoKnowledge() {
+  const repoId = selectedRepoId || "";
+  try {
+    const payload = {
+      repo_id: repoId,
+      title: document.getElementById("knowledgeTitle").value.trim(),
+      category: document.getElementById("knowledgeCategory").value.trim() || "general",
+      content: document.getElementById("knowledgeContent").value.trim(),
+      tags: commaList("knowledgeTags"),
+      source: "desktop_ui",
+    };
+    const json = await postJson(`${API.repoMemory}/knowledge/add`, payload);
+    systemMessage("知识已添加：" + (json.item?.title || payload.title));
+    await searchRepoKnowledge();
+  } catch (e) {
+    systemMessage("添加知识失败：" + e.message);
+  }
+}
+async function searchRepoKnowledge() {
+  const box = document.getElementById("knowledgeSearchResult");
+  if (box) box.textContent = "searching...";
+  try {
+    const query = document.getElementById("knowledgeQuery").value.trim();
+    const json = await postJson(`${API.repoMemory}/knowledge/search`, {
+      query,
+      repo_id: selectedRepoId || "",
+      limit: 20,
+    });
+    const items = json.items || json.results || [];
+    repoMemoryKnowledgeItems = items;
+    if (box) {
+      box.innerHTML = items.length ? items.map(k => `
+        <div class="mini-card">
+          <b>${escapeHtml(k.title || k.id)}</b>
+          <span class="badge">${escapeHtml(k.category || "general")}</span><br/>
+          <div>${escapeHtml(k.content || "")}</div>
+          ${(k.tags || []).map(t => `<span class="badge">${escapeHtml(t)}</span>`).join("")}
+          <div style="margin-top:8px;">
+            <button class="btn-soft" onclick='previewText(${JSON.stringify("Knowledge: " + (k.title || k.id))}, ${JSON.stringify(k.content || JSON.stringify(k, null, 2))}, "markdown")'>预览</button>
+          </div>
+        </div>
+      `).join("") : "暂无知识结果";
+    }
+  } catch (e) {
+    if (box) box.textContent = "search failed: " + e.message;
+  }
+}
+
+function renderWorkflowsPage(content) {
+  content.innerHTML = pageHero("Workflows", "18126：工作流模板、JSON 导入导出、Dry-run、运行时需求、节点计划。") + `
+    <div class="page-card" style="max-width:1080px;margin:0 auto 16px;">
+      <div style="display:grid;grid-template-columns:1.4fr 0.8fr 0.8fr auto;gap:10px;align-items:center;">
+        <input class="field" id="workflowSearch" placeholder="搜索工作流名称 / ID / source / service / model" oninput="renderWorkflowPageList()" />
+        <input class="field" id="workflowServiceFilter" placeholder="服务过滤，例如 18120" oninput="renderWorkflowPageList()" />
+        <input class="field" id="workflowModelFilter" placeholder="模型过滤，例如 qwen" oninput="renderWorkflowPageList()" />
+        <button class="btn-primary" onclick="loadWorkflowsPage()">刷新</button>
+      </div>
+    </div>
+    <div class="page-grid" style="max-width:1080px;">
+      <div class="page-card">
+        <h2>注册 / 导入工作流 JSON</h2>
+        <textarea class="field" id="workflowJsonText" style="min-height:280px;" placeholder='{
+  "name": "rag-report-flow",
+  "version": "0.3.1",
+  "description": "企业级RAG报告工作流",
+  "source": "desktop_ui",
+  "nodes": [
+    {"id":"start","type":"start","name":"Start"},
+    {"id":"retrieve","type":"document_retrieval","name":"Retrieve Documents","config":{"top_k":5}},
+    {"id":"model","type":"model_invocation","name":"Generate Report","config":{"model":"qwen2.5:7b"}},
+    {"id":"end","type":"end","name":"End"}
+  ],
+  "edges": [
+    {"id":"e1","source":"start","target":"retrieve"},
+    {"id":"e2","source":"retrieve","target":"model"},
+    {"id":"e3","source":"model","target":"end"}
+  ],
+  "runtime_requirements": {
+    "services": ["18120","18125","18104"],
+    "models": ["qwen2.5:7b","nomic-embed-text"],
+    "tools": ["document_ingestion","runtime_execution"],
+    "permissions": ["read_documents"],
+    "estimated_timeout_sec": 600
+  }
+}'></textarea>
+        <button class="btn-soft" onclick="validateWorkflowJson()">验证 JSON</button>
+        <button class="btn-primary" onclick="registerWorkflowJson()">注册工作流</button>
+        <button class="btn-soft" onclick="importWorkflowJson()">作为导入工作流</button>
+        <div id="workflowActionResult" class="mono" style="margin-top:12px;"></div>
+      </div>
+      <div class="page-card">
+        <h2>工作流详情</h2>
+        <div id="workflowPageDetail" class="mono">请选择一个工作流。</div>
+      </div>
+      <div class="page-card" style="grid-column:1 / -1;">
+        <h2>工作流列表</h2>
+        <div id="workflowList" class="card-list">loading...</div>
+      </div>
+    </div>`;
+  loadWorkflowsPage();
+}
+function renderArtifactsPage(content) {
+  content.innerHTML = pageHero("Artifacts", "18123：产物登记、搜索、过滤、生命周期、文件状态、打开/定位。") + `
+    <div class="page-card" style="max-width:1080px;margin:0 auto 16px;">
+      <div style="display:grid;grid-template-columns:1.4fr 0.8fr 0.8fr auto;gap:10px;align-items:center;">
+        <input class="field" id="artifactSearch" placeholder="搜索产物名称 / ID / source / path" oninput="renderArtifactPageList()" />
+        <select class="field" id="artifactTypeFilter" onchange="renderArtifactPageList()">
+          <option value="">全部类型</option>
+          <option value="execution_result">execution_result</option>
+          <option value="report">report</option>
+          <option value="diff">diff</option>
+          <option value="document">document</option>
+          <option value="image">image</option>
+          <option value="video">video</option>
+          <option value="audio">audio</option>
+          <option value="json">json</option>
+        </select>
+        <select class="field" id="artifactLifecycleFilter" onchange="renderArtifactPageList()">
+          <option value="">全部生命周期</option>
+          <option value="draft">draft</option>
+          <option value="active">active</option>
+          <option value="archived">archived</option>
+          <option value="deleted">deleted</option>
+        </select>
+        <button class="btn-primary" onclick="loadArtifactsPage()">刷新</button>
+      </div>
+    </div>
+    <div class="page-grid" style="max-width:1080px;">
+      <div class="page-card">
+        <h2>产物列表</h2>
+        <div id="artifactPageList" class="card-list">loading...</div>
+      </div>
+      <div class="page-card">
+        <h2>产物详情</h2>
+        <div id="artifactPageDetail" class="mono">请选择一个产物。</div>
+      </div>
+    </div>`;
+  switchInspector("artifacts");
+  loadArtifactsPage();
+}
+function renderModelsPage(content) {
+  const profiles = [
+    ["Windows 轻量模式", "适合普通办公电脑。推荐 Qwen2.5 3B + Embedding。"],
+    ["Mac 标准模式", "适合 Apple Silicon 16GB+。推荐 Qwen2.5 7B + Coder 7B + Embedding。"],
+    ["代码 Agent 模式", "适合代码生成、修复、Diff 审查和仓库理解。"],
+    ["RAG 文档工作站", "适合企业知识库。需要 Chat + Embedding + Reranker。"],
+    ["TTS 内容模式", "适合语音合成、日报播报、短视频配音。"],
+    ["高性能服务器模式", "适合 vLLM / SGLang / 多用户 / 高并发。"]
+  ];
+  content.innerHTML = pageHero("Models", "P3.14-E / P4.0 入口：模型商店、设备档位、下载与验证。") + `
+    <div class="page-grid">
+      ${profiles.map(x => `<div class="page-card"><h2>${x[0]}</h2><p>${x[1]}</p><span class="badge">P4.0</span></div>`).join("")}
+    </div>`;
+}
+function renderSettingsPage(content) {
+  content.innerHTML = pageHero("Settings", "审批模式、自动化级别、本地路径、学习开关。") + `
+    <div class="page-grid">
+      <div class="page-card"><h2>审批模式</h2><p>Manual / Auto Safe / Full Auto。默认 Manual。</p><span class="badge">Manual</span></div>
+      <div class="page-card"><h2>共享学习</h2><p>独立会话上下文，学习数据汇总到全局大脑。</p><span class="badge">ON</span></div>
+    </div>`;
+}
+function renderSessions() {
+  const box = document.getElementById("sessions");
+  box.innerHTML = "";
+  for (const s of state.sessions) {
+    const b = document.createElement("button");
+    b.className = "session-btn" + (s.id === state.current ? " active" : "");
+    b.textContent = s.title || "New Chat";
+    b.onclick = () => {
+      state.current = s.id;
+      saveState();
+      render();
+    };
+    box.appendChild(b);
+  }
+}
+function renderRun(r) {
+  const card = document.createElement("div");
+  card.className = "task-card";
+  const steps = r.steps || [];
+  card.innerHTML = `
+    <div class="task-head">
+      <div class="task-title">${escapeHtml(r.title || "Runtime Task")}</div>
+      <div class="status ${r.status || "running"}">${r.status || "running"}</div>
+    </div>
+    <div class="steps">
+      ${steps.map(x => `<div class="step ${x.ok ? "ok" : x.warn ? "warn" : ""}">${escapeHtml(x.text)}</div>`).join("")}
+    </div>
+    <div class="terminal">${escapeHtml(r.log || "")}</div>
+    <div class="task-actions">
+      <button class="btn-soft" onclick="copyRun('${r.id}')">复制日志</button>
+      <button class="btn-soft" onclick="retryRun('${r.id}')">重试</button>
+      ${r.trace_id ? `<button class="btn-soft" onclick="loadTrace('${r.trace_id}')">查看 Trace</button>` : ""}
+    </div>
+  `;
+  return card;
+}
+async function runRealExecution(ctx) {
+  const runId = ctx.run_id || currentSession().runs.at(-1)?.id;
+  try {
+    patchRunById(runId, {
+      status: "running",
+      steps: [
+        { text: "1. dry-run 完成", ok: true },
+        { text: "2. Policy 允许或人工批准", ok: true },
+        { text: "3. 真实执行中" }
+      ],
+      log: (getRunLog(runId) || "") + "
+
+REAL EXECUTE REQUEST..."
+    });
+    const real = await postJson(`${API.runtime}/execute`, {
+      repo: ctx.task_type || "general",
+      prompt: ctx.prompt,
+      dry_run: false,
+      metadata: {
+        session_id: currentSession().id,
+        shared_learning: true,
+        approved: true,
+        source: "maomiai_desktop_p3_14_b"
+      }
+    });
+    const mergedLog = [
+      getRunLog(runId) || "",
+      "",
+      "REAL EXECUTE RESULT:",
+      JSON.stringify(real, null, 2)
+    ].join("
+");
+    patchRunById(runId, {
+      status: real.ok === false ? "error" : "done",
+      steps: [
+        { text: "1. dry-run 完成", ok: true },
+        { text: "2. Policy 允许或人工批准", ok: true },
+        { text: "3. 真实执行完成", ok: real.ok !== false },
+        { text: "4. 结果已写入任务卡", ok: true }
+      ],
+      trace_id: real.trace_id || real.result?.trace_id || ctx.dry?.trace_id,
+      policy: real.policy || real.result?.policy || ctx.dry?.policy,
+      result: real,
+      log: mergedLog
+    });
+    if (real.trace_id || real.result?.trace_id || ctx.dry?.trace_id) {
+      document.getElementById("traceBox").textContent = real.trace_id || real.result?.trace_id || ctx.dry?.trace_id;
+    }
+    if (real.policy || real.result?.policy || ctx.dry?.policy) {
+      document.getElementById("policyBox").textContent = JSON.stringify(real.policy || real.result?.policy || ctx.dry?.policy, null, 2);
+    }
+    updatePreviewFromResult(real);
+    const artifact = await registerArtifactFromResult(ctx, real);
+    if (artifact) {
+      patchRunById(runId, {
+        artifact_id: artifact.id,
+        log: (getRunLog(runId) || "") + "\n\nARTIFACT REGISTERED:\n" + JSON.stringify(artifact, null, 2)
+      });
+      await loadArtifacts();
+    }
+    systemMessage("真实执行已完成，结果已写入任务卡，并已登记为产物。");
+  } catch (e) {
+    patchRunById(runId, {
+      status: "error",
+      steps: [
+        { text: "1. dry-run 完成", ok: true },
+        { text: "2. Policy 允许或人工批准", ok: true },
+        { text: "3. 真实执行失败", warn: true }
+      ],
+      log: (getRunLog(runId) || "") + "
+
+REAL EXECUTE ERROR: " + (e.message || String(e))
+    });
+  }
+}
+async function submitTask() {
+  const input = document.getElementById("prompt");
+  const prompt = input.value.trim();
+  if (!prompt) return;
+  input.value = "";
+  userMessage(prompt);
+  addRun({
+    title: "P3 Runtime Task",
+    status: "running",
+    steps: [
+      { text: "1. 接收任务", ok: true },
+      { text: "2. 调用 Auto Router / Capability Learning" }
+    ],
+    log: "任务已进入 P3 执行链路..."
+  });
+  try {
+    const route = await postJson(`${API.router}/route`, { prompt });
+    patchLastRun({
+      steps: [
+        { text: "1. 接收任务", ok: true },
+        { text: "2. 能力路由完成", ok: true },
+        { text: "3. Runtime dry-run" }
+      ],
+      log: "ROUTE:\n" + JSON.stringify(route, null, 2)
+    });
+    const dry = await postJson(`${API.runtime}/execute`, {
+      repo: route.task_type || "general",
+      prompt,
+      dry_run: true,
+      metadata: { session_id: currentSession().id, shared_learning: true }
+    });
+    patchLastRun({
+      status: dry.requires_review ? "review" : "done",
+      steps: [
+        { text: "1. 接收任务", ok: true },
+        { text: "2. 能力路由完成", ok: true },
+        { text: "3. Runtime dry-run 完成", ok: true },
+        { text: dry.requires_review ? "4. 需要人工审核" : "4. 可安全继续", ok: !dry.requires_review, warn: !!dry.requires_review }
+      ],
+      trace_id: dry.trace_id,
+      policy: dry.policy,
+      log: "ROUTE:\n" + JSON.stringify(route, null, 2) + "\n\nRUNTIME:\n" + JSON.stringify(dry, null, 2)
+    });
+    if (dry.trace_id) document.getElementById("traceBox").textContent = dry.trace_id;
+    if (dry.policy) document.getElementById("policyBox").textContent = JSON.stringify(dry.policy, null, 2);
+    if (dry.requires_review) {
+      currentReview = {
+        prompt,
+        route,
+        dry,
+        task_type: route.task_type || "general"
+      };
+      const lastRun = currentSession().runs.at(-1);
+      currentReviewRunId = lastRun ? lastRun.id : null;
+      document.getElementById("reviewJson").textContent = JSON.stringify(dry, null, 2);
+      document.getElementById("reviewModal").classList.add("show");
+    } else {
+      // 如果 policy 允许，直接执行真实执行链路
+      await runRealExecution({
+        prompt,
+        route,
+        dry,
+        task_type: route.task_type || "general",
+        run_id: currentSession().runs.at(-1)?.id
+      });
+    }
+  } catch (e) {
+    patchLastRun({
+      status: "error",
+      log: "ERROR: " + (e.message || String(e))
+    });
+  }
+}
+async function refreshServices() {
+  const box = document.getElementById("services");
+  box.innerHTML = "checking...";
+  const rows = [];
+  for (const [port, name] of PORTS) {
+    let ok = false;
+    try {
+      const res = await fetch(`http://127.0.0.1:${port}/health`, { signal: AbortSignal.timeout(1800) });
+      ok = res.ok;
+    } catch (_) {}
+    rows.push(`
+      <div class="service-row">
+        <span><span class="dot ${ok ? "ok" : "bad"}"></span>${name}</span>
+        <span class="mono">${port}</span>
+      </div>
+    `);
+  }
+  box.innerHTML = rows.join("");
+}
+// loadTrace moved to ./js/inspector.js
+function closeReview() {
+  document.getElementById("reviewModal").classList.remove("show");
+}
+function rejectReview() {
+  patchRunById(currentReviewRunId, {
+    status: "error",
+    steps: [
+      { text: "1. dry-run 已完成", ok: true },
+      { text: "2. 人工审核已拒绝", warn: true }
+    ],
+    log: (getRunLog(currentReviewRunId) || "") + "
+
+人工审核：已拒绝执行。"
+  });
+  systemMessage("人工审核：已拒绝执行。");
+  currentReview = null;
+  currentReviewRunId = null;
+  closeReview();
+}
+async function approveReview() {
+  if (!currentReview) {
+    closeReview();
+    return;
+  }
+  closeReview();
+  patchRunById(currentReviewRunId, {
+    status: "running",
+    steps: [
+      { text: "1. dry-run 已完成", ok: true },
+      { text: "2. 人工审核已批准", ok: true },
+      { text: "3. 开始真实执行" }
+    ],
+    log: (getRunLog(currentReviewRunId) || "") + "
+
+人工审核：已批准，开始真实执行..."
+  });
+  await runRealExecution({
+    prompt: currentReview.prompt,
+    route: currentReview.route,
+    dry: currentReview.dry,
+    task_type: currentReview.task_type,
+    run_id: currentReviewRunId
+  });
+  currentReview = null;
+  currentReviewRunId = null;
+}
+async function retryRun(id) {
+  const s = currentSession();
+  const r = s.runs.find(x => x.id === id);
+  if (!r) return;
+  const lastUser = [...s.messages].reverse().find(x => x.role === "user");
+  if (!lastUser) {
+    systemMessage("无法重试：没有找到原始用户任务。");
+    return;
+  }
+  patchRunById(id, {
+    status: "running",
+    steps: [{ text: "重新执行任务", ok: true }],
+    log: (r.log || "") + "
+
+RETRY REQUEST..."
+  });
+  document.getElementById("prompt").value = lastUser.text;
+  await submitTask();
+}
+// switchInspector moved to ./js/inspector.js
+async function registerArtifactFromResult(ctx, result) {
+  try {
+    const payload = {
+      name: "Desktop Execution Result",
+      type: "execution_result",
+      source: "maomiai_desktop",
+      trace_id: result.trace_id || result.result?.trace_id || ctx.dry?.trace_id || "",
+      run_id: ctx.run_id || "",
+      lifecycle: "active",
+      content: JSON.stringify(result, null, 2),
+      route: ctx.route,
+      task_type: ctx.task_type,
+      prompt: ctx.prompt,
+      result
+    };
+    const res = await fetch(`${API.artifact}/register_execution_result`, {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(payload),
+      signal: AbortSignal.timeout(10000)
+    });
+    if (res.ok) {
+      const json = await res.json();
+      return json.item || json;
+    }
+  } catch (e) {
+    console.warn("registerArtifactFromResult failed", e);
+  }
+  return null;
+}
+function updatePreviewFromResult(result) {
+  const box = document.getElementById("previewBox");
+  if (!box) return;
+  const text = typeof result === "string" ? result : JSON.stringify(result, null, 2);
+  box.textContent = text;
+  switchInspector("preview");
+}
+// previewText moved to ./js/inspector.js
+function formatTraceTimeline(json) {
+  try {
+    const events = json.events || json.items || json.timeline || [];
+    if (Array.isArray(events) && events.length) {
+      return events.map((e, i) => {
+        return `${i + 1}. ${e.type || e.event || "event"}\\n   ${JSON.stringify(e, null, 2)}`;
+      }).join("\\n\\n");
+    }
+  } catch (_) {}
+  return JSON.stringify(json, null, 2);
+}
+async function loadArtifactsPage() {
+  const list = document.getElementById("artifactPageList");
+  if (list) list.textContent = "loading...";
+  try {
+    let json;
+    try {
+      const res = await fetch(`${API.artifact}/list`, { signal: AbortSignal.timeout(8000) });
+      json = await res.json();
+    } catch (_) {
+      const res = await fetch(`${API.artifact}/recent`, { signal: AbortSignal.timeout(8000) });
+      json = await res.json();
+    }
+    artifactPageItems = json.items || json.artifacts || [];
+    renderArtifactPageList();
+    // 同步右侧 inspector
+    if (document.getElementById("artifactBox")) {
+      await loadArtifacts();
+    }
+  } catch (e) {
+    if (list) list.textContent = "load artifacts failed: " + e.message;
+  }
+}
+function getArtifactDisplayFields(x) {
+  const payload = x.payload || {};
+  return {
+    id: x.id || payload.id || "",
+    name: x.name || payload.name || x.id || "Untitled Artifact",
+    type: x.type || payload.type || "unknown",
+    source: x.source || payload.source || "unknown",
+    lifecycle: x.lifecycle || payload.lifecycle || "active",
+    path: x.path || payload.path || "",
+    trace_id: x.trace_id || payload.trace_id || "",
+    run_id: x.run_id || payload.run_id || "",
+    created_at: x.created_at || payload.created_at || "",
+  };
+}
+function renderArtifactPageList() {
+  const box = document.getElementById("artifactPageList");
+  if (!box) return;
+  const q = (document.getElementById("artifactSearch")?.value || "").toLowerCase().trim();
+  const typeFilter = document.getElementById("artifactTypeFilter")?.value || "";
+  const lifecycleFilter = document.getElementById("artifactLifecycleFilter")?.value || "";
+  let items = artifactPageItems || [];
+  items = items.filter(x => {
+    const f = getArtifactDisplayFields(x);
+    const text = JSON.stringify(f).toLowerCase();
+    if (q && !text.includes(q)) return false;
+    if (typeFilter && f.type !== typeFilter) return false;
+    if (lifecycleFilter && f.lifecycle !== lifecycleFilter) return false;
+    return true;
+  });
+  if (!items.length) {
+    box.textContent = "暂无匹配产物";
+    return;
+  }
+  box.innerHTML = items.map(x => {
+    const f = getArtifactDisplayFields(x);
+    const active = selectedArtifactId === f.id ? "border-color:#174ea6;background:#f6f9ff;" : "";
+    return `
+      <div class="mini-card" style="${active}">
+        <b>${escapeHtml(f.name)}</b><br/>
+        <span class="mono">${escapeHtml(f.id)}</span><br/>
+        <span class="badge">${escapeHtml(f.type)}</span>
+        <span class="badge">${escapeHtml(f.lifecycle)}</span>
+        <span class="badge">${escapeHtml(f.source)}</span>
+        ${f.path ? `<div class="mono" style="margin-top:6px;">${escapeHtml(f.path)}</div>` : ""}
+        <div style="margin-top:10px;">
+          <button class="btn-soft" onclick="selectArtifact('${f.id}')">详情</button>
+          <button class="btn-soft" onclick='previewArtifact(${JSON.stringify(JSON.stringify(x))})'>预览</button>
+          <button class="btn-soft" onclick="changeArtifactLifecycle('${f.id}', 'active')">Active</button>
+          <button class="btn-soft" onclick="changeArtifactLifecycle('${f.id}', 'archived')">Archive</button>
+        </div>
+      </div>
+    `;
+  }).join("");
+}
+async function selectArtifact(id) {
+  selectedArtifactId = id;
+  renderArtifactPageList();
+  const box = document.getElementById("artifactPageDetail");
+  if (box) box.textContent = "loading...";
+  try {
+    const res = await fetch(`${API.artifact}/artifact/${id}`, { signal: AbortSignal.timeout(8000) });
+    const json = await res.json();
+    const item = json.item || json.artifact || json;
+    const f = getArtifactDisplayFields(item);
+    let fileStatus = {};
+    try {
+      const fsRes = await fetch(`${API.artifact}/artifact/${id}/file_status`, { signal: AbortSignal.timeout(5000) });
+      fileStatus = await fsRes.json();
+    } catch (e) {
+      fileStatus = { ok: false, error: e.message };
+    }
+    if (box) {
+      box.innerHTML = `
+        <div><b>${escapeHtml(f.name)}</b></div>
+        <div class="mono" style="margin:8px 0;">${escapeHtml(f.id)}</div>
+        <span class="badge">${escapeHtml(f.type)}</span>
+        <span class="badge">${escapeHtml(f.lifecycle)}</span>
+        <span class="badge">${escapeHtml(f.source)}</span>
+        <div style="margin-top:12px;">
+          <button class="btn-soft" onclick='previewArtifact(${JSON.stringify(JSON.stringify(item))})'>发送到 Preview</button>
+          <button class="btn-soft" onclick="changeArtifactLifecycle('${f.id}', 'active')">设为 Active</button>
+          <button class="btn-soft" onclick="changeArtifactLifecycle('${f.id}', 'archived')">归档</button>
+          <button class="btn-soft" onclick="changeArtifactLifecycle('${f.id}', 'deleted')">删除标记</button>
+        </div>
+        <h3 style="margin-top:16px;">File Status</h3>
+        <pre class="mono">${escapeHtml(JSON.stringify(fileStatus, null, 2))}</pre>
+        <div class="task-actions" style="padding:8px 0;">
+          <button class="btn-soft" ${fileStatus.exists ? "" : "disabled"} onclick="openArtifactPath('${escapeJs(fileStatus.path || "")}')">打开文件</button>
+          <button class="btn-soft" ${fileStatus.exists ? "" : "disabled"} onclick="revealArtifactPath('${escapeJs(fileStatus.path || "")}')">在文件夹中显示</button>
+          <button class="btn-soft" ${fileStatus.path ? "" : "disabled"} onclick="navigator.clipboard.writeText('${escapeJs(fileStatus.path || "")}')">复制路径</button>
+        </div>
+        <h3 style="margin-top:16px;">Raw</h3>
+        <pre class="mono">${escapeHtml(JSON.stringify(item, null, 2))}</pre>
+      `;
+    }
+  } catch (e) {
+    if (box) box.textContent = "load detail failed: " + e.message;
+  }
+}
+async function changeArtifactLifecycle(id, lifecycle) {
+  try {
+    const res = await fetch(`${API.artifact}/artifact/${id}/lifecycle`, {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({ lifecycle }),
+      signal: AbortSignal.timeout(8000)
+    });
+    const json = await res.json();
+    if (!json.ok) throw new Error(JSON.stringify(json));
+    systemMessage(`产物 ${id} 已更新生命周期为 ${lifecycle}`);
+    await loadArtifactsPage();
+    await selectArtifact(id);
+  } catch (e) {
+    systemMessage("更新产物生命周期失败：" + e.message);
+  }
+}
+// escapeJs moved to ./js/utils.js
+// loadArtifacts moved to ./js/inspector.js
+// previewArtifact moved to ./js/inspector.js
+// loadArtifactFileStatus moved to ./js/inspector.js
+// openArtifactPath moved to ./js/tauri-bridge.js
+// revealArtifactPath moved to ./js/tauri-bridge.js
+// runEval moved to ./js/inspector.js
+function formatEvalResult(json) {
+  const results = json.results || json.items || [];
+  if (Array.isArray(results) && results.length) {
+    return results.map((r, i) => {
+      const ok = r.ok === true || r.passed === true || r.status === "pass";
+      return `${ok ? "✓" : "✗"} ${r.name || r.case || ("case_" + i)}\\n${JSON.stringify(r, null, 2)}`;
+    }).join("\\n\\n");
+  }
+  return JSON.stringify(json, null, 2);
+}
+async function loadSkills() {
+  return loadSkillsPage();
+}
+async function loadSkillsPage() {
+  const box = document.getElementById("skillsList");
+  if (box) box.textContent = "loading...";
+  try {
+    const res = await fetch(`${API.skill}/list`, { signal: AbortSignal.timeout(8000) });
+    const json = await res.json();
+    skillPageItems = json.items || json.skills || [];
+    renderSkillPageList();
+  } catch (e) {
+    if (box) box.textContent = "load skills failed: " + e.message;
+  }
+}
+function getSkillDisplayFields(x) {
+  const payload = x.payload || {};
+  const agents = payload.agents || payload.agent_tags || x.agents || [];
+  const tags = payload.tags || x.tags || [];
+  const signature = payload.signature_status || x.signature_status || "unsigned";
+  return {
+    id: x.id || "",
+    name: x.name || payload.name || x.id || "Untitled Skill",
+    version: x.version || payload.version || "0.1.0",
+    source: x.source || payload.source || "unknown",
+    enabled: x.enabled !== false,
+    description: payload.description || x.description || "",
+    agents,
+    tags,
+    signature_status: signature,
+    raw: payload.raw || x.raw || JSON.stringify(x, null, 2),
+    created_at: x.created_at || "",
+    updated_at: x.updated_at || "",
+  };
+}
+function renderSkillPageList() {
+  const box = document.getElementById("skillsList");
+  if (!box) return;
+  const q = (document.getElementById("skillSearch")?.value || "").toLowerCase().trim();
+  const enabledFilter = document.getElementById("skillEnabledFilter")?.value || "";
+  const agentFilter = (document.getElementById("skillAgentFilter")?.value || "").toLowerCase().trim();
+  let items = skillPageItems || [];
+  items = items.filter(x => {
+    const f = getSkillDisplayFields(x);
+    const text = JSON.stringify(f).toLowerCase();
+    if (q && !text.includes(q)) return false;
+    if (enabledFilter === "enabled" && !f.enabled) return false;
+    if (enabledFilter === "disabled" && f.enabled) return false;
+    if (agentFilter) {
+      const agentsText = (f.agents || []).join(",").toLowerCase();
+      if (!agentsText.includes(agentFilter)) return false;
+    }
+    return true;
+  });
+  if (!items.length) {
+    box.textContent = "暂无匹配技能";
+    return;
+  }
+  box.innerHTML = items.map(x => {
+    const f = getSkillDisplayFields(x);
+    const active = selectedSkillId === f.id ? "border-color:#174ea6;background:#f6f9ff;" : "";
+    return `
+      <div class="mini-card" style="${active}">
+        <b>${escapeHtml(f.name)}</b><br/>
+        <span class="mono">${escapeHtml(f.id)}</span><br/>
+        ${f.description ? `<div style="margin-top:6px;">${escapeHtml(f.description)}</div>` : ""}
+        <span class="badge">${escapeHtml(f.version)}</span>
+        <span class="badge">${f.enabled ? "enabled" : "disabled"}</span>
+        <span class="badge">${escapeHtml(f.source)}</span>
+        <span class="badge">signature:${escapeHtml(f.signature_status)}</span>
+        ${(f.agents || []).map(a => `<span class="badge">agent:${escapeHtml(a)}</span>`).join("")}
+        ${(f.tags || []).map(t => `<span class="badge">${escapeHtml(t)}</span>`).join("")}
+        <div style="margin-top:10px;">
+          <button class="btn-soft" onclick="selectSkill('${f.id}')">详情</button>
+          <button class="btn-soft" onclick="enableSkill('${f.id}')">启用</button>
+          <button class="btn-soft" onclick="disableSkill('${f.id}')">禁用</button>
+          <button class="btn-soft" onclick='previewText(${JSON.stringify("SKILL.md: " + f.name)}, ${JSON.stringify(f.raw)}, "markdown")'>预览</button>
+        </div>
+      </div>
+    `;
+  }).join("");
+}
+async function selectSkill(id) {
+  selectedSkillId = id;
+  renderSkillPageList();
+  const box = document.getElementById("skillPageDetail");
+  if (box) box.textContent = "loading...";
+  try {
+    let json = null;
+    try {
+      const res = await fetch(`${API.skill}/skill/${id}`, { signal: AbortSignal.timeout(8000) });
+      json = await res.json();
+    } catch (_) {
+      json = { ok: false };
+    }
+    let item = json.item || json.skill || null;
+    if (!item) {
+      item = (skillPageItems || []).find(x => (x.id || "") === id);
+    }
+    if (!item) {
+      if (box) box.textContent = "skill not found: " + id;
+      return;
+    }
+    const f = getSkillDisplayFields(item);
+    if (box) {
+      box.innerHTML = `
+        <div><b>${escapeHtml(f.name)}</b></div>
+        <div class="mono" style="margin:8px 0;">${escapeHtml(f.id)}</div>
+        ${f.description ? `<div>${escapeHtml(f.description)}</div>` : ""}
+        <span class="badge">${escapeHtml(f.version)}</span>
+        <span class="badge">${f.enabled ? "enabled" : "disabled"}</span>
+        <span class="badge">${escapeHtml(f.source)}</span>
+        <span class="badge">signature:${escapeHtml(f.signature_status)}</span>
+        ${(f.agents || []).map(a => `<span class="badge">agent:${escapeHtml(a)}</span>`).join("")}
+        ${(f.tags || []).map(t => `<span class="badge">${escapeHtml(t)}</span>`).join("")}
+        <div style="margin-top:12px;">
+          <button class="btn-soft" onclick="enableSkill('${f.id}')">启用</button>
+          <button class="btn-soft" onclick="disableSkill('${f.id}')">禁用</button>
+          <button class="btn-soft" onclick='previewText(${JSON.stringify("SKILL.md: " + f.name)}, ${JSON.stringify(f.raw)}, "markdown")'>发送到 Preview</button>
+        </div>
+        <h3 style="margin-top:16px;">SKILL.md / Raw</h3>
+        <pre class="mono">${escapeHtml(f.raw)}</pre>
+        <h3 style="margin-top:16px;">Metadata</h3>
+        <pre class="mono">${escapeHtml(JSON.stringify(item, null, 2))}</pre>
+      `;
+    }
+  } catch (e) {
+    if (box) box.textContent = "load skill detail failed: " + e.message;
+  }
+}
+async function parseSkillMd() {
+  const text = document.getElementById("skillMdText").value || "";
+  const box = document.getElementById("skillParseResult");
+  box.textContent = "parsing...";
+  try {
+    const json = await postJson(`${API.skill}/parse_skill_md`, { text });
+    box.textContent = JSON.stringify(json, null, 2);
+  } catch (e) {
+    box.textContent = "parse failed: " + e.message;
+  }
+}
+async function installSkillMd() {
+  const text = document.getElementById("skillMdText").value || "";
+  const box = document.getElementById("skillParseResult");
+  box.textContent = "installing...";
+  try {
+    const json = await postJson(`${API.skill}/install_skill_md`, { text, source: "desktop_ui" });
+    box.textContent = JSON.stringify(json, null, 2);
+    await loadSkillsPage();
+    if (json.item?.id) await selectSkill(json.item.id);
+    systemMessage("Skill 已安装：" + (json.item?.name || ""));
+  } catch (e) {
+    box.textContent = "install failed: " + e.message;
+  }
+}
+async function registerSkill() {
+  const name = document.getElementById("skillName").value.trim();
+  const version = document.getElementById("skillVersion").value.trim() || "0.2.0";
+  let payload = {};
+  try {
+    const raw = document.getElementById("skillPayload").value.trim();
+    payload = raw ? JSON.parse(raw) : {};
+  } catch (_) {}
+  if (!name) return;
+  await postJson(`${API.skill}/register`, { name, version, source: "desktop_ui", payload });
+  await loadSkills();
+}
+async function disableSkill(id) {
+  await postJson(`${API.skill}/disable/${id}`, {});
+  await loadSkillsPage();
+  await selectSkill(id);
+}
+async function enableSkill(id) {
+  await postJson(`${API.skill}/enable/${id}`, {});
+  await loadSkillsPage();
+  await selectSkill(id);
+}
+async function loadDocumentStatus() {
+  const box = document.getElementById("docStatus");
+  if (!box) return;
+  box.textContent = "loading...";
+  try {
+    let health = {};
+    let backends = {};
+    try { health = await (await fetch(`${API.doc}/health`)).json(); } catch (_) {}
+    try { backends = await (await fetch(`${API.doc}/backends_v2`)).json(); } catch (_) {}
+    box.textContent = JSON.stringify({health, backends}, null, 2);
+  } catch (e) {
+    box.textContent = "doc status failed: " + e.message;
+  }
+}
+async function ingestDocument() {
+  const path = document.getElementById("docPath").value.trim();
+  const text = document.getElementById("docText").value.trim();
+  const progressBox = document.getElementById("ingestProgress");
+  const resultBox = document.getElementById("docResult");
+  
+  if (!path && !text) {
+    progressBox.textContent = "请输入文件路径或文本内容";
+    return;
+  }
+  
+  progressBox.textContent = "ingesting...";
+  resultBox.textContent = "";
+  
+  try {
+    let json;
+    
+    if (text) {
+      // 暂时使用/ingest端点，将文本作为临时文件
+      // 后续可以添加专门的文本端点或FormData
+      progressBox.textContent = "文本摄取暂未完全实现，请使用文件路径";
+      return;
+    } else {
+      // 文件摄取需要FormData，暂时用路径
+      progressBox.textContent = "文件摄取需要Tauri文件选择器，暂未实现";
+      return;
+    }
+    
+    progressBox.textContent = "✅ 摄取完成";
+    resultBox.textContent = JSON.stringify(json, null, 2);
+    
+    if (json.chunks && json.chunks.length > 0) {
+      renderChunks(json.chunks);
+    }
+    
+    systemMessage("文档摄取成功：" + (json.document_id || json.chunks?.length + " chunks"));
+    loadRecentDocuments();
+  } catch (e) {
+    progressBox.textContent = "❌ 摄取失败";
+    resultBox.textContent = "ingest failed: " + e.message;
+    systemMessage("文档摄取失败：" + e.message);
+  }
+}
+async function showCachedDoc(docId) {
+  try {
+    const res = await fetch(`${API.doc}/cache/${docId}?format=markdown`, { signal: AbortSignal.timeout(5000) });
+    const json = await res.json();
+    const content = json.content || json.markdown || json.text || "";
+    if (json.chunks && json.chunks.length > 0) {
+      renderChunks(json.chunks);
+      systemMessage("加载了 " + json.chunks.length + " 个分块");
+    } else {
+      renderChunks([{content: content, metadata: {type: "text"}}]);
+      systemMessage("加载了文档内容");
+    }
+  } catch (e) {
+    systemMessage("加载缓存失败：" + e.message);
+  }
+}
+async function loadRecentDocuments() {
+  const box = document.getElementById("docResult");
+  if (!box) return;
+  box.textContent = "loading...";
+  try {
+    const res = await fetch(`${API.doc}/recent?limit=10`, { signal: AbortSignal.timeout(5000) });
+    const json = await res.json();
+    const records = json.records || [];
+    if (records.length === 0) {
+      box.textContent = "暂无摄取记录";
+      return;
+    }
+    box.innerHTML = records.map((rec, idx) => {
+      const doc = rec.document || rec;
+      const chunks = doc.chunks || doc.chunk_count || rec.chunks?.length || 0;
+      const name = doc.filename || doc.name || doc.path || ("doc_" + idx);
+      return `
+      <div class="mini-card">
+        <b>${escapeHtml(name)}</b><br/>
+        <span class="mono">id: ${escapeHtml(doc.document_id || rec.doc_id || "")}</span><br/>
+        <span class="badge">${chunks} chunks</span>
+        ${doc.status ? `<span class="badge" style="background:#16a34a;color:#fff;">${doc.status}</span>` : ""}
+        <button class="btn-soft" style="margin-top:8px;" onclick="showCachedDoc('${doc.document_id || rec.doc_id || ""}')">查看缓存</button>
+      </div>
+    `}).join("");
+  } catch (e) {
+    box.textContent = "load recent docs failed: " + e.message;
+  }
+}
+async function showDocChunks(docId) {
+  try {
+    const res = await fetch(`${API.doc}/document/${docId}/chunks`, { signal: AbortSignal.timeout(5000) });
+    const json = await res.json();
+    const chunks = json.chunks || json.items || [];
+    if (chunks.length > 0) {
+      renderChunks(chunks);
+      systemMessage("加载了 " + chunks.length + " 个分块");
+    } else {
+      systemMessage("该文档暂无分块");
+    }
+  } catch (e) {
+    systemMessage("加载分块失败：" + e.message);
+  }
+}
+function renderChunks(chunks) {
+  const box = document.getElementById("chunkList");
+  if (!box) return;
+  box.innerHTML = chunks.map((chunk, idx) => `
+    <div class="mini-card">
+      <b>Chunk #${idx + 1}</b><br/>
+      <span class="mono">length: ${chunk.content?.length || chunk.text?.length || 0}</span><br/>
+      <span class="badge">${chunk.metadata?.type || "text"}</span>
+      <div style="margin-top:8px;max-height:120px;overflow:auto;" class="mono">${escapeHtml(chunk.content || chunk.text || "")}</div>
+    </div>
+  `).join("");
+}
+function clearDocInput() {
+  document.getElementById("docPath").value = "";
+  document.getElementById("docText").value = "";
+  document.getElementById("ingestProgress").textContent = "";
+}
+async function loadWorkflows() {
+  return loadWorkflowsPage();
+}
+async function loadWorkflowsPage() {
+  const box = document.getElementById("workflowList");
+  if (box) box.textContent = "loading...";
+  try {
+    const res = await fetch(`${API.workflow}/list`, { signal: AbortSignal.timeout(8000) });
+    const json = await res.json();
+    workflowPageItems = json.items || json.workflows || [];
+    renderWorkflowPageList();
+  } catch (e) {
+    if (box) box.textContent = "load workflows failed: " + e.message;
+  }
+}
+function getWorkflowDisplayFields(x) {
+  const def = x.definition || x.workflow || x;
+  const runtime = def.runtime_requirements || {};
+  const nodes = def.nodes || [];
+  const edges = def.edges || [];
+  return {
+    id: x.id || def.id || "",
+    name: x.name || def.name || x.id || "Untitled Workflow",
+    version: x.version || def.version || "0.1.0",
+    description: x.description || def.description || "",
+    source: x.source || def.source || "unknown",
+    enabled: x.enabled !== false,
+    nodes,
+    edges,
+    services: runtime.services || [],
+    models: runtime.models || [],
+    tools: runtime.tools || [],
+    permissions: runtime.permissions || [],
+    timeout: runtime.estimated_timeout_sec || 300,
+    definition: def,
+  };
+}
+function renderWorkflowPageList() {
+  const box = document.getElementById("workflowList");
+  if (!box) return;
+  const q = (document.getElementById("workflowSearch")?.value || "").toLowerCase().trim();
+  const serviceFilter = (document.getElementById("workflowServiceFilter")?.value || "").toLowerCase().trim();
+  const modelFilter = (document.getElementById("workflowModelFilter")?.value || "").toLowerCase().trim();
+  let items = workflowPageItems || [];
+  items = items.filter(x => {
+    const f = getWorkflowDisplayFields(x);
+    const text = JSON.stringify(f).toLowerCase();
+    if (q && !text.includes(q)) return false;
+    if (serviceFilter) {
+      const serviceText = (f.services || []).join(",").toLowerCase();
+      if (!serviceText.includes(serviceFilter)) return false;
+    }
+    if (modelFilter) {
+      const modelText = (f.models || []).join(",").toLowerCase();
+      if (!modelText.includes(modelFilter)) return false;
+    }
+    return true;
+  });
+  if (!items.length) {
+    box.textContent = "暂无匹配工作流";
+    return;
+  }
+  box.innerHTML = items.map(x => {
+    const f = getWorkflowDisplayFields(x);
+    const active = selectedWorkflowId === f.id ? "border-color:#174ea6;background:#f6f9ff;" : "";
+    return `
+      <div class="mini-card" style="${active}">
+        <b>${escapeHtml(f.name)}</b><br/>
+        <span class="mono">${escapeHtml(f.id)}</span><br/>
+        ${f.description ? `<div style="margin-top:6px;">${escapeHtml(f.description)}</div>` : ""}
+        <span class="badge">${escapeHtml(f.version)}</span>
+        <span class="badge">${escapeHtml(f.source)}</span>
+        <span class="badge">${f.enabled ? "enabled" : "disabled"}</span>
+        <span class="badge">nodes:${f.nodes.length}</span>
+        <span class="badge">edges:${f.edges.length}</span>
+        ${(f.services || []).map(s => `<span class="badge">svc:${escapeHtml(s)}</span>`).join("")}
+        ${(f.models || []).map(m => `<span class="badge">model:${escapeHtml(m)}</span>`).join("")}
+        <div style="margin-top:10px;">
+          <button class="btn-soft" onclick="selectWorkflow('${f.id}')">详情</button>
+          <button class="btn-soft" onclick="dryRunWorkflow('${f.id}')">Dry-run</button>
+          <button class="btn-soft" onclick="exportWorkflow('${f.id}')">导出 JSON</button>
+          <button class="btn-soft" onclick='previewText(${JSON.stringify("Workflow: " + f.name)}, ${JSON.stringify(JSON.stringify(f.definition, null, 2))}, "json")'>预览</button>
+        </div>
+      </div>
+    `;
+  }).join("");
+}
+async function selectWorkflow(id) {
+  selectedWorkflowId = id;
+  renderWorkflowPageList();
+  const box = document.getElementById("workflowPageDetail");
+  if (box) box.textContent = "loading...";
+  try {
+    const res = await fetch(`${API.workflow}/get/${id}`, { signal: AbortSignal.timeout(8000) });
+    const json = await res.json();
+    const item = json.item || json.workflow || json;
+    const f = getWorkflowDisplayFields(item);
+    if (box) {
+      box.innerHTML = `
+        <div><b>${escapeHtml(f.name)}</b></div>
+        <div class="mono" style="margin:8px 0;">${escapeHtml(f.id)}</div>
+        ${f.description ? `<div>${escapeHtml(f.description)}</div>` : ""}
+        <span class="badge">${escapeHtml(f.version)}</span>
+        <span class="badge">${escapeHtml(f.source)}</span>
+        <span class="badge">timeout:${escapeHtml(f.timeout)}</span>
+        <h3 style="margin-top:16px;">Runtime Requirements</h3>
+        <div>
+          ${(f.services || []).map(s => `<span class="badge">svc:${escapeHtml(s)}</span>`).join("")}
+          ${(f.models || []).map(m => `<span class="badge">model:${escapeHtml(m)}</span>`).join("")}
+          ${(f.tools || []).map(t => `<span class="badge">tool:${escapeHtml(t)}</span>`).join("")}
+          ${(f.permissions || []).map(p => `<span class="badge">perm:${escapeHtml(p)}</span>`).join("")}
+        </div>
+        <h3 style="margin-top:16px;">Nodes</h3>
+        <div class="card-list">
+          ${f.nodes.map(n => `
+            <div class="mini-card">
+              <b>${escapeHtml(n.name || n.id)}</b><br/>
+              <span class="mono">${escapeHtml(n.id)}</span>
+              <span class="badge">${escapeHtml(n.type)}</span>
+              <pre class="mono">${escapeHtml(JSON.stringify(n.config || {}, null, 2))}</pre>
+            </div>
+          `).join("")}
+        </div>
+        <h3 style="margin-top:16px;">Edges</h3>
+        <pre class="mono">${escapeHtml(JSON.stringify(f.edges, null, 2))}</pre>
+        <div style="margin-top:12px;">
+          <button class="btn-soft" onclick="dryRunWorkflow('${f.id}')">Dry-run</button>
+          <button class="btn-soft" onclick="exportWorkflow('${f.id}')">导出到 Preview</button>
+          <button class="btn-soft" onclick='previewText(${JSON.stringify("Workflow: " + f.name)}, ${JSON.stringify(JSON.stringify(f.definition, null, 2))}, "json")'>预览定义</button>
+        </div>
+      `;
+    }
+  } catch (e) {
+    if (box) box.textContent = "load workflow detail failed: " + e.message;
+  }
+}
+function getWorkflowJsonInput() {
+  const box = document.getElementById("workflowJsonText");
+  if (!box) throw new Error("workflowJsonText not found");
+  const raw = box.value.trim();
+  if (!raw) throw new Error("请输入 Workflow JSON");
+  return JSON.parse(raw);
+}
+async function validateWorkflowJson() {
+  const box = document.getElementById("workflowActionResult");
+  if (box) box.textContent = "validating...";
+  try {
+    const workflow = getWorkflowJsonInput();
+    const res = await postJson(`${API.workflow}/validate`, workflow);
+    if (box) box.textContent = JSON.stringify(res, null, 2);
+  } catch (e) {
+    if (box) box.textContent = "validate failed: " + e.message;
+  }
+}
+async function registerWorkflowJson() {
+  const box = document.getElementById("workflowActionResult");
+  if (box) box.textContent = "registering...";
+  try {
+    const workflow = getWorkflowJsonInput();
+    const res = await postJson(`${API.workflow}/register`, workflow);
+    if (box) box.textContent = JSON.stringify(res, null, 2);
+    await loadWorkflowsPage();
+    const id = res.item?.id;
+    if (id) await selectWorkflow(id);
+    systemMessage("Workflow 已注册：" + (res.item?.name || ""));
+  } catch (e) {
+    if (box) box.textContent = "register failed: " + e.message;
+  }
+}
+async function importWorkflowJson() {
+  const box = document.getElementById("workflowActionResult");
+  if (box) box.textContent = "importing...";
+  try {
+    const workflow = getWorkflowJsonInput();
+    const res = await postJson(`${API.workflow}/import`, { workflow, source: "desktop_import" });
+    if (box) box.textContent = JSON.stringify(res, null, 2);
+    await loadWorkflowsPage();
+    const id = res.item?.id;
+    if (id) await selectWorkflow(id);
+    systemMessage("Workflow 已导入：" + (res.item?.name || ""));
+  } catch (e) {
+    if (box) box.textContent = "import failed: " + e.message;
+  }
+}
+async function dryRunWorkflow(id) {
+  const box = document.getElementById("workflowPageDetail");
+  try {
+    const res = await postJson(`${API.workflow}/dry_run`, {
+      workflow_id: id,
+      input: {
+        source: "desktop_ui",
+        session_id: currentSession().id,
+      }
+    });
+    previewText("Workflow Dry-run: " + id, JSON.stringify(res, null, 2), "json");
+    if (box) {
+      const current = box.innerHTML;
+      box.innerHTML = current + `
+        <h3 style="margin-top:16px;">Dry-run Result</h3>
+        <pre class="mono">${escapeHtml(JSON.stringify(res, null, 2))}</pre>
+      `;
+    }
+  } catch (e) {
+    systemMessage("Workflow dry-run failed: " + e.message);
+  }
+}
+async function exportWorkflow(id) {
+  try {
+    const res = await fetch(`${API.workflow}/export/${id}`, { signal: AbortSignal.timeout(8000) });
+    const json = await res.json();
+    previewText("Workflow Export: " + id, JSON.stringify(json.workflow || json, null, 2), "json");
+  } catch (e) {
+    systemMessage("Workflow export failed: " + e.message);
+  }
+}
+async function registerWorkflow() {
+  return registerWorkflowJson();
+}
+function copyRun(id) {
+  const r = currentSession().runs.find(x => x.id === id);
+  if (r) navigator.clipboard.writeText(r.log || "");
+}
+async function postJson(url, body) {
+  const res = await fetch(url, {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(body),
+    signal: AbortSignal.timeout(60000)
+  });
+  if (!res.ok) throw new Error(`${url} failed: ${res.status}`);
+  return await res.json();
+}
+// escapeHtml moved to ./js/utils.js
+render();
+refreshServices();
+</script>
+<script src="./js/auto-start-services.js"></script>
+</body>
+</html>
