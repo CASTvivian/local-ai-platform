@@ -1,5 +1,4 @@
-// P3.14-D7-C3-B: Windows click fallback + local model setup entry.
-// Loaded last. Avoid relying on inline onclick only.
+// P3.14-D7-C3-C: Windows click fallback + visible local AI setup feedback.
 (function () {
   const API = {
     bootstrap: "http://127.0.0.1:18100",
@@ -13,108 +12,13 @@
       .replaceAll('"', "&quot;")
       .replaceAll("'", "&#039;");
   }
-  function promptEl() {
-    return document.getElementById("prompt") ||
-      document.getElementById("composerInput") ||
-      document.querySelector("textarea");
-  }
   function contentEl() {
     return document.getElementById("content") || document.querySelector(".content");
   }
-  function preview(title, value) {
-    if (typeof window.previewText === "function") {
-      window.previewText(title, typeof value === "string" ? value : JSON.stringify(value, null, 2), "json");
-      return;
-    }
-    const box = document.getElementById("previewBox") || document.getElementById("content");
-    if (box) {
-      box.innerHTML = `<pre class="mono">${esc(typeof value === "string" ? value : JSON.stringify(value, null, 2))}</pre>`;
-    }
+  function promptEl() {
+    return document.getElementById("prompt") || document.querySelector("textarea");
   }
-  async function getJson(url, timeout = 10000) {
-    const res = await fetch(url, { signal: AbortSignal.timeout(timeout) });
-    const text = await res.text();
-    try {
-      return JSON.parse(text);
-    } catch {
-      return { raw: text, ok: res.ok };
-    }
-  }
-  async function postJson(url, body, timeout = 60000) {
-    const res = await fetch(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body || {}),
-      signal: AbortSignal.timeout(timeout),
-    });
-    const text = await res.text();
-    try {
-      return JSON.parse(text);
-    } catch {
-      return { raw: text, ok: res.ok };
-    }
-  }
-  function fillPrompt(text) {
-    const input = promptEl();
-    if (!input) return;
-    input.value = text;
-    input.focus();
-  }
-  async function checkLocalModelStatus() {
-    const result = {
-      title: "本地模型状态检查",
-      bootstrap: null,
-      gateway: null,
-      message: "",
-    };
-    try {
-      result.bootstrap = await getJson(`${API.bootstrap}/bootstrap/status`, 8000);
-    } catch (e) {
-      result.bootstrap = {
-        ok: false,
-        error: String(e),
-        hint: "模型准备服务未启动或不可访问。",
-      };
-    }
-    try {
-      result.gateway = await postJson(`${API.modelGateway}/generate`, {
-        model: "default",
-        prompt: "请用一句中文回答：本地模型是否可用？",
-        stream: false,
-      }, 30000);
-    } catch (e) {
-      result.gateway = {
-        ok: false,
-        error: String(e),
-        hint: "本地模型网关未启动或模型暂不可用。",
-      };
-    }
-    result.message = result.gateway?.response || result.gateway?.text || result.gateway?.raw || "状态检查完成。";
-    preview("本地模型状态", result);
-    renderModelSetupResult(result);
-    return result;
-  }
-  async function startLocalModelDownload(kind) {
-    const payload = {
-      profile: kind || "standard",
-      // UI 不展示具体模型名；后端可自行映射 profile 到实际模型。
-      models: kind === "code" ? ["code-capability"] : ["standard-chat"],
-    };
-    let result;
-    try {
-      result = await postJson(`${API.bootstrap}/bootstrap/start`, payload, 10000);
-    } catch (e) {
-      result = {
-        ok: false,
-        error: String(e),
-        hint: "模型准备服务暂不可用。请先确认后端服务已启动。",
-      };
-    }
-    preview("本地模型准备", result);
-    renderModelSetupResult(result);
-    return result;
-  }
-  function renderModelSetupResult(result) {
+  function setResult(title, status, detail, raw) {
     let box = document.getElementById("modelSetupResult");
     if (!box) {
       const content = contentEl();
@@ -124,12 +28,115 @@
       box.className = "model-setup-result";
       content.appendChild(box);
     }
+    const statusClass = status === "ok" ? "ok" : status === "loading" ? "loading" : "bad";
     box.innerHTML = `
-      <div class="model-result-card">
-        <div class="model-result-title">本地模型状态</div>
-        <pre>${esc(JSON.stringify(result, null, 2))}</pre>
+      <div class="model-result-card ${statusClass}">
+        <div class="model-result-title">${esc(title)}</div>
+        <div class="model-result-detail">${esc(detail)}</div>
+        ${raw ? `<pre>${esc(typeof raw === "string" ? raw : JSON.stringify(raw, null, 2))}</pre>` : ""}
+        <div class="model-result-actions">
+          <button data-action="check-model-status">重新检查</button>
+          <button data-action="back-to-chat">返回对话</button>
+        </div>
       </div>
     `;
+  }
+  async function getJson(url, timeout = 10000) {
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), timeout);
+    try {
+      const res = await fetch(url, { signal: ctrl.signal });
+      const text = await res.text();
+      try {
+        return JSON.parse(text);
+      } catch {
+        return { ok: res.ok, raw: text };
+      }
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+  async function postJson(url, body, timeout = 60000) {
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), timeout);
+    try {
+      const res = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body || {}),
+        signal: ctrl.signal,
+      });
+      const text = await res.text();
+      try {
+        return JSON.parse(text);
+      } catch {
+        return { ok: res.ok, raw: text };
+      }
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+  function explainBackendUnavailable(raw) {
+    return {
+      ok: false,
+      message: "本地 AI 后端暂未连接。",
+      next_steps: [
+        "确认桌面后端服务已经启动。",
+        "回到右侧服务面板查看服务健康状态。",
+        "如果是第一次安装，请先运行随包附带的启动脚本，或等待后续版本自动启动服务。",
+      ],
+      raw,
+    };
+  }
+  async function checkLocalModelStatus() {
+    setResult("正在检查本地 AI", "loading", "正在连接本地服务，请稍候...", null);
+    const result = {
+      title: "本地 AI 状态检查",
+      bootstrap: null,
+      gateway: null,
+      ready: false,
+    };
+    try {
+      result.bootstrap = await getJson(`${API.bootstrap}/bootstrap/status`, 8000);
+    } catch (e) {
+      result.bootstrap = explainBackendUnavailable(String(e));
+    }
+    try {
+      result.gateway = await postJson(`${API.modelGateway}/generate`, {
+        model: "default",
+        prompt: "请用一句中文回答：本地 AI 是否可用？",
+        stream: false,
+      }, 30000);
+    } catch (e) {
+      result.gateway = explainBackendUnavailable(String(e));
+    }
+    const reply = result.gateway?.response || result.gateway?.text || result.gateway?.raw || "";
+    result.ready = Boolean(reply && !result.gateway?.message?.includes("暂未连接"));
+    if (result.ready) {
+      setResult("本地 AI 可用", "ok", "本地模型网关已连接，可以回到对话继续使用。", result);
+    } else {
+      setResult("本地 AI 暂未连接", "bad", "当前 App 界面正常，但本地后端服务没有连接成功。", result);
+    }
+    return result;
+  }
+  async function startLocalModelDownload(kind) {
+    const label = kind === "code" ? "代码能力" : "标准对话能力";
+    setResult(`正在准备${label}`, "loading", "正在请求本地模型准备服务...", null);
+    let result;
+    try {
+      result = await postJson(`${API.bootstrap}/bootstrap/start`, {
+        profile: kind || "standard",
+        models: kind === "code" ? ["code-capability"] : ["standard-chat"],
+      }, 15000);
+    } catch (e) {
+      result = explainBackendUnavailable(String(e));
+    }
+    if (result?.ok) {
+      setResult(`${label}准备中`, "ok", "已提交本地准备任务，请稍后重新检查状态。", result);
+    } else {
+      setResult(`${label}暂未开始`, "bad", "模型准备服务未连接。请先启动本地服务后重试。", result);
+    }
+    return result;
   }
   function renderModelSetupPage() {
     const content = contentEl();
@@ -137,12 +144,12 @@
     content.innerHTML = `
       <div class="gpt-home model-setup-home">
         <div class="gpt-logo">M</div>
-        <h1>本地模型准备</h1>
-        <p>这里用于检查和准备本地 AI 能力。普通用户无需理解具体模型名称，只需要选择用途即可。</p>
+        <h1>本地 AI 准备</h1>
+        <p>检查本地 AI 能力是否可用，或按用途准备对话、代码能力。普通用户无需理解具体模型名称。</p>
         <div class="model-setup-grid">
           <button data-action="check-model-status">
-            <strong>检查本地模型状态</strong>
-            <span>确认本地模型网关、推理后端和当前能力是否可用。</span>
+            <strong>检查本地 AI 状态</strong>
+            <span>确认本地服务、推理后端和当前能力是否可用。</span>
           </button>
           <button data-action="download-standard-model">
             <strong>准备标准对话能力</strong>
@@ -154,12 +161,23 @@
           </button>
           <button data-action="back-to-chat">
             <strong>返回对话</strong>
-            <span>下载或检查完成后，回到主对话继续使用。</span>
+            <span>检查或准备完成后，回到主对话继续使用。</span>
           </button>
         </div>
-        <div id="modelSetupResult" class="model-setup-result"></div>
+        <div id="modelSetupResult" class="model-setup-result">
+          <div class="model-result-card">
+            <div class="model-result-title">尚未检查</div>
+            <div class="model-result-detail">点击上方按钮开始检查或准备本地 AI。</div>
+          </div>
+        </div>
       </div>
     `;
+  }
+  function fillPrompt(text) {
+    const input = promptEl();
+    if (!input) return;
+    input.value = text;
+    input.focus();
   }
   function ensureHomeHasModelCard() {
     const grid = document.querySelector(".gpt-suggestions");
@@ -167,20 +185,50 @@
     const btn = document.createElement("button");
     btn.setAttribute("data-action", "open-model-setup");
     btn.innerHTML = `
-      <strong>准备本地模型</strong>
-      <span>检查本地 AI 能力，或按用途准备对话/代码能力。</span>
+      <strong>准备本地 AI</strong>
+      <span>检查本地能力是否可用，或准备对话/代码能力。</span>
     `;
     grid.appendChild(btn);
     grid.__modelCardInjected = true;
   }
-  function handleClick(e) {
+  function patchSuggestionButtons() {
+    const buttons = Array.from(document.querySelectorAll(".gpt-suggestions button"));
+    for (const btn of buttons) {
+      const onclick = btn.getAttribute("onclick") || "";
+      const match = onclick.match(/fillPrompt\('([\s\S]*)'\)/);
+      if (match && !btn.getAttribute("data-action")) {
+        btn.setAttribute("data-action", "fill-prompt");
+        btn.setAttribute("data-prompt", match[1].replace(/\\'/g, "'"));
+        btn.removeAttribute("onclick");
+      }
+    }
+  }
+  function patchSendButton() {
+    const buttons = Array.from(document.querySelectorAll("button"));
+    const send = buttons.find((b) => (b.textContent || "").trim() === "发送");
+    if (!send || send.__sendPatchedD7C3C) return;
+    send.__sendPatchedD7C3C = true;
+    send.addEventListener("click", (e) => {
+      const input = promptEl();
+      if (!input || !input.value.trim()) return;
+      if (typeof window.sendMessage === "function") {
+        e.preventDefault();
+        e.stopPropagation();
+        window.sendMessage();
+        return;
+      }
+      if (typeof window.submitTask === "function") {
+        e.preventDefault();
+        e.stopPropagation();
+        window.submitTask();
+      }
+    }, true);
+  }
+  function handleAction(e) {
     const target = e.target.closest("button, [data-action], [data-view]");
     if (!target) return;
     const action = target.getAttribute("data-action");
     const view = target.getAttribute("data-view");
-    if (action || view) {
-      console.log("[windows-click-model-setup] click", { action, view });
-    }
     if (action === "fill-prompt") {
       e.preventDefault();
       fillPrompt(target.getAttribute("data-prompt") || "");
@@ -209,49 +257,12 @@
     if (action === "back-to-chat") {
       e.preventDefault();
       if (typeof window.setView === "function") window.setView("chat");
-      else if (typeof window.chatRender === "function") window.chatRender();
       return;
     }
-    // Windows fallback for nav buttons.
     if (view && typeof window.setView === "function") {
       e.preventDefault();
       window.setView(view);
-      return;
     }
-  }
-  function patchSuggestionButtons() {
-    const buttons = Array.from(document.querySelectorAll(".gpt-suggestions button"));
-    for (const btn of buttons) {
-      const onclick = btn.getAttribute("onclick") || "";
-      const match = onclick.match(/fillPrompt\('([\s\S]*)'\)/);
-      if (match && !btn.getAttribute("data-action")) {
-        btn.setAttribute("data-action", "fill-prompt");
-        btn.setAttribute("data-prompt", match[1].replace(/\\'/g, "'"));
-        btn.removeAttribute("onclick");
-      }
-    }
-  }
-  function patchSendButton() {
-    const send = Array.from(document.querySelectorAll("button"))
-      .find((b) => (b.textContent || "").trim() === "发送");
-    if (!send || send.__windowsSendPatched) return;
-    send.__windowsSendPatched = true;
-    send.addEventListener("click", (e) => {
-      const input = promptEl();
-      if (!input || !input.value.trim()) return;
-      // Prefer session manager if present.
-      if (typeof window.sendMessage === "function") {
-        e.preventDefault();
-        e.stopPropagation();
-        window.sendMessage();
-        return;
-      }
-      if (typeof window.submitTask === "function") {
-        e.preventDefault();
-        e.stopPropagation();
-        window.submitTask();
-      }
-    }, true);
   }
   function tick() {
     ensureHomeHasModelCard();
@@ -261,12 +272,14 @@
   window.renderModelSetupPage = renderModelSetupPage;
   window.checkLocalModelStatus = checkLocalModelStatus;
   window.startLocalModelDownload = startLocalModelDownload;
-  document.addEventListener("click", handleClick, true);
+  // pointerdown makes Windows WebView clicks feel more reliable.
+  document.addEventListener("pointerdown", handleAction, true);
+  document.addEventListener("click", handleAction, true);
   document.addEventListener("DOMContentLoaded", () => {
     tick();
     setTimeout(tick, 300);
     setTimeout(tick, 1200);
   });
   setInterval(tick, 2000);
-  console.log("[D7-C3-B] Windows click fix + model setup loaded");
+  console.log("[D7-C3-C] product model setup feedback loaded");
 })();

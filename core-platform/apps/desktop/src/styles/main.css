@@ -622,3 +622,39 @@ body[data-ui-version="d7-c3-chatgpt-like"] textarea#prompt {
   line-height: 1.5;
   color: #334155;
 }
+/* D7-C3-C model setup feedback states */
+.model-result-card.ok {
+  border-color: #bbf7d0;
+  background: #f0fdf4;
+}
+.model-result-card.bad {
+  border-color: #fecaca;
+  background: #fef2f2;
+}
+.model-result-card.loading {
+  border-color: #bfdbfe;
+  background: #eff6ff;
+}
+.model-result-detail {
+  color: #475569;
+  line-height: 1.7;
+  margin-bottom: 12px;
+}
+.model-result-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+}
+.model-result-actions button {
+  border: 0;
+  border-radius: 999px;
+  padding: 9px 14px;
+  background: #e5e7eb;
+  color: #0f172a;
+  cursor: pointer;
+  font-weight: 700;
+}
+.model-result-actions button:first-child {
+  background: #2563eb;
+  color: white;
+}
