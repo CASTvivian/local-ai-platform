@@ -28,6 +28,24 @@ if ([string]::IsNullOrWhiteSpace($Root)) {
 }
 
 Write-Host "Root: $Root"
+
+$EnsureRuntimeScript = Join-Path (Split-Path -Parent $MyInvocation.MyCommand.Path) "ensure_runtime.ps1"
+$EmbeddedPython = $null
+if (Test-Path $EnsureRuntimeScript) {
+  Write-Host "Preparing embedded runtime..."
+  $runtimeResultRaw = powershell -ExecutionPolicy Bypass -File $EnsureRuntimeScript -Root $Root
+  Write-Host $runtimeResultRaw
+  try {
+    $runtimeResult = $runtimeResultRaw | ConvertFrom-Json
+    if ($runtimeResult.ok -and $runtimeResult.python_exe) {
+      $EmbeddedPython = $runtimeResult.python_exe
+      Write-Host "Embedded Python ready: $EmbeddedPython"
+    }
+  } catch {
+    Write-Host "Failed to parse runtime result: $($_.Exception.Message)"
+  }
+}
+
 $LogDir = Join-Path $Root "logs\windows"
 New-Item -ItemType Directory -Force -Path $LogDir | Out-Null
 
