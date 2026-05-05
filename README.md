@@ -1,235 +1,213 @@
 # MAOMIAI Local AI Platform
 
-MAOMIAI Local AI Platform 是一套面向本地化部署的 AI 工作台与智能体平台。项目目标是在用户自己的电脑、私有服务器或企业内网环境中，提供任务路由、模型调用、文档处理、工作流编排、代码审查、产物管理、仓库记忆、设计系统和桌面端操作台等能力。
+MAOMIAI Local AI Platform 是一个面向本地化部署的桌面级 AI 工作台，目标是在用户设备上完成模型调用、任务执行、文档处理、代码审查、工作流管理和结果产物管理，减少对外部云端服务的依赖。
 
-当前版本已经完成 **P3.14 跨平台演示包封口**，可用于内部演示、客户沟通和后续迭代验证。
-
----
-
-## 当前阶段状态
-
-| 模块 | 状态 |
-|---|---|
-| macOS Desktop App | ✅ 已打包 |
-| macOS DMG | ✅ 已生成 |
-| Windows GitHub Actions 打包 | ✅ 已生成安装包 artifact |
-| 本地模型调用链路 | ✅ 已接通 |
-| 模型网关 | ✅ 已接通 |
-| 本地推理后端 | ✅ 已接通 |
-| 全中文桌面 UI | ✅ 已完成 |
-| 服务健康面板 | ✅ 已完成 |
-| Demo 启停脚本 | ✅ 已完成 |
-| 会话上下文管理 | ⚠️ 已实现，待完整回归 |
-| 页面交互清理 | ⚠️ D7 阶段继续修复 |
-
-> 说明：公开文档不暴露具体模型名称和内部模型配置，仅描述本地模型能力与部署链路。
+本项目当前处于 P3.14 桌面演示包阶段，已完成 macOS / Windows 双平台桌面应用打包流程，并持续完善 Windows 下的本地运行时自启动、模型准备和离线能力检测体验。
 
 ---
 
-## 产品定位
+## 项目定位
 
-MAOMIAI Local AI Platform 不是单一聊天机器人，而是一个本地 AI 工作台底座。它面向以下使用场景：
+MAOMIAI 面向以下场景：
 
-- 本地大模型调用与统一网关
-- 多服务协同的本地 Agent 工作台
-- 代码生成、代码审查与安全门禁
-- 文档处理、知识沉淀与后续检索增强
-- 工作流模板管理和执行入口
-- 执行产物、报告、文件、补丁和构建结果管理
-- 仓库级修复历史与知识记忆
-- 设计系统与 UI 规范管理
-- macOS / Windows 桌面端演示与交付
+- 本地 AI 助手工作台
+- 企业内部 AI 工具原型
+- 本地模型调用与能力编排
+- 文档、代码、工作流和产物统一管理
+- 跨平台桌面应用演示与交付
+- 私有化、本地优先、低外部依赖的 AI 平台验证
+
+---
+
+## 当前能力
+
+### 1. 桌面端工作台
+
+当前桌面端基于 Tauri 构建，界面层使用 HTML / CSS / JavaScript，系统层使用 Rust/Tauri，后端能力由 Python 服务提供。
+
+已支持：
+- 中文化桌面界面
+- 新建会话
+- 文件与结果入口
+- 代码检查入口
+- 本地模型准备入口
+- 右侧检查器面板
+- 服务健康状态展示
+- Windows / macOS 打包
+
+### 2. 本地 AI 能力链路
+
+当前设计为本地优先：
+
+```
+Desktop App
+  → Local Runtime Service
+  → Local Model Gateway
+  → Local Inference Backend
+  → Local Model
+```
+
+系统会尽量在本地完成：
+
+- 本地 AI 状态检测
+- 本地后端服务启动
+- 本地运行时准备
+- 模型能力准备
+- 模型调用
+- 中文回复返回
+
+具体模型名称不会在产品说明中直接暴露，普通用户只需要理解为：
+
+- 标准对话能力
+- 代码能力
+- 文档理解能力
+- 工作流执行能力
+
+### 3. Windows 本地运行时准备
+
+Windows 版本正在增强自动化准备能力，包括：
+
+- 检测本地后端运行状态
+- 检测运行时环境
+- 准备本地 Python 后端运行环境
+- 检测本地推理后端是否安装
+- 引导用户安装本地推理后端
+- 准备本地 AI 能力
+- 下载或检查所需模型能力
+
+当前策略是：平台自身运行时尽量自动准备，外部推理后端安装需要用户明确触发或确认。
+
+### 4. 企业级服务模块
+
+当前核心服务已进入企业级服务结构，包含：
+
+- Skill Store Service (技能管理)
+- Artifact Registry Service (执行结果管理)
+- Code Review Gate Service (安全审查)
+- Repo Memory Service (仓库学习)
+- Workflow Store Service (工作流模板)
+- Design System Service (设计规范)
+
+这些服务已统一进入桌面打包路径，避免 Windows / macOS 出现不同版本。
 
 ---
 
 ## 仓库结构
 
-```text
+```
 .
-├── .github/workflows/                 # GitHub Actions，含 Windows 打包
-├── core-platform/                      # 本地 AI 平台主工程
-│   ├── apps/desktop/                   # Tauri 桌面端
-│   ├── services/                       # 后端服务
-│   ├── scripts/                        # 启停 / 验收 / 打包脚本
-│   ├── manifests/                      # 模型与设备配置
-│   ├── docs/                           # 报告与演示文档
-│   └── releases/                       # 本地打包产物
-├── generated/                          # 生成产物目录
-├── scripts/                            # 仓库级辅助脚本
+├── .github/workflows/                  # GitHub Actions 构建流程
+├── core-platform/
+│   ├── apps/desktop/                   # 桌面应用源码与 Tauri 配置
+│   ├── scripts/                        # macOS / Windows 启动脚本
+│   ├── services/                       # 桌面端本地后端服务
+│   └── releases/                       # 本地生成的演示包归档
+├── capability-registry/                # 能力注册相关资源
+├── generated/                          # 本地生成资源
+├── scripts/                            # 历史脚本与辅助脚本
+├── services/                           # 历史服务源码与同步来源
+├── docs/                               # 项目文档与验收报告
 └── README.md
 ```
 
----
+当前桌面打包主路径为：
 
-## 核心能力
-
-### 1. 本地模型链路
-
-```text
-Desktop App
-  -> Model Gateway
-  -> Local Inference Runtime
-  -> Local Model Response
+```
+core-platform/apps/desktop
 ```
 
-当前已验证桌面端可以通过本地模型网关获得中文自然语言回复。公开说明中不写具体模型名，具体模型选择与部署方式由本地环境配置决定。
-
-### 2. 桌面工作台
-
-当前桌面端包含：
-
-- 新建会话
-- 启动中心
-- 大脑状态
-- 技能商店
-- 文档处理
-- 工作流
-- 产物中心
-- 代码审查
-- 仓库记忆
-- 设计系统
-- 模型设置
-- 服务健康检查
-- 右侧 Inspector 面板
-
-### 3. 核心服务
-
-| 服务 | 说明 |
-|---|---|
-| Model Gateway | 本地模型统一网关 |
-| Auto Router | 任务路由与能力选择 |
-| Runtime Execution | 运行时执行与沙箱入口 |
-| Policy Engine | 策略评估与权限控制 |
-| Trace Observability | 追踪、审计和可观测性 |
-| Eval Gateway | 评测任务入口 |
-| Document Ingestion | 文档处理与摄取入口 |
-| Skill Store | 技能安装与启用管理 |
-| Artifact Registry | 产物注册与查询 |
-| Code Review Gate | 代码审查与安全检测 |
-| Repo Memory | 仓库记忆与修复历史 |
-| Workflow Store | 工作流模板管理 |
-| Design System | 设计规范与 UI 约束管理 |
+Windows / macOS 的桌面包均应从该路径构建。
 
 ---
 
-## 跨平台演示包
+## 构建说明
 
-### macOS
+### macOS 本地构建
 
-当前 macOS 演示包已完成：
-
-```text
-core-platform/releases/maomiai-desktop-demo/
-core-platform/releases/maomiai-desktop-demo.tar.gz
+```bash
+cd core-platform/apps/desktop
+npm install
+npm run tauri build
 ```
 
-包含：
+构建产物通常位于：
 
-- `Local AI Platform.app`
-- `Local AI Platform_0.1.0_aarch64.dmg`
-- 启动 / 停止脚本
-- Demo Guide
-- 验收报告
-- Package Manifest
+```
+core-platform/apps/desktop/src-tauri/target/release/bundle/
+```
 
-### Windows
+### Windows GitHub Actions 构建
 
-Windows 通过 GitHub Actions 打包：
+Windows 包通过 GitHub Actions 构建：
 
-```text
+```
 .github/workflows/build-win-release.yml
 ```
 
-构建完成后下载 artifact：
+构建内容包括：
 
-```text
-local-ai-platform-win
-```
+- 桌面应用
+- 前端 dist
+- Windows runtime scripts
+- 本地后端服务
+- 构建信息文件
 
-当前已验证 Windows artifact 可包含：
+产物包括：
 
-```text
-Local AI Platform_0.1.0_x64-setup.exe
-Local AI Platform_0.1.0_x64_en-US.msi
-desktop_lib.exe
-```
-
----
-
-## 本地启动
-
-### 启动 Demo
-
-```bash
-cd /Users/mofamaomi/Documents/本地ai/core-platform
-bash scripts/demo/run_desktop_demo.sh
-```
-
-### 停止 Demo
-
-```bash
-cd /Users/mofamaomi/Documents/本地ai/core-platform
-bash scripts/demo/stop_desktop_demo.sh
-```
-
-### 只启动后端服务
-
-```bash
-cd /Users/mofamaomi/Documents/本地ai/core-platform
-bash scripts/desktop/start_desktop_services.sh
-```
-
-### 查看服务状态
-
-```bash
-bash scripts/desktop/status_desktop_services.sh
-```
+- Windows setup 安装包
+- MSI 安装包
+- desktop executable
+- BUILD_INFO.json
 
 ---
 
-## GitHub Actions
+## 当前阶段状态
 
-当前仓库包含 Windows 桌面打包工作流：
+### P3.14 Desktop Demo Package
 
-```text
-Actions -> build-win-release
-```
+已完成：
 
-构建逻辑：
+- ✅ macOS 桌面演示包
+- ✅ Windows 桌面演示包
+- ✅ 中文化桌面界面
+- ✅ 本地模型准备入口
+- ✅ Windows runtime 文件打包
+- ✅ 企业服务打包路径修复
+- ✅ GitHub Actions Windows 构建流程
+- ✅ 项目完整性验证通过
 
-1. Checkout 仓库
-2. 安装 Node 与 Rust 环境
-3. 安装桌面端依赖
-4. 构建前端静态资源
-5. 执行 Tauri Windows 打包
-6. 收集 Windows 安装包与可执行文件
-7. 上传 GitHub Actions artifact
+进行中：
 
-说明：当前以 artifact 上传作为主要交付方式，不依赖 GitHub Release 发布权限。
-
----
-
-## 当前已知问题
-
-当前版本是演示版本，不是最终生产封口。
-
-待 D7 阶段继续处理：
-
-1. 会话上下文完整回归
-2. 新建会话 / 会话隔离 / 本地持久化细节修复
-3. 页面交互完整回归
-4. 移除临时 runtime override 层
-5. 页面模块正式化
-6. 文档处理服务完整硬化
-7. 模型下载 / 注册 / 校验链路
+- Windows 实机自动启动后端验证
+- Windows 本地模型准备闭环验证
+- 会话上下文与交互回归
+- 临时覆盖层清理
+- 产品级 UI 继续打磨
 
 ---
 
-## 当前阶段结论
+## 重要说明
 
-```text
-P3.14 Demo Package Freeze ✅
-macOS Demo Package ✅
-Windows Demo Package ✅
-D7 Interaction Regression Pending ⚠️
-```
+本项目当前仍处于工程验证与演示包阶段，不应被视为正式生产版本。
+
+Windows 端的本地 AI 自动准备流程需要在真实 Windows 环境中继续验证，包括运行时下载、后端启动、推理后端检测和模型能力准备。
+
+---
+
+## Roadmap
+
+近期重点：
+
+1. Windows 本地后端自启动稳定化
+2. Windows 本地 AI 准备流程闭环
+3. 模型下载状态与进度展示
+4. 会话上下文管理
+5. 桌面 UI 产品化
+6. 临时运行时覆盖层清理
+7. 企业级服务接口统一验收
+
+---
+
+## License
+
+Internal prototype / demo package.
