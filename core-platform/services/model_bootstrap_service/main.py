@@ -8,7 +8,7 @@ from typing import Any, Dict, List
 from fastapi import FastAPI
 from pydantic import BaseModel
 
-APP_VERSION = "0.1.0-d7-c4-bootstrap"
+APP_VERSION = "0.1.0-d7-c4-win"
 DEFAULT_TIMEOUT = int(os.environ.get("MAOMIAI_BOOTSTRAP_TIMEOUT", "1800"))
 
 app = FastAPI(title="MAOMIAI Model Bootstrap Service", version=APP_VERSION)
@@ -66,10 +66,7 @@ def find_ollama() -> str | None:
     return None
 
 def profile_to_models(profile: str, requested: List[str]) -> List[str]:
-    # UI 不显示具体模型名；这里是本地实现映射。
-    # 后续可以改为读取 manifests/model_registry。
     if requested:
-        # 允许前端传抽象能力名。
         mapped = []
         for item in requested:
             if item == "standard-chat":
