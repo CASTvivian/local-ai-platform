@@ -45,6 +45,7 @@ def find_ollama() -> str | None:
     found = shutil.which("ollama")
     if found:
         return found
+
     candidates = []
     if platform.system().lower() == "windows":
         local = os.environ.get("LOCALAPPDATA")
@@ -58,6 +59,7 @@ def find_ollama() -> str | None:
             "/usr/local/bin/ollama",
             "/opt/homebrew/bin/ollama",
         ])
+
     for c in candidates:
         if c and os.path.exists(c):
             return c
@@ -77,6 +79,7 @@ def profile_to_models(profile: str, requested: List[str]) -> List[str]:
             else:
                 mapped.append(item)
         return mapped
+
     if profile == "code":
         return [os.environ.get("MAOMIAI_CODE_MODEL", "qwen2.5-coder:7b")]
     return [os.environ.get("MAOMIAI_STANDARD_MODEL", "qwen2.5:7b")]
@@ -102,6 +105,7 @@ def bootstrap_status():
         "models": [],
         "message": "",
     }
+
     if not ollama:
         status["ok"] = False
         status["message"] = "未检测到本地推理后端。请先安装并启动 Ollama。"
@@ -111,10 +115,12 @@ def bootstrap_status():
             "回到本地 AI 准备页重新检查。",
         ]
         return status
+
     version = run_cmd([ollama, "--version"], timeout=15)
     listed = run_cmd([ollama, "list"], timeout=30)
     status["ollama_version"] = version
     status["ollama_list"] = listed
+
     if listed.get("ok"):
         lines = [x.strip() for x in listed.get("stdout", "").splitlines() if x.strip()]
         status["models"] = lines
@@ -122,6 +128,7 @@ def bootstrap_status():
     else:
         status["ok"] = False
         status["message"] = "已检测到本地推理后端，但无法读取模型列表。请确认服务已启动。"
+
     return status
 
 @app.post("/bootstrap/start")
@@ -136,14 +143,17 @@ def bootstrap_start(req: BootstrapStartRequest):
                 "安装并启动后，再点击准备本地 AI。",
             ],
         }
+
     models = profile_to_models(req.profile, req.models)
     results = []
+
     for model in models:
         started = time.time()
         res = run_cmd([ollama, "pull", model], timeout=DEFAULT_TIMEOUT)
         res["model"] = model
         res["elapsed_sec"] = round(time.time() - started, 2)
         results.append(res)
+
     ok = all(r.get("ok") for r in results)
     return {
         "ok": ok,

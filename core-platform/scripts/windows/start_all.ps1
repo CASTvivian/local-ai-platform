@@ -23,6 +23,7 @@ function Start-PythonService {
   )
 
   Write-Host "Starting $Name on $Port..."
+
   $Existing = Get-NetTCPConnection -LocalPort $Port -ErrorAction SilentlyContinue
   if ($Existing) {
     Write-Host "$Name already has port $Port in use."
@@ -30,6 +31,7 @@ function Start-PythonService {
   }
 
   $LogFile = Join-Path $LogDir "$Name.log"
+
   $Args = @(
     "-m", "uvicorn",
     $Module,
