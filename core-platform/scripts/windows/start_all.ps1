@@ -31,6 +31,13 @@ Write-Host "Root: $Root"
 $LogDir = Join-Path $Root "logs\windows"
 New-Item -ItemType Directory -Force -Path $LogDir | Out-Null
 
+# Ensure Python dependencies before starting services.
+$BootstrapScript = Join-Path (Split-Path -Parent $MyInvocation.MyCommand.Path) "bootstrap_runtime.ps1"
+if (Test-Path $BootstrapScript) {
+  Write-Host "Checking Python dependencies..."
+  powershell -ExecutionPolicy Bypass -File $BootstrapScript -Action ensure_deps
+}
+
 function Find-Python {
   $py = Get-Command python -ErrorAction SilentlyContinue
   if ($py) { return $py.Source }

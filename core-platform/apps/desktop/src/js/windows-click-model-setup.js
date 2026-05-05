@@ -36,6 +36,7 @@
         ${raw ? `<pre>${esc(typeof raw === "string" ? raw : JSON.stringify(raw, null, 2))}</pre>` : ""}
         <div class="model-result-actions">
           <button data-action="check-model-status">重新检查</button>
+          <button data-action="install-local-inference">安装本地推理后端</button>
           <button data-action="back-to-chat">返回对话</button>
         </div>
       </div>
@@ -119,6 +120,31 @@
     }
     return result;
   }
+  async function installLocalInferenceBackend() {
+    setResult("正在安装本地推理后端", "loading", "正在调用本地安装脚本。若系统弹出安全提示，请允许执行。", null);
+    let result;
+    try {
+      result = await postJson(`${API.bootstrap}/bootstrap/install_ollama`, {}, 10000);
+    } catch (e) {
+      result = {
+        ok: false,
+        message: "无法自动安装本地推理后端。",
+        error: String(e),
+        install_url: "https://ollama.com/download/windows",
+        next_steps: [
+          "请打开官方下载页安装。",
+          "安装完成后重新打开 MAOMIAI。",
+          "再点击检查本地 AI 状态。"
+        ]
+      };
+    }
+    if (result?.ok) {
+      setResult("安装命令已执行", "ok", "请等待安装完成，然后重新检查本地 AI 状态。", result);
+    } else {
+      setResult("需要安装本地推理后端", "bad", "当前未检测到本地推理后端。请按提示完成安装。", result);
+    }
+  }
+
   async function startLocalModelDownload(kind) {
     const label = kind === "code" ? "代码能力" : "标准对话能力";
     setResult(`正在准备${label}`, "loading", "正在请求本地模型准备服务...", null);
@@ -229,6 +255,11 @@
     if (!target) return;
     const action = target.getAttribute("data-action");
     const view = target.getAttribute("data-view");
+    if (action === "install-local-inference") {
+      e.preventDefault();
+      installLocalInferenceBackend();
+      return;
+    }
     if (action === "fill-prompt") {
       e.preventDefault();
       fillPrompt(target.getAttribute("data-prompt") || "");
@@ -272,6 +303,7 @@
   window.renderModelSetupPage = renderModelSetupPage;
   window.checkLocalModelStatus = checkLocalModelStatus;
   window.startLocalModelDownload = startLocalModelDownload;
+  window.installLocalInferenceBackend = installLocalInferenceBackend;
   // pointerdown makes Windows WebView clicks feel more reliable.
   document.addEventListener("pointerdown", handleAction, true);
   document.addEventListener("click", handleAction, true);

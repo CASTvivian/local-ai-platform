@@ -4,14 +4,62 @@ import platform
 import shutil
 import subprocess
 import time
+import json
 from typing import Any, Dict, List
 from fastapi import FastAPI
 from pydantic import BaseModel
 
-APP_VERSION = "0.1.0-d7-c4-win"
+APP_VERSION = "0.1.0-d7-c4-auto-bootstrap"
 DEFAULT_TIMEOUT = int(os.environ.get("MAOMIAI_BOOTSTRAP_TIMEOUT", "1800"))
 
 app = FastAPI(title="MAOMIAI Model Bootstrap Service", version=APP_VERSION)
+
+
+def find_bootstrap_script() -> str | None:
+    candidates = []
+    here = os.path.abspath(os.path.dirname(__file__))
+    candidates.extend([
+        os.path.abspath(os.path.join(here, "..", "..", "scripts", "windows", "bootstrap_runtime.ps1")),
+        os.path.abspath(os.path.join(here, "..", "scripts", "windows", "bootstrap_runtime.ps1")),
+        os.path.abspath(os.path.join(os.getcwd(), "scripts", "windows", "bootstrap_runtime.ps1")),
+        os.path.abspath(os.path.join(os.getcwd(), "resources", "scripts", "windows", "bootstrap_runtime.ps1")),
+    ])
+    for c in candidates:
+        if os.path.exists(c):
+            return c
+    return None
+
+
+def run_bootstrap_script(action: str, profile: str = "standard") -> Dict[str, Any] | None:
+    script = find_bootstrap_script()
+    if not script:
+        return None
+    ps = shutil.which("powershell") or shutil.which("pwsh")
+    if not ps:
+        return None
+    try:
+        p = subprocess.run(
+            [ps, "-ExecutionPolicy", "Bypass", "-File", script, "-Action", action, "-Profile", profile],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+            timeout=DEFAULT_TIMEOUT,
+        )
+        raw = p.stdout.strip()
+        try:
+            parsed = json.loads(raw)
+        except Exception:
+            parsed = {"raw": raw}
+        parsed["script_ok"] = p.returncode == 0
+        parsed["stderr"] = p.stderr
+        return parsed
+    except Exception as e:
+        return {
+            "ok": False,
+            "error": str(e),
+            "action": action,
+            "profile": profile,
+        }
 
 class BootstrapStartRequest(BaseModel):
     profile: str = "standard"
@@ -91,6 +139,10 @@ def health():
 
 @app.get("/bootstrap/status")
 def bootstrap_status():
+    scripted = run_bootstrap_script('status')
+    if scripted is not None:
+        return scripted
+
     ollama = find_ollama()
     status: Dict[str, Any] = {
         "ok": True,
@@ -130,6 +182,14 @@ def bootstrap_status():
 
 @app.post("/bootstrap/start")
 def bootstrap_start(req: BootstrapStartRequest):
+    scripted_ollama = run_bootstrap_script('ensure_ollama', req.profile)
+    if scripted_ollama is not None and not scripted_ollama.get('ok'):
+        return scripted_ollama
+
+    scripted_pull = run_bootstrap_script('pull_model', req.profile)
+    if scripted_pull is not None:
+        return scripted_pull
+
     ollama = find_ollama()
     if not ollama:
         return {
@@ -158,4 +218,22 @@ def bootstrap_start(req: BootstrapStartRequest):
         "models": models,
         "results": results,
         "message": "本地 AI 能力准备完成。" if ok else "部分模型准备失败，请查看详情。",
+    }
+
+
+@app.post("/bootstrap/install_ollama")
+def bootstrap_install_ollama():
+    scripted = run_bootstrap_script("install_ollama")
+    if scripted is not None:
+        return scripted
+    return {
+        "ok": False,
+        "message": "当前环境无法自动安装本地推理后端。",
+        "install_url": "https://ollama.com/download/windows",
+        "install_command": "irm https://ollama.com/install.ps1 | iex",
+        "next_steps": [
+            "请打开官方下载页安装。",
+            "安装完成后重新打开 MAOMIAI。",
+            "再点击检查本地 AI 状态。"
+        ],
     }

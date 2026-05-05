@@ -30,8 +30,12 @@
       "icons/icon.png"
     ],
     "resources": [
-      "resources/scripts/start_all.sh",
-      "resources/scripts/stop_all.sh"
+      "../../scripts/windows/bootstrap_runtime.ps1",
+      "../../scripts/windows/start_all.ps1",
+      "../../scripts/windows/stop_all.ps1",
+      "../../scripts/windows/status_all.ps1",
+      "../../services/model_bootstrap_service",
+      "../../services/model_gateway"
     ]
   }
 }
