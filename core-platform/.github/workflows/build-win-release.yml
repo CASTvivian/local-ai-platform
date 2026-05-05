@@ -73,3 +73,23 @@ jobs:
           name: local-ai-platform-win
           path: dist-win/*
           if-no-files-found: error
+
+
+      - name: Verify packaged runtime source exists
+        working-directory: ./core-platform/apps/desktop
+        shell: pwsh
+        run: |
+          if (!(Test-Path "..\..\..\..\scripts\windows\start_all.ps1")) {
+            throw "missing scripts/windows/start_all.ps1"
+          }
+          if (!(Test-Path "..\..\..\..\scripts\windows\stop_all.ps1")) {
+            throw "missing scripts/windows/stop_all.ps1"
+          }
+          if (!(Test-Path "..\..\..\..\services\model_bootstrap_service\main.py")) {
+            throw "missing services/model_bootstrap_service/main.py"
+          }
+          if (!(Test-Path "..\..\..\..\services\model_gateway\main.py")) {
+            throw "missing services/model_gateway/main.py"
+          }
+          Write-Host "Runtime files verified before Tauri build."
+
