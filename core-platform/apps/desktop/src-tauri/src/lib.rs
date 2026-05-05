@@ -1,5 +1,5 @@
-use std::path::PathBuf;
 use std::process::Command;
+use tauri::Manager;
 
 #[tauri::command]
 fn start_backend() -> Result<String, String> {
@@ -35,9 +35,110 @@ fn start_backend() -> Result<String, String> {
 }
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
+
+#[tauri::command]
+fn start_desktop_services(app: tauri::AppHandle) -> Result<String, String> {
+    use std::process::Command;
+    let resource_dir = app
+        .path()
+        .resource_dir()
+        .map_err(|e| format!("resource_dir error: {}", e))?;
+    #[cfg(target_os = "windows")]
+    {
+        let script = resource_dir.join("scripts").join("windows").join("start_all.ps1");
+        let fallback = resource_dir.join("resources").join("scripts").join("windows").join("start_all.ps1");
+        let script_path = if script.exists() { script } else { fallback };
+        if !script_path.exists() {
+            return Err(format!("Windows startup script not found: {:?}", script_path));
+        }
+        let output = Command::new("powershell")
+            .arg("-ExecutionPolicy")
+            .arg("Bypass")
+            .arg("-File")
+            .arg(script_path)
+            .output()
+            .map_err(|e| format!("failed to run powershell startup: {}", e))?;
+        let stdout = String::from_utf8_lossy(&output.stdout).to_string();
+        let stderr = String::from_utf8_lossy(&output.stderr).to_string();
+        if output.status.success() {
+            Ok(format!("{}\n{}", stdout, stderr))
+        } else {
+            Err(format!("{}\n{}", stdout, stderr))
+        }
+    }
+    #[cfg(not(target_os = "windows"))]
+    {
+        let script = resource_dir.join("resources").join("scripts").join("start_all.sh");
+        if !script.exists() {
+            return Err(format!("startup script not found: {:?}", script));
+        }
+        let output = Command::new("bash")
+            .arg(script)
+            .output()
+            .map_err(|e| format!("failed to start services: {}", e))?;
+        let stdout = String::from_utf8_lossy(&output.stdout).to_string();
+        let stderr = String::from_utf8_lossy(&output.stderr).to_string();
+        if output.status.success() {
+            Ok(format!("{}\n{}", stdout, stderr))
+        } else {
+            Err(format!("{}\n{}", stdout, stderr))
+        }
+    }
+}
+#[tauri::command]
+fn stop_desktop_services(app: tauri::AppHandle) -> Result<String, String> {
+    use std::process::Command;
+    let resource_dir = app
+        .path()
+        .resource_dir()
+        .map_err(|e| format!("resource_dir error: {}", e))?;
+    #[cfg(target_os = "windows")]
+    {
+        let script = resource_dir.join("scripts").join("windows").join("stop_all.ps1");
+        let fallback = resource_dir.join("resources").join("scripts").join("windows").join("stop_all.ps1");
+        let script_path = if script.exists() { script } else { fallback };
+        if !script_path.exists() {
+            return Err(format!("Windows stop script not found: {:?}", script_path));
+        }
+        let output = Command::new("powershell")
+            .arg("-ExecutionPolicy")
+            .arg("Bypass")
+            .arg("-File")
+            .arg(script_path)
+            .output()
+            .map_err(|e| format!("failed to run powershell stop: {}", e))?;
+        let stdout = String::from_utf8_lossy(&output.stdout).to_string();
+        let stderr = String::from_utf8_lossy(&output.stderr).to_string();
+        if output.status.success() {
+            Ok(format!("{}\n{}", stdout, stderr))
+        } else {
+            Err(format!("{}\n{}", stdout, stderr))
+        }
+    }
+    #[cfg(not(target_os = "windows"))]
+    {
+        let script = resource_dir.join("resources").join("scripts").join("stop_all.sh");
+        if !script.exists() {
+            return Err(format!("stop script not found: {:?}", script));
+        }
+        let output = Command::new("bash")
+            .arg(script)
+            .output()
+            .map_err(|e| format!("failed to stop services: {}", e))?;
+        let stdout = String::from_utf8_lossy(&output.stdout).to_string();
+        let stderr = String::from_utf8_lossy(&output.stderr).to_string();
+        if output.status.success() {
+            Ok(format!("{}\n{}", stdout, stderr))
+        } else {
+            Err(format!("{}\n{}", stdout, stderr))
+        }
+    }
+}
+
+
 pub fn run() {
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![start_backend])
+        .invoke_handler(tauri::generate_handler![start_backend, start_desktop_services, stop_desktop_services])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
