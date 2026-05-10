@@ -136,9 +136,61 @@ fn stop_desktop_services(app: tauri::AppHandle) -> Result<String, String> {
 }
 
 
+
+#[tauri::command]
+fn install_local_inference_backend() -> Result<String, String> {
+    use std::process::Command;
+    #[cfg(target_os = "windows")]
+    {
+        let install_cmd = "irm https://ollama.com/install.ps1 | iex";
+        let output = Command::new("powershell")
+            .arg("-ExecutionPolicy")
+            .arg("Bypass")
+            .arg("-Command")
+            .arg(install_cmd)
+            .output()
+            .map_err(|e| format!("failed to start installer: {}", e))?;
+        let stdout = String::from_utf8_lossy(&output.stdout).to_string();
+        let stderr = String::from_utf8_lossy(&output.stderr).to_string();
+        if output.status.success() {
+            Ok(format!(
+                "本地推理后端安装命令已执行。\n\nstdout:\n{}\n\nstderr:\n{}",
+                stdout, stderr
+            ))
+        } else {
+            let _ = Command::new("cmd")
+                .arg("/C")
+                .arg("start")
+                .arg("https://ollama.com/download/windows")
+                .spawn();
+            Err(format!(
+                "自动安装命令执行失败，已尝试打开官方下载页。\n\nstdout:\n{}\n\nstderr:\n{}",
+                stdout, stderr
+            ))
+        }
+    }
+    #[cfg(target_os = "macos")]
+    {
+        let output = Command::new("open")
+            .arg("https://ollama.com/download")
+            .output()
+            .map_err(|e| format!("failed to open download page: {}", e))?;
+        if output.status.success() {
+            Ok("已打开本地推理后端官方下载页。".to_string())
+        } else {
+            Err("无法打开官方下载页，请手动访问 https://ollama.com/download".to_string())
+        }
+    }
+    #[cfg(all(not(target_os = "windows"), not(target_os = "macos")))]
+    {
+        Ok("请手动安装本地推理后端：https://ollama.com/download".to_string())
+    }
+}
+
+
 pub fn run() {
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![start_backend, start_desktop_services, stop_desktop_services])
+        .invoke_handler(tauri::generate_handler![start_backend, start_desktop_services, stop_desktop_services, install_local_inference_backend])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

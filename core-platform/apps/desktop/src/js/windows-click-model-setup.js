@@ -121,28 +121,77 @@
     return result;
   }
   async function installLocalInferenceBackend() {
-    setResult("正在安装本地推理后端", "loading", "正在调用本地安装脚本。若系统弹出安全提示，请允许执行。", null);
-    let result;
+    setResult("正在安装本地推理后端", "loading", "正在请求系统安装。Windows 可能会弹出 PowerShell 或安全确认，请允许执行。", null);
+    const result = {
+      ok: false,
+      stage: "install_local_inference_backend",
+      tauri: null,
+      api: null,
+      message: "",
+      next_steps: []
+    };
+    // 1) Prefer direct Tauri command. This does not depend on 18100.
     try {
-      result = await postJson(`${API.bootstrap}/bootstrap/install_ollama`, {}, 10000);
-    } catch (e) {
-      result = {
+      const invoke =
+        window.__TAURI__?.core?.invoke ||
+        window.__TAURI_INTERNALS__?.invoke;
+      if (invoke) {
+        const out = await invoke("install_local_inference_backend");
+        result.tauri = { ok: true, output: out };
+        result.ok = true;
+        result.message = "安装命令已执行。安装完成后，请重新点击\"检查本地 AI 状态\"。";
+        result.next_steps = [
+          "等待安装程序完成。",
+          "安装完成后重新打开 MAOMIAI 或点击重新检查。",
+          "如果仍不可用，请手动打开官方下载页安装。"
+        ];
+        setResult("安装命令已执行", "ok", result.message, result);
+        return result;
+      }
+      result.tauri = {
         ok: false,
-        message: "无法自动安装本地推理后端。",
+        message: "当前环境没有可用的 Tauri invoke。"
+      };
+    } catch (e) {
+      result.tauri = {
+        ok: false,
         error: String(e),
-        install_url: "https://ollama.com/download/windows",
-        next_steps: [
-          "请打开官方下载页安装。",
-          "安装完成后重新打开 MAOMIAI。",
-          "再点击检查本地 AI 状态。"
-        ]
+        message: "Tauri 直接安装命令执行失败。"
       };
     }
-    if (result?.ok) {
-      setResult("安装命令已执行", "ok", "请等待安装完成，然后重新检查本地 AI 状态。", result);
-    } else {
-      setResult("需要安装本地推理后端", "bad", "当前未检测到本地推理后端。请按提示完成安装。", result);
+    // 2) Try backend API fallback if 18100 is available.
+    try {
+      const apiResult = await postJson(`${API.bootstrap}/bootstrap/install_ollama`, {}, 30000);
+      result.api = apiResult;
+      if (apiResult?.ok) {
+        result.ok = true;
+        result.message = "后端安装命令已执行。安装完成后请重新检查。";
+        setResult("安装命令已执行", "ok", result.message, result);
+        return result;
+      }
+    } catch (e) {
+      result.api = {
+        ok: false,
+        error: String(e),
+        message: "18100 安装接口不可用。"
+      };
     }
+    // 3) Last fallback: open official page or show command.
+    try {
+      window.open("https://ollama.com/download/windows", "_blank");
+    } catch (_) {}
+    result.ok = false;
+    result.message = "无法自动安装本地推理后端，已尝试打开官方下载页。";
+    result.install_url = "https://ollama.com/download/windows";
+    result.install_command = "irm https://ollama.com/install.ps1 | iex";
+    result.next_steps = [
+      "请打开官方下载页安装 Windows 版本。",
+      "或在 PowerShell 中执行安装命令。",
+      "安装完成后重新打开 MAOMIAI。",
+      "回到本地 AI 准备页点击重新检查。"
+    ];
+    setResult("需要手动安装本地推理后端", "bad", result.message, result);
+    return result;
   }
 
   async function startLocalModelDownload(kind) {
