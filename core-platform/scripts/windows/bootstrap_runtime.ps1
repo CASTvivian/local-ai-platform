@@ -57,11 +57,25 @@ function Get-Model-For-Profile {
   }
 }
 
-
 function Test-Port {
   param([int]$Port)
   $conn = Get-NetTCPConnection -LocalPort $Port -ErrorAction SilentlyContinue
   return [bool]$conn
+}
+
+function Test-OllamaApi {
+  try {
+    $r = Invoke-RestMethod "http://127.0.0.1:11434/api/tags" -TimeoutSec 3
+    return @{
+      ok = $true
+      response = $r
+    }
+  } catch {
+    return @{
+      ok = $false
+      error = $_.Exception.Message
+    }
+  }
 }
 
 function Ensure-Ollama-Serve {
@@ -74,18 +88,21 @@ function Ensure-Ollama-Serve {
       install_url = "https://ollama.com/download/windows"
     }
   }
-  if (Test-Port 11434) {
+  $api = Test-OllamaApi
+  if ($api.ok) {
     return @{
       ok = $true
       stage = "serve"
       message = "本地推理后端已运行。"
       ollama = $ollama
       port = 11434
+      api = $api
     }
   }
+  # Critical: never run bare `ollama`. Only run `ollama serve`.
   try {
     Start-Process -FilePath $ollama -ArgumentList @("serve") -WindowStyle Hidden
-    Start-Sleep -Seconds 4
+    Start-Sleep -Seconds 5
   } catch {
     return @{
       ok = $false
@@ -95,20 +112,23 @@ function Ensure-Ollama-Serve {
       ollama = $ollama
     }
   }
-  if (Test-Port 11434) {
+  $api2 = Test-OllamaApi
+  if ($api2.ok) {
     return @{
       ok = $true
       stage = "serve"
       message = "本地推理后端已启动。"
       ollama = $ollama
       port = 11434
+      api = $api2
     }
   }
   return @{
     ok = $false
     stage = "serve"
-    message = "已尝试启动本地推理后端，但 11434 端口暂未就绪。"
+    message = "已尝试启动本地推理后端，但 API 暂未就绪。请稍后重新检查或重启 MAOMIAI。"
     ollama = $ollama
+    api = $api2
   }
 }
 
@@ -121,12 +141,14 @@ function Get-Ollama-List {
       models = @()
     }
   }
+  $serve = Ensure-Ollama-Serve
   try {
     $out = & $ollama list 2>&1 | Out-String
     return @{
       ok = $true
       raw = $out
       models = $out
+      serve = $serve
     }
   } catch {
     return @{
@@ -134,6 +156,7 @@ function Get-Ollama-List {
       message = "读取本地模型列表失败。"
       error = $_.Exception.Message
       models = @()
+      serve = $serve
     }
   }
 }
@@ -174,6 +197,7 @@ function Pull-Model {
   New-Item -ItemType Directory -Force -Path $LogDir | Out-Null
   $logFile = Join-Path $LogDir ("ollama-pull-" + $Profile + ".log")
   try {
+    # Critical: non-interactive pull only.
     $p = Start-Process `
       -FilePath $ollama `
       -ArgumentList @("pull", $model) `

@@ -152,12 +152,8 @@ fn install_local_inference_backend() -> Result<String, String> {
             .map_err(|e| format!("无法启动安装命令: {}", e))?;
         let stdout = String::from_utf8_lossy(&output.stdout).to_string();
         let stderr = String::from_utf8_lossy(&output.stderr).to_string();
-        let _ = Command::new("cmd")
-            .arg("/C")
-            .arg("start")
-            .arg("")
-            .arg("ollama")
-            .spawn();
+        // Do not launch bare `ollama` here; it opens an interactive menu on Windows.
+        // The bootstrap_runtime.ps1 script will handle `ollama serve` correctly.
         let status_text = if output.status.success() {
             "INSTALL_COMMAND_OK"
         } else {
