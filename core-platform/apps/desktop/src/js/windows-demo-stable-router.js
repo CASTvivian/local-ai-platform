@@ -1,0 +1,268 @@
+(function () {
+  console.log("[MAOMIAI] windows-demo-stable-router loaded");
+  const CONTENT_IDS = ["content", "mainContent", "app-content"];
+  function $(id) {
+    return document.getElementById(id);
+  }
+  function getContent() {
+    for (const id of CONTENT_IDS) {
+      const el = $(id);
+      if (el) return el;
+    }
+    const main = document.querySelector("main") || document.querySelector(".main") || document.body;
+    let el = document.createElement("div");
+    el.id = "content";
+    el.className = "content";
+    main.appendChild(el);
+    return el;
+  }
+  function escapeHtml(v) {
+    return String(v ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+  function setActiveNav(view) {
+    document.querySelectorAll("[data-view], .nav button, aside button, .sidebar button").forEach(btn => {
+      const v = btn.getAttribute("data-view") || btn.dataset?.view;
+      if (v === view) btn.classList.add("active");
+      else btn.classList.remove("active");
+    });
+  }
+  function page(title, subtitle, body) {
+    const content = getContent();
+    content.innerHTML = `
+      <section class="demo-page">
+        <div class="demo-hero">
+          <h1>${escapeHtml(title)}</h1>
+          <p>${escapeHtml(subtitle || "")}</p>
+        </div>
+        <div class="demo-body">${body || ""}</div>
+      </section>
+    `;
+  }
+  function renderChat() {
+    if (typeof window.renderChatPage === "function") {
+      try { return window.renderChatPage(getContent()); } catch (e) { console.warn(e); }
+    }
+    page("MAOMIAI 本地 AI", "输入任务，软件会调用本地 AI 能力完成处理。", `
+      <div class="demo-card">
+        <h2>新对话</h2>
+        <p>请在底部输入框输入问题，例如：你好，请介绍一下你自己。</p>
+      </div>
+    `);
+  }
+  function renderFiles() {
+    if (typeof window.renderArtifactsPage === "function") {
+      try { return window.renderArtifactsPage(getContent()); } catch (e) { console.warn(e); }
+    }
+    page("文件与结果", "集中查看本地 AI 生成的文件、报告、代码和处理结果。", `
+      <div class="demo-grid">
+        <div class="demo-card">
+          <h2>结果产物</h2>
+          <p>后续对话、代码检查、文档处理生成的结果会显示在这里。</p>
+        </div>
+        <div class="demo-card">
+          <h2>本地存储</h2>
+          <p>优先保存在本机，便于客户演示私有化和本地部署能力。</p>
+        </div>
+      </div>
+    `);
+  }
+  function renderCodeReview() {
+    if (typeof window.renderCodeReviewPage === "function") {
+      try { return window.renderCodeReviewPage(getContent()); } catch (e) { console.warn(e); }
+    }
+    page("代码检查", "用于代码审查、风险命令检查、错误分析和项目修复建议。", `
+      <div class="demo-card">
+        <h2>代码检查测试</h2>
+        <textarea id="demoCodeInput" class="demo-textarea" placeholder="粘贴需要检查的代码或命令，例如 rm -rf /"></textarea>
+        <button class="primary" data-action="demo-code-check">开始检查</button>
+        <pre id="demoCodeResult" class="demo-result">等待输入。</pre>
+      </div>
+    `);
+  }
+  function renderSettings() {
+    page("设置", "配置本地运行、服务启动、模型能力和演示环境。", `
+      <div class="demo-grid">
+        <div class="demo-card">
+          <h2>运行模式</h2>
+          <p>当前为本地运行模式，优先调用本机后端和本地模型能力。</p>
+        </div>
+        <div class="demo-card">
+          <h2>服务状态</h2>
+          <p>请在右侧检查器的服务页查看后端服务健康状态。</p>
+        </div>
+      </div>
+    `);
+  }
+  function renderLocalModels() {
+    if (typeof window.renderModelSetupPage === "function") {
+      try {
+        window.renderModelSetupPage();
+        return;
+      } catch (e) {
+        console.error("[MAOMIAI] renderModelSetupPage failed", e);
+      }
+    }
+    page("本地模型", "选择需要的本地 AI 能力，软件会自动下载、部署并连接。", `
+      <div class="demo-grid">
+        <div class="model-store-card">
+          <h3>标准对话能力</h3>
+          <p>适合中文问答、总结、写作、任务规划。</p>
+          <button class="primary" data-action="download-model-profile" data-profile="standard">下载并启用</button>
+        </div>
+        <div class="model-store-card">
+          <h3>代码能力</h3>
+          <p>适合代码生成、代码检查、错误分析和项目修复。</p>
+          <button class="primary" data-action="download-model-profile" data-profile="code">下载并启用</button>
+        </div>
+        <div class="model-store-card">
+          <h3>轻量快速能力</h3>
+          <p>适合低配置电脑、快速问答和演示测试。</p>
+          <button class="primary" data-action="download-model-profile" data-profile="light">下载并启用</button>
+        </div>
+      </div>
+      <div id="modelSetupResult" class="model-setup-result"></div>
+    `);
+  }
+  function route(view) {
+    const normalized = String(view || "chat");
+    setActiveNav(normalized);
+    if (normalized === "chat" || normalized === "new-chat" || normalized === "new") {
+      renderChat();
+      return;
+    }
+    if (
+      normalized === "models" ||
+      normalized === "model" ||
+      normalized === "local-model" ||
+      normalized === "local-models" ||
+      normalized === "本地模型"
+    ) {
+      renderLocalModels();
+      return;
+    }
+    if (
+      normalized === "artifacts" ||
+      normalized === "files" ||
+      normalized === "documents" ||
+      normalized === "文件与结果"
+    ) {
+      renderFiles();
+      return;
+    }
+    if (normalized === "code-review" || normalized === "code" || normalized === "代码检查") {
+      renderCodeReview();
+      return;
+    }
+    if (normalized === "settings" || normalized === "setting" || normalized === "设置") {
+      renderSettings();
+      return;
+    }
+    if (typeof window.__oldSetView === "function") {
+      try {
+        return window.__oldSetView(normalized);
+      } catch (e) {
+        console.warn("[MAOMIAI] old setView failed", e);
+      }
+    }
+    page("功能页面", `视图：${normalized}`, `
+      <div class="demo-card">
+        <p>该功能已注册，但当前演示包使用兜底页面显示。</p>
+      </div>
+    `);
+  }
+  function inferViewFromText(text) {
+    const t = String(text || "").trim();
+    if (t.includes("新对话") || t.includes("新建会话")) return "chat";
+    if (t.includes("本地模型") || t.includes("模型")) return "models";
+    if (t.includes("文件") || t.includes("结果") || t.includes("产物")) return "artifacts";
+    if (t.includes("代码")) return "code-review";
+    if (t.includes("设置")) return "settings";
+    return null;
+  }
+  function installNavAttributes() {
+    const candidates = Array.from(document.querySelectorAll("button, a, .nav-item, .sidebar-item, [role='button']"));
+    for (const el of candidates) {
+      const text = (el.textContent || "").trim();
+      if (!el.getAttribute("data-view")) {
+        const inferred = inferViewFromText(text);
+        if (inferred) el.setAttribute("data-view", inferred);
+      }
+      if (text.includes("本地模型")) {
+        el.setAttribute("data-view", "models");
+        el.style.cursor = "pointer";
+      }
+      if (text.includes("文件与结果")) {
+        el.setAttribute("data-view", "artifacts");
+        el.style.cursor = "pointer";
+      }
+      if (text.includes("代码检查")) {
+        el.setAttribute("data-view", "code-review");
+        el.style.cursor = "pointer";
+      }
+      if (text.includes("新对话")) {
+        el.setAttribute("data-view", "chat");
+        el.style.cursor = "pointer";
+      }
+      if (text.includes("设置")) {
+        el.setAttribute("data-view", "settings");
+        el.style.cursor = "pointer";
+      }
+    }
+  }
+  function bindGlobalClicks() {
+    document.addEventListener("pointerdown", (event) => {
+      const target = event.target.closest("[data-view]");
+      if (!target) return;
+      const view = target.getAttribute("data-view");
+      if (!view) return;
+      event.preventDefault();
+      event.stopPropagation();
+      route(view);
+    }, true);
+    document.addEventListener("click", (event) => {
+      const target = event.target.closest("[data-view]");
+      if (!target) return;
+      const view = target.getAttribute("data-view");
+      if (!view) return;
+      event.preventDefault();
+      event.stopPropagation();
+      route(view);
+    }, true);
+    document.addEventListener("click", (event) => {
+      const actionEl = event.target.closest("[data-action]");
+      if (!actionEl) return;
+      const action = actionEl.getAttribute("data-action");
+      if (action === "demo-code-check") {
+        event.preventDefault();
+        const input = $("demoCodeInput");
+        const result = $("demoCodeResult");
+        if (result) {
+          result.textContent = `已收到检查内容：\n${input?.value || ""}\n\n演示包会将该内容提交到代码检查服务。`;
+        }
+      }
+    }, true);
+  }
+  function boot() {
+    if (!window.__oldSetView && typeof window.setView === "function") {
+      window.__oldSetView = window.setView;
+    }
+    window.setView = route;
+    window.routeView = route;
+    window.__MAOMIAI_STABLE_ROUTE__ = route;
+    installNavAttributes();
+    bindGlobalClicks();
+    setTimeout(installNavAttributes, 300);
+    setTimeout(installNavAttributes, 1200);
+    setInterval(installNavAttributes, 2500);
+    console.log("[MAOMIAI] stable router ready");
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", boot);
+  } else {
+    boot();
+  }
+})();
