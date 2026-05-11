@@ -1,0 +1,3 @@
+VoxCPM placeholder output
+text=你好，这是一个测试语音请求
+status=placeholder

@@ -1,0 +1,19 @@
+{
+  "ok": false,
+  "kind": "video_generate",
+  "prompt": "我想做一个未来城市夜景的短片",
+  "params": {
+    "num_frames": null,
+    "num_inference_steps": null,
+    "guidance_scale": null,
+    "fps": null
+  },
+  "cmd": [
+    "python3",
+    "/Users/mofamaomi/Documents/本地ai/core-platform/scripts/run_cogvideo.py",
+    "我想做一个未来城市夜景的短片"
+  ],
+  "returncode": 2,
+  "stdout": "{\"ok\": false, \"mode\": \"error\", \"backend\": \"CogVideoX-2B\", \"error\": \"Error no file named model_index.json found in directory /Users/mofamaomi/Documents/\\u672c\\u5730ai/references/CogVideo.\"}\n",
+  "stderr": ""
+}

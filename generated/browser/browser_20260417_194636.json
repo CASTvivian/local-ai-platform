@@ -1,0 +1,34 @@
+{
+  "provider": "skyvern",
+  "repo_exists": true,
+  "python_exists": true,
+  "mode": "runtime_bridge",
+  "ok": true,
+  "prompt": "自动表单流程测试",
+  "start_url": "https://example.com",
+  "attempts": [
+    {
+      "cmd": [
+        "python3",
+        "-m",
+        "skyvern"
+      ],
+      "cwd": "/Users/mofamaomi/Documents/本地ai/references/skyvern",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 189, in _run_module_as_main\n  File \"<frozen runpy>\", line 148, in _get_module_details\n  File \"<frozen runpy>\", line 112, in _get_module_details\n  File \"/Users/mofamaomi/Documents/本地ai/references/skyvern/skyvern/__init__.py\", line 4, in <module>\n    from skyvern.forge.sdk.forge_log import setup_logger\n  File \"/Users/mofamaomi/Documents/本地ai/references/skyvern/skyvern/forge/sdk/forge_log.py\", line 6, in <module>\n    import structlog\nModuleNotFoundError: No module named 'structlog'\n"
+    },
+    {
+      "cmd": [
+        "python3",
+        "--version"
+      ],
+      "cwd": "/Users/mofamaomi/Documents/本地ai/references/skyvern",
+      "returncode": 0,
+      "stdout": "Python 3.12.5\n",
+      "stderr": ""
+    }
+  ],
+  "note": "skyvern runtime bridge executed; inspect attempts for actual entry compatibility",
+  "kind": "browser_agent_runtime"
+}

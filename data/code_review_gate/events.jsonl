@@ -1,0 +1,2 @@
+{"ts": "2026-04-25T17:23:06.553724", "type": "review_diff", "data": {"review_id": "review_9c4def8df79c", "risk_level": "RiskLevel.low", "decision": "ReviewDecision.approve", "findings_count": 0, "files": ["hello.py"]}}
+{"ts": "2026-04-25T17:23:06.582877", "type": "review_diff", "data": {"review_id": "review_2d0e9b736c1e", "risk_level": "RiskLevel.critical", "decision": "ReviewDecision.reject", "findings_count": 4, "files": ["dangerous.py"]}}

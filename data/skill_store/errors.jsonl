@@ -1,0 +1,2 @@
+{"ts": "2026-04-25T17:11:32.715554", "where": "install_skill_md", "message": "Skill my-test-skill v1.0.0 already exists", "extra": {"type": "ValueError"}}
+{"ts": "2026-04-25T19:22:39.033554", "where": "install_skill_md", "message": "Invalid skill name: name must contain only alphanumeric characters, hyphens, and underscores", "extra": {"type": "ValueError"}}

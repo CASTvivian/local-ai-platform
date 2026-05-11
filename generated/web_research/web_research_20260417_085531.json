@@ -1,0 +1,7 @@
+{
+  "ok": true,
+  "kind": "web_research",
+  "mode": "shell",
+  "query": "联网搜索最新A股市场新闻",
+  "note": "web research shell ready; connect live search/news provider next"
+}

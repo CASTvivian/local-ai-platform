@@ -1,0 +1,7 @@
+{
+  "ok": true,
+  "kind": "stock_research",
+  "mode": "shell",
+  "query": "测试股票研究",
+  "note": "stock research shell ready; connect realtime stock/news provider next"
+}

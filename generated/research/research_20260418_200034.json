@@ -1,0 +1,26 @@
+{
+  "ok": true,
+  "kind": "stock_report",
+  "research_scope": "stock_research",
+  "stock": "比亚迪",
+  "lightweight": true,
+  "stages": {
+    "web_search": "done",
+    "market_data": "done",
+    "llm_report": "done"
+  },
+  "web_sources": [
+    {
+      "title": "search_timeout_or_error",
+      "href": "",
+      "body": "search stage failed or timed out"
+    }
+  ],
+  "quotes": {
+    "spot_error": "('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))"
+  },
+  "fundamentals": {},
+  "notes": "测试绕过 auto-router 的内部总结",
+  "report": "**比亚迪轻量研究报告**\n\n**概况：**\n比亚迪作为新能源汽车领域的龙头企业，近年来在电动汽车、电池和太阳能等多个领域取得了显著进展。公司不仅在国内市场具有强大的竞争力，在国际市场上也逐渐崭露头角。\n\n**市场关注点：**\n1. 新能源政策变化及其对公司的影响；\n2. 技术创新与产品布局能否保持领先优势；\n3. 国际市场的拓展及全球化战略布局。\n\n**风险点：**\n1. 政策支持的不确定性可能影响行业增长前景；\n2. 竞争加剧，特别是来自特斯拉等国际巨头的竞争压力；\n3. 供应链稳定性面临挑战，原材料价格波动可能导致成本上升。\n\n**结论：**\n尽管存在一定的市场和技术竞争风险及政策不确定性，比亚迪凭借其强大的研发实力和完善的产业链布局，在新能源汽车领域仍具备较强的竞争优势。建议投资者保持关注，并结合自身投资策略审慎决策。",
+  "cache_hit": false
+}

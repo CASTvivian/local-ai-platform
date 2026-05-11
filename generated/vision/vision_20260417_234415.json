@@ -1,0 +1,14 @@
+{
+  "ok": true,
+  "kind": "vision_analyze",
+  "status": "fallback_summary",
+  "image_exists": false,
+  "meta": {},
+  "prompt": "请分析这张图片的内容",
+  "preferred_model": null,
+  "used_model": null,
+  "ranked_models": [],
+  "analysis": null,
+  "fallback_summary": "根据提供的信息，您没有提供具体的图片元数据。为了进行准确的分析，我需要知道一些基本的元数据信息，比如图片格式、尺寸大小，或者是否有特定的主题标签等。如果有这些信息或者其他相关描述，请告知，这样我可以帮助您更好地分析这张图片的内容。如果没有其他具体信息，我只能给出一个通用的回答：由于缺乏具体的图像内容和相关信息，无法提供详细的分析。",
+  "note": "Vision Batch 4 closeout"
+}

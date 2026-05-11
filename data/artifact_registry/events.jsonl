@@ -1,0 +1,3 @@
+{"ts": "2026-04-25T16:43:05.955769", "type": "register_execution_result", "data": {"id": "artifact_bea90b1d3dad", "name": "test_artifact_1777135385", "run_id": "run_test_1777135385"}}
+{"ts": "2026-04-25T16:43:06.064400", "type": "update_lifecycle", "data": {"id": "artifact_bea90b1d3dad", "from": "Lifecycle.archived", "to": "Lifecycle.archived", "reason": "Test archival"}}
+{"ts": "2026-04-25T19:00:44.750842", "type": "register_execution_result", "data": {"id": "artifact_55e7eb64bfbe", "name": "D3-A Artifact Page Demo", "run_id": "run_d3_a_test"}}

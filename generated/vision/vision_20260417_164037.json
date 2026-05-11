@@ -1,0 +1,11 @@
+{
+  "ok": true,
+  "kind": "vision_analyze",
+  "image_exists": true,
+  "meta": {
+    "path": ".",
+    "error": "[Errno 21] Is a directory: '.'"
+  },
+  "prompt": "帮我分析这张图片内容",
+  "note": "第一版真实实现：已真实读取本地图像与元数据；后续继续接 Ollama 视觉模型"
+}

@@ -1,0 +1,14 @@
+{
+  "ok": true,
+  "kind": "vision_analyze",
+  "image_exists": true,
+  "meta": {
+    "path": ".",
+    "error": "[Errno 21] Is a directory: '.'"
+  },
+  "prompt": "帮我分析这张图片内容",
+  "used_model": null,
+  "ranked_models": [],
+  "analysis": null,
+  "note": "Vision Batch 3: 精确视觉模型选择 + 失败安全降级"
+}

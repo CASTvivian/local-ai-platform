@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>Service Health Test</title>
+  <style>
+    body { font-family: -apple-system, sans-serif; padding: 20px; }
+    .service-card {
+      background: #f5f5f5;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 12px;
+      margin: 8px 0;
+    }
+    .service-card.ok { border-color: #dcfce7; background: #f0fdf4; }
+    .service-card.bad { border-color: #fee2e2; background: #fef2f2; }
+    .dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 99px;
+      margin-right: 6px;
+    }
+    .dot.ok { background: #16a34a; }
+    .dot.bad { background: #dc2626; }
+    .badge {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: #e8f0fe;
+      color: #174ea6;
+      font-size: 12px;
+      font-weight: 800;
+      margin: 2px 4px 2px 0;
+    }
+    .badge-enterprise { background: #dbeafe; color: #1e40af; }
+    .badge-partial { background: #fef3c7; color: #92400e; }
+    .badge-required { background: #fee2e2; color: #991b1b; }
+    .mono { font-family: ui-monospace, monospace; }
+  </style>
+</head>
+<body>
+  <h1>Service Health Test (P3.14-D4-B)</h1>
+  <button onclick="testServices()">Test Services</button>
+  <div id="results"></div>
+  <script>
+const CORE_SERVICES = [
+  {
+    port: 18093,
+    key: "auto_router",
+    name: "Auto Router",
+    module: "services.auto_router_service.main:app",
+    log: "/Users/mofamaomi/Documents/本地ai/logs/auto-router.log",
+    required: true,
+    tier: "owned",
+    role: "任务路由 / 能力选择",
+  },
+  {
+    port: 18101,
+    key: "reference_skill",
+    name: "Reference Skill",
+    module: "services.reference_skill_service.main:app",
+    log: "/Users/mofamaomi/Documents/本地ai/logs/reference-skill.log",
+    required: false,
+    tier: "owned",
+    role: "技能参考 / 示例",
+    note: "可选",
+  },
+  {
+    port: 18102,
+    key: "capability_learning",
+    name: "Capability Learning",
+    module: "services.capability_learning_service.main:app",
+    log: "/Users/mofamaomi/Documents/本地ai/logs/capability-learning.log",
+    required: false,
+    tier: "owned",
+    role: "能力学习 / 迁移",
+    note: "可选",
+  },
+  {
+    port: 18104,
+    key: "runtime_execution",
+    name: "Runtime Execution",
+    module: "services.runtime_execution_service.main:app",
+    log: "/Users/mofamaomi/Documents/本地ai/logs/runtime-execution.log",
+    required: true,
+    tier: "owned",
+    role: "代码执行 / 沙箱",
+  },
+  {
+    port: 18110,
+    key: "policy_engine",
+    name: "Policy Engine",
+    module: "services.policy_engine_service.main:app",
+    log: "/Users/mofamaomi/Documents/本地ai/logs/policy-engine.log",
+    required: true,
+    tier: "owned",
+    role: "策略评估 / 权限",
+  },
+  {
+    port: 18111,
+    key: "trace_observability",
+    name: "Trace Observability",
+    module: "services.trace_observability_service.main:app",
+    log: "/Users/mofamaomi/Documents/本地ai/logs/trace-observability.log",
+    required: true,
+    tier: "owned",
+    role: "可观测性 / 审计",
+  },
+  {
+    port: 18112,
+    key: "eval_gateway",
+    name: "Eval Gateway",
+    module: "services.eval_gateway_service.main:app",
+    log: "/Users/mofamaomi/Documents/本地ai/logs/eval-gateway.log",
+    required: true,
+    tier: "owned",
+    role: "评估入口 / 指标",
+  },
+  {
+    port: 18120,
+    key: "document_ingestion",
+    name: "Document Ingestion",
+    module: "services.document_ingestion_service.main:app",
+    log: "/Users/mofamaomi/Documents/本地ai/logs/document-ingestion.log",
+    required: false,
+    tier: "partial",
+    role: "文档处理 / 向量化",
+    note: "部分企业化",
+  },
+  {
+    port: 18121,
+    key: "skill_store",
+    name: "Skill Store",
+    module: "services.skill_store_service.main:app",
+    log: "/Users/mofamaomi/Documents/本地ai/logs/skill-store.log",
+    required: true,
+    tier: "enterprise",
+    role: "技能仓库 / 安装",
+  },
+  {
+    port: 18122,
+    key: "job_orchestrator",
+    name: "Job Orchestrator",
+    module: "services.job_orchestrator_service.main:app",
+    log: "/Users/mofamaomi/Documents/本地ai/logs/job-orchestrator.log",
+    required: false,
+    tier: "owned",
+    role: "任务编排 / 调度",
+    note: "可选",
+  },
+  {
+    port: 18123,
+    key: "artifact_registry",
+    name: "Artifact Registry",
+    module: "services.artifact_registry_service.main:app",
+    log: "/Users/mofamaomi/Documents/本地ai/logs/artifact-registry.log",
+    required: true,
+    tier: "enterprise",
+    role: "产物注册 / 生命周期",
+  },
+  {
+    port: 18124,
+    key: "code_review_gate",
+    name: "Code Review Gate",
+    module: "services.code_review_gate_service.main:app",
+    log: "/Users/mofamaomi/Documents/本地ai/logs/code-review-gate.log",
+    required: true,
+    tier: "enterprise",
+    role: "代码审查 / 安全检查",
+  },
+  {
+    port: 18125,
+    key: "repo_memory",
+    name: "Repo Memory",
+    module: "services.repo_memory_service.main:app",
+    log: "/Users/mofamaomi/Documents/本地ai/logs/repo-memory.log",
+    required: true,
+    tier: "enterprise",
+    role: "仓库记忆 / 共享学习",
+  },
+  {
+    port: 18126,
+    key: "workflow_store",
+    name: "Workflow Store",
+    module: "services.workflow_store_service.main:app",
+    log: "/Users/mofamaomi/Documents/本地ai/logs/workflow-store.log",
+    required: true,
+    tier: "enterprise",
+    role: "工作流仓库 / 模板",
+  },
+  {
+    port: 18127,
+    key: "design_system",
+    name: "Design System",
+    module: "services.design_system_service.main:app",
+    log: "/Users/mofamaomi/Documents/本地ai/logs/design-system.log",
+    required: true,
+    tier: "enterprise",
+    role: "设计系统 / UI 约束",
+  },
+];
+
+async function testServices() {
+  const resultsDiv = document.getElementById("results");
+  resultsDiv.innerHTML = "<p>Checking services...</p>";
+  
+  const results = [];
+  for (const service of CORE_SERVICES) {
+    try {
+      const res = await fetch(`http://127.0.0.1:${service.port}/health`, { signal: AbortSignal.timeout(2000) });
+      const json = await res.json();
+      results.push({
+        ...service,
+        ok: json.ok === true,
+        version: json.version || "unknown",
+        detail: json
+      });
+    } catch (e) {
+      results.push({
+        ...service,
+        ok: false,
+        version: "unknown",
+        error: e.message
+      });
+    }
+  }
+  
+  const enterpriseCount = results.filter(x => x.tier === "enterprise" && x.ok).length;
+  const enterpriseTotal = results.filter(x => x.tier === "enterprise").length;
+  const okCount = results.filter(x => x.ok).length;
+  
+  let html = `
+    <h2>Summary: ${okCount}/${results.length} services (${enterpriseCount}/${enterpriseTotal} enterprise)</h2>
+  `;
+  
+  for (const s of results) {
+    const tierBadge = s.tier === "enterprise" ? 
+      `<span class="badge badge-enterprise">ENT</span>` : 
+      s.tier === "partial" ? 
+      `<span class="badge badge-partial">PART</span>` : "";
+    
+    const requiredBadge = s.required ? 
+      `<span class="badge badge-required">REQ</span>` : "";
+    
+    html += `
+      <div class="service-card ${s.ok ? 'ok' : 'bad'}">
+        <div>
+          <strong>${s.name}</strong> <span class="mono">${s.port}</span><br/>
+          ${tierBadge}${requiredBadge}
+          ${s.ok && s.version !== "unknown" ? `<span class="mono">v${s.version}</span>` : ""}
+        </div>
+        <div style="margin-top: 8px; font-size: 12px; color: #666;">
+          ${s.role}${s.note ? ` (${s.note})` : ""}
+        </div>
+        ${!s.ok && s.error ? `<div class="mono" style="margin-top: 4px; color: #dc2626;">Error: ${s.error}</div>` : ""}
+      </div>
+    `;
+  }
+  
+  resultsDiv.innerHTML = html;
+}
+  </script>
+</body>
+</html>

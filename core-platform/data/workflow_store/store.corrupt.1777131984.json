@@ -1,0 +1,47 @@
+{
+  "store_version": "1.0",
+  "items": [
+    {
+      "id": "workflow_a8acc128de13",
+      "name": "final-test",
+      "version": "1.0.0",
+      "description": "",
+      "source": "desktop_ui",
+      "enabled": true,
+      "definition": {
+        "name": "final-test",
+        "version": "1.0.0",
+        "description": "",
+        "source": "desktop_ui",
+        "nodes": [
+          {
+            "id": "n1",
+            "type": "start",
+            "name": "Start",
+            "config": {},
+            "position": null
+          }
+        ],
+        "edges": [
+          {
+            "id": "e1",
+            "source": "n1",
+            "target": "n1",
+            "condition": null,
+            "metadata": {}
+          }
+        ],
+        "runtime_requirements": {
+          "services": [],
+          "models": [],
+          "tools": [],
+          "permissions": [],
+          "estimated_timeout_sec": 300
+        },
+        "metadata": {}
+      },
+      "created_at": 1777131982.2812831,
+      "updated_at": 1777131982.2812831
+    }
+  ]
+}

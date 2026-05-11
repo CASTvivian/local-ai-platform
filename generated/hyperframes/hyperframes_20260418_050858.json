@@ -1,0 +1,22 @@
+{
+  "ok": true,
+  "kind": "hyperframes_render_stub",
+  "prompt": "把这份研究摘要渲染成一个模板视频",
+  "project_name": "hf_20260418_050855",
+  "workdir": "/Users/mofamaomi/Documents/本地ai/generated/hyperframes/hf_20260418_050855",
+  "attempts": [
+    {
+      "cmd": [
+        "npx",
+        "hyperframes",
+        "init",
+        "hf_20260418_050855"
+      ],
+      "cwd": "/Users/mofamaomi/Documents/本地ai/generated/hyperframes",
+      "returncode": 0,
+      "stdout": "Created hf_20260418_050855/\n  AGENTS.md\n  CLAUDE.md\n  hyperframes.json\n  index.html\n  meta.json\n\nGet started:\n\n  1. Install AI coding skills (one-time):\n     npx skills add heygen-com/hyperframes\n\n  2. Open this project with your AI coding agent:\n     cd hf_20260418_050855 then start Claude Code, Cursor, or your preferred agent\n\n  3. Try a starter prompt:\n     \"Using /hyperframes, create a 15-second intro about [your topic]\"\n     More patterns: hyperframes.heygen.com/guides/prompting\n\n  4. Preview in the browser:\n     cd hf_20260418_050855 && npx hyperframes preview\n\n  5. Render to MP4 when ready:\n     cd hf_20260418_050855 && npx hyperframes render\n\n  Full docs: hyperframes.heygen.com\n",
+      "stderr": ""
+    }
+  ],
+  "note": "Batch 1 先完成 repo/cli/render bridge；后续再接 composition 生成与 render"
+}

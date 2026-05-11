@@ -1,0 +1,8 @@
+{
+  "ok": true,
+  "kind": "rag",
+  "backend": "RAG-Anything-placeholder",
+  "mode": "placeholder",
+  "query": "文件推理真实壳测试",
+  "note": "RAG real integration shell ready; connect file ingestion and retrieval pipeline later"
+}

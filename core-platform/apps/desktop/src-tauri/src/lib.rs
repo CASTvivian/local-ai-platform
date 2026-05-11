@@ -137,37 +137,50 @@ fn stop_desktop_services(app: tauri::AppHandle) -> Result<String, String> {
 
 
 
+fn write_embedded_windows_bootstrap() -> Result<std::path::PathBuf, String> {
+    #[cfg(target_os = "windows")]
+    {
+        use std::fs;
+        use std::io::Write;
+        // Compile-time embed. This avoids Tauri resource path problems on Windows installers.
+        let script_content = include_str!("../../../../scripts/windows/bootstrap_runtime.ps1");
+        let exe = std::env::current_exe().map_err(|e| format!("无法获取程序路径: {}", e))?;
+        let app_dir = exe.parent().ok_or("无法获取程序目录")?;
+        let runtime_dir = app_dir.join("maomiai-runtime").join("scripts").join("windows");
+        fs::create_dir_all(&runtime_dir)
+            .map_err(|e| format!("无法创建运行时目录 {:?}: {}", runtime_dir, e))?;
+        let script_path = runtime_dir.join("bootstrap_runtime.ps1");
+        let mut file = fs::File::create(&script_path)
+            .map_err(|e| format!("无法写入 bootstrap_runtime.ps1: {}", e))?;
+        file.write_all(script_content.as_bytes())
+            .map_err(|e| format!("写入 bootstrap_runtime.ps1 失败: {}", e))?;
+        Ok(script_path)
+    }
+    #[cfg(not(target_os = "windows"))]
+    {
+        Err("该运行时脚本仅用于 Windows。".to_string())
+    }
+}
+
 fn run_windows_bootstrap(action: &str, profile: Option<String>) -> Result<String, String> {
     use std::process::Command;
     #[cfg(target_os = "windows")]
     {
+        let script = write_embedded_windows_bootstrap()?;
         let exe = std::env::current_exe().map_err(|e| format!("无法获取程序路径: {}", e))?;
         let app_dir = exe.parent().ok_or("无法获取程序目录")?;
-        let candidates = vec![
-            app_dir.join("resources").join("scripts").join("windows").join("bootstrap_runtime.ps1"),
-            app_dir.join("scripts").join("windows").join("bootstrap_runtime.ps1"),
-            app_dir.join("runtime").join("scripts").join("windows").join("bootstrap_runtime.ps1"),
-        ];
-        let script = candidates
-            .into_iter()
-            .find(|p| p.exists())
-            .ok_or("未找到打包内的 bootstrap_runtime.ps1")?;
-        let root = script
-            .parent()
-            .and_then(|p| p.parent())
-            .and_then(|p| p.parent())
-            .map(|p| p.to_path_buf())
-            .unwrap_or_else(|| app_dir.to_path_buf());
+        let root = app_dir.join("maomiai-runtime");
         let mut command = Command::new("powershell");
         command
+            .arg("-NoProfile")
             .arg("-ExecutionPolicy")
             .arg("Bypass")
             .arg("-File")
-            .arg(script)
+            .arg(&script)
             .arg("-Action")
             .arg(action)
             .arg("-Root")
-            .arg(root);
+            .arg(&root);
         if let Some(p) = profile {
             command.arg("-Profile").arg(p);
         }
@@ -179,7 +192,13 @@ fn run_windows_bootstrap(action: &str, profile: Option<String>) -> Result<String
         if output.status.success() {
             Ok(stdout)
         } else {
-            Err(format!("本地运行时脚本执行失败。\nstdout:\n{}\nstderr:\n{}", stdout, stderr))
+            Err(format!(
+                "{{\"ok\":false,\"message\":\"本地运行时脚本执行失败\",\"script\":\"{}\",\"root\":\"{}\",\"stdout\":{:?},\"stderr\":{:?}}}",
+                script.display(),
+                root.display(),
+                stdout,
+                stderr
+            ))
         }
     }
     #[cfg(not(target_os = "windows"))]

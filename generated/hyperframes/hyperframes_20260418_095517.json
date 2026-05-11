@@ -1,0 +1,55 @@
+{
+  "ok": true,
+  "kind": "hyperframes_render",
+  "prompt": "把这份研究摘要渲染成一个模板视频",
+  "project_name": "hf_20260418_095311",
+  "workdir": "/Users/mofamaomi/Documents/本地ai/generated/hyperframes/hf_20260418_095311",
+  "composition_path": "/Users/mofamaomi/Documents/本地ai/generated/hyperframes/hf_20260418_095311/composition.html",
+  "title": "模板视频渲染",
+  "subtitle": "把这份研究摘要渲染成一个模板视频",
+  "bullets": [
+    "这是由 HyperFrames 生成的模板视频",
+    "当前已打通平台主链路",
+    "后续可继续接 research / tts / chart / subtitle",
+    "本次为多页模板版"
+  ],
+  "subtitle_lines": [
+    "第 1 页：主题概览",
+    "第 2 页：重点摘要",
+    "第 3 页：下一步建议"
+  ],
+  "init_attempts": [
+    {
+      "cmd": [
+        "npx",
+        "hyperframes",
+        "init",
+        "hf_20260418_095311"
+      ],
+      "cwd": "/Users/mofamaomi/Documents/本地ai/generated/hyperframes",
+      "returncode": 0,
+      "stdout": "Created hf_20260418_095311/\n  AGENTS.md\n  CLAUDE.md\n  hyperframes.json\n  index.html\n  meta.json\n\nGet started:\n\n  1. Install AI coding skills (one-time):\n     npx skills add heygen-com/hyperframes\n\n  2. Open this project with your AI coding agent:\n     cd hf_20260418_095311 then start Claude Code, Cursor, or your preferred agent\n\n  3. Try a starter prompt:\n     \"Using /hyperframes, create a 15-second intro about [your topic]\"\n     More patterns: hyperframes.heygen.com/guides/prompting\n\n  4. Preview in the browser:\n     cd hf_20260418_095311 && npx hyperframes preview\n\n  5. Render to MP4 when ready:\n     cd hf_20260418_095311 && npx hyperframes render\n\n  Full docs: hyperframes.heygen.com\n",
+      "stderr": ""
+    }
+  ],
+  "preview_attempt": {
+    "cmd": [
+      "npx",
+      "hyperframes",
+      "preview"
+    ],
+    "error": "Command '['npx', 'hyperframes', 'preview']' timed out after 120 seconds"
+  },
+  "render_attempt": {
+    "cmd": [
+      "npx",
+      "hyperframes",
+      "render"
+    ],
+    "cwd": "/Users/mofamaomi/Documents/本地ai/generated/hyperframes/hf_20260418_095311",
+    "returncode": 1,
+    "stdout": "\n◆  Rendering hf_20260418_095311 → /Users/mofamaomi/Documents/本地ai/generated/hyperframes/hf_20260418_095311/renders/hf_20260418_095311_2026-04-18_09-55-17.mp4\n   30fps · standard · 6 workers (auto — 8 cores detected)\n\n",
+    "stderr": "\n✗  FFmpeg not found\n\n   Rendering requires FFmpeg for video encoding.\n   Install: brew install ffmpeg\n\n"
+  },
+  "note": "Batch 3 已支持多页模板、字幕骨架与 render 尝试"
+}

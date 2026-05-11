@@ -1,0 +1,34 @@
+{
+  "provider": "browser_use",
+  "repo_exists": true,
+  "python_exists": true,
+  "mode": "runtime_bridge",
+  "ok": true,
+  "prompt": "访问这个网页并检查环境是否可用",
+  "start_url": "https://example.com",
+  "attempts": [
+    {
+      "cmd": [
+        "python3",
+        "-m",
+        "browser_use"
+      ],
+      "cwd": "/Users/mofamaomi/Documents/本地ai/references/browser-use",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 189, in _run_module_as_main\n  File \"<frozen runpy>\", line 148, in _get_module_details\n  File \"<frozen runpy>\", line 112, in _get_module_details\n  File \"/Users/mofamaomi/Documents/本地ai/references/browser-use/browser_use/__init__.py\", line 4, in <module>\n    from browser_use.logging_config import setup_logging\n  File \"/Users/mofamaomi/Documents/本地ai/references/browser-use/browser_use/logging_config.py\", line 10, in <module>\n    from browser_use.config import CONFIG\n  File \"/Users/mofamaomi/Documents/本地ai/references/browser-use/browser_use/config.py\", line 14, in <module>\n    from pydantic_settings import BaseSettings, SettingsConfigDict\nModuleNotFoundError: No module named 'pydantic_settings'\n"
+    },
+    {
+      "cmd": [
+        "python3",
+        "main.py"
+      ],
+      "cwd": "/Users/mofamaomi/Documents/本地ai/references/browser-use",
+      "returncode": 2,
+      "stdout": "",
+      "stderr": "/opt/homebrew/Cellar/python@3.12/3.12.5/Frameworks/Python.framework/Versions/3.12/Resources/Python.app/Contents/MacOS/Python: can't open file '/Users/mofamaomi/Documents/本地ai/references/browser-use/main.py': [Errno 2] No such file or directory\n"
+    }
+  ],
+  "note": "browser-use runtime bridge executed; inspect attempts for actual entry compatibility",
+  "kind": "browser_agent_runtime"
+}

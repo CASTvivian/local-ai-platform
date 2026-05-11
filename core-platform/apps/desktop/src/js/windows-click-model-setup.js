@@ -160,6 +160,16 @@
   function getTauriInvoke() {
     return window.__TAURI__?.core?.invoke || window.__TAURI_INTERNALS__?.invoke || null;
   }
+  function directRuntimeHint(error) {
+    const msg = String(error || "");
+    if (msg.includes("bootstrap_runtime.ps1") || msg.includes("运行时脚本")) {
+      return "本地运行时脚本没有正确释放。请安装最新版本后重试。";
+    }
+    if (msg.includes("ExecutionPolicy") || msg.includes("PowerShell")) {
+      return "Windows PowerShell 执行受限，请以管理员身份或允许脚本执行后重试。";
+    }
+    return msg;
+  }
   function parseRuntimeJson(text) {
     if (!text) return null;
     const raw = String(text).trim();

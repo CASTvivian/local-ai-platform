@@ -1,0 +1,4 @@
+{"ts": "2026-04-25T16:57:23.604327", "type": "install_skill_md", "data": {"id": "skill_ca4967c2ebb1", "name": "my-test-skill", "version": "1.0.0"}}
+{"ts": "2026-04-25T17:11:59.207498", "type": "disable_skill", "data": {"id": "skill_ca4967c2ebb1", "name": "my-test-skill"}}
+{"ts": "2026-04-25T17:11:59.249053", "type": "enable_skill", "data": {"id": "skill_ca4967c2ebb1", "name": "my-test-skill"}}
+{"ts": "2026-04-25T19:23:45.303472", "type": "install_skill_md", "data": {"id": "skill_5702bcf7ff7a", "name": "d3b-demo-skill", "version": "0.1.0"}}

@@ -1,0 +1,8 @@
+{
+  "ok": true,
+  "kind": "tts",
+  "backend": "VoxCPM-placeholder",
+  "mode": "placeholder",
+  "text": "语音生成真实壳测试",
+  "note": "TTS real integration shell ready; connect VoxCPM inference later"
+}

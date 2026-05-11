@@ -1,0 +1,9 @@
+{
+  "ok": true,
+  "kind": "research_search",
+  "research_scope": "general_web_research",
+  "query": "A股市场最新动态",
+  "source": "web",
+  "max_results": 5,
+  "results": []
+}

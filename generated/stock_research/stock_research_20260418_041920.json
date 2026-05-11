@@ -1,0 +1,7 @@
+{
+  "ok": true,
+  "kind": "stock_research",
+  "mode": "shell",
+  "query": "研究英伟达股票",
+  "note": "stock research shell ready; connect realtime stock/news provider next"
+}

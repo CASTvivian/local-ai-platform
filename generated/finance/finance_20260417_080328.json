@@ -1,0 +1,8 @@
+{
+  "ok": true,
+  "kind": "finance",
+  "backend": "Qlib-placeholder",
+  "mode": "placeholder",
+  "query": "金融研究真实壳测试",
+  "note": "Finance real integration shell ready; connect qlib/vnpy research pipeline later"
+}

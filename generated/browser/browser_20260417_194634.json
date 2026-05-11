@@ -1,0 +1,34 @@
+{
+  "provider": "stagehand",
+  "repo_exists": true,
+  "node_exists": true,
+  "npm_exists": true,
+  "mode": "runtime_bridge",
+  "ok": true,
+  "prompt": "提取网页主要内容",
+  "start_url": "https://example.com",
+  "attempts": [
+    {
+      "cmd": [
+        "npm",
+        "run"
+      ],
+      "cwd": "/Users/mofamaomi/Documents/本地ai/references/stagehand",
+      "returncode": 0,
+      "stdout": "Lifecycle scripts included in stagehand-workspace@0.0.0:\n  test\n    turbo run test:core test:e2e test:server test:evals test:cli\n  prepare\n    node packages/core/scripts/prepare.js && husky\navailable via `npm run`:\n  build\n    turbo run build\n  build:full\n    turbo run build\n  build:cjs\n    turbo run build:cjs\n  build:cli\n    turbo run build:cli\n  build:esm\n    turbo run build:esm\n  build:sea\n    turbo run build:sea:esm\n  build:sea:esm\n    turbo run build:sea:esm\n  build:sea:cjs\n    turbo run build:sea:cjs\n  lint\n    turbo run lint\n  format\n    prettier --write .\n  prettier\n    prettier --write .\n  eslint\n    eslint .\n  test:core\n    turbo run test:core --\n  test:core:local\n    STAGEHAND_BROWSER_TARGET=local pnpm run test:core --\n  test:core:bb\n    STAGEHAND_BROWSER_TARGET=browserbase pnpm run test:core --\n  test:e2e\n    turbo run test:e2e --\n  test:e2e:local\n    STAGEHAND_BROWSER_TARGET=local pnpm run test:e2e --\n  test:e2e:bb\n    STAGEHAND_BROWSER_TARGET=browserbase pnpm run test:e2e --\n  test:server\n    turbo run test:server --\n  test:server:sea\n    STAGEHAND_SERVER_TARGET=sea pnpm run test:server --\n  test:server:local\n    STAGEHAND_SERVER_TARGET=local pnpm run test:server --\n  test:server:remote\n    STAGEHAND_SERVER_TARGET=remote pnpm run test:server --\n  test:evals\n    turbo run test:evals --\n  test:evals:local\n    STAGEHAND_BROWSER_TARGET=local pnpm run test:evals --\n  test:evals:bb\n    STAGEHAND_BROWSER_TARGET=browserbase pnpm run test:evals --\n  coverage:merge\n    pnpm -w exec tsx packages/core/scripts/coverage.ts merge\n  docs\n    turbo run docs\n  dev\n    turbo run dev\n  example\n    pnpm --filter @browserbasehq/stagehand run example --\n  cache:clear\n    turbo run build --force\n  release\n    turbo run build && changeset publish\n  release-canary\n    turbo run build && changeset version --snapshot && changeset publish --tag alpha\n",
+      "stderr": ""
+    },
+    {
+      "cmd": [
+        "node",
+        "--version"
+      ],
+      "cwd": "/Users/mofamaomi/Documents/本地ai/references/stagehand",
+      "returncode": 0,
+      "stdout": "v24.8.0\n",
+      "stderr": ""
+    }
+  ],
+  "note": "stagehand runtime bridge executed; next step is wiring exact task entry script",
+  "kind": "browser_agent_runtime"
+}

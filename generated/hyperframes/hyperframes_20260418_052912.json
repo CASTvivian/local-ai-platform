@@ -1,0 +1,27 @@
+{
+  "ok": true,
+  "kind": "hyperframes_probe",
+  "attempts": [
+    {
+      "cmd": [
+        "node",
+        "--version"
+      ],
+      "cwd": "/Users/mofamaomi/Documents/本地ai/references/hyperframes",
+      "returncode": 0,
+      "stdout": "v24.8.0\n",
+      "stderr": ""
+    },
+    {
+      "cmd": [
+        "npx",
+        "hyperframes",
+        "--help"
+      ],
+      "cwd": "/Users/mofamaomi/Documents/本地ai/references/hyperframes",
+      "returncode": 0,
+      "stdout": "hyperframes v0.4.3 — Create and render HTML video compositions\n\nUsage:  hyperframes <command> [options]\n\nGetting Started:\n  init            Scaffold a new composition project\n  add             Install a block or component from the registry\n  capture         Capture a website for video production\n  catalog         Browse and install blocks and components\n  preview         Start the studio for previewing compositions\n  render          Render a composition to MP4 or WebM\n\nProject:\n  lint            Validate a composition for common mistakes\n  snapshot        Capture key frames as PNG screenshots for visual verification\n  info            Print project metadata\n  compositions    List all compositions in a project\n  docs            View inline documentation in the terminal\n\nTooling:\n  benchmark       Render with preset fps/quality/worker configs and compare speed and file size\n  browser         Manage the Chrome browser used for rendering\n  doctor          Check system dependencies and environment\n  upgrade         Check for updates and show upgrade instructions\n\nAI & Integrations:\n  skills          Install HyperFrames and GSAP skills for AI coding tools\n  transcribe      Transcribe audio/video to word-level timestamps, or import an existing transcript\n  tts             Generate speech audio from text using a local AI model (Kokoro-82M)\n\nSettings:\n  telemetry       Manage anonymous usage telemetry\n\nExamples:\n  $ hyperframes init my-video                      Create a new project\n  $ hyperframes preview                            Start the live preview studio\n  $ hyperframes render -o out.mp4                  Render to MP4\n  $ hyperframes render --format webm -o out.webm   Transparent WebM overlay\n  $ hyperframes lint                               Validate your composition\n  $ hyperframes doctor                             Check system dependencies\n\nRun hyperframes <command> --help for more information about a command.\n\n",
+      "stderr": ""
+    }
+  ]
+}

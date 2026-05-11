@@ -1,0 +1,9 @@
+{
+  "ok": true,
+  "kind": "research_search",
+  "research_scope": "general_web_research",
+  "query": "测试任务:帮我搜索并整理 A股市场动态,然后渲染成模板视频",
+  "source": "web",
+  "max_results": 5,
+  "results": []
+}

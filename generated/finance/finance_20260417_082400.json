@@ -1,0 +1,14 @@
+{
+  "ok": true,
+  "kind": "finance",
+  "backend": "Qlib-placeholder",
+  "mode": "shell",
+  "target": {
+    "repo": "/Users/mofamaomi/Documents/本地ai/references/qlib",
+    "enabled": true,
+    "mode": "shell",
+    "next_step": "connect research dataset + qlib analysis pipeline"
+  },
+  "query": "金融研究真实壳测试",
+  "note": "Finance shell is active; connect qlib research pipeline next"
+}

@@ -1,0 +1,14 @@
+{
+  "ok": true,
+  "kind": "rag",
+  "backend": "RAG-Anything-placeholder",
+  "mode": "shell",
+  "target": {
+    "repo": "/Users/mofamaomi/Documents/本地ai/references/RAG-Anything",
+    "enabled": true,
+    "mode": "shell",
+    "next_step": "connect ingestion + retrieval + qa pipeline"
+  },
+  "query": "文件推理链路批次测试",
+  "note": "RAG shell is active; connect ingestion/index/query next"
+}

@@ -1,0 +1,6 @@
+{
+  "built_at": "2026-05-05T05:58:40.5016867+00:00",
+  "commit": "245a2b1",
+  "label": "win-d7-c5-self-contained-runtime",
+  "workflow": "build-win-release"
+}

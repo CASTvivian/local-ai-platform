@@ -1,0 +1,26 @@
+{
+  "ok": true,
+  "kind": "stock_report",
+  "research_scope": "stock_research",
+  "stock": "比亚迪",
+  "lightweight": true,
+  "stages": {
+    "web_search": "done",
+    "market_data": "done",
+    "llm_report": "done"
+  },
+  "web_sources": [
+    {
+      "title": "search_timeout_or_error",
+      "href": "",
+      "body": "search stage failed or timed out"
+    }
+  ],
+  "quotes": {
+    "spot_error": "('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))"
+  },
+  "fundamentals": {},
+  "notes": "测试绕过 auto-router 的内部总结",
+  "report": "### 比亚迪轻量级研究报告\n\n#### 一、概况\n比亚迪是一家领先的新能源汽车制造商，也是全球电池和电子产品的领导者。其产品覆盖了从电动汽车到太阳能电站的广泛领域。\n\n#### 二、市场关注点\n1. **新能源车市增长**：随着各国对环保要求的提高，新能源汽车行业持续快速增长。\n2. **电池技术革新**：比亚迪在电池技术和能量存储解决方案方面持续创新。\n3. **国际化进展**：公司正在加速其国际市场的拓展步伐。\n\n#### 三、风险点\n1. **原材料价格波动**：如锂等关键原材料的价格变化可能会影响成本控制和利润空间。\n2. **政策不确定性**：不同国家对新能源汽车的补贴和支持政策存在不确定性，这可能影响市场需求。\n3. **技术竞争加剧**：随着更多竞争对手涌入市场，比亚迪必须保持技术创新优势以维持市场领先地位。\n\n#### 四、结论\n比亚迪作为新能源汽车行业的领军企业，其发展前景广阔。但同时也面临原材料价格波动和市场竞争加剧等挑战。投资者应关注政策动向和技术进步，做好风险控制。\n\n请注意，本报告基于现有信息编制，并可能随时间变化而调整。建议进一步研究并咨询专业意见以做出投资决策。",
+  "cache_hit": false
+}

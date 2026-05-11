@@ -1,0 +1,12 @@
+{"ts": "2026-04-25T17:55:27.693836", "where": "suggest_ui", "message": "name 'ComponentType' is not defined", "extra": {"type": "NameError"}}
+{"ts": "2026-04-25T17:59:59.495198", "where": "register_design_system", "message": "Design system test-design-system already exists", "extra": {"type": "ValueError"}}
+{"ts": "2026-04-25T18:00:04.062019", "where": "register_design_system", "message": "Design system test-design-system already exists", "extra": {"type": "ValueError"}}
+{"ts": "2026-04-25T18:00:15.153475", "where": "register_design_system", "message": "Design system test-design-system already exists", "extra": {"type": "ValueError"}}
+{"ts": "2026-04-25T18:00:17.906740", "where": "register_design_system", "message": "Design system test-design-system already exists", "extra": {"type": "ValueError"}}
+{"ts": "2026-04-25T18:00:21.067782", "where": "register_design_system", "message": "Design system test-design-system already exists", "extra": {"type": "ValueError"}}
+{"ts": "2026-04-25T18:00:53.911014", "where": "register_design_system", "message": "Design system test-design-system already exists", "extra": {"type": "ValueError"}}
+{"ts": "2026-04-25T18:00:56.834198", "where": "register_design_system", "message": "Design system test-design-system already exists", "extra": {"type": "ValueError"}}
+{"ts": "2026-04-25T18:08:12.033292", "where": "register_design_system", "message": "Design system test-design-system already exists", "extra": {"type": "ValueError"}}
+{"ts": "2026-04-25T21:53:02.308361", "where": "register_design_system", "message": "Invalid design system: name must contain only alphanumeric characters, hyphens, and underscores", "extra": {"type": "ValueError"}}
+{"ts": "2026-04-25T21:55:13.751888", "where": "register_design_system", "message": "Invalid design system: name must contain only alphanumeric characters, hyphens, and underscores", "extra": {"type": "ValueError"}}
+{"ts": "2026-04-25T21:55:23.129117", "where": "register_design_system", "message": "Invalid design system: name must contain only alphanumeric characters, hyphens, and underscores", "extra": {"type": "ValueError"}}

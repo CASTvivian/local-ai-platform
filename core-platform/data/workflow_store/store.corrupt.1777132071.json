@@ -1,0 +1,39 @@
+{
+  "store_version": "1.0",
+  "items": [
+    {
+      "id": "workflow_9f76b67facd1",
+      "name": "clean-test",
+      "version": "1.0.0",
+      "description": "",
+      "source": "desktop_ui",
+      "enabled": true,
+      "definition": {
+        "name": "clean-test",
+        "version": "1.0.0",
+        "description": "",
+        "source": "desktop_ui",
+        "nodes": [
+          {
+            "id": "n1",
+            "type": "start",
+            "name": "Start",
+            "config": {},
+            "position": null
+          }
+        ],
+        "edges": [],
+        "runtime_requirements": {
+          "services": [],
+          "models": [],
+          "tools": [],
+          "permissions": [],
+          "estimated_timeout_sec": 300
+        },
+        "metadata": {}
+      },
+      "created_at": 1777132069.234554,
+      "updated_at": 1777132069.234554
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "ok": true,
+  "kind": "tts_speak",
+  "backend": "say_fallback",
+  "vox_result": null,
+  "preset": "default_cn",
+  "voice": "Tingting",
+  "text": "把这段话转成语音：欢迎来到本地 AI 平台",
+  "audio_path": "/Users/mofamaomi/Documents/本地ai/generated/audio/tts_20260418_202038.aiff",
+  "returncode": 0,
+  "stderr": ""
+}

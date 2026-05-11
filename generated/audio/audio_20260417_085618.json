@@ -1,0 +1,14 @@
+{
+  "ok": true,
+  "kind": "tts",
+  "backend": "VoxCPM-placeholder",
+  "mode": "shell",
+  "target": {
+    "repo": "/Users/mofamaomi/Documents/本地ai/references/VoxCPM",
+    "enabled": true,
+    "mode": "shell",
+    "next_step": "connect real tts inference"
+  },
+  "text": "语音输出链路批次测试",
+  "note": "TTS shell is active; connect VoxCPM inference next"
+}

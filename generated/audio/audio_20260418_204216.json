@@ -1,0 +1,12 @@
+{
+  "ok": true,
+  "kind": "tts_speak",
+  "backend": "say_fallback",
+  "vox_result": null,
+  "preset": "default_cn",
+  "voice": "Tingting",
+  "text": "今日市场震荡。科技板块活跃。成交额放大。资金关注高景气赛道。短线情绪有所修复。后续仍需观察量能持续性。",
+  "audio_path": "/Users/mofamaomi/Documents/本地ai/generated/audio/tts_20260418_204214.aiff",
+  "returncode": 0,
+  "stderr": ""
+}

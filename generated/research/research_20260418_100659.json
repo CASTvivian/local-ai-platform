@@ -1,0 +1,20 @@
+{
+  "ok": true,
+  "kind": "stock_report",
+  "research_scope": "stock_research",
+  "stock": "帮我写一份比亚迪的股票研究摘要",
+  "lightweight": true,
+  "stages": {
+    "web_search": "done",
+    "market_data": "done",
+    "llm_report": "error"
+  },
+  "web_sources": [],
+  "quotes": {
+    "spot_error": "('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))"
+  },
+  "fundamentals": {},
+  "notes": "",
+  "report": "report_error: HTTPConnectionPool(host='127.0.0.1', port=18081): Read timed out. (read timeout=60)",
+  "cache_hit": false
+}

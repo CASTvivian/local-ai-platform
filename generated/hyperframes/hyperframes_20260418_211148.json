@@ -1,0 +1,94 @@
+{
+  "ok": true,
+  "kind": "hyperframes_render",
+  "prompt": "把这份研究摘要做成一个 30 秒字幕视频",
+  "project_name": "hf_20260418_210729",
+  "workdir": "/Users/mofamaomi/Documents/本地ai/generated/hyperframes/hf_20260418_210729",
+  "composition_path": "/Users/mofamaomi/Documents/本地ai/generated/hyperframes/hf_20260418_210729/composition.html",
+  "title": "FFmpeg Render Test",
+  "subtitle": "Phase 2 Step 1 Final",
+  "bullets": [
+    "市场震荡",
+    "科技活跃",
+    "成交额放大",
+    "资金偏好回升",
+    "成长方向受关注",
+    "风格切换仍在继续"
+  ],
+  "subtitle_lines": [
+    "第一页：市场概览",
+    "第二页：结构亮点"
+  ],
+  "init_attempts": [
+    {
+      "cmd": [
+        "npx",
+        "hyperframes",
+        "init",
+        "hf_20260418_210729"
+      ],
+      "cwd": "/Users/mofamaomi/Documents/本地ai/generated/hyperframes",
+      "returncode": 0,
+      "stdout": "Created hf_20260418_210729/\n  AGENTS.md\n  CLAUDE.md\n  hyperframes.json\n  index.html\n  meta.json\n\nGet started:\n\n  1. Install AI coding skills (one-time):\n     npx skills add heygen-com/hyperframes\n\n  2. Open this project with your AI coding agent:\n     cd hf_20260418_210729 then start Claude Code, Cursor, or your preferred agent\n\n  3. Try a starter prompt:\n     \"Using /hyperframes, create a 15-second intro about [your topic]\"\n     More patterns: hyperframes.heygen.com/guides/prompting\n\n  4. Preview in the browser:\n     cd hf_20260418_210729 && npx hyperframes preview\n\n  5. Render to MP4 when ready:\n     cd hf_20260418_210729 && npx hyperframes render\n\n  Full docs: hyperframes.heygen.com\n",
+      "stderr": ""
+    }
+  ],
+  "preview_attempt": {
+    "cmd": [
+      "npx",
+      "hyperframes",
+      "preview"
+    ],
+    "error": "Command '['npx', 'hyperframes', 'preview']' timed out after 120 seconds"
+  },
+  "render_attempt": {
+    "cmd": [
+      "npx",
+      "hyperframes",
+      "render"
+    ],
+    "cwd": "/Users/mofamaomi/Documents/本地ai/generated/hyperframes/hf_20260418_210729",
+    "returncode": 0,
+    "stdout": "\n◆  Rendering hf_20260418_210729 → /Users/mofamaomi/Documents/本地ai/generated/hyperframes/hf_20260418_210729/renders/hf_20260418_210729_2026-04-18_21-11-20.mp4\n   30fps · standard · 6 workers (auto — 8 cores detected)\n\n\u001b[?25l│\n◇  Browser: system\n\u001b[?25h\n\u001b[2K  █░░░░░░░░░░░░░░░░░░░░░░░░  5%  Compiling composition[Compiler] Inlined CDN script: https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js\n[INFO] Compiled composition metadata {\"entryFile\":\"index.html\",\"staticDuration\":10,\"width\":1920,\"height\":1080,\"videoCount\":0,\"audioCount\":0}\n\n\u001b[2K  ██░░░░░░░░░░░░░░░░░░░░░░░  10%  Extracting video frames\n\u001b[2K  █████░░░░░░░░░░░░░░░░░░░░  20%  Processing audio tracks\n\u001b[2K  ██████░░░░░░░░░░░░░░░░░░░  25%  Starting frame capture[non-blocking] Failed to load resource: the server responded with a status of 404 (Not Found)\n[non-blocking] Failed to load resource: the server responded with a status of 404 (Not Found)\n[non-blocking] Failed to load resource: the server responded with a status of 404 (Not Found)\n[non-blocking] Failed to load resource: the server responded with a status of 404 (Not Found)\n[non-blocking] Failed to load resource: the server responded with a status of 404 (Not Found)\n[non-blocking] Failed to load resource: the server responded with a status of 404 (Not Found)\n\n\u001b[2K  ███████░░░░░░░░░░░░░░░░░░  30%  Capturing frame 30/300 (6 workers)\n\u001b[2K  ████████░░░░░░░░░░░░░░░░░  34%  Capturing frame 60/300 (6 workers)\n\u001b[2K  █████████░░░░░░░░░░░░░░░░  39%  Capturing frame 90/300 (6 workers)\n\u001b[2K  ██████████░░░░░░░░░░░░░░░  43%  Capturing frame 120/300 (6 workers)\n\u001b[2K  ████████████░░░░░░░░░░░░░  48%  Capturing frame 150/300 (6 workers)\n\u001b[2K  █████████████░░░░░░░░░░░░  52%  Capturing frame 180/300 (6 workers)\n\u001b[2K  ██████████████░░░░░░░░░░░  57%  Capturing frame 210/300 (6 workers)\n\u001b[2K  ███████████████░░░░░░░░░░  61%  Capturing frame 240/300 (6 workers)\n\u001b[2K  ████████████████░░░░░░░░░  66%  Capturing frame 270/300 (6 workers)\n\u001b[2K  █████████████████░░░░░░░░  70%  Capturing frame 300/300 (6 workers)\n\u001b[2K  ██████████████████░░░░░░░  75%  Encoding video\n\u001b[2K  ██████████████████████░░░  90%  Assembling final video\n\u001b[2K  █████████████████████████  100%  Render complete\n◇  /Users/mofamaomi/Documents/本地ai/generated/hyperframes/hf_20260418_210729/renders/hf_20260418_210729_2026-04-18_21-11-20.mp4\n   26.7 KB · 22.5s · completed\n",
+    "stderr": ""
+  },
+  "render_ready": true,
+  "outputs": [
+    {
+      "path": "/Users/mofamaomi/Documents/本地ai/generated/hyperframes/hf_20260418_210729/AGENTS.md",
+      "name": "AGENTS.md",
+      "size": 2098
+    },
+    {
+      "path": "/Users/mofamaomi/Documents/本地ai/generated/hyperframes/hf_20260418_210729/CLAUDE.md",
+      "name": "CLAUDE.md",
+      "size": 3282
+    },
+    {
+      "path": "/Users/mofamaomi/Documents/本地ai/generated/hyperframes/hf_20260418_210729/composition.html",
+      "name": "composition.html",
+      "size": 2623
+    },
+    {
+      "path": "/Users/mofamaomi/Documents/本地ai/generated/hyperframes/hf_20260418_210729/hyperframes.json",
+      "name": "hyperframes.json",
+      "size": 278
+    },
+    {
+      "path": "/Users/mofamaomi/Documents/本地ai/generated/hyperframes/hf_20260418_210729/index.html",
+      "name": "index.html",
+      "size": 1207
+    },
+    {
+      "path": "/Users/mofamaomi/Documents/本地ai/generated/hyperframes/hf_20260418_210729/meta.json",
+      "name": "meta.json",
+      "size": 107
+    },
+    {
+      "path": "/Users/mofamaomi/Documents/本地ai/generated/hyperframes/hf_20260418_210729/renders/hf_20260418_210729_2026-04-18_21-11-20.mp4",
+      "name": "hf_20260418_210729_2026-04-18_21-11-20.mp4",
+      "size": 27346
+    }
+  ],
+  "note": "Phase 2 Step 1：已扫描项目输出文件"
+}

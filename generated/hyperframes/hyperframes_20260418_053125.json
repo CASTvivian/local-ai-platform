@@ -1,0 +1,49 @@
+{
+  "ok": true,
+  "kind": "hyperframes_render",
+  "prompt": "把这份研究摘要做成一个 30 秒字幕视频",
+  "project_name": "hf_20260418_052919",
+  "workdir": "/Users/mofamaomi/Documents/本地ai/generated/hyperframes/hf_20260418_052919",
+  "composition_path": "/Users/mofamaomi/Documents/本地ai/generated/hyperframes/hf_20260418_052919/composition.html",
+  "title": "研究摘要视频",
+  "subtitle": "Batch 2 模板",
+  "bullets": [
+    "市场震荡",
+    "科技活跃",
+    "成交额放大"
+  ],
+  "init_attempts": [
+    {
+      "cmd": [
+        "npx",
+        "hyperframes",
+        "init",
+        "hf_20260418_052919"
+      ],
+      "cwd": "/Users/mofamaomi/Documents/本地ai/generated/hyperframes",
+      "returncode": 0,
+      "stdout": "Created hf_20260418_052919/\n  AGENTS.md\n  CLAUDE.md\n  hyperframes.json\n  index.html\n  meta.json\n\nGet started:\n\n  1. Install AI coding skills (one-time):\n     npx skills add heygen-com/hyperframes\n\n  2. Open this project with your AI coding agent:\n     cd hf_20260418_052919 then start Claude Code, Cursor, or your preferred agent\n\n  3. Try a starter prompt:\n     \"Using /hyperframes, create a 15-second intro about [your topic]\"\n     More patterns: hyperframes.heygen.com/guides/prompting\n\n  4. Preview in the browser:\n     cd hf_20260418_052919 && npx hyperframes preview\n\n  5. Render to MP4 when ready:\n     cd hf_20260418_052919 && npx hyperframes render\n\n  Full docs: hyperframes.heygen.com\n",
+      "stderr": ""
+    }
+  ],
+  "preview_attempt": {
+    "cmd": [
+      "npx",
+      "hyperframes",
+      "preview"
+    ],
+    "error": "Command '['npx', 'hyperframes', 'preview']' timed out after 120 seconds"
+  },
+  "render_attempt": {
+    "cmd": [
+      "npx",
+      "hyperframes",
+      "render"
+    ],
+    "cwd": "/Users/mofamaomi/Documents/本地ai/generated/hyperframes/hf_20260418_052919",
+    "returncode": 1,
+    "stdout": "\n◆  Rendering hf_20260418_052919 → /Users/mofamaomi/Documents/本地ai/generated/hyperframes/hf_20260418_052919/renders/hf_20260418_052919_2026-04-17_05-31-25.mp4\n   30fps · standard · 6 workers (auto — 8 cores detected)\n\n",
+    "stderr": "\n✗  FFmpeg not found\n\n   Rendering requires FFmpeg for video encoding.\n   Install: brew install ffmpeg\n\n"
+  },
+  "note": "Batch 2 已自动生成 composition，并尝试 preview / render"
+}

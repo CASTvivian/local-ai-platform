@@ -1,0 +1,74 @@
+{
+  "store_version": "1.0.0",
+  "items": [
+    {
+      "review_id": "review_9c4def8df79c",
+      "risk_level": "low",
+      "decision": "approve",
+      "findings": [],
+      "test_suggestions": [
+        "Run unit tests",
+        "Run integration tests",
+        "Run source integrity check",
+        "Run eval gateway regression",
+        "Run security scan",
+        "Run pytest with coverage",
+        "Run mypy type checking",
+        "Run black formatting check"
+      ],
+      "summary": "LOW: Code passed security checks. 0 minor findings.",
+      "created_at": 1777108986.552963
+    },
+    {
+      "review_id": "review_2d0e9b736c1e",
+      "risk_level": "critical",
+      "decision": "reject",
+      "findings": [
+        {
+          "type": "dangerous_shell",
+          "pattern": "rm -rf /",
+          "line": 1,
+          "file": "dangerous.py",
+          "severity": "high",
+          "description": "Dangerous shell command that could cause data loss or security issues"
+        },
+        {
+          "type": "dangerous_shell",
+          "pattern": "rm -rf",
+          "line": 1,
+          "file": "dangerous.py",
+          "severity": "high",
+          "description": "Dangerous shell command that could cause data loss or security issues"
+        },
+        {
+          "type": "secret_leak",
+          "pattern": "api_key",
+          "line": 3,
+          "file": "dangerous.py",
+          "severity": "critical",
+          "description": "Potential secret or credential leak"
+        },
+        {
+          "type": "dynamic_exec",
+          "pattern": "eval(",
+          "line": 2,
+          "file": "dangerous.py",
+          "severity": "high",
+          "description": "Dynamic code execution vulnerability"
+        }
+      ],
+      "test_suggestions": [
+        "Run unit tests",
+        "Run integration tests",
+        "Run source integrity check",
+        "Run eval gateway regression",
+        "Run security scan",
+        "Run pytest with coverage",
+        "Run mypy type checking",
+        "Run black formatting check"
+      ],
+      "summary": "CRITICAL: 4 security findings detected. Immediate action required.",
+      "created_at": 1777108986.58198
+    }
+  ]
+}

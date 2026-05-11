@@ -1,0 +1,17 @@
+{
+  "ok": true,
+  "kind": "vision_analyze",
+  "status": "fallback_summary",
+  "image_exists": true,
+  "meta": {
+    "path": ".",
+    "error": "[Errno 21] Is a directory: '.'"
+  },
+  "prompt": "帮我分析这张图片内容",
+  "preferred_model": null,
+  "used_model": null,
+  "ranked_models": [],
+  "analysis": null,
+  "fallback_summary": "看来您提供的路径是一个目录而不是文件，因此无法直接查看该路径下的具体图片内容。为了帮助您进行图片分析，请提供有关图片的一些描述信息或上传一张具体的图片文件，这样我可以基于其元数据来给出一些分析建议。您可以选择重新尝试上传图片，或者告诉我关于这张图片的一些基本信息，比如它的主题、包含的元素等。",
+  "note": "Vision Batch 4 closeout"
+}

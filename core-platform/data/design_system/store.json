@@ -1,0 +1,132 @@
+{
+  "store_version": "1.0",
+  "designs": [
+    {
+      "id": "design_6cd139d875f7",
+      "name": "MAOMIAI Desktop Enterprise",
+      "version": "0.3.1",
+      "source": "desktop_d3_f2_test",
+      "brand": {
+        "name": "MAOMIAI",
+        "style": "clean-enterprise",
+        "primary": "#2563eb",
+        "accent": "#7c3aed",
+        "font": "Inter, system-ui",
+        "radius": "16px",
+        "shadow": "soft"
+      },
+      "tokens": {
+        "colors": {
+          "primary": "#2563eb",
+          "surface": "#ffffff",
+          "muted": "#f8fafc",
+          "success": "#16a34a",
+          "danger": "#dc2626",
+          "accent": "#7c3aed"
+        },
+        "fonts": {
+          "base": "Inter, system-ui"
+        },
+        "spacing": {},
+        "border_radius": {
+          "base": "16px"
+        },
+        "shadows": {
+          "base": "soft"
+        }
+      },
+      "components": [
+        {
+          "name": "button",
+          "type": "button",
+          "description": "Use rounded corners and clear hover state.",
+          "rules": [
+            "Use rounded corners and clear hover state."
+          ],
+          "tokens": {}
+        },
+        {
+          "name": "card",
+          "type": "card",
+          "description": "Use soft shadow and clear spacing.",
+          "rules": [
+            "Use soft shadow and clear spacing."
+          ],
+          "tokens": {}
+        },
+        {
+          "name": "modal",
+          "type": "modal",
+          "description": "Use backdrop and explicit cancel/confirm actions.",
+          "rules": [
+            "Use backdrop and explicit cancel/confirm actions."
+          ],
+          "tokens": {}
+        },
+        {
+          "name": "table",
+          "type": "table",
+          "description": "Use sticky header and visible empty state.",
+          "rules": [
+            "Use sticky header and visible empty state."
+          ],
+          "tokens": {}
+        }
+      ],
+      "ui_constraints": [
+        "button: Use rounded corners and clear hover state.",
+        "card: Use soft shadow and clear spacing.",
+        "modal: Use backdrop and explicit cancel/confirm actions.",
+        "table: Use sticky header and visible empty state.",
+        "use primary color #2563eb",
+        "use border radius 16px",
+        "use font Inter, system-ui"
+      ],
+      "raw": "---\nname: MAOMIAI Desktop Enterprise\nversion: 0.3.1\nbrand: MAOMIAI\nstyle: clean-enterprise\n---\n\n# MAOMIAI Desktop Design System\n\n## Brand\nprimary: #2563eb\naccent: #7c3aed\nfont: Inter, system-ui\nradius: 16px\nshadow: soft\n\n## Colors\nprimary: #2563eb\nsurface: #ffffff\nmuted: #f8fafc\nsuccess: #16a34a\ndanger: #dc2626\n\n## Components\n### Button\nUse rounded corners and clear hover state.\n### Card\nUse soft shadow and clear spacing.\n### Modal\nUse backdrop and explicit cancel/confirm actions.\n### Table\nUse sticky header and visible empty state.",
+      "metadata": {
+        "name": "MAOMIAI Desktop Enterprise",
+        "version": "0.3.1",
+        "brand": "MAOMIAI",
+        "style": "clean-enterprise"
+      },
+      "created_at": 1777155237.611012,
+      "updated_at": 1777155237.611012
+    },
+    {
+      "id": "design_663b8737fe94",
+      "name": "Test Design",
+      "version": "1.0.0",
+      "source": "desktop_d3_f2_test",
+      "brand": {
+        "name": "Test",
+        "style": "",
+        "primary": "#2563eb",
+        "accent": "",
+        "font": "",
+        "radius": "",
+        "shadow": ""
+      },
+      "tokens": {
+        "colors": {
+          "primary": "#2563eb"
+        },
+        "fonts": {},
+        "spacing": {},
+        "border_radius": {},
+        "shadows": {}
+      },
+      "components": [],
+      "ui_constraints": [
+        "use primary color #2563eb"
+      ],
+      "raw": "---\nname: Test Design\nversion: 1.0.0\nbrand: Test\n---\n\n# Test\n## Colors\nprimary: #2563eb\n",
+      "metadata": {
+        "name": "Test Design",
+        "version": "1.0.0",
+        "brand": "Test"
+      },
+      "created_at": 1777155243.817884,
+      "updated_at": 1777155243.817884
+    }
+  ]
+}

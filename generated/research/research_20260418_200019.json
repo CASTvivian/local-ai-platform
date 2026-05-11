@@ -1,0 +1,28 @@
+{
+  "ok": true,
+  "kind": "stock_report",
+  "research_scope": "stock_research",
+  "stock": "帮我写一份比亚迪的股票研究摘要",
+  "lightweight": true,
+  "stages": {
+    "web_search": "done",
+    "market_data": "done",
+    "llm_report": "done"
+  },
+  "web_sources": [
+    {
+      "title": "search_timeout_or_error",
+      "href": "",
+      "body": "search stage failed or timed out"
+    }
+  ],
+  "quotes": {
+    "market_timeout_or_error": true
+  },
+  "fundamentals": {
+    "market_timeout_or_error": true
+  },
+  "notes": "",
+  "report": "比亚迪股票研究摘要\n\n**概况**: 比亚迪股份有限公司，成立于1995年，业务涵盖新能源汽车、电池和电子产品研发等领域。作为全球领先的新能源汽车制造商之一，近年来其市场份额持续增长。\n\n**市场关注点**:\n- 新能源汽车销量与市场渗透率：新能源汽车行业快速发展，比亚迪作为行业龙头备受关注。\n- 产能扩张与技术创新：企业产能扩张及技术革新是投资者关心的重点。\n- 政策环境变化：国家对新能源汽车产业的支持政策及其后续影响将直接影响公司未来业绩。\n\n**风险点**:\n- 原材料价格波动：锂、钴等原材料价格剧烈波动可能对成本造成较大压力。\n- 技术竞争加剧：新进入者和技术突破可能会改变行业格局，给比亚迪带来挑战。\n- 政策不确定性：政策导向的转变可能会影响公司的市场布局与投资计划。\n\n**结论**:\n总体而言，比亚迪作为新能源汽车行业的领军企业，在市场需求强劲及政府支持背景下有望持续增长。但面对原材料价格波动、技术竞争加剧等外部环境变化，投资者应保持警惕并审慎评估风险。",
+  "cache_hit": false
+}

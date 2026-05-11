@@ -1,0 +1,8 @@
+{
+  "ok": true,
+  "kind": "vision",
+  "backend": "Qwen3-VL-placeholder",
+  "mode": "placeholder",
+  "query": "图片分析真实壳测试",
+  "note": "Vision real integration shell ready; connect model inference later"
+}

@@ -1,0 +1,36 @@
+{
+  "ok": true,
+  "kind": "stock_report",
+  "research_scope": "stock_research",
+  "stock": "比亚迪",
+  "lightweight": true,
+  "stages": {
+    "web_search": "done",
+    "market_data": "done",
+    "llm_report": "error"
+  },
+  "web_sources": [
+    {
+      "title": "【深圳比亚迪工厂车库起火 无人伤亡】 中国电动车企业比亚迪位于深 …",
+      "href": "https://www.facebook.com/reel/3935935249876851/",
+      "body": "4 days ago · 【深圳比亚迪工厂车库起火 无人伤亡】 中国电动车企业比亚迪位于深圳坪山的工厂发生火情，火势在数小时后被扑灭，未造成人员伤亡。 深圳坪山区消防通报称，马峦街道一立体车库于14 …"
+    },
+    {
+      "title": "中国电动车巨头比亚迪总部团队去年初派员考察设厂地... - 马来西亚星 …",
+      "href": "https://www.facebook.com/story.php/?story_fbid=1396683899159800&id=100064546095888",
+      "body": "2 days ago · 比亚迪霹设厂停工 - 国内 - 封面头条 23h · 16 likes 󱘫 Top fan 夏天天 Simon Ang 这不是强盗逻辑，别人车价定价多少， 是商业行为，对普通老百姓不是更好吗 自由竞争 22h Kenny Yose 马 …"
+    },
+    {
+      "title": "朝野多名议员关注并指出，比亚迪设厂计划可能因中央 政策受阻，并敦 …",
+      "href": "https://www.facebook.com/story.php/?story_fbid=1444630904366359&id=100064583896391",
+      "body": "2 days ago · 18h · 8 likes Peter Low China Press (中國報)应该来砂捞越开产东马本地六七万然后 出岛卖去西马20万👍😂切记重要的要找 （华）没有（华）代表和推动权力就撤 吧🙏不要盲目害了海外华商 3h …"
+    }
+  ],
+  "quotes": {
+    "spot_error": "('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))"
+  },
+  "fundamentals": {},
+  "notes": "测试绕过 auto-router 的内部总结",
+  "report": "report_error: HTTPConnectionPool(host='127.0.0.1', port=18080): Read timed out. (read timeout=60)",
+  "cache_hit": false
+}

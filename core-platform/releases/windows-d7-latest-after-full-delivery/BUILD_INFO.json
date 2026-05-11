@@ -1,0 +1,6 @@
+{
+  "built_at": "2026-05-10T19:50:39.3667783+00:00",
+  "workflow": "build-win-release",
+  "label": "win-d7-full-delivery-runtime-verified",
+  "commit": "522f10a"
+}

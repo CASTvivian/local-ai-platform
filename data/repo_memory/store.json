@@ -1,0 +1,73 @@
+{
+  "store_version": "1.0",
+  "repos": [
+    {
+      "id": "repo_ab0320c35cfc",
+      "name": "test-repo",
+      "path": "/Users/test/repo",
+      "description": "Test repository",
+      "tags": [
+        "python",
+        "api"
+      ],
+      "services": [
+        "service1",
+        "service2"
+      ],
+      "created_at": 1777109812.441932,
+      "updated_at": 1777109812.441932
+    }
+  ],
+  "fixes": [
+    {
+      "id": "fix_6439054b391b",
+      "repo_id": "repo_ab0320c35cfc",
+      "title": "Fix import error",
+      "problem": "Module not found",
+      "solution": "Added missing import",
+      "files_changed": [
+        "app/models.py"
+      ],
+      "commands_run": [
+        "pytest"
+      ],
+      "tests_run": [
+        "test_import"
+      ],
+      "result": "success",
+      "commit_hash": "",
+      "created_at": 1777110307.68467
+    }
+  ],
+  "snapshots": [
+    {
+      "id": "snapshot_f8ac7911d599",
+      "repo_id": "repo_ab0320c35cfc",
+      "title": "Initial state",
+      "summary": "Fresh repository",
+      "files": [
+        "app/models.py"
+      ],
+      "services": [
+        "service1"
+      ],
+      "tokens_estimate": 1500,
+      "created_at": 1777110307.735609
+    }
+  ],
+  "knowledge": [
+    {
+      "id": "knowledge_cd0849b4f495",
+      "repo_id": "repo_ab0320c35cfc",
+      "category": "troubleshooting",
+      "title": "Import error pattern",
+      "content": "Always check import paths first",
+      "tags": [
+        "import",
+        "python"
+      ],
+      "source": "manual",
+      "created_at": 1777110315.682171
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "ok": false,
+  "kind": "video_generate",
+  "prompt": "a futuristic city at night, cinematic, flying cars",
+  "params": {
+    "num_frames": 49,
+    "num_inference_steps": 20,
+    "guidance_scale": 6,
+    "fps": 8
+  },
+  "cmd": [
+    "python3",
+    "/Users/mofamaomi/Documents/本地ai/core-platform/scripts/run_cogvideo.py",
+    "a futuristic city at night, cinematic, flying cars"
+  ],
+  "returncode": 2,
+  "stdout": "{\"ok\": false, \"mode\": \"error\", \"backend\": \"CogVideoX-2B\", \"error\": \"Error no file named model_index.json found in directory /Users/mofamaomi/Documents/\\u672c\\u5730ai/references/CogVideo.\"}\n",
+  "stderr": ""
+}

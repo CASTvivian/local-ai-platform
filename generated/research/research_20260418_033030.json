@@ -1,0 +1,34 @@
+{
+  "ok": true,
+  "kind": "news_summary",
+  "topic": "A股市场",
+  "sources": [
+    {
+      "title": "Difference in pronunciation between: a, á, ã, â and à",
+      "href": "https://forum.wordreference.com/threads/difference-in-pronunciation-between-a-á-ã-â-and-à.2892496/",
+      "body": "Sep 11, 2014 · Could I get a few people to explain the difference in pronunciation between a, á, ã, â and à in Portuguese using English comparisons (if possible)? I can't seem to find a thread or other Web …"
+    },
+    {
+      "title": "\"â€™\" showing on page instead of - Stack Overflow",
+      "href": "https://stackoverflow.com/questions/2477452/â€-showing-on-page-instead-of",
+      "body": "Mar 19, 2010 · So what's the problem, It's a ’ (RIGHT SINGLE QUOTATION MARK - U+2019) character which is being decoded as CP-1252 instead of UTF-8. If you check the Encodings table of this …"
+    },
+    {
+      "title": "HTML encoding issues - \"Â\" character showing up instead of",
+      "href": "https://stackoverflow.com/questions/1461907/html-encoding-issues-Â-character-showing-up-instead-of-nbsp",
+      "body": "Somewhere in that mess, the non-breaking spaces from the HTML template (the s) are encoding as ISO-8859-1 so that they show up incorrectly as an \"Â\" character That'd be encoding to UTF-8 then, …"
+    },
+    {
+      "title": "How to convert these strange characters? (Ã«, Ã, Ã¬, Ã¹, Ã)",
+      "href": "https://stackoverflow.com/questions/5127744/how-to-convert-these-strange-characters-Ã-Ã-Ã¬-Ã¹-Ã",
+      "body": "My page often shows things like Ã«, Ã, Ã¬, Ã¹, Ã in place of normal characters. I use utf8 for header page and MySQL encode. How does this happen?"
+    },
+    {
+      "title": "What is the difference between a += b and a =+ b , also a++ and ++a?",
+      "href": "https://stackoverflow.com/questions/5098282/what-is-the-difference-between-a-b-and-a-b-also-a-and-a",
+      "body": "Feb 23, 2011 · a += b is equivalent to a = a + b a = +b is equivalent to a = b a++ and ++a both increment a by 1. The difference is that a++ returns the value of a before the increment whereas ++a returns …"
+    }
+  ],
+  "notes": "今日市场震荡，科技板块活跃，成交额放大。",
+  "summary": "新闻摘要：\n\n主题：A股市场\n\n今日A股市场呈现震荡格局，成交量有所增加，其中科技板块表现较为活跃。然而，上述检索结果与附加素材主要涉及语言编码和字符显示问题，与A股市场的实际情况无直接关联。对于投资者而言，关注市场动态、政策变化和技术板块的表现更为重要。\n\n请注意，提供的链接内容与主题无关，可能需要进一步筛选相关的信息以提供更准确的新闻摘要。"
+}

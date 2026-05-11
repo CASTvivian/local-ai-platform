@@ -1,0 +1,137 @@
+{
+  "store_version": "1.0.0",
+  "items": [
+    {
+      "id": "fc0fd55013ff485c",
+      "name": "acceptance_test_1777134441",
+      "version": "1.0.0",
+      "description": "Acceptance test workflow",
+      "source": "test",
+      "enabled": true,
+      "definition": {
+        "nodes": [
+          {
+            "id": "start",
+            "type": "start",
+            "name": "Start",
+            "config": {},
+            "position": null
+          },
+          {
+            "id": "end",
+            "type": "end",
+            "name": "End",
+            "config": {},
+            "position": null
+          }
+        ],
+        "edges": [
+          {
+            "id": "e1",
+            "source": "start",
+            "target": "end",
+            "condition": null
+          }
+        ],
+        "runtime_requirements": {
+          "services": [
+            "18104"
+          ],
+          "models": [
+            "qwen2.5:7b"
+          ],
+          "tools": [],
+          "permissions": [],
+          "estimated_timeout_sec": 300
+        }
+      },
+      "created_at": 1777105641.020387,
+      "updated_at": 1777105641.020387
+    },
+    {
+      "id": "e8b9445832159b75",
+      "name": "desktop-rag-report-flow",
+      "version": "0.3.3",
+      "description": "桌面端测试 RAG 报告工作流",
+      "source": "desktop_d3_c_test",
+      "enabled": true,
+      "definition": {
+        "nodes": [
+          {
+            "id": "start",
+            "type": "start",
+            "name": "Start",
+            "config": {},
+            "position": null
+          },
+          {
+            "id": "retrieve",
+            "type": "document_retrieval",
+            "name": "Retrieve Documents",
+            "config": {
+              "top_k": 5
+            },
+            "position": null
+          },
+          {
+            "id": "model",
+            "type": "model_invocation",
+            "name": "Generate Report",
+            "config": {
+              "model": "qwen2.5:7b"
+            },
+            "position": null
+          },
+          {
+            "id": "end",
+            "type": "end",
+            "name": "End",
+            "config": {},
+            "position": null
+          }
+        ],
+        "edges": [
+          {
+            "id": "e1",
+            "source": "start",
+            "target": "retrieve",
+            "condition": null
+          },
+          {
+            "id": "e2",
+            "source": "retrieve",
+            "target": "model",
+            "condition": null
+          },
+          {
+            "id": "e3",
+            "source": "model",
+            "target": "end",
+            "condition": null
+          }
+        ],
+        "runtime_requirements": {
+          "services": [
+            "18120",
+            "18125",
+            "18104"
+          ],
+          "models": [
+            "qwen2.5:7b",
+            "nomic-embed-text"
+          ],
+          "tools": [
+            "document_ingestion",
+            "runtime_execution"
+          ],
+          "permissions": [
+            "read_documents"
+          ],
+          "estimated_timeout_sec": 600
+        }
+      },
+      "created_at": 1777118225.783956,
+      "updated_at": 1777118225.783956
+    }
+  ]
+}

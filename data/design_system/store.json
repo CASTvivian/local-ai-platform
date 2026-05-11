@@ -1,0 +1,58 @@
+{
+  "store_version": "1.0",
+  "design_systems": [
+    {
+      "id": "design_ee5f45c88597",
+      "name": "test-design-system",
+      "version": "1.0.0",
+      "description": "Test design system",
+      "source": "manual",
+      "enabled": true,
+      "created_at": 1777110927.529871,
+      "updated_at": 1777110927.529871
+    },
+    {
+      "id": "design_d105bce59e01",
+      "name": "test-design-system-v2",
+      "version": "2.0.0",
+      "description": "Test v2",
+      "source": "manual",
+      "enabled": true,
+      "created_at": 1777111741.129289,
+      "updated_at": 1777111741.129289
+    },
+    {
+      "id": "design_88cf5a527a47",
+      "name": "test-design-system-1777140568",
+      "version": "1.0.0",
+      "description": "Test design system",
+      "source": "manual",
+      "enabled": true,
+      "created_at": 1777111768.957838,
+      "updated_at": 1777111768.957838
+    },
+    {
+      "id": "design_ba99d7136b5e",
+      "name": "test-design-system-1777140710",
+      "version": "1.0.0",
+      "description": "Test design system",
+      "source": "manual",
+      "enabled": true,
+      "created_at": 1777111910.706994,
+      "updated_at": 1777111910.706994
+    },
+    {
+      "id": "design_6a0c8f8eae33",
+      "name": "maomiai-desktop",
+      "version": "0.3.1",
+      "description": "",
+      "source": "desktop_d3_f_test",
+      "enabled": true,
+      "created_at": 1777125331.373727,
+      "updated_at": 1777125331.373727
+    }
+  ],
+  "brand_profiles": [],
+  "design_tokens": [],
+  "component_specs": []
+}

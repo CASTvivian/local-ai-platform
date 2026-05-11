@@ -1,0 +1,49 @@
+{
+  "provider": "browser_use",
+  "repo_exists": true,
+  "python_exists": true,
+  "mode": "runtime_bridge",
+  "module_probe": {
+    "dotenv": true,
+    "pydantic_settings": true,
+    "requests": true
+  },
+  "ok": true,
+  "prompt": "访问这个网页并检查执行入口",
+  "start_url": "https://example.com",
+  "attempts": [
+    {
+      "cmd": [
+        "python3",
+        "-m",
+        "browser_use"
+      ],
+      "cwd": "/Users/mofamaomi/Documents/本地ai/references/browser-use",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "/Users/mofamaomi/Documents/本地ai/core-platform/.venv/bin/python3: No module named browser_use.__main__; 'browser_use' is a package and cannot be directly executed\n"
+    },
+    {
+      "cmd": [
+        "python3",
+        "main.py"
+      ],
+      "cwd": "/Users/mofamaomi/Documents/本地ai/references/browser-use",
+      "returncode": 2,
+      "stdout": "",
+      "stderr": "/opt/homebrew/Cellar/python@3.12/3.12.5/Frameworks/Python.framework/Versions/3.12/Resources/Python.app/Contents/MacOS/Python: can't open file '/Users/mofamaomi/Documents/本地ai/references/browser-use/main.py': [Errno 2] No such file or directory\n"
+    },
+    {
+      "cmd": [
+        "python3",
+        "--version"
+      ],
+      "cwd": "/Users/mofamaomi/Documents/本地ai/references/browser-use",
+      "returncode": 0,
+      "stdout": "Python 3.12.5\n",
+      "stderr": ""
+    }
+  ],
+  "note": "browser-use runtime bridge executed",
+  "kind": "browser_agent_runtime"
+}

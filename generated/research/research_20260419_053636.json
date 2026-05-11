@@ -1,0 +1,36 @@
+{
+  "ok": true,
+  "kind": "research_search",
+  "research_scope": "general_web_research",
+  "query": "帮我生成一份 A股市场日报视频，并输出研究摘要、语音和成片",
+  "source": "web",
+  "max_results": 5,
+  "results": [
+    {
+      "title": "6 best portable honey warming cabinets for Market Sellers",
+      "href": "https://www.farmstandapp.com/330238/6-best-portable-honey-warming-cabinets-for-market-sellers/",
+      "body": "Mar 19, 2026 · Our guide reviews the 6 best portable warming cabinets for market sellers, comparing capacity, power, and …"
+    },
+    {
+      "title": "FOOD GRADE Stainless Steel HEATED Honey Storage Tanks",
+      "href": "https://www.waxmelters.com/Heated-Honey-Storage-Tanks-s/174.htm",
+      "body": "Heaters never touch your honey and do not need cleaning or replacement! Tank's EZ \"ON\" Switch quickly & gently heats your …"
+    },
+    {
+      "title": "witbee Heated Honey Bottling Tank, 19 Gallon Stainless Steel D…",
+      "href": "https://www.amazon.com/Bottling-Stainless-Strainer-Adjustable-Temperature/dp/B0CNSYGZ3B",
+      "body": "This Heated Honey Bottling Tank is a professional-grade stainless steel double wall wax melter that is perfect for honey …"
+    },
+    {
+      "title": "The 7 Best Warming Drawers of 2026 (Reviews) - FindThisBest",
+      "href": "https://www.findthisbest.com/best-warming-drawers",
+      "body": "Jan 8, 2026 · What are the best warming drawers products in 2026? We analyzed 1,987 warming drawers reviews to do …"
+    },
+    {
+      "title": "Honey Warming / Cooling Cabinet – HillCo, LLC",
+      "href": "https://www.hillco.buzz/products/honey-warming-cabinet",
+      "body": "We took a high quality beverage cooler refrigerator, chosen for its classy looks and glass door, and added a robust heating …"
+    }
+  ],
+  "cache_hit": false
+}

@@ -1,0 +1,7 @@
+{
+  "ok": true,
+  "kind": "research_search",
+  "query": "人工智能最新进展",
+  "source": "web",
+  "note": "Batch 1 structure ready; plug real search engine/news source next"
+}

@@ -1,0 +1,79 @@
+{
+  "store_version": "1.0.0",
+  "items": [
+    {
+      "id": "skill_ca4967c2ebb1",
+      "name": "my-test-skill",
+      "description": "My test skill",
+      "source": "desktop_skill_md",
+      "version": "1.0.0",
+      "enabled": true,
+      "status": "active",
+      "signature_status": "unsigned",
+      "agents": [
+        "coder",
+        "tester"
+      ],
+      "tags": [
+        "automation",
+        "testing"
+      ],
+      "agent_bindings": [],
+      "payload": {
+        "name": "my-test-skill",
+        "version": "1.0.0",
+        "description": "My test skill",
+        "agents": [
+          "coder",
+          "tester"
+        ],
+        "tags": [
+          "automation",
+          "testing"
+        ],
+        "format": "SKILL.md",
+        "raw": "# My Test Skill\nName: my-test-skill\nVersion: 1.0.0\nDescription: My test skill\nAgents: coder, tester\nTags: automation, testing",
+        "signature": "",
+        "install_mode": "skill_md_text"
+      },
+      "created_at": 1777107443.603186,
+      "updated_at": 1777108319.248618
+    },
+    {
+      "id": "skill_5702bcf7ff7a",
+      "name": "d3b-demo-skill",
+      "description": "Desktop D3-B page test skill",
+      "source": "manual",
+      "version": "0.1.0",
+      "enabled": true,
+      "status": "active",
+      "signature_status": "unsigned",
+      "agents": [
+        "codex"
+      ],
+      "tags": [
+        "test",
+        "desktop"
+      ],
+      "agent_bindings": [],
+      "payload": {
+        "name": "d3b-demo-skill",
+        "version": "0.1.0",
+        "description": "Desktop D3-B page test skill",
+        "agents": [
+          "codex"
+        ],
+        "tags": [
+          "test",
+          "desktop"
+        ],
+        "format": "SKILL.md",
+        "raw": "# d3b-demo-skill\nversion: 0.1.0\ndescription: Desktop D3-B page test skill\nagents: codex\ntags: test,desktop\n\n## Instructions\nThis is a test skill for D3-B desktop page integration.",
+        "signature": "",
+        "install_mode": "skill_md_text"
+      },
+      "created_at": 1777116225.3003,
+      "updated_at": 1777116225.3003
+    }
+  ]
+}

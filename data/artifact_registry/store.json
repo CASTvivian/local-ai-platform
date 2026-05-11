@@ -1,0 +1,38 @@
+{
+  "store_version": "1.0.0",
+  "items": [
+    {
+      "id": "artifact_bea90b1d3dad",
+      "name": "test_artifact_1777135385",
+      "source": "test",
+      "version": "0.1.0",
+      "enabled": true,
+      "type": "execution_result",
+      "path": "/tmp/test_artifact.txt",
+      "lifecycle": "archived",
+      "trace_id": "",
+      "run_id": "run_test_1777135385",
+      "payload": {
+        "title": "Test Execution Result",
+        "status": "completed"
+      },
+      "created_at": 1777106585.954992,
+      "updated_at": 1777106586.064008
+    },
+    {
+      "id": "artifact_55e7eb64bfbe",
+      "name": "D3-A Artifact Page Demo",
+      "source": "runtime_execution",
+      "version": "0.1.0",
+      "enabled": true,
+      "type": "execution_result",
+      "path": "",
+      "lifecycle": "active",
+      "trace_id": "",
+      "run_id": "run_d3_a_test",
+      "payload": {},
+      "created_at": 1777114844.747507,
+      "updated_at": 1777114844.747507
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "ok": true,
+  "kind": "research_search",
+  "research_scope": "general_web_research",
+  "query": "帮我生成一份 A股市场日报视频，并输出研究摘要、语音和成片\n\n根据 reviewer 缺口重新验证",
+  "source": "web",
+  "max_results": 5,
+  "results": [
+    {
+      "title": "search_timeout_or_error",
+      "href": "",
+      "body": "search stage failed or timed out"
+    }
+  ],
+  "cache_hit": false
+}

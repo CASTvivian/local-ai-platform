@@ -1,0 +1,111 @@
+{
+  "ok": true,
+  "kind": "hyperframes_render",
+  "prompt": "【A股市场日报】今日A股市场整体表现平稳，各大指数涨跌不一。上证综指微涨0.2%，深证成指下跌0.5%，创业板指则小幅上涨0.1%。行业板块中，家用电器、建筑材料、银行等行业涨幅居前；医药生物、电子、计算机等板块则出现不同程度的回调。机构观点认为，市场行情短期内或将继续震荡整理，建议投资者关注政策面及经济数据对市场的边际影响。\n\n【研究摘要】\n今日A股市场呈现结构性分化特征。其中，家用电器和建筑材料行业表现亮眼，分别上涨1.2%和0.9%，主要受益于板块内个股业绩增长及政策支持；而医药生物、电子等前期涨幅较大的行业则出现调整压力。整体来看，市场情绪较为谨慎，短期内预计仍将围绕政策预期波动。\n\n【语音】\n尊敬的投资者朋友们，今天A股市场整体呈现出结构性分化的特征。家用电器和建筑材料行业的表现尤为突出，其他几个板块如医药生物和电子等有所回调。未来市场走势或将继续依赖于政策面以及经济数据的变化，请您注意控制风险，合理配置资产。\n（注：语音部分由机器合成）\n\n【成片】\n标题：“今日A股市场日报”\n内容：\n1. 市场综述：上证综指微涨0.2%，深证成指下跌0.5%，创业板指小幅上涨0.1%。\n2. 热点行业：家用电器、建筑材料涨幅领先，医药生物和电子行业回调明显。\n3. 机构观点：短期内市场将围绕政策预期波动，建议关注经济数据影响。",
+  "project_name": "research_video_20260419_000144",
+  "workdir": "/Users/mofamaomi/Documents/本地ai/generated/hyperframes/research_video_20260419_000144",
+  "composition_path": "/Users/mofamaomi/Documents/本地ai/generated/hyperframes/research_video_20260419_000144/composition.html",
+  "title": "Agent Team Workflow Video",
+  "subtitle": "Research to Video",
+  "bullets": [
+    "【A股市场日报】今日A股市场整体表现平稳，各大指数涨跌不一",
+    "上证综指微涨0.2%，深证成指下跌0.5%，创业板指则小幅上涨0.1%",
+    "行业板块中，家用电器、建筑材料、银行等行业涨幅居前；医药生物、电子、计算机等板块则出现不同程度的回调",
+    "机构观点认为，市场行情短期内或将继续震荡整理，建议投资者关注政策面及经济数据对市场的边际影响",
+    "【研究摘要】",
+    "今日A股市场呈现结构性分化特征",
+    "其中，家用电器和建筑材料行业表现亮眼，分别上涨1.2%和0.9%，主要受益于板块内个股业绩增长及政策支持；而医药生物、电子等前期涨幅较大的行业则出现调整压力",
+    "整体来看，市场情绪较为谨慎，短期内预计仍将围绕政策预期波动",
+    "【语音】"
+  ],
+  "subtitle_lines": [
+    "【A股市场日报】今日A股市场整体表现平稳，各大指数涨跌不一",
+    "上证综指微涨0.2%，深证成指下跌0.5%，创业板指则小幅上涨0.1%",
+    "行业板块中，家用电器、建筑材料、银行等行业涨幅居前；医药生物、电子、计算机等板块则出现不同程度的回调",
+    "机构观点认为，市场行情短期内或将继续震荡整理，建议投资者关注政策面及经济数据对市场的边际影响",
+    "【研究摘要】",
+    "今日A股市场呈现结构性分化特征"
+  ],
+  "init_attempts": [
+    {
+      "cmd": [
+        "npx",
+        "hyperframes",
+        "init",
+        "research_video_20260419_000144"
+      ],
+      "cwd": "/Users/mofamaomi/Documents/本地ai/generated/hyperframes",
+      "returncode": 0,
+      "stdout": "Created research_video_20260419_000144/\n  AGENTS.md\n  CLAUDE.md\n  hyperframes.json\n  index.html\n  meta.json\n\nGet started:\n\n  1. Install AI coding skills (one-time):\n     npx skills add heygen-com/hyperframes\n\n  2. Open this project with your AI coding agent:\n     cd research_video_20260419_000144 then start Claude Code, Cursor, or your preferred agent\n\n  3. Try a starter prompt:\n     \"Using /hyperframes, create a 15-second intro about [your topic]\"\n     More patterns: hyperframes.heygen.com/guides/prompting\n\n  4. Preview in the browser:\n     cd research_video_20260419_000144 && npx hyperframes preview\n\n  5. Render to MP4 when ready:\n     cd research_video_20260419_000144 && npx hyperframes render\n\n  Full docs: hyperframes.heygen.com\n",
+      "stderr": ""
+    }
+  ],
+  "preview_attempt": {
+    "cmd": [
+      "npx",
+      "hyperframes",
+      "preview"
+    ],
+    "error": "Command '['npx', 'hyperframes', 'preview']' timed out after 120 seconds"
+  },
+  "render_attempt": {
+    "cmd": [
+      "npx",
+      "hyperframes",
+      "render"
+    ],
+    "cwd": "/Users/mofamaomi/Documents/本地ai/generated/hyperframes/research_video_20260419_000144",
+    "returncode": 0,
+    "stdout": "\n◆  Rendering research_video_20260419_000144 → /Users/mofamaomi/Documents/本地ai/generated/hyperframes/research_video_20260419_000144/renders/research_video_20260419_000144_2026-04-18_00-08-06.mp4\n   30fps · standard · 6 workers (auto — 8 cores detected)\n\n\u001b[?25l│\n◇  Browser: system\n\u001b[?25h\n\u001b[2K  █░░░░░░░░░░░░░░░░░░░░░░░░  5%  Compiling composition[Compiler] Inlined CDN script: https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js\n[INFO] Compiled composition metadata {\"entryFile\":\"index.html\",\"staticDuration\":10,\"width\":1920,\"height\":1080,\"videoCount\":0,\"audioCount\":0}\n\n\u001b[2K  ██░░░░░░░░░░░░░░░░░░░░░░░  10%  Extracting video frames\n\u001b[2K  █████░░░░░░░░░░░░░░░░░░░░  20%  Processing audio tracks\n\u001b[2K  ██████░░░░░░░░░░░░░░░░░░░  25%  Starting frame capture[non-blocking] Failed to load resource: the server responded with a status of 404 (Not Found)\n[non-blocking] Failed to load resource: the server responded with a status of 404 (Not Found)\n[non-blocking] Failed to load resource: the server responded with a status of 404 (Not Found)\n[non-blocking] Failed to load resource: the server responded with a status of 404 (Not Found)\n[non-blocking] Failed to load resource: the server responded with a status of 404 (Not Found)\n[non-blocking] Failed to load resource: the server responded with a status of 404 (Not Found)\n\n\u001b[2K  ███████░░░░░░░░░░░░░░░░░░  30%  Capturing frame 30/300 (6 workers)\n\u001b[2K  ████████░░░░░░░░░░░░░░░░░  34%  Capturing frame 60/300 (6 workers)\n\u001b[2K  █████████░░░░░░░░░░░░░░░░  39%  Capturing frame 90/300 (6 workers)\n\u001b[2K  ██████████░░░░░░░░░░░░░░░  43%  Capturing frame 120/300 (6 workers)\n\u001b[2K  ████████████░░░░░░░░░░░░░  48%  Capturing frame 150/300 (6 workers)\n\u001b[2K  █████████████░░░░░░░░░░░░  52%  Capturing frame 180/300 (6 workers)\n\u001b[2K  ██████████████░░░░░░░░░░░  57%  Capturing frame 210/300 (6 workers)\n\u001b[2K  ███████████████░░░░░░░░░░  61%  Capturing frame 240/300 (6 workers)\n\u001b[2K  ████████████████░░░░░░░░░  66%  Capturing frame 270/300 (6 workers)\n\u001b[2K  █████████████████░░░░░░░░  70%  Capturing frame 300/300 (6 workers)\n\u001b[2K  ██████████████████░░░░░░░  75%  Encoding video\n\u001b[2K  ██████████████████████░░░  90%  Assembling final video\n\u001b[2K  █████████████████████████  100%  Render complete\n◇  /Users/mofamaomi/Documents/本地ai/generated/hyperframes/research_video_20260419_000144/renders/research_video_20260419_000144_2026-04-18_00-08-06.mp4\n   26.7 KB · 19.3s · completed\n",
+    "stderr": ""
+  },
+  "render_ready": true,
+  "vendor_info": {
+    "vendor_dir": "/Users/mofamaomi/Documents/本地ai/generated/hyperframes/research_video_20260419_000144/vendor",
+    "gsap_local": "/Users/mofamaomi/Documents/本地ai/generated/hyperframes/research_video_20260419_000144/vendor/gsap.min.js",
+    "gsap_exists": true
+  },
+  "outputs": [
+    {
+      "path": "/Users/mofamaomi/Documents/本地ai/generated/hyperframes/research_video_20260419_000144/AGENTS.md",
+      "name": "AGENTS.md",
+      "size": 2098
+    },
+    {
+      "path": "/Users/mofamaomi/Documents/本地ai/generated/hyperframes/research_video_20260419_000144/CLAUDE.md",
+      "name": "CLAUDE.md",
+      "size": 3282
+    },
+    {
+      "path": "/Users/mofamaomi/Documents/本地ai/generated/hyperframes/research_video_20260419_000144/composition.html",
+      "name": "composition.html",
+      "size": 4131
+    },
+    {
+      "path": "/Users/mofamaomi/Documents/本地ai/generated/hyperframes/research_video_20260419_000144/hyperframes.json",
+      "name": "hyperframes.json",
+      "size": 278
+    },
+    {
+      "path": "/Users/mofamaomi/Documents/本地ai/generated/hyperframes/research_video_20260419_000144/index.html",
+      "name": "index.html",
+      "size": 1207
+    },
+    {
+      "path": "/Users/mofamaomi/Documents/本地ai/generated/hyperframes/research_video_20260419_000144/meta.json",
+      "name": "meta.json",
+      "size": 131
+    },
+    {
+      "path": "/Users/mofamaomi/Documents/本地ai/generated/hyperframes/research_video_20260419_000144/renders/research_video_20260419_000144_2026-04-18_00-08-06.mp4",
+      "name": "research_video_20260419_000144_2026-04-18_00-08-06.mp4",
+      "size": 27346
+    },
+    {
+      "path": "/Users/mofamaomi/Documents/本地ai/generated/hyperframes/research_video_20260419_000144/vendor/gsap.min.js",
+      "name": "gsap.min.js",
+      "size": 72214
+    }
+  ],
+  "note": "Phase 2 Step 2：已接入本地 vendor 资源，降低 CDN 依赖"
+}

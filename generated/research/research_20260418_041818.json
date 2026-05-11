@@ -1,0 +1,9 @@
+{
+  "ok": true,
+  "kind": "research_search",
+  "research_scope": "general_web_research",
+  "query": "AI发展趋势",
+  "source": "web",
+  "max_results": 3,
+  "results": []
+}

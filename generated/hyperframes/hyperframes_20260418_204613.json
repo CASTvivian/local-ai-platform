@@ -1,0 +1,94 @@
+{
+  "ok": true,
+  "kind": "hyperframes_render",
+  "prompt": "把这份研究摘要做成一个 30 秒字幕视频",
+  "project_name": "hf_20260418_204214",
+  "workdir": "/Users/mofamaomi/Documents/本地ai/generated/hyperframes/hf_20260418_204214",
+  "composition_path": "/Users/mofamaomi/Documents/本地ai/generated/hyperframes/hf_20260418_204214/composition.html",
+  "title": "研究摘要视频",
+  "subtitle": "Phase 2 Step 1 Render",
+  "bullets": [
+    "市场震荡",
+    "科技活跃",
+    "成交额放大",
+    "资金偏好回升",
+    "成长方向受关注",
+    "风格切换仍在继续"
+  ],
+  "subtitle_lines": [
+    "第一页：市场概览",
+    "第二页：结构亮点"
+  ],
+  "init_attempts": [
+    {
+      "cmd": [
+        "npx",
+        "hyperframes",
+        "init",
+        "hf_20260418_204214"
+      ],
+      "cwd": "/Users/mofamaomi/Documents/本地ai/generated/hyperframes",
+      "returncode": 0,
+      "stdout": "Created hf_20260418_204214/\n  AGENTS.md\n  CLAUDE.md\n  hyperframes.json\n  index.html\n  meta.json\n\nGet started:\n\n  1. Install AI coding skills (one-time):\n     npx skills add heygen-com/hyperframes\n\n  2. Open this project with your AI coding agent:\n     cd hf_20260418_204214 then start Claude Code, Cursor, or your preferred agent\n\n  3. Try a starter prompt:\n     \"Using /hyperframes, create a 15-second intro about [your topic]\"\n     More patterns: hyperframes.heygen.com/guides/prompting\n\n  4. Preview in the browser:\n     cd hf_20260418_204214 && npx hyperframes preview\n\n  5. Render to MP4 when ready:\n     cd hf_20260418_204214 && npx hyperframes render\n\n  Full docs: hyperframes.heygen.com\n",
+      "stderr": "npm warn exec The following package was not found and will be installed: hyperframes@0.4.4\n"
+    }
+  ],
+  "preview_attempt": {
+    "cmd": [
+      "npx",
+      "hyperframes",
+      "preview"
+    ],
+    "error": "Command '['npx', 'hyperframes', 'preview']' timed out after 120 seconds"
+  },
+  "render_attempt": {
+    "cmd": [
+      "npx",
+      "hyperframes",
+      "render"
+    ],
+    "cwd": "/Users/mofamaomi/Documents/本地ai/generated/hyperframes/hf_20260418_204214",
+    "returncode": 1,
+    "stdout": "\n◆  Rendering hf_20260418_204214 → /Users/mofamaomi/Documents/本地ai/generated/hyperframes/hf_20260418_204214/renders/hf_20260418_204214_2026-04-18_20-46-13.mp4\n   30fps · standard · 6 workers (auto — 8 cores detected)\n\n",
+    "stderr": "\n✗  FFmpeg not found\n\n   Rendering requires FFmpeg for video encoding.\n   Install: brew install ffmpeg\n\n"
+  },
+  "render_ready": false,
+  "outputs": [
+    {
+      "path": "/Users/mofamaomi/Documents/本地ai/generated/hyperframes/hf_20260418_204214/.thumbnails/index.html_2.00.jpg",
+      "name": "index.html_2.00.jpg",
+      "size": 12998
+    },
+    {
+      "path": "/Users/mofamaomi/Documents/本地ai/generated/hyperframes/hf_20260418_204214/AGENTS.md",
+      "name": "AGENTS.md",
+      "size": 2098
+    },
+    {
+      "path": "/Users/mofamaomi/Documents/本地ai/generated/hyperframes/hf_20260418_204214/CLAUDE.md",
+      "name": "CLAUDE.md",
+      "size": 3282
+    },
+    {
+      "path": "/Users/mofamaomi/Documents/本地ai/generated/hyperframes/hf_20260418_204214/composition.html",
+      "name": "composition.html",
+      "size": 2625
+    },
+    {
+      "path": "/Users/mofamaomi/Documents/本地ai/generated/hyperframes/hf_20260418_204214/hyperframes.json",
+      "name": "hyperframes.json",
+      "size": 278
+    },
+    {
+      "path": "/Users/mofamaomi/Documents/本地ai/generated/hyperframes/hf_20260418_204214/index.html",
+      "name": "index.html",
+      "size": 1207
+    },
+    {
+      "path": "/Users/mofamaomi/Documents/本地ai/generated/hyperframes/hf_20260418_204214/meta.json",
+      "name": "meta.json",
+      "size": 107
+    }
+  ],
+  "note": "Phase 2 Step 1：已扫描项目输出文件"
+}

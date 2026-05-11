@@ -1,0 +1,2 @@
+{"ts": "2026-04-25T16:27:21.023753", "type": "register_workflow", "data": {"id": "fc0fd55013ff485c", "name": "acceptance_test_1777134441", "version": "1.0.0"}}
+{"ts": "2026-04-25T19:57:05.785439", "type": "register_workflow", "data": {"id": "e8b9445832159b75", "name": "desktop-rag-report-flow", "version": "0.3.3"}}
