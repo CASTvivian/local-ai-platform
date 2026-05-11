@@ -157,6 +157,20 @@
   function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
+  function getTauriInvoke() {
+    return window.__TAURI__?.core?.invoke || window.__TAURI_INTERNALS__?.invoke || null;
+  }
+  function parseRuntimeJson(text) {
+    if (!text) return null;
+    const raw = String(text).trim();
+    try { return JSON.parse(raw); } catch (_) {}
+    const first = raw.indexOf("{");
+    const last = raw.lastIndexOf("}");
+    if (first >= 0 && last > first) {
+      try { return JSON.parse(raw.slice(first, last + 1)); } catch (_) {}
+    }
+    return { ok: false, raw };
+  }
   function getModelStatusText(modelName, status) {
     const raw = JSON.stringify(status || {});
     if (raw.includes(modelName)) return "已安装";
@@ -212,31 +226,35 @@
     if (!options.silent) {
       setResult("正在检查本地 AI", "loading", "正在检查本地推理后端、模型列表和本地网关。", null);
     }
-    const result = {
-      ok: false,
-      bootstrap: null,
-      gateway: null,
-      ready: false
-    };
-    try {
-      result.bootstrap = await getJson(`${API.bootstrap}/bootstrap/status`, 10000);
-    } catch (e) {
-      result.bootstrap = { ok: false, error: String(e), message: "本地 AI 后端暂未连接。" };
+    const result = { ok: false, direct: null, bootstrap: null, gateway: null, ready: false };
+    const invoke = getTauriInvoke();
+    if (invoke) {
+      try {
+        const out = await invoke("local_ai_status_direct");
+        result.direct = parseRuntimeJson(out);
+      } catch (e) {
+        result.direct = { ok: false, error: String(e) };
+      }
     }
     try {
-      result.gateway = await getJson(`${API.gateway}/health`, 5000);
+      result.bootstrap = await getJson(`${API.bootstrap}/bootstrap/status`, 3000);
     } catch (e) {
-      result.gateway = { ok: false, error: String(e), message: "本地模型网关暂未连接。" };
+      result.bootstrap = { ok: false, error: String(e), message: "18100 暂未连接。" };
     }
-    result.ready = !!(result.bootstrap?.ready || result.bootstrap?.serve?.ok || result.gateway?.ok);
+    try {
+      result.gateway = await getJson(`${API.gateway}/health`, 3000);
+    } catch (e) {
+      result.gateway = { ok: false, error: String(e), message: "18080 暂未连接。" };
+    }
+    result.ready = !!(result.direct?.ready || result.direct?.serve?.ok || result.bootstrap?.ready || result.gateway?.ok);
     result.ok = result.ready;
     if (!options.silent) {
-      if (result.ready) {
-        setResult("本地 AI 可用", "ok", "本地推理后端或模型网关已有响应。你可以下载或启用所需能力。", result);
-      } else {
-        setResult("本地 AI 暂未连接", "bad", "请先安装本地推理后端，或重启 MAOMIAI 后重新检查。", result);
-      }
       renderModelStore(result);
+      if (result.ready) {
+        setResult("本地 AI 可用", "ok", "本地推理后端已有响应。你可以下载或启用所需能力。", result);
+      } else {
+        setResult("本地 AI 暂未连接", "bad", "系统会尝试自动安装或启动本地运行环境。请点击安装本地推理后端，或直接选择一个能力下载。", result);
+      }
     }
     return result;
   }
@@ -246,33 +264,28 @@
       return;
     }
     window.__maomiaiInstallingLocalBackend = true;
-    const steps = [
-      "准备安装",
-      "请求系统执行安装",
-      "等待安装完成",
-      "重新检查状态"
-    ];
+    const steps = ["准备安装", "执行安装", "启动服务", "重新检查"];
     try {
       setProgress("正在安装本地推理后端", steps, 0);
-      const invoke = window.__TAURI__?.core?.invoke || window.__TAURI_INTERNALS__?.invoke;
-      if (invoke) {
-        setProgress("正在安装本地推理后端", steps, 1);
-        const out = await invoke("install_local_inference_backend");
-        setProgress("安装命令已执行", steps, 2, "请等待安装程序完成。完成后会自动重新检查。");
-        await sleep(3000);
-        setProgress("正在重新检查", steps, 3);
-        const status = await checkLocalModelStatus({ silent: true });
-        if (status.ready) {
-          setResult("本地推理后端已可用", "ok", "安装完成并检测到本地服务。现在可以下载模型能力。", status);
-        } else {
-          setResult("安装后仍未连接", "bad", "安装命令已执行，但暂未检测到服务。请确认安装器已完成，然后重启 MAOMIAI。", { out, status });
-        }
+      const invoke = getTauriInvoke();
+      if (!invoke) {
+        setResult("无法调用系统安装器", "bad", "当前环境无法调用 Tauri 命令。请下载完整安装包后重试。", null);
         return;
       }
-      window.open("https://ollama.com/download/windows", "_blank");
-      setResult("请手动安装", "bad", "当前环境无法直接调用系统安装命令，已尝试打开官方下载页。", {
-        url: "https://ollama.com/download/windows"
-      });
+      setProgress("正在执行安装命令", steps, 1);
+      const out = await invoke("install_local_inference_backend");
+      const parsed = parseRuntimeJson(out);
+      setProgress("正在启动本地推理服务", steps, 2);
+      await sleep(2000);
+      setProgress("正在重新检查", steps, 3);
+      const status = await checkLocalModelStatus({ silent: true });
+      if (status.ready || parsed?.ok) {
+        setResult("本地推理后端已准备", "ok", "本地推理后端已安装或启动。现在可以下载模型能力。", { parsed, status });
+      } else {
+        setResult("安装后仍未连接", "bad", "安装命令已经执行，但服务暂未就绪。请等待安装完成后重新检查，或重启 MAOMIAI。", { parsed, status });
+      }
+    } catch (e) {
+      setResult("安装失败", "bad", String(e), { error: String(e) });
     } finally {
       window.__maomiaiInstallingLocalBackend = false;
     }
@@ -284,39 +297,33 @@
     }
     const item = MODEL_CATALOG.find(x => x.profile === profile) || MODEL_CATALOG[0];
     window.__maomiaiDownloadingModel = true;
-    const steps = [
-      "检查本地推理后端",
-      "启动本地推理服务",
-      `下载 ${item.title}`,
-      "验证能力是否可用",
-      "连接到聊天"
-    ];
+    const steps = ["检查环境", "启动本地推理服务", `下载 ${item.title}`, "验证能力", "连接到聊天"];
     try {
+      const invoke = getTauriInvoke();
+      if (!invoke) {
+        setResult(`${item.title} 下载失败`, "bad", "当前环境无法调用 Tauri 运行时下载命令。", { profile });
+        return;
+      }
       setProgress(`正在准备 ${item.title}`, steps, 0);
       await sleep(500);
-      setProgress(`正在启动本地推理服务`, steps, 1);
-      const result = await postJson(`${API.bootstrap}/bootstrap/start`, { profile }, 1000 * 60 * 90);
-      setProgress(`正在下载 ${item.title}`, steps, 2, "下载时间取决于网络环境和模型大小，请保持软件打开。");
-      if (!result?.ok) {
-        setResult(`${item.title} 下载失败`, "bad", result?.message || "下载失败，请检查本地推理后端是否可用。", result);
-        return result;
+      setProgress("正在启动本地推理服务", steps, 1);
+      setProgress(`正在下载 ${item.title}`, steps, 2, "下载可能需要较长时间。中途关闭后，下次点击会继续检查和下载。");
+      const out = await invoke("download_local_model_capability", { profile });
+      const parsed = parseRuntimeJson(out);
+      if (!parsed?.ok) {
+        setResult(`${item.title} 下载失败`, "bad", parsed?.message || "下载未完成。", parsed || { raw: out });
+        return parsed;
       }
       setProgress(`正在验证 ${item.title}`, steps, 3);
       await sleep(1000);
       const status = await checkLocalModelStatus({ silent: true });
       setProgress(`${item.title} 已准备完成`, steps, 4);
-      await sleep(700);
-      setResult(`${item.title} 已准备完成`, "ok", "模型已下载并可用。现在可以返回对话直接使用。", {
-        result,
-        status
-      });
+      await sleep(600);
+      setResult(`${item.title} 已准备完成`, "ok", "模型已下载并可用。现在可以返回对话直接使用。", { parsed, status });
       renderModelStore(status);
-      return result;
+      return parsed;
     } catch (e) {
-      setResult(`${item.title} 下载失败`, "bad", String(e), {
-        profile,
-        error: String(e)
-      });
+      setResult(`${item.title} 下载失败`, "bad", String(e), { profile, error: String(e) });
     } finally {
       window.__maomiaiDownloadingModel = false;
     }

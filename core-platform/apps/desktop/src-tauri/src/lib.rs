@@ -137,65 +137,77 @@ fn stop_desktop_services(app: tauri::AppHandle) -> Result<String, String> {
 
 
 
-#[tauri::command]
-fn install_local_inference_backend() -> Result<String, String> {
+fn run_windows_bootstrap(action: &str, profile: Option<String>) -> Result<String, String> {
     use std::process::Command;
     #[cfg(target_os = "windows")]
     {
-        let install_cmd = "irm https://ollama.com/install.ps1 | iex";
-        let output = Command::new("powershell")
+        let exe = std::env::current_exe().map_err(|e| format!("无法获取程序路径: {}", e))?;
+        let app_dir = exe.parent().ok_or("无法获取程序目录")?;
+        let candidates = vec![
+            app_dir.join("resources").join("scripts").join("windows").join("bootstrap_runtime.ps1"),
+            app_dir.join("scripts").join("windows").join("bootstrap_runtime.ps1"),
+            app_dir.join("runtime").join("scripts").join("windows").join("bootstrap_runtime.ps1"),
+        ];
+        let script = candidates
+            .into_iter()
+            .find(|p| p.exists())
+            .ok_or("未找到打包内的 bootstrap_runtime.ps1")?;
+        let root = script
+            .parent()
+            .and_then(|p| p.parent())
+            .and_then(|p| p.parent())
+            .map(|p| p.to_path_buf())
+            .unwrap_or_else(|| app_dir.to_path_buf());
+        let mut command = Command::new("powershell");
+        command
             .arg("-ExecutionPolicy")
             .arg("Bypass")
-            .arg("-Command")
-            .arg(install_cmd)
+            .arg("-File")
+            .arg(script)
+            .arg("-Action")
+            .arg(action)
+            .arg("-Root")
+            .arg(root);
+        if let Some(p) = profile {
+            command.arg("-Profile").arg(p);
+        }
+        let output = command
             .output()
-            .map_err(|e| format!("无法启动安装命令: {}", e))?;
+            .map_err(|e| format!("执行本地运行时脚本失败: {}", e))?;
         let stdout = String::from_utf8_lossy(&output.stdout).to_string();
         let stderr = String::from_utf8_lossy(&output.stderr).to_string();
-        // Do not launch bare `ollama` here; it opens an interactive menu on Windows.
-        // The bootstrap_runtime.ps1 script will handle `ollama serve` correctly.
-        let status_text = if output.status.success() {
-            "INSTALL_COMMAND_OK"
-        } else {
-            "INSTALL_COMMAND_FAILED"
-        };
-        let response = format!(
-            "{{\"status\":\"{}\",\"message\":\"安装命令已执行。请等待安装程序完成，然后点击重新检查。\",\"stdout\":{:?},\"stderr\":{:?}}}",
-            status_text, stdout, stderr
-        );
         if output.status.success() {
-            Ok(response)
+            Ok(stdout)
         } else {
-            let _ = Command::new("cmd")
-                .arg("/C")
-                .arg("start")
-                .arg("https://ollama.com/download/windows")
-                .spawn();
-            Err(response)
+            Err(format!("本地运行时脚本执行失败。\nstdout:\n{}\nstderr:\n{}", stdout, stderr))
         }
     }
-    #[cfg(target_os = "macos")]
+    #[cfg(not(target_os = "windows"))]
     {
-        let output = Command::new("open")
-            .arg("https://ollama.com/download")
-            .output()
-            .map_err(|e| format!("无法打开下载页: {}", e))?;
-        if output.status.success() {
-            Ok("{\"status\":\"OPENED_DOWNLOAD_PAGE\",\"message\":\"已打开官方下载页。\"}".to_string())
-        } else {
-            Err("{\"status\":\"OPEN_DOWNLOAD_PAGE_FAILED\",\"message\":\"无法打开官方下载页，请手动访问 https://ollama.com/download\"}".to_string())
-        }
-    }
-    #[cfg(all(not(target_os = "windows"), not(target_os = "macos")))]
-    {
-        Ok("{\"status\":\"MANUAL_INSTALL_REQUIRED\",\"message\":\"请手动安装本地推理后端。\"}".to_string())
+        Ok("{\"ok\":false,\"message\":\"该命令仅用于 Windows 打包环境。\"}".to_string())
     }
 }
+
+#[tauri::command]
+fn local_ai_status_direct() -> Result<String, String> {
+    run_windows_bootstrap("status", None)
+}
+
+#[tauri::command]
+fn install_local_inference_backend() -> Result<String, String> {
+    run_windows_bootstrap("install_ollama", None)
+}
+
+#[tauri::command]
+fn download_local_model_capability(profile: String) -> Result<String, String> {
+    run_windows_bootstrap("pull_model", Some(profile))
+}
+
 
 
 pub fn run() {
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![start_backend, start_desktop_services, stop_desktop_services, install_local_inference_backend])
+        .invoke_handler(tauri::generate_handler![start_backend, start_desktop_services, stop_desktop_services, local_ai_status_direct, install_local_inference_backend, download_local_model_capability])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
