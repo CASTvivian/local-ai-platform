@@ -9,8 +9,14 @@ from typing import Any, Dict, List
 from fastapi import FastAPI
 from pydantic import BaseModel
 
-APP_VERSION = "0.1.0-d7-c4-auto-bootstrap"
+APP_VERSION = "0.1.0-d7-c5-one-click"
 DEFAULT_TIMEOUT = int(os.environ.get("MAOMIAI_BOOTSTRAP_TIMEOUT", "1800"))
+
+PROFILE_MODEL_MAP = {
+    "standard": "qwen2.5:7b",
+    "code": "qwen2.5-coder:7b",
+    "light": "qwen2.5:1.5b",
+}
 
 app = FastAPI(title="MAOMIAI Model Bootstrap Service", version=APP_VERSION)
 

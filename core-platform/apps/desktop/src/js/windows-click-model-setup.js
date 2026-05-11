@@ -284,24 +284,85 @@ async function installLocalInferenceBackend() {
     }
   }
 
-  async function startLocalModelDownload(kind) {
-    const label = kind === "code" ? "代码能力" : "标准对话能力";
-    setResult(`正在准备${label}`, "loading", "正在请求本地模型准备服务...", null);
-    let result;
+  async function startLocalModelDownload(profile = "standard") {
+    if (window.__maomiaiDownloadingModel) {
+      setResult("正在准备能力", "loading", "当前已有下载任务在执行，请不要重复点击。", {
+        ok: false,
+        profile
+      });
+      return;
+    }
+    window.__maomiaiDownloadingModel = true;
+    const labelMap = {
+      standard: "标准对话能力",
+      code: "代码能力",
+      light: "轻量快速能力"
+    };
+    const label = labelMap[profile] || "标准对话能力";
+    const steps = [
+      "检查本地推理后端",
+      "启动本地推理服务",
+      `下载 ${label}`,
+      "验证能力是否可用",
+      "连接到聊天"
+    ];
     try {
-      result = await postJson(`${API.bootstrap}/bootstrap/start`, {
-        profile: kind || "standard",
-        models: kind === "code" ? ["code-capability"] : ["standard-chat"],
-      }, 15000);
-    } catch (e) {
-      result = explainBackendUnavailable(String(e));
+      setProgress(`正在准备 ${label}`, steps, 0);
+      await sleep(500);
+      setProgress(`正在准备 ${label}`, steps, 1);
+      let result = null;
+      try {
+        result = await postJson(`${API.bootstrap}/bootstrap/start`, { profile }, 1000 * 60 * 60);
+      } catch (e) {
+        result = {
+          ok: false,
+          error: String(e),
+          message: "本地 AI 后端暂未连接，无法开始下载。请先点击安装本地推理后端，或重启 MAOMIAI。"
+        };
+      }
+      setProgress(`正在下载 ${label}`, steps, 2, `<div class="model-progress-note">下载时间取决于网络环境和能力包大小，请保持窗口打开。</div>`);
+      if (!result?.ok) {
+        setResult(
+          `${label} 准备失败`,
+          "bad",
+          result?.message || "下载或验证失败。",
+          {
+            ok: false,
+            profile,
+            result,
+            next_steps: [
+              "确认本地推理后端已经安装。",
+              "点击\"检查本地 AI 状态\"。",
+              "如果仍不可用，请重启 MAOMIAI 后重试。"
+            ]
+          }
+        );
+        return result;
+      }
+      setProgress(`正在验证 ${label}`, steps, 3);
+      await sleep(1000);
+      const status = await checkLocalModelStatus({ silent: true });
+      setProgress(`${label} 已准备完成`, steps, 4);
+      await sleep(800);
+      setResult(
+        `${label} 已准备完成`,
+        "ok",
+        "本地 AI 能力已下载并连接。现在可以返回对话直接使用。",
+        {
+          ok: true,
+          profile,
+          result,
+          status,
+          next_steps: [
+            "点击返回对话。",
+            "输入问题测试本地 AI 回复。"
+          ]
+        }
+      );
+      return result;
+    } finally {
+      window.__maomiaiDownloadingModel = false;
     }
-    if (result?.ok) {
-      setResult(`${label}准备中`, "ok", "已提交本地准备任务，请稍后重新检查状态。", result);
-    } else {
-      setResult(`${label}暂未开始`, "bad", "模型准备服务未连接。请先启动本地服务后重试。", result);
-    }
-    return result;
   }
   function renderModelSetupPage() {
     const content = contentEl();
@@ -316,13 +377,21 @@ async function installLocalInferenceBackend() {
             <strong>检查本地 AI 状态</strong>
             <span>确认本地服务、推理后端和当前能力是否可用。</span>
           </button>
-          <button data-action="download-standard-model">
-            <strong>准备标准对话能力</strong>
+          <button data-action="download-model-standard">
+            <strong>下载标准对话能力</strong>
             <span>适合日常问答、总结、文档理解和任务规划。</span>
           </button>
-          <button data-action="download-code-model">
-            <strong>准备代码能力</strong>
+          <button data-action="download-model-code">
+            <strong>下载代码能力</strong>
             <span>适合代码生成、代码审查、错误分析和项目修复。</span>
+          </button>
+          <button data-action="download-model-light">
+            <strong>下载轻量快速能力</strong>
+            <span>适合低配置电脑和快速响应场景。</span>
+          </button>
+          <button data-action="install-local-inference">
+            <strong>安装本地推理后端</strong>
+            <span>如果尚未安装本地推理后端，点击此按钮安装。</span>
           </button>
           <button data-action="back-to-chat">
             <strong>返回对话</strong>
@@ -412,6 +481,21 @@ async function installLocalInferenceBackend() {
     if (action === "check-model-status") {
       e.preventDefault();
       checkLocalModelStatus();
+      return;
+    }
+    if (action === "download-model-standard") {
+      e.preventDefault();
+      startLocalModelDownload("standard");
+      return;
+    }
+    if (action === "download-model-code") {
+      e.preventDefault();
+      startLocalModelDownload("code");
+      return;
+    }
+    if (action === "download-model-light") {
+      e.preventDefault();
+      startLocalModelDownload("light");
       return;
     }
     if (action === "download-standard-model") {

@@ -1,6 +1,7 @@
 param(
   [string]$Action = "status",
-  [string]$Profile = "standard"
+  [string]$Profile = "standard",
+  [string]$Root = ""
 )
 $ErrorActionPreference = "Continue"
 
@@ -8,41 +9,28 @@ function Write-Json($obj) {
   $obj | ConvertTo-Json -Depth 12 -Compress
 }
 
-function Find-Python {
-  $python = Get-Command python -ErrorAction SilentlyContinue
-  if ($python) { return $python.Source }
-  $py = Get-Command py -ErrorAction SilentlyContinue
-  if ($py) { return $py.Source }
-  return $null
-}
-
-function Run-Cmd {
-  param([string]$File, [string[]]$Args)
-  try {
-    $p = Start-Process -FilePath $File -ArgumentList $Args -NoNewWindow -PassThru -Wait -RedirectStandardOutput "$env:TEMP\maomiai_stdout.txt" -RedirectStandardError "$env:TEMP\maomiai_stderr.txt"
-    $stdout = ""
-    $stderr = ""
-    if (Test-Path "$env:TEMP\maomiai_stdout.txt") { $stdout = Get-Content "$env:TEMP\maomiai_stdout.txt" -Raw }
-    if (Test-Path "$env:TEMP\maomiai_stderr.txt") { $stderr = Get-Content "$env:TEMP\maomiai_stderr.txt" -Raw }
-    return @{
-      ok = ($p.ExitCode -eq 0)
-      exit_code = $p.ExitCode
-      stdout = $stdout
-      stderr = $stderr
-      command = "$File $($Args -join ' ')"
-    }
-  } catch {
-    return @{
-      ok = $false
-      error = $_.Exception.Message
-      command = "$File $($Args -join ' ')"
+function Resolve-Root {
+  param([string]$InputRoot)
+  if (![string]::IsNullOrWhiteSpace($InputRoot) -and (Test-Path $InputRoot)) {
+    return (Resolve-Path $InputRoot).Path
+  }
+  $ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+  foreach ($c in @(
+    (Join-Path $ScriptDir "..\..\.."),
+    (Join-Path $ScriptDir "..\.."),
+    (Join-Path $ScriptDir "..")
+  )) {
+    $r = Resolve-Path $c -ErrorAction SilentlyContinue
+    if ($r -and (Test-Path (Join-Path $r.Path "services"))) {
+      return $r.Path
     }
   }
+  return (Resolve-Path (Join-Path $ScriptDir "..\..\..") -ErrorAction SilentlyContinue).Path
 }
 
 function Find-Ollama {
-  $ollama = Get-Command ollama -ErrorAction SilentlyContinue
-  if ($ollama) { return $ollama.Source }
+  $cmd = Get-Command ollama -ErrorAction SilentlyContinue
+  if ($cmd) { return $cmd.Source }
   $candidates = @(
     "$env:LOCALAPPDATA\Programs\Ollama\ollama.exe",
     "$env:ProgramFiles\Ollama\ollama.exe",
@@ -54,138 +42,92 @@ function Find-Ollama {
   return $null
 }
 
+function Get-Model-For-Profile {
+  param([string]$Profile)
+  switch ($Profile) {
+    "standard" { return "qwen2.5:7b" }
+    "code" { return "qwen2.5-coder:7b" }
+    "light" { return "qwen2.5:1.5b" }
+    default { return "qwen2.5:7b" }
+  }
+}
+
 function Test-Port {
   param([int]$Port)
-  $c = Get-NetTCPConnection -LocalPort $Port -ErrorAction SilentlyContinue
-  return [bool]$c
+  $conn = Get-NetTCPConnection -LocalPort $Port -ErrorAction SilentlyContinue
+  return [bool]$conn
 }
 
-function Ensure-PythonDeps {
-  $python = Find-Python
-  if (-not $python) {
-    return @{
-      ok = $false
-      reason = "python_missing"
-      message = "未检测到 Python，无法启动本地后端服务。"
-      next_steps = @(
-        "请先安装 Python 3.11 或 3.12。",
-        "安装时勾选 Add Python to PATH。",
-        "安装后重新打开 MAOMIAI。"
-      )
-    }
-  }
-  $check = Run-Cmd $python @("-c", "import fastapi,uvicorn,pydantic; print('deps ok')")
-  if ($check.ok) {
-    return @{
-      ok = $true
-      python = $python
-      message = "Python 依赖已就绪。"
-      detail = $check
-    }
-  }
-  $install = Run-Cmd $python @("-m", "pip", "install", "--user", "fastapi", "uvicorn", "pydantic")
-  $recheck = Run-Cmd $python @("-c", "import fastapi,uvicorn,pydantic; print('deps ok')")
-  return @{
-    ok = $recheck.ok
-    python = $python
-    message = $(if ($recheck.ok) { "Python 依赖安装完成。" } else { "Python 依赖安装失败。" })
-    install = $install
-    recheck = $recheck
-  }
-}
-
-function Get-Status {
-  $python = Find-Python
+function Ensure-Ollama-Serve {
   $ollama = Find-Ollama
-  $ollamaApi = $false
-  $models = @()
-  try {
-    $r = Invoke-RestMethod "http://127.0.0.1:11434/api/tags" -TimeoutSec 3
-    $ollamaApi = $true
-    $models = $r.models
-  } catch {
-    # Ignore errors
-  }
-  return @{
-    ok = $true
-    python_found = [bool]$python
-    python_path = $python
-    port_18080 = Test-Port 18080
-    port_18100 = Test-Port 18100
-    ollama_found = [bool]$ollama
-    ollama_path = $ollama
-    ollama_api = $ollamaApi
-    models = $models
-    message = "诊断完成。"
-  }
-}
-
-function Install-Ollama {
-  try {
-    $cmd = "irm https://ollama.com/install.ps1 | iex"
-    $p = Start-Process -FilePath "powershell" -ArgumentList @("-ExecutionPolicy", "Bypass", "-Command", $cmd) -Wait -PassThru
-    return @{
-      ok = ($p.ExitCode -eq 0)
-      exit_code = $p.ExitCode
-      message = $(if ($p.ExitCode -eq 0) { "Ollama 安装命令已执行。" } else { "Ollama 安装命令执行失败。" })
-      source = "https://ollama.com/download/windows"
-    }
-  } catch {
+  if (!$ollama) {
     return @{
       ok = $false
-      error = $_.Exception.Message
-      message = "无法自动执行 Ollama 安装。"
-      next_steps = @(
-        "请打开 https://ollama.com/download/windows 下载安装。",
-        "安装完成后重新点击检查。"
-      )
-    }
-  }
-}
-
-function Ensure-Ollama {
-  $ollama = Find-Ollama
-  if (-not $ollama) {
-    return @{
-      ok = $false
-      reason = "ollama_missing"
+      stage = "find_ollama"
       message = "未检测到本地推理后端。"
       install_url = "https://ollama.com/download/windows"
-      install_command = "irm https://ollama.com/install.ps1 | iex"
-      next_steps = @(
-        "点击安装或打开官方下载页安装。",
-        "安装完成后重新打开 MAOMIAI。",
-        "再点击检查本地 AI 状态。"
-      )
+    }
+  }
+  if (Test-Port 11434) {
+    return @{
+      ok = $true
+      stage = "serve"
+      message = "本地推理后端已运行。"
+      ollama = $ollama
+      port = 11434
     }
   }
   try {
-    Invoke-RestMethod "http://127.0.0.1:11434/api/tags" -TimeoutSec 3 | Out-Null
+    Start-Process -FilePath $ollama -ArgumentList @("serve") -WindowStyle Hidden
+    Start-Sleep -Seconds 4
+  } catch {
+    return @{
+      ok = $false
+      stage = "serve"
+      message = "启动本地推理后端失败。"
+      error = $_.Exception.Message
+      ollama = $ollama
+    }
+  }
+  if (Test-Port 11434) {
     return @{
       ok = $true
+      stage = "serve"
+      message = "本地推理后端已启动。"
       ollama = $ollama
-      api = $true
-      message = "本地推理后端已运行。"
+      port = 11434
+    }
+  }
+  return @{
+    ok = $false
+    stage = "serve"
+    message = "已尝试启动本地推理后端，但 11434 端口暂未就绪。"
+    ollama = $ollama
+  }
+}
+
+function Get-Ollama-List {
+  $ollama = Find-Ollama
+  if (!$ollama) {
+    return @{
+      ok = $false
+      message = "未检测到本地推理后端。"
+      models = @()
+    }
+  }
+  try {
+    $out = & $ollama list 2>&1 | Out-String
+    return @{
+      ok = $true
+      raw = $out
+      models = $out
     }
   } catch {
-    try {
-      Start-Process -FilePath $ollama -WindowStyle Hidden
-      Start-Sleep -Seconds 3
-      Invoke-RestMethod "http://127.0.0.1:11434/api/tags" -TimeoutSec 5 | Out-Null
-      return @{
-        ok = $true
-        ollama = $ollama
-        api = $true
-        message = "本地推理后端已启动。"
-      }
-    } catch {
-      return @{
-        ok = $false
-        ollama = $ollama
-        api = $false
-        error = $_.Exception.Message
-        message = "已检测到本地推理后端，但无法启动 API。"
-      }
+    return @{
+      ok = $false
+      message = "读取本地模型列表失败。"
+      error = $_.Exception.Message
+      models = @()
     }
   }
 }
@@ -193,56 +135,143 @@ function Ensure-Ollama {
 function Pull-Model {
   param([string]$Profile)
   $ollama = Find-Ollama
-  if (-not $ollama) {
+  if (!$ollama) {
     return @{
       ok = $false
-      reason = "ollama_missing"
-      message = "无法下载模型：未检测到本地推理后端。"
+      stage = "pull"
+      message = "未检测到本地推理后端，请先安装。"
+      install_url = "https://ollama.com/download/windows"
     }
   }
-  $model = if ($Profile -eq "code") {
-    if ($env:MAOMIAI_CODE_MODEL) { $env:MAOMIAI_CODE_MODEL } else { "qwen2.5-coder:7b" }
-  } else {
-    if ($env:MAOMIAI_STANDARD_MODEL) { $env:MAOMIAI_STANDARD_MODEL } else { "qwen2.5:7b" }
+  $serve = Ensure-Ollama-Serve
+  if (!$serve.ok) {
+    return @{
+      ok = $false
+      stage = "serve_before_pull"
+      message = "本地推理后端未能启动，无法下载能力。"
+      serve = $serve
+    }
   }
-  $res = Run-Cmd $ollama @("pull", $model)
-  return @{
-    ok = $res.ok
-    profile = $Profile
-    model = $model
-    message = $(if ($res.ok) { "本地 AI 能力准备完成。" } else { "模型下载失败。" })
-    result = $res
+  $model = Get-Model-For-Profile $Profile
+  $before = Get-Ollama-List
+  if ($before.raw -and ($before.raw -match [regex]::Escape($model))) {
+    return @{
+      ok = $true
+      stage = "already_exists"
+      profile = $Profile
+      model = $model
+      message = "所选能力已准备完成，无需重复下载。"
+      list = $before
+    }
+  }
+  $LogDir = Join-Path $Root "logs\windows"
+  New-Item -ItemType Directory -Force -Path $LogDir | Out-Null
+  $logFile = Join-Path $LogDir ("ollama-pull-" + $Profile + ".log")
+  try {
+    $p = Start-Process `
+      -FilePath $ollama `
+      -ArgumentList @("pull", $model) `
+      -WindowStyle Hidden `
+      -PassThru `
+      -Wait `
+      -RedirectStandardOutput $logFile `
+      -RedirectStandardError $logFile
+    $raw = ""
+    if (Test-Path $logFile) {
+      $raw = Get-Content $logFile -Raw -ErrorAction SilentlyContinue
+    }
+    $after = Get-Ollama-List
+    $exists = $false
+    if ($after.raw -and ($after.raw -match [regex]::Escape($model))) {
+      $exists = $true
+    }
+    return @{
+      ok = ($p.ExitCode -eq 0 -and $exists)
+      stage = "pull"
+      profile = $Profile
+      model = $model
+      exit_code = $p.ExitCode
+      message = $(if ($p.ExitCode -eq 0 -and $exists) { "能力下载完成，已可以使用。" } else { "下载命令已结束，但未确认能力可用。" })
+      log_file = $logFile
+      raw_tail = $(if ($raw.Length -gt 4000) { $raw.Substring($raw.Length - 4000) } else { $raw })
+      list = $after
+    }
+  } catch {
+    return @{
+      ok = $false
+      stage = "pull"
+      profile = $Profile
+      model = $model
+      message = "下载能力失败。"
+      error = $_.Exception.Message
+      log_file = $logFile
+    }
   }
 }
 
-# Main dispatcher
-if ($Action -eq "status") {
-  Write-Json (Get-Status)
-  exit
+function Install-Ollama {
+  $cmd = "irm https://ollama.com/install.ps1 | iex"
+  try {
+    $out = powershell -ExecutionPolicy Bypass -Command $cmd 2>&1 | Out-String
+    return @{
+      ok = $true
+      stage = "install"
+      message = "安装命令已执行。安装完成后会自动检查。"
+      raw_tail = $(if ($out.Length -gt 4000) { $out.Substring($out.Length - 4000) } else { $out })
+    }
+  } catch {
+    return @{
+      ok = $false
+      stage = "install"
+      message = "自动安装失败，请使用官方下载页安装。"
+      install_url = "https://ollama.com/download/windows"
+      error = $_.Exception.Message
+    }
+  }
 }
 
-if ($Action -eq "ensure_deps") {
-  Write-Json (Ensure-PythonDeps)
-  exit
-}
+$Root = Resolve-Root $Root
 
-if ($Action -eq "install_ollama") {
-  Write-Json (Install-Ollama)
-  exit
-}
-
-if ($Action -eq "ensure_ollama") {
-  Write-Json (Ensure-Ollama)
-  exit
-}
-
-if ($Action -eq "pull_model") {
-  Write-Json (Pull-Model $Profile)
-  exit
-}
-
-Write-Json @{
-  ok = $false
-  message = "未知操作。"
-  action = $Action
+switch ($Action) {
+  "status" {
+    $ollama = Find-Ollama
+    $serve = Ensure-Ollama-Serve
+    $list = Get-Ollama-List
+    Write-Json @{
+      ok = $true
+      action = "status"
+      root = $Root
+      ollama_found = [bool]$ollama
+      ollama = $ollama
+      serve = $serve
+      list = $list
+      ready = ($serve.ok -and $list.ok)
+    }
+  }
+  "install_ollama" {
+    $install = Install-Ollama
+    $serve = Ensure-Ollama-Serve
+    Write-Json @{
+      ok = ($install.ok -and $serve.ok)
+      action = "install_ollama"
+      install = $install
+      serve = $serve
+      message = $(if ($serve.ok) { "本地推理后端安装并启动完成。" } else { "安装命令已执行，请等待安装完成后重新检查。" })
+    }
+  }
+  "ensure_ollama" {
+    $serve = Ensure-Ollama-Serve
+    Write-Json $serve
+  }
+  "pull_model" {
+    $pull = Pull-Model $Profile
+    Write-Json $pull
+  }
+  default {
+    Write-Json @{
+      ok = $false
+      message = "未知操作。"
+      action = $Action
+    }
+  }
 }
