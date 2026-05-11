@@ -14,8 +14,13 @@ DEFAULT_TIMEOUT = int(os.environ.get("MAOMIAI_BOOTSTRAP_TIMEOUT", "1800"))
 
 PROFILE_MODEL_MAP = {
     "standard": "qwen2.5:7b",
-    "code": "qwen2.5-coder:7b",
     "light": "qwen2.5:1.5b",
+    "code": "qwen2.5-coder:7b",
+    "reasoning": "deepseek-r1:7b",
+    "english": "llama3.1:8b",
+    "small": "llama3.2:3b",
+    "embed": "nomic-embed-text",
+    "embed_multi": "bge-m3",
 }
 
 app = FastAPI(title="MAOMIAI Model Bootstrap Service", version=APP_VERSION)

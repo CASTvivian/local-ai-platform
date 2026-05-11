@@ -46,11 +46,17 @@ function Get-Model-For-Profile {
   param([string]$Profile)
   switch ($Profile) {
     "standard" { return "qwen2.5:7b" }
-    "code" { return "qwen2.5-coder:7b" }
     "light" { return "qwen2.5:1.5b" }
+    "code" { return "qwen2.5-coder:7b" }
+    "reasoning" { return "deepseek-r1:7b" }
+    "english" { return "llama3.1:8b" }
+    "small" { return "llama3.2:3b" }
+    "embed" { return "nomic-embed-text" }
+    "embed_multi" { return "bge-m3" }
     default { return "qwen2.5:7b" }
   }
 }
+
 
 function Test-Port {
   param([int]$Port)

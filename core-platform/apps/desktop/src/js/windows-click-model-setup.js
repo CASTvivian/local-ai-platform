@@ -1,540 +1,357 @@
-// P3.14-D7-C3-C: Windows click fallback + visible local AI setup feedback.
 (function () {
   const API = {
     bootstrap: "http://127.0.0.1:18100",
-    modelGateway: "http://127.0.0.1:18080",
+    gateway: "http://127.0.0.1:18080"
   };
-  function esc(v) {
+  const MODEL_CATALOG = [
+    {
+      profile: "standard",
+      title: "标准对话能力",
+      model: "qwen2.5:7b",
+      tag: "推荐默认",
+      size: "中等",
+      hardware: "建议 16GB 内存以上",
+      desc: "适合中文问答、总结、写作、文档理解、普通任务规划，是默认推荐能力。",
+      type: "chat"
+    },
+    {
+      profile: "light",
+      title: "轻量快速能力",
+      model: "qwen2.5:1.5b",
+      tag: "低配优先",
+      size: "小",
+      hardware: "低配置电脑可用",
+      desc: "适合低配电脑、快速响应、简单问答和轻量任务。",
+      type: "chat"
+    },
+    {
+      profile: "code",
+      title: "代码能力",
+      model: "qwen2.5-coder:7b",
+      tag: "开发推荐",
+      size: "中等",
+      hardware: "建议 16GB 内存以上",
+      desc: "适合代码生成、代码审查、报错分析、项目修复和技术方案整理。",
+      type: "code"
+    },
+    {
+      profile: "reasoning",
+      title: "推理分析能力",
+      model: "deepseek-r1:7b",
+      tag: "复杂分析",
+      size: "中等",
+      hardware: "建议 16GB 内存以上",
+      desc: "适合复杂问题拆解、逻辑推理、策略分析和多步骤规划。",
+      type: "reasoning"
+    },
+    {
+      profile: "english",
+      title: "英文通用能力",
+      model: "llama3.1:8b",
+      tag: "英文/通用",
+      size: "中等",
+      hardware: "建议 16GB 内存以上",
+      desc: "适合英文问答、通用任务、跨语言测试和国际化场景。",
+      type: "chat"
+    },
+    {
+      profile: "small",
+      title: "小型通用能力",
+      model: "llama3.2:3b",
+      tag: "轻量通用",
+      size: "小",
+      hardware: "低配置电脑可用",
+      desc: "适合轻量问答、快速测试和低配置机器。",
+      type: "chat"
+    },
+    {
+      profile: "embed",
+      title: "文档向量能力",
+      model: "nomic-embed-text",
+      tag: "知识库",
+      size: "小",
+      hardware: "普通配置可用",
+      desc: "适合文档检索、知识库、RAG。本能力不是聊天模型，用于文档向量化。",
+      type: "embedding"
+    },
+    {
+      profile: "embed_multi",
+      title: "多语言文档向量能力",
+      model: "bge-m3",
+      tag: "多语言知识库",
+      size: "中等",
+      hardware: "普通配置可用",
+      desc: "适合中文、英文、多语言文档检索和企业知识库。本能力不是聊天模型。",
+      type: "embedding"
+    }
+  ];
+  function escapeHtml(v) {
     return String(v ?? "")
-      .replaceAll("&", "&amp;")
-      .replaceAll("<", "&lt;")
-      .replaceAll(">", "&gt;")
-      .replaceAll('"', "&quot;")
-      .replaceAll("'", "&#039;");
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
   }
-  function contentEl() {
-    return document.getElementById("content") || document.querySelector(".content");
-  }
-  function promptEl() {
-    return document.getElementById("prompt") || document.querySelector("textarea");
-  }
-  function setResult(title, status, detail, raw) {
-    let box = document.getElementById("modelSetupResult");
-    if (!box) {
-      const content = contentEl();
-      if (!content) return;
-      box = document.createElement("div");
-      box.id = "modelSetupResult";
-      box.className = "model-setup-result";
-      content.appendChild(box);
-    }
-    const statusClass = status === "ok" ? "ok" : status === "loading" ? "loading" : "bad";
-    box.innerHTML = `
-      <div class="model-result-card ${statusClass}">
-        <div class="model-result-title">${esc(title)}</div>
-        <div class="model-result-detail">${esc(detail)}</div>
-        ${raw ? `<pre>${esc(typeof raw === "string" ? raw : JSON.stringify(raw, null, 2))}</pre>` : ""}
-        <div class="model-result-actions">
-          <button data-action="check-model-status">重新检查</button>
-          <button data-action="install-local-inference">安装本地推理后端</button>
-          <button data-action="back-to-chat">返回对话</button>
-        </div>
-      </div>
-    `;
-  }
-  async function getJson(url, timeout = 10000) {
-    const ctrl = new AbortController();
-    const timer = setTimeout(() => ctrl.abort(), timeout);
-    try {
-      const res = await fetch(url, { signal: ctrl.signal });
-      const text = await res.text();
-      try {
-        return JSON.parse(text);
-      } catch {
-        return { ok: res.ok, raw: text };
-      }
-    } finally {
-      clearTimeout(timer);
-    }
-  }
-  async function postJson(url, body, timeout = 60000) {
-    const ctrl = new AbortController();
-    const timer = setTimeout(() => ctrl.abort(), timeout);
+  async function postJson(url, payload, timeout = 120000) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), timeout);
     try {
       const res = await fetch(url, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body || {}),
-        signal: ctrl.signal,
+        body: JSON.stringify(payload || {}),
+        signal: controller.signal
       });
       const text = await res.text();
-      try {
-        return JSON.parse(text);
-      } catch {
-        return { ok: res.ok, raw: text };
-      }
+      try { return JSON.parse(text); } catch (_) { return { ok: res.ok, raw: text }; }
     } finally {
       clearTimeout(timer);
     }
   }
-  function explainBackendUnavailable(raw) {
-    return {
-      ok: false,
-      message: "本地 AI 后端暂未连接。",
-      next_steps: [
-        "确认桌面后端服务已经启动；首次使用时可能需要下载运行环境。",
-        "回到右侧服务面板查看服务健康状态。",
-        "如果是第一次安装，请先运行随包附带的启动脚本，或等待后续版本自动启动服务。",
-      ],
-      raw,
-    };
-  }
-  async function checkLocalModelStatus(options = {}) {
-    setResult("正在检查本地 AI", "loading", "正在连接本地服务，请稍候...", null);
-    const result = {
-      title: "本地 AI 状态检查",
-      bootstrap: null,
-      gateway: null,
-      ready: false,
-    };
+  async function getJson(url, timeout = 10000) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), timeout);
     try {
-      result.bootstrap = await getJson(`${API.bootstrap}/bootstrap/status`, 8000);
-    } catch (e) {
-      result.bootstrap = explainBackendUnavailable(String(e));
+      const res = await fetch(url, { signal: controller.signal });
+      const text = await res.text();
+      try { return JSON.parse(text); } catch (_) { return { ok: res.ok, raw: text }; }
+    } finally {
+      clearTimeout(timer);
     }
-    try {
-      result.gateway = await postJson(`${API.modelGateway}/generate`, {
-        model: "default",
-        prompt: "请用一句中文回答：本地 AI 是否可用？",
-        stream: false,
-      }, 30000);
-    } catch (e) {
-      result.gateway = explainBackendUnavailable(String(e));
-    }
-    const reply = result.gateway?.response || result.gateway?.text || result.gateway?.raw || "";
-    result.ready = Boolean(reply && !result.gateway?.message?.includes("暂未连接"));
-    if (result.ready) {
-      setResult("本地 AI 可用", "ok", "本地模型网关已连接，可以回到对话继续使用。", result);
-    } else {
-      setResult("本地 AI 暂未连接", "bad", "当前 App 界面正常，但本地后端服务还没有连接成功。系统会尝试自动准备运行环境，请稍后重试。", result);
-    }
-    return result;
   }
-  
-  function renderProgressSteps(title, steps, activeIndex = 0, extra = "") {
-    const rows = steps.map((step, index) => {
-      const cls = index < activeIndex ? "done" : (index === activeIndex ? "active" : "");
-      const icon = index < activeIndex ? "✓" : (index === activeIndex ? "…" : "○");
+  function setResult(title, type, message, data) {
+    const el = document.getElementById("modelSetupResult");
+    if (!el) return;
+    el.innerHTML = `
+      <div class="model-result-card ${escapeHtml(type || "")}">
+        <h3>${escapeHtml(title)}</h3>
+        <p>${escapeHtml(message || "")}</p>
+        ${data ? `<pre>${escapeHtml(JSON.stringify(data, null, 2))}</pre>` : ""}
+      </div>
+    `;
+  }
+  function renderProgress(title, steps, activeIndex, note = "") {
+    const rows = steps.map((step, i) => {
+      const cls = i < activeIndex ? "done" : (i === activeIndex ? "active" : "");
+      const icon = i < activeIndex ? "✓" : (i === activeIndex ? "…" : "○");
       return `<div class="model-progress-step ${cls}">
         <span class="model-progress-icon">${icon}</span>
         <span>${escapeHtml(step)}</span>
       </div>`;
     }).join("");
-    return `<div class="model-progress-card">
-      <div class="model-progress-title">${escapeHtml(title)}</div>
-      <div class="model-progress-bar"><div class="model-progress-fill" style="width:${Math.min(100, Math.max(8, ((activeIndex + 1) / steps.length) * 100))}%"></div></div>
-      <div class="model-progress-steps">${rows}</div>
-      ${extra ? `<div class="model-progress-extra">${extra}</div>` : ""}
-    </div>`;
+    const pct = Math.min(100, Math.max(8, ((activeIndex + 1) / steps.length) * 100));
+    return `
+      <div class="model-progress-card">
+        <div class="model-progress-title">${escapeHtml(title)}</div>
+        <div class="model-progress-bar"><div class="model-progress-fill" style="width:${pct}%"></div></div>
+        <div class="model-progress-steps">${rows}</div>
+        ${note ? `<div class="model-progress-extra">${escapeHtml(note)}</div>` : ""}
+      </div>
+    `;
   }
-  function setProgress(title, steps, activeIndex, extra = "") {
+  function setProgress(title, steps, activeIndex, note = "") {
     const el = document.getElementById("modelSetupResult");
     if (!el) return;
-    el.innerHTML = renderProgressSteps(title, steps, activeIndex, extra);
+    el.innerHTML = renderProgress(title, steps, activeIndex, note);
   }
-  function safeParseJsonText(text) {
-    if (!text || typeof text !== "string") return null;
-    try { return JSON.parse(text); } catch (_) { return null; }
-  }
-  async function sleep(ms) {
+  function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
-  async function recheckAfterInstall() {
-    const steps = [
-      "等待安装程序完成",
-      "检查本地推理后端",
-      "检查本地 AI 后端",
-      "刷新状态"
-    ];
-    for (let i = 0; i < 3; i++) {
-      setProgress("正在重新检查本地 AI 状态", steps, Math.min(i + 1, steps.length - 1));
-      await sleep(2000);
-      try {
-        const status = await checkLocalModelStatus({ silent: true });
-        if (status?.ready || status?.gateway?.ok || status?.bootstrap?.ok) {
-          setResult("本地 AI 状态已更新", "ok", "检测到本地后端已有响应。现在可以准备标准对话能力。", status);
-          return status;
-        }
-      } catch (_) {}
-    }
-    setResult(
-      "安装后仍未连接",
-      "bad",
-      "安装命令已经执行，但本地后端仍未连接。可能需要等待安装器完成、重启 MAOMIAI，或手动打开本地推理后端。",
-      {
-        ok: false,
-        next_steps: [
-          "确认安装器已经完成。",
-          "关闭并重新打开 MAOMIAI。",
-          "如果 Windows 开始菜单里有本地推理后端，请手动打开一次。",
-          "然后回到本页点击重新检查。"
-        ]
-      }
-    );
-    return null;
+  function getModelStatusText(modelName, status) {
+    const raw = JSON.stringify(status || {});
+    if (raw.includes(modelName)) return "已安装";
+    return "未安装";
   }
-
-async function installLocalInferenceBackend() {
+  function renderModelStore(status = null) {
+    const content = document.getElementById("content");
+    if (!content) return;
+    const cards = MODEL_CATALOG.map(item => {
+      const state = status ? getModelStatusText(item.model, status) : "待检查";
+      const stateClass = state === "已安装" ? "installed" : "missing";
+      return `
+        <div class="model-store-card" data-profile="${escapeHtml(item.profile)}">
+          <div class="model-store-card-head">
+            <div>
+              <h3>${escapeHtml(item.title)}</h3>
+              <div class="model-store-model">${escapeHtml(item.model)}</div>
+            </div>
+            <span class="model-store-tag">${escapeHtml(item.tag)}</span>
+          </div>
+          <p>${escapeHtml(item.desc)}</p>
+          <div class="model-store-meta">
+            <span>大小：${escapeHtml(item.size)}</span>
+            <span>${escapeHtml(item.hardware)}</span>
+            <span class="model-state ${stateClass}">${escapeHtml(state)}</span>
+          </div>
+          <button class="primary model-download-btn" data-action="download-model-profile" data-profile="${escapeHtml(item.profile)}">
+            ${state === "已安装" ? "重新验证并启用" : "下载并启用"}
+          </button>
+        </div>
+      `;
+    }).join("");
+    content.innerHTML = `
+      <section class="model-store-page">
+        <div class="model-store-hero">
+          <div class="model-logo">M</div>
+          <h1>本地模型</h1>
+          <p>选择你需要的能力，软件会自动下载、部署并连接。客户不需要打开终端，也不需要手动输入命令。</p>
+        </div>
+        <div class="model-store-actions">
+          <button class="secondary" data-action="check-local-model-status">检查本地 AI 状态</button>
+          <button class="secondary" data-action="install-local-inference">安装本地推理后端</button>
+          <button class="secondary" data-action="return-chat">返回对话</button>
+        </div>
+        <div id="modelSetupResult" class="model-setup-result"></div>
+        <div class="model-store-grid">
+          ${cards}
+        </div>
+      </section>
+    `;
+  }
+  async function checkLocalModelStatus(options = {}) {
+    if (!options.silent) {
+      setResult("正在检查本地 AI", "loading", "正在检查本地推理后端、模型列表和本地网关。", null);
+    }
+    const result = {
+      ok: false,
+      bootstrap: null,
+      gateway: null,
+      ready: false
+    };
+    try {
+      result.bootstrap = await getJson(`${API.bootstrap}/bootstrap/status`, 10000);
+    } catch (e) {
+      result.bootstrap = { ok: false, error: String(e), message: "本地 AI 后端暂未连接。" };
+    }
+    try {
+      result.gateway = await getJson(`${API.gateway}/health`, 5000);
+    } catch (e) {
+      result.gateway = { ok: false, error: String(e), message: "本地模型网关暂未连接。" };
+    }
+    result.ready = !!(result.bootstrap?.ready || result.bootstrap?.serve?.ok || result.gateway?.ok);
+    result.ok = result.ready;
+    if (!options.silent) {
+      if (result.ready) {
+        setResult("本地 AI 可用", "ok", "本地推理后端或模型网关已有响应。你可以下载或启用所需能力。", result);
+      } else {
+        setResult("本地 AI 暂未连接", "bad", "请先安装本地推理后端，或重启 MAOMIAI 后重新检查。", result);
+      }
+      renderModelStore(result);
+    }
+    return result;
+  }
+  async function installLocalInferenceBackend() {
     if (window.__maomiaiInstallingLocalBackend) {
-      setResult("正在安装中", "loading", "安装流程已经在执行，请不要重复点击。", {
-        ok: false,
-        message: "安装流程正在执行中。"
-      });
+      setResult("正在安装中", "loading", "安装流程已经在执行，请不要重复点击。", null);
       return;
     }
     window.__maomiaiInstallingLocalBackend = true;
     const steps = [
-      "准备安装命令",
-      "请求 Windows 执行安装",
-      "等待安装程序完成",
-      "自动重新检查状态"
+      "准备安装",
+      "请求系统执行安装",
+      "等待安装完成",
+      "重新检查状态"
     ];
     try {
       setProgress("正在安装本地推理后端", steps, 0);
-      const result = {
-        ok: false,
-        stage: "install_local_inference_backend",
-        tauri: null,
-        api: null,
-        message: "",
-        next_steps: []
-      };
-      await sleep(300);
-      setProgress("正在安装本地推理后端", steps, 1);
-      try {
-        const invoke =
-          window.__TAURI__?.core?.invoke ||
-          window.__TAURI_INTERNALS__?.invoke;
-        if (invoke) {
-          const out = await invoke("install_local_inference_backend");
-          const parsed = safeParseJsonText(out);
-          result.tauri = { ok: true, output: out, parsed };
-          result.ok = true;
-          result.message = parsed?.message || "安装命令已执行。";
-          setProgress(
-            "安装命令已执行",
-            steps,
-            2,
-            `<div class="model-progress-note">请等待 Windows 安装程序完成。完成后系统会自动重新检查。</div>`
-          );
-          await sleep(2500);
-          setProgress("正在重新检查", steps, 3);
-          await recheckAfterInstall();
-          return result;
+      const invoke = window.__TAURI__?.core?.invoke || window.__TAURI_INTERNALS__?.invoke;
+      if (invoke) {
+        setProgress("正在安装本地推理后端", steps, 1);
+        const out = await invoke("install_local_inference_backend");
+        setProgress("安装命令已执行", steps, 2, "请等待安装程序完成。完成后会自动重新检查。");
+        await sleep(3000);
+        setProgress("正在重新检查", steps, 3);
+        const status = await checkLocalModelStatus({ silent: true });
+        if (status.ready) {
+          setResult("本地推理后端已可用", "ok", "安装完成并检测到本地服务。现在可以下载模型能力。", status);
+        } else {
+          setResult("安装后仍未连接", "bad", "安装命令已执行，但暂未检测到服务。请确认安装器已完成，然后重启 MAOMIAI。", { out, status });
         }
-        result.tauri = {
-          ok: false,
-          message: "当前环境没有可用的 Tauri invoke。"
-        };
-      } catch (e) {
-        const parsed = safeParseJsonText(String(e));
-        result.tauri = {
-          ok: false,
-          error: String(e),
-          parsed,
-          message: parsed?.message || "Tauri 直接安装命令执行失败。"
-        };
+        return;
       }
-      setProgress("正在尝试后端安装接口", steps, 1);
-      try {
-        const apiResult = await postJson(`${API.bootstrap}/bootstrap/install_ollama`, {}, 30000);
-        result.api = apiResult;
-        if (apiResult?.ok) {
-          result.ok = true;
-          result.message = "后端安装命令已执行。安装完成后请重新检查。";
-          setProgress("安装命令已执行", steps, 2);
-          await sleep(2500);
-          await recheckAfterInstall();
-          return result;
-        }
-      } catch (e) {
-        result.api = {
-          ok: false,
-          error: String(e),
-          message: "18100 安装接口不可用。"
-        };
-      }
-      try {
-        window.open("https://ollama.com/download/windows", "_blank");
-      } catch (_) {}
-      result.ok = false;
-      result.message = "无法自动安装本地推理后端，已尝试打开官方下载页。";
-      result.install_url = "https://ollama.com/download/windows";
-      result.install_command = "irm https://ollama.com/install.ps1 | iex";
-      result.next_steps = [
-        "请打开官方下载页安装 Windows 版本。",
-        "或在 PowerShell 中执行安装命令。",
-        "安装完成后重新打开 MAOMIAI。",
-        "回到本地 AI 准备页点击重新检查。"
-      ];
-      setResult("需要手动安装本地推理后端", "bad", result.message, result);
-      return result;
+      window.open("https://ollama.com/download/windows", "_blank");
+      setResult("请手动安装", "bad", "当前环境无法直接调用系统安装命令，已尝试打开官方下载页。", {
+        url: "https://ollama.com/download/windows"
+      });
     } finally {
       window.__maomiaiInstallingLocalBackend = false;
     }
   }
-
   async function startLocalModelDownload(profile = "standard") {
     if (window.__maomiaiDownloadingModel) {
-      setResult("正在准备能力", "loading", "当前已有下载任务在执行，请不要重复点击。", {
-        ok: false,
-        profile
-      });
+      setResult("正在准备能力", "loading", "已有下载任务正在执行，请不要重复点击。", null);
       return;
     }
+    const item = MODEL_CATALOG.find(x => x.profile === profile) || MODEL_CATALOG[0];
     window.__maomiaiDownloadingModel = true;
-    const labelMap = {
-      standard: "标准对话能力",
-      code: "代码能力",
-      light: "轻量快速能力"
-    };
-    const label = labelMap[profile] || "标准对话能力";
     const steps = [
       "检查本地推理后端",
       "启动本地推理服务",
-      `下载 ${label}`,
+      `下载 ${item.title}`,
       "验证能力是否可用",
       "连接到聊天"
     ];
     try {
-      setProgress(`正在准备 ${label}`, steps, 0);
+      setProgress(`正在准备 ${item.title}`, steps, 0);
       await sleep(500);
-      setProgress(`正在准备 ${label}`, steps, 1);
-      let result = null;
-      try {
-        result = await postJson(`${API.bootstrap}/bootstrap/start`, { profile }, 1000 * 60 * 60);
-      } catch (e) {
-        result = {
-          ok: false,
-          error: String(e),
-          message: "本地 AI 后端暂未连接，无法开始下载。请先点击安装本地推理后端，或重启 MAOMIAI。"
-        };
-      }
-      setProgress(`正在下载 ${label}`, steps, 2, `<div class="model-progress-note">下载时间取决于网络环境和能力包大小，请保持窗口打开。</div>`);
+      setProgress(`正在启动本地推理服务`, steps, 1);
+      const result = await postJson(`${API.bootstrap}/bootstrap/start`, { profile }, 1000 * 60 * 90);
+      setProgress(`正在下载 ${item.title}`, steps, 2, "下载时间取决于网络环境和模型大小，请保持软件打开。");
       if (!result?.ok) {
-        setResult(
-          `${label} 准备失败`,
-          "bad",
-          result?.message || "下载或验证失败。",
-          {
-            ok: false,
-            profile,
-            result,
-            next_steps: [
-              "确认本地推理后端已经安装。",
-              "点击\"检查本地 AI 状态\"。",
-              "如果仍不可用，请重启 MAOMIAI 后重试。"
-            ]
-          }
-        );
+        setResult(`${item.title} 下载失败`, "bad", result?.message || "下载失败，请检查本地推理后端是否可用。", result);
         return result;
       }
-      setProgress(`正在验证 ${label}`, steps, 3);
+      setProgress(`正在验证 ${item.title}`, steps, 3);
       await sleep(1000);
       const status = await checkLocalModelStatus({ silent: true });
-      setProgress(`${label} 已准备完成`, steps, 4);
-      await sleep(800);
-      setResult(
-        `${label} 已准备完成`,
-        "ok",
-        "本地 AI 能力已下载并连接。现在可以返回对话直接使用。",
-        {
-          ok: true,
-          profile,
-          result,
-          status,
-          next_steps: [
-            "点击返回对话。",
-            "输入问题测试本地 AI 回复。"
-          ]
-        }
-      );
+      setProgress(`${item.title} 已准备完成`, steps, 4);
+      await sleep(700);
+      setResult(`${item.title} 已准备完成`, "ok", "模型已下载并可用。现在可以返回对话直接使用。", {
+        result,
+        status
+      });
+      renderModelStore(status);
       return result;
+    } catch (e) {
+      setResult(`${item.title} 下载失败`, "bad", String(e), {
+        profile,
+        error: String(e)
+      });
     } finally {
       window.__maomiaiDownloadingModel = false;
     }
   }
-  function renderModelSetupPage() {
-    const content = contentEl();
-    if (!content) return;
-    content.innerHTML = `
-      <div class="gpt-home model-setup-home">
-        <div class="gpt-logo">M</div>
-        <h1>本地 AI 准备</h1>
-        <p>检查本地 AI 能力是否可用，或按用途准备对话、代码能力。普通用户无需理解具体模型名称。</p>
-        <div class="model-setup-grid">
-          <button data-action="check-model-status">
-            <strong>检查本地 AI 状态</strong>
-            <span>确认本地服务、推理后端和当前能力是否可用。</span>
-          </button>
-          <button data-action="download-model-standard">
-            <strong>下载标准对话能力</strong>
-            <span>适合日常问答、总结、文档理解和任务规划。</span>
-          </button>
-          <button data-action="download-model-code">
-            <strong>下载代码能力</strong>
-            <span>适合代码生成、代码审查、错误分析和项目修复。</span>
-          </button>
-          <button data-action="download-model-light">
-            <strong>下载轻量快速能力</strong>
-            <span>适合低配置电脑和快速响应场景。</span>
-          </button>
-          <button data-action="install-local-inference">
-            <strong>安装本地推理后端</strong>
-            <span>如果尚未安装本地推理后端，点击此按钮安装。</span>
-          </button>
-          <button data-action="back-to-chat">
-            <strong>返回对话</strong>
-            <span>检查或准备完成后，回到主对话继续使用。</span>
-          </button>
-        </div>
-        <div id="modelSetupResult" class="model-setup-result">
-          <div class="model-result-card">
-            <div class="model-result-title">尚未检查</div>
-            <div class="model-result-detail">点击上方按钮开始检查或准备本地 AI。</div>
-          </div>
-        </div>
-      </div>
-    `;
-  }
-  function fillPrompt(text) {
-    const input = promptEl();
-    if (!input) return;
-    input.value = text;
-    input.focus();
-  }
-  function ensureHomeHasModelCard() {
-    const grid = document.querySelector(".gpt-suggestions");
-    if (!grid || grid.__modelCardInjected) return;
-    const btn = document.createElement("button");
-    btn.setAttribute("data-action", "open-model-setup");
-    btn.innerHTML = `
-      <strong>准备本地 AI</strong>
-      <span>检查本地能力是否可用，或准备对话/代码能力。</span>
-    `;
-    grid.appendChild(btn);
-    grid.__modelCardInjected = true;
-  }
-  function patchSuggestionButtons() {
-    const buttons = Array.from(document.querySelectorAll(".gpt-suggestions button"));
-    for (const btn of buttons) {
-      const onclick = btn.getAttribute("onclick") || "";
-      const match = onclick.match(/fillPrompt\('([\s\S]*)'\)/);
-      if (match && !btn.getAttribute("data-action")) {
-        btn.setAttribute("data-action", "fill-prompt");
-        btn.setAttribute("data-prompt", match[1].replace(/\\'/g, "'"));
-        btn.removeAttribute("onclick");
+  function bindModelStoreEvents() {
+    document.addEventListener("click", (event) => {
+      const target = event.target.closest("[data-action]");
+      if (!target) return;
+      const action = target.getAttribute("data-action");
+      if (action === "check-local-model-status") {
+        event.preventDefault();
+        checkLocalModelStatus();
       }
-    }
-  }
-  function patchSendButton() {
-    const buttons = Array.from(document.querySelectorAll("button"));
-    const send = buttons.find((b) => (b.textContent || "").trim() === "发送");
-    if (!send || send.__sendPatchedD7C3C) return;
-    send.__sendPatchedD7C3C = true;
-    send.addEventListener("click", (e) => {
-      const input = promptEl();
-      if (!input || !input.value.trim()) return;
-      if (typeof window.sendMessage === "function") {
-        e.preventDefault();
-        e.stopPropagation();
-        window.sendMessage();
-        return;
+      if (action === "install-local-inference") {
+        event.preventDefault();
+        installLocalInferenceBackend();
       }
-      if (typeof window.submitTask === "function") {
-        e.preventDefault();
-        e.stopPropagation();
-        window.submitTask();
+      if (action === "download-model-profile") {
+        event.preventDefault();
+        const profile = target.getAttribute("data-profile") || "standard";
+        startLocalModelDownload(profile);
+      }
+      if (action === "return-chat") {
+        event.preventDefault();
+        if (typeof window.setView === "function") window.setView("chat");
       }
     }, true);
   }
-  function handleAction(e) {
-    const target = e.target.closest("button, [data-action], [data-view]");
-    if (!target) return;
-    const action = target.getAttribute("data-action");
-    const view = target.getAttribute("data-view");
-    if (action === "install-local-inference") {
-      e.preventDefault();
-      installLocalInferenceBackend();
-      return;
-    }
-    if (action === "fill-prompt") {
-      e.preventDefault();
-      fillPrompt(target.getAttribute("data-prompt") || "");
-      return;
-    }
-    if (action === "open-model-setup" || view === "models") {
-      e.preventDefault();
-      renderModelSetupPage();
-      return;
-    }
-    if (action === "check-model-status") {
-      e.preventDefault();
-      checkLocalModelStatus();
-      return;
-    }
-    if (action === "download-model-standard") {
-      e.preventDefault();
-      startLocalModelDownload("standard");
-      return;
-    }
-    if (action === "download-model-code") {
-      e.preventDefault();
-      startLocalModelDownload("code");
-      return;
-    }
-    if (action === "download-model-light") {
-      e.preventDefault();
-      startLocalModelDownload("light");
-      return;
-    }
-    if (action === "download-standard-model") {
-      e.preventDefault();
-      startLocalModelDownload("standard");
-      return;
-    }
-    if (action === "download-code-model") {
-      e.preventDefault();
-      startLocalModelDownload("code");
-      return;
-    }
-    if (action === "back-to-chat") {
-      e.preventDefault();
-      if (typeof window.setView === "function") window.setView("chat");
-      return;
-    }
-    if (view && typeof window.setView === "function") {
-      e.preventDefault();
-      window.setView(view);
-    }
-  }
-  function tick() {
-    ensureHomeHasModelCard();
-    patchSuggestionButtons();
-    patchSendButton();
-  }
-  window.renderModelSetupPage = renderModelSetupPage;
+  window.renderModelSetupPage = function () {
+    renderModelStore();
+    setTimeout(() => checkLocalModelStatus({ silent: true }).then(status => renderModelStore(status)).catch(() => {}), 300);
+  };
   window.checkLocalModelStatus = checkLocalModelStatus;
-  window.startLocalModelDownload = startLocalModelDownload;
   window.installLocalInferenceBackend = installLocalInferenceBackend;
-  // pointerdown makes Windows WebView clicks feel more reliable.
-  document.addEventListener("pointerdown", handleAction, true);
-  document.addEventListener("click", handleAction, true);
-  document.addEventListener("DOMContentLoaded", () => {
-    tick();
-    setTimeout(tick, 300);
-    setTimeout(tick, 1200);
-  });
-  setInterval(tick, 2000);
-  console.log("[D7-C3-C] product model setup feedback loaded");
+  window.startLocalModelDownload = startLocalModelDownload;
+  window.__MAOMIAI_MODEL_CATALOG__ = MODEL_CATALOG;
+  bindModelStoreEvents();
 })();
