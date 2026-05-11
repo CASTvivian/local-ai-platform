@@ -149,24 +149,33 @@ fn install_local_inference_backend() -> Result<String, String> {
             .arg("-Command")
             .arg(install_cmd)
             .output()
-            .map_err(|e| format!("failed to start installer: {}", e))?;
+            .map_err(|e| format!("无法启动安装命令: {}", e))?;
         let stdout = String::from_utf8_lossy(&output.stdout).to_string();
         let stderr = String::from_utf8_lossy(&output.stderr).to_string();
+        let _ = Command::new("cmd")
+            .arg("/C")
+            .arg("start")
+            .arg("")
+            .arg("ollama")
+            .spawn();
+        let status_text = if output.status.success() {
+            "INSTALL_COMMAND_OK"
+        } else {
+            "INSTALL_COMMAND_FAILED"
+        };
+        let response = format!(
+            "{{\"status\":\"{}\",\"message\":\"安装命令已执行。请等待安装程序完成，然后点击重新检查。\",\"stdout\":{:?},\"stderr\":{:?}}}",
+            status_text, stdout, stderr
+        );
         if output.status.success() {
-            Ok(format!(
-                "本地推理后端安装命令已执行。\n\nstdout:\n{}\n\nstderr:\n{}",
-                stdout, stderr
-            ))
+            Ok(response)
         } else {
             let _ = Command::new("cmd")
                 .arg("/C")
                 .arg("start")
                 .arg("https://ollama.com/download/windows")
                 .spawn();
-            Err(format!(
-                "自动安装命令执行失败，已尝试打开官方下载页。\n\nstdout:\n{}\n\nstderr:\n{}",
-                stdout, stderr
-            ))
+            Err(response)
         }
     }
     #[cfg(target_os = "macos")]
@@ -174,16 +183,16 @@ fn install_local_inference_backend() -> Result<String, String> {
         let output = Command::new("open")
             .arg("https://ollama.com/download")
             .output()
-            .map_err(|e| format!("failed to open download page: {}", e))?;
+            .map_err(|e| format!("无法打开下载页: {}", e))?;
         if output.status.success() {
-            Ok("已打开本地推理后端官方下载页。".to_string())
+            Ok("{\"status\":\"OPENED_DOWNLOAD_PAGE\",\"message\":\"已打开官方下载页。\"}".to_string())
         } else {
-            Err("无法打开官方下载页，请手动访问 https://ollama.com/download".to_string())
+            Err("{\"status\":\"OPEN_DOWNLOAD_PAGE_FAILED\",\"message\":\"无法打开官方下载页，请手动访问 https://ollama.com/download\"}".to_string())
         }
     }
     #[cfg(all(not(target_os = "windows"), not(target_os = "macos")))]
     {
-        Ok("请手动安装本地推理后端：https://ollama.com/download".to_string())
+        Ok("{\"status\":\"MANUAL_INSTALL_REQUIRED\",\"message\":\"请手动安装本地推理后端。\"}".to_string())
     }
 }
 

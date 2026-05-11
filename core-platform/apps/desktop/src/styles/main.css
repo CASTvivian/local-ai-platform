@@ -658,3 +658,68 @@ body[data-ui-version="d7-c3-chatgpt-like"] textarea#prompt {
   background: #2563eb;
   color: white;
 }
+
+/* D7-C5 install progress */
+.model-progress-card {
+  border: 1px solid rgba(37, 99, 235, 0.22);
+  background: rgba(239, 246, 255, 0.92);
+  border-radius: 18px;
+  padding: 18px;
+  margin-top: 14px;
+}
+.model-progress-title {
+  font-size: 18px;
+  font-weight: 800;
+  color: #1f2937;
+  margin-bottom: 12px;
+}
+.model-progress-bar {
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(148, 163, 184, 0.28);
+  overflow: hidden;
+  margin-bottom: 14px;
+}
+.model-progress-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #2563eb, #7c3aed);
+  transition: width 280ms ease;
+}
+.model-progress-steps {
+  display: grid;
+  gap: 10px;
+}
+.model-progress-step {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #64748b;
+  font-weight: 650;
+}
+.model-progress-step.active {
+  color: #1d4ed8;
+}
+.model-progress-step.done {
+  color: #15803d;
+}
+.model-progress-icon {
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.75);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+}
+.model-progress-extra {
+  margin-top: 14px;
+  color: #475569;
+  font-size: 14px;
+}
+.model-progress-note {
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.72);
+}

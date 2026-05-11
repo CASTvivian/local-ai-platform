@@ -89,7 +89,7 @@
       raw,
     };
   }
-  async function checkLocalModelStatus() {
+  async function checkLocalModelStatus(options = {}) {
     setResult("正在检查本地 AI", "loading", "正在连接本地服务，请稍候...", null);
     const result = {
       title: "本地 AI 状态检查",
@@ -120,78 +120,168 @@
     }
     return result;
   }
-  async function installLocalInferenceBackend() {
-    setResult("正在安装本地推理后端", "loading", "正在请求系统安装。Windows 可能会弹出 PowerShell 或安全确认，请允许执行。", null);
-    const result = {
-      ok: false,
-      stage: "install_local_inference_backend",
-      tauri: null,
-      api: null,
-      message: "",
-      next_steps: []
-    };
-    // 1) Prefer direct Tauri command. This does not depend on 18100.
-    try {
-      const invoke =
-        window.__TAURI__?.core?.invoke ||
-        window.__TAURI_INTERNALS__?.invoke;
-      if (invoke) {
-        const out = await invoke("install_local_inference_backend");
-        result.tauri = { ok: true, output: out };
-        result.ok = true;
-        result.message = "安装命令已执行。安装完成后，请重新点击\"检查本地 AI 状态\"。";
-        result.next_steps = [
-          "等待安装程序完成。",
-          "安装完成后重新打开 MAOMIAI 或点击重新检查。",
-          "如果仍不可用，请手动打开官方下载页安装。"
-        ];
-        setResult("安装命令已执行", "ok", result.message, result);
-        return result;
-      }
-      result.tauri = {
-        ok: false,
-        message: "当前环境没有可用的 Tauri invoke。"
-      };
-    } catch (e) {
-      result.tauri = {
-        ok: false,
-        error: String(e),
-        message: "Tauri 直接安装命令执行失败。"
-      };
-    }
-    // 2) Try backend API fallback if 18100 is available.
-    try {
-      const apiResult = await postJson(`${API.bootstrap}/bootstrap/install_ollama`, {}, 30000);
-      result.api = apiResult;
-      if (apiResult?.ok) {
-        result.ok = true;
-        result.message = "后端安装命令已执行。安装完成后请重新检查。";
-        setResult("安装命令已执行", "ok", result.message, result);
-        return result;
-      }
-    } catch (e) {
-      result.api = {
-        ok: false,
-        error: String(e),
-        message: "18100 安装接口不可用。"
-      };
-    }
-    // 3) Last fallback: open official page or show command.
-    try {
-      window.open("https://ollama.com/download/windows", "_blank");
-    } catch (_) {}
-    result.ok = false;
-    result.message = "无法自动安装本地推理后端，已尝试打开官方下载页。";
-    result.install_url = "https://ollama.com/download/windows";
-    result.install_command = "irm https://ollama.com/install.ps1 | iex";
-    result.next_steps = [
-      "请打开官方下载页安装 Windows 版本。",
-      "或在 PowerShell 中执行安装命令。",
-      "安装完成后重新打开 MAOMIAI。",
-      "回到本地 AI 准备页点击重新检查。"
+  
+  function renderProgressSteps(title, steps, activeIndex = 0, extra = "") {
+    const rows = steps.map((step, index) => {
+      const cls = index < activeIndex ? "done" : (index === activeIndex ? "active" : "");
+      const icon = index < activeIndex ? "✓" : (index === activeIndex ? "…" : "○");
+      return `<div class="model-progress-step ${cls}">
+        <span class="model-progress-icon">${icon}</span>
+        <span>${escapeHtml(step)}</span>
+      </div>`;
+    }).join("");
+    return `<div class="model-progress-card">
+      <div class="model-progress-title">${escapeHtml(title)}</div>
+      <div class="model-progress-bar"><div class="model-progress-fill" style="width:${Math.min(100, Math.max(8, ((activeIndex + 1) / steps.length) * 100))}%"></div></div>
+      <div class="model-progress-steps">${rows}</div>
+      ${extra ? `<div class="model-progress-extra">${extra}</div>` : ""}
+    </div>`;
+  }
+  function setProgress(title, steps, activeIndex, extra = "") {
+    const el = document.getElementById("modelSetupResult");
+    if (!el) return;
+    el.innerHTML = renderProgressSteps(title, steps, activeIndex, extra);
+  }
+  function safeParseJsonText(text) {
+    if (!text || typeof text !== "string") return null;
+    try { return JSON.parse(text); } catch (_) { return null; }
+  }
+  async function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+  async function recheckAfterInstall() {
+    const steps = [
+      "等待安装程序完成",
+      "检查本地推理后端",
+      "检查本地 AI 后端",
+      "刷新状态"
     ];
-    setResult("需要手动安装本地推理后端", "bad", result.message, result);
-    return result;
+    for (let i = 0; i < 3; i++) {
+      setProgress("正在重新检查本地 AI 状态", steps, Math.min(i + 1, steps.length - 1));
+      await sleep(2000);
+      try {
+        const status = await checkLocalModelStatus({ silent: true });
+        if (status?.ready || status?.gateway?.ok || status?.bootstrap?.ok) {
+          setResult("本地 AI 状态已更新", "ok", "检测到本地后端已有响应。现在可以准备标准对话能力。", status);
+          return status;
+        }
+      } catch (_) {}
+    }
+    setResult(
+      "安装后仍未连接",
+      "bad",
+      "安装命令已经执行，但本地后端仍未连接。可能需要等待安装器完成、重启 MAOMIAI，或手动打开本地推理后端。",
+      {
+        ok: false,
+        next_steps: [
+          "确认安装器已经完成。",
+          "关闭并重新打开 MAOMIAI。",
+          "如果 Windows 开始菜单里有本地推理后端，请手动打开一次。",
+          "然后回到本页点击重新检查。"
+        ]
+      }
+    );
+    return null;
+  }
+
+async function installLocalInferenceBackend() {
+    if (window.__maomiaiInstallingLocalBackend) {
+      setResult("正在安装中", "loading", "安装流程已经在执行，请不要重复点击。", {
+        ok: false,
+        message: "安装流程正在执行中。"
+      });
+      return;
+    }
+    window.__maomiaiInstallingLocalBackend = true;
+    const steps = [
+      "准备安装命令",
+      "请求 Windows 执行安装",
+      "等待安装程序完成",
+      "自动重新检查状态"
+    ];
+    try {
+      setProgress("正在安装本地推理后端", steps, 0);
+      const result = {
+        ok: false,
+        stage: "install_local_inference_backend",
+        tauri: null,
+        api: null,
+        message: "",
+        next_steps: []
+      };
+      await sleep(300);
+      setProgress("正在安装本地推理后端", steps, 1);
+      try {
+        const invoke =
+          window.__TAURI__?.core?.invoke ||
+          window.__TAURI_INTERNALS__?.invoke;
+        if (invoke) {
+          const out = await invoke("install_local_inference_backend");
+          const parsed = safeParseJsonText(out);
+          result.tauri = { ok: true, output: out, parsed };
+          result.ok = true;
+          result.message = parsed?.message || "安装命令已执行。";
+          setProgress(
+            "安装命令已执行",
+            steps,
+            2,
+            `<div class="model-progress-note">请等待 Windows 安装程序完成。完成后系统会自动重新检查。</div>`
+          );
+          await sleep(2500);
+          setProgress("正在重新检查", steps, 3);
+          await recheckAfterInstall();
+          return result;
+        }
+        result.tauri = {
+          ok: false,
+          message: "当前环境没有可用的 Tauri invoke。"
+        };
+      } catch (e) {
+        const parsed = safeParseJsonText(String(e));
+        result.tauri = {
+          ok: false,
+          error: String(e),
+          parsed,
+          message: parsed?.message || "Tauri 直接安装命令执行失败。"
+        };
+      }
+      setProgress("正在尝试后端安装接口", steps, 1);
+      try {
+        const apiResult = await postJson(`${API.bootstrap}/bootstrap/install_ollama`, {}, 30000);
+        result.api = apiResult;
+        if (apiResult?.ok) {
+          result.ok = true;
+          result.message = "后端安装命令已执行。安装完成后请重新检查。";
+          setProgress("安装命令已执行", steps, 2);
+          await sleep(2500);
+          await recheckAfterInstall();
+          return result;
+        }
+      } catch (e) {
+        result.api = {
+          ok: false,
+          error: String(e),
+          message: "18100 安装接口不可用。"
+        };
+      }
+      try {
+        window.open("https://ollama.com/download/windows", "_blank");
+      } catch (_) {}
+      result.ok = false;
+      result.message = "无法自动安装本地推理后端，已尝试打开官方下载页。";
+      result.install_url = "https://ollama.com/download/windows";
+      result.install_command = "irm https://ollama.com/install.ps1 | iex";
+      result.next_steps = [
+        "请打开官方下载页安装 Windows 版本。",
+        "或在 PowerShell 中执行安装命令。",
+        "安装完成后重新打开 MAOMIAI。",
+        "回到本地 AI 准备页点击重新检查。"
+      ];
+      setResult("需要手动安装本地推理后端", "bad", result.message, result);
+      return result;
+    } finally {
+      window.__maomiaiInstallingLocalBackend = false;
+    }
   }
 
   async function startLocalModelDownload(kind) {
