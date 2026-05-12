@@ -1,12 +1,13 @@
 param(
-  [string]$Action = "status",
-  [string]$Profile = "standard",
-  [string]$Root = ""
+  [string]$Action = 'status',
+  [string]$Profile = 'standard',
+  [string]$Root = ''
 )
-$ErrorActionPreference = "Continue"
+$ErrorActionPreference = 'Continue'
 
-function Write-Json($obj) {
-  $obj | ConvertTo-Json -Depth 12 -Compress
+function Write-Json {
+  param([object]$Obj)
+  $Obj | ConvertTo-Json -Depth 12 -Compress
 }
 
 function Resolve-Root {
@@ -15,277 +16,305 @@ function Resolve-Root {
     return (Resolve-Path $InputRoot).Path
   }
   $ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
-  foreach ($c in @(
-    (Join-Path $ScriptDir "..\..\.."),
-    (Join-Path $ScriptDir "..\.."),
-    (Join-Path $ScriptDir "..")
-  )) {
-    $r = Resolve-Path $c -ErrorAction SilentlyContinue
-    if ($r) { return $r.Path }
+  $Candidate = Resolve-Path (Join-Path $ScriptDir '..\..\..') -ErrorAction SilentlyContinue
+  if ($Candidate) {
+    return $Candidate.Path
   }
   return $ScriptDir
 }
 
 function Find-Ollama {
-  $cmd = Get-Command ollama -ErrorAction SilentlyContinue
-  if ($cmd) { return $cmd.Source }
-  $candidates = @(
+  $Cmd = Get-Command ollama -ErrorAction SilentlyContinue
+  if ($Cmd) {
+    return $Cmd.Source
+  }
+  $Candidates = @(
     "$env:LOCALAPPDATA\Programs\Ollama\ollama.exe",
     "$env:ProgramFiles\Ollama\ollama.exe",
     "$env:ProgramFiles(x86)\Ollama\ollama.exe"
   )
-  foreach ($c in $candidates) {
-    if (Test-Path $c) { return $c }
+  foreach ($Path in $Candidates) {
+    if (Test-Path $Path) {
+      return $Path
+    }
   }
   return $null
 }
 
 function Get-Model-For-Profile {
-  param([string]$Profile)
-  switch ($Profile) {
-    "standard" { return "qwen2.5:7b" }
-    "light" { return "qwen2.5:1.5b" }
-    "code" { return "qwen2.5-coder:7b" }
-    "reasoning" { return "deepseek-r1:7b" }
-    "english" { return "llama3.1:8b" }
-    "small" { return "llama3.2:3b" }
-    "embed" { return "nomic-embed-text" }
-    "embed_multi" { return "bge-m3" }
-    default { return "qwen2.5:7b" }
+  param([string]$ProfileName)
+  switch ($ProfileName) {
+    'standard' { return 'qwen2.5:7b' }
+    'light' { return 'qwen2.5:1.5b' }
+    'code' { return 'qwen2.5-coder:7b' }
+    'reasoning' { return 'deepseek-r1:7b' }
+    'english' { return 'llama3.1:8b' }
+    'small' { return 'llama3.2:3b' }
+    'embed' { return 'nomic-embed-text' }
+    'embed_multi' { return 'bge-m3' }
+    default { return 'qwen2.5:7b' }
   }
 }
 
-function Test-OllamaApi {
+function Ensure-Dir {
+  param([string]$Path)
+  if (!(Test-Path $Path)) {
+    New-Item -ItemType Directory -Force -Path $Path | Out-Null
+  }
+}
+
+function Test-Ollama-Api {
   try {
-    $r = Invoke-RestMethod "http://127.0.0.1:11434/api/tags" -TimeoutSec 3
-    return @{ ok = $true; response = $r }
+    $Response = Invoke-RestMethod 'http://127.0.0.1:11434/api/tags' -TimeoutSec 3
+    return @{
+      ok = $true
+      response = $Response
+    }
   } catch {
-    return @{ ok = $false; error = $_.Exception.Message }
+    return @{
+      ok = $false
+      error = $_.Exception.Message
+    }
   }
 }
 
 function Ensure-Ollama-Installed {
-  $ollama = Find-Ollama
-  if ($ollama) {
+  $Ollama = Find-Ollama
+  if ($Ollama) {
     return @{
       ok = $true
       installed = $true
-      ollama = $ollama
-      message = "本地推理后端已安装。"
+      ollama = $Ollama
+      message = 'Ollama is installed.'
     }
   }
-  $InstallDir = Join-Path $Root "runtime\downloads"
-  New-Item -ItemType Directory -Force -Path $InstallDir | Out-Null
-  $logFile = Join-Path $Root "logs\windows\install-ollama.log"
-  New-Item -ItemType Directory -Force -Path (Split-Path $logFile -Parent) | Out-Null
+
+  $DownloadDir = Join-Path $Root 'runtime\downloads'
+  $LogDir = Join-Path $Root 'logs\windows'
+  Ensure-Dir $DownloadDir
+  Ensure-Dir $LogDir
+  $LogFile = Join-Path $LogDir 'install-ollama.log'
+
   try {
-    $cmd = "irm https://ollama.com/install.ps1 | iex"
-    $out = powershell -ExecutionPolicy Bypass -Command $cmd 2>&1 | Out-String
-    Set-Content -Path $logFile -Value $out -Encoding UTF8
+    $InstallCommand = 'irm https://ollama.com/install.ps1 | iex'
+    $Output = powershell -NoProfile -ExecutionPolicy Bypass -Command $InstallCommand 2>&1 | Out-String
+    Set-Content -Path $LogFile -Value $Output -Encoding UTF8
     Start-Sleep -Seconds 3
-    $ollama2 = Find-Ollama
+    $OllamaAfter = Find-Ollama
     return @{
-      ok = [bool]$ollama2
-      installed = [bool]$ollama2
-      ollama = $ollama2
-      message = $(if ($ollama2) { "本地推理后端安装完成。" } else { "安装命令已执行，但暂未检测到可执行文件。" })
-      log_file = $logFile
-      raw_tail = $(if ($out.Length -gt 4000) { $out.Substring($out.Length - 4000) } else { $out })
+      ok = [bool]$OllamaAfter
+      installed = [bool]$OllamaAfter
+      ollama = $OllamaAfter
+      message = $(if ($OllamaAfter) { 'Ollama installed.' } else { 'Install command executed, but ollama.exe was not found yet.' })
+      log_file = $LogFile
+      raw_tail = $(if ($Output.Length -gt 4000) { $Output.Substring($Output.Length - 4000) } else { $Output })
     }
   } catch {
     return @{
       ok = $false
       installed = $false
-      message = "自动安装本地推理后端失败。"
+      message = 'Failed to install Ollama.'
       error = $_.Exception.Message
-      log_file = $logFile
-      install_url = "https://ollama.com/download/windows"
+      log_file = $LogFile
+      install_url = 'https://ollama.com/download/windows'
     }
   }
 }
 
 function Ensure-Ollama-Serve {
-  $install = Ensure-Ollama-Installed
-  if (!$install.ok) {
+  $Install = Ensure-Ollama-Installed
+  if (!$Install.ok) {
     return @{
       ok = $false
-      stage = "install"
-      install = $install
-      message = "本地推理后端未安装，无法启动。"
+      stage = 'install'
+      install = $Install
+      message = 'Ollama is not installed.'
     }
   }
-  $ollama = $install.ollama
-  $api = Test-OllamaApi
-  if ($api.ok) {
+
+  $Ollama = $Install.ollama
+  $Api = Test-Ollama-Api
+  if ($Api.ok) {
     return @{
       ok = $true
-      stage = "serve"
-      message = "本地推理服务已运行。"
-      ollama = $ollama
-      api = $api
+      stage = 'serve'
+      message = 'Ollama service is already running.'
+      ollama = $Ollama
+      api = $Api
     }
   }
+
   try {
-    Start-Process -FilePath $ollama -ArgumentList @("serve") -WindowStyle Hidden
+    Start-Process -FilePath $Ollama -ArgumentList @('serve') -WindowStyle Hidden
     Start-Sleep -Seconds 5
   } catch {
     return @{
       ok = $false
-      stage = "serve"
-      message = "启动本地推理服务失败。"
+      stage = 'serve'
+      message = 'Failed to start Ollama service.'
       error = $_.Exception.Message
-      ollama = $ollama
+      ollama = $Ollama
     }
   }
-  $api2 = Test-OllamaApi
+
+  $ApiAfter = Test-Ollama-Api
   return @{
-    ok = $api2.ok
-    stage = "serve"
-    message = $(if ($api2.ok) { "本地推理服务已启动。" } else { "已尝试启动，但 API 暂未就绪。" })
-    ollama = $ollama
-    api = $api2
+    ok = $ApiAfter.ok
+    stage = 'serve'
+    message = $(if ($ApiAfter.ok) { 'Ollama service started.' } else { 'Ollama service was started, but API is not ready yet.' })
+    ollama = $Ollama
+    api = $ApiAfter
   }
 }
 
 function Get-Ollama-List {
-  $ollama = Find-Ollama
-  if (!$ollama) {
+  $Ollama = Find-Ollama
+  if (!$Ollama) {
     return @{
       ok = $false
-      message = "未检测到本地推理后端。"
-      raw = ""
+      message = 'Ollama was not found.'
+      raw = ''
     }
   }
   try {
-    $out = & $ollama list 2>&1 | Out-String
+    $Output = & $Ollama list 2>&1 | Out-String
     return @{
       ok = $true
-      raw = $out
+      raw = $Output
     }
   } catch {
     return @{
       ok = $false
       error = $_.Exception.Message
-      raw = ""
+      raw = ''
     }
   }
 }
 
 function Save-Job {
   param([hashtable]$Job)
-  $JobDir = Join-Path $Root "runtime\jobs"
-  New-Item -ItemType Directory -Force -Path $JobDir | Out-Null
-  $file = Join-Path $JobDir ("model-download-" + $Job.profile + ".json")
-  $Job | ConvertTo-Json -Depth 12 | Set-Content -Path $file -Encoding UTF8
-  return $file
+  $JobDir = Join-Path $Root 'runtime\jobs'
+  Ensure-Dir $JobDir
+  $File = Join-Path $JobDir ('model-download-' + $Job.profile + '.json')
+  $Job | ConvertTo-Json -Depth 12 | Set-Content -Path $File -Encoding UTF8
+  return $File
 }
 
 function Pull-Model {
-  param([string]$Profile)
-  $model = Get-Model-For-Profile $Profile
-  $job = @{
-    profile = $Profile
-    model = $model
-    status = "starting"
-    started_at = (Get-Date).ToString("s")
+  param([string]$ProfileName)
+  $Model = Get-Model-For-Profile $ProfileName
+  $Job = @{
+    profile = $ProfileName
+    model = $Model
+    status = 'starting'
+    started_at = (Get-Date).ToString('s')
     progress = 0
   }
-  $jobFile = Save-Job $job
+  $JobFile = Save-Job $Job
 
-  $serve = Ensure-Ollama-Serve
-  if (!$serve.ok) {
-    $job.status = "failed"
-    $job.error = "serve_failed"
-    $job.serve = $serve
-    Save-Job $job | Out-Null
+  $Serve = Ensure-Ollama-Serve
+  if (!$Serve.ok) {
+    $Job.status = 'failed'
+    $Job.error = 'serve_failed'
+    $Job.serve = $Serve
+    Save-Job $Job | Out-Null
     return @{
       ok = $false
-      stage = "serve"
-      profile = $Profile
-      model = $model
-      message = "本地推理服务未能启动，无法下载模型。"
-      job_file = $jobFile
-      serve = $serve
+      stage = 'serve'
+      profile = $ProfileName
+      model = $Model
+      message = 'Ollama service could not be started.'
+      job_file = $JobFile
+      serve = $Serve
     }
   }
 
-  $listBefore = Get-Ollama-List
-  if ($listBefore.raw -and ($listBefore.raw -match [regex]::Escape($model))) {
-    $job.status = "done"
-    $job.progress = 100
-    Save-Job $job | Out-Null
+  $ListBefore = Get-Ollama-List
+  if ($ListBefore.raw -and ($ListBefore.raw -match [regex]::Escape($Model))) {
+    $Job.status = 'done'
+    $Job.progress = 100
+    Save-Job $Job | Out-Null
     return @{
       ok = $true
-      stage = "already_exists"
-      profile = $Profile
-      model = $model
-      message = "该能力已安装，可以直接启用。"
-      job_file = $jobFile
-      list = $listBefore
+      stage = 'already_exists'
+      profile = $ProfileName
+      model = $Model
+      message = 'Selected capability is already installed.'
+      job_file = $JobFile
+      list = $ListBefore
     }
   }
 
-  $LogDir = Join-Path $Root "logs\windows"
-  New-Item -ItemType Directory -Force -Path $LogDir | Out-Null
-  $logFile = Join-Path $LogDir ("ollama-pull-" + $Profile + ".log")
-  $ollama = Find-Ollama
+  $LogDir = Join-Path $Root 'logs\windows'
+  Ensure-Dir $LogDir
+  $StdoutFile = Join-Path $LogDir ('ollama-pull-' + $ProfileName + '.out.log')
+  $StderrFile = Join-Path $LogDir ('ollama-pull-' + $ProfileName + '.err.log')
+  $Ollama = Find-Ollama
 
-  $job.status = "downloading"
-  $job.progress = 10
-  $job.log_file = $logFile
-  Save-Job $job | Out-Null
+  $Job.status = 'downloading'
+  $Job.progress = 10
+  $Job.stdout_file = $StdoutFile
+  $Job.stderr_file = $StderrFile
+  Save-Job $Job | Out-Null
 
   try {
-    $p = Start-Process `
-      -FilePath $ollama `
-      -ArgumentList @("pull", $model) `
+    $Process = Start-Process `
+      -FilePath $Ollama `
+      -ArgumentList @('pull', $Model) `
       -WindowStyle Hidden `
       -PassThru `
       -Wait `
-      -RedirectStandardOutput $logFile `
-      -RedirectStandardError $logFile
+      -RedirectStandardOutput $StdoutFile `
+      -RedirectStandardError $StderrFile
 
-    $raw = ""
-    if (Test-Path $logFile) {
-      $raw = Get-Content $logFile -Raw -ErrorAction SilentlyContinue
+    $Stdout = ''
+    $Stderr = ''
+    if (Test-Path $StdoutFile) {
+      $Stdout = Get-Content $StdoutFile -Raw -ErrorAction SilentlyContinue
+    }
+    if (Test-Path $StderrFile) {
+      $Stderr = Get-Content $StderrFile -Raw -ErrorAction SilentlyContinue
     }
 
-    $after = Get-Ollama-List
-    $exists = $false
-    if ($after.raw -and ($after.raw -match [regex]::Escape($model))) {
-      $exists = $true
+    $ListAfter = Get-Ollama-List
+    $Exists = $false
+    if ($ListAfter.raw -and ($ListAfter.raw -match [regex]::Escape($Model))) {
+      $Exists = $true
     }
 
-    $job.status = $(if ($exists) { "done" } else { "failed" })
-    $job.progress = $(if ($exists) { 100 } else { 80 })
-    $job.exit_code = $p.ExitCode
-    Save-Job $job | Out-Null
+    $Job.status = $(if ($Exists) { 'done' } else { 'failed' })
+    $Job.progress = $(if ($Exists) { 100 } else { 80 })
+    $Job.exit_code = $Process.ExitCode
+    Save-Job $Job | Out-Null
 
     return @{
-      ok = $exists
-      stage = "pull"
-      profile = $Profile
-      model = $model
-      exit_code = $p.ExitCode
-      message = $(if ($exists) { "模型能力已下载并启用。" } else { "下载命令结束，但未确认模型可用。" })
-      job_file = $jobFile
-      log_file = $logFile
-      raw_tail = $(if ($raw.Length -gt 4000) { $raw.Substring($raw.Length - 4000) } else { $raw })
-      list = $after
+      ok = $Exists
+      stage = 'pull'
+      profile = $ProfileName
+      model = $Model
+      exit_code = $Process.ExitCode
+      message = $(if ($Exists) { 'Model capability is downloaded and ready.' } else { 'Pull command finished, but model was not confirmed.' })
+      job_file = $JobFile
+      stdout_file = $StdoutFile
+      stderr_file = $StderrFile
+      stdout_tail = $(if ($Stdout.Length -gt 4000) { $Stdout.Substring($Stdout.Length - 4000) } else { $Stdout })
+      stderr_tail = $(if ($Stderr.Length -gt 4000) { $Stderr.Substring($Stderr.Length - 4000) } else { $Stderr })
+      list = $ListAfter
     }
   } catch {
-    $job.status = "failed"
-    $job.error = $_.Exception.Message
-    Save-Job $job | Out-Null
+    $Job.status = 'failed'
+    $Job.error = $_.Exception.Message
+    Save-Job $Job | Out-Null
     return @{
       ok = $false
-      stage = "pull"
-      profile = $Profile
-      model = $model
-      message = "模型下载失败。"
+      stage = 'pull'
+      profile = $ProfileName
+      model = $Model
+      message = 'Model download failed.'
       error = $_.Exception.Message
-      job_file = $jobFile
-      log_file = $logFile
+      job_file = $JobFile
+      stdout_file = $StdoutFile
+      stderr_file = $StderrFile
     }
   }
 }
@@ -293,38 +322,38 @@ function Pull-Model {
 $Root = Resolve-Root $Root
 
 switch ($Action) {
-  "status" {
-    $serve = Ensure-Ollama-Serve
-    $list = Get-Ollama-List
+  'status' {
+    $Serve = Ensure-Ollama-Serve
+    $List = Get-Ollama-List
     Write-Json @{
       ok = $true
-      action = "status"
+      action = 'status'
       root = $Root
-      serve = $serve
-      list = $list
-      ready = ($serve.ok -and $list.ok)
+      serve = $Serve
+      list = $List
+      ready = ($Serve.ok -and $List.ok)
     }
   }
-  "install_ollama" {
-    $install = Ensure-Ollama-Installed
-    $serve = Ensure-Ollama-Serve
+  'install_ollama' {
+    $Install = Ensure-Ollama-Installed
+    $Serve = Ensure-Ollama-Serve
     Write-Json @{
-      ok = ($install.ok -and $serve.ok)
-      action = "install_ollama"
-      install = $install
-      serve = $serve
-      message = $(if ($serve.ok) { "本地推理后端已安装并启动。" } else { "安装已执行，但服务暂未就绪。" })
+      ok = ($Install.ok -and $Serve.ok)
+      action = 'install_ollama'
+      install = $Install
+      serve = $Serve
+      message = $(if ($Serve.ok) { 'Ollama is installed and running.' } else { 'Install command executed, but service is not ready yet.' })
     }
   }
-  "pull_model" {
-    $pull = Pull-Model $Profile
-    Write-Json $pull
+  'pull_model' {
+    $Pull = Pull-Model $Profile
+    Write-Json $Pull
   }
   default {
     Write-Json @{
       ok = $false
       action = $Action
-      message = "未知操作。"
+      message = 'Unknown action.'
     }
   }
 }
