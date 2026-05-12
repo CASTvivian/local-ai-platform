@@ -42,9 +42,76 @@
       </section>
     `;
   }
+  function getPromptInput() {
+    return $("prompt") || $("composerInput") || $("chatInput") || document.querySelector("textarea");
+  }
+  function focusPrompt(clear = false) {
+    const input = getPromptInput();
+    if (!input) return;
+    if (clear) input.value = "";
+    input.focus();
+  }
+  function currentChatSession() {
+    if (typeof window.currentSession === "function") {
+      try {
+        return window.currentSession();
+      } catch (_) {}
+    }
+    return null;
+  }
+  function appendAssistantMessage(text) {
+    if (typeof window.systemMessage === "function") {
+      try {
+        window.systemMessage(text);
+        return;
+      } catch (_) {}
+    }
+    const session = currentChatSession();
+    if (session && Array.isArray(session.messages)) {
+      session.messages.push({ role: "assistant", text, ts: Date.now() });
+      try { window.saveState?.(); } catch (_) {}
+      try { window.render?.(); } catch (_) {}
+    }
+  }
+  async function sendChatFallback() {
+    const input = getPromptInput();
+    const prompt = (input?.value || "").trim();
+    if (!prompt) return;
+    if (typeof window.userMessage === "function") {
+      try {
+        window.userMessage(prompt);
+      } catch (_) {}
+    }
+    if (input) input.value = "";
+    try {
+      const res = await fetch("http://127.0.0.1:18080/generate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ prompt })
+      });
+      const data = await res.json().catch(() => ({}));
+      const text = data.response || data.output || data.text || data.message || JSON.stringify(data);
+      appendAssistantMessage(text || "本地模型已响应。");
+    } catch (e) {
+      appendAssistantMessage(`发送失败：${String(e)}。请确认本地模型网关 18080 已启动。`);
+    }
+  }
   function renderChat() {
+    if (typeof window.__oldSetView === "function") {
+      try {
+        window.__oldSetView("chat");
+        focusPrompt(true);
+        return;
+      } catch (e) {
+        console.warn(e);
+      }
+    }
     if (typeof window.renderChatPage === "function") {
-      try { return window.renderChatPage(getContent()); } catch (e) { console.warn(e); }
+      try {
+        window.renderChatPage(getContent());
+        focusPrompt(true);
+        return;
+      } catch (e) { console.warn(e); }
     }
     page("MAOMIAI 本地 AI", "输入任务，软件会调用本地 AI 能力完成处理。", `
       <div class="demo-card">
@@ -243,6 +310,24 @@
         if (result) {
           result.textContent = `已收到检查内容：\n${input?.value || ""}\n\n演示包会将该内容提交到代码检查服务。`;
         }
+      }
+    }, true);
+    document.addEventListener("click", (event) => {
+      const btn = event.target.closest("button");
+      if (!btn) return;
+      const text = (btn.textContent || "").trim();
+      if (text === "发送" || text.includes("发送")) {
+        event.preventDefault();
+        event.stopPropagation();
+        sendChatFallback();
+      }
+    }, true);
+    document.addEventListener("keydown", (event) => {
+      const target = event.target;
+      if (!target || target !== getPromptInput()) return;
+      if (event.key === "Enter" && !event.shiftKey) {
+        event.preventDefault();
+        sendChatFallback();
       }
     }, true);
   }

@@ -200,6 +200,195 @@ function Save-Job {
   return $File
 }
 
+function Start-Model-Pull-Job {
+  param([string]$ProfileName)
+  $Model = Get-Model-For-Profile $ProfileName
+  $JobDir = Join-Path $Root 'runtime\jobs'
+  $LogDir = Join-Path $Root 'logs\windows'
+  Ensure-Dir $JobDir
+  Ensure-Dir $LogDir
+  $JobFile = Join-Path $JobDir ('model-download-' + $ProfileName + '.json')
+  $StdoutFile = Join-Path $LogDir ('ollama-pull-' + $ProfileName + '.out.log')
+  $StderrFile = Join-Path $LogDir ('ollama-pull-' + $ProfileName + '.err.log')
+
+  $Serve = Ensure-Ollama-Serve
+  if (!$Serve.ok) {
+    $Job = @{
+      profile = $ProfileName
+      model = $Model
+      status = 'failed'
+      progress = 0
+      error = 'serve_failed'
+      serve = $Serve
+      updated_at = (Get-Date).ToString('s')
+    }
+    $Job | ConvertTo-Json -Depth 12 | Set-Content -Path $JobFile -Encoding UTF8
+    return @{
+      ok = $false
+      profile = $ProfileName
+      model = $Model
+      status = 'failed'
+      message = 'Ollama service could not be started.'
+      job_file = $JobFile
+      serve = $Serve
+    }
+  }
+
+  $ListBefore = Get-Ollama-List
+  if ($ListBefore.raw -and ($ListBefore.raw -match [regex]::Escape($Model))) {
+    $Job = @{
+      profile = $ProfileName
+      model = $Model
+      status = 'done'
+      progress = 100
+      updated_at = (Get-Date).ToString('s')
+    }
+    $Job | ConvertTo-Json -Depth 12 | Set-Content -Path $JobFile -Encoding UTF8
+    return @{
+      ok = $true
+      profile = $ProfileName
+      model = $Model
+      status = 'done'
+      progress = 100
+      message = 'Selected capability is already installed.'
+      job_file = $JobFile
+    }
+  }
+
+  $Job = @{
+    profile = $ProfileName
+    model = $Model
+    status = 'downloading'
+    progress = 10
+    started_at = (Get-Date).ToString('s')
+    updated_at = (Get-Date).ToString('s')
+    stdout_file = $StdoutFile
+    stderr_file = $StderrFile
+  }
+  $Job | ConvertTo-Json -Depth 12 | Set-Content -Path $JobFile -Encoding UTF8
+
+  $Args = @(
+    '-NoProfile',
+    '-ExecutionPolicy',
+    'Bypass',
+    '-File',
+    $MyInvocation.MyCommand.Path,
+    '-Action',
+    'pull_model',
+    '-Profile',
+    $ProfileName,
+    '-Root',
+    $Root
+  )
+
+  try {
+    Start-Process -FilePath 'powershell' -ArgumentList $Args -WindowStyle Hidden | Out-Null
+    return @{
+      ok = $true
+      profile = $ProfileName
+      model = $Model
+      status = 'started'
+      progress = 10
+      message = 'Model download started in background.'
+      job_file = $JobFile
+      stdout_file = $StdoutFile
+      stderr_file = $StderrFile
+    }
+  } catch {
+    $Job.status = 'failed'
+    $Job.error = $_.Exception.Message
+    $Job.updated_at = (Get-Date).ToString('s')
+    $Job | ConvertTo-Json -Depth 12 | Set-Content -Path $JobFile -Encoding UTF8
+    return @{
+      ok = $false
+      profile = $ProfileName
+      model = $Model
+      status = 'failed'
+      message = 'Failed to start background download.'
+      error = $_.Exception.Message
+      job_file = $JobFile
+    }
+  }
+}
+
+function Get-Model-Pull-Job {
+  param([string]$ProfileName)
+  $Model = Get-Model-For-Profile $ProfileName
+  $JobDir = Join-Path $Root 'runtime\jobs'
+  $LogDir = Join-Path $Root 'logs\windows'
+  $JobFile = Join-Path $JobDir ('model-download-' + $ProfileName + '.json')
+  $StdoutFile = Join-Path $LogDir ('ollama-pull-' + $ProfileName + '.out.log')
+  $StderrFile = Join-Path $LogDir ('ollama-pull-' + $ProfileName + '.err.log')
+  $Job = @{
+    profile = $ProfileName
+    model = $Model
+    status = 'not_started'
+    progress = 0
+    job_file = $JobFile
+    stdout_file = $StdoutFile
+    stderr_file = $StderrFile
+  }
+
+  if (Test-Path $JobFile) {
+    try {
+      $Existing = Get-Content $JobFile -Raw | ConvertFrom-Json
+      $Job.status = $Existing.status
+      $Job.progress = $Existing.progress
+      $Job.started_at = $Existing.started_at
+      $Job.updated_at = $Existing.updated_at
+    } catch {}
+  }
+
+  $Stdout = ''
+  $Stderr = ''
+  if (Test-Path $StdoutFile) {
+    $Stdout = Get-Content $StdoutFile -Raw -ErrorAction SilentlyContinue
+  }
+  if (Test-Path $StderrFile) {
+    $Stderr = Get-Content $StderrFile -Raw -ErrorAction SilentlyContinue
+  }
+
+  $Progress = 0
+  $Combined = ($Stdout + "`n" + $Stderr)
+  $Matches = [regex]::Matches($Combined, '([0-9]{1,3})\.?[0-9]*%')
+  if ($Matches.Count -gt 0) {
+    $Last = $Matches[$Matches.Count - 1].Groups[1].Value
+    [int]::TryParse($Last, [ref]$Progress) | Out-Null
+  }
+  if ($Progress -gt 0 -and $Progress -lt 100) {
+    $Job.progress = $Progress
+    $Job.status = 'downloading'
+  }
+
+  $List = Get-Ollama-List
+  $Exists = $false
+  if ($List.raw -and ($List.raw -match [regex]::Escape($Model))) {
+    $Exists = $true
+  }
+  if ($Exists) {
+    $Job.status = 'done'
+    $Job.progress = 100
+    $Job.updated_at = (Get-Date).ToString('s')
+    Ensure-Dir $JobDir
+    $Job | ConvertTo-Json -Depth 12 | Set-Content -Path $JobFile -Encoding UTF8
+  }
+
+  return @{
+    ok = $true
+    profile = $ProfileName
+    model = $Model
+    status = $Job.status
+    progress = $Job.progress
+    job_file = $JobFile
+    stdout_file = $StdoutFile
+    stderr_file = $StderrFile
+    stdout_tail = $(if ($Stdout.Length -gt 2000) { $Stdout.Substring($Stdout.Length - 2000) } else { $Stdout })
+    stderr_tail = $(if ($Stderr.Length -gt 2000) { $Stderr.Substring($Stderr.Length - 2000) } else { $Stderr })
+    installed = $Exists
+    list = $List
+  }
+}
+
 function Pull-Model {
   param([string]$ProfileName)
   $Model = Get-Model-For-Profile $ProfileName
@@ -285,6 +474,7 @@ function Pull-Model {
     $Job.status = $(if ($Exists) { 'done' } else { 'failed' })
     $Job.progress = $(if ($Exists) { 100 } else { 80 })
     $Job.exit_code = $Process.ExitCode
+    $Job.updated_at = (Get-Date).ToString('s')
     Save-Job $Job | Out-Null
 
     return @{
@@ -304,6 +494,7 @@ function Pull-Model {
   } catch {
     $Job.status = 'failed'
     $Job.error = $_.Exception.Message
+    $Job.updated_at = (Get-Date).ToString('s')
     Save-Job $Job | Out-Null
     return @{
       ok = $false
@@ -344,6 +535,14 @@ switch ($Action) {
       serve = $Serve
       message = $(if ($Serve.ok) { 'Ollama is installed and running.' } else { 'Install command executed, but service is not ready yet.' })
     }
+  }
+  'start_pull_model' {
+    $Started = Start-Model-Pull-Job $Profile
+    Write-Json $Started
+  }
+  'job_status' {
+    $Status = Get-Model-Pull-Job $Profile
+    Write-Json $Status
   }
   'pull_model' {
     $Pull = Pull-Model $Profile

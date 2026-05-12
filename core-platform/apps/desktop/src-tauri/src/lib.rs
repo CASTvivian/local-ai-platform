@@ -222,11 +222,29 @@ fn download_local_model_capability(profile: String) -> Result<String, String> {
     run_windows_bootstrap("pull_model", Some(profile))
 }
 
+#[tauri::command]
+fn start_local_model_download(profile: String) -> Result<String, String> {
+    run_windows_bootstrap("start_pull_model", Some(profile))
+}
+
+#[tauri::command]
+fn local_model_download_status(profile: String) -> Result<String, String> {
+    run_windows_bootstrap("job_status", Some(profile))
+}
 
 
 pub fn run() {
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![start_backend, start_desktop_services, stop_desktop_services, local_ai_status_direct, install_local_inference_backend, download_local_model_capability])
+        .invoke_handler(tauri::generate_handler![
+            start_backend,
+            start_desktop_services,
+            stop_desktop_services,
+            local_ai_status_direct,
+            install_local_inference_backend,
+            download_local_model_capability,
+            start_local_model_download,
+            local_model_download_status
+        ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

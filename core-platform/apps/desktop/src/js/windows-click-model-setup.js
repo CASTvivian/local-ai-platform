@@ -3,6 +3,8 @@
     bootstrap: "http://127.0.0.1:18100",
     gateway: "http://127.0.0.1:18080"
   };
+  window.__MAOMIAI_MODEL_STATUS__ = window.__MAOMIAI_MODEL_STATUS__ || null;
+  window.__MAOMIAI_MODEL_JOBS__ = window.__MAOMIAI_MODEL_JOBS__ || {};
   const MODEL_CATALOG = [
     {
       profile: "standard",
@@ -187,10 +189,11 @@
     return "未安装";
   }
   function renderModelStore(status = null) {
+    const effectiveStatus = status || window.__MAOMIAI_MODEL_STATUS__ || null;
     const content = document.getElementById("content");
     if (!content) return;
     const cards = MODEL_CATALOG.map(item => {
-      const state = status ? getModelStatusText(item.model, status) : "待检查";
+      const state = effectiveStatus ? getModelStatusText(item.model, effectiveStatus) : "待检查";
       const stateClass = state === "已安装" ? "installed" : "missing";
       return `
         <div class="model-store-card" data-profile="${escapeHtml(item.profile)}">
@@ -258,6 +261,7 @@
     }
     result.ready = !!(result.direct?.ready || result.direct?.serve?.ok || result.bootstrap?.ready || result.gateway?.ok);
     result.ok = result.ready;
+    window.__MAOMIAI_MODEL_STATUS__ = result;
     if (!options.silent) {
       renderModelStore(result);
       if (result.ready) {
@@ -315,23 +319,51 @@
         return;
       }
       setProgress(`正在准备 ${item.title}`, steps, 0);
-      await sleep(500);
-      setProgress("正在启动本地推理服务", steps, 1);
-      setProgress(`正在下载 ${item.title}`, steps, 2, "下载可能需要较长时间。中途关闭后，下次点击会继续检查和下载。");
-      const out = await invoke("download_local_model_capability", { profile });
+      await sleep(300);
+      setProgress("正在启动下载任务", steps, 1);
+      const out = await invoke("start_local_model_download", { profile });
       const parsed = parseRuntimeJson(out);
       if (!parsed?.ok) {
-        setResult(`${item.title} 下载失败`, "bad", parsed?.message || "下载未完成。", parsed || { raw: out });
+        setResult(`${item.title} 启动下载失败`, "bad", parsed?.message || "无法启动后台下载任务。", parsed || { raw: out });
         return parsed;
       }
-      setProgress(`正在验证 ${item.title}`, steps, 3);
-      await sleep(1000);
-      const status = await checkLocalModelStatus({ silent: true });
-      setProgress(`${item.title} 已准备完成`, steps, 4);
-      await sleep(600);
-      setResult(`${item.title} 已准备完成`, "ok", "模型已下载并可用。现在可以返回对话直接使用。", { parsed, status });
-      renderModelStore(status);
-      return parsed;
+      window.__MAOMIAI_MODEL_JOBS__[profile] = parsed;
+      let lastStatus = parsed;
+      for (let i = 0; i < 720; i++) {
+        await sleep(2000);
+        let polled;
+        try {
+          const statusRaw = await invoke("local_model_download_status", { profile });
+          polled = parseRuntimeJson(statusRaw);
+        } catch (e) {
+          polled = { ok: false, error: String(e) };
+        }
+        lastStatus = polled;
+        const progress = Number(polled?.progress || 10);
+        const clamped = Math.max(0, Math.min(100, progress));
+        setProgress(`正在下载 ${item.title}`, steps, 2, `当前进度：${clamped}%`);
+        if (polled?.status === "done" || polled?.installed || clamped >= 100) {
+          setProgress(`正在验证 ${item.title}`, steps, 3);
+          await sleep(800);
+          const status = await checkLocalModelStatus({ silent: true });
+          window.__MAOMIAI_MODEL_STATUS__ = status;
+          setProgress(`${item.title} 已准备完成`, steps, 4);
+          await sleep(600);
+          setResult(`${item.title} 已准备完成`, "ok", "模型已下载并可用。现在可以返回对话直接使用。", {
+            started: parsed,
+            status: polled,
+            finalStatus: status
+          });
+          renderModelStore(status);
+          return polled;
+        }
+        if (polled?.status === "failed") {
+          setResult(`${item.title} 下载失败`, "bad", polled?.message || "后台下载任务失败。", polled);
+          return polled;
+        }
+      }
+      setResult(`${item.title} 下载仍在进行`, "loading", "下载任务仍在后台进行。你可以稍后重新进入本地模型页面查看状态。", lastStatus);
+      return lastStatus;
     } catch (e) {
       setResult(`${item.title} 下载失败`, "bad", String(e), { profile, error: String(e) });
     } finally {
@@ -363,8 +395,15 @@
     }, true);
   }
   window.renderModelSetupPage = function () {
-    renderModelStore();
-    setTimeout(() => checkLocalModelStatus({ silent: true }).then(status => renderModelStore(status)).catch(() => {}), 300);
+    renderModelStore(window.__MAOMIAI_MODEL_STATUS__ || null);
+    setTimeout(() => {
+      checkLocalModelStatus({ silent: true })
+        .then(status => {
+          window.__MAOMIAI_MODEL_STATUS__ = status;
+          renderModelStore(status);
+        })
+        .catch(() => {});
+    }, 100);
   };
   window.checkLocalModelStatus = checkLocalModelStatus;
   window.installLocalInferenceBackend = installLocalInferenceBackend;
