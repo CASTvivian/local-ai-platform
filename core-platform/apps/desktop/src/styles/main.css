@@ -830,6 +830,29 @@ body[data-ui-version="d7-c3-chatgpt-like"] textarea#prompt {
 .model-download-btn {
   width: 100%;
 }
+.model-card-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.model-use-btn {
+  width: 100%;
+}
+.model-card-badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 6px;
+}
+.model-current-badge {
+  background: #dcfce7;
+  color: #166534;
+  border-radius: 999px;
+  padding: 7px 10px;
+  font-size: 12px;
+  font-weight: 900;
+  white-space: nowrap;
+}
 /* D7-C6 demo stable router fallback */
 .demo-page {
   padding: 32px;
@@ -909,4 +932,25 @@ body[data-ui-version="d7-c3-chatgpt-like"] textarea#prompt {
   border-radius: 14px;
   padding: 14px;
   margin-top: 16px;
+}
+.chat-model-selector {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255,255,255,0.88);
+  border: 1px solid rgba(15,23,42,0.08);
+  border-radius: 999px;
+  padding: 8px 12px;
+  box-shadow: 0 8px 20px rgba(15,23,42,0.06);
+}
+.chat-model-selector span {
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 800;
+}
+.chat-model-selector select {
+  border: 0;
+  background: transparent;
+  font-weight: 800;
+  outline: none;
 }

@@ -1,6 +1,14 @@
 (function () {
   console.log("[MAOMIAI] windows-demo-stable-router loaded");
   const CONTENT_IDS = ["content", "mainContent", "app-content"];
+  const MODEL_CATALOG_FALLBACK = [
+    { profile: "standard", title: "标准对话能力", model: "qwen2.5:7b" },
+    { profile: "light", title: "轻量快速能力", model: "qwen2.5:1.5b" },
+    { profile: "code", title: "代码能力", model: "qwen2.5-coder:7b" },
+    { profile: "reasoning", title: "推理分析能力", model: "deepseek-r1:7b" },
+    { profile: "english", title: "英文通用能力", model: "llama3.1:8b" },
+    { profile: "small", title: "小型通用能力", model: "llama3.2:3b" }
+  ];
   function $(id) {
     return document.getElementById(id);
   }
@@ -22,6 +30,41 @@
       .replace(/</g, "&lt;")
       .replace(/>/g, "&gt;")
       .replace(/"/g, "&quot;");
+  }
+  function getCatalog() {
+    return window.__MAOMIAI_MODEL_CATALOG__ || MODEL_CATALOG_FALLBACK;
+  }
+  function getCurrentProfile() {
+    return localStorage.getItem("maomiai_current_model_profile") || window.__MAOMIAI_CURRENT_MODEL_PROFILE__ || "standard";
+  }
+  function setCurrentProfile(profile) {
+    const next = profile || "standard";
+    localStorage.setItem("maomiai_current_model_profile", next);
+    window.__MAOMIAI_CURRENT_MODEL_PROFILE__ = next;
+    if (typeof window.setCurrentModelProfile === "function") {
+      try { window.setCurrentModelProfile(next); } catch (_) {}
+    }
+  }
+  function getCurrentModel() {
+    const profile = getCurrentProfile();
+    return getCatalog().find(x => x.profile === profile) || getCatalog()[0] || MODEL_CATALOG_FALLBACK[0];
+  }
+  function extractAssistantText(data) {
+    if (!data) return "";
+    if (typeof data === "string") return data;
+    return (
+      data.response ||
+      data.output ||
+      data.text ||
+      data.content ||
+      data.message ||
+      data.answer ||
+      data?.choices?.[0]?.message?.content ||
+      data?.choices?.[0]?.text ||
+      data?.data?.response ||
+      data?.data?.output ||
+      ""
+    );
   }
   function setActiveNav(view) {
     document.querySelectorAll("[data-view], .nav button, aside button, .sidebar button").forEach(btn => {
@@ -73,10 +116,56 @@
       try { window.render?.(); } catch (_) {}
     }
   }
+  function replaceLastAssistantMessage(text) {
+    const session = currentChatSession();
+    if (session && Array.isArray(session.messages)) {
+      for (let i = session.messages.length - 1; i >= 0; i -= 1) {
+        const msg = session.messages[i];
+        if (msg.role === "assistant") {
+          msg.text = text;
+          try { window.saveState?.(); } catch (_) {}
+          try { window.render?.(); } catch (_) {}
+          return;
+        }
+      }
+    }
+    appendAssistantMessage(text);
+  }
+  function injectChatModelSelector() {
+    const topbar = document.querySelector(".topbar");
+    if (!topbar) return;
+    const actions = topbar.querySelector(".top-actions");
+    if (!actions) return;
+    let wrapper = document.getElementById("chatModelSelector");
+    const current = getCurrentModel();
+    const options = getCatalog().map(item => {
+      const selected = item.profile === current.profile ? "selected" : "";
+      return `<option value="${escapeHtml(item.profile)}" ${selected}>${escapeHtml(item.title)}</option>`;
+    }).join("");
+    if (!wrapper) {
+      wrapper = document.createElement("div");
+      wrapper.id = "chatModelSelector";
+      wrapper.className = "chat-model-selector";
+      actions.prepend(wrapper);
+    }
+    wrapper.innerHTML = `
+      <span>当前能力</span>
+      <select id="chatModelSelect">${options}</select>
+    `;
+    const select = document.getElementById("chatModelSelect");
+    if (select) {
+      select.onchange = () => {
+        setCurrentProfile(select.value);
+        const model = getCurrentModel();
+        appendAssistantMessage(`已切换当前能力：${model.title}`);
+      };
+    }
+  }
   async function sendChatFallback() {
     const input = getPromptInput();
     const prompt = (input?.value || "").trim();
     if (!prompt) return;
+    const modelInfo = getCurrentModel();
     if (typeof window.userMessage === "function") {
       try {
         window.userMessage(prompt);
@@ -84,16 +173,40 @@
     }
     if (input) input.value = "";
     try {
-      const res = await fetch("http://127.0.0.1:18080/generate", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt })
-      });
-      const data = await res.json().catch(() => ({}));
-      const text = data.response || data.output || data.text || data.message || JSON.stringify(data);
-      appendAssistantMessage(text || "本地模型已响应。");
+      appendAssistantMessage(`正在使用「${modelInfo.title}」思考中...`);
+      const attempts = [
+        { url: "http://127.0.0.1:18080/generate", body: { prompt, profile: modelInfo.profile, model: modelInfo.model } },
+        { url: "http://127.0.0.1:18080/generate", body: { prompt } },
+        { url: "http://127.0.0.1:18080/chat", body: { messages: [{ role: "user", content: prompt }], profile: modelInfo.profile, model: modelInfo.model } }
+      ];
+      let lastError = "本地模型网关没有返回内容。";
+      for (const attempt of attempts) {
+        try {
+          const res = await fetch(attempt.url, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(attempt.body)
+          });
+          const raw = await res.text();
+          let data = null;
+          try { data = JSON.parse(raw); } catch (_) { data = raw; }
+          if (!res.ok) {
+            lastError = `${attempt.url} HTTP ${res.status}: ${raw}`;
+            continue;
+          }
+          const text = extractAssistantText(data);
+          if (text) {
+            replaceLastAssistantMessage(text);
+            return;
+          }
+          lastError = `${attempt.url} 返回为空：${raw}`;
+        } catch (e) {
+          lastError = `${attempt.url} 请求失败：${String(e)}`;
+        }
+      }
+      replaceLastAssistantMessage(`发送失败：${lastError}。请确认本地模型已下载，并且本地模型网关 18080 已启动。`);
     } catch (e) {
-      appendAssistantMessage(`发送失败：${String(e)}。请确认本地模型网关 18080 已启动。`);
+      replaceLastAssistantMessage(`发送失败：${String(e)}。请确认本地模型已下载，并且本地模型网关 18080 已启动。`);
     }
   }
   function renderChat() {
@@ -101,6 +214,7 @@
       try {
         window.__oldSetView("chat");
         focusPrompt(true);
+        setTimeout(injectChatModelSelector, 30);
         return;
       } catch (e) {
         console.warn(e);
@@ -110,6 +224,7 @@
       try {
         window.renderChatPage(getContent());
         focusPrompt(true);
+        setTimeout(injectChatModelSelector, 30);
         return;
       } catch (e) { console.warn(e); }
     }
@@ -119,6 +234,7 @@
         <p>请在底部输入框输入问题，例如：你好，请介绍一下你自己。</p>
       </div>
     `);
+    setTimeout(injectChatModelSelector, 30);
   }
   function renderFiles() {
     if (typeof window.renderArtifactsPage === "function") {
@@ -338,6 +454,7 @@
     window.setView = route;
     window.routeView = route;
     window.__MAOMIAI_STABLE_ROUTE__ = route;
+    window.__MAOMIAI_GET_CURRENT_MODEL__ = getCurrentModel;
     installNavAttributes();
     bindGlobalClicks();
     setTimeout(installNavAttributes, 300);

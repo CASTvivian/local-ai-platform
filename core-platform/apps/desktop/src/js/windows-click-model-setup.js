@@ -5,6 +5,7 @@
   };
   window.__MAOMIAI_MODEL_STATUS__ = window.__MAOMIAI_MODEL_STATUS__ || null;
   window.__MAOMIAI_MODEL_JOBS__ = window.__MAOMIAI_MODEL_JOBS__ || {};
+  window.__MAOMIAI_CURRENT_MODEL_PROFILE__ = localStorage.getItem("maomiai_current_model_profile") || "standard";
   const MODEL_CATALOG = [
     {
       profile: "standard",
@@ -188,6 +189,27 @@
     if (raw.includes(modelName)) return "已安装";
     return "未安装";
   }
+  function getCurrentModelProfile() {
+    return localStorage.getItem("maomiai_current_model_profile") || "standard";
+  }
+  function setCurrentModelProfile(profile) {
+    const next = profile || "standard";
+    localStorage.setItem("maomiai_current_model_profile", next);
+    window.__MAOMIAI_CURRENT_MODEL_PROFILE__ = next;
+  }
+  function getModelByProfile(profile) {
+    return MODEL_CATALOG.find(x => x.profile === profile) || MODEL_CATALOG[0];
+  }
+  function setCurrentModelFromButton(profile) {
+    setCurrentModelProfile(profile);
+    const item = getModelByProfile(profile);
+    setResult("当前能力已切换", "ok", `当前对话将优先使用：${item.title}`, {
+      profile: item.profile,
+      title: item.title,
+      model: item.model
+    });
+    renderModelStore(window.__MAOMIAI_MODEL_STATUS__ || null);
+  }
   function renderModelStore(status = null) {
     const effectiveStatus = status || window.__MAOMIAI_MODEL_STATUS__ || null;
     const content = document.getElementById("content");
@@ -195,6 +217,7 @@
     const cards = MODEL_CATALOG.map(item => {
       const state = effectiveStatus ? getModelStatusText(item.model, effectiveStatus) : "待检查";
       const stateClass = state === "已安装" ? "installed" : "missing";
+      const current = getCurrentModelProfile() === item.profile;
       return `
         <div class="model-store-card" data-profile="${escapeHtml(item.profile)}">
           <div class="model-store-card-head">
@@ -202,7 +225,10 @@
               <h3>${escapeHtml(item.title)}</h3>
               <div class="model-store-model">${escapeHtml(item.model)}</div>
             </div>
-            <span class="model-store-tag">${escapeHtml(item.tag)}</span>
+            <div class="model-card-badges">
+              <span class="model-store-tag">${escapeHtml(item.tag)}</span>
+              ${current ? `<span class="model-current-badge">当前使用</span>` : ""}
+            </div>
           </div>
           <p>${escapeHtml(item.desc)}</p>
           <div class="model-store-meta">
@@ -210,9 +236,14 @@
             <span>${escapeHtml(item.hardware)}</span>
             <span class="model-state ${stateClass}">${escapeHtml(state)}</span>
           </div>
-          <button class="primary model-download-btn" data-action="download-model-profile" data-profile="${escapeHtml(item.profile)}">
-            ${state === "已安装" ? "重新验证并启用" : "下载并启用"}
-          </button>
+          <div class="model-card-actions">
+            <button class="primary model-download-btn" data-action="download-model-profile" data-profile="${escapeHtml(item.profile)}">
+              ${state === "已安装" ? "重新验证" : "下载并启用"}
+            </button>
+            <button class="secondary model-use-btn" data-action="set-current-model-profile" data-profile="${escapeHtml(item.profile)}">
+              ${current ? "当前使用中" : "设为当前使用"}
+            </button>
+          </div>
         </div>
       `;
     }).join("");
@@ -347,9 +378,10 @@
           await sleep(800);
           const status = await checkLocalModelStatus({ silent: true });
           window.__MAOMIAI_MODEL_STATUS__ = status;
+          setCurrentModelProfile(profile);
           setProgress(`${item.title} 已准备完成`, steps, 4);
           await sleep(600);
-          setResult(`${item.title} 已准备完成`, "ok", "模型已下载并可用。现在可以返回对话直接使用。", {
+          setResult(`${item.title} 已准备完成`, "ok", "模型已下载并已设为当前使用。现在可以返回对话直接使用。", {
             started: parsed,
             status: polled,
             finalStatus: status
@@ -388,6 +420,11 @@
         const profile = target.getAttribute("data-profile") || "standard";
         startLocalModelDownload(profile);
       }
+      if (action === "set-current-model-profile") {
+        event.preventDefault();
+        const profile = target.getAttribute("data-profile") || "standard";
+        setCurrentModelFromButton(profile);
+      }
       if (action === "return-chat") {
         event.preventDefault();
         if (typeof window.setView === "function") window.setView("chat");
@@ -408,6 +445,9 @@
   window.checkLocalModelStatus = checkLocalModelStatus;
   window.installLocalInferenceBackend = installLocalInferenceBackend;
   window.startLocalModelDownload = startLocalModelDownload;
+  window.getCurrentModelProfile = getCurrentModelProfile;
+  window.setCurrentModelProfile = setCurrentModelProfile;
+  window.getModelByProfile = getModelByProfile;
   window.__MAOMIAI_MODEL_CATALOG__ = MODEL_CATALOG;
   bindModelStoreEvents();
 })();
