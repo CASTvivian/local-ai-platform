@@ -267,22 +267,11 @@ function Start-Model-Pull-Job {
   }
   $Job | ConvertTo-Json -Depth 12 | Set-Content -Path $JobFile -Encoding UTF8
 
-  $Args = @(
-    '-NoProfile',
-    '-ExecutionPolicy',
-    'Bypass',
-    '-File',
-    $MyInvocation.MyCommand.Path,
-    '-Action',
-    'pull_model',
-    '-Profile',
-    $ProfileName,
-    '-Root',
-    $Root
-  )
+  $ScriptPath = $MyInvocation.MyCommand.Path
+  $CommandLine = '-NoProfile -ExecutionPolicy Bypass -File "' + $ScriptPath + '" -Action pull_model -Profile "' + $ProfileName + '" -Root "' + $Root + '"'
 
   try {
-    Start-Process -FilePath 'powershell' -ArgumentList $Args -WindowStyle Hidden | Out-Null
+    Start-Process -FilePath 'powershell' -ArgumentList $CommandLine -WindowStyle Hidden | Out-Null
     return @{
       ok = $true
       profile = $ProfileName
@@ -510,6 +499,68 @@ function Pull-Model {
   }
 }
 
+function Generate-Text {
+  param(
+    [string]$ProfileName,
+    [string]$Prompt
+  )
+  $Model = Get-Model-For-Profile $ProfileName
+  $Serve = Ensure-Ollama-Serve
+  if (!$Serve.ok) {
+    return @{
+      ok = $false
+      stage = 'serve'
+      profile = $ProfileName
+      model = $Model
+      message = 'Ollama service could not be started.'
+      serve = $Serve
+    }
+  }
+
+  $List = Get-Ollama-List
+  if (!($List.raw -and ($List.raw -match [regex]::Escape($Model)))) {
+    return @{
+      ok = $false
+      stage = 'model_missing'
+      profile = $ProfileName
+      model = $Model
+      message = 'Selected model is not installed. Please download it first.'
+      list = $List
+    }
+  }
+
+  try {
+    $Body = @{
+      model = $Model
+      prompt = $Prompt
+      stream = $false
+    } | ConvertTo-Json -Depth 8
+    $Response = Invoke-RestMethod `
+      -Uri 'http://127.0.0.1:11434/api/generate' `
+      -Method Post `
+      -ContentType 'application/json' `
+      -Body $Body `
+      -TimeoutSec 300
+    return @{
+      ok = $true
+      stage = 'generate'
+      profile = $ProfileName
+      model = $Model
+      response = $Response.response
+      raw = $Response
+    }
+  } catch {
+    return @{
+      ok = $false
+      stage = 'generate'
+      profile = $ProfileName
+      model = $Model
+      message = 'Local inference request failed.'
+      error = $_.Exception.Message
+    }
+  }
+}
+
 $Root = Resolve-Root $Root
 
 switch ($Action) {
@@ -543,6 +594,14 @@ switch ($Action) {
   'job_status' {
     $Status = Get-Model-Pull-Job $Profile
     Write-Json $Status
+  }
+  'generate_text' {
+    $Text = ''
+    if ($env:MAOMIAI_PROMPT) {
+      $Text = $env:MAOMIAI_PROMPT
+    }
+    $Generated = Generate-Text $Profile $Text
+    Write-Json $Generated
   }
   'pull_model' {
     $Pull = Pull-Model $Profile

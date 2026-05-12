@@ -34,6 +34,16 @@
   function getCatalog() {
     return window.__MAOMIAI_MODEL_CATALOG__ || MODEL_CATALOG_FALLBACK;
   }
+  function isInstalledModel(item) {
+    const status = window.__MAOMIAI_MODEL_STATUS__ || null;
+    const raw = JSON.stringify(status || {});
+    return raw.includes(item.model);
+  }
+  function getInstalledCatalog() {
+    const catalog = getCatalog();
+    const installed = catalog.filter(isInstalledModel);
+    return installed.length ? installed : catalog.filter(x => x.profile === "standard" || x.profile === "light");
+  }
   function getCurrentProfile() {
     return localStorage.getItem("maomiai_current_model_profile") || window.__MAOMIAI_CURRENT_MODEL_PROFILE__ || "standard";
   }
@@ -47,7 +57,8 @@
   }
   function getCurrentModel() {
     const profile = getCurrentProfile();
-    return getCatalog().find(x => x.profile === profile) || getCatalog()[0] || MODEL_CATALOG_FALLBACK[0];
+    const installed = getInstalledCatalog();
+    return installed.find(x => x.profile === profile) || installed[0] || getCatalog()[0] || MODEL_CATALOG_FALLBACK[0];
   }
   function extractAssistantText(data) {
     if (!data) return "";
@@ -138,7 +149,7 @@
     if (!actions) return;
     let wrapper = document.getElementById("chatModelSelector");
     const current = getCurrentModel();
-    const options = getCatalog().map(item => {
+    const options = getInstalledCatalog().map(item => {
       const selected = item.profile === current.profile ? "selected" : "";
       return `<option value="${escapeHtml(item.profile)}" ${selected}>${escapeHtml(item.title)}</option>`;
     }).join("");
@@ -174,10 +185,31 @@
     if (input) input.value = "";
     try {
       appendAssistantMessage(`正在使用「${modelInfo.title}」思考中...`);
+      const invoke = window.__TAURI__?.core?.invoke || window.__TAURI_INTERNALS__?.invoke || null;
+      if (invoke) {
+        try {
+          const raw = await invoke("generate_local_ai_response", {
+            profile: modelInfo.profile,
+            prompt
+          });
+          let data = null;
+          try { data = JSON.parse(String(raw).trim()); } catch (_) { data = raw; }
+          const text = extractAssistantText(data);
+          if (text) {
+            replaceLastAssistantMessage(text);
+            return;
+          }
+          if (data?.message) {
+            throw new Error(data.message);
+          }
+          throw new Error(`本地推理返回为空：${String(raw).slice(0, 500)}`);
+        } catch (e) {
+          console.warn("[MAOMIAI] direct local inference failed", e);
+        }
+      }
       const attempts = [
         { url: "http://127.0.0.1:18080/generate", body: { prompt, profile: modelInfo.profile, model: modelInfo.model } },
-        { url: "http://127.0.0.1:18080/generate", body: { prompt } },
-        { url: "http://127.0.0.1:18080/chat", body: { messages: [{ role: "user", content: prompt }], profile: modelInfo.profile, model: modelInfo.model } }
+        { url: "http://127.0.0.1:18080/generate", body: { prompt } }
       ];
       let lastError = "本地模型网关没有返回内容。";
       for (const attempt of attempts) {
@@ -204,9 +236,9 @@
           lastError = `${attempt.url} 请求失败：${String(e)}`;
         }
       }
-      replaceLastAssistantMessage(`发送失败：${lastError}。请确认本地模型已下载，并且本地模型网关 18080 已启动。`);
+      replaceLastAssistantMessage(`发送失败：${lastError}。请确认本地模型已下载，且 Ollama 服务正在运行。`);
     } catch (e) {
-      replaceLastAssistantMessage(`发送失败：${String(e)}。请确认本地模型已下载，并且本地模型网关 18080 已启动。`);
+      replaceLastAssistantMessage(`发送失败：${String(e)}。请确认本地模型已下载，且 Ollama 服务正在运行。`);
     }
   }
   function renderChat() {

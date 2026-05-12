@@ -954,3 +954,9 @@ body[data-ui-version="d7-c3-chatgpt-like"] textarea#prompt {
   font-weight: 800;
   outline: none;
 }
+.model-use-btn:disabled,
+.model-download-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  filter: grayscale(0.3);
+}

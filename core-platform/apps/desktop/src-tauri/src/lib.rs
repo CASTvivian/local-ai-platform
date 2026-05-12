@@ -207,6 +207,55 @@ fn run_windows_bootstrap(action: &str, profile: Option<String>) -> Result<String
     }
 }
 
+fn run_windows_bootstrap_with_prompt(
+    action: &str,
+    profile: Option<String>,
+    prompt: Option<String>,
+) -> Result<String, String> {
+    use std::process::Command;
+    #[cfg(target_os = "windows")]
+    {
+        let script = write_embedded_windows_bootstrap()?;
+        let exe = std::env::current_exe().map_err(|e| format!("无法获取程序路径: {}", e))?;
+        let app_dir = exe.parent().ok_or("无法获取程序目录")?;
+        let root = app_dir.join("maomiai-runtime");
+        let mut command = Command::new("powershell");
+        command
+            .arg("-NoProfile")
+            .arg("-ExecutionPolicy")
+            .arg("Bypass")
+            .arg("-File")
+            .arg(&script)
+            .arg("-Action")
+            .arg(action)
+            .arg("-Root")
+            .arg(&root);
+        if let Some(p) = profile {
+            command.arg("-Profile").arg(p);
+        }
+        if let Some(text) = prompt {
+            command.env("MAOMIAI_PROMPT", text);
+        }
+        let output = command
+            .output()
+            .map_err(|e| format!("执行本地推理命令失败: {}", e))?;
+        let stdout = String::from_utf8_lossy(&output.stdout).to_string();
+        let stderr = String::from_utf8_lossy(&output.stderr).to_string();
+        if output.status.success() {
+            Ok(stdout)
+        } else {
+            Err(format!(
+                "{{\"ok\":false,\"message\":\"本地推理命令执行失败\",\"stdout\":{:?},\"stderr\":{:?}}}",
+                stdout, stderr
+            ))
+        }
+    }
+    #[cfg(not(target_os = "windows"))]
+    {
+        Ok("{\"ok\":false,\"message\":\"该命令仅用于 Windows 打包环境。\"}".to_string())
+    }
+}
+
 #[tauri::command]
 fn local_ai_status_direct() -> Result<String, String> {
     run_windows_bootstrap("status", None)
@@ -232,6 +281,11 @@ fn local_model_download_status(profile: String) -> Result<String, String> {
     run_windows_bootstrap("job_status", Some(profile))
 }
 
+#[tauri::command]
+fn generate_local_ai_response(profile: String, prompt: String) -> Result<String, String> {
+    run_windows_bootstrap_with_prompt("generate_text", Some(profile), Some(prompt))
+}
+
 
 pub fn run() {
     tauri::Builder::default()
@@ -243,7 +297,8 @@ pub fn run() {
             install_local_inference_backend,
             download_local_model_capability,
             start_local_model_download,
-            local_model_download_status
+            local_model_download_status,
+            generate_local_ai_response
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

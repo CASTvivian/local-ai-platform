@@ -184,6 +184,10 @@
     }
     return { ok: false, raw };
   }
+  function isModelInstalled(modelName, status) {
+    const raw = JSON.stringify(status || {});
+    return raw.includes(modelName);
+  }
   function getModelStatusText(modelName, status) {
     const raw = JSON.stringify(status || {});
     if (raw.includes(modelName)) return "已安装";
@@ -201,8 +205,16 @@
     return MODEL_CATALOG.find(x => x.profile === profile) || MODEL_CATALOG[0];
   }
   function setCurrentModelFromButton(profile) {
-    setCurrentModelProfile(profile);
     const item = getModelByProfile(profile);
+    const status = window.__MAOMIAI_MODEL_STATUS__ || null;
+    if (!isModelInstalled(item.model, status)) {
+      setResult("该能力尚未安装", "bad", `请先下载 ${item.title}，下载完成后才能设为当前使用。`, {
+        profile: item.profile,
+        model: item.model
+      });
+      return;
+    }
+    setCurrentModelProfile(profile);
     setResult("当前能力已切换", "ok", `当前对话将优先使用：${item.title}`, {
       profile: item.profile,
       title: item.title,
@@ -218,6 +230,7 @@
       const state = effectiveStatus ? getModelStatusText(item.model, effectiveStatus) : "待检查";
       const stateClass = state === "已安装" ? "installed" : "missing";
       const current = getCurrentModelProfile() === item.profile;
+      const installed = state === "已安装";
       return `
         <div class="model-store-card" data-profile="${escapeHtml(item.profile)}">
           <div class="model-store-card-head">
@@ -240,8 +253,8 @@
             <button class="primary model-download-btn" data-action="download-model-profile" data-profile="${escapeHtml(item.profile)}">
               ${state === "已安装" ? "重新验证" : "下载并启用"}
             </button>
-            <button class="secondary model-use-btn" data-action="set-current-model-profile" data-profile="${escapeHtml(item.profile)}">
-              ${current ? "当前使用中" : "设为当前使用"}
+            <button class="secondary model-use-btn" ${installed ? "" : "disabled"} data-action="set-current-model-profile" data-profile="${escapeHtml(item.profile)}">
+              ${installed ? (current ? "当前使用中" : "设为当前使用") : "未安装不可用"}
             </button>
           </div>
         </div>
@@ -448,6 +461,7 @@
   window.getCurrentModelProfile = getCurrentModelProfile;
   window.setCurrentModelProfile = setCurrentModelProfile;
   window.getModelByProfile = getModelByProfile;
+  window.isMaomiaiModelInstalled = isModelInstalled;
   window.__MAOMIAI_MODEL_CATALOG__ = MODEL_CATALOG;
   bindModelStoreEvents();
 })();
