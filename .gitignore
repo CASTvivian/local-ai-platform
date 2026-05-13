@@ -18,3 +18,5 @@ core-platform/apps/desktop/bundle/backend/generated/
 
 # C19 brain asset cloned third-party repositories
 core-platform/data/brain_assets/repos/
+# Local references for Claude Code / Claw Code kernel recovery
+core-platform/references/agent_kernels/
