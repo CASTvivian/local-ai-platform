@@ -65,9 +65,11 @@
       data.output ||
       data.text ||
       data.content ||
+      data?.message?.content ||
       data.message ||
       data.answer ||
       data?.raw?.response ||
+      data?.raw?.message?.content ||
       data?.data?.response ||
       data?.data?.output ||
       data?.choices?.[0]?.message?.content ||
@@ -119,7 +121,7 @@
     const box = $("maomiaiDebugBox");
     if (!box) return;
     box.innerHTML = `
-      <div class="debug-title">${escapeHtml(title)}</div>
+      <summary>${escapeHtml(title)}（点击展开）</summary>
       <pre>${escapeHtml(typeof data === "string" ? data : JSON.stringify(data, null, 2))}</pre>
     `;
   }
@@ -189,10 +191,10 @@
           <button class="primary" data-action="maomiai-test-infer">测试本地推理</button>
           <button class="secondary" data-action="maomiai-clear-chat">清空会话</button>
         </div>
-        <div id="maomiaiDebugBox" class="maomiai-debug-box">
-          <div class="debug-title">调试状态</div>
+        <details id="maomiaiDebugBox" class="maomiai-debug-box">
+          <summary>调试状态（点击展开）</summary>
           <pre>等待发送。当前能力：${escapeHtml(current.title)} / ${escapeHtml(current.model)}</pre>
-        </div>
+        </details>
         <div id="demoChatMessages" class="demo-chat-messages"></div>
       </section>
     `;
@@ -297,7 +299,7 @@
       input.value = "";
     }
     pushChat("user", value);
-    pushChat("assistant", `正在使用「${modelInfo.title}」思考中...`);
+    pushChat("assistant", `正在使用「${modelInfo.title}」生成回复...`);
 
     try {
       const text = await callDirectLocalInference(value, modelInfo);
@@ -495,3 +497,5 @@
     boot();
   }
 })();
+
+console.log("[MAOMIAI] C15 Chinese prompt file fix loaded");

@@ -991,3 +991,14 @@ body[data-ui-version="d7-c3-chatgpt-like"] textarea#prompt {
   max-height: 220px;
   overflow: auto;
 }
+/* D7-C15 collapsed debug */
+.maomiai-debug-box summary {
+  cursor: pointer;
+  font-weight: 900;
+  color: #93c5fd;
+  list-style: none;
+}
+
+.maomiai-debug-box summary::-webkit-details-marker {
+  display: none;
+}

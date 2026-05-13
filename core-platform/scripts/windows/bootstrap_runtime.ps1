@@ -505,6 +505,22 @@ function Generate-Text {
     [string]$Prompt
   )
   $Model = Get-Model-For-Profile $ProfileName
+  if ($env:MAOMIAI_PROMPT_FILE -and (Test-Path $env:MAOMIAI_PROMPT_FILE)) {
+    try {
+      $Prompt = Get-Content -Path $env:MAOMIAI_PROMPT_FILE -Raw -Encoding UTF8
+    } catch {
+      $Prompt = ''
+    }
+  }
+  if ([string]::IsNullOrWhiteSpace($Prompt)) {
+    return @{
+      ok = $false
+      stage = 'prompt'
+      profile = $ProfileName
+      model = $Model
+      message = 'Prompt is empty.'
+    }
+  }
   $Serve = Ensure-Ollama-Serve
   if (!$Serve.ok) {
     return @{
@@ -530,29 +546,49 @@ function Generate-Text {
   }
 
   try {
-    $Body = @{
+    $SystemPrompt = '你是 MAOMIAI 本地 AI 助手。请始终使用中文回答。回答要自然、简洁、直接。用户已经提供了问题，不要说没有看到问题，不要要求用户重复，除非问题确实为空。'
+    $BodyObj = @{
       model = $Model
-      prompt = $Prompt
       stream = $false
-    } | ConvertTo-Json -Depth 8
+      messages = @(
+        @{
+          role = 'system'
+          content = $SystemPrompt
+        },
+        @{
+          role = 'user'
+          content = $Prompt
+        }
+      )
+      options = @{
+        temperature = 0.7
+      }
+    }
+    $Body = $BodyObj | ConvertTo-Json -Depth 12
     $Response = Invoke-RestMethod `
-      -Uri 'http://127.0.0.1:11434/api/generate' `
+      -Uri 'http://127.0.0.1:11434/api/chat' `
       -Method Post `
-      -ContentType 'application/json' `
+      -ContentType 'application/json; charset=utf-8' `
       -Body $Body `
       -TimeoutSec 300
+    $Text = ''
+    if ($Response.message -and $Response.message.content) {
+      $Text = $Response.message.content
+    } elseif ($Response.response) {
+      $Text = $Response.response
+    }
     return @{
       ok = $true
-      stage = 'generate'
+      stage = 'chat'
       profile = $ProfileName
       model = $Model
-      response = $Response.response
+      response = $Text
       raw = $Response
     }
   } catch {
     return @{
       ok = $false
-      stage = 'generate'
+      stage = 'chat'
       profile = $ProfileName
       model = $Model
       message = 'Local inference request failed.'
@@ -597,7 +633,13 @@ switch ($Action) {
   }
   'generate_text' {
     $Text = ''
-    if ($env:MAOMIAI_PROMPT) {
+    if ($env:MAOMIAI_PROMPT_FILE -and (Test-Path $env:MAOMIAI_PROMPT_FILE)) {
+      try {
+        $Text = Get-Content -Path $env:MAOMIAI_PROMPT_FILE -Raw -Encoding UTF8
+      } catch {
+        $Text = ''
+      }
+    } elseif ($env:MAOMIAI_PROMPT) {
       $Text = $env:MAOMIAI_PROMPT
     }
     $Generated = Generate-Text $Profile $Text
