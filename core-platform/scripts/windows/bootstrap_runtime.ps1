@@ -7,7 +7,25 @@ $ErrorActionPreference = 'Continue'
 
 function Write-Json {
   param([object]$Obj)
-  $Obj | ConvertTo-Json -Depth 16 -Compress
+  try {
+    $Json = $Obj | ConvertTo-Json -Depth 16 -Compress
+    $Bytes = [System.Text.Encoding]::UTF8.GetBytes($Json)
+    $B64 = [System.Convert]::ToBase64String($Bytes)
+    $Envelope = @{
+      ok = $true;
+      maomiai_payload_encoding = 'utf8-base64-json';
+      maomiai_payload_b64 = $B64
+    }
+    $Envelope | ConvertTo-Json -Depth 4 -Compress
+  } catch {
+    $Fallback = @{
+      ok = $false;
+      maomiai_payload_encoding = 'plain';
+      message = 'Failed to serialize JSON payload.';
+      error = $_.Exception.Message
+    }
+    $Fallback | ConvertTo-Json -Depth 4 -Compress
+  }
 }
 
 function Ensure-Dir {

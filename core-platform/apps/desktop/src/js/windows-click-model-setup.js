@@ -173,14 +173,31 @@
     }
     return msg;
   }
+  function decodeMaomiaiEnvelope(obj) {
+    if (!obj || !obj.maomiai_payload_b64) return obj;
+    try {
+      const bin = atob(obj.maomiai_payload_b64);
+      const bytes = new Uint8Array(bin.length);
+      for (let i = 0; i < bin.length; i += 1) bytes[i] = bin.charCodeAt(i);
+      const text = new TextDecoder("utf-8").decode(bytes);
+      return JSON.parse(text);
+    } catch (e) {
+      return {
+        ok: false,
+        message: "Failed to decode MAOMIAI runtime payload.",
+        error: String(e),
+        envelope: obj,
+      };
+    }
+  }
   function parseRuntimeJson(text) {
     if (!text) return null;
     const raw = String(text).trim();
-    try { return JSON.parse(raw); } catch (_) {}
+    try { return decodeMaomiaiEnvelope(JSON.parse(raw)); } catch (_) {}
     const first = raw.indexOf("{");
     const last = raw.lastIndexOf("}");
     if (first >= 0 && last > first) {
-      try { return JSON.parse(raw.slice(first, last + 1)); } catch (_) {}
+      try { return decodeMaomiaiEnvelope(JSON.parse(raw.slice(first, last + 1))); } catch (_) {}
     }
     return { ok: false, raw };
   }
