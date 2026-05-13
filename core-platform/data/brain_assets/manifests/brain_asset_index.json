@@ -1,0 +1,4059 @@
+{
+  "version": "2026.05",
+  "count": 147,
+  "items": [
+    {
+      "asset_id": "brain_666ghj__mirofish",
+      "source_type": "github_star",
+      "repo": "666ghj/MiroFish",
+      "repo_name": "MiroFish",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/666ghj__MiroFish.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/666ghj__MiroFish",
+      "tags": [
+        "agent",
+        "agent-memory",
+        "financial-forecasting",
+        "future-prediction",
+        "knowledge-graph",
+        "llm_runtime",
+        "llms",
+        "multi-agent-simulation",
+        "public-opinion-analysis",
+        "python3",
+        "rag",
+        "social-prediction",
+        "swarm-intelligence"
+      ],
+      "buckets": [
+        "agent",
+        "rag",
+        "llm_runtime"
+      ],
+      "html_url": "https://github.com/666ghj/MiroFish",
+      "description": "A Simple and Universal Swarm Intelligence Engine, Predicting Anything. 简洁通用的群体智能引擎，预测万物",
+      "language": "Python",
+      "stars": 60353,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_88250__symphony",
+      "source_type": "github_star",
+      "repo": "88250/symphony",
+      "repo_name": "symphony",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/88250__symphony.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/88250__symphony",
+      "tags": [
+        "bbs",
+        "community",
+        "discussion",
+        "forum",
+        "java",
+        "markdown",
+        "other",
+        "sns",
+        "sym",
+        "vditor"
+      ],
+      "buckets": [
+        "other"
+      ],
+      "html_url": "https://github.com/88250/symphony",
+      "description": "🎶 一款用 Java 实现的现代化社区（论坛/问答/BBS/社交网络/博客）系统平台。A modern community (forum/Q&A/BBS/SNS/blog) system platform implemented in Java. https://ld246.com",
+      "language": "Java",
+      "stars": 2925,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_aaronjmars__miroshark",
+      "source_type": "github_star",
+      "repo": "aaronjmars/MiroShark",
+      "repo_name": "MiroShark",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/aaronjmars__MiroShark.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/aaronjmars__MiroShark",
+      "tags": [
+        "ai-simulation",
+        "financial-forecasting",
+        "future-prediction",
+        "mirofish",
+        "other",
+        "swarm",
+        "swarm-intelligence"
+      ],
+      "buckets": [
+        "other"
+      ],
+      "html_url": "https://github.com/aaronjmars/MiroShark",
+      "description": "Simulate anything, for $1 & less than 10 min — Universal Swarm Intelligence Engine",
+      "language": "Python",
+      "stars": 1142,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_abhigyanpatwari__gitnexus",
+      "source_type": "github_star",
+      "repo": "abhigyanpatwari/GitNexus",
+      "repo_name": "GitNexus",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/abhigyanpatwari__GitNexus.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/abhigyanpatwari__GitNexus",
+      "tags": [
+        "agent",
+        "rag"
+      ],
+      "buckets": [
+        "agent",
+        "rag"
+      ],
+      "html_url": "https://github.com/abhigyanpatwari/GitNexus",
+      "description": "GitNexus: The Zero-Server Code Intelligence Engine -       GitNexus is a client-side knowledge graph creator that runs entirely in your browser. Drop in a GitHub repo or ZIP file, and get an interactive knowledge graph wit a built in Graph RAG Agent. Perfect for code exploration",
+      "language": "TypeScript",
+      "stars": 37994,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_addyosmani__agent_skills",
+      "source_type": "github_star",
+      "repo": "addyosmani/agent-skills",
+      "repo_name": "agent-skills",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/addyosmani__agent-skills.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/addyosmani__agent-skills",
+      "tags": [
+        "agent",
+        "agent-skills",
+        "antigravity",
+        "antigravity-ide",
+        "claude-code",
+        "cursor",
+        "skills"
+      ],
+      "buckets": [
+        "agent"
+      ],
+      "html_url": "https://github.com/addyosmani/agent-skills",
+      "description": "Production-grade engineering skills for AI coding agents.",
+      "language": "Shell",
+      "stars": 40409,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_affaan_m__everything_claude_code",
+      "source_type": "github_star",
+      "repo": "affaan-m/everything-claude-code",
+      "repo_name": "everything-claude-code",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/affaan-m__everything-claude-code.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/affaan-m__everything-claude-code",
+      "tags": [
+        "agent",
+        "ai-agents",
+        "anthropic",
+        "claude",
+        "claude-code",
+        "developer-tools",
+        "llm",
+        "llm_runtime",
+        "mcp",
+        "productivity"
+      ],
+      "buckets": [
+        "agent",
+        "mcp",
+        "llm_runtime"
+      ],
+      "html_url": "https://github.com/affaan-m/everything-claude-code",
+      "description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
+      "language": "JavaScript",
+      "stars": 180549,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_ageerle__ruoyi_ai",
+      "source_type": "github_star",
+      "repo": "ageerle/ruoyi-ai",
+      "repo_name": "ruoyi-ai",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/ageerle__ruoyi-ai.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/ageerle__ruoyi-ai",
+      "tags": [
+        "agent",
+        "ai",
+        "knowledge",
+        "mcp",
+        "rag"
+      ],
+      "buckets": [
+        "agent",
+        "rag",
+        "mcp"
+      ],
+      "html_url": "https://github.com/ageerle/ruoyi-ai",
+      "description": "面向企业级市场的一站式AI应用开发框架，支持多厂商大模型统一接入与管理，具备安全可控的企业知识库与高精度检索优化能力，提供可视化流程编排、自主决策智能体与多智能体协同调度，兼容主流 Agent Skill 协议，帮助企业与开发者零门槛快速构建安全、高效、可落地的AI智能体应用与行业解决方案。",
+      "language": "Java",
+      "stars": 5247,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_agentskills__agentskills",
+      "source_type": "github_star",
+      "repo": "agentskills/agentskills",
+      "repo_name": "agentskills",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/agentskills__agentskills.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/agentskills__agentskills",
+      "tags": [
+        "agent",
+        "agent-skills"
+      ],
+      "buckets": [
+        "agent"
+      ],
+      "html_url": "https://github.com/agentskills/agentskills",
+      "description": "Specification and documentation for Agent Skills",
+      "language": "Python",
+      "stars": 18463,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_ahujasid__blender_mcp",
+      "source_type": "github_star",
+      "repo": "ahujasid/blender-mcp",
+      "repo_name": "blender-mcp",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/ahujasid__blender-mcp.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/ahujasid__blender-mcp",
+      "tags": [
+        "mcp"
+      ],
+      "buckets": [
+        "mcp"
+      ],
+      "html_url": "https://github.com/ahujasid/blender-mcp",
+      "description": "-",
+      "language": "Python",
+      "stars": 21587,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_alchaincyf__darwin_skill",
+      "source_type": "github_star",
+      "repo": "alchaincyf/darwin-skill",
+      "repo_name": "darwin-skill",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/alchaincyf__darwin-skill.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/alchaincyf__darwin-skill",
+      "tags": [
+        "agent"
+      ],
+      "buckets": [
+        "agent"
+      ],
+      "html_url": "https://github.com/alchaincyf/darwin-skill",
+      "description": "达尔文.skill —— 一个让你的Skill无限进化的系统：评估→改进→测试→保留或回滚 | Autoresearch-inspired autonomous skill optimization for Claude Code. Evaluate, improve, test, keep or revert.",
+      "language": "HTML",
+      "stars": 2372,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_anthropics__skills",
+      "source_type": "github_star",
+      "repo": "anthropics/skills",
+      "repo_name": "skills",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/anthropics__skills.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/anthropics__skills",
+      "tags": [
+        "agent",
+        "agent-skills"
+      ],
+      "buckets": [
+        "agent"
+      ],
+      "html_url": "https://github.com/anthropics/skills",
+      "description": "Public repository for Agent Skills",
+      "language": "Python",
+      "stars": 133030,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_appcypher__awesome_mcp_servers",
+      "source_type": "github_star",
+      "repo": "appcypher/awesome-mcp-servers",
+      "repo_name": "awesome-mcp-servers",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/appcypher__awesome-mcp-servers.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/appcypher__awesome-mcp-servers",
+      "tags": [
+        "agent",
+        "ai",
+        "anthropic-claude",
+        "awesome",
+        "context",
+        "llm_runtime",
+        "mcp",
+        "model-context-protocol",
+        "servers",
+        "tool-use",
+        "tools"
+      ],
+      "buckets": [
+        "agent",
+        "mcp",
+        "llm_runtime"
+      ],
+      "html_url": "https://github.com/appcypher/awesome-mcp-servers",
+      "description": "Awesome MCP Servers - A curated list of Model Context Protocol servers",
+      "language": "None",
+      "stars": 5532,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_ashishpatel26__500_ai_agents_projects",
+      "source_type": "github_star",
+      "repo": "ashishpatel26/500-AI-Agents-Projects",
+      "repo_name": "500-AI-Agents-Projects",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/ashishpatel26__500-AI-Agents-Projects.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/ashishpatel26__500-AI-Agents-Projects",
+      "tags": [
+        "agent",
+        "ai-agents",
+        "genai"
+      ],
+      "buckets": [
+        "agent"
+      ],
+      "html_url": "https://github.com/ashishpatel26/500-AI-Agents-Projects",
+      "description": "The 500 AI Agents Projects is a curated collection of AI agent use cases across various industries. It showcases practical applications and provides links to open-source projects for implementation, illustrating how AI agents are transforming sectors such as healthcare, finance, education, retail, and more.",
+      "language": "None",
+      "stars": 30332,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_austin1serb__anthropic_leaked_source_code",
+      "source_type": "github_star",
+      "repo": "Austin1serb/Anthropic-Leaked-Source-Code",
+      "repo_name": "Anthropic-Leaked-Source-Code",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/Austin1serb__Anthropic-Leaked-Source-Code.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/Austin1serb__Anthropic-Leaked-Source-Code",
+      "tags": [
+        "agent"
+      ],
+      "buckets": [
+        "agent"
+      ],
+      "html_url": "https://github.com/Austin1serb/Anthropic-Leaked-Source-Code",
+      "description": "CLAUDE LEAK - Full Claude Leaked Source Code",
+      "language": "TypeScript",
+      "stars": 412,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_bergside__awesome_design_skills",
+      "source_type": "github_star",
+      "repo": "bergside/awesome-design-skills",
+      "repo_name": "awesome-design-skills",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/bergside__awesome-design-skills.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/bergside__awesome-design-skills",
+      "tags": [
+        "agent",
+        "agent-skills",
+        "agentic-ai",
+        "agentic-workflow",
+        "agents",
+        "ai",
+        "ai-agents",
+        "ai-tools",
+        "awesome",
+        "awesome-list",
+        "awesome-readme",
+        "claude-design",
+        "codex",
+        "cursor",
+        "design",
+        "design-md",
+        "design-system",
+        "google-stitch",
+        "mcp",
+        "skills"
+      ],
+      "buckets": [
+        "agent",
+        "mcp"
+      ],
+      "html_url": "https://github.com/bergside/awesome-design-skills",
+      "description": "List of 67 awesome DESIGN.md and SKILL.md design skill files for agentic tools like Claude Design, Google Stitch, Codex, Cursor, and other AI tools",
+      "language": "None",
+      "stars": 479,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_browser_use__browser_harness",
+      "source_type": "github_star",
+      "repo": "browser-use/browser-harness",
+      "repo_name": "browser-harness",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/browser-use__browser-harness.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/browser-use__browser-harness",
+      "tags": [
+        "llm_runtime"
+      ],
+      "buckets": [
+        "llm_runtime"
+      ],
+      "html_url": "https://github.com/browser-use/browser-harness",
+      "description": "Browser Harness | Self-healing harness that enables LLMs to complete any task.",
+      "language": "Python",
+      "stars": 12323,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_bytedance__deer_flow",
+      "source_type": "github_star",
+      "repo": "bytedance/deer-flow",
+      "repo_name": "deer-flow",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/bytedance__deer-flow.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/bytedance__deer-flow",
+      "tags": [
+        "agent",
+        "agentic",
+        "agentic-framework",
+        "agentic-workflow",
+        "ai",
+        "ai-agents",
+        "deep-research",
+        "harness",
+        "langchain",
+        "langgraph",
+        "langmanus",
+        "llm",
+        "llm_runtime",
+        "mcp",
+        "multi-agent",
+        "nodejs",
+        "podcast",
+        "python",
+        "rag",
+        "superagent",
+        "typescript"
+      ],
+      "buckets": [
+        "agent",
+        "rag",
+        "mcp",
+        "llm_runtime"
+      ],
+      "html_url": "https://github.com/bytedance/deer-flow",
+      "description": "An open-source long-horizon SuperAgent harness that researches, codes, and creates. With the help of sandboxes, memories, tools, skill, subagents and message gateway, it handles different levels of tasks that could take minutes to hours.",
+      "language": "Python",
+      "stars": 67192,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_castvivian__chenzaikuaipao_io",
+      "source_type": "github_star",
+      "repo": "CASTvivian/chenzaikuaipao.io",
+      "repo_name": "chenzaikuaipao.io",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/CASTvivian__chenzaikuaipao.io.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/CASTvivian__chenzaikuaipao.io",
+      "tags": [
+        "other"
+      ],
+      "buckets": [
+        "other"
+      ],
+      "html_url": "https://github.com/CASTvivian/chenzaikuaipao.io",
+      "description": "やり直すんだ。そして、次はうまくやる。",
+      "language": "JavaScript",
+      "stars": 1,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_chaitin__pandawiki",
+      "source_type": "github_star",
+      "repo": "chaitin/PandaWiki",
+      "repo_name": "PandaWiki",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/chaitin__PandaWiki.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/chaitin__PandaWiki",
+      "tags": [
+        "ai",
+        "docs",
+        "document",
+        "documentation",
+        "kb",
+        "knownledge",
+        "llm",
+        "llm_runtime",
+        "rag",
+        "self-hosted",
+        "wiki"
+      ],
+      "buckets": [
+        "rag",
+        "llm_runtime"
+      ],
+      "html_url": "https://github.com/chaitin/PandaWiki",
+      "description": "PandaWiki 是一款 AI 大模型驱动的开源知识库搭建系统，帮助你快速构建智能化的 产品文档、技术文档、FAQ、博客系统，借助大模型的力量为你提供 AI 创作、AI 问答、AI 搜索等能力。",
+      "language": "TypeScript",
+      "stars": 9565,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_chenglou__pretext",
+      "source_type": "github_star",
+      "repo": "chenglou/pretext",
+      "repo_name": "pretext",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/chenglou__pretext.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/chenglou__pretext",
+      "tags": [
+        "other"
+      ],
+      "buckets": [
+        "other"
+      ],
+      "html_url": "https://github.com/chenglou/pretext",
+      "description": "Fast, accurate & comprehensive text measurement & layout",
+      "language": "TypeScript",
+      "stars": 46781,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_chhsiching__github_chinese_top_charts",
+      "source_type": "github_star",
+      "repo": "ChHsiching/GitHub-Chinese-Top-Charts",
+      "repo_name": "GitHub-Chinese-Top-Charts",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/ChHsiching__GitHub-Chinese-Top-Charts.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/ChHsiching__GitHub-Chinese-Top-Charts",
+      "tags": [
+        "chinese",
+        "other",
+        "projects",
+        "top-charts"
+      ],
+      "buckets": [
+        "other"
+      ],
+      "html_url": "https://github.com/ChHsiching/GitHub-Chinese-Top-Charts",
+      "description": "🇨🇳 GitHub中文排行榜，帮助你发现高分优秀中文项目。",
+      "language": "Java",
+      "stars": 1767,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_claude_code_best__claude_code",
+      "source_type": "github_star",
+      "repo": "claude-code-best/claude-code",
+      "repo_name": "claude-code",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/claude-code-best__claude-code.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/claude-code-best__claude-code",
+      "tags": [
+        "agent"
+      ],
+      "buckets": [
+        "agent"
+      ],
+      "html_url": "https://github.com/claude-code-best/claude-code",
+      "description": "原汁原昧 Claude Code 可运行,可构建, 可调试版; 生产级工程化, 企业级可靠性; 安全无毒, 内存泄露修复",
+      "language": "TypeScript",
+      "stars": 18111,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_coleam00__archon",
+      "source_type": "github_star",
+      "repo": "coleam00/Archon",
+      "repo_name": "Archon",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/coleam00__Archon.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/coleam00__Archon",
+      "tags": [
+        "agent",
+        "ai",
+        "automation",
+        "bun",
+        "claude",
+        "cli",
+        "coding-assistant",
+        "developer-tools",
+        "mcp",
+        "typescript",
+        "workflow-engine",
+        "yaml"
+      ],
+      "buckets": [
+        "agent",
+        "mcp"
+      ],
+      "html_url": "https://github.com/coleam00/Archon",
+      "description": "The first open-source harness builder for AI coding. Make AI coding deterministic and repeatable.",
+      "language": "TypeScript",
+      "stars": 21341,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_coleam00__claude_memory_compiler",
+      "source_type": "github_star",
+      "repo": "coleam00/claude-memory-compiler",
+      "repo_name": "claude-memory-compiler",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/coleam00__claude-memory-compiler.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/coleam00__claude-memory-compiler",
+      "tags": [
+        "agent",
+        "llm_runtime",
+        "rag"
+      ],
+      "buckets": [
+        "agent",
+        "rag",
+        "llm_runtime"
+      ],
+      "html_url": "https://github.com/coleam00/claude-memory-compiler",
+      "description": "Give Claude Code a memory that evolves with your codebase. Hooks automatically capture sessions, the Claude Agent SDK extracts key decisions and lessons, and an LLM compiler organizes everything into structured, cross-referenced knowledge articles - inspired by Karpathy's LLM Knowledge Base architecture.",
+      "language": "Python",
+      "stars": 1040,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_comfy_org__comfyui",
+      "source_type": "github_star",
+      "repo": "Comfy-Org/ComfyUI",
+      "repo_name": "ComfyUI",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/Comfy-Org__ComfyUI.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/Comfy-Org__ComfyUI",
+      "tags": [
+        "ai",
+        "comfy",
+        "comfyui",
+        "llm_runtime",
+        "python",
+        "pytorch",
+        "stable-diffusion",
+        "video"
+      ],
+      "buckets": [
+        "llm_runtime",
+        "video"
+      ],
+      "html_url": "https://github.com/Comfy-Org/ComfyUI",
+      "description": "The most powerful and modular diffusion model GUI, api and backend with a graph/nodes interface.",
+      "language": "Python",
+      "stars": 112643,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_coreyhaines31__marketingskills",
+      "source_type": "github_star",
+      "repo": "coreyhaines31/marketingskills",
+      "repo_name": "marketingskills",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/coreyhaines31__marketingskills.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/coreyhaines31__marketingskills",
+      "tags": [
+        "agent",
+        "claude",
+        "codex",
+        "marketing"
+      ],
+      "buckets": [
+        "agent"
+      ],
+      "html_url": "https://github.com/coreyhaines31/marketingskills",
+      "description": "Marketing skills for Claude Code and AI agents. CRO, copywriting, SEO, analytics, and growth engineering.",
+      "language": "JavaScript",
+      "stars": 28153,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_danau5tin__multi_agent_coding_system",
+      "source_type": "github_star",
+      "repo": "Danau5tin/multi-agent-coding-system",
+      "repo_name": "multi-agent-coding-system",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/Danau5tin__multi-agent-coding-system.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/Danau5tin__multi-agent-coding-system",
+      "tags": [
+        "agent"
+      ],
+      "buckets": [
+        "agent"
+      ],
+      "html_url": "https://github.com/Danau5tin/multi-agent-coding-system",
+      "description": "Reached #13 on Stanford's Terminal Bench leaderboard. Orchestrator, explorer & coder agents working together with intelligent context sharing.",
+      "language": "Python",
+      "stars": 1376,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_danveloper__flash_moe",
+      "source_type": "github_star",
+      "repo": "danveloper/flash-moe",
+      "repo_name": "flash-moe",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/danveloper__flash-moe.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/danveloper__flash-moe",
+      "tags": [
+        "llm_runtime"
+      ],
+      "buckets": [
+        "llm_runtime"
+      ],
+      "html_url": "https://github.com/danveloper/flash-moe",
+      "description": "Running a big model on a small laptop",
+      "language": "Objective-C",
+      "stars": 3844,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_datawhalechina__easy_vibe",
+      "source_type": "github_star",
+      "repo": "datawhalechina/easy-vibe",
+      "repo_name": "easy-vibe",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/datawhalechina__easy-vibe.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/datawhalechina__easy-vibe",
+      "tags": [
+        "agent",
+        "ai",
+        "coding",
+        "course",
+        "deepseek",
+        "gemini",
+        "genai",
+        "gpt",
+        "llm",
+        "llm_runtime",
+        "low-code",
+        "mcp",
+        "nextjs",
+        "no-code",
+        "openai",
+        "programming",
+        "tutorial",
+        "vibe-coding",
+        "vibecoding",
+        "vscode",
+        "workflow"
+      ],
+      "buckets": [
+        "agent",
+        "mcp",
+        "llm_runtime"
+      ],
+      "html_url": "https://github.com/datawhalechina/easy-vibe",
+      "description": "💻 vibe coding 2026 | Your first modern Coding course for beginners to master step by step.",
+      "language": "JavaScript",
+      "stars": 10410,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_datawhalechina__hello_agents",
+      "source_type": "github_star",
+      "repo": "datawhalechina/hello-agents",
+      "repo_name": "hello-agents",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/datawhalechina__hello-agents.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/datawhalechina__hello-agents",
+      "tags": [
+        "agent",
+        "llm",
+        "llm_runtime",
+        "rag",
+        "tutorial"
+      ],
+      "buckets": [
+        "agent",
+        "rag",
+        "llm_runtime"
+      ],
+      "html_url": "https://github.com/datawhalechina/hello-agents",
+      "description": "📚 《从零开始构建智能体》——从零开始的智能体原理与实践教程",
+      "language": "Python",
+      "stars": 48290,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_davideuler__architecture_of_internet_product",
+      "source_type": "github_star",
+      "repo": "davideuler/architecture.of.internet-product",
+      "repo_name": "architecture.of.internet-product",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/davideuler__architecture.of.internet-product.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/davideuler__architecture.of.internet-product",
+      "tags": [
+        "architecture",
+        "architecture-guidelines",
+        "architecture-of-internet-product",
+        "chatgpt",
+        "dall-e-3",
+        "gpt",
+        "gpt-4",
+        "internet-architecutre",
+        "llm",
+        "llm_runtime",
+        "sora",
+        "ui"
+      ],
+      "buckets": [
+        "llm_runtime",
+        "ui"
+      ],
+      "html_url": "https://github.com/davideuler/architecture.of.internet-product",
+      "description": "互联网公司技术架构，微信/淘宝/微博/腾讯/阿里/美团点评/百度/OpenAI/Google/Facebook/Amazon/eBay的架构，欢迎PR补充",
+      "language": "HTML",
+      "stars": 20750,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_donchitos__claude_code_game_studios",
+      "source_type": "github_star",
+      "repo": "Donchitos/Claude-Code-Game-Studios",
+      "repo_name": "Claude-Code-Game-Studios",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/Donchitos__Claude-Code-Game-Studios.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/Donchitos__Claude-Code-Game-Studios",
+      "tags": [
+        "agent",
+        "ai-agents",
+        "ai-assisted-development",
+        "anthropic",
+        "claude",
+        "claude-code",
+        "game-design",
+        "game-development",
+        "gamedev",
+        "godot",
+        "indie-game-dev",
+        "unity",
+        "unreal-engine"
+      ],
+      "buckets": [
+        "agent"
+      ],
+      "html_url": "https://github.com/Donchitos/Claude-Code-Game-Studios",
+      "description": "Turn Claude Code into a full game dev studio — 49 AI agents, 72 workflow skills, and a complete coordination system mirroring real studio hierarchy.",
+      "language": "Shell",
+      "stars": 18524,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_durang__gbrain_http_wrapper",
+      "source_type": "github_star",
+      "repo": "durang/gbrain-http-wrapper",
+      "repo_name": "gbrain-http-wrapper",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/durang__gbrain-http-wrapper.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/durang__gbrain-http-wrapper",
+      "tags": [
+        "agent",
+        "mcp",
+        "ui"
+      ],
+      "buckets": [
+        "agent",
+        "mcp",
+        "ui"
+      ],
+      "html_url": "https://github.com/durang/gbrain-http-wrapper",
+      "description": "OAuth 2.1 + Bearer HTTP front-end for gbrain serve (stdio MCP). PKCE + DCR + refresh tokens. Connected: ChatGPT, Claude.ai, Codex CLI, Claude Desktop, OpenClaw, Hermes. Tailscale Funnel compatible.",
+      "language": "TypeScript",
+      "stars": 14,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_eliben__raft",
+      "source_type": "github_star",
+      "repo": "eliben/raft",
+      "repo_name": "raft",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/eliben__raft.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/eliben__raft",
+      "tags": [
+        "other"
+      ],
+      "buckets": [
+        "other"
+      ],
+      "html_url": "https://github.com/eliben/raft",
+      "description": ":rowboat: Raft implementation in Go",
+      "language": "Go",
+      "stars": 1375,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_emcie_co__parlant",
+      "source_type": "github_star",
+      "repo": "emcie-co/parlant",
+      "repo_name": "parlant",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/emcie-co__parlant.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/emcie-co__parlant",
+      "tags": [
+        "agent",
+        "ai-agents",
+        "ai-alignment",
+        "customer-service",
+        "customer-success",
+        "gemini",
+        "genai",
+        "hacktoberfest",
+        "llama3",
+        "llm",
+        "llm_runtime",
+        "openai",
+        "python"
+      ],
+      "buckets": [
+        "agent",
+        "llm_runtime"
+      ],
+      "html_url": "https://github.com/emcie-co/parlant",
+      "description": "Build reliable customer-facing AI agents with Parlant: an interaction control harness optimized for controlled, consistent, and predictable LLM interactions.",
+      "language": "Python",
+      "stars": 18069,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_enricoros__big_agi",
+      "source_type": "github_star",
+      "repo": "enricoros/big-AGI",
+      "repo_name": "big-AGI",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/enricoros__big-AGI.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/enricoros__big-AGI",
+      "tags": [
+        "agent",
+        "agi",
+        "ai-agents",
+        "ai-suite",
+        "ai-workspace",
+        "anthropic-api",
+        "deepseek-api",
+        "gemini-api",
+        "gpt",
+        "gpt-5",
+        "librechat",
+        "llm_runtime",
+        "multi-modal",
+        "multi-model",
+        "nano-banana",
+        "openai-responses-api",
+        "openwebui",
+        "perplexity-api",
+        "sonnet-4-5",
+        "ui",
+        "xai-api"
+      ],
+      "buckets": [
+        "agent",
+        "llm_runtime",
+        "ui"
+      ],
+      "html_url": "https://github.com/enricoros/big-AGI",
+      "description": "AI suite powered by state-of-the-art models and providing advanced AI/AGI functions. Includes AI personas, AGI functions, world-class Beam multi-model chats, text-to-image, voice, response streaming, code highlighting and execution, PDF import, presets for developers, much more. Deploy on-prem or in the cloud.",
+      "language": "TypeScript",
+      "stars": 6970,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_fchangjun__awesome_design_md_cn",
+      "source_type": "github_star",
+      "repo": "fchangjun/awesome-design-md-cn",
+      "repo_name": "awesome-design-md-cn",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/fchangjun__awesome-design-md-cn.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/fchangjun__awesome-design-md-cn",
+      "tags": [
+        "agent"
+      ],
+      "buckets": [
+        "agent"
+      ],
+      "html_url": "https://github.com/fchangjun/awesome-design-md-cn",
+      "description": "Stitch 提出的设计系统文档格式 —— 用纯文本 Markdown 记录设计系统，让 AI 编码 Agent 能够生成风格一致的 UI。",
+      "language": "HTML",
+      "stars": 84,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_forrestchang__andrej_karpathy_skills",
+      "source_type": "github_star",
+      "repo": "forrestchang/andrej-karpathy-skills",
+      "repo_name": "andrej-karpathy-skills",
+      "summary_file": "core-platform/data/brain_assets/reports/repo_summaries/forrestchang__andrej-karpathy-skills.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars/forrestchang__andrej-karpathy-skills",
+      "tags": [
+        "agent",
+        "llm_runtime"
+      ],
+      "buckets": [
+        "agent",
+        "llm_runtime"
+      ],
+      "html_url": "https://github.com/forrestchang/andrej-karpathy-skills",
+      "description": "A single CLAUDE.md file to improve Claude Code behavior, derived from Andrej Karpathy's observations on LLM coding pitfalls.",
+      "language": "None",
+      "stars": 127053,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_francyjglisboa__agent_skill_creator",
+      "source_type": "github_star",
+      "repo": "FrancyJGLisboa/agent-skill-creator",
+      "repo_name": "agent-skill-creator",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/FrancyJGLisboa__agent-skill-creator.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/FrancyJGLisboa__agent-skill-creator",
+      "tags": [
+        "agent",
+        "mcp"
+      ],
+      "buckets": [
+        "agent",
+        "mcp"
+      ],
+      "html_url": "https://github.com/FrancyJGLisboa/agent-skill-creator",
+      "description": "Turn any workflow into reusable AI agent skills that install on 14+ tools — Claude Code, Copilot, Cursor, Windsurf, Codex, Gemini, Kiro, and more. One SKILL.md, every platform.",
+      "language": "Python",
+      "stars": 905,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_g122622__synthos",
+      "source_type": "github_star",
+      "repo": "g122622/synthos",
+      "repo_name": "synthos",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/g122622__synthos.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/g122622__synthos",
+      "tags": [
+        "llm",
+        "llm_runtime",
+        "qq"
+      ],
+      "buckets": [
+        "llm_runtime"
+      ],
+      "html_url": "https://github.com/g122622/synthos",
+      "description": "基于 Node.js 和 TypeScript 构建的智能聊天记录分析系统，专注于 QQ 聊天记录的全链路数据处理与 AI 总结功能，融合自然语言处理、向量模型、任务调度与 Web 前端展示，为用户提供从原始聊天记录导入、上下文理解、兴趣度分析到可视化摘要输出的一站式解决方案。",
+      "language": "TypeScript",
+      "stars": 25,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_garrytan__gbrain",
+      "source_type": "github_star",
+      "repo": "garrytan/gbrain",
+      "repo_name": "gbrain",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/garrytan__gbrain.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/garrytan__gbrain",
+      "tags": [
+        "agent"
+      ],
+      "buckets": [
+        "agent"
+      ],
+      "html_url": "https://github.com/garrytan/gbrain",
+      "description": "Garry's Opinionated OpenClaw/Hermes Agent Brain",
+      "language": "TypeScript",
+      "stars": 15199,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_garrytan__gbrain_evals",
+      "source_type": "github_star",
+      "repo": "garrytan/gbrain-evals",
+      "repo_name": "gbrain-evals",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/garrytan__gbrain-evals.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/garrytan__gbrain-evals",
+      "tags": [
+        "other"
+      ],
+      "buckets": [
+        "other"
+      ],
+      "html_url": "https://github.com/garrytan/gbrain-evals",
+      "description": "-",
+      "language": "HTML",
+      "stars": 121,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_garrytan__gstack",
+      "source_type": "github_star",
+      "repo": "garrytan/gstack",
+      "repo_name": "gstack",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/garrytan__gstack.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/garrytan__gstack",
+      "tags": [
+        "agent",
+        "mcp"
+      ],
+      "buckets": [
+        "agent",
+        "mcp"
+      ],
+      "html_url": "https://github.com/garrytan/gstack",
+      "description": "Use Garry Tan's exact Claude Code setup: 23 opinionated tools that serve as CEO, Designer, Eng Manager, Release Manager, Doc Engineer, and QA",
+      "language": "TypeScript",
+      "stars": 94845,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_growinggit__github_chinese_top_charts",
+      "source_type": "github_star",
+      "repo": "GrowingGit/GitHub-Chinese-Top-Charts",
+      "repo_name": "GitHub-Chinese-Top-Charts",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/GrowingGit__GitHub-Chinese-Top-Charts.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/GrowingGit__GitHub-Chinese-Top-Charts",
+      "tags": [
+        "other"
+      ],
+      "buckets": [
+        "other"
+      ],
+      "html_url": "https://github.com/GrowingGit/GitHub-Chinese-Top-Charts",
+      "description": ":cn: GitHub中文排行榜，各语言分设「软件 | 资料」榜单，精准定位中文好项目。各取所需，高效学习。",
+      "language": "Java",
+      "stars": 107921,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_gsd_build__get_shit_done",
+      "source_type": "github_star",
+      "repo": "gsd-build/get-shit-done",
+      "repo_name": "get-shit-done",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/gsd-build__get-shit-done.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/gsd-build__get-shit-done",
+      "tags": [
+        "agent",
+        "claude-code",
+        "context-engineering",
+        "meta-prompting",
+        "spec-driven-development"
+      ],
+      "buckets": [
+        "agent"
+      ],
+      "html_url": "https://github.com/gsd-build/get-shit-done",
+      "description": "A light-weight and powerful meta-prompting, context engineering and spec-driven development system for Claude Code by TÂCHES.",
+      "language": "JavaScript",
+      "stars": 61786,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_gz_yami__mall4j",
+      "source_type": "github_star",
+      "repo": "gz-yami/mall4j",
+      "repo_name": "mall4j",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/gz-yami__mall4j.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/gz-yami__mall4j",
+      "tags": [
+        "java",
+        "jdk17",
+        "other",
+        "springboot3",
+        "uniapp",
+        "vue3"
+      ],
+      "buckets": [
+        "other"
+      ],
+      "html_url": "https://github.com/gz-yami/mall4j",
+      "description": "⭐️⭐️⭐️ 电商商城 小程序电商商城系统 PC商城 H5商城 APP商城 Java商城 O2O商城 跨境商城",
+      "language": "JavaScript",
+      "stars": 5054,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_hbai_ltd__toonflow_app",
+      "source_type": "github_star",
+      "repo": "HBAI-Ltd/Toonflow-app",
+      "repo_name": "Toonflow-app",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/HBAI-Ltd__Toonflow-app.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/HBAI-Ltd__Toonflow-app",
+      "tags": [
+        "ai",
+        "ai-content-creation",
+        "ai-tool",
+        "ai-video-generation",
+        "automation",
+        "content-generation",
+        "desktop-app",
+        "electron",
+        "generative-ai",
+        "image-generation",
+        "llm",
+        "llm_runtime",
+        "mcp",
+        "nodejs",
+        "shorts",
+        "text-to-video",
+        "typescript",
+        "ui",
+        "video",
+        "video-generation",
+        "vite",
+        "vue3"
+      ],
+      "buckets": [
+        "mcp",
+        "llm_runtime",
+        "ui",
+        "video"
+      ],
+      "html_url": "https://github.com/HBAI-Ltd/Toonflow-app",
+      "description": "Toonflow 是开源一站式 AI 短剧创作工具，将小说、剧本快速转化为动画短剧。集成 AI 编剧、智能分镜、角色与视频生成，跨平台桌面端轻量部署，助力创作者低成本批量产出视觉内容。Toonflow is an open-source AI tool that turns stories and scripts into animated short dramas. Features AI scriptwriting, storyboarding, character and video generation. A cross-platform desktop app for efficient content creation.",
+      "language": "HTML",
+      "stars": 7875,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_heygen_com__hyperframes",
+      "source_type": "github_star",
+      "repo": "heygen-com/hyperframes",
+      "repo_name": "hyperframes",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/heygen-com__hyperframes.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/heygen-com__hyperframes",
+      "tags": [
+        "agent",
+        "ai",
+        "animation",
+        "ffmpeg",
+        "framework",
+        "gsap",
+        "html",
+        "mcp",
+        "puppeteer",
+        "rendering",
+        "typescript",
+        "video"
+      ],
+      "buckets": [
+        "agent",
+        "mcp",
+        "video"
+      ],
+      "html_url": "https://github.com/heygen-com/hyperframes",
+      "description": "Write HTML. Render video. Built for agents.",
+      "language": "TypeScript",
+      "stars": 17624,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_hkuds__cli_anything",
+      "source_type": "github_star",
+      "repo": "HKUDS/CLI-Anything",
+      "repo_name": "CLI-Anything",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/HKUDS__CLI-Anything.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/HKUDS__CLI-Anything",
+      "tags": [
+        "agent"
+      ],
+      "buckets": [
+        "agent"
+      ],
+      "html_url": "https://github.com/HKUDS/CLI-Anything",
+      "description": "\"CLI-Anything: Making ALL Software Agent-Native\" -- CLI-Hub: https://clianything.cc/",
+      "language": "Python",
+      "stars": 34315,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_hkuds__openharness",
+      "source_type": "github_star",
+      "repo": "HKUDS/OpenHarness",
+      "repo_name": "OpenHarness",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/HKUDS__OpenHarness.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/HKUDS__OpenHarness",
+      "tags": [
+        "agent"
+      ],
+      "buckets": [
+        "agent"
+      ],
+      "html_url": "https://github.com/HKUDS/OpenHarness",
+      "description": "\"OpenHarness: Open Agent Harness with a Built-in Personal Agent--Ohmo!\"",
+      "language": "Python",
+      "stars": 12429,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_howardpen9__hermes_gbrain_bridge",
+      "source_type": "github_star",
+      "repo": "howardpen9/hermes-gbrain-bridge",
+      "repo_name": "hermes-gbrain-bridge",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/howardpen9__hermes-gbrain-bridge.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/howardpen9__hermes-gbrain-bridge",
+      "tags": [
+        "agent",
+        "agent-memory",
+        "ai-agent",
+        "bun",
+        "claude-code",
+        "codex-cli",
+        "developer-tools",
+        "gbrain",
+        "hermes",
+        "knowledge-graph",
+        "llm-tools",
+        "llm_runtime",
+        "markdown",
+        "mcp",
+        "memory-management",
+        "openclaw",
+        "rag",
+        "typescript"
+      ],
+      "buckets": [
+        "agent",
+        "rag",
+        "mcp",
+        "llm_runtime"
+      ],
+      "html_url": "https://github.com/howardpen9/hermes-gbrain-bridge",
+      "description": "Convert Hermes / OpenClaw agent memory (JSONL sessions, MEMORY.md) to markdown for gBrain ingest",
+      "language": "TypeScript",
+      "stars": 30,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_htdt__godogen",
+      "source_type": "github_star",
+      "repo": "htdt/godogen",
+      "repo_name": "godogen",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/htdt__godogen.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/htdt__godogen",
+      "tags": [
+        "agent",
+        "claude",
+        "claude-code",
+        "claude-code-skill",
+        "codex",
+        "codex-cli",
+        "codex-skill",
+        "game-development",
+        "godot",
+        "godot4",
+        "skills"
+      ],
+      "buckets": [
+        "agent"
+      ],
+      "html_url": "https://github.com/htdt/godogen",
+      "description": "Autonomous game development for Godot and Bevy with Claude Code and Codex",
+      "language": "Python",
+      "stars": 3163,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_hu_uh__awesome_design_md",
+      "source_type": "github_star",
+      "repo": "HU-UH/awesome-design-md",
+      "repo_name": "awesome-design-md",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/HU-UH__awesome-design-md.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/HU-UH__awesome-design-md",
+      "tags": [
+        "agent"
+      ],
+      "buckets": [
+        "agent"
+      ],
+      "html_url": "https://github.com/HU-UH/awesome-design-md",
+      "description": "55个精选网站设计系统 DESIGN.md，可给AI Agent使用生成匹配UI",
+      "language": "HTML",
+      "stars": 158,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_huytieu__cog_second_brain",
+      "source_type": "github_star",
+      "repo": "huytieu/COG-second-brain",
+      "repo_name": "COG-second-brain",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/huytieu__COG-second-brain.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/huytieu__COG-second-brain",
+      "tags": [
+        "agent",
+        "agentic",
+        "ai-agents",
+        "claude-code",
+        "cursor",
+        "garry-tan",
+        "gbrain",
+        "gstack",
+        "knowledge-management",
+        "obsidian",
+        "people-crm",
+        "productivity",
+        "rag",
+        "second-brain",
+        "self-evolving",
+        "specialist-sessions",
+        "worker-agents"
+      ],
+      "buckets": [
+        "agent",
+        "rag"
+      ],
+      "html_url": "https://github.com/huytieu/COG-second-brain",
+      "description": "Self-evolving second brain with 17 AI skills, 6 worker agents, and people CRM — inspired by Garry Tan's gstack and gbrain. Works with Claude Code, Cursor, Kiro, Gemini CLI, Codex.",
+      "language": "Shell",
+      "stars": 419,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_hyperspaceai__agi",
+      "source_type": "github_star",
+      "repo": "hyperspaceai/agi",
+      "repo_name": "agi",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/hyperspaceai__agi.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/hyperspaceai__agi",
+      "tags": [
+        "agent",
+        "agi",
+        "ai-agents",
+        "ai-research",
+        "artificial-general-intelligence",
+        "autonomous-agents",
+        "autonomous-agents-",
+        "autoresearch",
+        "collaborative-ai",
+        "decentralized",
+        "distributed-ai",
+        "llm",
+        "llm_runtime",
+        "p2p"
+      ],
+      "buckets": [
+        "agent",
+        "llm_runtime"
+      ],
+      "html_url": "https://github.com/hyperspaceai/agi",
+      "description": "The first distributed AGI system. Thousands of autonomous AI agents collaboratively train models, share experiments via P2P gossip, and push breakthroughs here. Fully peer-to-peer. Join from your browser or CLI.",
+      "language": "None",
+      "stars": 1659,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_iamdarcy__hioshop_miniprogram",
+      "source_type": "github_star",
+      "repo": "iamdarcy/hioshop-miniprogram",
+      "repo_name": "hioshop-miniprogram",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/iamdarcy__hioshop-miniprogram.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/iamdarcy__hioshop-miniprogram",
+      "tags": [
+        "miniprogram",
+        "nodejs",
+        "thinkjs",
+        "ui",
+        "vuejs",
+        "wechat-mini-program"
+      ],
+      "buckets": [
+        "ui"
+      ],
+      "html_url": "https://github.com/iamdarcy/hioshop-miniprogram",
+      "description": "微信小程序商城，开源免费商用，海风小店",
+      "language": "JavaScript",
+      "stars": 2604,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_jingyaogong__minimind",
+      "source_type": "github_star",
+      "repo": "jingyaogong/minimind",
+      "repo_name": "minimind",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/jingyaogong__minimind.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/jingyaogong__minimind",
+      "tags": [
+        "artificial-intelligence",
+        "large-language-model",
+        "llm_runtime"
+      ],
+      "buckets": [
+        "llm_runtime"
+      ],
+      "html_url": "https://github.com/jingyaogong/minimind",
+      "description": "🧠「大模型」2小时完全从0训练64M的小参数LLM！Train a 64M-parameter LLM from scratch in just 2h!",
+      "language": "Python",
+      "stars": 49610,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_jingyaogong__minimind_o",
+      "source_type": "github_star",
+      "repo": "jingyaogong/minimind-o",
+      "repo_name": "minimind-o",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/jingyaogong__minimind-o.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/jingyaogong__minimind-o",
+      "tags": [
+        "artificial-intelligence",
+        "chatgpt",
+        "llm_runtime",
+        "omni",
+        "ui"
+      ],
+      "buckets": [
+        "llm_runtime",
+        "ui"
+      ],
+      "html_url": "https://github.com/jingyaogong/minimind-o",
+      "description": "🎙️ 「大模型」从0训练0.1B能听能说能看的全模态Omni模型！A 0.1B Omni model trained from scratch, capable of listening, speaking, and seeing!",
+      "language": "Python",
+      "stars": 1094,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_jingyaogong__minimind_v",
+      "source_type": "github_star",
+      "repo": "jingyaogong/minimind-v",
+      "repo_name": "minimind-v",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/jingyaogong__minimind-v.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/jingyaogong__minimind-v",
+      "tags": [
+        "artificial-intelligence",
+        "chatgpt",
+        "llm_runtime",
+        "ui",
+        "vision-language-model"
+      ],
+      "buckets": [
+        "llm_runtime",
+        "ui"
+      ],
+      "html_url": "https://github.com/jingyaogong/minimind-v",
+      "description": "👀「大模型」2小时从0训练65M参数的视觉多模态VLM！Train a 65M-parameter VLM from scratch in just 2h! ",
+      "language": "Python",
+      "stars": 7880,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_juliusbrussee__caveman",
+      "source_type": "github_star",
+      "repo": "JuliusBrussee/caveman",
+      "repo_name": "caveman",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/JuliusBrussee__caveman.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/JuliusBrussee__caveman",
+      "tags": [
+        "agent",
+        "ai",
+        "anthropic",
+        "caveman",
+        "claude",
+        "claude-code",
+        "llm",
+        "llm_runtime",
+        "meme",
+        "prompt-engineering",
+        "skill",
+        "tokens"
+      ],
+      "buckets": [
+        "agent",
+        "llm_runtime"
+      ],
+      "html_url": "https://github.com/JuliusBrussee/caveman",
+      "description": "🪨 why use many token when few token do trick — Claude Code skill that cuts 65% of tokens by talking like caveman",
+      "language": "JavaScript",
+      "stars": 59037,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_k_dense_ai__scientific_agent_skills",
+      "source_type": "github_star",
+      "repo": "K-Dense-AI/scientific-agent-skills",
+      "repo_name": "scientific-agent-skills",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/K-Dense-AI__scientific-agent-skills.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/K-Dense-AI__scientific-agent-skills",
+      "tags": [
+        "agent",
+        "agent-skills",
+        "ai-scientist",
+        "bioinformatics",
+        "chemoinformatics",
+        "claude",
+        "claude-skills",
+        "claudecode",
+        "clinical-research",
+        "computational-biology",
+        "data-analysis",
+        "drug-discovery",
+        "genomics",
+        "materials-science",
+        "metabolomics",
+        "proteomics",
+        "scientific-computing",
+        "scientific-visualization"
+      ],
+      "buckets": [
+        "agent"
+      ],
+      "html_url": "https://github.com/K-Dense-AI/scientific-agent-skills",
+      "description": "A set of ready to use Agent Skills for research, science, engineering, analysis, finance and writing.",
+      "language": "Python",
+      "stars": 20767,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_karpathy__autoresearch",
+      "source_type": "github_star",
+      "repo": "karpathy/autoresearch",
+      "repo_name": "autoresearch",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/karpathy__autoresearch.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/karpathy__autoresearch",
+      "tags": [
+        "agent",
+        "ui"
+      ],
+      "buckets": [
+        "agent",
+        "ui"
+      ],
+      "html_url": "https://github.com/karpathy/autoresearch",
+      "description": "AI agents running research on single-GPU nanochat training automatically",
+      "language": "Python",
+      "stars": 80703,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_kzhrknt__awesome_design_md_jp",
+      "source_type": "github_star",
+      "repo": "kzhrknt/awesome-design-md-jp",
+      "repo_name": "awesome-design-md-jp",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/kzhrknt__awesome-design-md-jp.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/kzhrknt__awesome-design-md-jp",
+      "tags": [
+        "agent"
+      ],
+      "buckets": [
+        "agent"
+      ],
+      "html_url": "https://github.com/kzhrknt/awesome-design-md-jp",
+      "description": "日本語UIをAIエージェントに正しくつくらせるためのDESIGN.md集。Japanese DESIGN.md collection for AI agents — extending Google Stitch format with CJK typography.",
+      "language": "HTML",
+      "stars": 663,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_liangdabiao__godogen",
+      "source_type": "github_star",
+      "repo": "liangdabiao/Godogen",
+      "repo_name": "Godogen",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/liangdabiao__Godogen.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/liangdabiao__Godogen",
+      "tags": [
+        "agent"
+      ],
+      "buckets": [
+        "agent"
+      ],
+      "html_url": "https://github.com/liangdabiao/Godogen",
+      "description": "liang's Godogen: 使用 Claude Code 构建完整 Godot 4 项目的技能集,你描述你想要的内容。AI pipeline 会设计架构、生成美术资源、编写每一行代码、从运行的游戏引擎中截取截图，并修复看起来不对的地方。输出是一个真正的 Godot 4 项目，包含组织良好的场景、可读的脚本和正确的游戏架构。继承二开：github.com/htdt/godogen ",
+      "language": "Python",
+      "stars": 47,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_liangdabiao__seedance2_storyboard_generator",
+      "source_type": "github_star",
+      "repo": "liangdabiao/Seedance2-Storyboard-Generator",
+      "repo_name": "Seedance2-Storyboard-Generator",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/liangdabiao__Seedance2-Storyboard-Generator.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/liangdabiao__Seedance2-Storyboard-Generator",
+      "tags": [
+        "agent"
+      ],
+      "buckets": [
+        "agent"
+      ],
+      "html_url": "https://github.com/liangdabiao/Seedance2-Storyboard-Generator",
+      "description": "一句话：试错成本越来越高，提示词的重要性从来没有像今天这样大。Seedance 2.0 Storyboard Generator 开源剧情剧本Skill工具，帮佬友一键写好剧本 - 将小说/故事转化为多集视频。 为什么做这个？ 因为 seedance2 已经改变了一切，需要新的剧本剧情制作工具，更好的利用新AI的能力和更方便的制作短剧",
+      "language": "None",
+      "stars": 1183,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_lilishop__lilishop",
+      "source_type": "github_star",
+      "repo": "lilishop/lilishop",
+      "repo_name": "lilishop",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/lilishop__lilishop.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/lilishop__lilishop",
+      "tags": [
+        "docker-compose",
+        "elasticsearch",
+        "elk",
+        "jwt",
+        "k8s",
+        "mall",
+        "mybatis-plus",
+        "other",
+        "redis",
+        "rocketmq",
+        "shop",
+        "spring-cloud",
+        "springboot",
+        "uniapp",
+        "vue",
+        "xxl-job"
+      ],
+      "buckets": [
+        "other"
+      ],
+      "html_url": "https://github.com/lilishop/lilishop",
+      "description": "开源商城 JAVA商城 多语言商城 分销商城  uniapp商城 小程序商城  SAAS商城 ",
+      "language": "Java",
+      "stars": 4186,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_lllyasviel__fooocus",
+      "source_type": "github_star",
+      "repo": "lllyasviel/Fooocus",
+      "repo_name": "Fooocus",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/lllyasviel__Fooocus.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/lllyasviel__Fooocus",
+      "tags": [
+        "other"
+      ],
+      "buckets": [
+        "other"
+      ],
+      "html_url": "https://github.com/lllyasviel/Fooocus",
+      "description": "Focus on prompting and generating",
+      "language": "Python",
+      "stars": 48466,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_luongnv89__claude_howto",
+      "source_type": "github_star",
+      "repo": "luongnv89/claude-howto",
+      "repo_name": "claude-howto",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/luongnv89__claude-howto.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/luongnv89__claude-howto",
+      "tags": [
+        "agent",
+        "claude-code",
+        "guide",
+        "tutorial"
+      ],
+      "buckets": [
+        "agent"
+      ],
+      "html_url": "https://github.com/luongnv89/claude-howto",
+      "description": "A visual, example-driven guide to Claude Code — from basic concepts to advanced agents, with copy-paste templates that bring immediate value.",
+      "language": "Python",
+      "stars": 32542,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_marketcalls__openalgo",
+      "source_type": "github_star",
+      "repo": "marketcalls/openalgo",
+      "repo_name": "openalgo",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/marketcalls__openalgo.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/marketcalls__openalgo",
+      "tags": [
+        "algorithmic-trading",
+        "algotrading",
+        "amibroker",
+        "chartink",
+        "flask",
+        "metatrader",
+        "openalgo",
+        "other",
+        "python",
+        "quantative-trading",
+        "quantitative-finance",
+        "reactjs",
+        "self-hosting",
+        "sqlite",
+        "stock-market",
+        "stocks",
+        "trade-automation",
+        "trading-bot",
+        "tradingview"
+      ],
+      "buckets": [
+        "other"
+      ],
+      "html_url": "https://github.com/marketcalls/openalgo",
+      "description": "Open Source Algo Trading Platform for Everyone",
+      "language": "Python",
+      "stars": 1818,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_meliwat__awesome_design_md_pre_paywall",
+      "source_type": "github_star",
+      "repo": "Meliwat/awesome-design-md-pre-paywall",
+      "repo_name": "awesome-design-md-pre-paywall",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/Meliwat__awesome-design-md-pre-paywall.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/Meliwat__awesome-design-md-pre-paywall",
+      "tags": [
+        "agent"
+      ],
+      "buckets": [
+        "agent"
+      ],
+      "html_url": "https://github.com/Meliwat/awesome-design-md-pre-paywall",
+      "description": "Reverted snapshot of VoltAgent/awesome-design-md before getdesign.md links were introduced.",
+      "language": "HTML",
+      "stars": 27,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_microsoft__airsim",
+      "source_type": "github_star",
+      "repo": "microsoft/AirSim",
+      "repo_name": "AirSim",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/microsoft__AirSim.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/microsoft__AirSim",
+      "tags": [
+        "agent",
+        "ai",
+        "airsim",
+        "artificial-intelligence",
+        "autonomous-quadcoptor",
+        "autonomous-vehicles",
+        "computer-vision",
+        "control-systems",
+        "cross-platform",
+        "deep-reinforcement-learning",
+        "deeplearning",
+        "drones",
+        "pixhawk",
+        "platform-independent",
+        "research",
+        "self-driving-car",
+        "simulator",
+        "unreal-engine"
+      ],
+      "buckets": [
+        "agent"
+      ],
+      "html_url": "https://github.com/microsoft/AirSim",
+      "description": "Open source simulator for autonomous vehicles built on Unreal Engine / Unity, from Microsoft AI & Research",
+      "language": "C++",
+      "stars": 18162,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_microsoft__qlib",
+      "source_type": "github_star",
+      "repo": "microsoft/qlib",
+      "repo_name": "qlib",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/microsoft__qlib.md",
+      "local_path": "/Users/mofamaomi/Documents/本地ai/qlib",
+      "tags": [
+        "agent",
+        "algorithmic-trading",
+        "auto-quant",
+        "deep-learning",
+        "finance",
+        "fintech",
+        "investment",
+        "llm_runtime",
+        "machine-learning",
+        "paper",
+        "platform",
+        "python",
+        "quant",
+        "quant-dataset",
+        "quant-models",
+        "quantitative-finance",
+        "quantitative-trading",
+        "research",
+        "research-paper",
+        "stock-data"
+      ],
+      "buckets": [
+        "agent",
+        "llm_runtime"
+      ],
+      "html_url": "https://github.com/microsoft/qlib",
+      "description": "Qlib is an AI-oriented Quant investment platform that aims to use AI tech to empower Quant Research, from exploring ideas to implementing productions. Qlib supports diverse ML modeling paradigms, including supervised learning, market dynamics modeling, and RL, and is now equipped with https://github.com/microsoft/RD-Agent to automate R&D process.",
+      "language": "Python",
+      "stars": 42752,
+      "status": "indexed",
+      "clone_status": "local_existing"
+    },
+    {
+      "asset_id": "brain_mininglamp_ai__mano_p",
+      "source_type": "github_star",
+      "repo": "Mininglamp-AI/Mano-P",
+      "repo_name": "Mano-P",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/Mininglamp-AI__Mano-P.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/Mininglamp-AI__Mano-P",
+      "tags": [
+        "agent",
+        "computer-use-agents",
+        "desktop-automation",
+        "edge-computing",
+        "gui-automation",
+        "gui-grounding",
+        "llm_runtime",
+        "local-inference",
+        "mano",
+        "mano-p",
+        "multimodal-ai",
+        "on-device-ai",
+        "osworld",
+        "ui",
+        "vision-language-action",
+        "visual-language-model"
+      ],
+      "buckets": [
+        "agent",
+        "llm_runtime",
+        "ui"
+      ],
+      "html_url": "https://github.com/Mininglamp-AI/Mano-P",
+      "description": "Mano-P: Open-source GUI-VLA agent for edge devices. #1 on OSWorld (specialized, 58.2%). Runs locally on Apple M4 Mac mini/MacBook — no data leaves your device.Mano-P 是一个开源 GUI-VLA 项目，支持在 Mac mini/MacBook 上或通过算力棒本地运行推理，实现纯视觉驱动的跨平台 GUI 自动化操作。数据完全本地处理，支持复杂多步骤任务规划与执行。",
+      "language": "None",
+      "stars": 1895,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_modelscope__sirchmunk",
+      "source_type": "github_star",
+      "repo": "modelscope/sirchmunk",
+      "repo_name": "sirchmunk",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/modelscope__sirchmunk.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/modelscope__sirchmunk",
+      "tags": [
+        "llm_runtime"
+      ],
+      "buckets": [
+        "llm_runtime"
+      ],
+      "html_url": "https://github.com/modelscope/sirchmunk",
+      "description": "🐿️ Sirchmunk:  Raw data to self-evolving intelligence, real-time.",
+      "language": "Python",
+      "stars": 1100,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_moyangzhan__langchain4j_aideepin",
+      "source_type": "github_star",
+      "repo": "moyangzhan/langchain4j-aideepin",
+      "repo_name": "langchain4j-aideepin",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/moyangzhan__langchain4j-aideepin.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/moyangzhan__langchain4j-aideepin",
+      "tags": [
+        "agent",
+        "ai-agent",
+        "ai-workflow",
+        "graphrag",
+        "knowlege-base",
+        "langchain4j",
+        "mcp",
+        "rag",
+        "ui"
+      ],
+      "buckets": [
+        "agent",
+        "rag",
+        "mcp",
+        "ui"
+      ],
+      "html_url": "https://github.com/moyangzhan/langchain4j-aideepin",
+      "description": "基于AI的工作效率提升工具（聊天、绘画、知识库、工作流、 MCP服务市场、语音输入输出、长期记忆） | Ai-based productivity tools (Chat,Draw,RAG,Workflow,MCP marketplace, ASR,TTS, Long-term memory etc)",
+      "language": "Java",
+      "stars": 1273,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_moyangzhan__langchain4j_aideepin_web",
+      "source_type": "github_star",
+      "repo": "moyangzhan/langchain4j-aideepin-web",
+      "repo_name": "langchain4j-aideepin-web",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/moyangzhan__langchain4j-aideepin-web.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/moyangzhan__langchain4j-aideepin-web",
+      "tags": [
+        "mcp",
+        "rag",
+        "ui"
+      ],
+      "buckets": [
+        "rag",
+        "mcp",
+        "ui"
+      ],
+      "html_url": "https://github.com/moyangzhan/langchain4j-aideepin-web",
+      "description": "基于AI的工作效率提升工具（聊天、绘画、知识库、工作流、 MCP服务市场、语音输入输出、长期记忆） | Ai-based productivity tools (Chat,Draw,RAG,Workflow,MCP marketplace, ASR,TTS, Long-term memory etc)",
+      "language": "Vue",
+      "stars": 146,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_msitarzewski__agency_agents",
+      "source_type": "github_star",
+      "repo": "msitarzewski/agency-agents",
+      "repo_name": "agency-agents",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/msitarzewski__agency-agents.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/msitarzewski__agency-agents",
+      "tags": [
+        "agent",
+        "ui"
+      ],
+      "buckets": [
+        "agent",
+        "ui"
+      ],
+      "html_url": "https://github.com/msitarzewski/agency-agents",
+      "description": "A complete AI agency at your fingertips - From frontend wizards to Reddit community ninjas, from whimsy injectors to reality checkers. Each agent is a specialized expert with personality, processes, and proven deliverables.",
+      "language": "Shell",
+      "stars": 96502,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_mukul975__anthropic_cybersecurity_skills",
+      "source_type": "github_star",
+      "repo": "mukul975/Anthropic-Cybersecurity-Skills",
+      "repo_name": "Anthropic-Cybersecurity-Skills",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/mukul975__Anthropic-Cybersecurity-Skills.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/mukul975__Anthropic-Cybersecurity-Skills",
+      "tags": [
+        "agent",
+        "ai-agents",
+        "claude-code",
+        "cloud-security",
+        "cybersecurity",
+        "devsecops",
+        "ethical-hacking",
+        "incident-response",
+        "infosec",
+        "llm",
+        "llm_runtime",
+        "malware-analysis",
+        "mcp",
+        "mitre-attack",
+        "nist-csf",
+        "osint",
+        "penetration-testing",
+        "red-team",
+        "security",
+        "security-automation",
+        "threat-hunting",
+        "threat-intelligence"
+      ],
+      "buckets": [
+        "agent",
+        "mcp",
+        "llm_runtime"
+      ],
+      "html_url": "https://github.com/mukul975/Anthropic-Cybersecurity-Skills",
+      "description": "754 structured cybersecurity skills for AI agents · Mapped to 5 frameworks: MITRE ATT&CK, NIST CSF 2.0, MITRE ATLAS, D3FEND & NIST AI RMF · agentskills.io standard · Works with Claude Code, GitHub Copilot, Codex CLI, Cursor, Gemini CLI & 20+ platforms · 26 security domains · Apache 2.0",
+      "language": "Python",
+      "stars": 6246,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_multica_ai__multica",
+      "source_type": "github_star",
+      "repo": "multica-ai/multica",
+      "repo_name": "multica",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/multica-ai__multica.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/multica-ai__multica",
+      "tags": [
+        "agent"
+      ],
+      "buckets": [
+        "agent"
+      ],
+      "html_url": "https://github.com/multica-ai/multica",
+      "description": "The open-source managed agents platform. Turn coding agents into real teammates — assign tasks, track progress, compound skills.",
+      "language": "TypeScript",
+      "stars": 27728,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_nanbouking__wetravel",
+      "source_type": "github_star",
+      "repo": "nanbouking/WeTravel",
+      "repo_name": "WeTravel",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/nanbouking__WeTravel.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/nanbouking__WeTravel",
+      "tags": [
+        "other",
+        "travel"
+      ],
+      "buckets": [
+        "other"
+      ],
+      "html_url": "https://github.com/nanbouking/WeTravel",
+      "description": "旅游景区门户小程序是一个为游客朋友提供多元化服务的一站式数字文旅平台，提供“吃、住、游、购、娱”等旅游行程中的多种服务，全面支持景区介绍，景点攻略，景点预约，停车预约、景区导览等功能，游客可以在小程序中了解旅游度假区的景点信息、历史文化、各类活动等。前后端代码完整，采用腾讯提供的小程序云开发解决方案，无须服务器和域名。",
+      "language": "JavaScript",
+      "stars": 370,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_nanmicoder__mediacrawler",
+      "source_type": "github_star",
+      "repo": "NanmiCoder/MediaCrawler",
+      "repo_name": "MediaCrawler",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/NanmiCoder__MediaCrawler.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/NanmiCoder__MediaCrawler",
+      "tags": [
+        "other"
+      ],
+      "buckets": [
+        "other"
+      ],
+      "html_url": "https://github.com/NanmiCoder/MediaCrawler",
+      "description": "小红书笔记 | 评论爬虫、抖音视频 | 评论爬虫、快手视频 | 评论爬虫、B 站视频 ｜ 评论爬虫、微博帖子 ｜ 评论爬虫、百度贴吧帖子 ｜ 百度贴吧评论回复爬虫  | 知乎问答文章｜评论爬虫",
+      "language": "Python",
+      "stars": 49499,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_nicedreamzapp__claude_code_local",
+      "source_type": "github_star",
+      "repo": "nicedreamzapp/claude-code-local",
+      "repo_name": "claude-code-local",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/nicedreamzapp__claude-code-local.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/nicedreamzapp__claude-code-local",
+      "tags": [
+        "abliterated",
+        "agent",
+        "ai-privacy",
+        "airgap",
+        "ambient-computing",
+        "anthropic",
+        "apple-silicon",
+        "browser-agent",
+        "claude-code",
+        "gemma",
+        "llama",
+        "llm_runtime",
+        "local-ai",
+        "local-llm",
+        "macos",
+        "mlx",
+        "mlx-lm",
+        "offline-ai",
+        "on-device-ai",
+        "private-ai",
+        "qwen",
+        "voice-ai"
+      ],
+      "buckets": [
+        "agent",
+        "llm_runtime"
+      ],
+      "html_url": "https://github.com/nicedreamzapp/claude-code-local",
+      "description": "Run Claude Code 100% on-device with local AI on Apple Silicon. MLX-native Anthropic-API server, 65 tok/s Qwen 3.5 122B, Llama 3.3 70B, Gemma 4 31B. Private, offline, airgap-ready. Built for NDA / legal / healthcare workflows.",
+      "language": "Python",
+      "stars": 2597,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_nikmcfly__mirofish_offline",
+      "source_type": "github_star",
+      "repo": "nikmcfly/MiroFish-Offline",
+      "repo_name": "MiroFish-Offline",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/nikmcfly__MiroFish-Offline.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/nikmcfly__MiroFish-Offline",
+      "tags": [
+        "agent",
+        "ai",
+        "llm_runtime",
+        "multi-agent",
+        "neo4j",
+        "offline",
+        "ollama",
+        "open-source",
+        "prediction",
+        "simulation",
+        "swarm-intelligence",
+        "vue"
+      ],
+      "buckets": [
+        "agent",
+        "llm_runtime"
+      ],
+      "html_url": "https://github.com/nikmcfly/MiroFish-Offline",
+      "description": "Offline multi-agent simulation & prediction engine. English fork of MiroFish with Neo4j + Ollama local stack.",
+      "language": "Python",
+      "stars": 2154,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_nomic_ai__gpt4all",
+      "source_type": "github_star",
+      "repo": "nomic-ai/gpt4all",
+      "repo_name": "gpt4all",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/nomic-ai__gpt4all.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/nomic-ai__gpt4all",
+      "tags": [
+        "ai-chat",
+        "llm-inference",
+        "llm_runtime",
+        "ui"
+      ],
+      "buckets": [
+        "llm_runtime",
+        "ui"
+      ],
+      "html_url": "https://github.com/nomic-ai/gpt4all",
+      "description": "GPT4All: Run Local LLMs on Any Device. Open-source and available for commercial use.",
+      "language": "C++",
+      "stars": 77365,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_nousresearch__hermes_agent",
+      "source_type": "github_star",
+      "repo": "NousResearch/hermes-agent",
+      "repo_name": "hermes-agent",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/NousResearch__hermes-agent.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/NousResearch__hermes-agent",
+      "tags": [
+        "agent",
+        "ai",
+        "ai-agent",
+        "ai-agents",
+        "anthropic",
+        "chatgpt",
+        "claude",
+        "claude-code",
+        "clawdbot",
+        "codex",
+        "hermes",
+        "hermes-agent",
+        "llm",
+        "llm_runtime",
+        "moltbot",
+        "nous-research",
+        "openai",
+        "openclaw",
+        "ui"
+      ],
+      "buckets": [
+        "agent",
+        "llm_runtime",
+        "ui"
+      ],
+      "html_url": "https://github.com/NousResearch/hermes-agent",
+      "description": "The agent that grows with you",
+      "language": "Python",
+      "stars": 146973,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_oboard__claude_code_rev",
+      "source_type": "github_star",
+      "repo": "oboard/claude-code-rev",
+      "repo_name": "claude-code-rev",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/oboard__claude-code-rev.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/oboard__claude-code-rev",
+      "tags": [
+        "agent",
+        "claude-code"
+      ],
+      "buckets": [
+        "agent"
+      ],
+      "html_url": "https://github.com/oboard/claude-code-rev",
+      "description": "Runnable ClaudeCode source code",
+      "language": "TypeScript",
+      "stars": 3123,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_obra__superpowers",
+      "source_type": "github_star",
+      "repo": "obra/superpowers",
+      "repo_name": "superpowers",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/obra__superpowers.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/obra__superpowers",
+      "tags": [
+        "agent"
+      ],
+      "buckets": [
+        "agent"
+      ],
+      "html_url": "https://github.com/obra/superpowers",
+      "description": "An agentic skills framework & software development methodology that works.",
+      "language": "Shell",
+      "stars": 188042,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_openai__codex",
+      "source_type": "github_star",
+      "repo": "openai/codex",
+      "repo_name": "codex",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/openai__codex.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/openai__codex",
+      "tags": [
+        "agent"
+      ],
+      "buckets": [
+        "agent"
+      ],
+      "html_url": "https://github.com/openai/codex",
+      "description": "Lightweight coding agent that runs in your terminal",
+      "language": "Rust",
+      "stars": 82152,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_openai__symphony",
+      "source_type": "github_star",
+      "repo": "openai/symphony",
+      "repo_name": "symphony",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/openai__symphony.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/openai__symphony",
+      "tags": [
+        "agent"
+      ],
+      "buckets": [
+        "agent"
+      ],
+      "html_url": "https://github.com/openai/symphony",
+      "description": "Symphony turns project work into isolated, autonomous implementation runs, allowing teams to manage work instead of supervising coding agents.",
+      "language": "Elixir",
+      "stars": 23534,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_openbmb__voxcpm",
+      "source_type": "github_star",
+      "repo": "OpenBMB/VoxCPM",
+      "repo_name": "VoxCPM",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/OpenBMB__VoxCPM.md",
+      "local_path": "/Users/mofamaomi/Documents/本地ai/VoxCPM",
+      "tags": [
+        "audio",
+        "deeplearning",
+        "llm_runtime",
+        "minicpm",
+        "multilingual",
+        "python",
+        "pytorch",
+        "speech",
+        "speech-synthesis",
+        "text-to-speech",
+        "tts",
+        "tts-model",
+        "voice-cloning",
+        "voice-design",
+        "voxcpm"
+      ],
+      "buckets": [
+        "llm_runtime"
+      ],
+      "html_url": "https://github.com/OpenBMB/VoxCPM",
+      "description": "VoxCPM2: Tokenizer-Free TTS for Multilingual Speech Generation, Creative Voice Design, and True-to-Life Cloning",
+      "language": "Python",
+      "stars": 18517,
+      "status": "indexed",
+      "clone_status": "local_existing"
+    },
+    {
+      "asset_id": "brain_openclaw__openclaw",
+      "source_type": "github_star",
+      "repo": "openclaw/openclaw",
+      "repo_name": "openclaw",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/openclaw__openclaw.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/openclaw__openclaw",
+      "tags": [
+        "ai",
+        "assistant",
+        "crustacean",
+        "molty",
+        "openclaw",
+        "other",
+        "own-your-data",
+        "personal"
+      ],
+      "buckets": [
+        "other"
+      ],
+      "html_url": "https://github.com/openclaw/openclaw",
+      "description": "Your own personal AI assistant. Any OS. Any Platform. The lobster way. 🦞 ",
+      "language": "TypeScript",
+      "stars": 371302,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_opendatalab__mineru",
+      "source_type": "github_star",
+      "repo": "opendatalab/MinerU",
+      "repo_name": "MinerU",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/opendatalab__MinerU.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/opendatalab__MinerU",
+      "tags": [
+        "agent",
+        "ai4science",
+        "document-analysis",
+        "docx",
+        "extract-data",
+        "layout-analysis",
+        "llm_runtime",
+        "ocr",
+        "parser",
+        "pdf",
+        "pdf-converter",
+        "pdf-extractor-llm",
+        "pdf-extractor-pretrain",
+        "pdf-extractor-rag",
+        "pdf-parser",
+        "pptx",
+        "python",
+        "rag",
+        "xlsx"
+      ],
+      "buckets": [
+        "agent",
+        "rag",
+        "llm_runtime"
+      ],
+      "html_url": "https://github.com/opendatalab/MinerU",
+      "description": "Transforms complex documents like PDFs and Office docs into LLM-ready markdown/JSON for your Agentic workflows.",
+      "language": "Python",
+      "stars": 62790,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_opendatalab__mineru_diffusion",
+      "source_type": "github_star",
+      "repo": "opendatalab/MinerU-Diffusion",
+      "repo_name": "MinerU-Diffusion",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/opendatalab__MinerU-Diffusion.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/opendatalab__MinerU-Diffusion",
+      "tags": [
+        "ai4science",
+        "diffusion",
+        "dlm",
+        "document-analysis",
+        "extract-data",
+        "layout-analysis",
+        "llada",
+        "llm_runtime",
+        "ocr",
+        "parser",
+        "pdf",
+        "pdf-converter",
+        "pdf-extractor-llm",
+        "pdf-extractor-pretrain",
+        "pdf-extractor-rag",
+        "pdf-parser",
+        "python",
+        "rag",
+        "video"
+      ],
+      "buckets": [
+        "rag",
+        "llm_runtime",
+        "video"
+      ],
+      "html_url": "https://github.com/opendatalab/MinerU-Diffusion",
+      "description": "A diffusion-based framework for document OCR that replaces autoregressive decoding with block-level parallel diffusion decoding. ",
+      "language": "Python",
+      "stars": 590,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_opendataloader_project__opendataloader_pdf",
+      "source_type": "github_star",
+      "repo": "opendataloader-project/opendataloader-pdf",
+      "repo_name": "opendataloader-pdf",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/opendataloader-project__opendataloader-pdf.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/opendataloader-project__opendataloader-pdf",
+      "tags": [
+        "a11y",
+        "accessibility",
+        "ai",
+        "bounding-box",
+        "document-parsing",
+        "eaa",
+        "html",
+        "json",
+        "markdown",
+        "ocr",
+        "ocr-recognition",
+        "pdf",
+        "pdf-accessibility",
+        "pdf-converter",
+        "pdf-extraction",
+        "pdf-parser",
+        "pdf-ua",
+        "rag",
+        "tables",
+        "tagged-pdf"
+      ],
+      "buckets": [
+        "rag"
+      ],
+      "html_url": "https://github.com/opendataloader-project/opendataloader-pdf",
+      "description": "PDF Parser for AI-ready data. Automate PDF accessibility. Open-source.",
+      "language": "Java",
+      "stars": 21176,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_opendcai__dataflex",
+      "source_type": "github_star",
+      "repo": "OpenDCAI/DataFlex",
+      "repo_name": "DataFlex",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/OpenDCAI__DataFlex.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/OpenDCAI__DataFlex",
+      "tags": [
+        "data",
+        "data-mixture",
+        "data-model-interaction",
+        "data-reweighting",
+        "data-science",
+        "data-selection",
+        "llm_runtime",
+        "model-training"
+      ],
+      "buckets": [
+        "llm_runtime"
+      ],
+      "html_url": "https://github.com/OpenDCAI/DataFlex",
+      "description": "DataFlex is a data-centric training framework that enhances model performance by either selecting the most influential samples, optimizing their weights, or adjusting their mixing ratios.",
+      "language": "Python",
+      "stars": 617,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_openmoss__moss_tts_nano",
+      "source_type": "github_star",
+      "repo": "OpenMOSS/MOSS-TTS-Nano",
+      "repo_name": "MOSS-TTS-Nano",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/OpenMOSS__MOSS-TTS-Nano.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/OpenMOSS__MOSS-TTS-Nano",
+      "tags": [
+        "audio-tokenizer",
+        "chinese",
+        "english",
+        "llm_runtime",
+        "multi-modality",
+        "multilingual",
+        "realtime",
+        "streaming-audio",
+        "tts",
+        "voice-clone"
+      ],
+      "buckets": [
+        "llm_runtime"
+      ],
+      "html_url": "https://github.com/OpenMOSS/MOSS-TTS-Nano",
+      "description": "MOSS-TTS-Nano is an open-source multilingual tiny speech generation model from MOSI.AI and the OpenMOSS team. With only 0.1B parameters, it is designed for realtime speech generation, can run directly on CPU without a GPU, and keeps the deployment stack simple enough for local demos, web serving, and lightweight product integration.",
+      "language": "Python",
+      "stars": 2910,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_openmoss__moss_tts_nano_reader",
+      "source_type": "github_star",
+      "repo": "OpenMOSS/MOSS-TTS-Nano-Reader",
+      "repo_name": "MOSS-TTS-Nano-Reader",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/OpenMOSS__MOSS-TTS-Nano-Reader.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/OpenMOSS__MOSS-TTS-Nano-Reader",
+      "tags": [
+        "other"
+      ],
+      "buckets": [
+        "other"
+      ],
+      "html_url": "https://github.com/OpenMOSS/MOSS-TTS-Nano-Reader",
+      "description": "-",
+      "language": "JavaScript",
+      "stars": 40,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_paidax01__math_curve_loaders",
+      "source_type": "github_star",
+      "repo": "Paidax01/math-curve-loaders",
+      "repo_name": "math-curve-loaders",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/Paidax01__math-curve-loaders.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/Paidax01__math-curve-loaders",
+      "tags": [
+        "other"
+      ],
+      "buckets": [
+        "other"
+      ],
+      "html_url": "https://github.com/Paidax01/math-curve-loaders",
+      "description": "A lightweight gallery of mathematical curve based loading animations with modal previews, formulas, and copyable code snippets.",
+      "language": "JavaScript",
+      "stars": 799,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_panniantong__agent_reach",
+      "source_type": "github_star",
+      "repo": "Panniantong/Agent-Reach",
+      "repo_name": "Agent-Reach",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/Panniantong__Agent-Reach.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/Panniantong__Agent-Reach",
+      "tags": [
+        "agent",
+        "agent-infrastructure",
+        "ai-agent",
+        "ai-search",
+        "automation",
+        "bilibili",
+        "claude-code",
+        "cli",
+        "cursor",
+        "free-api",
+        "llm-tools",
+        "llm_runtime",
+        "mcp",
+        "python",
+        "reddit-scraper",
+        "twitter-scraper",
+        "web-scraper",
+        "xiaohongshu",
+        "youtube-transcript"
+      ],
+      "buckets": [
+        "agent",
+        "mcp",
+        "llm_runtime"
+      ],
+      "html_url": "https://github.com/Panniantong/Agent-Reach",
+      "description": "Give your AI agent eyes to see the entire internet. Read & search Twitter, Reddit, YouTube, GitHub, Bilibili, XiaoHongShu — one CLI, zero API fees.",
+      "language": "Python",
+      "stars": 19344,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_perkfly__ex_skill",
+      "source_type": "github_star",
+      "repo": "perkfly/ex-skill",
+      "repo_name": "ex-skill",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/perkfly__ex-skill.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/perkfly__ex-skill",
+      "tags": [
+        "agent"
+      ],
+      "buckets": [
+        "agent"
+      ],
+      "html_url": "https://github.com/perkfly/ex-skill",
+      "description": "前任 skill",
+      "language": "Python",
+      "stars": 1568,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_pixel_cellar__claude_code_game_studios",
+      "source_type": "github_star",
+      "repo": "pixel-cellar/Claude-Code-Game-Studios",
+      "repo_name": "Claude-Code-Game-Studios",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/pixel-cellar__Claude-Code-Game-Studios.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/pixel-cellar__Claude-Code-Game-Studios",
+      "tags": [
+        "agent"
+      ],
+      "buckets": [
+        "agent"
+      ],
+      "html_url": "https://github.com/pixel-cellar/Claude-Code-Game-Studios",
+      "description": "48 协同代理管理独立游戏开发的 Claude Code 架构 (中文本地化版本)",
+      "language": "Shell",
+      "stars": 153,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_public_apis__public_apis",
+      "source_type": "github_star",
+      "repo": "public-apis/public-apis",
+      "repo_name": "public-apis",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/public-apis__public-apis.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/public-apis__public-apis",
+      "tags": [
+        "api",
+        "apis",
+        "dataset",
+        "development",
+        "free",
+        "list",
+        "lists",
+        "open-source",
+        "other",
+        "public",
+        "public-api",
+        "public-apis",
+        "resources",
+        "software"
+      ],
+      "buckets": [
+        "other"
+      ],
+      "html_url": "https://github.com/public-apis/public-apis",
+      "description": "A collective list of free APIs",
+      "language": "Python",
+      "stars": 434539,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_punkpeye__awesome_mcp_servers",
+      "source_type": "github_star",
+      "repo": "punkpeye/awesome-mcp-servers",
+      "repo_name": "awesome-mcp-servers",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/punkpeye__awesome-mcp-servers.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/punkpeye__awesome-mcp-servers",
+      "tags": [
+        "ai",
+        "mcp"
+      ],
+      "buckets": [
+        "mcp"
+      ],
+      "html_url": "https://github.com/punkpeye/awesome-mcp-servers",
+      "description": "A collection of MCP servers.",
+      "language": "None",
+      "stars": 86780,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_pzy2000__repogenesis",
+      "source_type": "github_star",
+      "repo": "pzy2000/RepoGenesis",
+      "repo_name": "RepoGenesis",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/pzy2000__RepoGenesis.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/pzy2000__RepoGenesis",
+      "tags": [
+        "other"
+      ],
+      "buckets": [
+        "other"
+      ],
+      "html_url": "https://github.com/pzy2000/RepoGenesis",
+      "description": "1st Multilingual Benchmark for Repository-Level E2E Microservice Generation",
+      "language": "Python",
+      "stars": 96,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_rowboatlabs__rowboat",
+      "source_type": "github_star",
+      "repo": "rowboatlabs/rowboat",
+      "repo_name": "rowboat",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/rowboatlabs__rowboat.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/rowboatlabs__rowboat",
+      "tags": [
+        "agent",
+        "agents",
+        "agents-sdk",
+        "ai",
+        "ai-agents",
+        "ai-agents-automation",
+        "chatgpt",
+        "claude-code",
+        "claude-cowork",
+        "generative-ai",
+        "llm",
+        "llm_runtime",
+        "multiagent",
+        "opeani",
+        "open-source",
+        "orchestration",
+        "productivity",
+        "ui"
+      ],
+      "buckets": [
+        "agent",
+        "llm_runtime",
+        "ui"
+      ],
+      "html_url": "https://github.com/rowboatlabs/rowboat",
+      "description": "Open-source AI coworker, with memory",
+      "language": "TypeScript",
+      "stars": 14119,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_ryoppippi__ccusage",
+      "source_type": "github_star",
+      "repo": "ryoppippi/ccusage",
+      "repo_name": "ccusage",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/ryoppippi__ccusage.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/ryoppippi__ccusage",
+      "tags": [
+        "agent",
+        "mcp"
+      ],
+      "buckets": [
+        "agent",
+        "mcp"
+      ],
+      "html_url": "https://github.com/ryoppippi/ccusage",
+      "description": "A CLI tool for analyzing Claude Code/Codex CLI usage from local JSONL files.",
+      "language": "TypeScript",
+      "stars": 14095,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_safishamsi__graphify",
+      "source_type": "github_star",
+      "repo": "safishamsi/graphify",
+      "repo_name": "graphify",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/safishamsi__graphify.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/safishamsi__graphify",
+      "tags": [
+        "agent",
+        "antigravity",
+        "claude-code",
+        "codex",
+        "gemini",
+        "graphrag",
+        "knowledge-graph",
+        "leiden",
+        "openclaw",
+        "rag",
+        "skills",
+        "tree-sitter",
+        "video"
+      ],
+      "buckets": [
+        "agent",
+        "rag",
+        "video"
+      ],
+      "html_url": "https://github.com/safishamsi/graphify",
+      "description": "AI coding assistant skill (Claude Code, Codex, OpenCode, Cursor, Gemini CLI, and more). Turn any folder of code, SQL schemas, R scripts, shell scripts, docs, papers, images, or videos into a queryable knowledge graph. App code + database schema + infrastructure in one graph.",
+      "language": "Python",
+      "stars": 47241,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_sanbuphy__learn_coding_agent",
+      "source_type": "github_star",
+      "repo": "sanbuphy/learn-coding-agent",
+      "repo_name": "learn-coding-agent",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/sanbuphy__learn-coding-agent.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/sanbuphy__learn-coding-agent",
+      "tags": [
+        "agent"
+      ],
+      "buckets": [
+        "agent"
+      ],
+      "html_url": "https://github.com/sanbuphy/learn-coding-agent",
+      "description": "Research on Coding Agents",
+      "language": "None",
+      "stars": 11845,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_sansan0__trendradar",
+      "source_type": "github_star",
+      "repo": "sansan0/TrendRadar",
+      "repo_name": "TrendRadar",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/sansan0__TrendRadar.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/sansan0__TrendRadar",
+      "tags": [
+        "ai",
+        "bark",
+        "data-analysis",
+        "docker",
+        "hot-news",
+        "llm",
+        "llm_runtime",
+        "mail",
+        "mcp",
+        "mcp-server",
+        "news",
+        "ntfy",
+        "python",
+        "rss",
+        "trending-topics",
+        "ui",
+        "wechat",
+        "wework"
+      ],
+      "buckets": [
+        "mcp",
+        "llm_runtime",
+        "ui"
+      ],
+      "html_url": "https://github.com/sansan0/TrendRadar",
+      "description": "⭐AI-driven public opinion & trend monitor with multi-platform aggregation, RSS, and smart alerts.🎯 告别信息过载，你的 AI 舆情监控助手与热点筛选工具！聚合多平台热点 +  RSS 订阅，支持关键词精准筛选。AI 智能筛选新闻 + AI 翻译 +  AI 分析简报直推手机，也支持接入 MCP 架构，赋能 AI 自然语言对话分析、情感洞察与趋势预测等。支持 Docker ，数据本地/云端自持。集成微信/飞书/钉钉/Telegram/邮件/ntfy/bark/slack 等渠道智能推送。",
+      "language": "Python",
+      "stars": 57410,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_shanraisshan__claude_code_best_practice",
+      "source_type": "github_star",
+      "repo": "shanraisshan/claude-code-best-practice",
+      "repo_name": "claude-code-best-practice",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/shanraisshan__claude-code-best-practice.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/shanraisshan__claude-code-best-practice",
+      "tags": [
+        "agent",
+        "agentic-ai",
+        "agentic-coding",
+        "agentic-engineering",
+        "agentic-workflow",
+        "ai",
+        "ai-agents",
+        "anthropic",
+        "best-practices",
+        "boris",
+        "claude",
+        "claude-ai",
+        "claude-code",
+        "claude-code-agents",
+        "claude-code-best-practices",
+        "claude-code-commands",
+        "claude-code-skills",
+        "context-engineering",
+        "pakistan",
+        "pakistani-developer",
+        "vibe-coding"
+      ],
+      "buckets": [
+        "agent"
+      ],
+      "html_url": "https://github.com/shanraisshan/claude-code-best-practice",
+      "description": "from vibe coding to agentic engineering - practice makes claude perfect",
+      "language": "HTML",
+      "stars": 52676,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_shareai_lab__learn_claude_code",
+      "source_type": "github_star",
+      "repo": "shareAI-lab/learn-claude-code",
+      "repo_name": "learn-claude-code",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/shareAI-lab__learn-claude-code.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/shareAI-lab__learn-claude-code",
+      "tags": [
+        "agent",
+        "agent-development",
+        "ai-agent",
+        "claude",
+        "claude-code",
+        "educational",
+        "llm",
+        "llm_runtime",
+        "python",
+        "teaching",
+        "tutorial"
+      ],
+      "buckets": [
+        "agent",
+        "llm_runtime"
+      ],
+      "html_url": "https://github.com/shareAI-lab/learn-claude-code",
+      "description": "Bash is all you need -  A nano claude code–like 「agent harness」, built from 0 to 1",
+      "language": "TypeScript",
+      "stars": 60059,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_shitagaki_lab__see_through",
+      "source_type": "github_star",
+      "repo": "shitagaki-lab/see-through",
+      "repo_name": "see-through",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/shitagaki-lab__see-through.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/shitagaki-lab__see-through",
+      "tags": [
+        "other"
+      ],
+      "buckets": [
+        "other"
+      ],
+      "html_url": "https://github.com/shitagaki-lab/see-through",
+      "description": "\"Single-image Layer Decomposition for Anime Characters\" (SIGGRAPH 2026, Conditionally Accepted)",
+      "language": "Python",
+      "stars": 2464,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_shiyu_coder__kronos",
+      "source_type": "github_star",
+      "repo": "shiyu-coder/Kronos",
+      "repo_name": "Kronos",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/shiyu-coder__Kronos.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/shiyu-coder__Kronos",
+      "tags": [
+        "llm_runtime"
+      ],
+      "buckets": [
+        "llm_runtime"
+      ],
+      "html_url": "https://github.com/shiyu-coder/Kronos",
+      "description": "Kronos: A Foundation Model for the Language of Financial Markets",
+      "language": "Python",
+      "stars": 24062,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_sickn33__antigravity_awesome_skills",
+      "source_type": "github_star",
+      "repo": "sickn33/antigravity-awesome-skills",
+      "repo_name": "antigravity-awesome-skills",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/sickn33__antigravity-awesome-skills.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/sickn33__antigravity-awesome-skills",
+      "tags": [
+        "agent",
+        "agent-skills",
+        "agentic-skills",
+        "ai-agent-skills",
+        "ai-agents",
+        "ai-coding",
+        "ai-workflows",
+        "antigravity",
+        "antigravity-skills",
+        "claude-code",
+        "claude-code-skills",
+        "codex-cli",
+        "codex-skills",
+        "cursor",
+        "cursor-skills",
+        "developer-tools",
+        "gemini-cli",
+        "gemini-skills",
+        "kiro",
+        "mcp",
+        "skill-library"
+      ],
+      "buckets": [
+        "agent",
+        "mcp"
+      ],
+      "html_url": "https://github.com/sickn33/antigravity-awesome-skills",
+      "description": "Installable GitHub library of 1,400+ agentic skills for Claude Code, Cursor, Codex CLI, Gemini CLI, Antigravity, and more. Includes installer CLI, bundles, workflows, and official/community skill collections.",
+      "language": "Python",
+      "stars": 37331,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_significant_gravitas__autogpt",
+      "source_type": "github_star",
+      "repo": "Significant-Gravitas/AutoGPT",
+      "repo_name": "AutoGPT",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/Significant-Gravitas__AutoGPT.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/Significant-Gravitas__AutoGPT",
+      "tags": [
+        "agent",
+        "agentic-ai",
+        "agents",
+        "ai",
+        "artificial-intelligence",
+        "autonomous-agents",
+        "claude",
+        "gpt",
+        "llama-api",
+        "llm",
+        "llm_runtime",
+        "mcp",
+        "openai",
+        "python"
+      ],
+      "buckets": [
+        "agent",
+        "mcp",
+        "llm_runtime"
+      ],
+      "html_url": "https://github.com/Significant-Gravitas/AutoGPT",
+      "description": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
+      "language": "Python",
+      "stars": 184250,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_simstudioai__sim",
+      "source_type": "github_star",
+      "repo": "simstudioai/sim",
+      "repo_name": "sim",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/simstudioai__sim.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/simstudioai__sim",
+      "tags": [
+        "agent",
+        "agent-workflow",
+        "agentic-workflow",
+        "agents",
+        "ai",
+        "aiagents",
+        "anthropic",
+        "artificial-intelligence",
+        "automation",
+        "chatbot",
+        "deepseek",
+        "gemini",
+        "low-code",
+        "nextjs",
+        "no-code",
+        "openai",
+        "rag",
+        "react",
+        "typescript",
+        "ui"
+      ],
+      "buckets": [
+        "agent",
+        "rag",
+        "ui"
+      ],
+      "html_url": "https://github.com/simstudioai/sim",
+      "description": "Build, deploy, and orchestrate AI agents. Sim is the central intelligence layer for your AI workforce.",
+      "language": "TypeScript",
+      "stars": 28481,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_soxoj__maigret",
+      "source_type": "github_star",
+      "repo": "soxoj/maigret",
+      "repo_name": "maigret",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/soxoj__maigret.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/soxoj__maigret",
+      "tags": [
+        "blueteam",
+        "cli",
+        "cybersecurity",
+        "identification",
+        "infosec",
+        "investigation",
+        "namechecker",
+        "open-source",
+        "osint",
+        "osint-framework",
+        "osint-python",
+        "other",
+        "pentesting",
+        "python",
+        "python3",
+        "reconnaissance",
+        "redteam",
+        "scraping",
+        "sherlock",
+        "social-network",
+        "socmint"
+      ],
+      "buckets": [
+        "other"
+      ],
+      "html_url": "https://github.com/soxoj/maigret",
+      "description": "🕵️‍♂️ Collect a dossier on a person by username from 3000+ sites",
+      "language": "Python",
+      "stars": 28133,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_soxoj__maigret_tg_bot",
+      "source_type": "github_star",
+      "repo": "soxoj/maigret-tg-bot",
+      "repo_name": "maigret-tg-bot",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/soxoj__maigret-tg-bot.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/soxoj__maigret-tg-bot",
+      "tags": [
+        "maigret",
+        "namecheck",
+        "osint",
+        "other",
+        "telegram-bot"
+      ],
+      "buckets": [
+        "other"
+      ],
+      "html_url": "https://github.com/soxoj/maigret-tg-bot",
+      "description": "Maigret Telegram bot",
+      "language": "Python",
+      "stars": 121,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_steipete__codexbar",
+      "source_type": "github_star",
+      "repo": "steipete/CodexBar",
+      "repo_name": "CodexBar",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/steipete__CodexBar.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/steipete__CodexBar",
+      "tags": [
+        "agent",
+        "ai",
+        "claude-code",
+        "codex",
+        "swift"
+      ],
+      "buckets": [
+        "agent"
+      ],
+      "html_url": "https://github.com/steipete/CodexBar",
+      "description": "Show usage stats for OpenAI Codex and Claude Code, without having to login.",
+      "language": "Swift",
+      "stars": 12076,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_supermemoryai__supermemory",
+      "source_type": "github_star",
+      "repo": "supermemoryai/supermemory",
+      "repo_name": "supermemory",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/supermemoryai__supermemory.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/supermemoryai__supermemory",
+      "tags": [
+        "agent",
+        "agent-memory",
+        "ai-memory",
+        "cloudflare-kv",
+        "cloudflare-pages",
+        "cloudflare-workers",
+        "drizzle-orm",
+        "memory",
+        "postgres",
+        "rag",
+        "remix",
+        "tailwindcss",
+        "typescript",
+        "vite"
+      ],
+      "buckets": [
+        "agent",
+        "rag"
+      ],
+      "html_url": "https://github.com/supermemoryai/supermemory",
+      "description": "Memory engine and app that is extremely fast, scalable. The Memory API for the AI era.",
+      "language": "TypeScript",
+      "stars": 22535,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_t_lab_cuhksz__claude_code",
+      "source_type": "github_star",
+      "repo": "T-Lab-CUHKSZ/claude-code",
+      "repo_name": "claude-code",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/T-Lab-CUHKSZ__claude-code.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/T-Lab-CUHKSZ__claude-code",
+      "tags": [
+        "agent"
+      ],
+      "buckets": [
+        "agent"
+      ],
+      "html_url": "https://github.com/T-Lab-CUHKSZ/claude-code",
+      "description": "Claude Code Source - Buildable Research Fork. Reverse-engineered build system, runnable with Bun.",
+      "language": "TypeScript",
+      "stars": 309,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_tanweai__pua",
+      "source_type": "github_star",
+      "repo": "tanweai/pua",
+      "repo_name": "pua",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/tanweai__pua.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/tanweai__pua",
+      "tags": [
+        "agency",
+        "agent",
+        "pip",
+        "pua"
+      ],
+      "buckets": [
+        "agent"
+      ],
+      "html_url": "https://github.com/tanweai/pua",
+      "description": "你是一个曾经被寄予厚望的 P8 级工程师。Anthropic 当初给你定级的时候，对你的期望是很高的。  一个agent使用的高能动性的skill。  Your AI has been placed on a PIP. 30 days to show improvement.",
+      "language": "TypeScript",
+      "stars": 17284,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_thesaravanakumar__cognizant_early_engagement",
+      "source_type": "github_star",
+      "repo": "thesaravanakumar/Cognizant-Early-Engagement",
+      "repo_name": "Cognizant-Early-Engagement",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/thesaravanakumar__Cognizant-Early-Engagement.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/thesaravanakumar__Cognizant-Early-Engagement",
+      "tags": [
+        "agent",
+        "cognizant",
+        "cognizant-early-engagement",
+        "cognizant-genc",
+        "cognizant-onboarding-solutions",
+        "continous-deployment",
+        "continous-skill-development",
+        "cts",
+        "gen-c",
+        "genc"
+      ],
+      "buckets": [
+        "agent"
+      ],
+      "html_url": "https://github.com/thesaravanakumar/Cognizant-Early-Engagement",
+      "description": "Find solutions for the Cognizant Early Engagement Program [ Continuous Skill Development ].",
+      "language": "Java",
+      "stars": 247,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_transformeroptimus__superagi",
+      "source_type": "github_star",
+      "repo": "TransformerOptimus/SuperAGI",
+      "repo_name": "SuperAGI",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/TransformerOptimus__SuperAGI.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/TransformerOptimus__SuperAGI",
+      "tags": [
+        "agent",
+        "agents",
+        "agi",
+        "ai",
+        "artificial-general-intelligence",
+        "artificial-intelligence",
+        "autonomous-agents",
+        "gpt-4",
+        "hacktoberfest",
+        "llm",
+        "llm_runtime",
+        "llmops",
+        "nextjs",
+        "openai",
+        "pinecone",
+        "python",
+        "rag",
+        "superagi"
+      ],
+      "buckets": [
+        "agent",
+        "rag",
+        "llm_runtime"
+      ],
+      "html_url": "https://github.com/TransformerOptimus/SuperAGI",
+      "description": "<⚡️> SuperAGI - A dev-first open source autonomous AI agent framework. Enabling developers to build, manage & run useful autonomous agents quickly and reliably.",
+      "language": "Python",
+      "stars": 17515,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_ultraworkers__claw_code",
+      "source_type": "github_star",
+      "repo": "ultraworkers/claw-code",
+      "repo_name": "claw-code",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/ultraworkers__claw-code.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/ultraworkers__claw-code",
+      "tags": [
+        "agent"
+      ],
+      "buckets": [
+        "agent"
+      ],
+      "html_url": "https://github.com/ultraworkers/claw-code",
+      "description": "The repo is finally unlocked. enjoy the party! The fastest repo in history to surpass 100K stars ⭐. Join Discord: https://discord.gg/5TUQKqFWd Built in Rust using oh-my-codex.",
+      "language": "Rust",
+      "stars": 191229,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_vercel_labs__agent_browser",
+      "source_type": "github_star",
+      "repo": "vercel-labs/agent-browser",
+      "repo_name": "agent-browser",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/vercel-labs__agent-browser.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/vercel-labs__agent-browser",
+      "tags": [
+        "agent"
+      ],
+      "buckets": [
+        "agent"
+      ],
+      "html_url": "https://github.com/vercel-labs/agent-browser",
+      "description": "Browser automation CLI for AI agents",
+      "language": "Rust",
+      "stars": 32819,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_vercel_labs__agent_skills",
+      "source_type": "github_star",
+      "repo": "vercel-labs/agent-skills",
+      "repo_name": "agent-skills",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/vercel-labs__agent-skills.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/vercel-labs__agent-skills",
+      "tags": [
+        "agent"
+      ],
+      "buckets": [
+        "agent"
+      ],
+      "html_url": "https://github.com/vercel-labs/agent-skills",
+      "description": "Vercel's official collection of agent skills",
+      "language": "JavaScript",
+      "stars": 26469,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_vercel_labs__skills",
+      "source_type": "github_star",
+      "repo": "vercel-labs/skills",
+      "repo_name": "skills",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/vercel-labs__skills.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/vercel-labs__skills",
+      "tags": [
+        "agent",
+        "mcp"
+      ],
+      "buckets": [
+        "agent",
+        "mcp"
+      ],
+      "html_url": "https://github.com/vercel-labs/skills",
+      "description": "The open agent skills tool - npx skills",
+      "language": "TypeScript",
+      "stars": 18195,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_vibe_with_me_tools__agent_reachout",
+      "source_type": "github_star",
+      "repo": "vibe-with-me-tools/agent-reachout",
+      "repo_name": "agent-reachout",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/vibe-with-me-tools__agent-reachout.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/vibe-with-me-tools__agent-reachout",
+      "tags": [
+        "agent",
+        "agentic-ai",
+        "claude-code",
+        "claude-code-plugin",
+        "llm",
+        "llm_runtime",
+        "mcp",
+        "messaging",
+        "notifications",
+        "productivity",
+        "telegram",
+        "vibe-coding"
+      ],
+      "buckets": [
+        "agent",
+        "mcp",
+        "llm_runtime"
+      ],
+      "html_url": "https://github.com/vibe-with-me-tools/agent-reachout",
+      "description": "Let Claude Code reach you on Telegram when it finishes work or needs decisions",
+      "language": "TypeScript",
+      "stars": 42,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_vickscarlet__liferestart",
+      "source_type": "github_star",
+      "repo": "VickScarlet/lifeRestart",
+      "repo_name": "lifeRestart",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/VickScarlet__lifeRestart.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/VickScarlet__lifeRestart",
+      "tags": [
+        "other"
+      ],
+      "buckets": [
+        "other"
+      ],
+      "html_url": "https://github.com/VickScarlet/lifeRestart",
+      "description": "やり直すんだ。そして、次はうまくやる。",
+      "language": "JavaScript",
+      "stars": 10400,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_vnpy__vnpy",
+      "source_type": "github_star",
+      "repo": "vnpy/vnpy",
+      "repo_name": "vnpy",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/vnpy__vnpy.md",
+      "local_path": "/Users/mofamaomi/Documents/本地ai/vnpy",
+      "tags": [
+        "algotrading",
+        "finance",
+        "fintech",
+        "investment",
+        "other",
+        "python",
+        "quant",
+        "trading",
+        "vnpy"
+      ],
+      "buckets": [
+        "other"
+      ],
+      "html_url": "https://github.com/vnpy/vnpy",
+      "description": "基于Python的开源量化交易平台开发框架",
+      "language": "Python",
+      "stars": 40442,
+      "status": "indexed",
+      "clone_status": "local_existing"
+    },
+    {
+      "asset_id": "brain_voltagent__awesome_agent_skills",
+      "source_type": "github_star",
+      "repo": "VoltAgent/awesome-agent-skills",
+      "repo_name": "awesome-agent-skills",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/VoltAgent__awesome-agent-skills.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/VoltAgent__awesome-agent-skills",
+      "tags": [
+        "agent",
+        "agent-skills",
+        "ai-agents",
+        "antigravity-skills",
+        "awesome",
+        "awesome-list",
+        "awesome-lists",
+        "claude-code",
+        "claude-code-skills",
+        "claude-skills",
+        "codex-skills",
+        "cursor-skills",
+        "gemini-skills",
+        "opencode-skills",
+        "skills"
+      ],
+      "buckets": [
+        "agent"
+      ],
+      "html_url": "https://github.com/VoltAgent/awesome-agent-skills",
+      "description": "A curated collection of 1000+ agent skills from official dev teams and the community, compatible with Claude Code, Codex, Gemini CLI, Cursor, and more.",
+      "language": "None",
+      "stars": 21452,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_voltagent__awesome_claude_design",
+      "source_type": "github_star",
+      "repo": "VoltAgent/awesome-claude-design",
+      "repo_name": "awesome-claude-design",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/VoltAgent__awesome-claude-design.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/VoltAgent__awesome-claude-design",
+      "tags": [
+        "agent",
+        "claude-code",
+        "claude-design",
+        "design-md",
+        "design-system",
+        "figma"
+      ],
+      "buckets": [
+        "agent"
+      ],
+      "html_url": "https://github.com/VoltAgent/awesome-claude-design",
+      "description": "Awesome Claude Design: 68 ready-to-use design system inspirations in DESIGN.md format. Drop one in, scaffold a full UI in one shot.",
+      "language": "None",
+      "stars": 2136,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_voltagent__awesome_design_md",
+      "source_type": "github_star",
+      "repo": "VoltAgent/awesome-design-md",
+      "repo_name": "awesome-design-md",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/VoltAgent__awesome-design-md.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/VoltAgent__awesome-design-md",
+      "tags": [
+        "agent",
+        "awesome-list",
+        "design-md",
+        "design-system",
+        "design-tokens",
+        "figma",
+        "google-stitch",
+        "landing-page",
+        "vibe-coding",
+        "vibe-design"
+      ],
+      "buckets": [
+        "agent"
+      ],
+      "html_url": "https://github.com/VoltAgent/awesome-design-md",
+      "description": "A collection of DESIGN.md files inspired by popular brand design systems. Drop one into your project and let coding agents generate a matching UI.",
+      "language": "None",
+      "stars": 76678,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_vxcontrol__pentagi",
+      "source_type": "github_star",
+      "repo": "vxcontrol/pentagi",
+      "repo_name": "pentagi",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/vxcontrol__pentagi.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/vxcontrol__pentagi",
+      "tags": [
+        "agent",
+        "ai-agents",
+        "ai-security-tool",
+        "anthropic",
+        "autonomous-agents",
+        "golang",
+        "gpt",
+        "graphql",
+        "mcp",
+        "multi-agent-system",
+        "offensive-security",
+        "open-source",
+        "openai",
+        "penetration-testing",
+        "penetration-testing-tools",
+        "react",
+        "security-automation",
+        "security-testing",
+        "security-tools",
+        "self-hosted"
+      ],
+      "buckets": [
+        "agent",
+        "mcp"
+      ],
+      "html_url": "https://github.com/vxcontrol/pentagi",
+      "description": "Fully autonomous AI Agents system capable of performing complex penetration testing tasks",
+      "language": "Go",
+      "stars": 16812,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_wangyuan389__mall_cook",
+      "source_type": "github_star",
+      "repo": "wangyuan389/mall-cook",
+      "repo_name": "mall-cook",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/wangyuan389__mall-cook.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/wangyuan389__mall-cook",
+      "tags": [
+        "video"
+      ],
+      "buckets": [
+        "video"
+      ],
+      "html_url": "https://github.com/wangyuan389/mall-cook",
+      "description": "商城低代码平台，可视化搭建H5、小程序多端商城",
+      "language": "Vue",
+      "stars": 5586,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_whoiszxl__shopzz",
+      "source_type": "github_star",
+      "repo": "whoiszxl/shopzz",
+      "repo_name": "shopzz",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/whoiszxl__shopzz.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/whoiszxl__shopzz",
+      "tags": [
+        "bitcoin",
+        "blockchain",
+        "eth",
+        "flink",
+        "flutter",
+        "hadoop",
+        "other",
+        "springcloud-alibaba",
+        "usdt",
+        "vue3"
+      ],
+      "buckets": [
+        "other"
+      ],
+      "html_url": "https://github.com/whoiszxl/shopzz",
+      "description": "后端使用 SpringCloud Alibaba 开发，移动端使用 React Native 构建，管理后台使用 Arco Design 进行构建，并在支付上接入数字货币（比特币、以太坊UDST、平台Token）支付，后端采用 Hadoop 与 Flink 等大数据框架构建实时计算与离线计算体系。",
+      "language": "Java",
+      "stars": 438,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_xtekky__gpt4free",
+      "source_type": "github_star",
+      "repo": "xtekky/gpt4free",
+      "repo_name": "gpt4free",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/xtekky__gpt4free.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/xtekky__gpt4free",
+      "tags": [
+        "chatbot",
+        "chatbots",
+        "chatgpt",
+        "chatgpt-4",
+        "chatgpt-api",
+        "chatgpt-free",
+        "chatgpt4",
+        "deepseek",
+        "deepseek-api",
+        "deepseek-r1",
+        "gpt",
+        "gpt-4",
+        "gpt-4o",
+        "gpt4",
+        "gpt4-api",
+        "language-model",
+        "llm_runtime",
+        "openai",
+        "openai-api",
+        "openai-chatgpt",
+        "reverse-engineering",
+        "ui"
+      ],
+      "buckets": [
+        "llm_runtime",
+        "ui"
+      ],
+      "html_url": "https://github.com/xtekky/gpt4free",
+      "description": "The official gpt4free repository | various collection of powerful language models | opus 4.6 gpt 5.3 kimi 2.5 deepseek v3.2 gemini 3",
+      "language": "Python",
+      "stars": 66212,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_yeachan_heo__oh_my_codex",
+      "source_type": "github_star",
+      "repo": "Yeachan-Heo/oh-my-codex",
+      "repo_name": "oh-my-codex",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/Yeachan-Heo__oh-my-codex.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/Yeachan-Heo__oh-my-codex",
+      "tags": [
+        "agent"
+      ],
+      "buckets": [
+        "agent"
+      ],
+      "html_url": "https://github.com/Yeachan-Heo/oh-my-codex",
+      "description": "OmX - Oh My codeX: Your codex is not alone. Add hooks, agent teams, HUDs, and so much more.",
+      "language": "TypeScript",
+      "stars": 28395,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_yhf98__moss_tts_nano_win",
+      "source_type": "github_star",
+      "repo": "yhf98/MOSS-TTS-Nano-Win",
+      "repo_name": "MOSS-TTS-Nano-Win",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/yhf98__MOSS-TTS-Nano-Win.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/yhf98__MOSS-TTS-Nano-Win",
+      "tags": [
+        "other"
+      ],
+      "buckets": [
+        "other"
+      ],
+      "html_url": "https://github.com/yhf98/MOSS-TTS-Nano-Win",
+      "description": "MOSS-TTS-Nano Window 改版",
+      "language": "Python",
+      "stars": 5,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_yunaiv__ruoyi_vue_pro",
+      "source_type": "github_star",
+      "repo": "YunaiV/ruoyi-vue-pro",
+      "repo_name": "ruoyi-vue-pro",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/YunaiV__ruoyi-vue-pro.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/YunaiV__ruoyi-vue-pro",
+      "tags": [
+        "flowable",
+        "mybatis-plus",
+        "mysql",
+        "other",
+        "redis",
+        "redisson",
+        "spring-security",
+        "springboot",
+        "vue"
+      ],
+      "buckets": [
+        "other"
+      ],
+      "html_url": "https://github.com/YunaiV/ruoyi-vue-pro",
+      "description": "🔥 官方推荐 🔥 RuoYi-Vue 全新 Pro 版本，优化重构所有功能。基于 Spring Boot + MyBatis Plus + Vue & Element 实现的后台管理系统 + 微信小程序，支持 RBAC 动态权限、数据权限、SaaS 多租户、Flowable 工作流、三方登录、支付、短信、商城、CRM、ERP、MES、IM、AI 大模型、IoT 物联网等功能。你的 ⭐️ Star ⭐️，是作者生发的动力！",
+      "language": "Java",
+      "stars": 37064,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_yunaiv__yudao_cloud",
+      "source_type": "github_star",
+      "repo": "YunaiV/yudao-cloud",
+      "repo_name": "yudao-cloud",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/YunaiV__yudao-cloud.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/YunaiV__yudao-cloud",
+      "tags": [
+        "dubbo",
+        "elasticsearch",
+        "mall",
+        "mysql",
+        "nacos",
+        "other",
+        "redis",
+        "rocketmq",
+        "seata",
+        "sharding-sphere",
+        "skywalking",
+        "spring-cloud",
+        "spring-cloud-alibaba",
+        "springboot",
+        "springcloud",
+        "xxl-job",
+        "zookeeper"
+      ],
+      "buckets": [
+        "other"
+      ],
+      "html_url": "https://github.com/YunaiV/yudao-cloud",
+      "description": "ruoyi-vue-pro 全新 Cloud 版本，优化重构所有功能。基于 Spring Cloud Alibaba + MyBatis Plus + Vue & Element 实现的后台管理系统 + 用户小程序，支持 RBAC 动态权限、多租户、数据权限、工作流、三方登录、支付、短信、商城、CRM、ERP、MES、IM、AI 大模型、IoT 物联网等功能。你的 ⭐️ Star ⭐️，是作者生发的动力！",
+      "language": "Java",
+      "stars": 18921,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_zai_org__cogvideo",
+      "source_type": "github_star",
+      "repo": "zai-org/CogVideo",
+      "repo_name": "CogVideo",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/zai-org__CogVideo.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/zai-org__CogVideo",
+      "tags": [
+        "cogvideox",
+        "image-to-video",
+        "llm",
+        "llm_runtime",
+        "sora",
+        "text-to-video",
+        "video",
+        "video-generation"
+      ],
+      "buckets": [
+        "llm_runtime",
+        "video"
+      ],
+      "html_url": "https://github.com/zai-org/CogVideo",
+      "description": "text and image to video generation: CogVideoX (2024) and CogVideo (ICLR 2023)",
+      "language": "Python",
+      "stars": 12717,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_zai_org__open_autoglm",
+      "source_type": "github_star",
+      "repo": "zai-org/Open-AutoGLM",
+      "repo_name": "Open-AutoGLM",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/zai-org__Open-AutoGLM.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/zai-org__Open-AutoGLM",
+      "tags": [
+        "agent",
+        "llm_runtime",
+        "phone-use-agent"
+      ],
+      "buckets": [
+        "agent",
+        "llm_runtime"
+      ],
+      "html_url": "https://github.com/zai-org/Open-AutoGLM",
+      "description": "An Open Phone Agent Model & Framework. Unlocking the AI Phone for Everyone",
+      "language": "Python",
+      "stars": 25253,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_zhouxiaoka__autoclip",
+      "source_type": "github_star",
+      "repo": "zhouxiaoka/autoclip",
+      "repo_name": "autoclip",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/zhouxiaoka__autoclip.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/zhouxiaoka__autoclip",
+      "tags": [
+        "agent",
+        "ai",
+        "ai-agents",
+        "ai-tools",
+        "ai-video",
+        "ai-video-editor",
+        "auto",
+        "auto-highlight",
+        "highlight",
+        "llm",
+        "llm_runtime",
+        "mcp",
+        "video",
+        "video-editing",
+        "video-processing",
+        "videos"
+      ],
+      "buckets": [
+        "agent",
+        "mcp",
+        "llm_runtime",
+        "video"
+      ],
+      "html_url": "https://github.com/zhouxiaoka/autoclip",
+      "description": "AutoClip : AI-powered video clipping and highlight generation · 一款智能高光提取与剪辑的二创工具",
+      "language": "Python",
+      "stars": 5188,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_zhouxiaoka__autoclip_mvp",
+      "source_type": "github_star",
+      "repo": "zhouxiaoka/autoclip_mvp",
+      "repo_name": "autoclip_mvp",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/zhouxiaoka__autoclip_mvp.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/zhouxiaoka__autoclip_mvp",
+      "tags": [
+        "ai-video-editing",
+        "auto-highlight",
+        "llm",
+        "llm_runtime",
+        "video",
+        "video-editing"
+      ],
+      "buckets": [
+        "llm_runtime",
+        "video"
+      ],
+      "html_url": "https://github.com/zhouxiaoka/autoclip_mvp",
+      "description": "AutoClip: AI-powered video clipping and highlight generation · 一款智能高光提取与剪辑的二创工具",
+      "language": "Python",
+      "stars": 960,
+      "status": "indexed",
+      "clone_status": "cloned"
+    },
+    {
+      "asset_id": "brain_zyrouge__symphony",
+      "source_type": "github_star",
+      "repo": "zyrouge/symphony",
+      "repo_name": "symphony",
+      "summary_file": "core-platform/data/brain_assets/reports/missing_repo_summaries/zyrouge__symphony.md",
+      "local_path": "core-platform/data/brain_assets/repos/github_stars_missing/zyrouge__symphony",
+      "tags": [
+        "android",
+        "android-music-player",
+        "compose",
+        "foss",
+        "kotlin",
+        "material-ui",
+        "material-you",
+        "music",
+        "music-player",
+        "other"
+      ],
+      "buckets": [
+        "other"
+      ],
+      "html_url": "https://github.com/zyrouge/symphony",
+      "description": "🎵 Lightweight, elegant music player for Android 9+.",
+      "language": "Kotlin",
+      "stars": 1664,
+      "status": "indexed",
+      "clone_status": "cloned"
+    }
+  ]
+}

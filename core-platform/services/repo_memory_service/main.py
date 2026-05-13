@@ -39,6 +39,9 @@ from services.repo_memory_service.app.service import (
     compress_context,
     add_knowledge,
     search_knowledge,
+    get_brain_asset_catalog,
+    seed_brain_assets,
+    search_brain_assets,
     get_recent_events,
     get_health_info,
 )
@@ -186,6 +189,34 @@ def search_knowledge_endpoint(req: SearchKnowledgeRequest):
         return ok({"items": [r.model_dump() for r in results], "count": len(results)})
     except Exception as e:
         return JSONResponse(status_code=500, content=fail("search_knowledge", e))
+
+
+@app.get("/brain/assets")
+def brain_assets_endpoint():
+    """Return the current brain asset catalog summary."""
+    try:
+        return ok(get_brain_asset_catalog())
+    except Exception as e:
+        return JSONResponse(status_code=500, content=fail("brain_assets", e))
+
+
+@app.post("/brain/seed")
+def seed_brain_assets_endpoint():
+    """Seed summarized brain assets into repo memory."""
+    try:
+        return ok(seed_brain_assets())
+    except Exception as e:
+        return JSONResponse(status_code=500, content=fail("seed_brain_assets", e))
+
+
+@app.post("/brain/search")
+def search_brain_assets_endpoint(req: SearchKnowledgeRequest):
+    """Search brain asset knowledge entries."""
+    try:
+        results = search_brain_assets(req)
+        return ok({"items": [r.model_dump() for r in results], "count": len(results)})
+    except Exception as e:
+        return JSONResponse(status_code=500, content=fail("search_brain_assets", e))
 
 
 @app.get("/recent")

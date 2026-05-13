@@ -1,1 +1,1 @@
-"""Service package for the local AI platform."""
+"""Service package root for MAOMIAI local platform."""

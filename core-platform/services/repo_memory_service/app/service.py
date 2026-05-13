@@ -1,6 +1,8 @@
 """Business logic layer for repo memory service."""
 
+import json
 from datetime import datetime
+from pathlib import Path
 from typing import List, Optional, Dict, Any
 
 from .models import (
@@ -39,6 +41,137 @@ from .validation import (
 def now_ts() -> float:
     """Get current timestamp."""
     return datetime.utcnow().timestamp()
+
+
+BRAIN_ASSET_INDEX_PATH = BASE_DIR / "data" / "brain_assets" / "manifests" / "brain_asset_index.json"
+BRAIN_ASSET_CATEGORY_INDEX_PATH = BASE_DIR / "data" / "brain_assets" / "manifests" / "brain_asset_category_index.json"
+BRAIN_ASSET_SEED_PATH = BASE_DIR / "data" / "repo_memory" / "brain_asset_seed.json"
+
+
+def _load_json(path: Path) -> Dict[str, Any]:
+    if not path.exists():
+        return {}
+    with open(path, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+def _resolve_seed_repo_path(raw_path: str) -> str:
+    if not raw_path:
+        return ""
+    path = Path(raw_path)
+    if path.is_absolute():
+        return str(path)
+    candidates = [
+        BASE_DIR.parent / path,
+        BASE_DIR / path,
+    ]
+    for candidate in candidates:
+        if candidate.exists():
+            return str(candidate.resolve())
+    return ""
+
+
+def get_brain_asset_catalog() -> Dict[str, Any]:
+    """Return local brain asset index and category index metadata."""
+    index = _load_json(BRAIN_ASSET_INDEX_PATH)
+    categories = _load_json(BRAIN_ASSET_CATEGORY_INDEX_PATH)
+    seed = _load_json(BRAIN_ASSET_SEED_PATH)
+    return {
+        "index_path": str(BRAIN_ASSET_INDEX_PATH),
+        "category_index_path": str(BRAIN_ASSET_CATEGORY_INDEX_PATH),
+        "seed_path": str(BRAIN_ASSET_SEED_PATH),
+        "asset_count": index.get("count", 0),
+        "seed_count": seed.get("count", 0),
+        "categories": categories.get("categories", []),
+    }
+
+
+def seed_brain_assets() -> Dict[str, Any]:
+    """Idempotently seed brain asset summaries into repo memory."""
+    seed = _load_json(BRAIN_ASSET_SEED_PATH)
+    entries = seed.get("entries", [])
+    store = load_store()
+    repos_by_name = {repo.name: repo for repo in store.repos}
+    knowledge_keys = {(item.title, item.source) for item in store.knowledge}
+    repos_added = 0
+    knowledge_added = 0
+
+    for item in entries:
+        repo_name = item.get("repo_name", "").strip()
+        if not repo_name:
+            continue
+        repo = repos_by_name.get(repo_name)
+        if not repo:
+            ts = now_ts()
+            repo = RepoRecord(
+                id=make_repo_id(repo_name),
+                name=repo_name,
+                path=_resolve_seed_repo_path(item.get("repo_path", "")),
+                description=item.get("description", ""),
+                tags=item.get("tags", []),
+                services=item.get("services", []),
+                created_at=ts,
+                updated_at=ts,
+            )
+            store.repos.append(repo)
+            repos_by_name[repo_name] = repo
+            repos_added += 1
+
+        knowledge = item.get("knowledge", {})
+        title = knowledge.get("title", "").strip()
+        source = knowledge.get("source", "").strip()
+        content = knowledge.get("content", "").strip()
+        if not title or not source or not content:
+            continue
+        key = (title, source)
+        if key in knowledge_keys:
+            continue
+        entry = KnowledgeEntry(
+            id=make_knowledge_id(),
+            repo_id=repo.id,
+            category=knowledge.get("category", "brain_asset"),
+            title=title,
+            content=content,
+            tags=knowledge.get("tags", []),
+            source=source,
+            created_at=now_ts(),
+        )
+        store.knowledge.append(entry)
+        knowledge_keys.add(key)
+        knowledge_added += 1
+
+    if repos_added or knowledge_added:
+        save_store(store)
+        append_event(
+            "seed_brain_assets",
+            {
+                "repos_added": repos_added,
+                "knowledge_added": knowledge_added,
+                "seed_count": len(entries),
+            },
+        )
+
+    return {
+        "seed_entries": len(entries),
+        "repos_added": repos_added,
+        "knowledge_added": knowledge_added,
+        "repos_total": len(store.repos),
+        "knowledge_total": len(store.knowledge),
+    }
+
+
+def search_brain_assets(req: SearchKnowledgeRequest) -> List[KnowledgeEntry]:
+    """Search seeded brain asset knowledge, seeding on first use if needed."""
+    store = load_store()
+    if not any(item.category == "brain_asset" for item in store.knowledge):
+        seed_brain_assets()
+    brain_req = SearchKnowledgeRequest(
+        query=req.query,
+        category="brain_asset",
+        repo_id=req.repo_id,
+        limit=req.limit,
+    )
+    return search_knowledge(brain_req)
 
 
 def register_repo(req: RegisterRepoRequest) -> RepoRecord:

@@ -207,6 +207,7 @@
         </div>
         <div class="demo-chat-actions">
           <button class="primary" data-action="maomiai-test-infer">测试本地推理</button>
+          <button class="secondary" data-action="maomiai-query-brain">项目知识查询</button>
           <button class="secondary" data-action="maomiai-clear-chat">清空会话</button>
         </div>
         <details id="maomiaiDebugBox" class="maomiai-debug-box">
@@ -297,6 +298,54 @@
       }
     }
     throw new Error(lastError || "18080 网关没有返回内容。");
+  }
+
+  function currentKnowledgeQuery() {
+    const input = findComposerInput();
+    const activeText = String(input?.value || "").trim();
+    if (activeText) return activeText;
+    const messages = window.__MAOMIAI_CHAT_MESSAGES__ || [];
+    const lastUser = [...messages].reverse().find((item) => item.role === "user");
+    return String(lastUser?.content || "Agent").trim();
+  }
+
+  function formatBrainResults(query, data) {
+    const items = data?.items || [];
+    if (!items.length) {
+      return `项目知识库没有命中「${query}」。`;
+    }
+    const lines = [`项目知识命中 ${items.length} 条，查询词：「${query}」`];
+    for (const item of items.slice(0, 5)) {
+      const repo = item.title?.replace(/ summary$/, "") || item.repo_id || "unknown";
+      const tags = Array.isArray(item.tags) && item.tags.length ? ` [${item.tags.slice(0, 4).join(", ")}]` : "";
+      lines.push(`- ${repo}${tags}`);
+    }
+    return lines.join("\n");
+  }
+
+  async function queryProjectKnowledge(forceQuery) {
+    const query = String(forceQuery || currentKnowledgeQuery()).trim();
+    if (!query) {
+      updateDebug("项目知识查询被捕获，但输入为空", {});
+      return;
+    }
+    pushChat("user", query);
+    pushChat("assistant", "正在查询本地项目知识库...");
+    try {
+      const res = await fetch("http://127.0.0.1:18125/brain/search", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ query, limit: 5 }),
+      });
+      const data = await res.json();
+      updateDebug("项目知识查询返回", data);
+      if (!res.ok || !data?.ok) {
+        throw new Error(data?.error || `HTTP ${res.status}`);
+      }
+      updateLastAssistant(formatBrainResults(query, data));
+    } catch (e) {
+      updateLastAssistant(`项目知识查询失败：${String(e)}。请确认 Repo Memory 服务 18125 已启动。`);
+    }
   }
 
   async function sendChatMessage(forceText) {
@@ -442,6 +491,12 @@
           sendChatMessage("你好，请用一句话介绍你自己");
           return;
         }
+        if (action === "maomiai-query-brain") {
+          event.preventDefault();
+          event.stopPropagation();
+          queryProjectKnowledge();
+          return;
+        }
         if (action === "maomiai-clear-chat") {
           event.preventDefault();
           event.stopPropagation();
@@ -499,6 +554,7 @@
     window.setView = route;
     window.routeView = route;
     window.sendChatMessage = sendChatMessage;
+    window.queryProjectKnowledge = queryProjectKnowledge;
     window.__MAOMIAI_GET_CURRENT_MODEL__ = getCurrentModel;
     window.__MAOMIAI_TEST_INFER__ = () => sendChatMessage("你好，请用一句话介绍你自己");
     installNavAttributes();
