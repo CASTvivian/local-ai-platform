@@ -1,0 +1,42 @@
+{
+  "version": "2026.05",
+  "research_directions": [
+    {
+      "id": "agentic_rag",
+      "name": "Agentic RAG",
+      "meaning": "Retrieval is planned and controlled by an agent, not a one-shot vector lookup.",
+      "maomiai_action": "Add a context router and planning step before retrieval."
+    },
+    {
+      "id": "graph_rag",
+      "name": "GraphRAG / Graph Memory",
+      "meaning": "Use graph-structured knowledge for multi-hop reasoning and code or service relationships.",
+      "maomiai_action": "Build a repo-service-capability-model-tool graph."
+    },
+    {
+      "id": "mcp_gateway",
+      "name": "MCP Gateway",
+      "meaning": "Expose tools and enterprise systems through a standardized protocol.",
+      "maomiai_action": "Add an MCP-style tool gateway for GitHub, files, web, weather, and video generation."
+    },
+    {
+      "id": "cache_augmented_generation",
+      "name": "Cache-Augmented Generation",
+      "meaning": "Cache stable context and repeated evidence instead of retrieving everything each time.",
+      "maomiai_action": "Cache model catalog, repo summaries, and common project facts."
+    },
+    {
+      "id": "codebase_memory",
+      "name": "Codebase Memory",
+      "meaning": "Use AST, Tree-Sitter, or graph indexing for codebase understanding.",
+      "maomiai_action": "Add a Tree-Sitter repo graph for code and service analysis."
+    },
+    {
+      "id": "no_hallucination_policy",
+      "name": "No-Hallucination Policy",
+      "meaning": "Force tools for real-time facts and local memory for project facts.",
+      "maomiai_action": "Block unsupported claims and require evidence."
+    }
+  ]
+}
+
