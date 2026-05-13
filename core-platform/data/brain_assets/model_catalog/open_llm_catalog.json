@@ -1,0 +1,144 @@
+{
+  "version": "2026.05",
+  "categories": [
+    {
+      "id": "chat_cn",
+      "name": "中文对话能力",
+      "models": [
+        {
+          "profile": "light",
+          "ollama": "qwen2.5:1.5b",
+          "name": "轻量快速能力",
+          "use_case": "低配电脑、快速响应、基础问答",
+          "hardware": "8GB RAM 起步",
+          "status": "enabled"
+        },
+        {
+          "profile": "standard",
+          "ollama": "qwen2.5:7b",
+          "name": "标准对话能力",
+          "use_case": "中文问答、总结、写作、文档理解",
+          "hardware": "16GB RAM 建议",
+          "status": "enabled"
+        },
+        {
+          "profile": "qwen3",
+          "ollama": "qwen3:8b",
+          "name": "新一代中文能力",
+          "use_case": "更强中文、多语、推理和工具理解",
+          "hardware": "16GB-32GB RAM 建议",
+          "status": "catalog_only"
+        }
+      ]
+    },
+    {
+      "id": "reasoning",
+      "name": "推理分析能力",
+      "models": [
+        {
+          "profile": "reasoning_light",
+          "ollama": "deepseek-r1:1.5b",
+          "name": "轻量推理能力",
+          "use_case": "低配推理测试、简单逻辑分析",
+          "hardware": "8GB RAM 起步",
+          "status": "catalog_only"
+        },
+        {
+          "profile": "reasoning",
+          "ollama": "deepseek-r1:7b",
+          "name": "标准推理能力",
+          "use_case": "复杂分析、推理、方案拆解",
+          "hardware": "16GB-32GB RAM 建议",
+          "status": "enabled"
+        }
+      ]
+    },
+    {
+      "id": "code",
+      "name": "代码能力",
+      "models": [
+        {
+          "profile": "code_light",
+          "ollama": "qwen2.5-coder:1.5b",
+          "name": "轻量代码能力",
+          "use_case": "低配代码问答、简单修复",
+          "hardware": "8GB RAM 起步",
+          "status": "catalog_only"
+        },
+        {
+          "profile": "code",
+          "ollama": "qwen2.5-coder:7b",
+          "name": "标准代码能力",
+          "use_case": "代码生成、代码审查、错误分析、项目修复",
+          "hardware": "16GB RAM 建议",
+          "status": "enabled"
+        },
+        {
+          "profile": "devstral",
+          "ollama": "devstral",
+          "name": "Agent 代码能力",
+          "use_case": "编码智能体、项目级修改、开发代理",
+          "hardware": "高配/服务器建议",
+          "status": "catalog_only"
+        }
+      ]
+    },
+    {
+      "id": "embedding",
+      "name": "知识库向量能力",
+      "models": [
+        {
+          "profile": "embed",
+          "ollama": "nomic-embed-text",
+          "name": "英文/通用向量能力",
+          "use_case": "文档检索、仓库记忆、RAG",
+          "hardware": "低配可用",
+          "status": "enabled"
+        },
+        {
+          "profile": "embed_multi",
+          "ollama": "bge-m3",
+          "name": "多语言向量能力",
+          "use_case": "中文/英文混合知识库、长文检索",
+          "hardware": "中配建议",
+          "status": "enabled"
+        },
+        {
+          "profile": "embeddinggemma",
+          "ollama": "embeddinggemma",
+          "name": "Google 向量能力",
+          "use_case": "轻量 embedding / 检索实验",
+          "hardware": "低配可用",
+          "status": "catalog_only"
+        }
+      ]
+    },
+    {
+      "id": "server_large",
+      "name": "服务器大模型能力",
+      "models": [
+        {
+          "profile": "llama4",
+          "name": "Llama 4 系列",
+          "use_case": "高配服务器通用大模型",
+          "hardware": "服务器/多卡",
+          "status": "external_server"
+        },
+        {
+          "profile": "deepseek_large",
+          "name": "DeepSeek 大模型系列",
+          "use_case": "高阶推理、代码、复杂任务",
+          "hardware": "服务器/多卡",
+          "status": "external_server"
+        },
+        {
+          "profile": "qwen_large",
+          "name": "Qwen 大模型系列",
+          "use_case": "中文、多语、企业任务",
+          "hardware": "服务器/多卡",
+          "status": "external_server"
+        }
+      ]
+    }
+  ]
+}

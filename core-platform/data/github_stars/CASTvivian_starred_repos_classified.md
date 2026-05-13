@@ -1,0 +1,367 @@
+# CASTvivian Starred Repositories - Classified
+
+## Agent / Coding Agent (83)
+
+- **ultraworkers/claw-code** (191229)
+  - The repo is finally unlocked. enjoy the party! The fastest repo in history to surpass 100K stars ⭐. Join Discord: https://discord.gg/5TUQKqFWd Built in Rust using oh-my-codex.
+  - https://github.com/ultraworkers/claw-code
+- **obra/superpowers** (188042)
+  - An agentic skills framework & software development methodology that works.
+  - https://github.com/obra/superpowers
+- **Significant-Gravitas/AutoGPT** (184250)
+  - AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.
+  - https://github.com/Significant-Gravitas/AutoGPT
+- **affaan-m/everything-claude-code** (180549)
+  - The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.
+  - https://github.com/affaan-m/everything-claude-code
+- **NousResearch/hermes-agent** (146973)
+  - The agent that grows with you
+  - https://github.com/NousResearch/hermes-agent
+- **anthropics/skills** (133030)
+  - Public repository for Agent Skills
+  - https://github.com/anthropics/skills
+- **msitarzewski/agency-agents** (96502)
+  - A complete AI agency at your fingertips - From frontend wizards to Reddit community ninjas, from whimsy injectors to reality checkers. Each agent is a specialized expert with personality, processes, and proven deliverables.
+  - https://github.com/msitarzewski/agency-agents
+- **openai/codex** (82152)
+  - Lightweight coding agent that runs in your terminal
+  - https://github.com/openai/codex
+- **karpathy/autoresearch** (80703)
+  - AI agents running research on single-GPU nanochat training automatically
+  - https://github.com/karpathy/autoresearch
+- **VoltAgent/awesome-design-md** (76678)
+  - A collection of DESIGN.md files inspired by popular brand design systems. Drop one into your project and let coding agents generate a matching UI.
+  - https://github.com/VoltAgent/awesome-design-md
+- **bytedance/deer-flow** (67192)
+  - An open-source long-horizon SuperAgent harness that researches, codes, and creates. With the help of sandboxes, memories, tools, skill, subagents and message gateway, it handles different levels of tasks that could take minutes to hours.
+  - https://github.com/bytedance/deer-flow
+- **opendatalab/MinerU** (62790)
+  - Transforms complex documents like PDFs and Office docs into LLM-ready markdown/JSON for your Agentic workflows.
+  - https://github.com/opendatalab/MinerU
+- **gsd-build/get-shit-done** (61786)
+  - A light-weight and powerful meta-prompting, context engineering and spec-driven development system for Claude Code by TÂCHES.
+  - https://github.com/gsd-build/get-shit-done
+- **666ghj/MiroFish** (60353)
+  - A Simple and Universal Swarm Intelligence Engine, Predicting Anything. 简洁通用的群体智能引擎，预测万物
+  - https://github.com/666ghj/MiroFish
+- **shareAI-lab/learn-claude-code** (60059)
+  - Bash is all you need -  A nano claude code–like 「agent harness」, built from 0 to 1
+  - https://github.com/shareAI-lab/learn-claude-code
+- **JuliusBrussee/caveman** (59037)
+  - 🪨 why use many token when few token do trick — Claude Code skill that cuts 65% of tokens by talking like caveman
+  - https://github.com/JuliusBrussee/caveman
+- **shanraisshan/claude-code-best-practice** (52676)
+  - from vibe coding to agentic engineering - practice makes claude perfect
+  - https://github.com/shanraisshan/claude-code-best-practice
+- **datawhalechina/hello-agents** (48290)
+  - 📚 《从零开始构建智能体》——从零开始的智能体原理与实践教程
+  - https://github.com/datawhalechina/hello-agents
+- **safishamsi/graphify** (47241)
+  - AI coding assistant skill (Claude Code, Codex, OpenCode, Cursor, Gemini CLI, and more). Turn any folder of code, SQL schemas, R scripts, shell scripts, docs, papers, images, or videos into a queryable knowledge graph. App code + database schema + infrastructure in one graph.
+  - https://github.com/safishamsi/graphify
+- **microsoft/qlib** (42752)
+  - Qlib is an AI-oriented Quant investment platform that aims to use AI tech to empower Quant Research, from exploring ideas to implementing productions. Qlib supports diverse ML modeling paradigms, including supervised learning, market dynamics modeling, and RL, and is now equipped with https://github.com/microsoft/RD-Agent to automate R&D process.
+  - https://github.com/microsoft/qlib
+- **addyosmani/agent-skills** (40409)
+  - Production-grade engineering skills for AI coding agents.
+  - https://github.com/addyosmani/agent-skills
+- **abhigyanpatwari/GitNexus** (37994)
+  - GitNexus: The Zero-Server Code Intelligence Engine -       GitNexus is a client-side knowledge graph creator that runs entirely in your browser. Drop in a GitHub repo or ZIP file, and get an interactive knowledge graph wit a built in Graph RAG Agent. Perfect for code exploration
+  - https://github.com/abhigyanpatwari/GitNexus
+- **sickn33/antigravity-awesome-skills** (37331)
+  - Installable GitHub library of 1,400+ agentic skills for Claude Code, Cursor, Codex CLI, Gemini CLI, Antigravity, and more. Includes installer CLI, bundles, workflows, and official/community skill collections.
+  - https://github.com/sickn33/antigravity-awesome-skills
+- **HKUDS/CLI-Anything** (34315)
+  - "CLI-Anything: Making ALL Software Agent-Native" -- CLI-Hub: https://clianything.cc/
+  - https://github.com/HKUDS/CLI-Anything
+- **vercel-labs/agent-browser** (32819)
+  - Browser automation CLI for AI agents
+  - https://github.com/vercel-labs/agent-browser
+- **luongnv89/claude-howto** (32542)
+  - A visual, example-driven guide to Claude Code — from basic concepts to advanced agents, with copy-paste templates that bring immediate value.
+  - https://github.com/luongnv89/claude-howto
+- **ashishpatel26/500-AI-Agents-Projects** (30332)
+  - The 500 AI Agents Projects is a curated collection of AI agent use cases across various industries. It showcases practical applications and provides links to open-source projects for implementation, illustrating how AI agents are transforming sectors such as healthcare, finance, education, retail, and more.
+  - https://github.com/ashishpatel26/500-AI-Agents-Projects
+- **simstudioai/sim** (28481)
+  - Build, deploy, and orchestrate AI agents. Sim is the central intelligence layer for your AI workforce.
+  - https://github.com/simstudioai/sim
+- **Yeachan-Heo/oh-my-codex** (28395)
+  - OmX - Oh My codeX: Your codex is not alone. Add hooks, agent teams, HUDs, and so much more.
+  - https://github.com/Yeachan-Heo/oh-my-codex
+- **coreyhaines31/marketingskills** (28153)
+  - Marketing skills for Claude Code and AI agents. CRO, copywriting, SEO, analytics, and growth engineering.
+  - https://github.com/coreyhaines31/marketingskills
+- **multica-ai/multica** (27728)
+  - The open-source managed agents platform. Turn coding agents into real teammates — assign tasks, track progress, compound skills.
+  - https://github.com/multica-ai/multica
+- **vercel-labs/agent-skills** (26469)
+  - Vercel's official collection of agent skills
+  - https://github.com/vercel-labs/agent-skills
+- **zai-org/Open-AutoGLM** (25253)
+  - An Open Phone Agent Model & Framework. Unlocking the AI Phone for Everyone
+  - https://github.com/zai-org/Open-AutoGLM
+- **openai/symphony** (23534)
+  - Symphony turns project work into isolated, autonomous implementation runs, allowing teams to manage work instead of supervising coding agents.
+  - https://github.com/openai/symphony
+- **supermemoryai/supermemory** (22535)
+  - Memory engine and app that is extremely fast, scalable. The Memory API for the AI era.
+  - https://github.com/supermemoryai/supermemory
+- **VoltAgent/awesome-agent-skills** (21452)
+  - A curated collection of 1000+ agent skills from official dev teams and the community, compatible with Claude Code, Codex, Gemini CLI, Cursor, and more.
+  - https://github.com/VoltAgent/awesome-agent-skills
+- **K-Dense-AI/scientific-agent-skills** (20767)
+  - A set of ready to use Agent Skills for research, science, engineering, analysis, finance and writing.
+  - https://github.com/K-Dense-AI/scientific-agent-skills
+- **Panniantong/Agent-Reach** (19344)
+  - Give your AI agent eyes to see the entire internet. Read & search Twitter, Reddit, YouTube, GitHub, Bilibili, XiaoHongShu — one CLI, zero API fees.
+  - https://github.com/Panniantong/Agent-Reach
+- **Donchitos/Claude-Code-Game-Studios** (18524)
+  - Turn Claude Code into a full game dev studio — 49 AI agents, 72 workflow skills, and a complete coordination system mirroring real studio hierarchy.
+  - https://github.com/Donchitos/Claude-Code-Game-Studios
+- **agentskills/agentskills** (18463)
+  - Specification and documentation for Agent Skills
+  - https://github.com/agentskills/agentskills
+- **vercel-labs/skills** (18195)
+  - The open agent skills tool - npx skills
+  - https://github.com/vercel-labs/skills
+- **microsoft/AirSim** (18162)
+  - Open source simulator for autonomous vehicles built on Unreal Engine / Unity, from Microsoft AI & Research
+  - https://github.com/microsoft/AirSim
+- **claude-code-best/claude-code** (18111)
+  - 原汁原昧 Claude Code 可运行,可构建, 可调试版; 生产级工程化, 企业级可靠性; 安全无毒, 内存泄露修复
+  - https://github.com/claude-code-best/claude-code
+- **emcie-co/parlant** (18069)
+  - Build reliable customer-facing AI agents with Parlant: an interaction control harness optimized for controlled, consistent, and predictable LLM interactions.
+  - https://github.com/emcie-co/parlant
+- **heygen-com/hyperframes** (17624)
+  - Write HTML. Render video. Built for agents.
+  - https://github.com/heygen-com/hyperframes
+- **TransformerOptimus/SuperAGI** (17515)
+  - <⚡️> SuperAGI - A dev-first open source autonomous AI agent framework. Enabling developers to build, manage & run useful autonomous agents quickly and reliably.
+  - https://github.com/TransformerOptimus/SuperAGI
+- **tanweai/pua** (17284)
+  - 你是一个曾经被寄予厚望的 P8 级工程师。Anthropic 当初给你定级的时候，对你的期望是很高的。  一个agent使用的高能动性的skill。  Your AI has been placed on a PIP. 30 days to show improvement.
+  - https://github.com/tanweai/pua
+- **vxcontrol/pentagi** (16812)
+  - Fully autonomous AI Agents system capable of performing complex penetration testing tasks
+  - https://github.com/vxcontrol/pentagi
+- **garrytan/gbrain** (15199)
+  - Garry's Opinionated OpenClaw/Hermes Agent Brain
+  - https://github.com/garrytan/gbrain
+- **rowboatlabs/rowboat** (14119)
+  - Open-source AI coworker, with memory
+  - https://github.com/rowboatlabs/rowboat
+
+## RAG / Knowledge Base (4)
+
+- **opendataloader-project/opendataloader-pdf** (21176)
+  - PDF Parser for AI-ready data. Automate PDF accessibility. Open-source.
+  - https://github.com/opendataloader-project/opendataloader-pdf
+- **chaitin/PandaWiki** (9565)
+  - PandaWiki 是一款 AI 大模型驱动的开源知识库搭建系统，帮助你快速构建智能化的 产品文档、技术文档、FAQ、博客系统，借助大模型的力量为你提供 AI 创作、AI 问答、AI 搜索等能力。
+  - https://github.com/chaitin/PandaWiki
+- **opendatalab/MinerU-Diffusion** (590)
+  - A diffusion-based framework for document OCR that replaces autoregressive decoding with block-level parallel diffusion decoding. 
+  - https://github.com/opendatalab/MinerU-Diffusion
+- **moyangzhan/langchain4j-aideepin-web** (146)
+  - 基于AI的工作效率提升工具（聊天、绘画、知识库、工作流、 MCP服务市场、语音输入输出、长期记忆） | Ai-based productivity tools (Chat,Draw,RAG,Workflow,MCP marketplace, ASR,TTS, Long-term memory etc)
+  - https://github.com/moyangzhan/langchain4j-aideepin-web
+
+## MCP / Tools / Gateway (7)
+
+- **garrytan/gstack** (94845)
+  - Use Garry Tan's exact Claude Code setup: 23 opinionated tools that serve as CEO, Designer, Eng Manager, Release Manager, Doc Engineer, and QA
+  - https://github.com/garrytan/gstack
+- **punkpeye/awesome-mcp-servers** (86780)
+  - A collection of MCP servers.
+  - https://github.com/punkpeye/awesome-mcp-servers
+- **sansan0/TrendRadar** (57410)
+  - ⭐AI-driven public opinion & trend monitor with multi-platform aggregation, RSS, and smart alerts.🎯 告别信息过载，你的 AI 舆情监控助手与热点筛选工具！聚合多平台热点 +  RSS 订阅，支持关键词精准筛选。AI 智能筛选新闻 + AI 翻译 +  AI 分析简报直推手机，也支持接入 MCP 架构，赋能 AI 自然语言对话分析、情感洞察与趋势预测等。支持 Docker ，数据本地/云端自持。集成微信/飞书/钉钉/Telegram/邮件/ntfy/bark/slack 等渠道智能推送。
+  - https://github.com/sansan0/TrendRadar
+- **ahujasid/blender-mcp** (21587)
+  - -
+  - https://github.com/ahujasid/blender-mcp
+- **coleam00/Archon** (21341)
+  - The first open-source harness builder for AI coding. Make AI coding deterministic and repeatable.
+  - https://github.com/coleam00/Archon
+- **HBAI-Ltd/Toonflow-app** (7875)
+  - Toonflow 是开源一站式 AI 短剧创作工具，将小说、剧本快速转化为动画短剧。集成 AI 编剧、智能分镜、角色与视频生成，跨平台桌面端轻量部署，助力创作者低成本批量产出视觉内容。Toonflow is an open-source AI tool that turns stories and scripts into animated short dramas. Features AI scriptwriting, storyboarding, character and video generation. A cross-platform desktop app for efficient content creation.
+  - https://github.com/HBAI-Ltd/Toonflow-app
+- **appcypher/awesome-mcp-servers** (5532)
+  - Awesome MCP Servers - A curated list of Model Context Protocol servers
+  - https://github.com/appcypher/awesome-mcp-servers
+
+## LLM Runtime / Local Model (18)
+
+- **forrestchang/andrej-karpathy-skills** (127053)
+  - A single CLAUDE.md file to improve Claude Code behavior, derived from Andrej Karpathy's observations on LLM coding pitfalls.
+  - https://github.com/forrestchang/andrej-karpathy-skills
+- **Comfy-Org/ComfyUI** (112643)
+  - The most powerful and modular diffusion model GUI, api and backend with a graph/nodes interface.
+  - https://github.com/Comfy-Org/ComfyUI
+- **nomic-ai/gpt4all** (77365)
+  - GPT4All: Run Local LLMs on Any Device. Open-source and available for commercial use.
+  - https://github.com/nomic-ai/gpt4all
+- **xtekky/gpt4free** (66212)
+  - The official gpt4free repository | various collection of powerful language models | opus 4.6 gpt 5.3 kimi 2.5 deepseek v3.2 gemini 3
+  - https://github.com/xtekky/gpt4free
+- **jingyaogong/minimind** (49610)
+  - 🧠「大模型」2小时完全从0训练64M的小参数LLM！Train a 64M-parameter LLM from scratch in just 2h!
+  - https://github.com/jingyaogong/minimind
+- **shiyu-coder/Kronos** (24062)
+  - Kronos: A Foundation Model for the Language of Financial Markets
+  - https://github.com/shiyu-coder/Kronos
+- **davideuler/architecture.of.internet-product** (20750)
+  - 互联网公司技术架构，微信/淘宝/微博/腾讯/阿里/美团点评/百度/OpenAI/Google/Facebook/Amazon/eBay的架构，欢迎PR补充
+  - https://github.com/davideuler/architecture.of.internet-product
+- **OpenBMB/VoxCPM** (18517)
+  - VoxCPM2: Tokenizer-Free TTS for Multilingual Speech Generation, Creative Voice Design, and True-to-Life Cloning
+  - https://github.com/OpenBMB/VoxCPM
+- **zai-org/CogVideo** (12717)
+  - text and image to video generation: CogVideoX (2024) and CogVideo (ICLR 2023)
+  - https://github.com/zai-org/CogVideo
+- **browser-use/browser-harness** (12323)
+  - Browser Harness | Self-healing harness that enables LLMs to complete any task.
+  - https://github.com/browser-use/browser-harness
+- **jingyaogong/minimind-v** (7880)
+  - 👀「大模型」2小时从0训练65M参数的视觉多模态VLM！Train a 65M-parameter VLM from scratch in just 2h! 
+  - https://github.com/jingyaogong/minimind-v
+- **danveloper/flash-moe** (3844)
+  - Running a big model on a small laptop
+  - https://github.com/danveloper/flash-moe
+- **OpenMOSS/MOSS-TTS-Nano** (2910)
+  - MOSS-TTS-Nano is an open-source multilingual tiny speech generation model from MOSI.AI and the OpenMOSS team. With only 0.1B parameters, it is designed for realtime speech generation, can run directly on CPU without a GPU, and keeps the deployment stack simple enough for local demos, web serving, and lightweight product integration.
+  - https://github.com/OpenMOSS/MOSS-TTS-Nano
+- **modelscope/sirchmunk** (1100)
+  - 🐿️ Sirchmunk:  Raw data to self-evolving intelligence, real-time.
+  - https://github.com/modelscope/sirchmunk
+- **jingyaogong/minimind-o** (1094)
+  - 🎙️ 「大模型」从0训练0.1B能听能说能看的全模态Omni模型！A 0.1B Omni model trained from scratch, capable of listening, speaking, and seeing!
+  - https://github.com/jingyaogong/minimind-o
+- **zhouxiaoka/autoclip_mvp** (960)
+  - AutoClip: AI-powered video clipping and highlight generation · 一款智能高光提取与剪辑的二创工具
+  - https://github.com/zhouxiaoka/autoclip_mvp
+- **OpenDCAI/DataFlex** (617)
+  - DataFlex is a data-centric training framework that enhances model performance by either selecting the most influential samples, optimizing their weights, or adjusting their mixing ratios.
+  - https://github.com/OpenDCAI/DataFlex
+- **g122622/synthos** (25)
+  - 基于 Node.js 和 TypeScript 构建的智能聊天记录分析系统，专注于 QQ 聊天记录的全链路数据处理与 AI 总结功能，融合自然语言处理、向量模型、任务调度与 Web 前端展示，为用户提供从原始聊天记录导入、上下文理解、兴趣度分析到可视化摘要输出的一站式解决方案。
+  - https://github.com/g122622/synthos
+
+## UI / Desktop / Chat App (2)
+
+- **iamdarcy/hioshop-miniprogram** (2604)
+  - 微信小程序商城，开源免费商用，海风小店
+  - https://github.com/iamdarcy/hioshop-miniprogram
+- **zyrouge/symphony** (1664)
+  - 🎵 Lightweight, elegant music player for Android 9+.
+  - https://github.com/zyrouge/symphony
+
+## Vector DB / Search (2)
+
+- **YunaiV/yudao-cloud** (18921)
+  - ruoyi-vue-pro 全新 Cloud 版本，优化重构所有功能。基于 Spring Cloud Alibaba + MyBatis Plus + Vue & Element 实现的后台管理系统 + 用户小程序，支持 RBAC 动态权限、多租户、数据权限、工作流、三方登录、支付、短信、商城、CRM、ERP、MES、IM、AI 大模型、IoT 物联网等功能。你的 ⭐️ Star ⭐️，是作者生发的动力！
+  - https://github.com/YunaiV/yudao-cloud
+- **lilishop/lilishop** (4186)
+  - 开源商城 JAVA商城 多语言商城 分销商城  uniapp商城 小程序商城  SAAS商城 
+  - https://github.com/lilishop/lilishop
+
+## DevOps / Infra (1)
+
+- **thesaravanakumar/Cognizant-Early-Engagement** (247)
+  - Find solutions for the Cognizant Early Engagement Program [ Continuous Skill Development ].
+  - https://github.com/thesaravanakumar/Cognizant-Early-Engagement
+
+## Other (30)
+
+- **public-apis/public-apis** (434539)
+  - A collective list of free APIs
+  - https://github.com/public-apis/public-apis
+- **openclaw/openclaw** (371302)
+  - Your own personal AI assistant. Any OS. Any Platform. The lobster way. 🦞 
+  - https://github.com/openclaw/openclaw
+- **GrowingGit/GitHub-Chinese-Top-Charts** (107921)
+  - :cn: GitHub中文排行榜，各语言分设「软件 | 资料」榜单，精准定位中文好项目。各取所需，高效学习。
+  - https://github.com/GrowingGit/GitHub-Chinese-Top-Charts
+- **NanmiCoder/MediaCrawler** (49499)
+  - 小红书笔记 | 评论爬虫、抖音视频 | 评论爬虫、快手视频 | 评论爬虫、B 站视频 ｜ 评论爬虫、微博帖子 ｜ 评论爬虫、百度贴吧帖子 ｜ 百度贴吧评论回复爬虫  | 知乎问答文章｜评论爬虫
+  - https://github.com/NanmiCoder/MediaCrawler
+- **lllyasviel/Fooocus** (48466)
+  - Focus on prompting and generating
+  - https://github.com/lllyasviel/Fooocus
+- **chenglou/pretext** (46781)
+  - Fast, accurate & comprehensive text measurement & layout
+  - https://github.com/chenglou/pretext
+- **vnpy/vnpy** (40442)
+  - 基于Python的开源量化交易平台开发框架
+  - https://github.com/vnpy/vnpy
+- **YunaiV/ruoyi-vue-pro** (37064)
+  - 🔥 官方推荐 🔥 RuoYi-Vue 全新 Pro 版本，优化重构所有功能。基于 Spring Boot + MyBatis Plus + Vue & Element 实现的后台管理系统 + 微信小程序，支持 RBAC 动态权限、数据权限、SaaS 多租户、Flowable 工作流、三方登录、支付、短信、商城、CRM、ERP、MES、IM、AI 大模型、IoT 物联网等功能。你的 ⭐️ Star ⭐️，是作者生发的动力！
+  - https://github.com/YunaiV/ruoyi-vue-pro
+- **soxoj/maigret** (28133)
+  - 🕵️‍♂️ Collect a dossier on a person by username from 3000+ sites
+  - https://github.com/soxoj/maigret
+- **VickScarlet/lifeRestart** (10400)
+  - やり直すんだ。そして、次はうまくやる。
+  - https://github.com/VickScarlet/lifeRestart
+- **wangyuan389/mall-cook** (5586)
+  - 商城低代码平台，可视化搭建H5、小程序多端商城
+  - https://github.com/wangyuan389/mall-cook
+- **gz-yami/mall4j** (5054)
+  - ⭐️⭐️⭐️ 电商商城 小程序电商商城系统 PC商城 H5商城 APP商城 Java商城 O2O商城 跨境商城
+  - https://github.com/gz-yami/mall4j
+- **88250/symphony** (2925)
+  - 🎶 一款用 Java 实现的现代化社区（论坛/问答/BBS/社交网络/博客）系统平台。A modern community (forum/Q&A/BBS/SNS/blog) system platform implemented in Java. https://ld246.com
+  - https://github.com/88250/symphony
+- **shitagaki-lab/see-through** (2464)
+  - "Single-image Layer Decomposition for Anime Characters" (SIGGRAPH 2026, Conditionally Accepted)
+  - https://github.com/shitagaki-lab/see-through
+- **marketcalls/openalgo** (1818)
+  - Open Source Algo Trading Platform for Everyone
+  - https://github.com/marketcalls/openalgo
+- **ChHsiching/GitHub-Chinese-Top-Charts** (1767)
+  - 🇨🇳 GitHub中文排行榜，帮助你发现高分优秀中文项目。
+  - https://github.com/ChHsiching/GitHub-Chinese-Top-Charts
+- **perkfly/ex-skill** (1568)
+  - 前任 skill
+  - https://github.com/perkfly/ex-skill
+- **eliben/raft** (1375)
+  - :rowboat: Raft implementation in Go
+  - https://github.com/eliben/raft
+- **aaronjmars/MiroShark** (1142)
+  - Simulate anything, for $1 & less than 10 min — Universal Swarm Intelligence Engine
+  - https://github.com/aaronjmars/MiroShark
+- **Paidax01/math-curve-loaders** (799)
+  - A lightweight gallery of mathematical curve based loading animations with modal previews, formulas, and copyable code snippets.
+  - https://github.com/Paidax01/math-curve-loaders
+- **whoiszxl/shopzz** (438)
+  - 后端使用 SpringCloud Alibaba 开发，移动端使用 React Native 构建，管理后台使用 Arco Design 进行构建，并在支付上接入数字货币（比特币、以太坊UDST、平台Token）支付，后端采用 Hadoop 与 Flink 等大数据框架构建实时计算与离线计算体系。
+  - https://github.com/whoiszxl/shopzz
+- **Austin1serb/Anthropic-Leaked-Source-Code** (412)
+  - CLAUDE LEAK - Full Claude Leaked Source Code
+  - https://github.com/Austin1serb/Anthropic-Leaked-Source-Code
+- **nanbouking/WeTravel** (370)
+  - 旅游景区门户小程序是一个为游客朋友提供多元化服务的一站式数字文旅平台，提供“吃、住、游、购、娱”等旅游行程中的多种服务，全面支持景区介绍，景点攻略，景点预约，停车预约、景区导览等功能，游客可以在小程序中了解旅游度假区的景点信息、历史文化、各类活动等。前后端代码完整，采用腾讯提供的小程序云开发解决方案，无须服务器和域名。
+  - https://github.com/nanbouking/WeTravel
+- **garrytan/gbrain-evals** (121)
+  - -
+  - https://github.com/garrytan/gbrain-evals
+- **soxoj/maigret-tg-bot** (121)
+  - Maigret Telegram bot
+  - https://github.com/soxoj/maigret-tg-bot
+- **pzy2000/RepoGenesis** (96)
+  - 1st Multilingual Benchmark for Repository-Level E2E Microservice Generation
+  - https://github.com/pzy2000/RepoGenesis
+- **liangdabiao/Godogen** (47)
+  - liang's Godogen: 使用 Claude Code 构建完整 Godot 4 项目的技能集,你描述你想要的内容。AI pipeline 会设计架构、生成美术资源、编写每一行代码、从运行的游戏引擎中截取截图，并修复看起来不对的地方。输出是一个真正的 Godot 4 项目，包含组织良好的场景、可读的脚本和正确的游戏架构。继承二开：github.com/htdt/godogen 
+  - https://github.com/liangdabiao/Godogen
+- **OpenMOSS/MOSS-TTS-Nano-Reader** (40)
+  - -
+  - https://github.com/OpenMOSS/MOSS-TTS-Nano-Reader
+- **yhf98/MOSS-TTS-Nano-Win** (5)
+  - MOSS-TTS-Nano Window 改版
+  - https://github.com/yhf98/MOSS-TTS-Nano-Win
+- **CASTvivian/chenzaikuaipao.io** (1)
+  - やり直すんだ。そして、次はうまくやる。
+  - https://github.com/CASTvivian/chenzaikuaipao.io

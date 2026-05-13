@@ -1,0 +1,65 @@
+{
+  "version": "2026.05",
+  "runtime_strategy": {
+    "local_low_end": "not_recommended",
+    "local_high_end": "ComfyUI",
+    "server": "ComfyUI or diffusers service",
+    "client_behavior": "submit job, poll progress, download final video"
+  },
+  "models": [
+    {
+      "id": "wan",
+      "name": "Wan 2.x / Wan 2.2",
+      "type": "text-to-video / image-to-video",
+      "quality": "high",
+      "hardware": "24GB+ VRAM recommended",
+      "integration": "ComfyUI / server",
+      "status": "catalog_only"
+    },
+    {
+      "id": "hunyuanvideo",
+      "name": "HunyuanVideo",
+      "type": "text-to-video / image-to-video",
+      "quality": "high",
+      "hardware": "14GB-24GB+ VRAM depending workflow",
+      "integration": "ComfyUI / server",
+      "status": "catalog_only"
+    },
+    {
+      "id": "cogvideox",
+      "name": "CogVideoX",
+      "type": "text-to-video",
+      "quality": "medium_high",
+      "hardware": "12GB-24GB VRAM depending size",
+      "integration": "ComfyUI / diffusers",
+      "status": "catalog_only"
+    },
+    {
+      "id": "ltx_video",
+      "name": "LTX-Video / LTX-2",
+      "type": "text-to-video / video generation",
+      "quality": "high",
+      "hardware": "high_end_gpu",
+      "integration": "ComfyUI / server",
+      "status": "catalog_only"
+    },
+    {
+      "id": "svd",
+      "name": "Stable Video Diffusion",
+      "type": "image-to-video",
+      "quality": "medium",
+      "hardware": "8GB-16GB VRAM",
+      "integration": "ComfyUI",
+      "status": "catalog_only"
+    },
+    {
+      "id": "animatediff",
+      "name": "AnimateDiff",
+      "type": "animation / short loop",
+      "quality": "medium",
+      "hardware": "8GB+ VRAM",
+      "integration": "ComfyUI",
+      "status": "catalog_only"
+    }
+  ]
+}

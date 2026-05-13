@@ -1,0 +1,326 @@
+[
+  {
+    "full_name": "bytedance/deer-flow",
+    "summary_file": "core-platform/data/brain_assets/reports/repo_summaries/bytedance__deer-flow.md",
+    "local_path": "core-platform/data/brain_assets/repos/github_stars/bytedance__deer-flow",
+    "buckets": [
+      "agent",
+      "rag",
+      "mcp",
+      "llm_runtime"
+    ],
+    "clone_status": "cloned"
+  },
+  {
+    "full_name": "666ghj/MiroFish",
+    "summary_file": "core-platform/data/brain_assets/reports/repo_summaries/666ghj__MiroFish.md",
+    "local_path": "core-platform/data/brain_assets/repos/github_stars/666ghj__MiroFish",
+    "buckets": [
+      "agent",
+      "rag",
+      "llm_runtime"
+    ],
+    "clone_status": "cloned"
+  },
+  {
+    "full_name": "opendatalab/MinerU",
+    "summary_file": "core-platform/data/brain_assets/reports/repo_summaries/opendatalab__MinerU.md",
+    "local_path": "core-platform/data/brain_assets/repos/github_stars/opendatalab__MinerU",
+    "buckets": [
+      "agent",
+      "rag",
+      "llm_runtime"
+    ],
+    "clone_status": "cloned"
+  },
+  {
+    "full_name": "simstudioai/sim",
+    "summary_file": "core-platform/data/brain_assets/reports/repo_summaries/simstudioai__sim.md",
+    "local_path": "core-platform/data/brain_assets/repos/github_stars/simstudioai__sim",
+    "buckets": [
+      "agent",
+      "rag",
+      "ui"
+    ],
+    "clone_status": "cloned"
+  },
+  {
+    "full_name": "Significant-Gravitas/AutoGPT",
+    "summary_file": "core-platform/data/brain_assets/reports/repo_summaries/Significant-Gravitas__AutoGPT.md",
+    "local_path": "core-platform/data/brain_assets/repos/github_stars/Significant-Gravitas__AutoGPT",
+    "buckets": [
+      "agent",
+      "mcp",
+      "llm_runtime"
+    ],
+    "clone_status": "cloned"
+  },
+  {
+    "full_name": "datawhalechina/hello-agents",
+    "summary_file": "core-platform/data/brain_assets/reports/repo_summaries/datawhalechina__hello-agents.md",
+    "local_path": "core-platform/data/brain_assets/repos/github_stars/datawhalechina__hello-agents",
+    "buckets": [
+      "agent",
+      "rag",
+      "llm_runtime"
+    ],
+    "clone_status": "cloned"
+  },
+  {
+    "full_name": "safishamsi/graphify",
+    "summary_file": "core-platform/data/brain_assets/reports/repo_summaries/safishamsi__graphify.md",
+    "local_path": "core-platform/data/brain_assets/repos/github_stars/safishamsi__graphify",
+    "buckets": [
+      "agent",
+      "rag",
+      "video"
+    ],
+    "clone_status": "cloned"
+  },
+  {
+    "full_name": "sansan0/TrendRadar",
+    "summary_file": "core-platform/data/brain_assets/reports/repo_summaries/sansan0__TrendRadar.md",
+    "local_path": "core-platform/data/brain_assets/repos/github_stars/sansan0__TrendRadar",
+    "buckets": [
+      "mcp",
+      "llm_runtime",
+      "ui"
+    ],
+    "clone_status": "cloned"
+  },
+  {
+    "full_name": "NousResearch/hermes-agent",
+    "summary_file": "core-platform/data/brain_assets/reports/repo_summaries/NousResearch__hermes-agent.md",
+    "local_path": "core-platform/data/brain_assets/repos/github_stars/NousResearch__hermes-agent",
+    "buckets": [
+      "agent",
+      "llm_runtime",
+      "ui"
+    ],
+    "clone_status": "cloned"
+  },
+  {
+    "full_name": "affaan-m/everything-claude-code",
+    "summary_file": "core-platform/data/brain_assets/reports/repo_summaries/affaan-m__everything-claude-code.md",
+    "local_path": "core-platform/data/brain_assets/repos/github_stars/affaan-m__everything-claude-code",
+    "buckets": [
+      "agent",
+      "mcp",
+      "llm_runtime"
+    ],
+    "clone_status": "cloned"
+  },
+  {
+    "full_name": "Panniantong/Agent-Reach",
+    "summary_file": "core-platform/data/brain_assets/reports/repo_summaries/Panniantong__Agent-Reach.md",
+    "local_path": "core-platform/data/brain_assets/repos/github_stars/Panniantong__Agent-Reach",
+    "buckets": [
+      "agent",
+      "mcp",
+      "llm_runtime"
+    ],
+    "clone_status": "cloned"
+  },
+  {
+    "full_name": "HBAI-Ltd/Toonflow-app",
+    "summary_file": "core-platform/data/brain_assets/reports/repo_summaries/HBAI-Ltd__Toonflow-app.md",
+    "local_path": "core-platform/data/brain_assets/repos/github_stars/HBAI-Ltd__Toonflow-app",
+    "buckets": [
+      "mcp",
+      "llm_runtime",
+      "ui",
+      "video"
+    ],
+    "clone_status": "cloned"
+  },
+  {
+    "full_name": "TransformerOptimus/SuperAGI",
+    "summary_file": "core-platform/data/brain_assets/reports/repo_summaries/TransformerOptimus__SuperAGI.md",
+    "local_path": "core-platform/data/brain_assets/repos/github_stars/TransformerOptimus__SuperAGI",
+    "buckets": [
+      "agent",
+      "rag",
+      "llm_runtime"
+    ],
+    "clone_status": "cloned"
+  },
+  {
+    "full_name": "heygen-com/hyperframes",
+    "summary_file": "core-platform/data/brain_assets/reports/repo_summaries/heygen-com__hyperframes.md",
+    "local_path": "core-platform/data/brain_assets/repos/github_stars/heygen-com__hyperframes",
+    "buckets": [
+      "agent",
+      "mcp",
+      "video"
+    ],
+    "clone_status": "cloned"
+  },
+  {
+    "full_name": "zhouxiaoka/autoclip",
+    "summary_file": "core-platform/data/brain_assets/reports/repo_summaries/zhouxiaoka__autoclip.md",
+    "local_path": "core-platform/data/brain_assets/repos/github_stars/zhouxiaoka__autoclip",
+    "buckets": [
+      "agent",
+      "mcp",
+      "llm_runtime",
+      "video"
+    ],
+    "clone_status": "cloned"
+  },
+  {
+    "full_name": "rowboatlabs/rowboat",
+    "summary_file": "core-platform/data/brain_assets/reports/repo_summaries/rowboatlabs__rowboat.md",
+    "local_path": "core-platform/data/brain_assets/repos/github_stars/rowboatlabs__rowboat",
+    "buckets": [
+      "agent",
+      "llm_runtime",
+      "ui"
+    ],
+    "clone_status": "cloned"
+  },
+  {
+    "full_name": "moyangzhan/langchain4j-aideepin",
+    "summary_file": "core-platform/data/brain_assets/reports/repo_summaries/moyangzhan__langchain4j-aideepin.md",
+    "local_path": "core-platform/data/brain_assets/repos/github_stars/moyangzhan__langchain4j-aideepin",
+    "buckets": [
+      "agent",
+      "rag",
+      "mcp",
+      "ui"
+    ],
+    "clone_status": "cloned"
+  },
+  {
+    "full_name": "howardpen9/hermes-gbrain-bridge",
+    "summary_file": "core-platform/data/brain_assets/reports/repo_summaries/howardpen9__hermes-gbrain-bridge.md",
+    "local_path": "core-platform/data/brain_assets/repos/github_stars/howardpen9__hermes-gbrain-bridge",
+    "buckets": [
+      "agent",
+      "rag",
+      "mcp",
+      "llm_runtime"
+    ],
+    "clone_status": "cloned"
+  },
+  {
+    "full_name": "abhigyanpatwari/GitNexus",
+    "summary_file": "core-platform/data/brain_assets/reports/repo_summaries/abhigyanpatwari__GitNexus.md",
+    "local_path": "core-platform/data/brain_assets/repos/github_stars/abhigyanpatwari__GitNexus",
+    "buckets": [
+      "agent",
+      "rag"
+    ],
+    "clone_status": "cloned"
+  },
+  {
+    "full_name": "datawhalechina/easy-vibe",
+    "summary_file": "core-platform/data/brain_assets/reports/repo_summaries/datawhalechina__easy-vibe.md",
+    "local_path": "core-platform/data/brain_assets/repos/github_stars/datawhalechina__easy-vibe",
+    "buckets": [
+      "agent",
+      "mcp",
+      "llm_runtime"
+    ],
+    "clone_status": "cloned"
+  },
+  {
+    "full_name": "nomic-ai/gpt4all",
+    "summary_file": "core-platform/data/brain_assets/reports/repo_summaries/nomic-ai__gpt4all.md",
+    "local_path": "core-platform/data/brain_assets/repos/github_stars/nomic-ai__gpt4all",
+    "buckets": [
+      "llm_runtime",
+      "ui"
+    ],
+    "clone_status": "cloned"
+  },
+  {
+    "full_name": "coleam00/Archon",
+    "summary_file": "core-platform/data/brain_assets/reports/repo_summaries/coleam00__Archon.md",
+    "local_path": "core-platform/data/brain_assets/repos/github_stars/coleam00__Archon",
+    "buckets": [
+      "agent",
+      "mcp"
+    ],
+    "clone_status": "cloned"
+  },
+  {
+    "full_name": "davideuler/architecture.of.internet-product",
+    "summary_file": "core-platform/data/brain_assets/reports/repo_summaries/davideuler__architecture.of.internet-product.md",
+    "local_path": "core-platform/data/brain_assets/repos/github_stars/davideuler__architecture.of.internet-product",
+    "buckets": [
+      "llm_runtime",
+      "ui"
+    ],
+    "clone_status": "cloned"
+  },
+  {
+    "full_name": "sickn33/antigravity-awesome-skills",
+    "summary_file": "core-platform/data/brain_assets/reports/repo_summaries/sickn33__antigravity-awesome-skills.md",
+    "local_path": "core-platform/data/brain_assets/repos/github_stars/sickn33__antigravity-awesome-skills",
+    "buckets": [
+      "agent",
+      "mcp"
+    ],
+    "clone_status": "cloned"
+  },
+  {
+    "full_name": "karpathy/autoresearch",
+    "summary_file": "core-platform/data/brain_assets/reports/repo_summaries/karpathy__autoresearch.md",
+    "local_path": "core-platform/data/brain_assets/repos/github_stars/karpathy__autoresearch",
+    "buckets": [
+      "agent",
+      "ui"
+    ],
+    "clone_status": "cloned"
+  },
+  {
+    "full_name": "forrestchang/andrej-karpathy-skills",
+    "summary_file": "core-platform/data/brain_assets/reports/repo_summaries/forrestchang__andrej-karpathy-skills.md",
+    "local_path": "core-platform/data/brain_assets/repos/github_stars/forrestchang__andrej-karpathy-skills",
+    "buckets": [
+      "agent",
+      "llm_runtime"
+    ],
+    "clone_status": "cloned"
+  },
+  {
+    "full_name": "JuliusBrussee/caveman",
+    "summary_file": "core-platform/data/brain_assets/reports/repo_summaries/JuliusBrussee__caveman.md",
+    "local_path": "core-platform/data/brain_assets/repos/github_stars/JuliusBrussee__caveman",
+    "buckets": [
+      "agent",
+      "llm_runtime"
+    ],
+    "clone_status": "cloned"
+  },
+  {
+    "full_name": "garrytan/gstack",
+    "summary_file": "core-platform/data/brain_assets/reports/repo_summaries/garrytan__gstack.md",
+    "local_path": "core-platform/data/brain_assets/repos/github_stars/garrytan__gstack",
+    "buckets": [
+      "agent",
+      "mcp"
+    ],
+    "clone_status": "cloned"
+  },
+  {
+    "full_name": "shareAI-lab/learn-claude-code",
+    "summary_file": "core-platform/data/brain_assets/reports/repo_summaries/shareAI-lab__learn-claude-code.md",
+    "local_path": "core-platform/data/brain_assets/repos/github_stars/shareAI-lab__learn-claude-code",
+    "buckets": [
+      "agent",
+      "llm_runtime"
+    ],
+    "clone_status": "cloned"
+  },
+  {
+    "full_name": "msitarzewski/agency-agents",
+    "summary_file": "core-platform/data/brain_assets/reports/repo_summaries/msitarzewski__agency-agents.md",
+    "local_path": "core-platform/data/brain_assets/repos/github_stars/msitarzewski__agency-agents",
+    "buckets": [
+      "agent",
+      "ui"
+    ],
+    "clone_status": "cloned"
+  }
+]
