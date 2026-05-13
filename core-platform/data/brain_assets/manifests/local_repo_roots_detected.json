@@ -1,0 +1,72 @@
+[
+  {
+    "path": ".",
+    "name": "",
+    "origin_full_name": "castvivian/local-ai-platform"
+  },
+  {
+    "path": "RAG-Anything",
+    "name": "rag-anything",
+    "origin_full_name": "hkuds/rag-anything"
+  },
+  {
+    "path": "Qwen3-VL",
+    "name": "qwen3-vl",
+    "origin_full_name": "qwenlm/qwen3-vl"
+  },
+  {
+    "path": "qlib",
+    "name": "qlib",
+    "origin_full_name": "microsoft/qlib"
+  },
+  {
+    "path": "LLaVA-OneVision-1.5",
+    "name": "llava-onevision-1.5",
+    "origin_full_name": "evolvinglmms-lab/llava-onevision-1.5"
+  },
+  {
+    "path": "AlphaAgent",
+    "name": "alphaagent",
+    "origin_full_name": "rndmvariableq/alphaagent"
+  },
+  {
+    "path": "anything-llm",
+    "name": "anything-llm",
+    "origin_full_name": "mintplex-labs/anything-llm"
+  },
+  {
+    "path": "OpenHands",
+    "name": "openhands",
+    "origin_full_name": "openhands/openhands"
+  },
+  {
+    "path": "MASTER",
+    "name": "master",
+    "origin_full_name": "sjtu-dmtai/master"
+  },
+  {
+    "path": "langflow",
+    "name": "langflow",
+    "origin_full_name": "langflow-ai/langflow"
+  },
+  {
+    "path": "vnpy",
+    "name": "vnpy",
+    "origin_full_name": "vnpy/vnpy"
+  },
+  {
+    "path": "LLaVA-NeXT",
+    "name": "llava-next",
+    "origin_full_name": "llava-vl/llava-next"
+  },
+  {
+    "path": "andrej-karpathy-skills",
+    "name": "andrej-karpathy-skills",
+    "origin_full_name": "forrestchang/andrej-karpathy-skills"
+  },
+  {
+    "path": "VoxCPM",
+    "name": "voxcpm",
+    "origin_full_name": "openbmb/voxcpm"
+  }
+]

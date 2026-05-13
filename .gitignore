@@ -15,3 +15,6 @@ tree.txt
 core-platform/apps/desktop/bundle/backend/data/
 core-platform/apps/desktop/bundle/backend/references/
 core-platform/apps/desktop/bundle/backend/generated/
+
+# C19 brain asset cloned third-party repositories
+core-platform/data/brain_assets/repos/
