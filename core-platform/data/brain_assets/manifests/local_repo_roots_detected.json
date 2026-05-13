@@ -68,5 +68,990 @@
     "path": "VoxCPM",
     "name": "voxcpm",
     "origin_full_name": "openbmb/voxcpm"
+  },
+  {
+    "path": "capability-registry/claude-code-best-practice",
+    "name": "claude-code-best-practice",
+    "origin_full_name": "shanraisshan/claude-code-best-practice"
+  },
+  {
+    "path": "capability-registry/gstack",
+    "name": "gstack",
+    "origin_full_name": "garrytan/gstack"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/nomic-ai__gpt4all",
+    "name": "nomic-ai__gpt4all",
+    "origin_full_name": "nomic-ai/gpt4all"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/zai-org__CogVideo",
+    "name": "zai-org__cogvideo",
+    "origin_full_name": "zai-org/cogvideo"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/jingyaogong__minimind",
+    "name": "jingyaogong__minimind",
+    "origin_full_name": "jingyaogong/minimind"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/punkpeye__awesome-mcp-servers",
+    "name": "punkpeye__awesome-mcp-servers",
+    "origin_full_name": "punkpeye/awesome-mcp-servers"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/browser-use__browser-harness",
+    "name": "browser-use__browser-harness",
+    "origin_full_name": "browser-use/browser-harness"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/garrytan__gbrain-evals",
+    "name": "garrytan__gbrain-evals",
+    "origin_full_name": "garrytan/gbrain-evals"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/lllyasviel__Fooocus",
+    "name": "lllyasviel__fooocus",
+    "origin_full_name": "lllyasviel/fooocus"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/alchaincyf__darwin-skill",
+    "name": "alchaincyf__darwin-skill",
+    "origin_full_name": "alchaincyf/darwin-skill"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/g122622__synthos",
+    "name": "g122622__synthos",
+    "origin_full_name": "g122622/synthos"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/marketcalls__openalgo",
+    "name": "marketcalls__openalgo",
+    "origin_full_name": "marketcalls/openalgo"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/OpenMOSS__MOSS-TTS-Nano",
+    "name": "openmoss__moss-tts-nano",
+    "origin_full_name": "openmoss/moss-tts-nano"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/soxoj__maigret",
+    "name": "soxoj__maigret",
+    "origin_full_name": "soxoj/maigret"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/Austin1serb__Anthropic-Leaked-Source-Code",
+    "name": "austin1serb__anthropic-leaked-source-code",
+    "origin_full_name": "austin1serb/anthropic-leaked-source-code"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/coleam00__claude-memory-compiler",
+    "name": "coleam00__claude-memory-compiler",
+    "origin_full_name": "coleam00/claude-memory-compiler"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/affaan-m__everything-claude-code",
+    "name": "affaan-m__everything-claude-code",
+    "origin_full_name": "affaan-m/everything-claude-code"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/VickScarlet__lifeRestart",
+    "name": "vickscarlet__liferestart",
+    "origin_full_name": "vickscarlet/liferestart"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/yhf98__MOSS-TTS-Nano-Win",
+    "name": "yhf98__moss-tts-nano-win",
+    "origin_full_name": "yhf98/moss-tts-nano-win"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/NousResearch__hermes-agent",
+    "name": "nousresearch__hermes-agent",
+    "origin_full_name": "nousresearch/hermes-agent"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/T-Lab-CUHKSZ__claude-code",
+    "name": "t-lab-cuhksz__claude-code",
+    "origin_full_name": "t-lab-cuhksz/claude-code"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/opendatalab__MinerU",
+    "name": "opendatalab__mineru",
+    "origin_full_name": "opendatalab/mineru"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/zhouxiaoka__autoclip",
+    "name": "zhouxiaoka__autoclip",
+    "origin_full_name": "zhouxiaoka/autoclip"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/ryoppippi__ccusage",
+    "name": "ryoppippi__ccusage",
+    "origin_full_name": "ryoppippi/ccusage"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/nanbouking__WeTravel",
+    "name": "nanbouking__wetravel",
+    "origin_full_name": "nanbouking/wetravel"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/garrytan__gstack",
+    "name": "garrytan__gstack",
+    "origin_full_name": "garrytan/gstack"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/Danau5tin__multi-agent-coding-system",
+    "name": "danau5tin__multi-agent-coding-system",
+    "origin_full_name": "danau5tin/multi-agent-coding-system"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/chaitin__PandaWiki",
+    "name": "chaitin__pandawiki",
+    "origin_full_name": "chaitin/pandawiki"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/aaronjmars__MiroShark",
+    "name": "aaronjmars__miroshark",
+    "origin_full_name": "aaronjmars/miroshark"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/coleam00__Archon",
+    "name": "coleam00__archon",
+    "origin_full_name": "coleam00/archon"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/Donchitos__Claude-Code-Game-Studios",
+    "name": "donchitos__claude-code-game-studios",
+    "origin_full_name": "donchitos/claude-code-game-studios"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/safishamsi__graphify",
+    "name": "safishamsi__graphify",
+    "origin_full_name": "safishamsi/graphify"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/xtekky__gpt4free",
+    "name": "xtekky__gpt4free",
+    "origin_full_name": "xtekky/gpt4free"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/jingyaogong__minimind-o",
+    "name": "jingyaogong__minimind-o",
+    "origin_full_name": "jingyaogong/minimind-o"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/whoiszxl__shopzz",
+    "name": "whoiszxl__shopzz",
+    "origin_full_name": "whoiszxl/shopzz"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/JuliusBrussee__caveman",
+    "name": "juliusbrussee__caveman",
+    "origin_full_name": "juliusbrussee/caveman"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/supermemoryai__supermemory",
+    "name": "supermemoryai__supermemory",
+    "origin_full_name": "supermemoryai/supermemory"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/HU-UH__awesome-design-md",
+    "name": "hu-uh__awesome-design-md",
+    "origin_full_name": "hu-uh/awesome-design-md"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/ashishpatel26__500-AI-Agents-Projects",
+    "name": "ashishpatel26__500-ai-agents-projects",
+    "origin_full_name": "ashishpatel26/500-ai-agents-projects"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/openai__codex",
+    "name": "openai__codex",
+    "origin_full_name": "openai/codex"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/Paidax01__math-curve-loaders",
+    "name": "paidax01__math-curve-loaders",
+    "origin_full_name": "paidax01/math-curve-loaders"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/bytedance__deer-flow",
+    "name": "bytedance__deer-flow",
+    "origin_full_name": "bytedance/deer-flow"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/appcypher__awesome-mcp-servers",
+    "name": "appcypher__awesome-mcp-servers",
+    "origin_full_name": "appcypher/awesome-mcp-servers"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/Comfy-Org__ComfyUI",
+    "name": "comfy-org__comfyui",
+    "origin_full_name": "comfy-org/comfyui"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/tanweai__pua",
+    "name": "tanweai__pua",
+    "origin_full_name": "tanweai/pua"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/mukul975__Anthropic-Cybersecurity-Skills",
+    "name": "mukul975__anthropic-cybersecurity-skills",
+    "origin_full_name": "mukul975/anthropic-cybersecurity-skills"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/danveloper__flash-moe",
+    "name": "danveloper__flash-moe",
+    "origin_full_name": "danveloper/flash-moe"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/multica-ai__multica",
+    "name": "multica-ai__multica",
+    "origin_full_name": "multica-ai/multica"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/vibe-with-me-tools__agent-reachout",
+    "name": "vibe-with-me-tools__agent-reachout",
+    "origin_full_name": "vibe-with-me-tools/agent-reachout"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/chenglou__pretext",
+    "name": "chenglou__pretext",
+    "origin_full_name": "chenglou/pretext"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/NanmiCoder__MediaCrawler",
+    "name": "nanmicoder__mediacrawler",
+    "origin_full_name": "nanmicoder/mediacrawler"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/nicedreamzapp__claude-code-local",
+    "name": "nicedreamzapp__claude-code-local",
+    "origin_full_name": "nicedreamzapp/claude-code-local"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/sanbuphy__learn-coding-agent",
+    "name": "sanbuphy__learn-coding-agent",
+    "origin_full_name": "sanbuphy/learn-coding-agent"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/vxcontrol__pentagi",
+    "name": "vxcontrol__pentagi",
+    "origin_full_name": "vxcontrol/pentagi"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/garrytan__gbrain",
+    "name": "garrytan__gbrain",
+    "origin_full_name": "garrytan/gbrain"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/shiyu-coder__Kronos",
+    "name": "shiyu-coder__kronos",
+    "origin_full_name": "shiyu-coder/kronos"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/pzy2000__RepoGenesis",
+    "name": "pzy2000__repogenesis",
+    "origin_full_name": "pzy2000/repogenesis"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/vercel-labs__agent-browser",
+    "name": "vercel-labs__agent-browser",
+    "origin_full_name": "vercel-labs/agent-browser"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/zai-org__Open-AutoGLM",
+    "name": "zai-org__open-autoglm",
+    "origin_full_name": "zai-org/open-autoglm"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/emcie-co__parlant",
+    "name": "emcie-co__parlant",
+    "origin_full_name": "emcie-co/parlant"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/moyangzhan__langchain4j-aideepin",
+    "name": "moyangzhan__langchain4j-aideepin",
+    "origin_full_name": "moyangzhan/langchain4j-aideepin"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/soxoj__maigret-tg-bot",
+    "name": "soxoj__maigret-tg-bot",
+    "origin_full_name": "soxoj/maigret-tg-bot"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/kzhrknt__awesome-design-md-jp",
+    "name": "kzhrknt__awesome-design-md-jp",
+    "origin_full_name": "kzhrknt/awesome-design-md-jp"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/88250__symphony",
+    "name": "88250__symphony",
+    "origin_full_name": "88250/symphony"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/pixel-cellar__Claude-Code-Game-Studios",
+    "name": "pixel-cellar__claude-code-game-studios",
+    "origin_full_name": "pixel-cellar/claude-code-game-studios"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/liangdabiao__Seedance2-Storyboard-Generator",
+    "name": "liangdabiao__seedance2-storyboard-generator",
+    "origin_full_name": "liangdabiao/seedance2-storyboard-generator"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/sickn33__antigravity-awesome-skills",
+    "name": "sickn33__antigravity-awesome-skills",
+    "origin_full_name": "sickn33/antigravity-awesome-skills"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/davideuler__architecture.of.internet-product",
+    "name": "davideuler__architecture.of.internet-product",
+    "origin_full_name": "davideuler/architecture.of.internet-product"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/HKUDS__CLI-Anything",
+    "name": "hkuds__cli-anything",
+    "origin_full_name": "hkuds/cli-anything"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/steipete__CodexBar",
+    "name": "steipete__codexbar",
+    "origin_full_name": "steipete/codexbar"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/luongnv89__claude-howto",
+    "name": "luongnv89__claude-howto",
+    "origin_full_name": "luongnv89/claude-howto"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/heygen-com__hyperframes",
+    "name": "heygen-com__hyperframes",
+    "origin_full_name": "heygen-com/hyperframes"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/obra__superpowers",
+    "name": "obra__superpowers",
+    "origin_full_name": "obra/superpowers"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/zyrouge__symphony",
+    "name": "zyrouge__symphony",
+    "origin_full_name": "zyrouge/symphony"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/nikmcfly__MiroFish-Offline",
+    "name": "nikmcfly__mirofish-offline",
+    "origin_full_name": "nikmcfly/mirofish-offline"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/lilishop__lilishop",
+    "name": "lilishop__lilishop",
+    "origin_full_name": "lilishop/lilishop"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/VoltAgent__awesome-design-md",
+    "name": "voltagent__awesome-design-md",
+    "origin_full_name": "voltagent/awesome-design-md"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/enricoros__big-AGI",
+    "name": "enricoros__big-agi",
+    "origin_full_name": "enricoros/big-agi"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/opendataloader-project__opendataloader-pdf",
+    "name": "opendataloader-project__opendataloader-pdf",
+    "origin_full_name": "opendataloader-project/opendataloader-pdf"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/abhigyanpatwari__GitNexus",
+    "name": "abhigyanpatwari__gitnexus",
+    "origin_full_name": "abhigyanpatwari/gitnexus"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/microsoft__AirSim",
+    "name": "microsoft__airsim",
+    "origin_full_name": "microsoft/airsim"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/666ghj__MiroFish",
+    "name": "666ghj__mirofish",
+    "origin_full_name": "666ghj/mirofish"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/liangdabiao__Godogen",
+    "name": "liangdabiao__godogen",
+    "origin_full_name": "liangdabiao/godogen"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/GrowingGit__GitHub-Chinese-Top-Charts",
+    "name": "growinggit__github-chinese-top-charts",
+    "origin_full_name": "growinggit/github-chinese-top-charts"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/vercel-labs__skills",
+    "name": "vercel-labs__skills",
+    "origin_full_name": "vercel-labs/skills"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/huytieu__COG-second-brain",
+    "name": "huytieu__cog-second-brain",
+    "origin_full_name": "huytieu/cog-second-brain"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/iamdarcy__hioshop-miniprogram",
+    "name": "iamdarcy__hioshop-miniprogram",
+    "origin_full_name": "iamdarcy/hioshop-miniprogram"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/gsd-build__get-shit-done",
+    "name": "gsd-build__get-shit-done",
+    "origin_full_name": "gsd-build/get-shit-done"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/karpathy__autoresearch",
+    "name": "karpathy__autoresearch",
+    "origin_full_name": "karpathy/autoresearch"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/K-Dense-AI__scientific-agent-skills",
+    "name": "k-dense-ai__scientific-agent-skills",
+    "origin_full_name": "k-dense-ai/scientific-agent-skills"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/ageerle__ruoyi-ai",
+    "name": "ageerle__ruoyi-ai",
+    "origin_full_name": "ageerle/ruoyi-ai"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/HBAI-Ltd__Toonflow-app",
+    "name": "hbai-ltd__toonflow-app",
+    "origin_full_name": "hbai-ltd/toonflow-app"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/jingyaogong__minimind-v",
+    "name": "jingyaogong__minimind-v",
+    "origin_full_name": "jingyaogong/minimind-v"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/addyosmani__agent-skills",
+    "name": "addyosmani__agent-skills",
+    "origin_full_name": "addyosmani/agent-skills"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/Mininglamp-AI__Mano-P",
+    "name": "mininglamp-ai__mano-p",
+    "origin_full_name": "mininglamp-ai/mano-p"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/VoltAgent__awesome-agent-skills",
+    "name": "voltagent__awesome-agent-skills",
+    "origin_full_name": "voltagent/awesome-agent-skills"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/FrancyJGLisboa__agent-skill-creator",
+    "name": "francyjglisboa__agent-skill-creator",
+    "origin_full_name": "francyjglisboa/agent-skill-creator"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/simstudioai__sim",
+    "name": "simstudioai__sim",
+    "origin_full_name": "simstudioai/sim"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/datawhalechina__easy-vibe",
+    "name": "datawhalechina__easy-vibe",
+    "origin_full_name": "datawhalechina/easy-vibe"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/moyangzhan__langchain4j-aideepin-web",
+    "name": "moyangzhan__langchain4j-aideepin-web",
+    "origin_full_name": "moyangzhan/langchain4j-aideepin-web"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/openclaw__openclaw",
+    "name": "openclaw__openclaw",
+    "origin_full_name": "openclaw/openclaw"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/msitarzewski__agency-agents",
+    "name": "msitarzewski__agency-agents",
+    "origin_full_name": "msitarzewski/agency-agents"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/gz-yami__mall4j",
+    "name": "gz-yami__mall4j",
+    "origin_full_name": "gz-yami/mall4j"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/ultraworkers__claw-code",
+    "name": "ultraworkers__claw-code",
+    "origin_full_name": "ultraworkers/claw-code"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/VoltAgent__awesome-claude-design",
+    "name": "voltagent__awesome-claude-design",
+    "origin_full_name": "voltagent/awesome-claude-design"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/thesaravanakumar__Cognizant-Early-Engagement",
+    "name": "thesaravanakumar__cognizant-early-engagement",
+    "origin_full_name": "thesaravanakumar/cognizant-early-engagement"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/anthropics__skills",
+    "name": "anthropics__skills",
+    "origin_full_name": "anthropics/skills"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/fchangjun__awesome-design-md-cn",
+    "name": "fchangjun__awesome-design-md-cn",
+    "origin_full_name": "fchangjun/awesome-design-md-cn"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/YunaiV__ruoyi-vue-pro",
+    "name": "yunaiv__ruoyi-vue-pro",
+    "origin_full_name": "yunaiv/ruoyi-vue-pro"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/sansan0__TrendRadar",
+    "name": "sansan0__trendradar",
+    "origin_full_name": "sansan0/trendradar"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/HKUDS__OpenHarness",
+    "name": "hkuds__openharness",
+    "origin_full_name": "hkuds/openharness"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/zhouxiaoka__autoclip_mvp",
+    "name": "zhouxiaoka__autoclip_mvp",
+    "origin_full_name": "zhouxiaoka/autoclip_mvp"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/ahujasid__blender-mcp",
+    "name": "ahujasid__blender-mcp",
+    "origin_full_name": "ahujasid/blender-mcp"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/CASTvivian__chenzaikuaipao.io",
+    "name": "castvivian__chenzaikuaipao.io",
+    "origin_full_name": "castvivian/chenzaikuaipao.io"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/YunaiV__yudao-cloud",
+    "name": "yunaiv__yudao-cloud",
+    "origin_full_name": "yunaiv/yudao-cloud"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/htdt__godogen",
+    "name": "htdt__godogen",
+    "origin_full_name": "htdt/godogen"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/public-apis__public-apis",
+    "name": "public-apis__public-apis",
+    "origin_full_name": "public-apis/public-apis"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/agentskills__agentskills",
+    "name": "agentskills__agentskills",
+    "origin_full_name": "agentskills/agentskills"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/openai__symphony",
+    "name": "openai__symphony",
+    "origin_full_name": "openai/symphony"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/modelscope__sirchmunk",
+    "name": "modelscope__sirchmunk",
+    "origin_full_name": "modelscope/sirchmunk"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/datawhalechina__hello-agents",
+    "name": "datawhalechina__hello-agents",
+    "origin_full_name": "datawhalechina/hello-agents"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/ChHsiching__GitHub-Chinese-Top-Charts",
+    "name": "chhsiching__github-chinese-top-charts",
+    "origin_full_name": "chhsiching/github-chinese-top-charts"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/oboard__claude-code-rev",
+    "name": "oboard__claude-code-rev",
+    "origin_full_name": "oboard/claude-code-rev"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/shanraisshan__claude-code-best-practice",
+    "name": "shanraisshan__claude-code-best-practice",
+    "origin_full_name": "shanraisshan/claude-code-best-practice"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/opendatalab__MinerU-Diffusion",
+    "name": "opendatalab__mineru-diffusion",
+    "origin_full_name": "opendatalab/mineru-diffusion"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/eliben__raft",
+    "name": "eliben__raft",
+    "origin_full_name": "eliben/raft"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/Meliwat__awesome-design-md-pre-paywall",
+    "name": "meliwat__awesome-design-md-pre-paywall",
+    "origin_full_name": "meliwat/awesome-design-md-pre-paywall"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/OpenMOSS__MOSS-TTS-Nano-Reader",
+    "name": "openmoss__moss-tts-nano-reader",
+    "origin_full_name": "openmoss/moss-tts-nano-reader"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/Yeachan-Heo__oh-my-codex",
+    "name": "yeachan-heo__oh-my-codex",
+    "origin_full_name": "yeachan-heo/oh-my-codex"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/rowboatlabs__rowboat",
+    "name": "rowboatlabs__rowboat",
+    "origin_full_name": "rowboatlabs/rowboat"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/TransformerOptimus__SuperAGI",
+    "name": "transformeroptimus__superagi",
+    "origin_full_name": "transformeroptimus/superagi"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/bergside__awesome-design-skills",
+    "name": "bergside__awesome-design-skills",
+    "origin_full_name": "bergside/awesome-design-skills"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/OpenDCAI__DataFlex",
+    "name": "opendcai__dataflex",
+    "origin_full_name": "opendcai/dataflex"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/wangyuan389__mall-cook",
+    "name": "wangyuan389__mall-cook",
+    "origin_full_name": "wangyuan389/mall-cook"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/Panniantong__Agent-Reach",
+    "name": "panniantong__agent-reach",
+    "origin_full_name": "panniantong/agent-reach"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/durang__gbrain-http-wrapper",
+    "name": "durang__gbrain-http-wrapper",
+    "origin_full_name": "durang/gbrain-http-wrapper"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/Significant-Gravitas__AutoGPT",
+    "name": "significant-gravitas__autogpt",
+    "origin_full_name": "significant-gravitas/autogpt"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/shareAI-lab__learn-claude-code",
+    "name": "shareai-lab__learn-claude-code",
+    "origin_full_name": "shareai-lab/learn-claude-code"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/vercel-labs__agent-skills",
+    "name": "vercel-labs__agent-skills",
+    "origin_full_name": "vercel-labs/agent-skills"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/claude-code-best__claude-code",
+    "name": "claude-code-best__claude-code",
+    "origin_full_name": "claude-code-best/claude-code"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/howardpen9__hermes-gbrain-bridge",
+    "name": "howardpen9__hermes-gbrain-bridge",
+    "origin_full_name": "howardpen9/hermes-gbrain-bridge"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars_missing/shitagaki-lab__see-through",
+    "name": "shitagaki-lab__see-through",
+    "origin_full_name": "shitagaki-lab/see-through"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars/nomic-ai__gpt4all",
+    "name": "nomic-ai__gpt4all",
+    "origin_full_name": "nomic-ai/gpt4all"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars/affaan-m__everything-claude-code",
+    "name": "affaan-m__everything-claude-code",
+    "origin_full_name": "affaan-m/everything-claude-code"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars/NousResearch__hermes-agent",
+    "name": "nousresearch__hermes-agent",
+    "origin_full_name": "nousresearch/hermes-agent"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars/opendatalab__MinerU",
+    "name": "opendatalab__mineru",
+    "origin_full_name": "opendatalab/mineru"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars/zhouxiaoka__autoclip",
+    "name": "zhouxiaoka__autoclip",
+    "origin_full_name": "zhouxiaoka/autoclip"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars/garrytan__gstack",
+    "name": "garrytan__gstack",
+    "origin_full_name": "garrytan/gstack"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars/coleam00__Archon",
+    "name": "coleam00__archon",
+    "origin_full_name": "coleam00/archon"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars/safishamsi__graphify",
+    "name": "safishamsi__graphify",
+    "origin_full_name": "safishamsi/graphify"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars/JuliusBrussee__caveman",
+    "name": "juliusbrussee__caveman",
+    "origin_full_name": "juliusbrussee/caveman"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars/bytedance__deer-flow",
+    "name": "bytedance__deer-flow",
+    "origin_full_name": "bytedance/deer-flow"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars/moyangzhan__langchain4j-aideepin",
+    "name": "moyangzhan__langchain4j-aideepin",
+    "origin_full_name": "moyangzhan/langchain4j-aideepin"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars/forrestchang__andrej-karpathy-skills",
+    "name": "forrestchang__andrej-karpathy-skills",
+    "origin_full_name": "forrestchang/andrej-karpathy-skills"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars/sickn33__antigravity-awesome-skills",
+    "name": "sickn33__antigravity-awesome-skills",
+    "origin_full_name": "sickn33/antigravity-awesome-skills"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars/davideuler__architecture.of.internet-product",
+    "name": "davideuler__architecture.of.internet-product",
+    "origin_full_name": "davideuler/architecture.of.internet-product"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars/heygen-com__hyperframes",
+    "name": "heygen-com__hyperframes",
+    "origin_full_name": "heygen-com/hyperframes"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars/abhigyanpatwari__GitNexus",
+    "name": "abhigyanpatwari__gitnexus",
+    "origin_full_name": "abhigyanpatwari/gitnexus"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars/666ghj__MiroFish",
+    "name": "666ghj__mirofish",
+    "origin_full_name": "666ghj/mirofish"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars/karpathy__autoresearch",
+    "name": "karpathy__autoresearch",
+    "origin_full_name": "karpathy/autoresearch"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars/HBAI-Ltd__Toonflow-app",
+    "name": "hbai-ltd__toonflow-app",
+    "origin_full_name": "hbai-ltd/toonflow-app"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars/simstudioai__sim",
+    "name": "simstudioai__sim",
+    "origin_full_name": "simstudioai/sim"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars/datawhalechina__easy-vibe",
+    "name": "datawhalechina__easy-vibe",
+    "origin_full_name": "datawhalechina/easy-vibe"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars/msitarzewski__agency-agents",
+    "name": "msitarzewski__agency-agents",
+    "origin_full_name": "msitarzewski/agency-agents"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars/sansan0__TrendRadar",
+    "name": "sansan0__trendradar",
+    "origin_full_name": "sansan0/trendradar"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars/datawhalechina__hello-agents",
+    "name": "datawhalechina__hello-agents",
+    "origin_full_name": "datawhalechina/hello-agents"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars/rowboatlabs__rowboat",
+    "name": "rowboatlabs__rowboat",
+    "origin_full_name": "rowboatlabs/rowboat"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars/TransformerOptimus__SuperAGI",
+    "name": "transformeroptimus__superagi",
+    "origin_full_name": "transformeroptimus/superagi"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars/Panniantong__Agent-Reach",
+    "name": "panniantong__agent-reach",
+    "origin_full_name": "panniantong/agent-reach"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars/Significant-Gravitas__AutoGPT",
+    "name": "significant-gravitas__autogpt",
+    "origin_full_name": "significant-gravitas/autogpt"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars/shareAI-lab__learn-claude-code",
+    "name": "shareai-lab__learn-claude-code",
+    "origin_full_name": "shareai-lab/learn-claude-code"
+  },
+  {
+    "path": "core-platform/data/brain_assets/repos/github_stars/howardpen9__hermes-gbrain-bridge",
+    "name": "howardpen9__hermes-gbrain-bridge",
+    "origin_full_name": "howardpen9/hermes-gbrain-bridge"
+  },
+  {
+    "path": "references/hyperframes",
+    "name": "hyperframes",
+    "origin_full_name": "heygen-com/hyperframes"
+  },
+  {
+    "path": "references/cline",
+    "name": "cline",
+    "origin_full_name": "cline/cline"
+  },
+  {
+    "path": "references/deer-flow",
+    "name": "deer-flow",
+    "origin_full_name": "bytedance/deer-flow"
+  },
+  {
+    "path": "references/autoresearch",
+    "name": "autoresearch",
+    "origin_full_name": "karpathy/autoresearch"
+  },
+  {
+    "path": "references/lobe-chat",
+    "name": "lobe-chat",
+    "origin_full_name": "lobehub/lobe-chat"
+  },
+  {
+    "path": "references/CogVideo",
+    "name": "cogvideo",
+    "origin_full_name": "zai-org/cogvideo"
+  },
+  {
+    "path": "references/anything-llm",
+    "name": "anything-llm",
+    "origin_full_name": "mintplex-labs/anything-llm"
+  },
+  {
+    "path": "references/everything-claude-code",
+    "name": "everything-claude-code",
+    "origin_full_name": "affaan-m/everything-claude-code"
+  },
+  {
+    "path": "references/open-webui",
+    "name": "open-webui",
+    "origin_full_name": "open-webui/open-webui"
+  },
+  {
+    "path": "references/ComfyUI",
+    "name": "comfyui",
+    "origin_full_name": "comfy-org/comfyui"
+  },
+  {
+    "path": "references/LibreChat",
+    "name": "librechat",
+    "origin_full_name": "danny-avila/librechat"
+  },
+  {
+    "path": "references/Fooocus",
+    "name": "fooocus",
+    "origin_full_name": "lllyasviel/fooocus"
+  },
+  {
+    "path": "references/vision-agent",
+    "name": "vision-agent",
+    "origin_full_name": "landing-ai/vision-agent"
+  },
+  {
+    "path": "references/darwin-skill",
+    "name": "darwin-skill",
+    "origin_full_name": "alchaincyf/darwin-skill"
+  },
+  {
+    "path": "references/OpenHands",
+    "name": "openhands",
+    "origin_full_name": "openhands/openhands"
+  },
+  {
+    "path": "references/OpenHarness",
+    "name": "openharness",
+    "origin_full_name": "hkuds/openharness"
+  },
+  {
+    "path": "references/stagehand",
+    "name": "stagehand",
+    "origin_full_name": "browserbase/stagehand"
+  },
+  {
+    "path": "references/langflow",
+    "name": "langflow",
+    "origin_full_name": "langflow-ai/langflow"
+  },
+  {
+    "path": "references/hermes-agent",
+    "name": "hermes-agent",
+    "origin_full_name": "nousresearch/hermes-agent"
+  },
+  {
+    "path": "references/agentskills",
+    "name": "agentskills",
+    "origin_full_name": "scienceaix/agentskills"
+  },
+  {
+    "path": "references/claude-howto",
+    "name": "claude-howto",
+    "origin_full_name": "luongnv89/claude-howto"
+  },
+  {
+    "path": "references/supergemma4-26b-abliterated-multimodal-nvfp4",
+    "name": "supergemma4-26b-abliterated-multimodal-nvfp4",
+    "origin_full_name": "aeon-7/supergemma4-26b-abliterated-multimodal-nvfp4"
+  },
+  {
+    "path": "references/browser-use",
+    "name": "browser-use",
+    "origin_full_name": "browser-use/browser-use"
+  },
+  {
+    "path": "references/learn-claude-code",
+    "name": "learn-claude-code",
+    "origin_full_name": "shareai-lab/learn-claude-code"
+  },
+  {
+    "path": "references/skyvern",
+    "name": "skyvern",
+    "origin_full_name": "skyvern-ai/skyvern"
   }
 ]

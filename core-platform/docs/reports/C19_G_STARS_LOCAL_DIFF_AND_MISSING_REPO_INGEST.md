@@ -6,12 +6,12 @@ Completed.
 
 ## Numbers
 
-- Local git roots detected: 14
-- Starred repos already local: 4
-- Starred repos missing locally: 143
-- Missing repos cloned or already present: 140
-- Missing repos failed/no clone: 3
-- Missing repo summaries generated: 140
+- Local git roots detected: 211
+- Starred repos already local: 144
+- Starred repos missing locally: 3
+- Missing repos cloned or already present: 3
+- Missing repos failed/no clone: 0
+- Missing repo summaries generated: 3
 
 ## Output Files
 
@@ -30,7 +30,3 @@ Third-party repositories are cloned locally under `core-platform/data/brain_asse
 Only manifests, summaries, and reports should be committed.
 
 ## Failed / Skipped
-
-- **coreyhaines31/marketingskills**: failed: Command '['git', 'clone', '--depth', '1', 'https://github.com/coreyhaines31/marketingskills.git', 'c
-- **hyperspaceai/agi**: failed: Command '['git', 'clone', '--depth', '1', 'https://github.com/hyperspaceai/agi.git', 'core-platform/
-- **perkfly/ex-skill**: failed: Command '['git', 'clone', '--depth', '1', 'https://github.com/perkfly/ex-skill.git', 'core-platform/
