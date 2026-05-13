@@ -113,6 +113,12 @@ nohup "$START_SCRIPT" services.design_system_service.main:app \
   > "$LOG_DIR/design-system.log" 2>&1 &
 sleep 3
 
+echo "[17/17] starting agent_runtime on :18131"
+nohup "$START_SCRIPT" services.agent_runtime_service.main:app \
+  --host 0.0.0.0 --port 18131 \
+  > "$LOG_DIR/agent-runtime.log" 2>&1 &
+sleep 1
+
 echo
 echo "All services started. Running health checks..."
 echo
