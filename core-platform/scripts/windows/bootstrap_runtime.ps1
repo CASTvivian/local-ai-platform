@@ -422,7 +422,14 @@ function Generate-Text {
     [string]$Prompt
   )
   $Model = Get-Model-For-Profile $ProfileName
-  if ($env:MAOMIAI_PROMPT_FILE -and (Test-Path $env:MAOMIAI_PROMPT_FILE)) {
+  if ($env:MAOMIAI_PROMPT_B64) {
+    try {
+      $PromptBytes = [System.Convert]::FromBase64String($env:MAOMIAI_PROMPT_B64)
+      $Prompt = [System.Text.Encoding]::UTF8.GetString($PromptBytes)
+    } catch {
+      $Prompt = ''
+    }
+  } elseif ($env:MAOMIAI_PROMPT_FILE -and (Test-Path $env:MAOMIAI_PROMPT_FILE)) {
     try {
       $Prompt = Get-Content -Path $env:MAOMIAI_PROMPT_FILE -Raw -Encoding UTF8
     } catch {
@@ -472,7 +479,8 @@ function Generate-Text {
       options = @{ temperature = 0.7 }
     }
     $Body = $BodyObj | ConvertTo-Json -Depth 16
-    $Response = Invoke-RestMethod -Uri 'http://127.0.0.1:11434/api/chat' -Method Post -ContentType 'application/json' -Body $Body -TimeoutSec 300
+    $BodyBytes = [System.Text.Encoding]::UTF8.GetBytes($Body)
+    $Response = Invoke-RestMethod -Uri 'http://127.0.0.1:11434/api/chat' -Method Post -ContentType 'application/json; charset=utf-8' -Body $BodyBytes -TimeoutSec 300
     $Text = ''
     if ($Response.message -and $Response.message.content) {
       $Text = $Response.message.content
@@ -539,7 +547,14 @@ switch ($Action) {
   }
   'generate_text' {
     $Text = ''
-    if ($env:MAOMIAI_PROMPT_FILE -and (Test-Path $env:MAOMIAI_PROMPT_FILE)) {
+    if ($env:MAOMIAI_PROMPT_B64) {
+      try {
+        $TextBytes = [System.Convert]::FromBase64String($env:MAOMIAI_PROMPT_B64)
+        $Text = [System.Text.Encoding]::UTF8.GetString($TextBytes)
+      } catch {
+        $Text = ''
+      }
+    } elseif ($env:MAOMIAI_PROMPT_FILE -and (Test-Path $env:MAOMIAI_PROMPT_FILE)) {
       try {
         $Text = Get-Content -Path $env:MAOMIAI_PROMPT_FILE -Raw -Encoding UTF8
       } catch {

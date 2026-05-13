@@ -234,13 +234,9 @@ fn run_windows_bootstrap_with_prompt(
             command.arg("-Profile").arg(p);
         }
         if let Some(text) = prompt {
-            let prompt_dir = root.join("runtime").join("prompts");
-            std::fs::create_dir_all(&prompt_dir)
-                .map_err(|e| format!("无法创建 prompt 目录: {}", e))?;
-            let prompt_file = prompt_dir.join("current-prompt.txt");
-            std::fs::write(&prompt_file, text.as_bytes())
-                .map_err(|e| format!("无法写入 prompt 文件: {}", e))?;
-            command.env("MAOMIAI_PROMPT_FILE", prompt_file);
+            use base64::Engine;
+            let encoded = base64::engine::general_purpose::STANDARD.encode(text.as_bytes());
+            command.env("MAOMIAI_PROMPT_B64", encoded);
         }
         let output = command
             .output()
