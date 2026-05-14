@@ -4,10 +4,24 @@ param(
   [string]$Root = ''
 )
 $ErrorActionPreference = 'Continue'
+$MAOMIAI_BOOTSTRAP_RUNTIME_VERSION = 'c25-c11-fix4-http-pull'
+
+function Add-Bootstrap-Version {
+  param([object]$Obj)
+  try {
+    if ($Obj -is [hashtable] -or $Obj -is [System.Collections.Specialized.OrderedDictionary]) {
+      $Obj['bootstrap_version'] = $MAOMIAI_BOOTSTRAP_RUNTIME_VERSION
+    } else {
+      $Obj | Add-Member -NotePropertyName bootstrap_version -NotePropertyValue $MAOMIAI_BOOTSTRAP_RUNTIME_VERSION -Force
+    }
+  } catch {}
+  return $Obj
+}
 
 function Write-Json {
   param([object]$Obj)
   try {
+    $Obj = Add-Bootstrap-Version $Obj
     $Json = $Obj | ConvertTo-Json -Depth 16 -Compress
     $Bytes = [System.Text.Encoding]::UTF8.GetBytes($Json)
     $B64 = [System.Convert]::ToBase64String($Bytes)
@@ -296,6 +310,8 @@ function Update-Model-Pull-Job {
   $Alive = Test-Process-Alive $PidValue
   $Job = @{
     ok = ($Status -ne 'failed' -and $Status -ne 'unknown');
+    bootstrap_version = $MAOMIAI_BOOTSTRAP_RUNTIME_VERSION;
+    provider = 'ollama_http_pull';
     profile = $ProfileName;
     model = $Model;
     status = $Status;
@@ -326,8 +342,24 @@ function Start-Model-Pull-Job {
   Ensure-Dir $JobDir
   Ensure-Dir $LogDir
   $JobFile = Join-Path $JobDir ('model-download-' + $ProfileName + '.json')
-  $StdoutFile = Join-Path $LogDir ('ollama-pull-' + $ProfileName + '.out.log')
-  $StderrFile = Join-Path $LogDir ('ollama-pull-' + $ProfileName + '.err.log')
+  $StdoutFile = Join-Path $LogDir ('ollama-http-pull-' + $ProfileName + '.out.log')
+  $StderrFile = Join-Path $LogDir ('ollama-http-pull-' + $ProfileName + '.err.log')
+  $OldFiles = @(
+    $JobFile,
+    (Join-Path $LogDir ('ollama-pull-' + $ProfileName + '.out.log')),
+    (Join-Path $LogDir ('ollama-pull-' + $ProfileName + '.err.log')),
+    (Join-Path $LogDir ('ollama-http-pull-' + $ProfileName + '.out.log')),
+    (Join-Path $LogDir ('ollama-http-pull-' + $ProfileName + '.err.log')),
+    (Join-Path $JobDir ('model-download-' + $ProfileName + '.log')),
+    (Join-Path $JobDir ('model-download-' + $ProfileName + '.err')),
+    (Join-Path $JobDir ('model-download-' + $ProfileName + '.ps1')),
+    (Join-Path $JobDir ('model-download-' + $ProfileName + '-http.ps1'))
+  )
+  foreach ($File in $OldFiles) {
+    if (Test-Path $File) {
+      Remove-Item $File -Force -ErrorAction SilentlyContinue
+    }
+  }
   $Serve = Ensure-Ollama-Serve
   if (!$Serve.ok) {
     Update-Model-Pull-Job `
@@ -341,6 +373,7 @@ function Start-Model-Pull-Job {
       ok = $false;
       profile = $ProfileName;
       model = $Model;
+      provider = 'ollama_http_pull';
       status = 'failed';
       message = 'Ollama service could not be started.';
       job_file = $JobFile;
@@ -359,6 +392,7 @@ function Start-Model-Pull-Job {
       ok = $true;
       profile = $ProfileName;
       model = $Model;
+      provider = 'ollama_http_pull';
       status = 'completed';
       progress = 100;
       installed = $true;
@@ -369,7 +403,7 @@ function Start-Model-Pull-Job {
   Update-Model-Pull-Job `
     -ProfileName $ProfileName `
     -Status 'running' `
-    -Message 'Downloading model. Please keep the app open.' `
+    -Message 'Background HTTP pull process starting.' `
     -Progress 10 `
     -Installed $false | Out-Null
   $ScriptPath = $MyInvocation.MyCommand.Path
@@ -387,10 +421,11 @@ function Start-Model-Pull-Job {
       ok = $true;
       profile = $ProfileName;
       model = $Model;
+      provider = 'ollama_http_pull';
       status = 'started';
       progress = 10;
       pid = $Launcher.Id;
-      message = 'Model download started in background.';
+      message = 'Model download started via Ollama HTTP API.';
       job_file = $JobFile;
       stdout_file = $StdoutFile;
       stderr_file = $StderrFile
@@ -407,6 +442,7 @@ function Start-Model-Pull-Job {
       ok = $false;
       profile = $ProfileName;
       model = $Model;
+      provider = 'ollama_http_pull';
       status = 'failed';
       message = 'Failed to start background download.';
       error = $_.Exception.Message;
@@ -421,8 +457,8 @@ function Get-Model-Pull-Job {
   $JobDir = Join-Path $Root 'runtime\jobs'
   $LogDir = Join-Path $Root 'logs\windows'
   $JobFile = Join-Path $JobDir ('model-download-' + $ProfileName + '.json')
-  $StdoutFile = Join-Path $LogDir ('ollama-pull-' + $ProfileName + '.out.log')
-  $StderrFile = Join-Path $LogDir ('ollama-pull-' + $ProfileName + '.err.log')
+  $StdoutFile = Join-Path $LogDir ('ollama-http-pull-' + $ProfileName + '.out.log')
+  $StderrFile = Join-Path $LogDir ('ollama-http-pull-' + $ProfileName + '.err.log')
   $Status = 'not_started'
   $Progress = 0
   $ExistingError = ''
@@ -493,7 +529,7 @@ function Get-Model-Pull-Job {
   $Alive = Test-Process-Alive $ExistingPid
   if (($Status -eq 'running' -or $Status -eq 'starting') -and (-not $Alive) -and (-not $Exists) -and $Elapsed -gt 15) {
     $Status = 'unknown'
-    $ExistingError = 'download_process_not_alive'
+    $ExistingError = 'http_pull_process_not_alive'
     Update-Model-Pull-Job `
       -ProfileName $ProfileName `
       -Status 'unknown' `
@@ -510,6 +546,8 @@ function Get-Model-Pull-Job {
   }
   return @{
     ok = $true;
+    bootstrap_version = $MAOMIAI_BOOTSTRAP_RUNTIME_VERSION;
+    provider = 'ollama_http_pull';
     profile = $ProfileName;
     model = $Model;
     status = $Status;
@@ -561,8 +599,8 @@ function Pull-Model {
   }
   $LogDir = Join-Path $Root 'logs\windows'
   Ensure-Dir $LogDir
-  $StdoutFile = Join-Path $LogDir ('ollama-pull-' + $ProfileName + '.out.log')
-  $StderrFile = Join-Path $LogDir ('ollama-pull-' + $ProfileName + '.err.log')
+  $StdoutFile = Join-Path $LogDir ('ollama-http-pull-' + $ProfileName + '.out.log')
+  $StderrFile = Join-Path $LogDir ('ollama-http-pull-' + $ProfileName + '.err.log')
   if (Test-Path $StdoutFile) {
     Remove-Item $StdoutFile -Force -ErrorAction SilentlyContinue
   }
@@ -600,6 +638,7 @@ function Pull-Model {
         stage = 'pull_http';
         profile = $ProfileName;
         model = $Model;
+        provider = 'ollama_http_pull';
         message = $HttpError;
         stdout_file = $StdoutFile;
         stderr_file = $StderrFile
@@ -676,6 +715,7 @@ function Pull-Model {
       stage = 'pull_http';
       profile = $ProfileName;
       model = $Model;
+      provider = 'ollama_http_pull';
       exit_code = 0;
       progress = $(if ($Exists) { 100 } else { $Progress });
       completed = $Completed;
@@ -702,6 +742,7 @@ function Pull-Model {
       stage = 'pull_http';
       profile = $ProfileName;
       model = $Model;
+      provider = 'ollama_http_pull';
       message = 'Model download failed.';
       error = $_.Exception.Message;
       stdout_file = $StdoutFile;

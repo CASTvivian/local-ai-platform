@@ -168,6 +168,31 @@
     raw.elapsed_seconds = Number(raw.elapsed_seconds || 0);
     return raw;
   }
+  function isStaleModelDownloadJob(job) {
+    if (!job) return false;
+    const text = JSON.stringify(job);
+    if (text.includes("ollama-pull-") || text.includes("download_process_not_alive")) {
+      return true;
+    }
+    if (job.provider && job.provider !== "ollama_http_pull") {
+      return true;
+    }
+    if (!job.bootstrap_version && job.status === "unknown") {
+      return true;
+    }
+    return false;
+  }
+  function staleModelDownloadJob(profile, job) {
+    return normalizeModelJobStatus({
+      ok: false,
+      profile,
+      status: "failed",
+      progress: 0,
+      message: "检测到旧版下载任务状态。请安装最新包后重新点击下载；新版本会清理旧任务并走 Ollama HTTP API。",
+      last_log: JSON.stringify(job || {}, null, 2),
+      installed: false
+    });
+  }
   function formatDownloadBytes(value) {
     const n = Number(value || 0);
     if (!Number.isFinite(n) || n <= 0) return "0 B";
@@ -449,6 +474,13 @@
       setProgress("正在启动下载任务", steps, 1);
       const out = await invoke("start_local_model_download", { profile });
       const parsed = normalizeModelJobStatus(parseRuntimeJson(out));
+      if (isStaleModelDownloadJob(parsed)) {
+        const stale = staleModelDownloadJob(profile, parsed);
+        window.__MAOMIAI_MODEL_JOBS__[profile] = stale;
+        renderModelStore(window.__MAOMIAI_MODEL_STATUS__ || null);
+        setResult(`${item.title} 下载任务需要更新`, "bad", stale.message, stale);
+        return stale;
+      }
       if (!parsed?.ok) {
         setResult(`${item.title} 启动下载失败`, "bad", parsed?.message || "无法启动后台下载任务。", parsed || { raw: out });
         return parsed;
@@ -466,6 +498,9 @@
           polled = { ok: false, error: String(e) };
         }
         polled = normalizeModelJobStatus(polled);
+        if (isStaleModelDownloadJob(polled)) {
+          polled = staleModelDownloadJob(profile, polled);
+        }
         lastStatus = polled;
         window.__MAOMIAI_MODEL_JOBS__[profile] = polled;
         const progress = Number(polled?.progress || 10);
