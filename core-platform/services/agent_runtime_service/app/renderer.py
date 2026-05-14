@@ -45,21 +45,69 @@ def render_answer(plan: AgentPlan, results: list[ToolResult]) -> str:
             )
 
     if plan.intent == "weather":
-        return (
-            "这是实时天气问题，当前天气工具尚未启用，所以我不能凭空编天气。\n"
-            "后续接入 Weather Tool 后，这类问题会自动调用天气接口。"
-        )
+        weather = next((item for item in results if item.tool == "weather.query" and item.ok), None)
+        if not weather:
+            error = next((item.error for item in results if item.tool == "weather.query" and item.error), None)
+            return f"这是实时天气问题，但天气工具没有返回可用结果：{error or 'unknown error'}"
+        current = weather.data.get("current") or {}
+        daily = weather.data.get("daily") or []
+        metadata = weather.data.get("metadata") or {}
+        lines = [
+            f"天气查询结果：{weather.data.get('resolved_location') or weather.data.get('location')}",
+            f"- 温度：{current.get('temperature_2m')}°C，体感 {current.get('apparent_temperature')}°C",
+            f"- 湿度：{current.get('relative_humidity_2m')}%",
+            f"- 降水：{current.get('precipitation')} mm",
+            f"- 风速：{current.get('wind_speed_10m')} km/h",
+            f"- 天气代码：{current.get('weather_code')}",
+            f"- 更新时间：{current.get('time')}",
+        ]
+        if daily:
+            today = daily[0]
+            lines.append(
+                "今日预报："
+                f"天气代码 {today.get('weather_code')}，"
+                f"{today.get('temperature_min')}°C - {today.get('temperature_max')}°C，"
+                f"降水 {today.get('precipitation_sum')} mm。"
+            )
+        if metadata.get("source_url"):
+            lines.append(f"source: {metadata.get('source_url')}")
+        return "\n".join(lines)
+
+    if plan.intent == "restricted_action":
+        blocked = next((item for item in results if item.data.get("requires_approval")), None)
+        if blocked:
+            return (
+                "该操作属于受限工具调用，已被 Approval Gate 阻断。\n"
+                f"approval_id: {blocked.data.get('approval_id')}\n"
+                f"risk: {blocked.data.get('risk')}\n"
+                "请在审批 API 中确认后再执行。"
+            )
+        return "该操作属于受限工具调用，但没有生成审批记录。"
 
     if plan.intent == "web_fact":
         corrections = plan.args.get("corrections") or []
         prefix = ""
         if corrections:
             prefix = f"我检测到你可能想问的是：{plan.normalized_query}\n\n"
-        return (
-            prefix
-            + "这是需要事实来源或联网查询的问题，当前 Web Search 工具尚未启用。\n"
-            + "因此我不能用本地模型直接编答案。接入联网搜索后，会先查询来源再回答。"
-        )
+        web_result = next((item for item in results if item.tool == "web.search" and item.ok), None)
+        if web_result:
+            items = _extract_items(web_result.data)
+            if items:
+                lines = [prefix + "我已联网搜索，相关证据如下："]
+                for item in items[:5]:
+                    title = item.get("title") or "-"
+                    url = item.get("url") or "-"
+                    snippet = item.get("snippet") or ""
+                    snapshot_id = item.get("snapshot_id")
+                    lines.append(f"- {title}\n  {url}")
+                    if snapshot_id:
+                        lines.append(f"  snapshot: {snapshot_id}")
+                    if snippet:
+                        lines.append(f"  摘要: {snippet[:180]}")
+                return "\n".join(lines)
+        error_result = next((item for item in results if item.tool == "web.search"), None)
+        error = error_result.error if error_result else "web.search did not run"
+        return prefix + f"这是需要事实来源的问题，但联网搜索没有返回可用结果：{error}"
 
     if plan.intent in ("project_knowledge", "catalog_knowledge"):
         repo_result = next(
@@ -93,6 +141,41 @@ def render_answer(plan: AgentPlan, results: list[ToolResult]) -> str:
             clean_description = str(description).replace("\n", " ")[:180]
             lines.append(f"- {name}" + (f"：{clean_description}" if clean_description else ""))
         return "\n".join(lines)
+
+    if plan.intent == "project_architecture_services":
+        repo_result = next(
+            (item for item in results if item.tool == "repo_memory.search" and item.ok),
+            None,
+        )
+        if not repo_result:
+            return "架构分析第 1 步：应该查询 Repo Memory，但当前没有拿到可用结果。"
+        items = _extract_items(repo_result.data)
+        lines = ["架构分析第 1 步：已查询服务与运行时资产。"]
+        for item in items[:5]:
+            name = item.get("full_name") or item.get("repo") or item.get("name") or item.get("title") or item.get("source") or "unknown"
+            lines.append(f"- {name}")
+        return "\n".join(lines)
+
+    if plan.intent == "project_architecture_capabilities":
+        catalog = next((item for item in results if item.tool == "catalog.search" and item.ok), None)
+        skill_store = next((item for item in results if item.tool == "skill_store.list" and item.ok), None)
+        workflow_store = next((item for item in results if item.tool == "workflow_store.list" and item.ok), None)
+        return "\n".join(
+            [
+                "架构分析第 2 步：已检查能力目录、技能库和工作流库。",
+                f"- catalog.search: {'ok' if catalog else 'unavailable'}",
+                f"- skill_store.list: {'ok' if skill_store else 'unavailable'}",
+                f"- workflow_store.list: {'ok' if workflow_store else 'unavailable'}",
+            ]
+        )
+
+    if plan.intent == "project_architecture_summary":
+        return "\n".join(
+            [
+                "架构分析第 3 步：当前 MAOMIAI 运行时由 Desktop、Agent Runtime、Repo Memory、Skill Store、Workflow Store、Model Gateway 组成。",
+                "核心主链路已经收敛到 /agent/run；下一步需要补 approval、sandbox、run_store 增强和真正多步工具执行。",
+            ]
+        )
 
     if plan.intent == "capability_status":
         return "\n".join(

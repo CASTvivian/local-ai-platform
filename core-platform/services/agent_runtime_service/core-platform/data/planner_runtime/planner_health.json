@@ -1,0 +1,8 @@
+{
+  "ok": false,
+  "model_gateway_ok": false,
+  "circuit_open": true,
+  "last_error": "HTTP Error 503: Service Unavailable",
+  "last_error_at": 1778775455.1564531,
+  "checked_at": "2026-05-14T16:17:35.156459"
+}

@@ -1,0 +1,5 @@
+{
+  "version": "0.1.0-c25-c1",
+  "description": "Optional external entity aliases. Keep empty by default. Do not hardcode product/game/company names in runtime code.",
+  "aliases": []
+}

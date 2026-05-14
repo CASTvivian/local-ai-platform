@@ -10,11 +10,24 @@ from pydantic import BaseModel, Field
 class AgentRunRequest(BaseModel):
     """Input payload for agent planning and execution."""
 
-    message: str
+    message: Optional[str] = None
+    input: Optional[str] = None
     profile: Optional[str] = None
+    current_profile: Optional[str] = None
     model: Optional[str] = None
     session_id: Optional[str] = None
+    source: Optional[str] = None
     mode: str = "auto"
+
+    def message_text(self) -> str:
+        """Return the normalized user message for planning and execution."""
+
+        return (self.message or self.input or "").strip()
+
+    def model_profile(self) -> Optional[str]:
+        """Return the selected model profile regardless of caller naming."""
+
+        return self.profile or self.current_profile
 
 
 class AgentPlan(BaseModel):
@@ -43,7 +56,12 @@ class AgentRunResponse(BaseModel):
 
     ok: bool
     answer: str
+    final_answer: Optional[str] = None
+    run_id: Optional[str] = None
+    session_id: Optional[str] = None
     plan: AgentPlan
     tool_results: List[ToolResult] = Field(default_factory=list)
+    steps: List[Dict[str, Any]] = Field(default_factory=list)
+    task_graph: List[Dict[str, Any]] = Field(default_factory=list)
     delegated_to_model: bool = False
     error: Optional[str] = None

@@ -28,14 +28,29 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout (without submodules)
         uses: actions/checkout@v4
         with:
           fetch-depth: 1
-          submodules: false
-          lfs: false
-          clean: true
-          persist-credentials: false
+          sparse-checkout: |
+            core-platform
+            .github
+            docs
+
+      - name: Clean up broken submodule references
+        shell: pwsh
+        run: |
+          # Remove .gitmodules if it exists (will be recreated by other workflows but breaks this one)
+          if (Test-Path .gitmodules) {
+            Write-Host "Removing .gitmodules to prevent git exit code 128"
+            Remove-Item .gitmodules -Force
+          }
+          # Remove any submodule references from .git/config
+          if (Test-Path .git/config) {
+            $config = Get-Content .git/config -Raw
+            $config = $config -replace '(?s)\[submodule "[^"]+"\]\s*\n(\s*path\s*=.*\n\s*url\s*=.*\n?)+', ''
+            Set-Content .git/config -Value $config -NoNewline
+          }
 
       - name: Show commit and tree
         shell: pwsh

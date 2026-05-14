@@ -1,0 +1,2093 @@
+{
+  "generated_at": "2026-05-14T14:23:08.481282",
+  "scanned_files": 53,
+  "progress_modules": {
+    "agent_runtime_service": true,
+    "run_store": true,
+    "session_store": true,
+    "approval_security": true,
+    "runtime_execution": true,
+    "mcp_registry": true,
+    "capability_registry": true,
+    "filesystem_sandbox": true,
+    "browser_runtime": true,
+    "web_search_runtime": true,
+    "weather_runtime": true
+  },
+  "findings": {
+    "business_entity_hardcode": [
+      {
+        "file": "core-platform/services/agent_runtime_service/app/planner.py",
+        "matches": [
+          {
+            "line": 31,
+            "text": "\"元神\": \"原神\",",
+            "pattern": "原神"
+          },
+          {
+            "line": 32,
+            "text": "\"猿神\": \"原神\",",
+            "pattern": "原神"
+          },
+          {
+            "line": 33,
+            "text": "\"源神\": \"原神\",",
+            "pattern": "原神"
+          },
+          {
+            "line": 31,
+            "text": "\"元神\": \"原神\",",
+            "pattern": "元神"
+          }
+        ]
+      }
+    ],
+    "if_else_query_routing": [
+      {
+        "file": "core-platform/services/agent_runtime_service/app/planner.py",
+        "matches": [
+          {
+            "line": 50,
+            "text": "if \"后天\" in query:",
+            "pattern": "if \""
+          },
+          {
+            "line": 52,
+            "text": "if \"明天\" in query:",
+            "pattern": "if \""
+          },
+          {
+            "line": 54,
+            "text": "if \"昨天\" in query:",
+            "pattern": "if \""
+          },
+          {
+            "line": 56,
+            "text": "if \"前天\" in query:",
+            "pattern": "if \""
+          },
+          {
+            "line": 44,
+            "text": "def has_any(query: str, keywords: list[str]) -> bool:",
+            "pattern": "has_any("
+          },
+          {
+            "line": 111,
+            "text": "if has_any(",
+            "pattern": "has_any("
+          },
+          {
+            "line": 131,
+            "text": "if has_any(normalized, [\"天气\", \"气温\", \"下雨\", \"台风\", \"空气质量\"]):",
+            "pattern": "has_any("
+          },
+          {
+            "line": 140,
+            "text": "if has_any(normalized, [\"执行命令\", \"运行命令\", \"shell\", \"终端命令\", \"删除文件\", \"写入文件\"]):",
+            "pattern": "has_any("
+          },
+          {
+            "line": 149,
+            "text": "if has_any(",
+            "pattern": "has_any("
+          },
+          {
+            "line": 175,
+            "text": "if has_any(",
+            "pattern": "has_any("
+          },
+          {
+            "line": 203,
+            "text": "if has_any(",
+            "pattern": "has_any("
+          },
+          {
+            "line": 241,
+            "text": "if has_any(",
+            "pattern": "has_any("
+          }
+        ]
+      },
+      {
+        "file": "core-platform/services/agent_runtime_service/app/capability/registry.py",
+        "matches": [
+          {
+            "line": 236,
+            "text": "if \"code\" in capability.tags:",
+            "pattern": "if \""
+          },
+          {
+            "line": 239,
+            "text": "if \"reasoning\" in capability.tags:",
+            "pattern": "if \""
+          },
+          {
+            "line": 242,
+            "text": "if \"memory\" in capability.tags or \"repo\" in capability.tags:",
+            "pattern": "if \""
+          },
+          {
+            "line": 245,
+            "text": "if \"video\" in capability.tags:",
+            "pattern": "if \""
+          },
+          {
+            "line": 248,
+            "text": "if \"browser\" in capability.tags or \"fetch\" in capability.tags:",
+            "pattern": "if \""
+          }
+        ]
+      },
+      {
+        "file": "core-platform/services/agent_runtime_service/app/runtime/web_search_runtime.py",
+        "matches": [
+          {
+            "line": 39,
+            "text": "if \"duckduckgo.com\" in parsed.netloc and parsed.path.startswith(\"/l/\"):",
+            "pattern": "if \""
+          }
+        ]
+      },
+      {
+        "file": "core-platform/services/agent_runtime_service/app/runtime/browser_runtime.py",
+        "matches": [
+          {
+            "line": 167,
+            "text": "if \"html\" in content_type.lower() or \"<html\" in body.lower():",
+            "pattern": "if \""
+          }
+        ]
+      },
+      {
+        "file": "core-platform/apps/desktop/src/js/windows-click-model-setup.js",
+        "matches": [
+          {
+            "line": 168,
+            "text": "if (msg.includes(\"bootstrap_runtime.ps1\") || msg.includes(\"运行时脚本\")) {",
+            "pattern": ".includes("
+          },
+          {
+            "line": 171,
+            "text": "if (msg.includes(\"ExecutionPolicy\") || msg.includes(\"PowerShell\")) {",
+            "pattern": ".includes("
+          },
+          {
+            "line": 206,
+            "text": "return raw.includes(modelName);",
+            "pattern": ".includes("
+          },
+          {
+            "line": 210,
+            "text": "if (raw.includes(modelName)) return \"已安装\";",
+            "pattern": ".includes("
+          },
+          {
+            "line": 168,
+            "text": "if (msg.includes(\"bootstrap_runtime.ps1\") || msg.includes(\"运行时脚本\")) {",
+            "pattern": "includes(\""
+          },
+          {
+            "line": 171,
+            "text": "if (msg.includes(\"ExecutionPolicy\") || msg.includes(\"PowerShell\")) {",
+            "pattern": "includes(\""
+          }
+        ]
+      },
+      {
+        "file": "core-platform/apps/desktop/src/js/windows-demo-stable-router.js",
+        "matches": [
+          {
+            "line": 36,
+            "text": "const installed = getCatalog().filter((item) => raw.includes(item.model));",
+            "pattern": ".includes("
+          },
+          {
+            "line": 328,
+            "text": "if ([\"chat\", \"new-chat\", \"new\"].includes(target)) return renderChat();",
+            "pattern": ".includes("
+          },
+          {
+            "line": 329,
+            "text": "if ([\"models\", \"model\", \"local-model\", \"local-models\"].includes(target)) return renderLocalModels();",
+            "pattern": ".includes("
+          },
+          {
+            "line": 330,
+            "text": "if ([\"artifacts\", \"files\", \"documents\"].includes(target)) return renderFiles();",
+            "pattern": ".includes("
+          },
+          {
+            "line": 331,
+            "text": "if ([\"code-review\", \"code\"].includes(target)) return renderCodeReview();",
+            "pattern": ".includes("
+          },
+          {
+            "line": 332,
+            "text": "if ([\"settings\", \"setting\"].includes(target)) return renderSettings();",
+            "pattern": ".includes("
+          },
+          {
+            "line": 338,
+            "text": "if (value.includes(\"新对话\") || value.includes(\"新建会话\")) return \"chat\";",
+            "pattern": ".includes("
+          },
+          {
+            "line": 339,
+            "text": "if (value.includes(\"本地模型\") || value.includes(\"模型\")) return \"models\";",
+            "pattern": ".includes("
+          },
+          {
+            "line": 340,
+            "text": "if (value.includes(\"文件\") || value.includes(\"结果\") || value.includes(\"产物\")) return \"artifacts\";",
+            "pattern": ".includes("
+          },
+          {
+            "line": 341,
+            "text": "if (value.includes(\"代码\")) return \"code-review\";",
+            "pattern": ".includes("
+          },
+          {
+            "line": 342,
+            "text": "if (value.includes(\"设置\")) return \"settings\";",
+            "pattern": ".includes("
+          },
+          {
+            "line": 420,
+            "text": "if (text === \"发送\" || text.includes(\"发送\")) {",
+            "pattern": ".includes("
+          },
+          {
+            "line": 338,
+            "text": "if (value.includes(\"新对话\") || value.includes(\"新建会话\")) return \"chat\";",
+            "pattern": "includes(\""
+          },
+          {
+            "line": 339,
+            "text": "if (value.includes(\"本地模型\") || value.includes(\"模型\")) return \"models\";",
+            "pattern": "includes(\""
+          },
+          {
+            "line": 340,
+            "text": "if (value.includes(\"文件\") || value.includes(\"结果\") || value.includes(\"产物\")) return \"artifacts\";",
+            "pattern": "includes(\""
+          },
+          {
+            "line": 341,
+            "text": "if (value.includes(\"代码\")) return \"code-review\";",
+            "pattern": "includes(\""
+          },
+          {
+            "line": 342,
+            "text": "if (value.includes(\"设置\")) return \"settings\";",
+            "pattern": "includes(\""
+          },
+          {
+            "line": 420,
+            "text": "if (text === \"发送\" || text.includes(\"发送\")) {",
+            "pattern": "includes(\""
+          },
+          {
+            "line": 420,
+            "text": "if (text === \"发送\" || text.includes(\"发送\")) {",
+            "pattern": "text.includes"
+          }
+        ]
+      },
+      {
+        "file": "core-platform/apps/desktop/src/js/chatgpt-like-ui.js",
+        "matches": [
+          {
+            "line": 78,
+            "text": "if (meta && (!meta.textContent || meta.textContent.includes(\"view:\"))) {",
+            "pattern": ".includes("
+          },
+          {
+            "line": 78,
+            "text": "if (meta && (!meta.textContent || meta.textContent.includes(\"view:\"))) {",
+            "pattern": "includes(\""
+          }
+        ]
+      }
+    ],
+    "weather_city_or_code_maps": [],
+    "direct_model_bypass": [
+      {
+        "file": "core-platform/services/agent_runtime_service/app/planner.py",
+        "matches": [
+          {
+            "line": 243,
+            "text": "[\"模型\", \"大模型\", \"视频生成\", \"comfyui\", \"wan\", \"hunyuan\", \"cogvideo\", \"ollama\"],",
+            "pattern": "ollama"
+          }
+        ]
+      },
+      {
+        "file": "core-platform/apps/desktop/src/js/windows-click-model-setup.js",
+        "matches": [
+          {
+            "line": 307,
+            "text": "const out = await invoke(\"local_ai_status_direct\");",
+            "pattern": "local_ai_status_direct"
+          },
+          {
+            "line": 171,
+            "text": "if (msg.includes(\"ExecutionPolicy\") || msg.includes(\"PowerShell\")) {",
+            "pattern": "PowerShell"
+          },
+          {
+            "line": 172,
+            "text": "return \"Windows PowerShell 执行受限，请以管理员身份或允许脚本执行后重试。\";",
+            "pattern": "PowerShell"
+          },
+          {
+            "line": 168,
+            "text": "if (msg.includes(\"bootstrap_runtime.ps1\") || msg.includes(\"运行时脚本\")) {",
+            "pattern": "bootstrap_runtime"
+          }
+        ]
+      },
+      {
+        "file": "core-platform/apps/desktop/src-tauri/src/lib.rs",
+        "matches": [
+          {
+            "line": 287,
+            "text": "fn generate_local_ai_response(profile: String, prompt: String) -> Result<String, String> {",
+            "pattern": "generate_local_ai_response"
+          },
+          {
+            "line": 303,
+            "text": "generate_local_ai_response",
+            "pattern": "generate_local_ai_response"
+          },
+          {
+            "line": 272,
+            "text": "fn download_local_model_capability(profile: String) -> Result<String, String> {",
+            "pattern": "download_local_model_capability"
+          },
+          {
+            "line": 300,
+            "text": "download_local_model_capability,",
+            "pattern": "download_local_model_capability"
+          },
+          {
+            "line": 262,
+            "text": "fn local_ai_status_direct() -> Result<String, String> {",
+            "pattern": "local_ai_status_direct"
+          },
+          {
+            "line": 298,
+            "text": "local_ai_status_direct,",
+            "pattern": "local_ai_status_direct"
+          },
+          {
+            "line": 268,
+            "text": "run_windows_bootstrap(\"install_ollama\", None)",
+            "pattern": "ollama"
+          },
+          {
+            "line": 146,
+            "text": "let script_content = include_str!(\"../../../../scripts/windows/bootstrap_runtime.ps1\");",
+            "pattern": "bootstrap_runtime"
+          },
+          {
+            "line": 152,
+            "text": "let script_path = runtime_dir.join(\"bootstrap_runtime.ps1\");",
+            "pattern": "bootstrap_runtime"
+          },
+          {
+            "line": 154,
+            "text": ".map_err(|e| format!(\"无法写入 bootstrap_runtime.ps1: {}\", e))?;",
+            "pattern": "bootstrap_runtime"
+          },
+          {
+            "line": 156,
+            "text": ".map_err(|e| format!(\"写入 bootstrap_runtime.ps1 失败: {}\", e))?;",
+            "pattern": "bootstrap_runtime"
+          }
+        ]
+      }
+    ],
+    "tool_runtime_positive": [
+      {
+        "file": "core-platform/services/agent_runtime_service/app/validator.py",
+        "matches": [
+          {
+            "line": 35,
+            "text": "\"\"\"Build a normalized validation payload for run_store persistence.\"\"\"",
+            "pattern": "run_store"
+          }
+        ]
+      },
+      {
+        "file": "core-platform/services/agent_runtime_service/app/planner.py",
+        "matches": [
+          {
+            "line": 145,
+            "text": "reason=\"restricted local execution requires explicit approval\",",
+            "pattern": "approval"
+          }
+        ]
+      },
+      {
+        "file": "core-platform/services/agent_runtime_service/app/service.py",
+        "matches": [
+          {
+            "line": 7,
+            "text": "from .executor import execute_plan",
+            "pattern": "execute_plan"
+          },
+          {
+            "line": 106,
+            "text": "results = execute_plan(plan, request, run_id=run_state.run_id, session_id=session_id)",
+            "pattern": "execute_plan"
+          },
+          {
+            "line": 74,
+            "text": "async def run_agent_loop(request: AgentRunRequest) -> AgentRunResponse:",
+            "pattern": "run_agent"
+          },
+          {
+            "line": 176,
+            "text": "def run_agent(request: AgentRunRequest) -> AgentRunResponse:",
+            "pattern": "run_agent"
+          },
+          {
+            "line": 181,
+            "text": "return asyncio.run(run_agent_loop(request))",
+            "pattern": "run_agent"
+          },
+          {
+            "line": 79,
+            "text": "lands after approval, sandbox, and run_store are available.",
+            "pattern": "approval"
+          },
+          {
+            "line": 79,
+            "text": "lands after approval, sandbox, and run_store are available.",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 11,
+            "text": "from .run_store.models import AgentRunStep",
+            "pattern": "run_store"
+          },
+          {
+            "line": 12,
+            "text": "from .run_store.store import create_run, save_run",
+            "pattern": "run_store"
+          },
+          {
+            "line": 79,
+            "text": "lands after approval, sandbox, and run_store are available.",
+            "pattern": "run_store"
+          },
+          {
+            "line": 13,
+            "text": "from .session_store.store import append_run",
+            "pattern": "session_store"
+          },
+          {
+            "line": 14,
+            "text": "from .validator import build_validation, should_block_hallucination, should_retry",
+            "pattern": "validator"
+          }
+        ]
+      },
+      {
+        "file": "core-platform/services/agent_runtime_service/app/run_store/store.py",
+        "matches": [
+          {
+            "line": 14,
+            "text": "RUN_ROOT = CORE_PLATFORM_ROOT / \"data\" / \"run_store\"",
+            "pattern": "run_store"
+          }
+        ]
+      },
+      {
+        "file": "core-platform/services/agent_runtime_service/app/run_store/models.py",
+        "matches": [
+          {
+            "line": 12,
+            "text": "\"\"\"A single persisted planner/executor/validator step.\"\"\"",
+            "pattern": "validator"
+          }
+        ]
+      },
+      {
+        "file": "core-platform/services/agent_runtime_service/app/security/approval_store.py",
+        "matches": [
+          {
+            "line": 1,
+            "text": "\"\"\"JSON-file approval store for Agent Runtime.\"\"\"",
+            "pattern": "approval"
+          },
+          {
+            "line": 9,
+            "text": "from .approval_models import ApprovalDecision, ApprovalRecord",
+            "pattern": "approval"
+          },
+          {
+            "line": 13,
+            "text": "APPROVAL_ROOT = CORE_PLATFORM_ROOT / \"data\" / \"approval_store\"",
+            "pattern": "approval"
+          },
+          {
+            "line": 17,
+            "text": "def approval_file(approval_id: str) -> Path:",
+            "pattern": "approval"
+          },
+          {
+            "line": 18,
+            "text": "return APPROVAL_ROOT / f\"{approval_id}.json\"",
+            "pattern": "approval"
+          },
+          {
+            "line": 21,
+            "text": "def save_approval(record: ApprovalRecord) -> None:",
+            "pattern": "approval"
+          },
+          {
+            "line": 22,
+            "text": "approval_file(record.approval_id).write_text(record.model_dump_json(indent=2), encoding=\"utf-8\")",
+            "pattern": "approval"
+          },
+          {
+            "line": 25,
+            "text": "def load_approval(approval_id: str) -> Optional[ApprovalRecord]:",
+            "pattern": "approval"
+          },
+          {
+            "line": 26,
+            "text": "path = approval_file(approval_id)",
+            "pattern": "approval"
+          },
+          {
+            "line": 32,
+            "text": "def list_approvals() -> List[ApprovalRecord]:",
+            "pattern": "approval"
+          },
+          {
+            "line": 42,
+            "text": "def resolve_approval(decision: ApprovalDecision) -> Optional[ApprovalRecord]:",
+            "pattern": "approval"
+          },
+          {
+            "line": 43,
+            "text": "record = load_approval(decision.approval_id)",
+            "pattern": "approval"
+          },
+          {
+            "line": 50,
+            "text": "save_approval(record)",
+            "pattern": "approval"
+          }
+        ]
+      },
+      {
+        "file": "core-platform/services/agent_runtime_service/app/security/approval_models.py",
+        "matches": [
+          {
+            "line": 22,
+            "text": "\"\"\"Local reviewer decision for a pending approval.\"\"\"",
+            "pattern": "approval"
+          },
+          {
+            "line": 24,
+            "text": "approval_id: str",
+            "pattern": "approval"
+          },
+          {
+            "line": 31,
+            "text": "\"\"\"Persisted approval record.\"\"\"",
+            "pattern": "approval"
+          },
+          {
+            "line": 33,
+            "text": "approval_id: str",
+            "pattern": "approval"
+          },
+          {
+            "line": 46,
+            "text": "\"\"\"Build a new pending approval record.\"\"\"",
+            "pattern": "approval"
+          },
+          {
+            "line": 49,
+            "text": "approval_id=str(uuid.uuid4()),",
+            "pattern": "approval"
+          }
+        ]
+      },
+      {
+        "file": "core-platform/services/agent_runtime_service/app/security/sandbox.py",
+        "matches": [
+          {
+            "line": 40,
+            "text": "\"requires_approval\": False,",
+            "pattern": "approval"
+          },
+          {
+            "line": 47,
+            "text": "\"requires_approval\": True,",
+            "pattern": "approval"
+          },
+          {
+            "line": 53,
+            "text": "\"requires_approval\": True,",
+            "pattern": "approval"
+          },
+          {
+            "line": 1,
+            "text": "\"\"\"Tool sandbox policy for Agent Runtime execution.\"\"\"",
+            "pattern": "sandbox"
+          }
+        ]
+      },
+      {
+        "file": "core-platform/services/agent_runtime_service/app/security/guard.py",
+        "matches": [
+          {
+            "line": 8,
+            "text": "from .approval_models import ApprovalRequest, build_record",
+            "pattern": "approval"
+          },
+          {
+            "line": 9,
+            "text": "from .approval_store import save_approval",
+            "pattern": "approval"
+          },
+          {
+            "line": 14,
+            "text": "\"\"\"Return a blocking ToolResult when approval is required.\"\"\"",
+            "pattern": "approval"
+          },
+          {
+            "line": 17,
+            "text": "if not policy[\"requires_approval\"]:",
+            "pattern": "approval"
+          },
+          {
+            "line": 28,
+            "text": "save_approval(record)",
+            "pattern": "approval"
+          },
+          {
+            "line": 34,
+            "text": "\"requires_approval\": True,",
+            "pattern": "approval"
+          },
+          {
+            "line": 35,
+            "text": "\"approval_id\": record.approval_id,",
+            "pattern": "approval"
+          },
+          {
+            "line": 38,
+            "text": "error=\"Tool execution requires approval.\",",
+            "pattern": "approval"
+          },
+          {
+            "line": 10,
+            "text": "from .sandbox import evaluate_tool",
+            "pattern": "sandbox"
+          }
+        ]
+      },
+      {
+        "file": "core-platform/services/agent_runtime_service/app/renderer.py",
+        "matches": [
+          {
+            "line": 77,
+            "text": "blocked = next((item for item in results if item.data.get(\"requires_approval\")), None)",
+            "pattern": "approval"
+          },
+          {
+            "line": 81,
+            "text": "f\"approval_id: {blocked.data.get('approval_id')}\\n\"",
+            "pattern": "approval"
+          },
+          {
+            "line": 176,
+            "text": "\"核心主链路已经收敛到 /agent/run；下一步需要补 approval、sandbox、run_store 增强和真正多步工具执行。\",",
+            "pattern": "approval"
+          },
+          {
+            "line": 176,
+            "text": "\"核心主链路已经收敛到 /agent/run；下一步需要补 approval、sandbox、run_store 增强和真正多步工具执行。\",",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 176,
+            "text": "\"核心主链路已经收敛到 /agent/run；下一步需要补 approval、sandbox、run_store 增强和真正多步工具执行。\",",
+            "pattern": "run_store"
+          }
+        ]
+      },
+      {
+        "file": "core-platform/services/agent_runtime_service/app/capability/service.py",
+        "matches": [
+          {
+            "line": 1,
+            "text": "\"\"\"Capability matching service helpers.\"\"\"",
+            "pattern": "Capability"
+          },
+          {
+            "line": 5,
+            "text": "from .models import CapabilityMatchRequest, CapabilityMatchResult",
+            "pattern": "Capability"
+          },
+          {
+            "line": 9,
+            "text": "def match_capability(request: CapabilityMatchRequest) -> CapabilityMatchResult:",
+            "pattern": "Capability"
+          },
+          {
+            "line": 18,
+            "text": "return CapabilityMatchResult(ok=True, query=request.query, matches=items)",
+            "pattern": "Capability"
+          }
+        ]
+      },
+      {
+        "file": "core-platform/services/agent_runtime_service/app/capability/models.py",
+        "matches": [
+          {
+            "line": 1,
+            "text": "\"\"\"Capability registry models.\"\"\"",
+            "pattern": "Capability"
+          },
+          {
+            "line": 10,
+            "text": "class Capability(BaseModel):",
+            "pattern": "Capability"
+          },
+          {
+            "line": 26,
+            "text": "class CapabilityMatchRequest(BaseModel):",
+            "pattern": "Capability"
+          },
+          {
+            "line": 35,
+            "text": "class CapabilityMatchResult(BaseModel):",
+            "pattern": "Capability"
+          },
+          {
+            "line": 36,
+            "text": "\"\"\"Capability matching response.\"\"\"",
+            "pattern": "Capability"
+          },
+          {
+            "line": 40,
+            "text": "matches: List[Capability] = Field(default_factory=list)",
+            "pattern": "Capability"
+          }
+        ]
+      },
+      {
+        "file": "core-platform/services/agent_runtime_service/app/capability/registry.py",
+        "matches": [
+          {
+            "line": 9,
+            "text": "from .models import Capability",
+            "pattern": "Capability"
+          },
+          {
+            "line": 17,
+            "text": "Capability(",
+            "pattern": "Capability"
+          },
+          {
+            "line": 27,
+            "text": "Capability(",
+            "pattern": "Capability"
+          },
+          {
+            "line": 37,
+            "text": "Capability(",
+            "pattern": "Capability"
+          },
+          {
+            "line": 47,
+            "text": "Capability(",
+            "pattern": "Capability"
+          },
+          {
+            "line": 57,
+            "text": "Capability(",
+            "pattern": "Capability"
+          },
+          {
+            "line": 67,
+            "text": "Capability(",
+            "pattern": "Capability"
+          },
+          {
+            "line": 77,
+            "text": "Capability(",
+            "pattern": "Capability"
+          },
+          {
+            "line": 87,
+            "text": "Capability(",
+            "pattern": "Capability"
+          },
+          {
+            "line": 98,
+            "text": "Capability(",
+            "pattern": "Capability"
+          },
+          {
+            "line": 108,
+            "text": "Capability(",
+            "pattern": "Capability"
+          },
+          {
+            "line": 119,
+            "text": "Capability(",
+            "pattern": "Capability"
+          },
+          {
+            "line": 130,
+            "text": "Capability(",
+            "pattern": "Capability"
+          },
+          {
+            "line": 151,
+            "text": "def load_capabilities() -> List[Capability]:",
+            "pattern": "Capability"
+          },
+          {
+            "line": 156,
+            "text": "return [Capability.model_validate(item) for item in data]",
+            "pattern": "Capability"
+          },
+          {
+            "line": 168,
+            "text": "def get_capability(capability_id: str) -> Optional[Capability]:",
+            "pattern": "Capability"
+          },
+          {
+            "line": 177,
+            "text": "def save_capabilities(items: List[Capability]) -> None:",
+            "pattern": "Capability"
+          },
+          {
+            "line": 187,
+            "text": "def upsert_capability(capability: Capability) -> Capability:",
+            "pattern": "Capability"
+          },
+          {
+            "line": 206,
+            "text": ") -> List[Capability]:",
+            "pattern": "Capability"
+          },
+          {
+            "line": 211,
+            "text": "scored: list[tuple[float, Capability]] = []",
+            "pattern": "Capability"
+          },
+          {
+            "line": 96,
+            "text": "metadata={\"requires_approval\": True},",
+            "pattern": "approval"
+          },
+          {
+            "line": 88,
+            "text": "id=\"shell.sandbox\",",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 94,
+            "text": "tags=[\"shell\", \"sandbox\", \"execution\"],",
+            "pattern": "sandbox"
+          }
+        ]
+      },
+      {
+        "file": "core-platform/services/agent_runtime_service/app/capability/__init__.py",
+        "matches": [
+          {
+            "line": 1,
+            "text": "\"\"\"Capability registry for MAOMIAI Agent Runtime.\"\"\"",
+            "pattern": "Capability"
+          }
+        ]
+      },
+      {
+        "file": "core-platform/services/agent_runtime_service/app/runtime/weather_runtime.py",
+        "matches": [
+          {
+            "line": 15,
+            "text": "from .execution_store import save_execution",
+            "pattern": "execution_store"
+          }
+        ]
+      },
+      {
+        "file": "core-platform/services/agent_runtime_service/app/runtime/web_search_runtime.py",
+        "matches": [
+          {
+            "line": 18,
+            "text": "from .execution_store import save_execution",
+            "pattern": "execution_store"
+          }
+        ]
+      },
+      {
+        "file": "core-platform/services/agent_runtime_service/app/runtime/sandbox_executor.py",
+        "matches": [
+          {
+            "line": 15,
+            "text": "RUNTIME_ROOT = CORE_PLATFORM_ROOT / \"data\" / \"sandbox_runtime\"",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 27,
+            "text": "def _write_execution_record(sandbox_id: str, record: Dict[str, Any]) -> None:",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 28,
+            "text": "path = RUNTIME_ROOT / sandbox_id / \"execution.json\"",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 32,
+            "text": "def execute_sandboxed(command: str) -> Dict[str, Any]:",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 35,
+            "text": "This is a local sandbox boundary, not a container or VM. It prevents",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 37,
+            "text": "C25-B4 should replace this with a stronger OS/container sandbox.",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 40,
+            "text": "sandbox_id = str(uuid.uuid4())",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 41,
+            "text": "workdir = RUNTIME_ROOT / sandbox_id",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 49,
+            "text": "\"sandbox_id\": sandbox_id,",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 52,
+            "text": "_write_execution_record(sandbox_id, result)",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 58,
+            "text": "\"sandbox_id\": sandbox_id,",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 61,
+            "text": "_write_execution_record(sandbox_id, result)",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 68,
+            "text": "\"sandbox_id\": sandbox_id,",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 71,
+            "text": "_write_execution_record(sandbox_id, result)",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 86,
+            "text": "\"sandbox_id\": sandbox_id,",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 96,
+            "text": "_write_execution_record(sandbox_id, result)",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 101,
+            "text": "\"sandbox_id\": sandbox_id,",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 108,
+            "text": "_write_execution_record(sandbox_id, result)",
+            "pattern": "sandbox"
+          }
+        ]
+      },
+      {
+        "file": "core-platform/services/agent_runtime_service/app/runtime/browser_runtime.py",
+        "matches": [
+          {
+            "line": 117,
+            "text": "approval_id=None,",
+            "pattern": "approval"
+          },
+          {
+            "line": 134,
+            "text": "sandbox_id=result.get(\"snapshot_id\"),",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 18,
+            "text": "from .execution_store import save_execution",
+            "pattern": "execution_store"
+          }
+        ]
+      },
+      {
+        "file": "core-platform/services/agent_runtime_service/app/runtime/execution_store.py",
+        "matches": [
+          {
+            "line": 35,
+            "text": "approval_id: Optional[str] = None,",
+            "pattern": "approval"
+          },
+          {
+            "line": 46,
+            "text": "if approval_id and data.get(\"approval_id\") != approval_id:",
+            "pattern": "approval"
+          },
+          {
+            "line": 13,
+            "text": "EXECUTION_ROOT = CORE_PLATFORM_ROOT / \"data\" / \"execution_store\"",
+            "pattern": "execution_store"
+          }
+        ]
+      },
+      {
+        "file": "core-platform/services/agent_runtime_service/app/runtime/approval_executor.py",
+        "matches": [
+          {
+            "line": 8,
+            "text": "from ..security.approval_store import load_approval",
+            "pattern": "approval"
+          },
+          {
+            "line": 15,
+            "text": "def execute_approved_action(approval_id: str) -> Dict[str, Any]:",
+            "pattern": "approval"
+          },
+          {
+            "line": 18,
+            "text": "record = load_approval(approval_id)",
+            "pattern": "approval"
+          },
+          {
+            "line": 22,
+            "text": "approval_id=approval_id,",
+            "pattern": "approval"
+          },
+          {
+            "line": 26,
+            "text": "error=\"approval not found\",",
+            "pattern": "approval"
+          },
+          {
+            "line": 27,
+            "text": "metadata={\"source\": \"approval_executor\"},",
+            "pattern": "approval"
+          },
+          {
+            "line": 33,
+            "text": "\"message\": \"approval not found\",",
+            "pattern": "approval"
+          },
+          {
+            "line": 34,
+            "text": "\"approval_id\": approval_id,",
+            "pattern": "approval"
+          },
+          {
+            "line": 43,
+            "text": "approval_id=approval_id,",
+            "pattern": "approval"
+          },
+          {
+            "line": 50,
+            "text": "error=\"approval not granted\",",
+            "pattern": "approval"
+          },
+          {
+            "line": 51,
+            "text": "metadata={\"source\": \"approval_executor\"},",
+            "pattern": "approval"
+          },
+          {
+            "line": 57,
+            "text": "\"message\": \"approval not granted\",",
+            "pattern": "approval"
+          },
+          {
+            "line": 58,
+            "text": "\"approval_id\": approval_id,",
+            "pattern": "approval"
+          },
+          {
+            "line": 66,
+            "text": "approval_id=approval_id,",
+            "pattern": "approval"
+          },
+          {
+            "line": 74,
+            "text": "metadata={\"source\": \"approval_executor\"},",
+            "pattern": "approval"
+          },
+          {
+            "line": 81,
+            "text": "\"approval_id\": approval_id,",
+            "pattern": "approval"
+          },
+          {
+            "line": 86,
+            "text": "approval_id=approval_id,",
+            "pattern": "approval"
+          },
+          {
+            "line": 99,
+            "text": "\"source\": \"approval_executor\",",
+            "pattern": "approval"
+          },
+          {
+            "line": 106,
+            "text": "result[\"approval_id\"] = approval_id",
+            "pattern": "approval"
+          },
+          {
+            "line": 118,
+            "text": "approval_id=approval_id,",
+            "pattern": "approval"
+          },
+          {
+            "line": 128,
+            "text": "metadata={\"source\": \"approval_executor\", \"filesystem\": True},",
+            "pattern": "approval"
+          },
+          {
+            "line": 132,
+            "text": "result[\"approval_id\"] = approval_id",
+            "pattern": "approval"
+          },
+          {
+            "line": 143,
+            "text": "approval_id=approval_id,",
+            "pattern": "approval"
+          },
+          {
+            "line": 153,
+            "text": "metadata={\"source\": \"approval_executor\", \"filesystem\": True},",
+            "pattern": "approval"
+          },
+          {
+            "line": 157,
+            "text": "result[\"approval_id\"] = approval_id",
+            "pattern": "approval"
+          },
+          {
+            "line": 163,
+            "text": "approval_id=approval_id,",
+            "pattern": "approval"
+          },
+          {
+            "line": 170,
+            "text": "metadata={\"source\": \"approval_executor\"},",
+            "pattern": "approval"
+          },
+          {
+            "line": 177,
+            "text": "\"approval_id\": approval_id,",
+            "pattern": "approval"
+          },
+          {
+            "line": 1,
+            "text": "\"\"\"Bridge approved actions into sandboxed runtime execution.\"\"\"",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 11,
+            "text": "from .sandbox_executor import execute_sandboxed",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 12,
+            "text": "from .filesystem_sandbox import write_file, delete_file",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 16,
+            "text": "\"\"\"Execute an approved restricted action through the sandbox boundary.\"\"\"",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 83,
+            "text": "result = execute_sandboxed(command)",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 97,
+            "text": "sandbox_id=result.get(\"sandbox_id\"),",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 112,
+            "text": "sandbox_id=record.payload.get(\"sandbox_id\"),",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 127,
+            "text": "sandbox_id=result.get(\"sandbox_id\"),",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 138,
+            "text": "sandbox_id=str(record.payload.get(\"sandbox_id\") or \"\"),",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 152,
+            "text": "sandbox_id=result.get(\"sandbox_id\"),",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 10,
+            "text": "from .execution_store import save_execution",
+            "pattern": "execution_store"
+          }
+        ]
+      },
+      {
+        "file": "core-platform/services/agent_runtime_service/app/runtime/execution_models.py",
+        "matches": [
+          {
+            "line": 16,
+            "text": "approval_id: Optional[str] = None",
+            "pattern": "approval"
+          },
+          {
+            "line": 36,
+            "text": "approval_id: Optional[str] = None,",
+            "pattern": "approval"
+          },
+          {
+            "line": 51,
+            "text": "approval_id=approval_id,",
+            "pattern": "approval"
+          },
+          {
+            "line": 27,
+            "text": "sandbox_id: Optional[str] = None",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 44,
+            "text": "sandbox_id: Optional[str] = None,",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 62,
+            "text": "sandbox_id=sandbox_id,",
+            "pattern": "sandbox"
+          }
+        ]
+      },
+      {
+        "file": "core-platform/services/agent_runtime_service/app/runtime/filesystem_models.py",
+        "matches": [
+          {
+            "line": 6,
+            "text": "sandbox_id: Optional[str] = None",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 12,
+            "text": "sandbox_id: str",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 17,
+            "text": "sandbox_id: str",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 22,
+            "text": "sandbox_id: str",
+            "pattern": "sandbox"
+          }
+        ]
+      },
+      {
+        "file": "core-platform/services/agent_runtime_service/app/runtime/filesystem_sandbox.py",
+        "matches": [
+          {
+            "line": 1,
+            "text": "\"\"\"Filesystem sandbox restricted to a runtime-owned working directory.\"\"\"",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 12,
+            "text": "SANDBOX_ROOT = CORE_PLATFORM_ROOT / \"data\" / \"filesystem_sandbox\"",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 16,
+            "text": "def _sandbox_dir(sandbox_id: str | None = None) -> Path:",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 17,
+            "text": "sid = sandbox_id or str(uuid.uuid4())",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 32,
+            "text": "raise ValueError(\"path escapes sandbox\") from exc",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 34,
+            "text": "raise ValueError(\"path escapes sandbox\")",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 38,
+            "text": "def _error(sandbox_id: str | None, path: str, error: Exception) -> Dict[str, Any]:",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 41,
+            "text": "\"sandbox_id\": sandbox_id,",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 47,
+            "text": "def create_sandbox() -> Dict[str, Any]:",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 48,
+            "text": "root = _sandbox_dir()",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 51,
+            "text": "\"sandbox_id\": root.name,",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 56,
+            "text": "def write_file(sandbox_id: str | None, path: str, content: str) -> Dict[str, Any]:",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 57,
+            "text": "root = _sandbox_dir(sandbox_id)",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 66,
+            "text": "\"sandbox_id\": root.name,",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 72,
+            "text": "def read_file(sandbox_id: str, path: str) -> Dict[str, Any]:",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 73,
+            "text": "root = _sandbox_dir(sandbox_id)",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 81,
+            "text": "\"sandbox_id\": root.name,",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 88,
+            "text": "\"sandbox_id\": root.name,",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 94,
+            "text": "def list_files(sandbox_id: str, path: str = \".\") -> Dict[str, Any]:",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 95,
+            "text": "root = _sandbox_dir(sandbox_id)",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 106,
+            "text": "\"sandbox_id\": root.name,",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 120,
+            "text": "\"sandbox_id\": root.name,",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 126,
+            "text": "def delete_file(sandbox_id: str, path: str) -> Dict[str, Any]:",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 127,
+            "text": "root = _sandbox_dir(sandbox_id)",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 135,
+            "text": "\"sandbox_id\": root.name,",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 145,
+            "text": "\"sandbox_id\": root.name,",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 151,
+            "text": "def export_manifest(sandbox_id: str) -> Dict[str, Any]:",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 152,
+            "text": "root = _sandbox_dir(sandbox_id)",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 161,
+            "text": "\"sandbox_id\": root.name,",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 170,
+            "text": "\"sandbox_id\": root.name,",
+            "pattern": "sandbox"
+          }
+        ]
+      },
+      {
+        "file": "core-platform/services/agent_runtime_service/app/mcp/models.py",
+        "matches": [
+          {
+            "line": 10,
+            "text": "class MCPTool(BaseModel):",
+            "pattern": "MCPTool"
+          },
+          {
+            "line": 20,
+            "text": "requires_approval: bool = False",
+            "pattern": "approval"
+          },
+          {
+            "line": 40,
+            "text": "approval_required: bool = False",
+            "pattern": "approval"
+          },
+          {
+            "line": 41,
+            "text": "approval_id: Optional[str] = None",
+            "pattern": "approval"
+          }
+        ]
+      },
+      {
+        "file": "core-platform/services/agent_runtime_service/app/mcp/registry.py",
+        "matches": [
+          {
+            "line": 9,
+            "text": "from .models import MCPTool",
+            "pattern": "MCPTool"
+          },
+          {
+            "line": 17,
+            "text": "MCPTool(",
+            "pattern": "MCPTool"
+          },
+          {
+            "line": 28,
+            "text": "MCPTool(",
+            "pattern": "MCPTool"
+          },
+          {
+            "line": 38,
+            "text": "MCPTool(",
+            "pattern": "MCPTool"
+          },
+          {
+            "line": 48,
+            "text": "MCPTool(",
+            "pattern": "MCPTool"
+          },
+          {
+            "line": 59,
+            "text": "MCPTool(",
+            "pattern": "MCPTool"
+          },
+          {
+            "line": 70,
+            "text": "MCPTool(",
+            "pattern": "MCPTool"
+          },
+          {
+            "line": 81,
+            "text": "MCPTool(",
+            "pattern": "MCPTool"
+          },
+          {
+            "line": 92,
+            "text": "MCPTool(",
+            "pattern": "MCPTool"
+          },
+          {
+            "line": 103,
+            "text": "MCPTool(",
+            "pattern": "MCPTool"
+          },
+          {
+            "line": 114,
+            "text": "MCPTool(",
+            "pattern": "MCPTool"
+          },
+          {
+            "line": 125,
+            "text": "MCPTool(",
+            "pattern": "MCPTool"
+          },
+          {
+            "line": 136,
+            "text": "MCPTool(",
+            "pattern": "MCPTool"
+          },
+          {
+            "line": 158,
+            "text": "def load_tools() -> List[MCPTool]:",
+            "pattern": "MCPTool"
+          },
+          {
+            "line": 163,
+            "text": "return [MCPTool.model_validate(item) for item in data]",
+            "pattern": "MCPTool"
+          },
+          {
+            "line": 172,
+            "text": "def get_tool(name: str) -> Optional[MCPTool]:",
+            "pattern": "MCPTool"
+          },
+          {
+            "line": 181,
+            "text": "def save_tools(tools: List[MCPTool]) -> None:",
+            "pattern": "MCPTool"
+          },
+          {
+            "line": 191,
+            "text": "def upsert_tool(tool: MCPTool) -> MCPTool:",
+            "pattern": "MCPTool"
+          },
+          {
+            "line": 25,
+            "text": "requires_approval=False,",
+            "pattern": "approval"
+          },
+          {
+            "line": 35,
+            "text": "requires_approval=False,",
+            "pattern": "approval"
+          },
+          {
+            "line": 45,
+            "text": "requires_approval=False,",
+            "pattern": "approval"
+          },
+          {
+            "line": 56,
+            "text": "requires_approval=False,",
+            "pattern": "approval"
+          },
+          {
+            "line": 61,
+            "text": "description=\"Execute shell command in sandbox after approval.\",",
+            "pattern": "approval"
+          },
+          {
+            "line": 67,
+            "text": "requires_approval=True,",
+            "pattern": "approval"
+          },
+          {
+            "line": 72,
+            "text": "description=\"Write file inside filesystem sandbox after approval.\",",
+            "pattern": "approval"
+          },
+          {
+            "line": 78,
+            "text": "requires_approval=True,",
+            "pattern": "approval"
+          },
+          {
+            "line": 89,
+            "text": "requires_approval=False,",
+            "pattern": "approval"
+          },
+          {
+            "line": 100,
+            "text": "requires_approval=False,",
+            "pattern": "approval"
+          },
+          {
+            "line": 105,
+            "text": "description=\"Delete file or directory inside filesystem sandbox after approval.\",",
+            "pattern": "approval"
+          },
+          {
+            "line": 111,
+            "text": "requires_approval=True,",
+            "pattern": "approval"
+          },
+          {
+            "line": 122,
+            "text": "requires_approval=False,",
+            "pattern": "approval"
+          },
+          {
+            "line": 133,
+            "text": "requires_approval=False,",
+            "pattern": "approval"
+          },
+          {
+            "line": 144,
+            "text": "requires_approval=False,",
+            "pattern": "approval"
+          },
+          {
+            "line": 61,
+            "text": "description=\"Execute shell command in sandbox after approval.\",",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 68,
+            "text": "tags=[\"shell\", \"sandbox\"],",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 72,
+            "text": "description=\"Write file inside filesystem sandbox after approval.\",",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 75,
+            "text": "input_schema={\"sandbox_id\": \"string\", \"path\": \"string\", \"content\": \"string\"},",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 79,
+            "text": "tags=[\"filesystem\", \"sandbox\", \"write\"],",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 83,
+            "text": "description=\"Read file from filesystem sandbox.\",",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 86,
+            "text": "input_schema={\"sandbox_id\": \"string\", \"path\": \"string\"},",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 90,
+            "text": "tags=[\"filesystem\", \"sandbox\", \"read\"],",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 94,
+            "text": "description=\"List files in filesystem sandbox.\",",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 97,
+            "text": "input_schema={\"sandbox_id\": \"string\", \"path\": \"string\"},",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 101,
+            "text": "tags=[\"filesystem\", \"sandbox\", \"list\"],",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 105,
+            "text": "description=\"Delete file or directory inside filesystem sandbox after approval.\",",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 108,
+            "text": "input_schema={\"sandbox_id\": \"string\", \"path\": \"string\"},",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 112,
+            "text": "tags=[\"filesystem\", \"sandbox\", \"delete\"],",
+            "pattern": "sandbox"
+          }
+        ]
+      },
+      {
+        "file": "core-platform/services/agent_runtime_service/app/mcp/invoker.py",
+        "matches": [
+          {
+            "line": 63,
+            "text": "if tool.requires_approval:",
+            "pattern": "approval"
+          },
+          {
+            "line": 69,
+            "text": "error=\"approval required\",",
+            "pattern": "approval"
+          },
+          {
+            "line": 70,
+            "text": "approval_required=True,",
+            "pattern": "approval"
+          },
+          {
+            "line": 71,
+            "text": "approval_id=blocked.data.get(\"approval_id\"),",
+            "pattern": "approval"
+          },
+          {
+            "line": 123,
+            "text": "error=\"local tool requires approval execution path\",",
+            "pattern": "approval"
+          },
+          {
+            "line": 12,
+            "text": "from ..runtime.filesystem_sandbox import list_files, read_file",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 78,
+            "text": "sandbox_id=str(request.arguments.get(\"sandbox_id\") or \"\"),",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 84,
+            "text": "sandbox_id=str(request.arguments.get(\"sandbox_id\") or \"\"),",
+            "pattern": "sandbox"
+          }
+        ]
+      },
+      {
+        "file": "core-platform/services/agent_runtime_service/app/session_store/store.py",
+        "matches": [
+          {
+            "line": 13,
+            "text": "SESSION_ROOT = CORE_PLATFORM_ROOT / \"data\" / \"session_store\"",
+            "pattern": "session_store"
+          }
+        ]
+      },
+      {
+        "file": "core-platform/services/agent_runtime_service/app/executor.py",
+        "matches": [
+          {
+            "line": 7,
+            "text": "from .capability.models import CapabilityMatchRequest",
+            "pattern": "Capability"
+          },
+          {
+            "line": 107,
+            "text": "CapabilityMatchRequest(",
+            "pattern": "Capability"
+          },
+          {
+            "line": 53,
+            "text": "def execute_plan(",
+            "pattern": "execute_plan"
+          },
+          {
+            "line": 46,
+            "text": "\"approval_required\": result.approval_required,",
+            "pattern": "approval"
+          },
+          {
+            "line": 47,
+            "text": "\"approval_id\": result.approval_id,",
+            "pattern": "approval"
+          }
+        ]
+      },
+      {
+        "file": "core-platform/services/agent_runtime_service/main.py",
+        "matches": [
+          {
+            "line": 25,
+            "text": "from services.agent_runtime_service.app.mcp.models import MCPInvokeRequest, MCPTool",
+            "pattern": "MCPTool"
+          },
+          {
+            "line": 214,
+            "text": "def agent_mcp_upsert_tool(tool: MCPTool) -> Dict[str, Any]:",
+            "pattern": "MCPTool"
+          },
+          {
+            "line": 16,
+            "text": "from services.agent_runtime_service.app.capability.models import Capability, CapabilityMatchRequest",
+            "pattern": "Capability"
+          },
+          {
+            "line": 238,
+            "text": "def agent_upsert_capability(capability: Capability) -> Dict[str, Any]:",
+            "pattern": "Capability"
+          },
+          {
+            "line": 244,
+            "text": "def agent_match_capabilities(request: CapabilityMatchRequest) -> Dict[str, Any]:",
+            "pattern": "Capability"
+          },
+          {
+            "line": 65,
+            "text": "from services.agent_runtime_service.app.service import run_agent_loop",
+            "pattern": "run_agent"
+          },
+          {
+            "line": 114,
+            "text": "return (await run_agent_loop(request)).model_dump()",
+            "pattern": "run_agent"
+          },
+          {
+            "line": 29,
+            "text": "from services.agent_runtime_service.app.runtime.approval_executor import execute_approved_action",
+            "pattern": "approval"
+          },
+          {
+            "line": 58,
+            "text": "from services.agent_runtime_service.app.security.approval_models import ApprovalDecision",
+            "pattern": "approval"
+          },
+          {
+            "line": 59,
+            "text": "from services.agent_runtime_service.app.security.approval_store import (",
+            "pattern": "approval"
+          },
+          {
+            "line": 60,
+            "text": "list_approvals,",
+            "pattern": "approval"
+          },
+          {
+            "line": 61,
+            "text": "load_approval,",
+            "pattern": "approval"
+          },
+          {
+            "line": 62,
+            "text": "resolve_approval,",
+            "pattern": "approval"
+          },
+          {
+            "line": 133,
+            "text": "@app.get(\"/agent/approvals\")",
+            "pattern": "approval"
+          },
+          {
+            "line": 134,
+            "text": "def agent_approvals() -> Dict[str, Any]:",
+            "pattern": "approval"
+          },
+          {
+            "line": 137,
+            "text": "\"items\": [item.model_dump() for item in list_approvals()],",
+            "pattern": "approval"
+          },
+          {
+            "line": 141,
+            "text": "@app.get(\"/agent/approval/{approval_id}\")",
+            "pattern": "approval"
+          },
+          {
+            "line": 142,
+            "text": "def agent_approval(approval_id: str) -> Dict[str, Any]:",
+            "pattern": "approval"
+          },
+          {
+            "line": 143,
+            "text": "item = load_approval(approval_id)",
+            "pattern": "approval"
+          },
+          {
+            "line": 145,
+            "text": "return {\"ok\": False, \"error\": \"approval_not_found\", \"approval_id\": approval_id}",
+            "pattern": "approval"
+          },
+          {
+            "line": 149,
+            "text": "@app.post(\"/agent/approval/resolve\")",
+            "pattern": "approval"
+          },
+          {
+            "line": 150,
+            "text": "def agent_approval_resolve(decision: ApprovalDecision) -> Dict[str, Any]:",
+            "pattern": "approval"
+          },
+          {
+            "line": 151,
+            "text": "item = resolve_approval(decision)",
+            "pattern": "approval"
+          },
+          {
+            "line": 153,
+            "text": "return {\"ok\": False, \"error\": \"approval_not_found\", \"approval_id\": decision.approval_id}",
+            "pattern": "approval"
+          },
+          {
+            "line": 157,
+            "text": "@app.post(\"/agent/approval/execute/{approval_id}\")",
+            "pattern": "approval"
+          },
+          {
+            "line": 158,
+            "text": "def execute_approval(approval_id: str) -> Dict[str, Any]:",
+            "pattern": "approval"
+          },
+          {
+            "line": 159,
+            "text": "return execute_approved_action(approval_id)",
+            "pattern": "approval"
+          },
+          {
+            "line": 165,
+            "text": "approval_id: str | None = None,",
+            "pattern": "approval"
+          },
+          {
+            "line": 170,
+            "text": "\"items\": list_executions(run_id=run_id, approval_id=approval_id, limit=limit),",
+            "pattern": "approval"
+          },
+          {
+            "line": 191,
+            "text": "@app.get(\"/agent/replay/approval/{approval_id}\")",
+            "pattern": "approval"
+          },
+          {
+            "line": 192,
+            "text": "def agent_replay_approval(approval_id: str) -> Dict[str, Any]:",
+            "pattern": "approval"
+          },
+          {
+            "line": 195,
+            "text": "\"approval_id\": approval_id,",
+            "pattern": "approval"
+          },
+          {
+            "line": 196,
+            "text": "\"executions\": list_executions(approval_id=approval_id, limit=500),",
+            "pattern": "approval"
+          },
+          {
+            "line": 46,
+            "text": "from services.agent_runtime_service.app.runtime.filesystem_sandbox import (",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 47,
+            "text": "create_sandbox,",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 248,
+            "text": "@app.post(\"/agent/filesystem/sandbox\")",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 249,
+            "text": "def agent_filesystem_create_sandbox() -> Dict[str, Any]:",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 250,
+            "text": "return create_sandbox()",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 255,
+            "text": "return write_file(request.sandbox_id, request.path, request.content)",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 260,
+            "text": "return read_file(request.sandbox_id, request.path)",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 265,
+            "text": "return list_files(request.sandbox_id, request.path)",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 270,
+            "text": "return delete_file(request.sandbox_id, request.path)",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 273,
+            "text": "@app.get(\"/agent/filesystem/manifest/{sandbox_id}\")",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 274,
+            "text": "def agent_filesystem_manifest(sandbox_id: str) -> Dict[str, Any]:",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 275,
+            "text": "return export_manifest(sandbox_id)",
+            "pattern": "sandbox"
+          },
+          {
+            "line": 28,
+            "text": "from services.agent_runtime_service.app.run_store.store import load_run",
+            "pattern": "run_store"
+          },
+          {
+            "line": 64,
+            "text": "from services.agent_runtime_service.app.session_store.store import load_session",
+            "pattern": "session_store"
+          },
+          {
+            "line": 36,
+            "text": "from services.agent_runtime_service.app.runtime.execution_store import (",
+            "pattern": "execution_store"
+          }
+        ]
+      },
+      {
+        "file": "core-platform/apps/desktop/src/js/services.js",
+        "matches": [
+          {
+            "line": 5,
+            "text": "{ name: \"Capability Learning\", port: 18102 },",
+            "pattern": "Capability"
+          }
+        ]
+      }
+    ]
+  }
+}

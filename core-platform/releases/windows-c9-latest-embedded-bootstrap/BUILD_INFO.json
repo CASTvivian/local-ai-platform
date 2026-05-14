@@ -1,0 +1,6 @@
+{
+  "workflow": "build-win-release",
+  "label": "win-c9-embedded-bootstrap-confirmed-2",
+  "commit": "572b572",
+  "built_at": "2026-05-12T08:24:33.6184346+00:00"
+}

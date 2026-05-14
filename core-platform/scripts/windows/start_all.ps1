@@ -105,5 +105,9 @@ function Start-PythonService {
 # Module paths are relative to resource root.
 Start-PythonService -Name "model_gateway" -Module "services.model_gateway.main:app" -Port 18080
 Start-PythonService -Name "model_bootstrap" -Module "services.model_bootstrap_service.main:app" -Port 18100
+Start-PythonService -Name "skill_store" -Module "services.skill_store_service.main:app" -Port 18121
+Start-PythonService -Name "repo_memory" -Module "services.repo_memory_service.main:app" -Port 18125
+Start-PythonService -Name "workflow_store" -Module "services.workflow_store_service.main:app" -Port 18126
+Start-PythonService -Name "agent_runtime" -Module "services.agent_runtime_service.main:app" -Port 18131
 
 Write-Host "Startup requested."

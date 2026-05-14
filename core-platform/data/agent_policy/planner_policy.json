@@ -1,0 +1,164 @@
+{
+  "version": "0.1.0-c25-c1",
+  "description": "Externalized planner policy. Runtime code must not hardcode business entities.",
+  "intents": [
+    {
+      "intent": "time_now",
+      "tools": ["time.now"],
+      "reason": "current local time required",
+      "must_not_hallucinate": true,
+      "delegate_to_model": false,
+      "patterns": [
+        "今天几号",
+        "今天是几号",
+        "今天日期",
+        "当前时间",
+        "现在几点",
+        "星期几",
+        "几月几号"
+      ]
+    },
+    {
+      "intent": "weather",
+      "tools": ["weather.query"],
+      "reason": "weather requires weather connector",
+      "must_not_hallucinate": true,
+      "delegate_to_model": false,
+      "patterns": [
+        "天气",
+        "气温",
+        "下雨",
+        "降雨",
+        "台风",
+        "空气质量",
+        "预报"
+      ]
+    },
+    {
+      "intent": "restricted_action",
+      "tools": ["shell.exec"],
+      "reason": "restricted local execution requires explicit approval",
+      "must_not_hallucinate": true,
+      "delegate_to_model": false,
+      "patterns": [
+        "执行命令",
+        "运行命令",
+        "终端命令",
+        "shell",
+        "删除文件",
+        "写入文件"
+      ],
+      "extract": {
+        "command_arg": "command",
+        "markers": ["执行命令", "运行命令", "终端命令", "shell"]
+      }
+    },
+    {
+      "intent": "web_fact",
+      "tools": ["web.search"],
+      "reason": "fresh or factual question requires web evidence",
+      "must_not_hallucinate": true,
+      "delegate_to_model": false,
+      "patterns": [
+        "上网",
+        "联网",
+        "搜索",
+        "查一下",
+        "最新",
+        "新闻",
+        "官网",
+        "发行时间",
+        "发布时间",
+        "哪个公司",
+        "什么公司",
+        "哪家公司",
+        "成立时间",
+        "上市时间"
+      ]
+    },
+    {
+      "intent": "capability_status",
+      "tools": [
+        "capability.status",
+        "capability.match",
+        "skill_store.list",
+        "workflow_store.list",
+        "repo_memory.search",
+        "catalog.search"
+      ],
+      "reason": "capability answer should be grounded in enabled assets",
+      "must_not_hallucinate": true,
+      "delegate_to_model": false,
+      "patterns": [
+        "能做什么",
+        "你能完成什么",
+        "你有什么能力",
+        "你现在有什么能力",
+        "有什么能力",
+        "你的能力",
+        "平台能力",
+        "现在完成了什么"
+      ]
+    },
+    {
+      "intent": "project_knowledge",
+      "tools": ["capability.match", "repo_memory.search"],
+      "reason": "project-specific question should query repo memory",
+      "must_not_hallucinate": true,
+      "delegate_to_model": false,
+      "patterns": [
+        "我们仓",
+        "本地项目",
+        "项目里",
+        "repo",
+        "repository",
+        "github",
+        "stars",
+        "收藏的仓",
+        "rag",
+        "mcp",
+        "agent",
+        "智能体",
+        "参考仓",
+        "资产",
+        "repo memory",
+        "知识库",
+        "模型目录",
+        "视频模型",
+        "context engine",
+        "我们软件",
+        "这个软件",
+        "大脑",
+        "平台",
+        "claude code",
+        "技能仓"
+      ]
+    },
+    {
+      "intent": "catalog_knowledge",
+      "tools": ["capability.match", "catalog.search", "repo_memory.search"],
+      "reason": "model/video/catalog question should use catalog and memory",
+      "must_not_hallucinate": true,
+      "delegate_to_model": false,
+      "patterns": [
+        "模型",
+        "大模型",
+        "视频生成",
+        "comfyui",
+        "wan",
+        "hunyuan",
+        "cogvideo",
+        "ollama",
+        "vision",
+        "embedding"
+      ]
+    }
+  ],
+  "fallback": {
+    "intent": "local_chat",
+    "tools": ["model.generate"],
+    "reason": "normal conversation can delegate to local model",
+    "must_not_hallucinate": false,
+    "delegate_to_model": true
+  }
+}
