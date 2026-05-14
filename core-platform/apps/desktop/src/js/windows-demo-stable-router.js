@@ -1,5 +1,5 @@
 (function () {
-  console.log("[MAOMIAI] runtime context router loaded C21-B");
+  console.log("[MAOMIAI] agent runtime main path loaded C25-A1");
 
   const MODEL_CATALOG_FALLBACK = [
     { profile: "standard", title: "标准对话能力", model: "qwen2.5:7b" },
@@ -53,10 +53,6 @@
     return catalog.find((item) => item.profile === profile) || catalog[0] || MODEL_CATALOG_FALLBACK[0];
   }
 
-  function getTauriInvoke() {
-    return window.__TAURI__?.core?.invoke || window.__TAURI_INTERNALS__?.invoke || null;
-  }
-
   function decodeMaomiaiEnvelope(obj) {
     if (!obj || !obj.maomiai_payload_b64) return obj;
     try {
@@ -92,27 +88,6 @@
     return { ok: false, raw: text };
   }
 
-  function extractAssistantText(data) {
-    if (!data) return "";
-    if (typeof data === "string") return data;
-    return (
-      data.response ||
-      data.output ||
-      data.text ||
-      data.content ||
-      data.answer ||
-      data?.message?.content ||
-      data?.raw?.message?.content ||
-      data?.raw?.response ||
-      data?.data?.response ||
-      data?.data?.output ||
-      data?.choices?.[0]?.message?.content ||
-      data?.choices?.[0]?.text ||
-      data.message ||
-      ""
-    );
-  }
-
   function ensureChatState() {
     window.__MAOMIAI_CHAT_MESSAGES__ = window.__MAOMIAI_CHAT_MESSAGES__ || [];
   }
@@ -130,7 +105,7 @@
     `
       )
       .join("");
-    box.innerHTML = messages || '<div class="demo-card"><p>请输入问题，测试本地 AI 是否可用。</p></div>';
+    box.innerHTML = messages || '<div class="demo-card"><p>请输入问题，测试 Agent Runtime 是否可用。</p></div>';
   }
 
   function pushChat(role, content) {
@@ -181,252 +156,232 @@
     return null;
   }
 
-  function classifyIntent(text) {
-    const q = String(text || "").trim().toLowerCase();
-    const hasAny = (items) => items.some((item) => q.includes(item.toLowerCase()));
-    if (hasAny(["今天几号", "今天是几号", "今天日期", "现在几点", "当前时间", "几月几号", "星期几", "日期"])) {
-      return { type: "time", reason: "date_or_time_query" };
+  async function runAgentRuntime(userText) {
+    const model = getCurrentModel();
+    const response = await fetch("http://127.0.0.1:18131/agent/run", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        input: userText,
+        message: userText,
+        session_id: window.__MAOMIAI_SESSION_ID__ || "desktop-default",
+        source: "desktop-chat",
+        current_profile: localStorage.getItem("maomiai_current_model_profile") || model.profile || "light",
+        profile: localStorage.getItem("maomiai_current_model_profile") || model.profile || "light",
+        model: model.model,
+      }),
+    });
+    const raw = await response.text();
+    const parsed = safeParse(raw);
+    if (!response.ok) {
+      throw new Error(`Agent Runtime HTTP ${response.status}: ${raw}`);
     }
-    if (hasAny(["天气", "气温", "下雨", "广州天气", "深圳天气", "北京天气", "上海天气"])) {
-      return { type: "realtime_blocked", tool: "weather", reason: "weather_requires_live_tool" };
-    }
-    if (hasAny(["上网", "联网", "搜索", "查一下", "最新", "新闻", "今天的", "现在的", "实时", "官网"])) {
-      return { type: "realtime_blocked", tool: "web_search", reason: "web_search_not_enabled" };
-    }
-    if (
-      hasAny([
-        "我们仓",
-        "本地项目",
-        "项目里",
-        "repo",
-        "repository",
-        "github",
-        "stars",
-        "收藏的仓",
-        "rag",
-        "mcp",
-        "agent",
-        "智能体",
-        "参考仓",
-        "资产",
-        "repo memory",
-        "知识库",
-        "模型目录",
-        "视频模型",
-        "context engine",
-      ])
-    ) {
-      return { type: "repo_memory", reason: "project_or_asset_query" };
-    }
-    if (hasAny(["能做什么", "你能完成什么", "你有什么能力", "你的能力", "平台能力", "现在完成了什么"])) {
-      return { type: "capability", reason: "capability_query" };
-    }
-    return { type: "local_chat", reason: "normal_chat" };
+    return parsed;
   }
 
-  function answerTimeQuestion() {
-    const now = new Date();
-    const weekdays = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+  function extractAgentText(result) {
+    if (!result) return "Agent runtime returned empty response.";
     return (
-      `现在是本机时间：${now.getFullYear()}年${now.getMonth() + 1}月${now.getDate()}日，${weekdays[now.getDay()]}，` +
-      `${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}。`
+      result.final_answer ||
+      result.answer ||
+      result.response ||
+      result.output ||
+      result.text ||
+      result?.data?.final_answer ||
+      result?.data?.answer ||
+      JSON.stringify(result, null, 2)
     );
   }
 
-  function answerRealtimeBlocked(intent, query) {
-    if (intent.tool === "weather") {
-      return [
-        "我现在不能直接给你编天气。",
-        "",
-        "原因：当前 Windows 演示包还没有接入实时天气工具。",
-        "",
-        "正确流程应该是：",
-        "1. 识别这是实时天气问题；",
-        "2. 调用天气 API 或联网搜索；",
-        "3. 返回带日期和来源的结果。",
-        "",
-        "目前我可以明确告诉你：实时天气工具尚未启用，所以不能把模型猜测当成真实天气。",
-      ].join("\n");
-    }
-    return [
-      "我现在不能直接联网查询，也不能凭空编一个结果。",
-      "",
-      "原因：当前演示包还没有启用 Web Search / Browser 工具。",
-      "",
-      `你的问题是：${query}`,
-      "",
-      "下一阶段 C21-C 会接入联网搜索工具。接入后，这类问题会走实时搜索，而不是直接让本地模型猜。",
-    ].join("\n");
-  }
-
-  function answerCapabilityQuestion() {
-    return [
-      "当前 MAOMIAI 已经完成的是本地智能体平台 Demo 基座，不是完整最终版。",
-      "",
-      "已具备：",
-      "1. Windows 桌面端打包与安装；",
-      "2. 本地模型下载、识别、选择和推理；",
-      "3. 本地 GitHub Stars / 仓库资产整理；",
-      "4. Repo Memory 资产接口；",
-      "5. 本地模型目录、视频模型目录和 Context Engine 架构；",
-      "6. 基础的时间问题拦截和防乱答规则。",
-      "",
-      "仍在补齐：",
-      "1. 联网搜索工具；",
-      "2. 天气工具；",
-      "3. 自动工具调用；",
-      "4. Graph Memory；",
-      "5. MCP Gateway；",
-      "6. 视频生成后端。",
-    ].join("\n");
-  }
-
-  async function queryRepoMemory(query) {
-    const payloads = [
-      {
-        url: "http://127.0.0.1:18125/brain/search",
-        body: { query, limit: 8 },
-      },
-      {
-        url: "http://127.0.0.1:18125/brain/search",
-        body: { q: query, limit: 8 },
-      },
-    ];
-    let lastError = null;
-    for (const item of payloads) {
-      try {
-        const res = await fetch(item.url, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(item.body),
-        });
-        const raw = await res.text();
-        const data = safeParse(raw);
-        if (!res.ok) {
-          lastError = `${item.url} HTTP ${res.status}: ${raw}`;
-          continue;
-        }
-        return data;
-      } catch (e) {
-        lastError = `${item.url} 请求失败：${String(e)}`;
-      }
-    }
-    throw new Error(lastError || "Repo Memory 查询失败。");
-  }
-
-  function summarizeRepoMemoryResult(query, data) {
-    const raw = JSON.stringify(data || {}, null, 2);
-    const items = data?.results || data?.items || data?.matches || data?.data?.results || data?.data?.items || [];
-    if (Array.isArray(items) && items.length) {
-      const lines = [`我已从本地 Repo Memory 查询：${query}`, "", "相关资产："];
-      for (const item of items.slice(0, 8)) {
-        const name = item.full_name || item.repo || item.name || item.title || item.source || "unknown";
-        const desc = item.description || item.summary || item.content || item.text || "";
-        lines.push(`- ${name}${desc ? `：${String(desc).slice(0, 160)}` : ""}`);
-      }
-      return lines.join("\n");
-    }
-    if (data?.asset_count != null) {
-      return `本地 Repo Memory 已加载资产数量：${data.asset_count}。你可以继续问 MCP、Agent、RAG、模型目录、视频模型目录等问题。`;
-    }
-    return ["我查了本地 Repo Memory，但没有整理出明确匹配结果。", "", "原始返回：", raw.slice(0, 1200)].join("\n");
-  }
-
-  async function answerRepoMemoryQuestion(query) {
-    try {
-      const result = await queryRepoMemory(query);
-      return summarizeRepoMemoryResult(query, result);
-    } catch (e) {
-      return [
-        "这是项目/仓库相关问题，按规则应该查询本地 Repo Memory。",
-        "",
-        "但当前 Repo Memory 服务没有成功响应。",
-        "",
-        `错误：${String(e)}`,
-        "",
-        "请确认 18125 repo_memory_service 已启动。",
-      ].join("\n");
-    }
-  }
-
-  async function callDirectLocalInference(prompt, modelInfo) {
-    const invoke = getTauriInvoke();
-    if (!invoke) {
-      throw new Error("Tauri invoke 不可用，当前不是桌面运行环境或 preload 未注入。");
-    }
-    const raw = await invoke("generate_local_ai_response", {
-      profile: modelInfo.profile,
-      prompt,
-    });
-    const parsed = safeParse(raw);
-    if (parsed && parsed.ok === false && parsed.message) {
-      throw new Error(parsed.message + (parsed.error ? ` / ${parsed.error}` : ""));
-    }
-    const text = extractAssistantText(parsed);
-    if (text) return text;
-    if (typeof raw === "string" && raw.trim()) return raw;
-    throw new Error("本地推理没有返回可显示内容。");
-  }
-
-  async function callGatewayFallback(prompt, modelInfo) {
-    const payloads = [
-      {
-        url: "http://127.0.0.1:18080/generate",
-        body: { prompt, profile: modelInfo.profile, model: modelInfo.model },
-      },
-      {
-        url: "http://127.0.0.1:18080/generate",
-        body: { prompt },
-      },
-    ];
-    let lastError = null;
-    for (const item of payloads) {
-      try {
-        const res = await fetch(item.url, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(item.body),
-        });
-        const raw = await res.text();
-        const data = safeParse(raw);
-        if (!res.ok) {
-          lastError = `${item.url} HTTP ${res.status}: ${raw}`;
-          continue;
-        }
-        const text = extractAssistantText(data);
-        if (text) return text;
-        lastError = `${item.url} 返回为空：${raw}`;
-      } catch (e) {
-        lastError = `${item.url} 请求失败：${String(e)}`;
-      }
-    }
-    throw new Error(lastError || "18080 网关没有返回内容。");
-  }
-
   async function routeUserMessage(query) {
-    const intent = classifyIntent(query);
-    updateDebug("Context Router", intent);
-    if (intent.type === "time") return answerTimeQuestion();
-    if (intent.type === "realtime_blocked") return answerRealtimeBlocked(intent, query);
-    if (intent.type === "repo_memory") return await answerRepoMemoryQuestion(query);
-    if (intent.type === "capability") return answerCapabilityQuestion();
+    updateDebug("Agent Runtime", {
+      endpoint: "http://127.0.0.1:18131/agent/run",
+      session_id: window.__MAOMIAI_SESSION_ID__ || "desktop-default",
+      current_profile: localStorage.getItem("maomiai_current_model_profile") || getCurrentModel().profile,
+    });
+    const result = await runAgentRuntime(query);
+    maomiaiCaptureRunIdFromResult(result);
+    updateDebug("Agent Runtime Result", result);
+    return extractAgentText(result);
+  }
 
-    const modelInfo = getCurrentModel();
+  // ===== MAOMIAI Agent Replay UI =====
+  window.__MAOMIAI_LAST_RUN_ID__ = window.__MAOMIAI_LAST_RUN_ID__ || null;
+
+  function maomiaiEscapeHtml(value) {
+    return String(value ?? "")
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
+  }
+
+  function maomiaiShortJson(value, maxLen = 900) {
+    let text = "";
     try {
-      return await callDirectLocalInference(query, modelInfo);
-    } catch (directError) {
-      updateDebug("直接本地推理失败，尝试 18080 兜底", {
-        error: String(directError),
-        profile: modelInfo.profile,
-        model: modelInfo.model,
-      });
-      try {
-        return await callGatewayFallback(query, modelInfo);
-      } catch (gatewayError) {
-        return `推理失败：${String(directError)}\n\n18080 兜底也失败：${String(gatewayError)}`;
-      }
+      text = JSON.stringify(value ?? {}, null, 2);
+    } catch (err) {
+      text = String(value ?? "");
+    }
+    if (text.length > maxLen) {
+      return text.slice(0, maxLen) + "\n... truncated";
+    }
+    return text;
+  }
+
+  async function fetchAgentTimeline(runId) {
+    const response = await fetch(`http://127.0.0.1:18131/agent/replay/timeline/${encodeURIComponent(runId)}`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" }
+    });
+    return await response.json();
+  }
+
+  function renderAgentTimeline(timeline) {
+    if (!timeline || !timeline.ok) {
+      return `
+        <div class="agent-replay-empty">
+          <div class="agent-replay-title">暂无可回放记录</div>
+          <div class="agent-replay-subtitle">${maomiaiEscapeHtml(timeline?.message || timeline?.error || "未找到 run timeline")}</div>
+        </div>
+      `;
+    }
+    const events = Array.isArray(timeline.events) ? timeline.events : [];
+    const eventHtml = events.map((ev) => {
+      const type = maomiaiEscapeHtml(ev.type || "event");
+      const title = maomiaiEscapeHtml(ev.title || ev.type || "event");
+      const detail = maomiaiEscapeHtml(maomiaiShortJson(ev.detail || {}));
+      return `
+        <div class="agent-timeline-event">
+          <div class="agent-timeline-head">
+            <span class="agent-timeline-index">#${maomiaiEscapeHtml(ev.index)}</span>
+            <span class="agent-timeline-type">${type}</span>
+          </div>
+          <div class="agent-timeline-title">${title}</div>
+          <details class="agent-timeline-detail">
+            <summary>查看详情</summary>
+            <pre>${detail}</pre>
+          </details>
+        </div>
+      `;
+    }).join("");
+    return `
+      <div class="agent-replay-panel">
+        <div class="agent-replay-header">
+          <div>
+            <div class="agent-replay-title">Agent 执行回放</div>
+            <div class="agent-replay-subtitle">Run: ${maomiaiEscapeHtml(timeline.run_id || "-")}</div>
+          </div>
+          <div class="agent-replay-status">${maomiaiEscapeHtml(timeline.status || "unknown")}</div>
+        </div>
+        ${timeline.final_answer ? `
+          <div class="agent-replay-answer">
+            <div class="agent-replay-answer-label">最终回答</div>
+            <div class="agent-replay-answer-text">${maomiaiEscapeHtml(timeline.final_answer)}</div>
+          </div>
+        ` : ""}
+        <div class="agent-timeline-list">
+          ${eventHtml || `<div class="agent-replay-empty">暂无事件</div>`}
+        </div>
+      </div>
+    `;
+  }
+
+  async function openAgentReplay(runId) {
+    const targetRunId = runId || window.__MAOMIAI_LAST_RUN_ID__;
+    const app = document.querySelector("#app") || document.body;
+    if (!targetRunId) {
+      app.innerHTML = `
+        <div class="agent-replay-page">
+          <div class="agent-replay-empty">
+            <div class="agent-replay-title">暂无可回放 Run</div>
+            <div class="agent-replay-subtitle">请先在新对话里发送一次任务，然后再打开 Agent 回放。</div>
+            <button class="primary-btn" data-action="new-chat">返回新对话</button>
+          </div>
+        </div>
+      `;
+      return;
+    }
+    app.innerHTML = `
+      <div class="agent-replay-page">
+        <div class="agent-replay-loading">正在加载 Agent 执行回放...</div>
+      </div>
+    `;
+    try {
+      const timeline = await fetchAgentTimeline(targetRunId);
+      app.innerHTML = `
+        <div class="agent-replay-page">
+          <div class="agent-replay-actions">
+            <button class="secondary-btn" data-action="new-chat">返回对话</button>
+            <button class="secondary-btn" data-action="refresh-agent-replay" data-run-id="${maomiaiEscapeHtml(targetRunId)}">刷新回放</button>
+          </div>
+          ${renderAgentTimeline(timeline)}
+        </div>
+      `;
+    } catch (err) {
+      app.innerHTML = `
+        <div class="agent-replay-page">
+          <div class="agent-replay-empty">
+            <div class="agent-replay-title">Agent 回放加载失败</div>
+            <div class="agent-replay-subtitle">${maomiaiEscapeHtml(err.message || String(err))}</div>
+            <button class="primary-btn" data-action="new-chat">返回新对话</button>
+          </div>
+        </div>
+      `;
     }
   }
+
+  function injectAgentReplayButton() {
+    const chatRoot = document.querySelector(".chat-header, .topbar, .chat-toolbar, header");
+    if (!chatRoot || document.querySelector("[data-action='open-agent-replay']")) return;
+    const btn = document.createElement("button");
+    btn.className = "secondary-btn agent-replay-open-btn";
+    btn.dataset.action = "open-agent-replay";
+    btn.textContent = "Agent 回放";
+    chatRoot.appendChild(btn);
+  }
+
+  function maomiaiCaptureRunIdFromResult(result) {
+    const runId =
+      result?.run_id ||
+      result?.raw?.run_id ||
+      result?.data?.run_id ||
+      result?.result?.run_id ||
+      result?.steps?.[0]?.run_id ||
+      result?.raw?.run?.run_id;
+    if (runId) {
+      window.__MAOMIAI_LAST_RUN_ID__ = runId;
+      try {
+        localStorage.setItem("maomiai_last_run_id", runId);
+      } catch (err) {}
+    }
+  }
+
+  try {
+    window.__MAOMIAI_LAST_RUN_ID__ = localStorage.getItem("maomiai_last_run_id") || window.__MAOMIAI_LAST_RUN_ID__;
+  } catch (err) {}
+
+  setInterval(injectAgentReplayButton, 1200);
+
+  // Agent replay click actions
+  document.addEventListener("click", async (event) => {
+    const target = event.target && event.target.closest ? event.target.closest("[data-action]") : null;
+    if (!target) return;
+    const action = target.dataset.action;
+    if (action === "open-agent-replay") {
+      event.preventDefault();
+      event.stopPropagation();
+      await openAgentReplay(window.__MAOMIAI_LAST_RUN_ID__);
+      return;
+    }
+    if (action === "refresh-agent-replay") {
+      event.preventDefault();
+      event.stopPropagation();
+      await openAgentReplay(target.dataset.runId || window.__MAOMIAI_LAST_RUN_ID__);
+      return;
+    }
+  }, true);
 
   function renderChat() {
     ensureChatState();
@@ -444,7 +399,7 @@
         <div class="demo-chat-head">
           <div>
             <h1>MAOMIAI 本地 AI</h1>
-            <p>Context Router 已启用</p>
+            <p>Agent Runtime 已接管</p>
           </div>
           <div class="chat-model-selector">
             <span>当前能力</span>
@@ -452,14 +407,14 @@
           </div>
         </div>
         <div class="demo-chat-actions">
-          <button class="primary" data-action="maomiai-test-infer">测试本地推理</button>
+          <button class="primary" data-action="maomiai-test-infer">测试 Agent Runtime</button>
           <button class="secondary" data-action="maomiai-test-time">测试时间工具</button>
           <button class="secondary" data-action="maomiai-test-memory">测试项目知识</button>
           <button class="secondary" data-action="maomiai-clear-chat">清空会话</button>
         </div>
         <details id="maomiaiDebugBox" class="maomiai-debug-box">
           <summary>调试状态（点击展开）</summary>
-          <pre>Context Router ready. 当前能力：${escapeHtml(current.title)} / ${escapeHtml(current.model)}</pre>
+          <pre>Agent Runtime ready. 当前能力：${escapeHtml(current.title)} / ${escapeHtml(current.model)}</pre>
         </details>
         <div id="demoChatMessages" class="demo-chat-messages"></div>
       </section>
@@ -489,9 +444,14 @@
     }
     if (input && !forceText) input.value = "";
     pushChat("user", value);
-    pushChat("assistant", "正在判断问题类型并处理...");
-    const answer = await routeUserMessage(value);
-    updateLastAssistant(answer);
+    pushChat("assistant", "正在进入 Agent Runtime...");
+    try {
+      const answer = await routeUserMessage(value);
+      updateLastAssistant(answer);
+    } catch (e) {
+      updateDebug("Agent Runtime Error", String(e));
+      updateLastAssistant(`Agent Runtime 调用失败：${String(e)}\n\n请确认 18131 agent_runtime_service 已启动。`);
+    }
   }
 
   function page(title, subtitle, body) {
@@ -526,7 +486,7 @@
 
   function renderSettings() {
     page("设置", "配置本地运行、服务启动、模型能力和演示环境。", `
-      <div class="demo-card"><h2>运行模式</h2><p>当前为本地运行模式，Context Router 已启用。</p></div>
+      <div class="demo-card"><h2>运行模式</h2><p>当前为本地运行模式，Agent Runtime 已接管。</p></div>
     `);
   }
 
@@ -668,7 +628,7 @@
     setTimeout(installNavAttributes, 300);
     setTimeout(installNavAttributes, 1200);
     setInterval(installNavAttributes, 2500);
-    console.log("[MAOMIAI] context router ready C21-B");
+    console.log("[MAOMIAI] agent runtime main path ready C25-A1");
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);

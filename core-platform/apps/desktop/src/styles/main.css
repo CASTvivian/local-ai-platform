@@ -1002,3 +1002,121 @@ body[data-ui-version="d7-c3-chatgpt-like"] textarea#prompt {
 .maomiai-debug-box summary::-webkit-details-marker {
   display: none;
 }
+/* ===== MAOMIAI Agent Replay UI ===== */
+.agent-replay-page {
+  padding: 24px;
+  color: var(--text-primary, #e8edf7);
+}
+.agent-replay-actions {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.agent-replay-panel {
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  border-radius: 18px;
+  background: rgba(15, 23, 42, 0.72);
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.28);
+  overflow: hidden;
+}
+.agent-replay-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 20px;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.14), rgba(14, 165, 233, 0.08));
+}
+.agent-replay-title {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+.agent-replay-subtitle {
+  margin-top: 4px;
+  font-size: 13px;
+  color: rgba(226, 232, 240, 0.68);
+  word-break: break-all;
+}
+.agent-replay-status {
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  color: #bfdbfe;
+  background: rgba(37, 99, 235, 0.18);
+  border: 1px solid rgba(96, 165, 250, 0.25);
+}
+.agent-replay-answer {
+  padding: 16px 20px;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.16);
+  background: rgba(2, 6, 23, 0.22);
+}
+.agent-replay-answer-label {
+  font-size: 12px;
+  color: rgba(226, 232, 240, 0.62);
+  margin-bottom: 8px;
+}
+.agent-replay-answer-text {
+  white-space: pre-wrap;
+  line-height: 1.65;
+}
+.agent-timeline-list {
+  padding: 18px;
+  display: grid;
+  gap: 12px;
+}
+.agent-timeline-event {
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  border-radius: 14px;
+  padding: 14px;
+  background: rgba(15, 23, 42, 0.58);
+}
+.agent-timeline-head {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.agent-timeline-index {
+  font-size: 12px;
+  color: rgba(226, 232, 240, 0.55);
+}
+.agent-timeline-type {
+  font-size: 12px;
+  color: #bae6fd;
+  background: rgba(14, 165, 233, 0.12);
+  border: 1px solid rgba(14, 165, 233, 0.24);
+  border-radius: 999px;
+  padding: 3px 8px;
+}
+.agent-timeline-title {
+  font-size: 15px;
+  font-weight: 650;
+  margin-bottom: 8px;
+}
+.agent-timeline-detail summary {
+  cursor: pointer;
+  color: rgba(226, 232, 240, 0.68);
+  font-size: 13px;
+}
+.agent-timeline-detail pre {
+  margin-top: 10px;
+  padding: 12px;
+  overflow: auto;
+  max-height: 320px;
+  border-radius: 12px;
+  background: rgba(2, 6, 23, 0.78);
+  border: 1px solid rgba(148, 163, 184, 0.14);
+  font-size: 12px;
+  line-height: 1.55;
+}
+.agent-replay-empty,
+.agent-replay-loading {
+  padding: 32px;
+  border-radius: 18px;
+  background: rgba(15, 23, 42, 0.72);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+}
+.agent-replay-open-btn {
+  margin-left: 8px;
+}
