@@ -22,32 +22,26 @@ env:
 
 jobs:
   build-windows:
+    env:
+      MAOMIAI_BUILD_COMMIT: ${{ github.sha }}
+      MAOMIAI_BUILD_REF: ${{ github.ref_name }}
     runs-on: windows-latest
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
         with:
           fetch-depth: 1
           submodules: false
           lfs: false
           clean: true
-
-      - name: Git checkout diagnostics
-        shell: pwsh
-        run: |
-          git rev-parse HEAD
-          git status --short
-          if (Test-Path .gitmodules) {
-            Write-Host ".gitmodules exists; submodules are intentionally disabled for Windows package build."
-            Get-Content .gitmodules
-          }
+          persist-credentials: false
 
       - name: Show commit and tree
         shell: pwsh
         run: |
-          git rev-parse HEAD
-          git log -1 --oneline
+          Write-Host "Commit SHA: $env:MAOMIAI_BUILD_COMMIT"
+          Write-Host "Ref: $env:MAOMIAI_BUILD_REF"
           Get-ChildItem core-platform/apps/desktop/src -Recurse | Select-Object -First 100 FullName, Length
 
       - name: Setup Node
@@ -74,7 +68,7 @@ jobs:
           New-Item -ItemType Directory -Force -Path dist | Out-Null
           Copy-Item src\* dist -Recurse -Force
 
-          $sha = git rev-parse --short HEAD
+          $sha = $env:MAOMIAI_BUILD_COMMIT.Substring(0, 7)
           $time = Get-Date -Format o
           $meta = @{
             commit = $sha
