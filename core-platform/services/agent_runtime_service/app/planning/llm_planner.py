@@ -102,6 +102,8 @@ def extract_json_object(raw: str) -> Optional[Dict[str, Any]]:
 
 def call_planner_model(prompt: str) -> Optional[str]:
     global LAST_PLANNER_ERROR
+    if is_circuit_open():
+        raise RuntimeError("planner circuit is open; model gateway recently failed")
     endpoint = os.environ.get("MAOMIAI_PLANNER_MODEL_ENDPOINT", "http://127.0.0.1:18080/generate")
     timeout = float(os.environ.get("MAOMIAI_PLANNER_TIMEOUT", "30"))
     payload = json.dumps(
@@ -120,7 +122,9 @@ def call_planner_model(prompt: str) -> Optional[str]:
     try:
         with urllib.request.urlopen(request, timeout=timeout) as response:
             data = json.loads(response.read().decode("utf-8", errors="replace"))
+        clear_planner_error()
     except Exception as exc:
+        record_planner_error(str(exc))
         LAST_PLANNER_ERROR = f"model_gateway_error: {exc}"
         return None
     for key in ("response", "output", "text", "answer"):

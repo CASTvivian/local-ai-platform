@@ -8,6 +8,7 @@ from typing import Any, Dict, List
 from .models import AgentPlan
 from .planning.llm_planner import get_last_planner_error, llm_create_plan
 from .policy.loader import load_entity_aliases
+from .health.planner_health import planner_runtime_state
 
 
 LAST_PLAN_ERROR: str | None = None

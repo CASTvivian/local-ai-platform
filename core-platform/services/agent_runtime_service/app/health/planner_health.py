@@ -13,7 +13,11 @@ from typing import Dict, Any
 from .models import PlannerRuntimeState
 
 
-ROOT = Path("core-platform/data/planner_runtime")
+# Resolve path relative to workspace root
+# __file__ is at: .../本地ai/core-platform/services/agent_runtime_service/app/health/planner_health.py
+# Workspace root (本地ai/): parent.parent.parent.parent.parent.parent
+WORKSPACE_ROOT = Path(__file__).parent.parent.parent.parent.parent.parent
+ROOT = WORKSPACE_ROOT / "core-platform" / "data" / "planner_runtime"
 ROOT.mkdir(parents=True, exist_ok=True)
 STATE_FILE = ROOT / "planner_health.json"
 MODEL_GATEWAY_HEALTH_URL = os.environ.get("MAOMIAI_MODEL_GATEWAY_HEALTH_URL", "http://127.0.0.1:18080/health")
