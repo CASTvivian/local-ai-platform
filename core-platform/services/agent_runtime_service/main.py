@@ -28,6 +28,10 @@ from services.agent_runtime_service.app.capability.registry import (
 from services.agent_runtime_service.app.capability.service import match_capability
 from services.agent_runtime_service.app.models import AgentRunRequest
 from services.agent_runtime_service.app.mcp.invoker import invoke_mcp
+from services.agent_runtime_service.app.team.models import TeamRunRequest
+from services.agent_runtime_service.app.team.registry import list_teams, get_team
+from services.agent_runtime_service.app.team.coordinator import run_team
+from services.agent_runtime_service.app.team.store import load_team_run, list_team_runs
 from services.agent_runtime_service.app.mcp.models import MCPInvokeRequest, MCPTool
 from services.agent_runtime_service.app.mcp.registry import get_tool, list_tools, upsert_tool
 from services.agent_runtime_service.app.planner import build_plan
@@ -336,6 +340,55 @@ def agent_planner_health_api(check_live: bool = False) -> Dict[str, Any]:
     if check_live:
         check_model_gateway()
     return planner_runtime_state(check_live=False).model_dump()
+
+
+@app.get("/agent/team/registry")
+def agent_team_registry():
+    return {
+        "ok": True,
+        "items": list_teams(),
+    }
+
+
+@app.get("/agent/team/{team_id}")
+def agent_team_get(team_id: str):
+    item = get_team(team_id)
+    if not item:
+        return {
+            "ok": False,
+            "message": "team not found",
+        }
+    return {
+        "ok": True,
+        "item": item.model_dump(),
+    }
+
+
+@app.post("/agent/team/run")
+def agent_team_run(req: TeamRunRequest):
+    return run_team(req)
+
+
+@app.get("/agent/team/runs")
+def agent_team_runs(limit: int = 100):
+    return {
+        "ok": True,
+        "items": list_team_runs(limit=limit),
+    }
+
+
+@app.get("/agent/team/run/{team_run_id}")
+def agent_team_run_get(team_run_id: str):
+    item = load_team_run(team_run_id)
+    if not item:
+        return {
+            "ok": False,
+            "message": "team run not found",
+        }
+    return {
+        "ok": True,
+        "item": item.model_dump(),
+    }
 
 
 if __name__ == "__main__":

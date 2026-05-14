@@ -20,3 +20,19 @@ core-platform/apps/desktop/bundle/backend/generated/
 core-platform/data/brain_assets/repos/
 # Local references for Claude Code / Claw Code kernel recovery
 core-platform/references/agent_kernels/
+claude-code-source-code-main/
+claw-code-main/
+core-platform/data/run_store/
+core-platform/data/session_store/
+core-platform/data/approval_store/
+core-platform/data/sandbox_store/
+core-platform/data/sandbox_runtime/
+core-platform/data/execution_store/
+core-platform/data/mcp_registry/
+core-platform/data/capability_registry/
+core-platform/data/filesystem_sandbox/
+core-platform/data/browser_runtime/
+core-platform/data/web_search_runtime/
+# Runtime multi-agent team runs
+core-platform/data/agent_team/runs/
+core-platform/data/weather_runtime/

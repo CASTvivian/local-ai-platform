@@ -1,0 +1,47 @@
+{
+  "version": "0.1.0-c25-c8",
+  "description": "External multi-agent registry. Agent roles are config, not hardcoded runtime routing.",
+  "default_team": "default_local_team",
+  "teams": [
+    {
+      "id": "default_local_team",
+      "name": "Default Local Agent Team",
+      "description": "General-purpose local agent team.",
+      "enabled": true,
+      "agents": [
+        {
+          "id": "coordinator",
+          "name": "Coordinator",
+          "role": "Coordinate task decomposition, select workers, merge results.",
+          "capability_tags": ["planning", "coordination", "reasoning"],
+          "max_steps": 4,
+          "enabled": true
+        },
+        {
+          "id": "researcher",
+          "name": "Researcher",
+          "role": "Use memory, web, browser snapshots, and catalog tools to collect evidence.",
+          "capability_tags": ["repo", "memory", "web", "browser", "rag", "catalog"],
+          "max_steps": 4,
+          "enabled": true
+        },
+        {
+          "id": "builder",
+          "name": "Builder",
+          "role": "Use code, filesystem sandbox, workflow, and shell sandbox tools after approval.",
+          "capability_tags": ["code", "filesystem", "workflow", "shell", "sandbox"],
+          "max_steps": 4,
+          "enabled": true
+        },
+        {
+          "id": "reviewer",
+          "name": "Reviewer",
+          "role": "Validate output quality, check evidence, summarize risks, and request replans.",
+          "capability_tags": ["validation", "review", "quality", "safety"],
+          "max_steps": 3,
+          "enabled": true
+        }
+      ]
+    }
+  ]
+}
