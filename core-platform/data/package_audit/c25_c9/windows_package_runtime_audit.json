@@ -1,0 +1,193 @@
+{
+  "generated_at": "2026-05-14T17:13:16.904449",
+  "required": {
+    "desktop": [
+      {
+        "path": "core-platform/apps/desktop/package.json",
+        "exists": true,
+        "size": 184
+      },
+      {
+        "path": "core-platform/apps/desktop/src-tauri/tauri.conf.json",
+        "exists": true,
+        "size": 1287
+      },
+      {
+        "path": "core-platform/apps/desktop/src/js/windows-demo-stable-router.js",
+        "exists": true,
+        "size": 22391
+      },
+      {
+        "path": "core-platform/apps/desktop/src/js/windows-click-model-setup.js",
+        "exists": true,
+        "size": 19904
+      }
+    ],
+    "windows_scripts": [
+      {
+        "path": "core-platform/scripts/windows/start_all.ps1",
+        "exists": true,
+        "size": 3882
+      },
+      {
+        "path": "core-platform/scripts/windows/stop_all.ps1",
+        "exists": true,
+        "size": 476
+      },
+      {
+        "path": "core-platform/scripts/windows/status_all.ps1",
+        "exists": true,
+        "size": 271
+      },
+      {
+        "path": "core-platform/scripts/windows/bootstrap_runtime.ps1",
+        "exists": true,
+        "size": 16687
+      },
+      {
+        "path": "core-platform/scripts/windows/ensure_runtime.ps1",
+        "exists": true,
+        "size": 5798
+      }
+    ],
+    "services": [
+      {
+        "path": "core-platform/services/agent_runtime_service/main.py",
+        "exists": true,
+        "size": 12430
+      },
+      {
+        "path": "core-platform/services/model_gateway/main.py",
+        "exists": true,
+        "size": 854
+      },
+      {
+        "path": "core-platform/services/model_bootstrap_service/main.py",
+        "exists": true,
+        "size": 7858
+      },
+      {
+        "path": "core-platform/services/repo_memory_service/main.py",
+        "exists": true,
+        "size": 7120
+      },
+      {
+        "path": "core-platform/services/skill_store_service/main.py",
+        "exists": true,
+        "size": 5955
+      },
+      {
+        "path": "core-platform/services/workflow_store_service/main.py",
+        "exists": true,
+        "size": 5293
+      },
+      {
+        "path": "core-platform/services/artifact_registry_service/main.py",
+        "exists": true,
+        "size": 6235
+      },
+      {
+        "path": "core-platform/services/code_review_gate_service/main.py",
+        "exists": true,
+        "size": 3516
+      },
+      {
+        "path": "core-platform/services/design_system_service/main.py",
+        "exists": true,
+        "size": 6494
+      }
+    ],
+    "agent_runtime_modules": [
+      {
+        "path": "core-platform/services/agent_runtime_service/app/planner.py",
+        "exists": true,
+        "size": 2945
+      },
+      {
+        "path": "core-platform/services/agent_runtime_service/app/executor.py",
+        "exists": true,
+        "size": 6349
+      },
+      {
+        "path": "core-platform/services/agent_runtime_service/app/validator.py",
+        "exists": true,
+        "size": 1663
+      },
+      {
+        "path": "core-platform/services/agent_runtime_service/app/service.py",
+        "exists": true,
+        "size": 6419
+      },
+      {
+        "path": "core-platform/services/agent_runtime_service/app/loop/runner.py",
+        "exists": false,
+        "size": null
+      },
+      {
+        "path": "core-platform/services/agent_runtime_service/app/team/coordinator.py",
+        "exists": true,
+        "size": 7859
+      },
+      {
+        "path": "core-platform/services/agent_runtime_service/app/mcp/registry.py",
+        "exists": true,
+        "size": 6197
+      },
+      {
+        "path": "core-platform/services/agent_runtime_service/app/capability/registry.py",
+        "exists": true,
+        "size": 8302
+      },
+      {
+        "path": "core-platform/services/agent_runtime_service/app/runtime/sandbox_executor.py",
+        "exists": true,
+        "size": 3670
+      },
+      {
+        "path": "core-platform/services/agent_runtime_service/app/runtime/browser_runtime.py",
+        "exists": true,
+        "size": 8164
+      },
+      {
+        "path": "core-platform/services/agent_runtime_service/app/runtime/web_search_runtime.py",
+        "exists": true,
+        "size": 9230
+      },
+      {
+        "path": "core-platform/services/agent_runtime_service/app/runtime/weather_runtime.py",
+        "exists": true,
+        "size": 7986
+      }
+    ],
+    "runtime_policy_data": [
+      {
+        "path": "core-platform/data/agent_policy/planner_policy.json",
+        "exists": true,
+        "size": 4094
+      },
+      {
+        "path": "core-platform/data/agent_policy/entity_aliases.json",
+        "exists": true,
+        "size": 186
+      },
+      {
+        "path": "core-platform/data/agent_policy/hardcode_guard.json",
+        "exists": true,
+        "size": 2593
+      },
+      {
+        "path": "core-platform/data/sandbox_policy/sandbox_policy.json",
+        "exists": true,
+        "size": 943
+      },
+      {
+        "path": "core-platform/data/agent_team/team_registry.json",
+        "exists": true,
+        "size": 1619
+      }
+    ]
+  },
+  "missing": [
+    "core-platform/services/agent_runtime_service/app/loop/runner.py"
+  ]
+}

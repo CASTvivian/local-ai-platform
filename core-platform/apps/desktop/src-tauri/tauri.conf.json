@@ -38,7 +38,14 @@
       "../../../scripts/windows/stop_all.ps1",
       "../../../scripts/windows/status_all.ps1",
       "../../../services/model_bootstrap_service",
-      "../../../services/model_gateway"
+      "../../../services/model_gateway",
+      "../../../services/agent_runtime_service",
+      "../../../services/repo_memory_service",
+      "../../../services/skill_store_service",
+      "../../../services/workflow_store_service",
+      "../../../data/agent_policy",
+      "../../../data/sandbox_policy",
+      "../../../data/agent_team"
     ]
   }
 }
