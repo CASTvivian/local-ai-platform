@@ -194,6 +194,68 @@ function Save-Job {
   return $File
 }
 
+function Get-Log-Tail {
+  param(
+    [string]$Path,
+    [int]$MaxChars = 3000
+  )
+  if (!(Test-Path $Path)) {
+    return ''
+  }
+  try {
+    $Text = Get-Content $Path -Raw -ErrorAction SilentlyContinue
+    if ($Text.Length -gt $MaxChars) {
+      return $Text.Substring($Text.Length - $MaxChars)
+    }
+    return $Text
+  } catch {
+    return ''
+  }
+}
+
+function Update-Model-Pull-Job {
+  param(
+    [string]$ProfileName,
+    [string]$Status,
+    [string]$Message,
+    [int]$Progress = 0,
+    [bool]$Installed = $false,
+    [string]$LastLog = '',
+    [string]$ErrorMessage = ''
+  )
+  $Model = Get-Model-For-Profile $ProfileName
+  $JobDir = Join-Path $Root 'runtime\jobs'
+  Ensure-Dir $JobDir
+  $JobFile = Join-Path $JobDir ('model-download-' + $ProfileName + '.json')
+  $Existing = $null
+  if (Test-Path $JobFile) {
+    try {
+      $Existing = Get-Content $JobFile -Raw | ConvertFrom-Json
+    } catch {}
+  }
+  $StartedAt = $(if ($Existing -and $Existing.started_at) { $Existing.started_at } else { (Get-Date).ToString('s') })
+  $Elapsed = 0
+  try {
+    $Elapsed = [int]((Get-Date) - [datetime]$StartedAt).TotalSeconds
+  } catch {}
+  $Job = @{
+    ok = ($Status -ne 'failed');
+    profile = $ProfileName;
+    model = $Model;
+    status = $Status;
+    progress = $Progress;
+    message = $Message;
+    last_log = $LastLog;
+    installed = $Installed;
+    error = $ErrorMessage;
+    started_at = $StartedAt;
+    updated_at = (Get-Date).ToString('s');
+    elapsed_seconds = $Elapsed
+  }
+  $Job | ConvertTo-Json -Depth 16 | Set-Content -Path $JobFile -Encoding UTF8
+  return $JobFile
+}
+
 function Start-Model-Pull-Job {
   param([string]$ProfileName)
   $Model = Get-Model-For-Profile $ProfileName
@@ -206,16 +268,13 @@ function Start-Model-Pull-Job {
   $StderrFile = Join-Path $LogDir ('ollama-pull-' + $ProfileName + '.err.log')
   $Serve = Ensure-Ollama-Serve
   if (!$Serve.ok) {
-    $Job = @{
-      profile = $ProfileName;
-      model = $Model;
-      status = 'failed';
-      progress = 0;
-      error = 'serve_failed';
-      serve = $Serve;
-      updated_at = (Get-Date).ToString('s')
-    }
-    $Job | ConvertTo-Json -Depth 16 | Set-Content -Path $JobFile -Encoding UTF8
+    Update-Model-Pull-Job `
+      -ProfileName $ProfileName `
+      -Status 'failed' `
+      -Message 'Ollama service could not be started.' `
+      -Progress 0 `
+      -Installed $false `
+      -ErrorMessage 'serve_failed' | Out-Null
     return @{
       ok = $false;
       profile = $ProfileName;
@@ -228,35 +287,29 @@ function Start-Model-Pull-Job {
   }
   $ListBefore = Get-Ollama-List
   if ($ListBefore.raw -and ($ListBefore.raw -match [regex]::Escape($Model))) {
-    $Job = @{
-      profile = $ProfileName;
-      model = $Model;
-      status = 'done';
-      progress = 100;
-      updated_at = (Get-Date).ToString('s')
-    }
-    $Job | ConvertTo-Json -Depth 16 | Set-Content -Path $JobFile -Encoding UTF8
+    Update-Model-Pull-Job `
+      -ProfileName $ProfileName `
+      -Status 'completed' `
+      -Message 'Selected capability is already installed.' `
+      -Progress 100 `
+      -Installed $true | Out-Null
     return @{
       ok = $true;
       profile = $ProfileName;
       model = $Model;
-      status = 'done';
+      status = 'completed';
       progress = 100;
+      installed = $true;
       message = 'Selected capability is already installed.';
       job_file = $JobFile
     }
   }
-  $Job = @{
-    profile = $ProfileName;
-    model = $Model;
-    status = 'downloading';
-    progress = 10;
-    started_at = (Get-Date).ToString('s');
-    updated_at = (Get-Date).ToString('s');
-    stdout_file = $StdoutFile;
-    stderr_file = $StderrFile
-  }
-  $Job | ConvertTo-Json -Depth 16 | Set-Content -Path $JobFile -Encoding UTF8
+  Update-Model-Pull-Job `
+    -ProfileName $ProfileName `
+    -Status 'running' `
+    -Message 'Downloading model. Please keep the app open.' `
+    -Progress 10 `
+    -Installed $false | Out-Null
   $ScriptPath = $MyInvocation.MyCommand.Path
   $CommandLine = '-NoProfile -ExecutionPolicy Bypass -File "' + $ScriptPath + '" -Action pull_model -Profile "' + $ProfileName + '" -Root "' + $Root + '"'
   try {
@@ -273,10 +326,13 @@ function Start-Model-Pull-Job {
       stderr_file = $StderrFile
     }
   } catch {
-    $Job.status = 'failed'
-    $Job.error = $_.Exception.Message
-    $Job.updated_at = (Get-Date).ToString('s')
-    $Job | ConvertTo-Json -Depth 16 | Set-Content -Path $JobFile -Encoding UTF8
+    Update-Model-Pull-Job `
+      -ProfileName $ProfileName `
+      -Status 'failed' `
+      -Message 'Failed to start background download.' `
+      -Progress 0 `
+      -Installed $false `
+      -ErrorMessage $_.Exception.Message | Out-Null
     return @{
       ok = $false;
       profile = $ProfileName;
@@ -299,21 +355,17 @@ function Get-Model-Pull-Job {
   $StderrFile = Join-Path $LogDir ('ollama-pull-' + $ProfileName + '.err.log')
   $Status = 'not_started'
   $Progress = 0
+  $ExistingError = ''
   if (Test-Path $JobFile) {
     try {
       $Existing = Get-Content $JobFile -Raw | ConvertFrom-Json
       $Status = $Existing.status
       $Progress = [int]$Existing.progress
+      $ExistingError = $Existing.error
     } catch {}
   }
-  $Stdout = ''
-  $Stderr = ''
-  if (Test-Path $StdoutFile) {
-    $Stdout = Get-Content $StdoutFile -Raw -ErrorAction SilentlyContinue
-  }
-  if (Test-Path $StderrFile) {
-    $Stderr = Get-Content $StderrFile -Raw -ErrorAction SilentlyContinue
-  }
+  $Stdout = Get-Log-Tail $StdoutFile 6000
+  $Stderr = Get-Log-Tail $StderrFile 6000
   $Combined = ($Stdout + "`n" + $Stderr)
   $Matches = [regex]::Matches($Combined, '([0-9]{1,3})\.?[0-9]*%')
   if ($Matches.Count -gt 0) {
@@ -326,17 +378,30 @@ function Get-Model-Pull-Job {
     $Exists = $true
   }
   if ($Exists) {
-    $Status = 'done'
+    $Status = 'completed'
     $Progress = 100
-    $Job = @{
-      profile = $ProfileName;
-      model = $Model;
-      status = 'done';
-      progress = 100;
-      updated_at = (Get-Date).ToString('s')
-    }
-    Ensure-Dir $JobDir
-    $Job | ConvertTo-Json -Depth 16 | Set-Content -Path $JobFile -Encoding UTF8
+    Update-Model-Pull-Job `
+      -ProfileName $ProfileName `
+      -Status 'completed' `
+      -Message 'Model download completed.' `
+      -Progress 100 `
+      -Installed $true `
+      -LastLog $Combined | Out-Null
+  } elseif ($Status -eq 'downloading') {
+    $Status = 'running'
+  } elseif ($Status -eq 'done') {
+    $Status = 'completed'
+  }
+  $StartedAt = $null
+  $Elapsed = 0
+  if (Test-Path $JobFile) {
+    try {
+      $Existing = Get-Content $JobFile -Raw | ConvertFrom-Json
+      $StartedAt = $Existing.started_at
+      if ($StartedAt) {
+        $Elapsed = [int]((Get-Date) - [datetime]$StartedAt).TotalSeconds
+      }
+    } catch {}
   }
   return @{
     ok = $true;
@@ -344,11 +409,15 @@ function Get-Model-Pull-Job {
     model = $Model;
     status = $Status;
     progress = $Progress;
+    message = $(if ($Status -eq 'completed') { 'Model download completed.' } elseif ($Status -eq 'failed') { 'Model download failed.' } elseif ($Status -eq 'running') { 'Downloading model. Please keep the app open.' } else { 'No model download job is running.' });
     job_file = $JobFile;
     stdout_file = $StdoutFile;
     stderr_file = $StderrFile;
-    stdout_tail = $(if ($Stdout.Length -gt 2000) { $Stdout.Substring($Stdout.Length - 2000) } else { $Stdout });
-    stderr_tail = $(if ($Stderr.Length -gt 2000) { $Stderr.Substring($Stderr.Length - 2000) } else { $Stderr });
+    stdout_tail = $Stdout;
+    stderr_tail = $Stderr;
+    last_log = $Combined;
+    elapsed_seconds = $Elapsed;
+    error = $ExistingError;
     installed = $Exists;
     list = $List
   }
@@ -391,6 +460,15 @@ function Pull-Model {
     if ($ListAfter.raw -and ($ListAfter.raw -match [regex]::Escape($Model))) {
       $Exists = $true
     }
+    $Tail = (Get-Log-Tail $StdoutFile 3000) + "`n" + (Get-Log-Tail $StderrFile 3000)
+    Update-Model-Pull-Job `
+      -ProfileName $ProfileName `
+      -Status $(if ($Exists) { 'completed' } else { 'failed' }) `
+      -Message $(if ($Exists) { 'Model download completed.' } else { 'Pull command finished, but model was not confirmed.' }) `
+      -Progress $(if ($Exists) { 100 } else { 0 }) `
+      -Installed $Exists `
+      -LastLog $Tail `
+      -ErrorMessage $(if ($Exists) { '' } else { 'model_not_confirmed' }) | Out-Null
     return @{
       ok = $Exists;
       stage = 'pull';
@@ -403,6 +481,14 @@ function Pull-Model {
       list = $ListAfter
     }
   } catch {
+    Update-Model-Pull-Job `
+      -ProfileName $ProfileName `
+      -Status 'failed' `
+      -Message 'Model download failed.' `
+      -Progress 0 `
+      -Installed $false `
+      -LastLog ((Get-Log-Tail $StdoutFile 3000) + "`n" + (Get-Log-Tail $StderrFile 3000)) `
+      -ErrorMessage $_.Exception.Message | Out-Null
     return @{
       ok = $false;
       stage = 'pull';

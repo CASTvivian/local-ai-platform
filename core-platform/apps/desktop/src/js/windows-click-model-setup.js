@@ -157,6 +157,42 @@
     if (!el) return;
     el.innerHTML = renderProgress(title, steps, activeIndex, note);
   }
+  function normalizeModelJobStatus(job) {
+    const raw = { ...(job || {}) };
+    const status = String(raw.status || "").toLowerCase();
+    if (status === "done") raw.status = "completed";
+    else if (status === "downloading" || status === "started") raw.status = "running";
+    else if (!status) raw.status = "not_started";
+    raw.last_log = raw.last_log || raw.stdout_tail || raw.stderr_tail || "";
+    raw.elapsed_seconds = Number(raw.elapsed_seconds || 0);
+    return raw;
+  }
+  function renderModelDownloadPanel(profile) {
+    const job = normalizeModelJobStatus(window.__MAOMIAI_MODEL_JOBS__?.[profile] || null);
+    if (!job || job.status === "not_started") return "";
+    const statusLabel = {
+      starting: "准备中",
+      running: "下载中",
+      completed: "已完成",
+      failed: "失败",
+      checking: "检查中"
+    }[job.status] || job.status;
+    const progress = Math.max(8, Math.min(100, Number(job.progress || (job.status === "completed" ? 100 : 18))));
+    const log = String(job.last_log || "").trim();
+    return `
+      <div class="model-download-progress-box" data-download-profile="${escapeHtml(profile)}">
+        <div class="model-download-progress-head">
+          <span class="model-download-progress-status ${escapeHtml(job.status)}">${escapeHtml(statusLabel)}</span>
+          <span>${job.installed ? "已安装" : `已用时 ${escapeHtml(String(job.elapsed_seconds || 0))}s`}</span>
+        </div>
+        <div class="model-download-progress-bar">
+          <div class="model-download-progress-bar-inner ${job.status === "completed" ? "done" : ""}" style="width:${progress}%"></div>
+        </div>
+        <div class="model-download-progress-message">${escapeHtml(job.message || "正在检查模型下载状态。")}</div>
+        ${log ? `<details class="model-download-progress-log"><summary>下载日志</summary><pre>${escapeHtml(log)}</pre></details>` : ""}
+      </div>
+    `;
+  }
   function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
@@ -268,12 +304,13 @@
           </div>
           <div class="model-card-actions">
             <button class="primary model-download-btn" data-action="download-model-profile" data-profile="${escapeHtml(item.profile)}">
-              ${state === "已安装" ? "重新验证" : "下载并启用"}
+              ${window.__MAOMIAI_MODEL_JOBS__?.[item.profile]?.status === "running" ? "下载中..." : (state === "已安装" ? "重新验证" : "下载并启用")}
             </button>
             <button class="secondary model-use-btn" ${installed ? "" : "disabled"} data-action="set-current-model-profile" data-profile="${escapeHtml(item.profile)}">
               ${installed ? (current ? "当前使用中" : "设为当前使用") : "未安装不可用"}
             </button>
           </div>
+          ${renderModelDownloadPanel(item.profile)}
         </div>
       `;
     }).join("");
@@ -383,12 +420,13 @@
       await sleep(300);
       setProgress("正在启动下载任务", steps, 1);
       const out = await invoke("start_local_model_download", { profile });
-      const parsed = parseRuntimeJson(out);
+      const parsed = normalizeModelJobStatus(parseRuntimeJson(out));
       if (!parsed?.ok) {
         setResult(`${item.title} 启动下载失败`, "bad", parsed?.message || "无法启动后台下载任务。", parsed || { raw: out });
         return parsed;
       }
       window.__MAOMIAI_MODEL_JOBS__[profile] = parsed;
+      renderModelStore(window.__MAOMIAI_MODEL_STATUS__ || null);
       let lastStatus = parsed;
       for (let i = 0; i < 720; i++) {
         await sleep(2000);
@@ -399,16 +437,20 @@
         } catch (e) {
           polled = { ok: false, error: String(e) };
         }
+        polled = normalizeModelJobStatus(polled);
         lastStatus = polled;
+        window.__MAOMIAI_MODEL_JOBS__[profile] = polled;
         const progress = Number(polled?.progress || 10);
         const clamped = Math.max(0, Math.min(100, progress));
-        setProgress(`正在下载 ${item.title}`, steps, 2, `当前进度：${clamped}%`);
-        if (polled?.status === "done" || polled?.installed || clamped >= 100) {
+        renderModelStore(window.__MAOMIAI_MODEL_STATUS__ || null);
+        setProgress(`正在下载 ${item.title}`, steps, 2, `状态：${polled.status}，进度：${clamped}%，已用时：${polled.elapsed_seconds || 0}s`);
+        if (polled?.status === "completed" || polled?.installed || clamped >= 100) {
           setProgress(`正在验证 ${item.title}`, steps, 3);
           await sleep(800);
           const status = await checkLocalModelStatus({ silent: true });
           window.__MAOMIAI_MODEL_STATUS__ = status;
           setCurrentModelProfile(profile);
+          window.__MAOMIAI_MODEL_JOBS__[profile] = { ...polled, status: "completed", progress: 100, installed: true };
           setProgress(`${item.title} 已准备完成`, steps, 4);
           await sleep(600);
           setResult(`${item.title} 已准备完成`, "ok", "模型已下载并已设为当前使用。现在可以返回对话直接使用。", {
@@ -417,9 +459,14 @@
             finalStatus: status
           });
           renderModelStore(status);
+          document.dispatchEvent(new CustomEvent("maomiai:model-download-completed", {
+            detail: { profile, model: item.model, status: polled }
+          }));
           return polled;
         }
         if (polled?.status === "failed") {
+          window.__MAOMIAI_MODEL_JOBS__[profile] = polled;
+          renderModelStore(window.__MAOMIAI_MODEL_STATUS__ || null);
           setResult(`${item.title} 下载失败`, "bad", polled?.message || "后台下载任务失败。", polled);
           return polled;
         }
