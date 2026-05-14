@@ -4,7 +4,7 @@ param(
   [string]$Root = ''
 )
 $ErrorActionPreference = 'Continue'
-$MAOMIAI_BOOTSTRAP_RUNTIME_VERSION = 'c25-c11-rollback-stable-ollama-pull'
+$MAOMIAI_BOOTSTRAP_RUNTIME_VERSION = 'c25-c11-fix6-powershell-path-quoting'
 
 function Add-Bootstrap-Version {
   param([object]$Obj)
@@ -517,7 +517,10 @@ try {
     -Progress 1 `
     -Installed $false | Out-Null
   try {
-    $Launcher = Start-Process -FilePath 'powershell' -ArgumentList @('-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', $WorkerScript) -WindowStyle Hidden -PassThru -RedirectStandardOutput $WorkerOutFile -RedirectStandardError $WorkerErrFile
+    # Windows PowerShell 5.1 can split -File paths containing spaces. Encode "& '<path>'" instead.
+    $EncodedCommandText = "& '" + $WorkerScript.Replace("'", "''") + "'"
+    $EncodedCommand = [Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($EncodedCommandText))
+    $Launcher = Start-Process -FilePath 'powershell' -ArgumentList @('-NoProfile', '-ExecutionPolicy', 'Bypass', '-EncodedCommand', $EncodedCommand) -WindowStyle Hidden -PassThru -RedirectStandardOutput $WorkerOutFile -RedirectStandardError $WorkerErrFile
     Update-Model-Pull-Job `
       -ProfileName $ProfileName `
       -Status 'running' `
