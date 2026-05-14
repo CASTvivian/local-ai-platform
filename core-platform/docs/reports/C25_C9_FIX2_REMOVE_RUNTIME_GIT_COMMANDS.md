@@ -100,13 +100,61 @@ Next Windows workflow run must:
 4. ✅ BUILD_INFO.json contains correct commit SHA (from `github.sha`)
 5. ✅ BUILD_INFO.json commit equals latest main branch SHA
 
+## Actual Result - ✅ SUCCESS
+
+**Build Run**: https://github.com/CASTvivian/local-ai-platform/actions/runs/25875775034
+
+### Build Status
+- **Status**: ✅ `completed`
+- **Conclusion**: ✅ `success`
+- **Started**: 2026-05-14T17:45:29Z
+- **Completed**: 2026-05-14T17:52:05Z
+- **Duration**: ~6.6 minutes
+- **Commit SHA**: `a4a8ee04d7b0156bcc341b8899a1e192da981b49`
+
+### Artifacts
+- **Name**: `local-ai-platform-win`
+- **Size**: 7,393,403 bytes (7.0 MB)
+- **Files**:
+  - `Local AI Platform_0.1.0_x64-setup.exe` (1.9 MB)
+  - `Local AI Platform_0.1.0_x64_en-US.msi` (2.9 MB)
+  - `desktop_lib.exe` (8.3 MB)
+  - `BUILD_INFO.json` (150 bytes)
+
+### BUILD_INFO.json Verification
+```json
+{
+  "workflow": "build-win-release",
+  "commit": "a4a8ee0",
+  "label": "win-artifact-only",
+  "built_at": "2026-05-14T17:46:38.6903847+00:00"
+}
+```
+
+**Commit Match**: ✅ BUILD_INFO commit `a4a8ee0` matches latest main `a4a8ee0`
+
+### Git Exit Code Check
+✅ No `git.exe exit code 128` errors in build logs
+✅ Checkout succeeded with sparse-checkout
+✅ Submodule cleanup succeeded
+
+## Root Cause Resolution
+
+The `git.exe exit code 128` was caused by:
+1. `actions/checkout@v4` internally runs `git submodule foreach` during auth cleanup
+2. Even with `submodules: false`, this command still executes
+3. Broken `.gitmodules` with missing URLs caused exit 128
+
+**Solution**:
+- Use `sparse-checkout` to only checkout needed paths (avoids submodule processing)
+- Add explicit step to remove `.gitmodules` and clean `.git/config` submodule refs
+- Build metadata uses `$env:MAOMIAI_BUILD_COMMIT` from `github.sha`
+
 ## Next Steps
 
-1. Commit and push this fix
-2. Trigger `build-win-release.yml` workflow
-3. Monitor build logs for any git.exe errors
-4. Verify artifact contents
-5. Proceed to C25-C10 Windows final acceptance if build succeeds
+1. ✅ **C25-C9-FIX2 COMPLETED** - Windows build workflow now succeeds
+2. ➡️ **Proceed to C25-C10** - Windows final acceptance on real machine
+3. 📦 Windows artifacts ready for installation testing
 
 ## Related
 
