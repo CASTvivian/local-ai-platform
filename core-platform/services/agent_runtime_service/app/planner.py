@@ -1,214 +1,87 @@
-"""Rule-first planner for the initial MAOMIAI agent runtime."""
+"""LLM-first planner entrypoint for the MAOMIAI agent runtime."""
 
 from __future__ import annotations
 
-import re
+import os
+from typing import Any, Dict, List
 
 from .models import AgentPlan
+from .planning.llm_planner import get_last_planner_error, llm_create_plan
+from .policy.loader import load_entity_aliases
 
 
-def normalize_query(text: str) -> tuple[str, list[dict[str, str]]]:
-    """Normalize obvious local demo typos before intent routing."""
+LAST_PLAN_ERROR: str | None = None
+
+
+def normalize_query(text: str) -> tuple[str, list[dict[str, Any]]]:
+    """Normalize user text using external alias policy only."""
 
     query = (text or "").strip()
-    corrections: list[dict[str, str]] = []
-    typo_map = {
-        "元神": "原神",
-        "猿神": "原神",
-        "源神": "原神",
-    }
-    for wrong, right in typo_map.items():
-        if wrong in query:
-            query = query.replace(wrong, right)
+    corrections: list[dict[str, Any]] = []
+    for item in load_entity_aliases():
+        source = str(item.get("from") or "")
+        target = str(item.get("to") or "")
+        if source and target and source in query:
+            query = query.replace(source, target)
             corrections.append(
-                {"from": wrong, "to": right, "reason": "possible_entity_typo"}
+                {
+                    "from": source,
+                    "to": target,
+                    "reason": item.get("reason") or "external_entity_alias",
+                }
             )
     return query, corrections
 
 
-def has_any(query: str, keywords: list[str]) -> bool:
-    lowered = query.lower()
-    return any(keyword.lower() in lowered for keyword in keywords)
-
-
-def parse_date_offset(query: str) -> int | None:
-    if "后天" in query:
-        return 2
-    if "明天" in query:
-        return 1
-    if "昨天" in query:
-        return -1
-    if "前天" in query:
-        return -2
-
-    after_match = re.search(r"过\s*(\d+)\s*天", query)
-    if after_match:
-        return int(after_match.group(1))
-
-    future_match = re.search(r"(\d+)\s*天后", query)
-    if future_match:
-        return int(future_match.group(1))
-
-    past_match = re.search(r"(\d+)\s*天前", query)
-    if past_match:
-        return -int(past_match.group(1))
-
-    return None
-
-
-def build_plan(message: str) -> AgentPlan:
-    """Build the first deterministic agent plan for a user message."""
-
-    normalized, corrections = normalize_query(message)
-    offset = parse_date_offset(normalized)
-
-    if offset is not None:
-        return AgentPlan(
-            intent="date_math",
-            normalized_query=normalized,
-            tools=["time.now", "time.date_math"],
-            reason="date calculation required",
-            args={"offset_days": offset, "corrections": corrections},
-        )
-
-    if has_any(
-        normalized,
-        [
-            "今天几号",
-            "今天是几号",
-            "今天日期",
-            "当前时间",
-            "现在几点",
-            "星期几",
-            "几月几号",
-        ],
-    ):
-        return AgentPlan(
-            intent="time_now",
-            normalized_query=normalized,
-            tools=["time.now"],
-            reason="current local time required",
-            args={"corrections": corrections},
-        )
-
-    if has_any(normalized, ["天气", "气温", "下雨", "台风", "空气质量"]):
-        return AgentPlan(
-            intent="weather",
-            normalized_query=normalized,
-            tools=["weather.query"],
-            reason="weather requires live weather tool",
-            args={"corrections": corrections},
-        )
-
-    if has_any(
-        normalized,
-        [
-            "上网",
-            "联网",
-            "搜索",
-            "查一下",
-            "最新",
-            "新闻",
-            "官网",
-            "发行时间",
-            "发布时间",
-            "哪个公司",
-            "什么公司",
-            "哪家公司",
-            "成立时间",
-        ],
-    ):
-        return AgentPlan(
-            intent="web_fact",
-            normalized_query=normalized,
-            tools=["web.search"],
-            reason="fresh factual question requires web evidence",
-            args={"corrections": corrections},
-        )
-
-    if has_any(
-        normalized,
-        [
-            "能做什么",
-            "你能完成什么",
-            "你有什么能力",
-            "你现在有什么能力",
-            "有什么能力",
-            "你的能力",
-            "平台能力",
-            "现在完成了什么",
-        ],
-    ):
-        return AgentPlan(
-            intent="capability_status",
-            normalized_query=normalized,
-            tools=[
-                "capability.status",
-                "skill_store.list",
-                "workflow_store.list",
-                "repo_memory.search",
-                "catalog.search",
-            ],
-            reason="capability question should be grounded",
-            args={"corrections": corrections},
-        )
-
-    if has_any(
-        normalized,
-        [
-            "我们仓",
-            "本地项目",
-            "项目里",
-            "repo",
-            "repository",
-            "github",
-            "stars",
-            "收藏的仓",
-            "rag",
-            "mcp",
-            "agent",
-            "智能体",
-            "参考仓",
-            "资产",
-            "repo memory",
-            "知识库",
-            "模型目录",
-            "视频模型",
-            "context engine",
-            "我们软件",
-            "这个软件",
-            "大脑",
-            "平台",
-            "claude code",
-            "技能仓",
-        ],
-    ):
-        return AgentPlan(
-            intent="project_knowledge",
-            normalized_query=normalized,
-            tools=["repo_memory.search"],
-            reason="project-specific question should query repo memory",
-            args={"corrections": corrections},
-        )
-
-    if has_any(
-        normalized,
-        ["模型", "大模型", "视频生成", "comfyui", "wan", "hunyuan", "cogvideo", "ollama"],
-    ):
-        return AgentPlan(
-            intent="catalog_knowledge",
-            normalized_query=normalized,
-            tools=["catalog.search", "repo_memory.search"],
-            reason="model/video catalog question",
-            args={"corrections": corrections},
-        )
-
+def _fallback_local_chat(normalized: str, corrections: List[Dict[str, Any]]) -> AgentPlan:
+    health = planner_runtime_state(check_live=False)
     return AgentPlan(
         intent="local_chat",
         normalized_query=normalized,
         tools=["model.generate"],
-        reason="normal chat can delegate to local model",
+        reason="planner fallback: delegate to local model",
         must_not_hallucinate=False,
         delegate_to_model=True,
-        args={"corrections": corrections},
+        args={
+            "corrections": corrections,
+            "planner_source": "fallback_local_chat",
+            "fallback_reason": "llm_planner_unavailable",
+            "planner_health": health.model_dump(),
+            "planner_error": LAST_PLAN_ERROR,
+        },
     )
+
+
+def _llm_plan(message: str) -> AgentPlan | None:
+    global LAST_PLAN_ERROR
+    normalized, corrections = normalize_query(message)
+    llm_plan = llm_create_plan(normalized)
+    if not llm_plan:
+        LAST_PLAN_ERROR = get_last_planner_error()
+        return None
+    LAST_PLAN_ERROR = None
+    args = dict(llm_plan.args or {})
+    args["corrections"] = corrections
+    args["planner_source"] = "llm"
+    args["planner_confidence"] = llm_plan.confidence
+    return AgentPlan(
+        intent=llm_plan.intent,
+        normalized_query=normalized,
+        tools=llm_plan.tools,
+        reason=llm_plan.reason,
+        must_not_hallucinate=llm_plan.must_not_hallucinate,
+        delegate_to_model=llm_plan.delegate_to_model,
+        args=args,
+    )
+
+
+def build_plan(message: str) -> AgentPlan:
+    """Build a plan through the LLM planner, with local-chat fallback only."""
+
+    normalized, corrections = normalize_query(message)
+    mode = os.environ.get("MAOMIAI_PLANNER_MODE", "llm_first").strip().lower()
+    if mode in {"llm", "llm_first"}:
+        plan = _llm_plan(message)
+        if plan:
+            return plan
+    return _fallback_local_chat(normalized, corrections)
