@@ -4,7 +4,7 @@ param(
   [string]$Root = ''
 )
 $ErrorActionPreference = 'Continue'
-$MAOMIAI_BOOTSTRAP_RUNTIME_VERSION = 'c25-c11-fix7-download-retry-offline-pack'
+$MAOMIAI_BOOTSTRAP_RUNTIME_VERSION = 'c25-c11-fix8-ascii-download-classifier'
 
 function Add-Bootstrap-Version {
   param([object]$Obj)
@@ -58,47 +58,47 @@ function Get-Download-Error-Class {
   if ([string]::IsNullOrWhiteSpace($T)) {
     return @{
       code = 'unknown';
-      title = '下载失败';
-      message = '下载进程失败，但没有返回详细错误。请重试。';
+      title = 'unknown';
+      message = 'download_failed_without_detail';
       retryable = $true
     }
   }
   if ($T -match 'i/o timeout' -or $T -match 'timeout' -or $T -match 'max retries exceeded' -or $T -match 'Cloudflare' -or $T -match 'cloudflarestorage') {
     return @{
       code = 'network_timeout';
-      title = '模型源网络超时';
-      message = '已进入真实 Ollama 下载，但连接模型源超时。可以重试，或使用离线模型包。';
+      title = 'network_timeout';
+      message = 'model_source_network_timeout';
       retryable = $true
     }
   }
   if ($T -match 'proxy' -or $T -match 'connection refused' -or $T -match 'dial tcp') {
     return @{
       code = 'network_connect_failed';
-      title = '网络连接失败';
-      message = '无法连接模型下载源，请检查网络、代理或防火墙后重试。';
+      title = 'network_connect_failed';
+      message = 'network_or_proxy_connection_failed';
       retryable = $true
     }
   }
   if ($T -match 'not found' -or $T -match 'manifest unknown') {
     return @{
       code = 'model_not_found';
-      title = '模型不存在';
-      message = '模型名称可能不可用，请换一个模型。';
+      title = 'model_not_found';
+      message = 'model_name_not_available';
       retryable = $false
     }
   }
   if ($T -match 'permission' -or $T -match 'access is denied') {
     return @{
       code = 'permission_denied';
-      title = '权限不足';
-      message = '当前用户可能没有写入 Ollama 模型目录的权限。';
+      title = 'permission_denied';
+      message = 'permission_denied_for_model_storage';
       retryable = $false
     }
   }
   return @{
     code = 'download_failed';
-    title = '下载失败';
-    message = '模型下载失败，可以重试或查看错误日志。';
+    title = 'download_failed';
+    message = 'model_download_failed';
     retryable = $true
   }
 }

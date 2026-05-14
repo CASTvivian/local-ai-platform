@@ -208,6 +208,40 @@
     }
     return `${size.toFixed(idx === 0 ? 0 : 1)} ${units[idx]}`;
   }
+  function maomiaiDownloadErrorText(job) {
+    const code = job?.error_class || job?.error_title || job?.user_message || "";
+    const map = {
+      network_timeout: {
+        title: "模型源网络超时",
+        message: "已经进入真实 Ollama 下载，但连接模型源超时。可以点击重新下载；路演环境建议使用离线模型包或预装模型。"
+      },
+      network_connect_failed: {
+        title: "网络连接失败",
+        message: "无法连接模型下载源，请检查网络、代理或防火墙后重试。"
+      },
+      model_not_found: {
+        title: "模型不可用",
+        message: "当前模型名称可能不可用，请换一个模型。"
+      },
+      permission_denied: {
+        title: "权限不足",
+        message: "当前用户可能没有写入 Ollama 模型目录的权限。"
+      },
+      download_failed: {
+        title: "模型下载失败",
+        message: "模型下载失败，可以重试或查看错误日志。"
+      },
+      unknown: {
+        title: "下载状态异常",
+        message: "下载进程异常结束，但没有返回详细错误。可以重试或使用离线模型包。"
+      },
+      model_source_network_timeout: {
+        title: "模型源网络超时",
+        message: "已经进入真实 Ollama 下载，但连接模型源超时。可以点击重新下载；路演环境建议使用离线模型包或预装模型。"
+      }
+    };
+    return map[code] || null;
+  }
   function renderModelDownloadActions(profile, job) {
     const failed = job?.status === "failed" || job?.status === "unknown";
     if (!failed) return "";
@@ -238,7 +272,9 @@
     const exitCode = job.exit_code ?? "-";
     const failed = job.status === "failed" || job.status === "unknown";
     const running = job.status === "running" || job.status === "starting";
-    const displayMessage = job.user_message || job.message || "正在检查模型下载状态。";
+    const friendlyError = failed ? maomiaiDownloadErrorText(job) : null;
+    const displayMessage = friendlyError?.message || job.message || "正在检查模型下载状态。";
+    const errorTitle = friendlyError?.title || job.error_title || "";
     return `
       <div class="model-download-progress-box" data-download-profile="${escapeHtml(profile)}">
         <div class="model-download-progress-head">
@@ -248,7 +284,7 @@
         <div class="model-download-progress-bar">
           <div class="model-download-progress-bar-inner ${job.status === "completed" ? "done" : ""} ${failed ? "failed" : ""}" style="width:${progress}%"></div>
         </div>
-        ${job.error_title ? `<div class="model-download-progress-title">${escapeHtml(job.error_title)}</div>` : ""}
+        ${errorTitle ? `<div class="model-download-progress-title">${escapeHtml(errorTitle)}</div>` : ""}
         <div class="model-download-progress-message">${escapeHtml(displayMessage)}</div>
         <div class="model-download-progress-meta">
           <span>进程：${alive ? "运行中" : "未运行"}</span>
@@ -548,10 +584,11 @@
         if (polled?.status === "failed" || polled?.status === "unknown") {
           window.__MAOMIAI_MODEL_JOBS__[profile] = polled;
           renderModelStore(window.__MAOMIAI_MODEL_STATUS__ || null);
+          const friendlyError = maomiaiDownloadErrorText(polled);
           setResult(
-            polled?.status === "unknown" ? `${item.title} 下载状态异常` : `${item.title} 下载失败`,
+            friendlyError?.title || (polled?.status === "unknown" ? `${item.title} 下载状态异常` : `${item.title} 下载失败`),
             "bad",
-            polled?.user_message || polled?.message || "后台下载任务失败。请查看 PID、进程状态和错误日志后重试。",
+            friendlyError?.message || polled?.message || "后台下载任务失败。请查看 PID、进程状态和错误日志后重试。",
             polled
           );
           return polled;
