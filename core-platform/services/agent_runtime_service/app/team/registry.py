@@ -1,11 +1,13 @@
 from __future__ import annotations
 import json
+import os
 from pathlib import Path
 from typing import Optional, List, Dict, Any
 from .models import AgentTeamSpec
 
 
-REGISTRY_FILE = Path("core-platform/data/agent_team/team_registry.json")
+BASE_DIR = Path(os.environ.get("MAOMIAI_CORE_PLATFORM_DIR", Path(__file__).parent.parent.parent.parent.parent))
+REGISTRY_FILE = BASE_DIR / "data" / "agent_team" / "team_registry.json"
 
 
 def load_team_registry() -> Dict[str, Any]:

@@ -1,11 +1,13 @@
 from __future__ import annotations
 import json
+import os
 from pathlib import Path
 from typing import Optional, List, Dict, Any
 from .models import TeamRunState
 
 
-ROOT = Path("core-platform/data/agent_team/runs")
+BASE_DIR = Path(os.environ.get("MAOMIAI_CORE_PLATFORM_DIR", Path(__file__).parent.parent.parent.parent.parent))
+ROOT = BASE_DIR / "data" / "agent_team" / "runs"
 ROOT.mkdir(parents=True, exist_ok=True)
 
 

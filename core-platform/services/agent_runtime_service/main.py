@@ -9,15 +9,10 @@ from typing import Any, Dict
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from services.agent_runtime_service.app.health.service import agent_health
-from services.agent_runtime_service.app.health.planner_health import (
-    planner_runtime_state,
-    check_model_gateway,
-)
-
-
 SERVICE_DIR = Path(__file__).parent
 sys.path.insert(0, str(SERVICE_DIR.parent.parent))
+
+from services.agent_runtime_service.app.health.service import agent_health
 
 from services.agent_runtime_service.app.capability.models import Capability, CapabilityMatchRequest
 from services.agent_runtime_service.app.capability.registry import (
@@ -350,6 +345,14 @@ def agent_team_registry():
     }
 
 
+@app.get("/agent/team/runs")
+def agent_team_runs(limit: int = 100):
+    return {
+        "ok": True,
+        "items": list_team_runs(limit=limit),
+    }
+
+
 @app.get("/agent/team/{team_id}")
 def agent_team_get(team_id: str):
     item = get_team(team_id)
@@ -367,14 +370,6 @@ def agent_team_get(team_id: str):
 @app.post("/agent/team/run")
 def agent_team_run(req: TeamRunRequest):
     return run_team(req)
-
-
-@app.get("/agent/team/runs")
-def agent_team_runs(limit: int = 100):
-    return {
-        "ok": True,
-        "items": list_team_runs(limit=limit),
-    }
 
 
 @app.get("/agent/team/run/{team_run_id}")
