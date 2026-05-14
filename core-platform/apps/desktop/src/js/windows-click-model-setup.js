@@ -174,7 +174,7 @@
     if (text.includes("ollama-pull-") || text.includes("download_process_not_alive")) {
       return true;
     }
-    if (job.provider && job.provider !== "ollama_http_pull") {
+    if (job.provider && !["ollama_http_pull", "ollama_cli_pull_stable"].includes(job.provider)) {
       return true;
     }
     if (!job.bootstrap_version && job.status === "unknown") {
@@ -188,7 +188,7 @@
       profile,
       status: "failed",
       progress: 0,
-      message: "检测到旧版下载任务状态。请安装最新包后重新点击下载；新版本会清理旧任务并走 Ollama HTTP API。",
+      message: "检测到旧版下载任务状态。请安装最新包后重新点击下载；新版本会清理旧任务并走稳定 Ollama CLI 下载。",
       last_log: JSON.stringify(job || {}, null, 2),
       installed: false
     });
