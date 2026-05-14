@@ -4,7 +4,7 @@ param(
   [string]$Root = ''
 )
 $ErrorActionPreference = 'Continue'
-$MAOMIAI_BOOTSTRAP_RUNTIME_VERSION = 'c25-c11-fix4-http-pull'
+$MAOMIAI_BOOTSTRAP_RUNTIME_VERSION = 'c25-c11-fix5-stable-http-worker'
 
 function Add-Bootstrap-Version {
   param([object]$Obj)
@@ -342,79 +342,245 @@ function Start-Model-Pull-Job {
   Ensure-Dir $JobDir
   Ensure-Dir $LogDir
   $JobFile = Join-Path $JobDir ('model-download-' + $ProfileName + '.json')
-  $StdoutFile = Join-Path $LogDir ('ollama-http-pull-' + $ProfileName + '.out.log')
-  $StderrFile = Join-Path $LogDir ('ollama-http-pull-' + $ProfileName + '.err.log')
+  $WorkerScript = Join-Path $JobDir ('model-download-' + $ProfileName + '-worker.ps1')
+  $StdoutFile = Join-Path $LogDir ('ollama-http-worker-' + $ProfileName + '.out.log')
+  $StderrFile = Join-Path $LogDir ('ollama-http-worker-' + $ProfileName + '.err.log')
   $OldFiles = @(
     $JobFile,
     (Join-Path $LogDir ('ollama-pull-' + $ProfileName + '.out.log')),
     (Join-Path $LogDir ('ollama-pull-' + $ProfileName + '.err.log')),
     (Join-Path $LogDir ('ollama-http-pull-' + $ProfileName + '.out.log')),
     (Join-Path $LogDir ('ollama-http-pull-' + $ProfileName + '.err.log')),
+    (Join-Path $LogDir ('ollama-http-worker-' + $ProfileName + '.out.log')),
+    (Join-Path $LogDir ('ollama-http-worker-' + $ProfileName + '.err.log')),
     (Join-Path $JobDir ('model-download-' + $ProfileName + '.log')),
     (Join-Path $JobDir ('model-download-' + $ProfileName + '.err')),
     (Join-Path $JobDir ('model-download-' + $ProfileName + '.ps1')),
-    (Join-Path $JobDir ('model-download-' + $ProfileName + '-http.ps1'))
+    (Join-Path $JobDir ('model-download-' + $ProfileName + '-http.ps1')),
+    $WorkerScript
   )
   foreach ($File in $OldFiles) {
     if (Test-Path $File) {
       Remove-Item $File -Force -ErrorAction SilentlyContinue
     }
   }
-  $Serve = Ensure-Ollama-Serve
-  if (!$Serve.ok) {
+  $Ollama = Find-Ollama
+  if (!$Ollama) {
     Update-Model-Pull-Job `
       -ProfileName $ProfileName `
       -Status 'failed' `
-      -Message 'Ollama service could not be started.' `
+      -Message 'Ollama executable was not found.' `
       -Progress 0 `
       -Installed $false `
-      -ErrorMessage 'serve_failed' | Out-Null
+      -ErrorMessage 'ollama_not_found' | Out-Null
     return @{
       ok = $false;
       profile = $ProfileName;
       model = $Model;
       provider = 'ollama_http_pull';
       status = 'failed';
-      message = 'Ollama service could not be started.';
-      job_file = $JobFile;
-      serve = $Serve
-    }
-  }
-  $ListBefore = Get-Ollama-List
-  if ($ListBefore.raw -and ($ListBefore.raw -match [regex]::Escape($Model))) {
-    Update-Model-Pull-Job `
-      -ProfileName $ProfileName `
-      -Status 'completed' `
-      -Message 'Selected capability is already installed.' `
-      -Progress 100 `
-      -Installed $true | Out-Null
-    return @{
-      ok = $true;
-      profile = $ProfileName;
-      model = $Model;
-      provider = 'ollama_http_pull';
-      status = 'completed';
-      progress = 100;
-      installed = $true;
-      message = 'Selected capability is already installed.';
+      message = 'Ollama executable was not found.';
       job_file = $JobFile
     }
   }
+  $ProfileEsc = $ProfileName.Replace("'", "''")
+  $ModelEsc = $Model.Replace("'", "''")
+  $OllamaEsc = $Ollama.Replace("'", "''")
+  $JobFileEsc = $JobFile.Replace("'", "''")
+  $StartedAt = (Get-Date).ToString('s')
+  $Worker = @'
+$ErrorActionPreference = 'Stop'
+$ProgressPreference = 'SilentlyContinue'
+$BootstrapVersion = '__BOOTSTRAP_VERSION__'
+$Profile = '__PROFILE__'
+$Model = '__MODEL__'
+$Ollama = '__OLLAMA__'
+$JobFile = '__JOB_FILE__'
+$StartedAt = '__STARTED_AT__'
+
+function Write-State {
+  param(
+    [string]$Status,
+    [string]$Message,
+    [int]$Progress = 0,
+    [string]$LastLog = '',
+    [string]$ErrorLog = '',
+    [bool]$Installed = $false,
+    [object]$Completed = $null,
+    [object]$Total = $null,
+    [object]$ExitCode = $null
+  )
+  try { $Started = [datetime]::Parse($StartedAt) } catch { $Started = Get-Date }
+  $Elapsed = [int]((Get-Date) - $Started).TotalSeconds
+  $Payload = [ordered]@{
+    ok = ($Status -ne 'failed');
+    bootstrap_version = $BootstrapVersion;
+    provider = 'ollama_http_pull';
+    profile = $Profile;
+    model = $Model;
+    status = $Status;
+    message = $Message;
+    progress = $Progress;
+    completed = $Completed;
+    total = $Total;
+    installed = $Installed;
+    pid = $PID;
+    process_alive = $true;
+    exit_code = $ExitCode;
+    error = $(if ($Status -eq 'failed') { $Message } else { '' });
+    started_at = $StartedAt;
+    elapsed_seconds = $Elapsed;
+    last_log = $LastLog;
+    error_log = $ErrorLog;
+    updated_at = (Get-Date).ToString('s')
+  }
+  $Payload | ConvertTo-Json -Depth 20 | Set-Content -Path $JobFile -Encoding UTF8
+}
+
+function Test-OllamaApi {
+  try {
+    $null = Invoke-RestMethod -Uri 'http://127.0.0.1:11434/api/tags' -Method Get -TimeoutSec 3
+    return $true
+  } catch {
+    return $false
+  }
+}
+
+function Start-OllamaApi {
+  Write-State -Status 'running' -Message 'Checking Ollama API on 127.0.0.1:11434.' -Progress 3
+  if (Test-OllamaApi) {
+    Write-State -Status 'running' -Message 'Ollama API is already running.' -Progress 5
+    return $true
+  }
+  Write-State -Status 'running' -Message 'Starting ollama serve.' -Progress 5
+  try {
+    Start-Process -FilePath $Ollama -ArgumentList @('serve') -WindowStyle Hidden | Out-Null
+  } catch {
+    Write-State -Status 'failed' -Message ('Failed to start ollama serve: ' + $_.Exception.Message) -Progress 0 -ErrorLog $_.Exception.ToString() -ExitCode 2
+    return $false
+  }
+  for ($i = 0; $i -lt 30; $i++) {
+    Start-Sleep -Seconds 1
+    if (Test-OllamaApi) {
+      Write-State -Status 'running' -Message 'Ollama API started.' -Progress 8
+      return $true
+    }
+    Write-State -Status 'running' -Message ('Waiting for Ollama API on 127.0.0.1:11434... ' + ($i + 1) + '/30') -Progress 6
+  }
+  Write-State -Status 'failed' -Message 'Ollama API did not become ready on 127.0.0.1:11434 after 30 seconds.' -Progress 0 -ExitCode 3
+  return $false
+}
+
+function Get-InstalledModels {
+  try {
+    $Response = Invoke-RestMethod -Uri 'http://127.0.0.1:11434/api/tags' -Method Get -TimeoutSec 5
+    if ($Response.models) { return $Response.models }
+    return @()
+  } catch {
+    return @()
+  }
+}
+
+function Test-ModelInstalled {
+  $Models = Get-InstalledModels
+  foreach ($Item in $Models) {
+    if ($Item.name -eq $Model) {
+      return $true
+    }
+  }
+  return $false
+}
+
+try {
+  Write-State -Status 'starting' -Message 'Standalone worker started.' -Progress 1
+  if (-not (Start-OllamaApi)) {
+    exit 3
+  }
+  if (Test-ModelInstalled) {
+    Write-State -Status 'completed' -Message 'Model already installed.' -Progress 100 -Installed $true -ExitCode 0
+    exit 0
+  }
+  Write-State -Status 'running' -Message 'Connecting to Ollama /api/pull.' -Progress 10
+  Add-Type -AssemblyName System.Net.Http | Out-Null
+  $Client = [System.Net.Http.HttpClient]::new()
+  $Client.Timeout = [TimeSpan]::FromHours(8)
+  $Body = @{ name = $Model; stream = $true } | ConvertTo-Json -Depth 5
+  $Content = [System.Net.Http.StringContent]::new($Body, [System.Text.Encoding]::UTF8, 'application/json')
+  $Request = [System.Net.Http.HttpRequestMessage]::new([System.Net.Http.HttpMethod]::Post, 'http://127.0.0.1:11434/api/pull')
+  $Request.Content = $Content
+  $Response = $Client.SendAsync($Request, [System.Net.Http.HttpCompletionOption]::ResponseHeadersRead).GetAwaiter().GetResult()
+  if (-not $Response.IsSuccessStatusCode) {
+    $ErrorBody = $Response.Content.ReadAsStringAsync().GetAwaiter().GetResult()
+    Write-State -Status 'failed' -Message ('Ollama /api/pull failed: HTTP ' + [int]$Response.StatusCode) -Progress 0 -ErrorLog $ErrorBody -ExitCode ([int]$Response.StatusCode)
+    exit 4
+  }
+  $Stream = $Response.Content.ReadAsStreamAsync().GetAwaiter().GetResult()
+  $Reader = [System.IO.StreamReader]::new($Stream)
+  $LastLines = New-Object System.Collections.Generic.List[string]
+  $LastProgress = 10
+  $LastCompleted = $null
+  $LastTotal = $null
+  while (-not $Reader.EndOfStream) {
+    $Line = $Reader.ReadLine()
+    if ([string]::IsNullOrWhiteSpace($Line)) {
+      continue
+    }
+    $LastLines.Add($Line)
+    while ($LastLines.Count -gt 12) {
+      $LastLines.RemoveAt(0)
+    }
+    try {
+      $Event = $Line | ConvertFrom-Json
+      $StatusText = ''
+      if ($Event.status) { $StatusText = [string]$Event.status }
+      if ($null -ne $Event.total -and $null -ne $Event.completed) {
+        $LastTotal = [Int64]$Event.total
+        $LastCompleted = [Int64]$Event.completed
+        if ($LastTotal -gt 0) {
+          $Percent = [int](($LastCompleted / $LastTotal) * 100)
+          $LastProgress = [Math]::Min([Math]::Max($Percent, $LastProgress), 99)
+        }
+      } else {
+        $LastProgress = [Math]::Max($LastProgress, 12)
+      }
+      $Message = $(if ($StatusText) { $StatusText } else { 'Pulling model.' })
+      Write-State -Status 'running' -Message $Message -Progress $LastProgress -LastLog (($LastLines | Select-Object -Last 12) -join "`n") -Installed $false -Completed $LastCompleted -Total $LastTotal
+    } catch {
+      Write-State -Status 'running' -Message 'Pulling model.' -Progress $LastProgress -LastLog (($LastLines | Select-Object -Last 12) -join "`n") -ErrorLog $_.Exception.Message
+    }
+  }
+  Start-Sleep -Seconds 1
+  if (Test-ModelInstalled) {
+    Write-State -Status 'completed' -Message 'Model download completed and verified.' -Progress 100 -LastLog (($LastLines | Select-Object -Last 12) -join "`n") -Installed $true -Completed $LastCompleted -Total $LastTotal -ExitCode 0
+    exit 0
+  }
+  Write-State -Status 'failed' -Message 'Pull stream ended but model was not found in /api/tags.' -Progress $LastProgress -LastLog (($LastLines | Select-Object -Last 12) -join "`n") -Installed $false -Completed $LastCompleted -Total $LastTotal -ExitCode 5
+  exit 5
+} catch {
+  Write-State -Status 'failed' -Message $_.Exception.Message -Progress 0 -ErrorLog $_.Exception.ToString() -Installed $false -ExitCode 10
+  exit 10
+}
+'@
+  $Worker = $Worker.Replace('__BOOTSTRAP_VERSION__', $MAOMIAI_BOOTSTRAP_RUNTIME_VERSION)
+  $Worker = $Worker.Replace('__PROFILE__', $ProfileEsc)
+  $Worker = $Worker.Replace('__MODEL__', $ModelEsc)
+  $Worker = $Worker.Replace('__OLLAMA__', $OllamaEsc)
+  $Worker = $Worker.Replace('__JOB_FILE__', $JobFileEsc)
+  $Worker = $Worker.Replace('__STARTED_AT__', $StartedAt)
+  $Worker | Set-Content -Path $WorkerScript -Encoding UTF8
   Update-Model-Pull-Job `
     -ProfileName $ProfileName `
-    -Status 'running' `
-    -Message 'Background HTTP pull process starting.' `
-    -Progress 10 `
+    -Status 'starting' `
+    -Message 'Starting standalone Ollama HTTP pull worker.' `
+    -Progress 1 `
     -Installed $false | Out-Null
-  $ScriptPath = $MyInvocation.MyCommand.Path
-  $CommandLine = '-NoProfile -ExecutionPolicy Bypass -File "' + $ScriptPath + '" -Action pull_model -Profile "' + $ProfileName + '" -Root "' + $Root + '"'
   try {
-    $Launcher = Start-Process -FilePath 'powershell' -ArgumentList $CommandLine -WindowStyle Hidden -PassThru
+    $Launcher = Start-Process -FilePath 'powershell' -ArgumentList @('-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', $WorkerScript) -WindowStyle Hidden -PassThru -RedirectStandardOutput $StdoutFile -RedirectStandardError $StderrFile
     Update-Model-Pull-Job `
       -ProfileName $ProfileName `
       -Status 'running' `
-      -Message 'Background download process started.' `
-      -Progress 10 `
+      -Message 'Standalone HTTP pull worker started.' `
+      -Progress 2 `
       -Installed $false `
       -PidValue $Launcher.Id | Out-Null
     return @{
@@ -423,10 +589,11 @@ function Start-Model-Pull-Job {
       model = $Model;
       provider = 'ollama_http_pull';
       status = 'started';
-      progress = 10;
+      progress = 2;
       pid = $Launcher.Id;
-      message = 'Model download started via Ollama HTTP API.';
+      message = 'Standalone HTTP pull worker started.';
       job_file = $JobFile;
+      worker_script = $WorkerScript;
       stdout_file = $StdoutFile;
       stderr_file = $StderrFile
     }
@@ -457,10 +624,11 @@ function Get-Model-Pull-Job {
   $JobDir = Join-Path $Root 'runtime\jobs'
   $LogDir = Join-Path $Root 'logs\windows'
   $JobFile = Join-Path $JobDir ('model-download-' + $ProfileName + '.json')
-  $StdoutFile = Join-Path $LogDir ('ollama-http-pull-' + $ProfileName + '.out.log')
-  $StderrFile = Join-Path $LogDir ('ollama-http-pull-' + $ProfileName + '.err.log')
+  $StdoutFile = Join-Path $LogDir ('ollama-http-worker-' + $ProfileName + '.out.log')
+  $StderrFile = Join-Path $LogDir ('ollama-http-worker-' + $ProfileName + '.err.log')
   $Status = 'not_started'
   $Progress = 0
+  $ExistingMessage = ''
   $ExistingError = ''
   $ExistingPid = $null
   $ExistingExitCode = $null
@@ -471,6 +639,7 @@ function Get-Model-Pull-Job {
       $Existing = Get-Content $JobFile -Raw | ConvertFrom-Json
       $Status = $Existing.status
       $Progress = [int]$Existing.progress
+      $ExistingMessage = $Existing.message
       $ExistingError = $Existing.error
       $ExistingPid = $Existing.pid
       $ExistingExitCode = $Existing.exit_code
@@ -527,13 +696,14 @@ function Get-Model-Pull-Job {
     } catch {}
   }
   $Alive = Test-Process-Alive $ExistingPid
-  if (($Status -eq 'running' -or $Status -eq 'starting') -and (-not $Alive) -and (-not $Exists) -and $Elapsed -gt 15) {
-    $Status = 'unknown'
-    $ExistingError = 'http_pull_process_not_alive'
+  if (($Status -eq 'running' -or $Status -eq 'starting') -and (-not $Alive) -and (-not $Exists) -and $Elapsed -gt 10) {
+    $Status = 'failed'
+    $ExistingMessage = 'Standalone HTTP pull worker exited before model was installed. Check stderr_tail and stdout_tail.'
+    $ExistingError = 'http_pull_worker_exited'
     Update-Model-Pull-Job `
       -ProfileName $ProfileName `
-      -Status 'unknown' `
-      -Message 'Download process is not alive and model is not installed. Please retry.' `
+      -Status 'failed' `
+      -Message $ExistingMessage `
       -Progress $Progress `
       -Installed $false `
       -LastLog $Stdout `
@@ -552,7 +722,7 @@ function Get-Model-Pull-Job {
     model = $Model;
     status = $Status;
     progress = $Progress;
-    message = $(if ($Status -eq 'completed') { 'Model download completed.' } elseif ($Status -eq 'failed') { 'Model download failed.' } elseif ($Status -eq 'unknown') { 'Download process is not alive and model is not installed. Please retry.' } elseif ($Status -eq 'running') { 'Downloading model. Please keep the app open.' } else { 'No model download job is running.' });
+    message = $(if ($ExistingMessage) { $ExistingMessage } elseif ($Status -eq 'completed') { 'Model download completed.' } elseif ($Status -eq 'failed') { 'Model download failed.' } elseif ($Status -eq 'running') { 'Downloading model. Please keep the app open.' } else { 'No model download job is running.' });
     job_file = $JobFile;
     stdout_file = $StdoutFile;
     stderr_file = $StderrFile;
