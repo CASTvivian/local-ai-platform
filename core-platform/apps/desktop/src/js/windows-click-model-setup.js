@@ -168,6 +168,18 @@
     raw.elapsed_seconds = Number(raw.elapsed_seconds || 0);
     return raw;
   }
+  function formatDownloadBytes(value) {
+    const n = Number(value || 0);
+    if (!Number.isFinite(n) || n <= 0) return "0 B";
+    const units = ["B", "KB", "MB", "GB", "TB"];
+    let size = n;
+    let idx = 0;
+    while (size >= 1024 && idx < units.length - 1) {
+      size /= 1024;
+      idx += 1;
+    }
+    return `${size.toFixed(idx === 0 ? 0 : 1)} ${units[idx]}`;
+  }
   function renderModelDownloadPanel(profile) {
     const job = normalizeModelJobStatus(window.__MAOMIAI_MODEL_JOBS__?.[profile] || null);
     if (!job || job.status === "not_started") return "";
@@ -201,6 +213,7 @@
           <span>进程：${alive ? "运行中" : "未运行"}</span>
           <span>PID：${escapeHtml(String(pid))}</span>
           <span>Exit：${escapeHtml(String(exitCode))}</span>
+          ${job.total ? `<span>数据：${escapeHtml(formatDownloadBytes(job.completed))} / ${escapeHtml(formatDownloadBytes(job.total))}</span>` : ""}
         </div>
         ${running ? `<div class="model-download-progress-hint">如果日志长时间没有变化，可能是网络连接 Ollama 模型源较慢；若进程变为未运行且模型未安装，状态会自动变为需重试。</div>` : ""}
         ${log ? `<details class="model-download-progress-log" open><summary>下载日志</summary><pre>${escapeHtml(log)}</pre></details>` : ""}
