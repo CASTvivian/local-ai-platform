@@ -28,7 +28,20 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
         with:
+          fetch-depth: 1
           submodules: false
+          lfs: false
+          clean: true
+
+      - name: Git checkout diagnostics
+        shell: pwsh
+        run: |
+          git rev-parse HEAD
+          git status --short
+          if (Test-Path .gitmodules) {
+            Write-Host ".gitmodules exists; submodules are intentionally disabled for Windows package build."
+            Get-Content .gitmodules
+          }
 
       - name: Show commit and tree
         shell: pwsh
@@ -106,6 +119,34 @@ jobs:
         shell: pwsh
         run: |
           npm run tauri build
+
+      - name: Verify Windows artifact contents
+        shell: pwsh
+        run: |
+          Write-Host "Checking generated Windows artifacts..."
+          Get-ChildItem -Recurse -File core-platform/releases -ErrorAction SilentlyContinue | Select-Object FullName, Length
+          if (!(Test-Path "core-platform/apps/desktop/src-tauri/tauri.conf.json")) {
+            throw "tauri.conf.json missing"
+          }
+          $conf = Get-Content "core-platform/apps/desktop/src-tauri/tauri.conf.json" -Raw
+          $required = @(
+            "../../../scripts/windows",
+            "../../../services/agent_runtime_service",
+            "../../../services/model_gateway",
+            "../../../services/model_bootstrap_service",
+            "../../../services/repo_memory_service",
+            "../../../services/skill_store_service",
+            "../../../services/workflow_store_service",
+            "../../../data/agent_policy",
+            "../../../data/sandbox_policy",
+            "../../../data/agent_team"
+          )
+          foreach ($item in $required) {
+            if ($conf -notlike "*$item*") {
+              throw "Missing resource marker in tauri.conf.json: $item"
+            }
+          }
+          Write-Host "Artifact resource markers OK."
 
       - name: Collect artifacts
         shell: pwsh
