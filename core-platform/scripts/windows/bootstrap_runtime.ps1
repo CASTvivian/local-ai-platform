@@ -213,6 +213,26 @@ function Get-Log-Tail {
   }
 }
 
+function Test-Model-Installed {
+  param([string]$Model)
+  $List = Get-Ollama-List
+  return [bool]($List.raw -and ($List.raw -match [regex]::Escape($Model)))
+}
+
+function Test-Process-Alive {
+  param([object]$PidValue)
+  if (!$PidValue) {
+    return $false
+  }
+  try {
+    $ProcessId = [int]$PidValue
+    $Process = Get-Process -Id $ProcessId -ErrorAction SilentlyContinue
+    return ($null -ne $Process)
+  } catch {
+    return $false
+  }
+}
+
 function Update-Model-Pull-Job {
   param(
     [string]$ProfileName,
@@ -221,7 +241,10 @@ function Update-Model-Pull-Job {
     [int]$Progress = 0,
     [bool]$Installed = $false,
     [string]$LastLog = '',
-    [string]$ErrorMessage = ''
+    [string]$ErrorLog = '',
+    [string]$ErrorMessage = '',
+    [object]$PidValue = $null,
+    [object]$ExitCode = $null
   )
   $Model = Get-Model-For-Profile $ProfileName
   $JobDir = Join-Path $Root 'runtime\jobs'
@@ -234,19 +257,30 @@ function Update-Model-Pull-Job {
     } catch {}
   }
   $StartedAt = $(if ($Existing -and $Existing.started_at) { $Existing.started_at } else { (Get-Date).ToString('s') })
+  if ($null -eq $PidValue -and $Existing -and $Existing.pid) {
+    $PidValue = $Existing.pid
+  }
+  if ($null -eq $ExitCode -and $Existing -and $null -ne $Existing.exit_code) {
+    $ExitCode = $Existing.exit_code
+  }
   $Elapsed = 0
   try {
     $Elapsed = [int]((Get-Date) - [datetime]$StartedAt).TotalSeconds
   } catch {}
+  $Alive = Test-Process-Alive $PidValue
   $Job = @{
-    ok = ($Status -ne 'failed');
+    ok = ($Status -ne 'failed' -and $Status -ne 'unknown');
     profile = $ProfileName;
     model = $Model;
     status = $Status;
     progress = $Progress;
     message = $Message;
     last_log = $LastLog;
+    error_log = $ErrorLog;
     installed = $Installed;
+    pid = $PidValue;
+    process_alive = $Alive;
+    exit_code = $ExitCode;
     error = $ErrorMessage;
     started_at = $StartedAt;
     updated_at = (Get-Date).ToString('s');
@@ -313,13 +347,21 @@ function Start-Model-Pull-Job {
   $ScriptPath = $MyInvocation.MyCommand.Path
   $CommandLine = '-NoProfile -ExecutionPolicy Bypass -File "' + $ScriptPath + '" -Action pull_model -Profile "' + $ProfileName + '" -Root "' + $Root + '"'
   try {
-    Start-Process -FilePath 'powershell' -ArgumentList $CommandLine -WindowStyle Hidden | Out-Null
+    $Launcher = Start-Process -FilePath 'powershell' -ArgumentList $CommandLine -WindowStyle Hidden -PassThru
+    Update-Model-Pull-Job `
+      -ProfileName $ProfileName `
+      -Status 'running' `
+      -Message 'Background download process started.' `
+      -Progress 10 `
+      -Installed $false `
+      -PidValue $Launcher.Id | Out-Null
     return @{
       ok = $true;
       profile = $ProfileName;
       model = $Model;
       status = 'started';
       progress = 10;
+      pid = $Launcher.Id;
       message = 'Model download started in background.';
       job_file = $JobFile;
       stdout_file = $StdoutFile;
@@ -356,12 +398,16 @@ function Get-Model-Pull-Job {
   $Status = 'not_started'
   $Progress = 0
   $ExistingError = ''
+  $ExistingPid = $null
+  $ExistingExitCode = $null
   if (Test-Path $JobFile) {
     try {
       $Existing = Get-Content $JobFile -Raw | ConvertFrom-Json
       $Status = $Existing.status
       $Progress = [int]$Existing.progress
       $ExistingError = $Existing.error
+      $ExistingPid = $Existing.pid
+      $ExistingExitCode = $Existing.exit_code
     } catch {}
   }
   $Stdout = Get-Log-Tail $StdoutFile 6000
@@ -386,7 +432,10 @@ function Get-Model-Pull-Job {
       -Message 'Model download completed.' `
       -Progress 100 `
       -Installed $true `
-      -LastLog $Combined | Out-Null
+      -LastLog $Stdout `
+      -ErrorLog $Stderr `
+      -PidValue $ExistingPid `
+      -ExitCode $ExistingExitCode | Out-Null
   } elseif ($Status -eq 'downloading') {
     $Status = 'running'
   } elseif ($Status -eq 'done') {
@@ -398,10 +447,28 @@ function Get-Model-Pull-Job {
     try {
       $Existing = Get-Content $JobFile -Raw | ConvertFrom-Json
       $StartedAt = $Existing.started_at
+      $ExistingPid = $Existing.pid
+      $ExistingExitCode = $Existing.exit_code
       if ($StartedAt) {
         $Elapsed = [int]((Get-Date) - [datetime]$StartedAt).TotalSeconds
       }
     } catch {}
+  }
+  $Alive = Test-Process-Alive $ExistingPid
+  if (($Status -eq 'running' -or $Status -eq 'starting') -and (-not $Alive) -and (-not $Exists) -and $Elapsed -gt 15) {
+    $Status = 'unknown'
+    $ExistingError = 'download_process_not_alive'
+    Update-Model-Pull-Job `
+      -ProfileName $ProfileName `
+      -Status 'unknown' `
+      -Message 'Download process is not alive and model is not installed. Please retry.' `
+      -Progress $Progress `
+      -Installed $false `
+      -LastLog $Stdout `
+      -ErrorLog $Stderr `
+      -ErrorMessage $ExistingError `
+      -PidValue $ExistingPid `
+      -ExitCode $ExistingExitCode | Out-Null
   }
   return @{
     ok = $true;
@@ -409,14 +476,18 @@ function Get-Model-Pull-Job {
     model = $Model;
     status = $Status;
     progress = $Progress;
-    message = $(if ($Status -eq 'completed') { 'Model download completed.' } elseif ($Status -eq 'failed') { 'Model download failed.' } elseif ($Status -eq 'running') { 'Downloading model. Please keep the app open.' } else { 'No model download job is running.' });
+    message = $(if ($Status -eq 'completed') { 'Model download completed.' } elseif ($Status -eq 'failed') { 'Model download failed.' } elseif ($Status -eq 'unknown') { 'Download process is not alive and model is not installed. Please retry.' } elseif ($Status -eq 'running') { 'Downloading model. Please keep the app open.' } else { 'No model download job is running.' });
     job_file = $JobFile;
     stdout_file = $StdoutFile;
     stderr_file = $StderrFile;
     stdout_tail = $Stdout;
     stderr_tail = $Stderr;
     last_log = $Combined;
+    error_log = $Stderr;
     elapsed_seconds = $Elapsed;
+    pid = $ExistingPid;
+    process_alive = $Alive;
+    exit_code = $ExistingExitCode;
     error = $ExistingError;
     installed = $Exists;
     list = $List
@@ -468,6 +539,9 @@ function Pull-Model {
       -Progress $(if ($Exists) { 100 } else { 0 }) `
       -Installed $Exists `
       -LastLog $Tail `
+      -ErrorLog (Get-Log-Tail $StderrFile 3000) `
+      -PidValue $Process.Id `
+      -ExitCode $Process.ExitCode `
       -ErrorMessage $(if ($Exists) { '' } else { 'model_not_confirmed' }) | Out-Null
     return @{
       ok = $Exists;
@@ -488,6 +562,7 @@ function Pull-Model {
       -Progress 0 `
       -Installed $false `
       -LastLog ((Get-Log-Tail $StdoutFile 3000) + "`n" + (Get-Log-Tail $StderrFile 3000)) `
+      -ErrorLog (Get-Log-Tail $StderrFile 3000) `
       -ErrorMessage $_.Exception.Message | Out-Null
     return @{
       ok = $false;

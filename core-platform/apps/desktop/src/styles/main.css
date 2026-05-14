@@ -987,6 +987,9 @@ body[data-ui-version="d7-c3-chatgpt-like"] textarea#prompt {
 .model-download-progress-status.failed {
   color: #b91c1c;
 }
+.model-download-progress-status.unknown {
+  color: #b45309;
+}
 .model-download-progress-bar {
   height: 8px;
   border-radius: 999px;
@@ -1003,11 +1006,39 @@ body[data-ui-version="d7-c3-chatgpt-like"] textarea#prompt {
 .model-download-progress-bar-inner.done {
   background: linear-gradient(90deg, #16a34a, #86efac);
 }
+.model-download-progress-bar-inner.failed {
+  width: 100%;
+  background: linear-gradient(90deg, #dc2626, #fb7185);
+}
 .model-download-progress-message {
   margin-top: 8px;
   color: #475569;
   font-size: 12px;
   line-height: 1.55;
+}
+.model-download-progress-meta {
+  margin-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 11px;
+  color: #64748b;
+}
+.model-download-progress-meta span {
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  background: rgba(255, 255, 255, 0.58);
+  border-radius: 999px;
+  padding: 3px 7px;
+}
+.model-download-progress-hint {
+  margin-top: 8px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #92400e;
+  background: rgba(254, 243, 199, 0.72);
+  border: 1px solid rgba(251, 191, 36, 0.28);
 }
 .model-download-progress-log {
   margin-top: 8px;
@@ -1023,6 +1054,10 @@ body[data-ui-version="d7-c3-chatgpt-like"] textarea#prompt {
   border-radius: 12px;
   background: #0f172a;
   color: #e2e8f0;
+}
+.model-download-progress-log.error pre {
+  border: 1px solid rgba(248, 113, 113, 0.32);
+  background: #450a0a;
 }
 /* D7-C14 observable chat pipeline */
 .demo-chat-actions {

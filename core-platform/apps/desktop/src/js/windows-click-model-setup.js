@@ -164,6 +164,7 @@
     else if (status === "downloading" || status === "started") raw.status = "running";
     else if (!status) raw.status = "not_started";
     raw.last_log = raw.last_log || raw.stdout_tail || raw.stderr_tail || "";
+    raw.error_log = raw.error_log || raw.stderr_tail || "";
     raw.elapsed_seconds = Number(raw.elapsed_seconds || 0);
     return raw;
   }
@@ -175,10 +176,17 @@
       running: "下载中",
       completed: "已完成",
       failed: "失败",
+      unknown: "需重试",
       checking: "检查中"
     }[job.status] || job.status;
     const progress = Math.max(8, Math.min(100, Number(job.progress || (job.status === "completed" ? 100 : 18))));
     const log = String(job.last_log || "").trim();
+    const errorLog = String(job.error_log || "").trim();
+    const alive = !!job.process_alive;
+    const pid = job.pid || "-";
+    const exitCode = job.exit_code ?? "-";
+    const failed = job.status === "failed" || job.status === "unknown";
+    const running = job.status === "running" || job.status === "starting";
     return `
       <div class="model-download-progress-box" data-download-profile="${escapeHtml(profile)}">
         <div class="model-download-progress-head">
@@ -186,10 +194,17 @@
           <span>${job.installed ? "已安装" : `已用时 ${escapeHtml(String(job.elapsed_seconds || 0))}s`}</span>
         </div>
         <div class="model-download-progress-bar">
-          <div class="model-download-progress-bar-inner ${job.status === "completed" ? "done" : ""}" style="width:${progress}%"></div>
+          <div class="model-download-progress-bar-inner ${job.status === "completed" ? "done" : ""} ${failed ? "failed" : ""}" style="width:${progress}%"></div>
         </div>
         <div class="model-download-progress-message">${escapeHtml(job.message || "正在检查模型下载状态。")}</div>
-        ${log ? `<details class="model-download-progress-log"><summary>下载日志</summary><pre>${escapeHtml(log)}</pre></details>` : ""}
+        <div class="model-download-progress-meta">
+          <span>进程：${alive ? "运行中" : "未运行"}</span>
+          <span>PID：${escapeHtml(String(pid))}</span>
+          <span>Exit：${escapeHtml(String(exitCode))}</span>
+        </div>
+        ${running ? `<div class="model-download-progress-hint">如果日志长时间没有变化，可能是网络连接 Ollama 模型源较慢；若进程变为未运行且模型未安装，状态会自动变为需重试。</div>` : ""}
+        ${log ? `<details class="model-download-progress-log" open><summary>下载日志</summary><pre>${escapeHtml(log)}</pre></details>` : ""}
+        ${errorLog ? `<details class="model-download-progress-log error" open><summary>错误日志</summary><pre>${escapeHtml(errorLog)}</pre></details>` : ""}
       </div>
     `;
   }
@@ -464,10 +479,15 @@
           }));
           return polled;
         }
-        if (polled?.status === "failed") {
+        if (polled?.status === "failed" || polled?.status === "unknown") {
           window.__MAOMIAI_MODEL_JOBS__[profile] = polled;
           renderModelStore(window.__MAOMIAI_MODEL_STATUS__ || null);
-          setResult(`${item.title} 下载失败`, "bad", polled?.message || "后台下载任务失败。", polled);
+          setResult(
+            polled?.status === "unknown" ? `${item.title} 下载状态异常` : `${item.title} 下载失败`,
+            "bad",
+            polled?.message || "后台下载任务失败。请查看 PID、进程状态和错误日志后重试。",
+            polled
+          );
           return polled;
         }
       }
