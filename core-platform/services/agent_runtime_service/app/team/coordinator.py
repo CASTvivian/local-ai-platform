@@ -67,7 +67,32 @@ def _run_worker(goal: str, session_id: str, team_run_id: str, agent: AgentSpec, 
             "agent_name": agent.name,
         },
     )
-    return run_agent(req).model_dump()
+    try:
+        return run_agent(req).model_dump()
+    except Exception as e:
+        return {
+            "ok": False,
+            "answer": "",
+            "final_answer": "",
+            "error": str(e),
+            "agent_id": agent.id,
+            "agent_name": agent.name,
+            "fallback": True,
+            "steps": [
+                {
+                    "step": 0,
+                    "observation": {
+                        "error": str(e),
+                        "source": "team_worker_failure_isolation"
+                    },
+                    "validation": {
+                        "resolved": False,
+                        "retryable": True,
+                        "error": str(e)
+                    }
+                }
+            ]
+        }
 
 
 def run_team(req: TeamRunRequest) -> Dict[str, Any]:
@@ -83,127 +108,148 @@ def run_team(req: TeamRunRequest) -> Dict[str, Any]:
         team_id=team.id,
         input=req.input,
     )
-
-    _event(
-        state,
-        "team.created",
-        "Team run created",
-        {
-            "team_id": team.id,
-            "input": req.input,
-        },
-    )
-
-    enabled_agents = [a for a in team.agents if a.enabled]
-
-    _message(
-        state,
-        0,
-        "user",
-        "coordinator",
-        "goal",
-        req.input,
-        {"metadata": req.metadata},
-    )
-
-    shared_context: Dict[str, Any] = {
-        "goal": req.input,
-        "capabilities": {},
-        "worker_outputs": {},
-    }
-
-    for agent in enabled_agents:
-        caps = _match_for_agent(req.input, agent)
-        shared_context["capabilities"][agent.id] = caps
+    try:
         _event(
             state,
-            "agent.capability_match",
-            f"{agent.name} capability match",
+            "team.created",
+            "Team run created",
             {
-                "agent_id": agent.id,
-                "capabilities": caps,
+                "team_id": team.id,
+                "input": req.input,
             },
         )
 
-    for round_id in range(max(1, min(req.max_rounds, 6))):
-        state.current_round = round_id
+        enabled_agents = [a for a in team.agents if a.enabled]
+
+        _message(
+            state,
+            0,
+            "user",
+            "coordinator",
+            "goal",
+            req.input,
+            {"metadata": req.metadata},
+        )
+
+        shared_context: Dict[str, Any] = {
+            "goal": req.input,
+            "capabilities": {},
+            "worker_outputs": {},
+        }
 
         for agent in enabled_agents:
-            if agent.id == "coordinator":
-                continue
-
-            _message(
-                state,
-                round_id,
-                "coordinator",
-                agent.id,
-                "task",
-                req.input,
-                {"context": shared_context},
-            )
-
-            output = _run_worker(
-                goal=req.input,
-                session_id=req.session_id,
-                team_run_id=state.team_run_id,
-                agent=agent,
-                context=shared_context,
-            )
-
-            state.agent_outputs[agent.id] = output
-            shared_context["worker_outputs"][agent.id] = output
-
-            _message(
-                state,
-                round_id,
-                agent.id,
-                "coordinator",
-                "result",
-                output.get("answer") or output.get("final_answer") or "",
-                {"raw": output},
-            )
-
+            try:
+                caps = _match_for_agent(req.input, agent)
+            except Exception as e:
+                caps = {
+                    "ok": False,
+                    "error": str(e),
+                    "matches": [],
+                }
+            shared_context["capabilities"][agent.id] = caps
             _event(
                 state,
-                "agent.output",
-                f"{agent.name} output",
+                "agent.capability_match",
+                f"{agent.name} capability match",
                 {
                     "agent_id": agent.id,
-                    "ok": output.get("ok"),
-                    "answer": output.get("answer") or output.get("final_answer"),
-                    "steps": output.get("steps"),
+                    "capabilities": caps,
                 },
             )
 
-        # Single coordination round is enough for now; later C26 can implement recursive delegation.
-        break
+        for round_id in range(max(1, min(req.max_rounds, 6))):
+            state.current_round = round_id
 
-    final_parts = []
-    for agent in enabled_agents:
-        if agent.id == "coordinator":
-            continue
-        output = state.agent_outputs.get(agent.id) or {}
-        answer = output.get("answer") or output.get("final_answer")
-        if answer:
-            final_parts.append(f"[{agent.name}]\n{answer}")
+            for agent in enabled_agents:
+                if agent.id == "coordinator":
+                    continue
 
-    state.final_answer = "\n\n".join(final_parts) if final_parts else "Team run completed without worker output."
-    state.status = "completed"
+                _message(
+                    state,
+                    round_id,
+                    "coordinator",
+                    agent.id,
+                    "task",
+                    req.input,
+                    {"context": shared_context},
+                )
+
+                output = _run_worker(
+                    goal=req.input,
+                    session_id=req.session_id,
+                    team_run_id=state.team_run_id,
+                    agent=agent,
+                    context=shared_context,
+                )
+
+                state.agent_outputs[agent.id] = output
+                shared_context["worker_outputs"][agent.id] = output
+
+                answer_text = output.get("answer") or output.get("final_answer") or output.get("error") or ""
+                _message(
+                    state,
+                    round_id,
+                    agent.id,
+                    "coordinator",
+                    "result",
+                    answer_text,
+                    {"raw": output},
+                )
+
+                _event(
+                    state,
+                    "agent.output",
+                    f"{agent.name} output",
+                    {
+                        "agent_id": agent.id,
+                        "ok": output.get("ok"),
+                        "answer": output.get("answer") or output.get("final_answer"),
+                        "error": output.get("error"),
+                        "fallback": output.get("fallback"),
+                        "steps": output.get("steps"),
+                    },
+                )
+
+            # Single coordination round is enough for now; later C26 can implement recursive delegation.
+            break
+
+        final_parts = []
+        for agent in enabled_agents:
+            if agent.id == "coordinator":
+                continue
+            output = state.agent_outputs.get(agent.id) or {}
+            answer = output.get("answer") or output.get("final_answer")
+            error = output.get("error")
+            if answer:
+                final_parts.append(f"[{agent.name}]\n{answer}")
+            elif error:
+                final_parts.append(f"[{agent.name}]\nWorker unavailable: {error}")
+
+        state.final_answer = "\n\n".join(final_parts) if final_parts else "Team run completed without worker output."
+        state.status = "completed"
+        _event(
+            state,
+            "team.completed",
+            "Team run completed",
+            {
+                "final_answer": state.final_answer,
+            },
+        )
+    except Exception as e:
+        state.status = "failed"
+        state.final_answer = f"Team run failed but state was preserved: {e}"
+        _event(
+            state,
+            "team.failed",
+            "Team run failed",
+            {
+                "error": str(e),
+            },
+        )
     state.updated_at = datetime.utcnow().isoformat()
-
-    _event(
-        state,
-        "team.completed",
-        "Team run completed",
-        {
-            "final_answer": state.final_answer,
-        },
-    )
-
     save_team_run(state)
-
     return {
-        "ok": True,
+        "ok": state.status == "completed",
         "team_run_id": state.team_run_id,
         "team_id": state.team_id,
         "answer": state.final_answer,
