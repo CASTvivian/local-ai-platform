@@ -1,0 +1,47 @@
+{
+  "version": "0.1.0-c25-c7",
+  "default_profile": "local_restricted",
+  "profiles": {
+    "local_restricted": {
+      "description": "Restricted local sandbox execution profile.",
+      "allowed_binaries": [
+        "python",
+        "python3",
+        "node",
+        "bash",
+        "sh"
+      ],
+      "blocked_binaries": [
+        "rm",
+        "sudo",
+        "curl",
+        "wget",
+        "ssh",
+        "scp",
+        "nc",
+        "netcat",
+        "powershell",
+        "pwsh",
+        "cmd",
+        "reg",
+        "diskutil",
+        "launchctl"
+      ],
+      "timeout_seconds": 20,
+      "max_stdout_bytes": 200000,
+      "max_stderr_bytes": 200000,
+      "network": "disabled_by_policy",
+      "filesystem": "sandbox_only",
+      "env_allowlist": [
+        "PATH",
+        "PYTHONPATH",
+        "NODE_PATH",
+        "HOME",
+        "TMPDIR"
+      ],
+      "env_overrides": {
+        "MAOMIAI_SANDBOX": "1"
+      }
+    }
+  }
+}
