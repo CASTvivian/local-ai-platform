@@ -1019,6 +1019,12 @@ body[data-ui-version="d7-c3-chatgpt-like"] textarea#prompt {
   font-size: 12px;
   line-height: 1.55;
 }
+.model-download-progress-title {
+  margin-top: 10px;
+  color: #92400e;
+  font-size: 13px;
+  font-weight: 900;
+}
 .model-download-progress-meta {
   margin-top: 8px;
   display: flex;
@@ -1061,6 +1067,17 @@ body[data-ui-version="d7-c3-chatgpt-like"] textarea#prompt {
 .model-download-progress-log.error pre {
   border: 1px solid rgba(248, 113, 113, 0.32);
   background: #450a0a;
+}
+.model-download-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+.model-download-actions .secondary {
+  padding: 7px 10px;
+  border-radius: 10px;
+  font-size: 12px;
 }
 /* D7-C14 observable chat pipeline */
 .demo-chat-actions {

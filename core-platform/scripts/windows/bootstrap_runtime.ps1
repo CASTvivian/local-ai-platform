@@ -4,7 +4,7 @@ param(
   [string]$Root = ''
 )
 $ErrorActionPreference = 'Continue'
-$MAOMIAI_BOOTSTRAP_RUNTIME_VERSION = 'c25-c11-fix6-powershell-path-quoting'
+$MAOMIAI_BOOTSTRAP_RUNTIME_VERSION = 'c25-c11-fix7-download-retry-offline-pack'
 
 function Add-Bootstrap-Version {
   param([object]$Obj)
@@ -39,6 +39,67 @@ function Write-Json {
       error = $_.Exception.Message
     }
     $Fallback | ConvertTo-Json -Depth 4 -Compress
+  }
+}
+
+function Remove-Ansi-Text {
+  param([string]$Text)
+  if ([string]::IsNullOrEmpty($Text)) {
+    return ''
+  }
+  $Clean = $Text -replace "`e\[[0-9;?]*[ -/]*[@-~]", ''
+  $Clean = $Clean -replace "\x1b\[[0-9;?]*[ -/]*[@-~]", ''
+  return $Clean
+}
+
+function Get-Download-Error-Class {
+  param([string]$Text)
+  $T = Remove-Ansi-Text $Text
+  if ([string]::IsNullOrWhiteSpace($T)) {
+    return @{
+      code = 'unknown';
+      title = '下载失败';
+      message = '下载进程失败，但没有返回详细错误。请重试。';
+      retryable = $true
+    }
+  }
+  if ($T -match 'i/o timeout' -or $T -match 'timeout' -or $T -match 'max retries exceeded' -or $T -match 'Cloudflare' -or $T -match 'cloudflarestorage') {
+    return @{
+      code = 'network_timeout';
+      title = '模型源网络超时';
+      message = '已进入真实 Ollama 下载，但连接模型源超时。可以重试，或使用离线模型包。';
+      retryable = $true
+    }
+  }
+  if ($T -match 'proxy' -or $T -match 'connection refused' -or $T -match 'dial tcp') {
+    return @{
+      code = 'network_connect_failed';
+      title = '网络连接失败';
+      message = '无法连接模型下载源，请检查网络、代理或防火墙后重试。';
+      retryable = $true
+    }
+  }
+  if ($T -match 'not found' -or $T -match 'manifest unknown') {
+    return @{
+      code = 'model_not_found';
+      title = '模型不存在';
+      message = '模型名称可能不可用，请换一个模型。';
+      retryable = $false
+    }
+  }
+  if ($T -match 'permission' -or $T -match 'access is denied') {
+    return @{
+      code = 'permission_denied';
+      title = '权限不足';
+      message = '当前用户可能没有写入 Ollama 模型目录的权限。';
+      retryable = $false
+    }
+  }
+  return @{
+    code = 'download_failed';
+    title = '下载失败';
+    message = '模型下载失败，可以重试或查看错误日志。';
+    retryable = $true
   }
 }
 
@@ -237,9 +298,9 @@ function Get-Log-Tail {
   try {
     $Text = Get-Content $Path -Raw -ErrorAction SilentlyContinue
     if ($Text.Length -gt $MaxChars) {
-      return $Text.Substring($Text.Length - $MaxChars)
+      return (Remove-Ansi-Text $Text.Substring($Text.Length - $MaxChars))
     }
-    return $Text
+    return (Remove-Ansi-Text $Text)
   } catch {
     return ''
   }
@@ -308,6 +369,11 @@ function Update-Model-Pull-Job {
     $Elapsed = [int]((Get-Date) - [datetime]$StartedAt).TotalSeconds
   } catch {}
   $Alive = Test-Process-Alive $PidValue
+  $CleanLastLog = Remove-Ansi-Text $LastLog
+  $CleanErrorLog = Remove-Ansi-Text $ErrorLog
+  $ClassText = ($CleanLastLog + "`n" + $CleanErrorLog + "`n" + $ErrorMessage)
+  $ErrorClass = Get-Download-Error-Class $ClassText
+  $UserMessage = $(if ($Status -eq 'failed' -or $Status -eq 'unknown') { $ErrorClass.message } else { $Message })
   $Job = @{
     ok = ($Status -ne 'failed' -and $Status -ne 'unknown');
     bootstrap_version = $MAOMIAI_BOOTSTRAP_RUNTIME_VERSION;
@@ -317,8 +383,12 @@ function Update-Model-Pull-Job {
     status = $Status;
     progress = $Progress;
     message = $Message;
-    last_log = $LastLog;
-    error_log = $ErrorLog;
+    user_message = $UserMessage;
+    error_class = $(if ($Status -eq 'failed' -or $Status -eq 'unknown') { $ErrorClass.code } else { '' });
+    error_title = $(if ($Status -eq 'failed' -or $Status -eq 'unknown') { $ErrorClass.title } else { '' });
+    retryable = $(if ($Status -eq 'failed' -or $Status -eq 'unknown') { $ErrorClass.retryable } else { $true });
+    last_log = $CleanLastLog;
+    error_log = $CleanErrorLog;
     installed = $Installed;
     pid = $PidValue;
     process_alive = $Alive;
@@ -665,6 +735,11 @@ function Get-Model-Pull-Job {
       -Completed $ExistingCompleted `
       -Total $ExistingTotal | Out-Null
   }
+  $CleanStdout = Remove-Ansi-Text $Stdout
+  $CleanStderr = Remove-Ansi-Text $Stderr
+  $CleanCombined = ($CleanStdout + "`n" + $CleanStderr).Trim()
+  $Class = Get-Download-Error-Class ($CleanCombined + "`n" + $ExistingError)
+  $DisplayMessage = $(if ($Status -eq 'completed') { 'Model download completed.' } elseif ($Status -eq 'failed' -or $Status -eq 'unknown') { $Class.message } elseif ($Status -eq 'running') { 'Downloading model. Please keep the app open.' } else { 'No model download job is running.' })
   return @{
     ok = $true;
     bootstrap_version = $MAOMIAI_BOOTSTRAP_RUNTIME_VERSION;
@@ -673,16 +748,20 @@ function Get-Model-Pull-Job {
     model = $Model;
     status = $Status;
     progress = $Progress;
-    message = $(if ($ExistingMessage) { $ExistingMessage } elseif ($Status -eq 'completed') { 'Model download completed.' } elseif ($Status -eq 'failed') { 'Model download failed.' } elseif ($Status -eq 'running') { 'Downloading model. Please keep the app open.' } else { 'No model download job is running.' });
+    message = $(if ($ExistingMessage) { $ExistingMessage } else { $DisplayMessage });
+    user_message = $DisplayMessage;
+    error_class = $(if ($Status -eq 'failed' -or $Status -eq 'unknown') { $Class.code } else { '' });
+    error_title = $(if ($Status -eq 'failed' -or $Status -eq 'unknown') { $Class.title } else { '' });
+    retryable = $(if ($Status -eq 'failed' -or $Status -eq 'unknown') { $Class.retryable } else { $true });
     job_file = $JobFile;
     stdout_file = $StdoutFile;
     stderr_file = $StderrFile;
     worker_stdout_file = $WorkerOutFile;
     worker_stderr_file = $WorkerErrFile;
-    stdout_tail = $Stdout;
-    stderr_tail = $Stderr;
-    last_log = $Combined;
-    error_log = $Stderr;
+    stdout_tail = $CleanStdout;
+    stderr_tail = $CleanStderr;
+    last_log = $CleanCombined;
+    error_log = $CleanStderr;
     elapsed_seconds = $Elapsed;
     pid = $ExistingPid;
     process_alive = $Alive;
@@ -911,6 +990,10 @@ switch ($Action) {
     }
   }
   'start_pull_model' {
+    $Started = Start-Model-Pull-Job $Profile
+    Write-Json $Started
+  }
+  'retry_pull_model' {
     $Started = Start-Model-Pull-Job $Profile
     Write-Json $Started
   }

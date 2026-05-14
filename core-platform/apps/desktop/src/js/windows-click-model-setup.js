@@ -165,6 +165,9 @@
     else if (!status) raw.status = "not_started";
     raw.last_log = raw.last_log || raw.stdout_tail || raw.stderr_tail || "";
     raw.error_log = raw.error_log || raw.stderr_tail || "";
+    raw.user_message = raw.user_message || raw.message || "";
+    raw.error_title = raw.error_title || "";
+    raw.retryable = raw.retryable !== false;
     raw.elapsed_seconds = Number(raw.elapsed_seconds || 0);
     return raw;
   }
@@ -205,6 +208,17 @@
     }
     return `${size.toFixed(idx === 0 ? 0 : 1)} ${units[idx]}`;
   }
+  function renderModelDownloadActions(profile, job) {
+    const failed = job?.status === "failed" || job?.status === "unknown";
+    if (!failed) return "";
+    const retry = job?.retryable !== false;
+    return `
+      <div class="model-download-actions">
+        ${retry ? `<button class="secondary model-download-retry-btn" data-action="retry-model-download" data-profile="${escapeHtml(profile)}">重新下载</button>` : ""}
+        <button class="secondary model-offline-pack-btn" data-action="show-offline-model-pack" data-profile="${escapeHtml(profile)}">使用离线模型包</button>
+      </div>
+    `;
+  }
   function renderModelDownloadPanel(profile) {
     const job = normalizeModelJobStatus(window.__MAOMIAI_MODEL_JOBS__?.[profile] || null);
     if (!job || job.status === "not_started") return "";
@@ -224,6 +238,7 @@
     const exitCode = job.exit_code ?? "-";
     const failed = job.status === "failed" || job.status === "unknown";
     const running = job.status === "running" || job.status === "starting";
+    const displayMessage = job.user_message || job.message || "正在检查模型下载状态。";
     return `
       <div class="model-download-progress-box" data-download-profile="${escapeHtml(profile)}">
         <div class="model-download-progress-head">
@@ -233,13 +248,16 @@
         <div class="model-download-progress-bar">
           <div class="model-download-progress-bar-inner ${job.status === "completed" ? "done" : ""} ${failed ? "failed" : ""}" style="width:${progress}%"></div>
         </div>
-        <div class="model-download-progress-message">${escapeHtml(job.message || "正在检查模型下载状态。")}</div>
+        ${job.error_title ? `<div class="model-download-progress-title">${escapeHtml(job.error_title)}</div>` : ""}
+        <div class="model-download-progress-message">${escapeHtml(displayMessage)}</div>
         <div class="model-download-progress-meta">
           <span>进程：${alive ? "运行中" : "未运行"}</span>
           <span>PID：${escapeHtml(String(pid))}</span>
           <span>Exit：${escapeHtml(String(exitCode))}</span>
+          ${job.error_class ? `<span>错误：${escapeHtml(job.error_class)}</span>` : ""}
           ${job.total ? `<span>数据：${escapeHtml(formatDownloadBytes(job.completed))} / ${escapeHtml(formatDownloadBytes(job.total))}</span>` : ""}
         </div>
+        ${renderModelDownloadActions(profile, job)}
         ${running ? `<div class="model-download-progress-hint">如果日志长时间没有变化，可能是网络连接 Ollama 模型源较慢；若进程变为未运行且模型未安装，状态会自动变为需重试。</div>` : ""}
         ${log ? `<details class="model-download-progress-log" open><summary>下载日志</summary><pre>${escapeHtml(log)}</pre></details>` : ""}
         ${errorLog ? `<details class="model-download-progress-log error" open><summary>错误日志</summary><pre>${escapeHtml(errorLog)}</pre></details>` : ""}
@@ -533,7 +551,7 @@
           setResult(
             polled?.status === "unknown" ? `${item.title} 下载状态异常` : `${item.title} 下载失败`,
             "bad",
-            polled?.message || "后台下载任务失败。请查看 PID、进程状态和错误日志后重试。",
+            polled?.user_message || polled?.message || "后台下载任务失败。请查看 PID、进程状态和错误日志后重试。",
             polled
           );
           return polled;
@@ -564,6 +582,28 @@
         event.preventDefault();
         const profile = target.getAttribute("data-profile") || "standard";
         startLocalModelDownload(profile);
+      }
+      if (action === "retry-model-download") {
+        event.preventDefault();
+        const profile = target.getAttribute("data-profile") || "standard";
+        window.__MAOMIAI_MODEL_JOBS__[profile] = normalizeModelJobStatus({
+          status: "starting",
+          progress: 1,
+          message: "正在重新启动下载任务。",
+          installed: false
+        });
+        renderModelStore(window.__MAOMIAI_MODEL_STATUS__ || null);
+        startLocalModelDownload(profile);
+      }
+      if (action === "show-offline-model-pack") {
+        event.preventDefault();
+        const profile = target.getAttribute("data-profile") || "standard";
+        const item = getModelByProfile(profile);
+        setResult("离线模型包入口", "loading", "当前网络下载失败。路演或客户现场建议使用提前准备好的离线模型包，避免依赖现场访问 Ollama 模型源。", {
+          profile,
+          model: item.model,
+          next: "接入离线模型包导入：选择 .zip 或 Ollama 模型缓存目录，导入到本机 Ollama models 目录后刷新状态。"
+        });
       }
       if (action === "set-current-model-profile") {
         event.preventDefault();
