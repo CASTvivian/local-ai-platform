@@ -4,7 +4,7 @@ param(
   [string]$Root = ''
 )
 $ErrorActionPreference = 'Continue'
-$MAOMIAI_BOOTSTRAP_RUNTIME_VERSION = 'c25-c11-fix8-ascii-download-classifier'
+$MAOMIAI_BOOTSTRAP_RUNTIME_VERSION = 'c25-c13-runtime-resource-packaging'
 
 function Add-Bootstrap-Version {
   param([object]$Obj)
@@ -1004,6 +1004,35 @@ switch ($Action) {
   'pull_model' {
     $Pull = Pull-Model $Profile
     Write-Json $Pull
+  }
+  'runtime_resources' {
+    $Required = @(
+      'scripts\windows\start_all.ps1',
+      'scripts\windows\status_all.ps1',
+      'scripts\windows\bootstrap_runtime.ps1',
+      'services\agent_runtime_service\main.py',
+      'services\model_gateway\main.py',
+      'services\model_bootstrap_service\main.py',
+      'services\repo_memory_service\main.py',
+      'services\skill_store_service\main.py',
+      'services\workflow_store_service\main.py',
+      'data\agent_policy',
+      'data\agent_team',
+      'data\sandbox_policy'
+    )
+    $Missing = @()
+    foreach ($Rel in $Required) {
+      $Path = Join-Path $Root $Rel
+      if (-not (Test-Path $Path)) {
+        $Missing += $Rel
+      }
+    }
+    Write-Json @{
+      ok = ($Missing.Count -eq 0);
+      missing = $Missing;
+      runtime_root = $Root;
+      bootstrap_version = $MAOMIAI_BOOTSTRAP_RUNTIME_VERSION
+    }
   }
   'generate_text' {
     $Text = ''

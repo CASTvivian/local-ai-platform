@@ -46,7 +46,9 @@
       "../../../services/workflow_store_service",
       "../../../data/agent_policy",
       "../../../data/sandbox_policy",
-      "../../../data/agent_team"
+      "../../../data/agent_team",
+      "../../../data/brain_assets",
+      "../../../data/github_stars"
     ]
   }
 }
