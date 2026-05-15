@@ -156,8 +156,67 @@
     return null;
   }
 
+  async function maomiaiAgentRuntimeHealth() {
+    try {
+      const response = await fetch("http://127.0.0.1:18131/health", { method: "GET" });
+      return { ok: response.ok, status: response.status };
+    } catch (err) {
+      return { ok: false, error: err.message || String(err) };
+    }
+  }
+
+  async function maomiaiTryStartWindowsRuntime() {
+    const invoke = window.__TAURI__?.core?.invoke || window.__TAURI__?.tauri?.invoke;
+    if (!invoke) {
+      // C25-C12-FIX: Don't fail - Rust setup() already auto-starts services.
+      // Just report that invoke is unavailable but services should already be running.
+      return { ok: true, source: "rust_autostart", note: "Tauri invoke unavailable, relying on Rust startup auto-start" };
+    }
+    try {
+      const result = await invoke("start_local_ai_runtime", {});
+      return typeof result === "string" ? safeParse(result) : result;
+    } catch (err) {
+      // Even if invoke fails, Rust autostart may have succeeded
+      return { ok: true, source: "rust_autostart_fallback", note: "invoke failed but Rust autostart may be active", error: err.message || String(err) };
+    }
+  }
+
+  async function maomiaiEnsureAgentRuntimeBeforeSend() {
+    const initialHealth = await maomiaiAgentRuntimeHealth();
+    if (initialHealth.ok) {
+      return { ok: true, already_running: true, initial_health: initialHealth };
+    }
+    // Try to start via Tauri invoke (or learn Rust already did it)
+    const startResult = await maomiaiTryStartWindowsRuntime();
+    // Poll for health with retries - Rust autostart needs time
+    for (let attempt = 0; attempt < 6; attempt++) {
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+      const health = await maomiaiAgentRuntimeHealth();
+      if (health.ok) {
+        return {
+          ok: true,
+          initial_health: initialHealth,
+          start_result: startResult,
+          final_health: health,
+          attempts: attempt + 1,
+        };
+      }
+    }
+    const finalHealth = await maomiaiAgentRuntimeHealth();
+    return {
+      ok: !!finalHealth.ok,
+      initial_health: initialHealth,
+      start_result: startResult,
+      final_health: finalHealth,
+    };
+  }
+
   async function runAgentRuntime(userText) {
     const model = getCurrentModel();
+    const runtimeReady = await maomiaiEnsureAgentRuntimeBeforeSend();
+    if (!runtimeReady.ok) {
+      throw new Error(`Agent Runtime auto-start failed: ${JSON.stringify(runtimeReady)}`);
+    }
     const response = await fetch("http://127.0.0.1:18131/agent/run", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
