@@ -168,7 +168,7 @@
   async function maomiaiTryStartWindowsRuntime() {
     const invoke = window.__TAURI__?.core?.invoke || window.__TAURI__?.tauri?.invoke;
     if (!invoke) {
-      return { ok: false, error: "tauri_invoke_unavailable" };
+      return { ok: false, error: "tauri_invoke_unavailable_or_global_tauri_disabled" };
     }
     try {
       const result = await invoke("start_local_ai_runtime", {});

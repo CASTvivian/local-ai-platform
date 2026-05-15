@@ -274,6 +274,32 @@ fn start_local_ai_runtime(app: tauri::AppHandle) -> Result<String, String> {
     }
 }
 
+fn run_windows_start_all_background(app: tauri::AppHandle) {
+    #[cfg(target_os = "windows")]
+    {
+        std::thread::spawn(move || {
+            let script = match find_windows_start_all_script(&app) {
+                Ok(path) => path,
+                Err(_) => return,
+            };
+            let root = match find_windows_runtime_root(&app) {
+                Ok(path) => path,
+                Err(_) => return,
+            };
+            let command_text = format!(
+                "& {} -Root {}",
+                quote_powershell_path(&script),
+                quote_powershell_path(&root)
+            );
+            let _ = run_powershell_encoded(&command_text);
+        });
+    }
+    #[cfg(not(target_os = "windows"))]
+    {
+        let _ = app;
+    }
+}
+
 fn run_windows_bootstrap(action: &str, profile: Option<String>) -> Result<String, String> {
     use std::process::Command;
     #[cfg(target_os = "windows")]
@@ -403,6 +429,10 @@ fn generate_local_ai_response(profile: String, prompt: String) -> Result<String,
 
 pub fn run() {
     tauri::Builder::default()
+        .setup(|app| {
+            run_windows_start_all_background(app.handle().clone());
+            Ok(())
+        })
         .invoke_handler(tauri::generate_handler![
             start_backend,
             start_desktop_services,
