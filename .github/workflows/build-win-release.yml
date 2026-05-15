@@ -23,6 +23,7 @@ env:
 jobs:
   build-windows:
     env:
+      MAOMIAI_WINDOWS_BUNDLE_TARGETS: msi
       MAOMIAI_BUILD_COMMIT: ${{ github.sha }}
       MAOMIAI_BUILD_REF: ${{ github.ref_name }}
     runs-on: windows-latest
@@ -123,11 +124,16 @@ jobs:
         run: |
           Get-Content src-tauri\tauri.conf.json
 
+      - name: Windows bundle target: MSI only
+        shell: pwsh
+        run: |
+          Write-Host "Building MSI only to avoid NSIS download 504 during CI."
+
       - name: Build Tauri Windows bundle
         working-directory: ./core-platform/apps/desktop
         shell: pwsh
         run: |
-          npm run tauri build
+          npm run tauri build -- --bundles msi
 
       - name: Verify Windows artifact contents
         shell: pwsh
