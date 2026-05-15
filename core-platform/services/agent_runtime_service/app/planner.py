@@ -53,10 +53,62 @@ def _fallback_local_chat(normalized: str, corrections: List[Dict[str, Any]]) -> 
     )
 
 
+def _keyword_plan(normalized: str, corrections: List[Dict[str, Any]]) -> AgentPlan | None:
+    """Handle demo-critical grounded intents without depending on the LLM planner."""
+
+    lowered = normalized.lower()
+
+    if any(token in normalized for token in ["现在几点", "现在几号", "今天几月几号", "今天是几月几号", "当前时间", "现在时间"]):
+        return AgentPlan(
+            intent="time_now",
+            normalized_query=normalized,
+            tools=["time.now"],
+            reason="keyword rule: current local time/date query",
+            must_not_hallucinate=True,
+            delegate_to_model=False,
+            args={"corrections": corrections, "planner_source": "keyword_rule"},
+        )
+
+    if any(token in normalized for token in ["仓库资产", "repo 资产", "mcp 相关仓库", "agent 和 mcp", "agent与mcp", "agent mcp"]):
+        return AgentPlan(
+            intent="project_knowledge",
+            normalized_query=normalized,
+            tools=["repo_memory.search"],
+            reason="keyword rule: repo or MCP asset query",
+            must_not_hallucinate=True,
+            delegate_to_model=False,
+            args={
+                "query": normalized,
+                "corrections": corrections,
+                "planner_source": "keyword_rule",
+            },
+        )
+
+    if (
+        ("能力" in normalized or "capability" in lowered)
+        and any(token in normalized for token in ["智能体", "平台", "agent"])
+    ):
+        return AgentPlan(
+            intent="capability_status",
+            normalized_query=normalized,
+            tools=["capability.status"],
+            reason="keyword rule: platform capability status query",
+            must_not_hallucinate=True,
+            delegate_to_model=False,
+            args={"corrections": corrections, "planner_source": "keyword_rule"},
+        )
+
+    return None
+
+
 def _llm_plan(message: str) -> AgentPlan | None:
     global LAST_PLAN_ERROR
     normalized, corrections = normalize_query(message)
-    llm_plan = llm_create_plan(normalized)
+    try:
+        llm_plan = llm_create_plan(normalized)
+    except Exception as exc:
+        LAST_PLAN_ERROR = str(exc)
+        return None
     if not llm_plan:
         LAST_PLAN_ERROR = get_last_planner_error()
         return None
@@ -77,9 +129,13 @@ def _llm_plan(message: str) -> AgentPlan | None:
 
 
 def build_plan(message: str) -> AgentPlan:
-    """Build a plan through the LLM planner, with local-chat fallback only."""
+    """Build a plan through keyword rules, then the LLM planner, then fallback chat."""
 
     normalized, corrections = normalize_query(message)
+    keyword_plan = _keyword_plan(normalized, corrections)
+    if keyword_plan:
+        return keyword_plan
+
     mode = os.environ.get("MAOMIAI_PLANNER_MODE", "llm_first").strip().lower()
     if mode in {"llm", "llm_first"}:
         plan = _llm_plan(message)
