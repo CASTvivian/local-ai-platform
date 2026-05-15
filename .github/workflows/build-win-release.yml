@@ -124,7 +124,7 @@ jobs:
         run: |
           Get-Content src-tauri\tauri.conf.json
 
-      - name: Windows bundle target: MSI only
+      - name: "Windows bundle target: MSI only"
         shell: pwsh
         run: |
           Write-Host "Building MSI only to avoid NSIS download 504 during CI."
