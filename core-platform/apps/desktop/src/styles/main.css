@@ -1239,3 +1239,52 @@ body[data-ui-version="d7-c3-chatgpt-like"] textarea#prompt {
 .agent-replay-open-btn {
   margin-left: 8px;
 }
+/* D7-B: Session item buttons in chat */
+.session-list {
+  display: flex;
+  gap: 8px;
+  padding: 0 12px;
+  flex-wrap: wrap;
+  max-height: 60px;
+  overflow: auto;
+}
+.session-item {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--text);
+  font-size: 12px;
+  cursor: pointer;
+  margin: 2px;
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: background 0.15s, border-color 0.15s;
+}
+.session-title {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.session-meta {
+  font-size: 11px;
+  color: var(--muted);
+}
+.session-item:hover {
+  background: var(--panel-soft);
+  border-color: var(--blue);
+}
+.session-item.active {
+  background: var(--blue);
+  color: #fff;
+  border-color: var(--blue);
+}
+.session-item.active .session-meta {
+  color: rgba(255, 255, 255, 0.88);
+}

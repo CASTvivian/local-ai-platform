@@ -88,8 +88,70 @@
     return { ok: false, raw: text };
   }
 
+  const CHAT_STORE_KEY = "maomiai_chat_sessions_v2";
+
   function ensureChatState() {
-    window.__MAOMIAI_CHAT_MESSAGES__ = window.__MAOMIAI_CHAT_MESSAGES__ || [];
+    if (!window.__MAOMIAI_CHAT_MESSAGES__) {
+      // D7-B FIX: Restore persisted messages instead of always starting empty
+      const store = loadChatStore();
+      const session = store.sessions.find(s => s.id === store.currentSessionId) || store.sessions[0];
+      window.__MAOMIAI_CHAT_MESSAGES__ = session ? session.messages : [];
+      window.__MAOMIAI_SESSION_ID__ = session ? session.id : "desktop-default";
+    }
+  }
+
+  function loadChatStore() {
+    try {
+      const raw = localStorage.getItem(CHAT_STORE_KEY);
+      if (raw) {
+        const store = JSON.parse(raw);
+        if (store && Array.isArray(store.sessions)) return store;
+      }
+    } catch (_) {}
+    return { currentSessionId: "session_default", sessions: [{ id: "session_default", title: "默认会话", messages: [], createdAt: Date.now() }] };
+  }
+
+  function loadSessions() {
+    return loadChatStore();
+  }
+
+  function saveChatStore() {
+    try {
+      const store = loadSessions();
+      let session = store.sessions.find(s => s.id === store.currentSessionId);
+      if (!session) {
+        session = { id: store.currentSessionId, title: "默认会话", messages: [], createdAt: Date.now() };
+        store.sessions.unshift(session);
+      }
+      session.messages = (window.__MAOMIAI_CHAT_MESSAGES__ || []).slice(-100); // Keep last 100 messages
+      localStorage.setItem(CHAT_STORE_KEY, JSON.stringify(store));
+    } catch (_) {}
+  }
+
+  function saveSessions() {
+    saveChatStore();
+  }
+
+  function switchChatSession(sessionId) {
+    window.__MAOMIAI_SESSION_ID__ = sessionId;
+    const store = loadSessions();
+    store.currentSessionId = sessionId;
+    const session = store.sessions.find(s => s.id === sessionId);
+    window.__MAOMIAI_CHAT_MESSAGES__ = session ? [...session.messages] : [];
+    try { localStorage.setItem(CHAT_STORE_KEY, JSON.stringify(store)); } catch (_) {}
+  }
+
+  // D7-B: newSession() remains the explicit shell entry point; router uses createNewChatSession() internally.
+  function createNewChatSession() {
+    const id = "session_" + Date.now().toString(36) + "_" + Math.random().toString(36).slice(2, 8);
+    const store = loadSessions();
+    const session = { id, title: "新建会话", messages: [], createdAt: Date.now() };
+    store.sessions.unshift(session);
+    store.currentSessionId = id;
+    try { localStorage.setItem(CHAT_STORE_KEY, JSON.stringify(store)); } catch (_) {}
+    window.__MAOMIAI_SESSION_ID__ = id;
+    window.__MAOMIAI_CHAT_MESSAGES__ = [];
+    return id;
   }
 
   function updateChatMessagesOnly() {
@@ -111,6 +173,16 @@
   function pushChat(role, content) {
     ensureChatState();
     window.__MAOMIAI_CHAT_MESSAGES__.push({ role, content: String(content ?? "") });
+    // D7-B: Auto-title session from first user message
+    if (role === "user") {
+      const store = loadChatStore();
+      const session = store.sessions.find(s => s.id === store.currentSessionId);
+      if (session && (session.title === "新建会话" || session.title === "默认会话")) {
+        session.title = String(content ?? "").slice(0, 20);
+        try { localStorage.setItem(CHAT_STORE_KEY, JSON.stringify(store)); } catch (_) {}
+      }
+    }
+    saveChatStore();
     updateChatMessagesOnly();
   }
 
@@ -123,6 +195,7 @@
     } else {
       messages.push({ role: "assistant", content: String(content ?? "") });
     }
+    saveChatStore();
     updateChatMessagesOnly();
   }
 
@@ -453,12 +526,21 @@
         return `<option value="${escapeHtml(item.profile)}" ${selected}>${escapeHtml(item.title)}</option>`;
       })
       .join("");
+
+    // D7-B: Session list in sidebar
+    const store = loadChatStore();
+    const sessionListHtml = store.sessions.slice(0, 10).map(s => {
+      const active = s.id === store.currentSessionId ? "active" : "";
+      const title = escapeHtml(s.title || "新建会话");
+      return `<button class="session-item ${active}" data-action="switch-session" data-session-id="${escapeHtml(s.id)}">${title}</button>`;
+    }).join("");
+
     content.innerHTML = `
       <section class="demo-chat-page">
         <div class="demo-chat-head">
           <div>
             <h1>MAOMIAI 本地 AI</h1>
-            <p>Agent Runtime 已接管</p>
+            <p>Agent Runtime 已接管 | 会话：${escapeHtml(window.__MAOMIAI_SESSION_ID__ || "default")}</p>
           </div>
           <div class="chat-model-selector">
             <span>当前能力</span>
@@ -467,9 +549,11 @@
         </div>
         <div class="demo-chat-actions">
           <button class="primary" data-action="maomiai-test-infer">测试 Agent Runtime</button>
-          <button class="secondary" data-action="maomiai-test-time">测试时间工具</button>
-          <button class="secondary" data-action="maomiai-test-memory">测试项目知识</button>
-          <button class="secondary" data-action="maomiai-clear-chat">清空会话</button>
+          <button class="secondary" data-action="maomiai-new-session">新建会话</button>
+          <button class="secondary" data-action="maomiai-clear-chat">清空当前会话</button>
+        </div>
+        <div class="session-list">
+          ${sessionListHtml}
         </div>
         <details id="maomiaiDebugBox" class="maomiai-debug-box">
           <summary>调试状态（点击展开）</summary>
@@ -563,7 +647,12 @@
 
   function route(view) {
     const target = String(view || "chat");
-    if (["chat", "new-chat", "new"].includes(target)) return renderChat();
+    // D7-B FIX: "new-chat" creates a new session, "chat" returns to current
+    if (target === "new-chat" || target === "new") {
+      createNewChatSession();
+      return renderChat();
+    }
+    if (["chat"].includes(target)) return renderChat();
     if (["models", "model", "local-model", "local-models"].includes(target)) return renderLocalModels();
     if (["artifacts", "files", "documents"].includes(target)) return renderFiles();
     if (["code-review", "code"].includes(target)) return renderCodeReview();
@@ -631,7 +720,27 @@
           event.preventDefault();
           event.stopPropagation();
           window.__MAOMIAI_CHAT_MESSAGES__ = [];
+          saveChatStore();
           renderChat();
+          return;
+        }
+        // D7-B: New session button
+        if (action === "maomiai-new-session") {
+          event.preventDefault();
+          event.stopPropagation();
+          createNewChatSession();
+          renderChat();
+          return;
+        }
+        // D7-B: Switch session button
+        if (action === "switch-session") {
+          event.preventDefault();
+          event.stopPropagation();
+          const sessionId = actionEl.getAttribute("data-session-id");
+          if (sessionId) {
+            switchChatSession(sessionId);
+            renderChat();
+          }
           return;
         }
         if (action === "demo-code-check") {
