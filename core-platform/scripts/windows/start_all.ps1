@@ -2,112 +2,234 @@ param(
   [string]$Root = ""
 )
 $ErrorActionPreference = "Continue"
-Write-Host "===== MAOMIAI Windows service startup ====="
 
-if ([string]::IsNullOrWhiteSpace($Root)) {
+function Write-Json {
+  param([object]$Obj)
+  $Obj | ConvertTo-Json -Depth 20 -Compress
+}
+
+function Ensure-Dir {
+  param([string]$Path)
+  if (!(Test-Path $Path)) {
+    New-Item -ItemType Directory -Force -Path $Path | Out-Null
+  }
+}
+
+function Resolve-RuntimeRoot {
+  param([string]$InputRoot)
+  if (![string]::IsNullOrWhiteSpace($InputRoot) -and (Test-Path $InputRoot)) {
+    return (Resolve-Path $InputRoot).Path
+  }
   $ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
-
-  # Installed Tauri resources may place this under:
-  # resources\scripts\windows\start_all.ps1
-  # or directly under scripts\windows\start_all.ps1
   $Candidates = @(
-    (Resolve-Path (Join-Path $ScriptDir "..\..\..") -ErrorAction SilentlyContinue),
-    (Resolve-Path (Join-Path $ScriptDir "..\..") -ErrorAction SilentlyContinue),
-    (Resolve-Path (Join-Path $ScriptDir "..") -ErrorAction SilentlyContinue)
+    (Join-Path $ScriptDir "..\..\.."),
+    (Join-Path $ScriptDir "..\.."),
+    (Join-Path $ScriptDir "..")
   )
-  foreach ($c in $Candidates) {
-    if ($c -and (Test-Path (Join-Path $c "services"))) {
-      $Root = $c.Path
-      break
+  foreach ($Candidate in $Candidates) {
+    $Resolved = Resolve-Path $Candidate -ErrorAction SilentlyContinue
+    if ($Resolved -and (Test-Path (Join-Path $Resolved.Path "services"))) {
+      return $Resolved.Path
     }
   }
-  if ([string]::IsNullOrWhiteSpace($Root)) {
-    $Root = Resolve-Path (Join-Path $ScriptDir "..\..\..") -ErrorAction SilentlyContinue
-    if ($Root) { $Root = $Root.Path }
+  $Fallback = Resolve-Path (Join-Path $ScriptDir "..\..\..") -ErrorAction SilentlyContinue
+  if ($Fallback) {
+    return $Fallback.Path
   }
-}
-
-Write-Host "Root: $Root"
-
-$EnsureRuntimeScript = Join-Path (Split-Path -Parent $MyInvocation.MyCommand.Path) "ensure_runtime.ps1"
-$EmbeddedPython = $null
-if (Test-Path $EnsureRuntimeScript) {
-  Write-Host "Preparing embedded runtime..."
-  $runtimeResultRaw = powershell -ExecutionPolicy Bypass -File $EnsureRuntimeScript -Root $Root
-  Write-Host $runtimeResultRaw
-  try {
-    $runtimeResult = $runtimeResultRaw | ConvertFrom-Json
-    if ($runtimeResult.ok -and $runtimeResult.python_exe) {
-      $EmbeddedPython = $runtimeResult.python_exe
-      Write-Host "Embedded Python ready: $EmbeddedPython"
-    }
-  } catch {
-    Write-Host "Failed to parse runtime result: $($_.Exception.Message)"
-  }
-}
-
-$LogDir = Join-Path $Root "logs\windows"
-New-Item -ItemType Directory -Force -Path $LogDir | Out-Null
-
-# Ensure Python dependencies before starting services.
-$BootstrapScript = Join-Path (Split-Path -Parent $MyInvocation.MyCommand.Path) "bootstrap_runtime.ps1"
-if (Test-Path $BootstrapScript) {
-  Write-Host "Checking Python dependencies..."
-  powershell -ExecutionPolicy Bypass -File $BootstrapScript -Action ensure_deps
+  return $ScriptDir
 }
 
 function Find-Python {
-  $py = Get-Command python -ErrorAction SilentlyContinue
-  if ($py) { return $py.Source }
-
-  $pyLauncher = Get-Command py -ErrorAction SilentlyContinue
-  if ($pyLauncher) { return $pyLauncher.Source }
-
+  param([string]$RuntimeRoot)
+  $Embedded = Join-Path $RuntimeRoot "runtime\python\python.exe"
+  $Candidates = @(
+    $Embedded,
+    "python",
+    "python3",
+    "$env:LOCALAPPDATA\Programs\Python\Python312\python.exe",
+    "$env:LOCALAPPDATA\Programs\Python\Python311\python.exe",
+    "$env:ProgramFiles\Python312\python.exe",
+    "$env:ProgramFiles\Python311\python.exe"
+  )
+  foreach ($Item in $Candidates) {
+    try {
+      if (Test-Path $Item) {
+        return $Item
+      }
+      $Cmd = Get-Command $Item -ErrorAction SilentlyContinue
+      if ($Cmd) {
+        return $Cmd.Source
+      }
+    } catch {}
+  }
   return $null
 }
 
-function Start-PythonService {
+function Test-Http {
+  param([string]$Url)
+  try {
+    Invoke-RestMethod -Uri $Url -Method Get -TimeoutSec 3 | Out-Null
+    return $true
+  } catch {
+    return $false
+  }
+}
+
+function Read-Tail {
+  param(
+    [string]$Path,
+    [int]$Lines = 80
+  )
+  if (!(Test-Path $Path)) {
+    return ""
+  }
+  try {
+    return (Get-Content $Path -Tail $Lines -ErrorAction SilentlyContinue) -join "`n"
+  } catch {
+    return ""
+  }
+}
+
+function Ensure-PythonRuntime {
+  param([string]$RuntimeRoot)
+  $ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+  $EnsureScript = Join-Path $ScriptDir "ensure_runtime.ps1"
+  if (!(Test-Path $EnsureScript)) {
+    return @{ ok = $true; skipped = $true; reason = "ensure_runtime_missing" }
+  }
+  try {
+    $Output = powershell.exe -NoProfile -ExecutionPolicy Bypass -File $EnsureScript -Root $RuntimeRoot
+    try {
+      return ($Output | ConvertFrom-Json)
+    } catch {
+      return @{ ok = $true; raw = ($Output | Out-String) }
+    }
+  } catch {
+    return @{ ok = $false; error = $_.Exception.Message }
+  }
+}
+
+function Start-ServiceProcess {
   param(
     [string]$Name,
     [string]$Module,
-    [int]$Port
+    [int]$Port,
+    [string]$RuntimeRoot,
+    [string]$Python,
+    [string]$LogDir,
+    [string]$PidDir
   )
-
-  Write-Host "Starting $Name on $Port..."
-  $Existing = Get-NetTCPConnection -LocalPort $Port -ErrorAction SilentlyContinue
-  if ($Existing) {
-    Write-Host "$Name already has port $Port in use."
-    return
+  $HealthUrl = "http://127.0.0.1:$Port/health"
+  if (Test-Http $HealthUrl) {
+    return @{
+      name = $Name
+      ok = $true
+      already_running = $true
+      port = $Port
+      health = $HealthUrl
+    }
   }
-
-  $Python = Find-Python
   if (-not $Python) {
-    Write-Host "Python not found. Cannot start $Name."
-    return
+    return @{
+      name = $Name
+      ok = $false
+      error = "python_not_found"
+      port = $Port
+    }
   }
-
-  $LogFile = Join-Path $LogDir "$Name.log"
+  $Stdout = Join-Path $LogDir "$Name.out.log"
+  $Stderr = Join-Path $LogDir "$Name.err.log"
+  $PidFile = Join-Path $PidDir "$Name.pid"
   $Args = @("-m", "uvicorn", $Module, "--host", "127.0.0.1", "--port", "$Port")
-  Write-Host "Command: $Python $($Args -join ' ')"
-  Write-Host "Log: $LogFile"
-
-  Start-Process `
-    -FilePath $Python `
-    -ArgumentList $Args `
-    -WorkingDirectory $Root `
-    -WindowStyle Hidden `
-    -RedirectStandardOutput $LogFile `
-    -RedirectStandardError $LogFile
-
-  Start-Sleep -Milliseconds 800
+  try {
+    $Proc = Start-Process `
+      -FilePath $Python `
+      -ArgumentList $Args `
+      -WorkingDirectory $RuntimeRoot `
+      -WindowStyle Hidden `
+      -PassThru `
+      -RedirectStandardOutput $Stdout `
+      -RedirectStandardError $Stderr
+    $Proc.Id | Set-Content -Path $PidFile -Encoding ASCII
+  } catch {
+    return @{
+      name = $Name
+      ok = $false
+      error = "process_start_failed"
+      message = $_.Exception.Message
+      port = $Port
+      stdout = $Stdout
+      stderr = $Stderr
+    }
+  }
+  for ($i = 0; $i -lt 35; $i++) {
+    Start-Sleep -Milliseconds 800
+    if (Test-Http $HealthUrl) {
+      return @{
+        name = $Name
+        ok = $true
+        pid = $Proc.Id
+        port = $Port
+        health = $HealthUrl
+        stdout = $Stdout
+        stderr = $Stderr
+      }
+    }
+  }
+  return @{
+    name = $Name
+    ok = $false
+    pid = $Proc.Id
+    port = $Port
+    health = $HealthUrl
+    stdout = $Stdout
+    stderr = $Stderr
+    error = "health_timeout"
+    stdout_tail = (Read-Tail $Stdout)
+    stderr_tail = (Read-Tail $Stderr)
+  }
 }
 
-# Module paths are relative to resource root.
-Start-PythonService -Name "model_gateway" -Module "services.model_gateway.main:app" -Port 18080
-Start-PythonService -Name "model_bootstrap" -Module "services.model_bootstrap_service.main:app" -Port 18100
-Start-PythonService -Name "skill_store" -Module "services.skill_store_service.main:app" -Port 18121
-Start-PythonService -Name "repo_memory" -Module "services.repo_memory_service.main:app" -Port 18125
-Start-PythonService -Name "workflow_store" -Module "services.workflow_store_service.main:app" -Port 18126
-Start-PythonService -Name "agent_runtime" -Module "services.agent_runtime_service.main:app" -Port 18131
+$RuntimeRoot = Resolve-RuntimeRoot $Root
+$LogDir = Join-Path $RuntimeRoot "logs\windows"
+$PidDir = Join-Path $RuntimeRoot "runtime\pids"
+Ensure-Dir $LogDir
+Ensure-Dir $PidDir
 
-Write-Host "Startup requested."
+$Runtime = Ensure-PythonRuntime $RuntimeRoot
+$Python = Find-Python $RuntimeRoot
+
+$Services = @(
+  @{ name = "model_bootstrap_service"; module = "services.model_bootstrap_service.main:app"; port = 18100 },
+  @{ name = "model_gateway"; module = "services.model_gateway.main:app"; port = 18080 },
+  @{ name = "repo_memory_service"; module = "services.repo_memory_service.main:app"; port = 18125 },
+  @{ name = "skill_store_service"; module = "services.skill_store_service.main:app"; port = 18121 },
+  @{ name = "workflow_store_service"; module = "services.workflow_store_service.main:app"; port = 18126 },
+  @{ name = "agent_runtime_service"; module = "services.agent_runtime_service.main:app"; port = 18131 }
+)
+
+$Result = [ordered]@{
+  ok = $true
+  runtime_root = $RuntimeRoot
+  python = $Python
+  runtime = $Runtime
+  started_at = (Get-Date).ToString("s")
+  services = @()
+}
+
+foreach ($Svc in $Services) {
+  $R = Start-ServiceProcess `
+    -Name $Svc.name `
+    -Module $Svc.module `
+    -Port $Svc.port `
+    -RuntimeRoot $RuntimeRoot `
+    -Python $Python `
+    -LogDir $LogDir `
+    -PidDir $PidDir
+  $Result.services += $R
+  if (-not $R.ok) {
+    $Result.ok = $false
+  }
+}
+
+Write-Json $Result

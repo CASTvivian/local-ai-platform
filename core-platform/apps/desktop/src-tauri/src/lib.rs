@@ -162,6 +162,118 @@ fn write_embedded_windows_bootstrap() -> Result<std::path::PathBuf, String> {
     }
 }
 
+fn quote_powershell_path(path: &std::path::Path) -> String {
+    format!("'{}'", path.display().to_string().replace('\'', "''"))
+}
+
+fn run_powershell_encoded(command_text: &str) -> Result<std::process::Output, String> {
+    use base64::Engine;
+    use std::process::Command;
+    let encoded_utf16: Vec<u16> = command_text.encode_utf16().collect();
+    let encoded_bytes: Vec<u8> = encoded_utf16.iter().flat_map(|c| c.to_le_bytes()).collect();
+    let encoded_command = base64::engine::general_purpose::STANDARD.encode(encoded_bytes);
+    Command::new("powershell.exe")
+        .args([
+            "-NoProfile",
+            "-ExecutionPolicy",
+            "Bypass",
+            "-EncodedCommand",
+            &encoded_command,
+        ])
+        .output()
+        .map_err(|e| e.to_string())
+}
+
+#[cfg(target_os = "windows")]
+fn find_windows_runtime_root(app: &tauri::AppHandle) -> Result<std::path::PathBuf, String> {
+    let resource_dir = app
+        .path()
+        .resource_dir()
+        .map_err(|e| format!("resource_dir error: {}", e))?;
+    let exe = std::env::current_exe().map_err(|e| e.to_string())?;
+    let app_dir = exe.parent().ok_or("no exe parent")?.to_path_buf();
+    let mut candidates = vec![
+        resource_dir.clone(),
+        resource_dir.join("resources"),
+        app_dir.join("maomiai-runtime"),
+    ];
+    if let Ok(local_appdata) = std::env::var("LOCALAPPDATA") {
+        candidates.push(
+            std::path::PathBuf::from(local_appdata)
+                .join("Local AI Platform")
+                .join("maomiai-runtime"),
+        );
+    }
+    candidates
+        .into_iter()
+        .find(|p| p.join("services").exists())
+        .ok_or_else(|| format!("runtime services root not found near {}", resource_dir.display()))
+}
+
+#[cfg(target_os = "windows")]
+fn find_windows_start_all_script(app: &tauri::AppHandle) -> Result<std::path::PathBuf, String> {
+    let resource_dir = app
+        .path()
+        .resource_dir()
+        .map_err(|e| format!("resource_dir error: {}", e))?;
+    let exe = std::env::current_exe().map_err(|e| e.to_string())?;
+    let app_dir = exe.parent().ok_or("no exe parent")?.to_path_buf();
+    let mut candidates = vec![
+        resource_dir.join("scripts").join("windows").join("start_all.ps1"),
+        resource_dir
+            .join("resources")
+            .join("scripts")
+            .join("windows")
+            .join("start_all.ps1"),
+        app_dir
+            .join("maomiai-runtime")
+            .join("scripts")
+            .join("windows")
+            .join("start_all.ps1"),
+    ];
+    if let Ok(local_appdata) = std::env::var("LOCALAPPDATA") {
+        candidates.push(
+            std::path::PathBuf::from(local_appdata)
+                .join("Local AI Platform")
+                .join("maomiai-runtime")
+                .join("scripts")
+                .join("windows")
+                .join("start_all.ps1"),
+        );
+    }
+    candidates
+        .into_iter()
+        .find(|p| p.exists())
+        .ok_or_else(|| "start_all.ps1 not found in runtime resources".to_string())
+}
+
+#[tauri::command]
+fn start_local_ai_runtime(app: tauri::AppHandle) -> Result<String, String> {
+    #[cfg(target_os = "windows")]
+    {
+        let script = find_windows_start_all_script(&app)?;
+        let root = find_windows_runtime_root(&app)?;
+        let command_text = format!(
+            "& {} -Root {}",
+            quote_powershell_path(&script),
+            quote_powershell_path(&root)
+        );
+        let output = run_powershell_encoded(&command_text)?;
+        let stdout = String::from_utf8_lossy(&output.stdout).to_string();
+        let stderr = String::from_utf8_lossy(&output.stderr).to_string();
+        if output.status.success() {
+            Ok(stdout)
+        } else {
+            Err(format!("start_all.ps1 failed: {}", stderr))
+        }
+    }
+    #[cfg(not(target_os = "windows"))]
+    {
+        let _ = app;
+        Ok("{\"ok\":false,\"message\":\"start_local_ai_runtime is only available on Windows.\"}".to_string())
+    }
+}
+
 fn run_windows_bootstrap(action: &str, profile: Option<String>) -> Result<String, String> {
     use std::process::Command;
     #[cfg(target_os = "windows")]
@@ -294,6 +406,7 @@ pub fn run() {
         .invoke_handler(tauri::generate_handler![
             start_backend,
             start_desktop_services,
+            start_local_ai_runtime,
             stop_desktop_services,
             local_ai_status_direct,
             install_local_inference_backend,

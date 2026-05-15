@@ -156,8 +156,50 @@
     return null;
   }
 
+  async function maomiaiAgentRuntimeHealth() {
+    try {
+      const response = await fetch("http://127.0.0.1:18131/health", { method: "GET" });
+      return { ok: response.ok, status: response.status };
+    } catch (err) {
+      return { ok: false, error: err.message || String(err) };
+    }
+  }
+
+  async function maomiaiTryStartWindowsRuntime() {
+    const invoke = window.__TAURI__?.core?.invoke || window.__TAURI__?.tauri?.invoke;
+    if (!invoke) {
+      return { ok: false, error: "tauri_invoke_unavailable" };
+    }
+    try {
+      const result = await invoke("start_local_ai_runtime", {});
+      return typeof result === "string" ? safeParse(result) : result;
+    } catch (err) {
+      return { ok: false, error: err.message || String(err) };
+    }
+  }
+
+  async function maomiaiEnsureAgentRuntimeBeforeSend() {
+    const initialHealth = await maomiaiAgentRuntimeHealth();
+    if (initialHealth.ok) {
+      return { ok: true, already_running: true, initial_health: initialHealth };
+    }
+    const startResult = await maomiaiTryStartWindowsRuntime();
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+    const finalHealth = await maomiaiAgentRuntimeHealth();
+    return {
+      ok: !!finalHealth.ok,
+      initial_health: initialHealth,
+      start_result: startResult,
+      final_health: finalHealth,
+    };
+  }
+
   async function runAgentRuntime(userText) {
     const model = getCurrentModel();
+    const runtimeReady = await maomiaiEnsureAgentRuntimeBeforeSend();
+    if (!runtimeReady.ok) {
+      throw new Error(`Agent Runtime auto-start failed: ${JSON.stringify(runtimeReady)}`);
+    }
     const response = await fetch("http://127.0.0.1:18131/agent/run", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
