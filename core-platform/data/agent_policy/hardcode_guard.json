@@ -14,6 +14,7 @@
     "core-platform/data/agent_policy/hardcode_guard.json",
     "core-platform/services/agent_runtime_service/app/policy/loader.py",
     "core-platform/services/agent_runtime_service/app/planning/legacy_rule_planner.py",
+    "core-platform/data/agent_policy/capability_registry.json",
     "core-platform/docs/reports"
   ],
   "blocked_literals": [

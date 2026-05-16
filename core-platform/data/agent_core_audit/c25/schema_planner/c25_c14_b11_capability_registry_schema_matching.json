@@ -1,0 +1,78 @@
+{
+  "checked_at": "2026-05-16T04:43:26.729439Z",
+  "capability_registry_file": "core-platform/data/agent_policy/capability_registry.json",
+  "registry_py": "core-platform/services/agent_runtime_service/app/capability/registry.py",
+  "capability_count": 12,
+  "source": "schema_registry",
+  "tests": [
+    {
+      "input": "请帮我分析代码结构",
+      "top_matches": [
+        [
+          "code.standard",
+          0.09
+        ],
+        [
+          "reasoning.standard",
+          0.09
+        ],
+        [
+          "repo.memory",
+          0.1
+        ]
+      ]
+    },
+    {
+      "input": "我们有哪些项目资产",
+      "top_matches": [
+        [
+          "repo.memory",
+          0.1
+        ],
+        [
+          "code.standard",
+          0.09
+        ],
+        [
+          "web.search",
+          0.1
+        ]
+      ]
+    },
+    {
+      "input": "帮我查公开资料",
+      "top_matches": [
+        [
+          "browser.fetch",
+          0.07
+        ],
+        [
+          "web.search",
+          0.1
+        ],
+        [
+          "repo.memory",
+          0.1
+        ]
+      ]
+    },
+    {
+      "input": "现在几点",
+      "top_matches": [
+        [
+          "repo.memory",
+          0.1
+        ],
+        [
+          "web.search",
+          0.1
+        ],
+        [
+          "weather.query",
+          0.1
+        ]
+      ]
+    }
+  ],
+  "note": "Capability matching now loads external schema and computes generic schema text overlap. Fixed Chinese keyword scoring table removed from runtime code."
+}

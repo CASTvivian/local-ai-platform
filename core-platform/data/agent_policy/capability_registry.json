@@ -1,0 +1,151 @@
+{
+  "version": "c25-c14-b11",
+  "description": "External capability registry. Runtime matching must use schema descriptions and aliases from this file, not hardcoded keyword tables in Python.",
+  "capabilities": [
+    {
+      "id": "chat.light",
+      "name": "轻量对话能力",
+      "type": "model",
+      "description": "Low-resource quick dialogue and basic Q&A for constrained hardware.",
+      "runtime": "model",
+      "target": "qwen2.5:1.5b",
+      "tags": ["chat", "local_model", "light"],
+      "aliases": ["chat", "dialogue", "qa", "问答", "对话", "轻量"],
+      "priority": 60,
+      "enabled": true
+    },
+    {
+      "id": "chat.standard",
+      "name": "标准对话能力",
+      "type": "model",
+      "description": "Standard dialogue, writing, summarization, and general Q&A in Chinese.",
+      "runtime": "model",
+      "target": "qwen2.5:7b",
+      "tags": ["chat", "local_model", "cn"],
+      "aliases": ["chat", "writing", "summary", "写作", "总结", "中文"],
+      "priority": 80,
+      "enabled": true
+    },
+    {
+      "id": "code.standard",
+      "name": "代码能力",
+      "type": "model",
+      "description": "Code generation, review, error analysis, project repair, and development assistance.",
+      "runtime": "model",
+      "target": "qwen2.5-coder:7b",
+      "tags": ["code", "coding", "developer"],
+      "aliases": ["code", "development", "programming", "debug", "build", "test", "代码", "编程", "开发", "报错", "bug"],
+      "priority": 85,
+      "enabled": true
+    },
+    {
+      "id": "reasoning.standard",
+      "name": "推理分析能力",
+      "type": "model",
+      "description": "Complex problem decomposition, analysis, reasoning, and strategy formulation.",
+      "runtime": "model",
+      "target": "deepseek-r1:7b",
+      "tags": ["reasoning", "analysis", "planning"],
+      "aliases": ["reasoning", "analysis", "strategy", "推理", "分析", "判断", "策略"],
+      "priority": 85,
+      "enabled": true
+    },
+    {
+      "id": "repo.memory",
+      "name": "项目知识能力",
+      "type": "tool",
+      "description": "Query local repositories, GitHub stars, reference summaries, and Repo Memory for project knowledge.",
+      "runtime": "mcp",
+      "target": "repo_memory.search",
+      "tags": ["repo", "memory", "rag", "knowledge", "agent", "mcp"],
+      "aliases": ["repo", "memory", "project", "architecture", "asset", "knowledge", "brain", "仓", "项目", "知识库", "mcp", "rag"],
+      "priority": 95,
+      "enabled": true
+    },
+    {
+      "id": "skill.store",
+      "name": "技能仓能力",
+      "type": "tool",
+      "description": "List and manage local skill store capabilities.",
+      "runtime": "mcp",
+      "target": "skill_store.list",
+      "tags": ["skill", "capability", "tools"],
+      "aliases": ["skill", "capability", "tools", "技能"],
+      "priority": 70,
+      "enabled": true
+    },
+    {
+      "id": "workflow.store",
+      "name": "工作流能力",
+      "type": "tool",
+      "description": "List and manage local workflows and automation.",
+      "runtime": "mcp",
+      "target": "workflow_store.list",
+      "tags": ["workflow", "automation"],
+      "aliases": ["workflow", "automation", "工作流"],
+      "priority": 70,
+      "enabled": true
+    },
+    {
+      "id": "shell.sandbox",
+      "name": "沙箱命令能力",
+      "type": "tool",
+      "description": "Execute approved commands in a sandboxed environment after approval.",
+      "runtime": "mcp",
+      "target": "shell.exec",
+      "tags": ["shell", "sandbox", "execution"],
+      "aliases": ["shell", "sandbox", "execution", "command", "沙箱"],
+      "priority": 40,
+      "enabled": true,
+      "metadata": {"requires_approval": true}
+    },
+    {
+      "id": "browser.fetch",
+      "name": "网页抓取能力",
+      "type": "tool",
+      "description": "Fetch public web pages, create local snapshots for subsequent search and content reading.",
+      "runtime": "mcp",
+      "target": "browser.fetch",
+      "tags": ["browser", "web", "fetch", "snapshot"],
+      "aliases": ["browser", "web page", "fetch", "snapshot", "url", "网页", "抓取", "读取网页"],
+      "priority": 75,
+      "enabled": true
+    },
+    {
+      "id": "web.search",
+      "name": "联网搜索能力",
+      "type": "tool",
+      "description": "Search the public web for external or fresh information when local memory is insufficient.",
+      "runtime": "mcp",
+      "target": "web.search",
+      "tags": ["web", "search", "realtime", "browser"],
+      "aliases": ["web", "search", "online", "fresh", "latest", "联网", "搜索"],
+      "priority": 95,
+      "enabled": true
+    },
+    {
+      "id": "weather.query",
+      "name": "天气查询能力",
+      "type": "tool",
+      "description": "Query real-time weather via geocoding and Open-Meteo when a location is resolved.",
+      "runtime": "mcp",
+      "target": "weather.query",
+      "tags": ["weather", "realtime", "geocoding"],
+      "aliases": ["weather", "forecast", "temperature", "天气"],
+      "priority": 95,
+      "enabled": true
+    },
+    {
+      "id": "video.catalog",
+      "name": "视频生成目录能力",
+      "type": "catalog",
+      "description": "Query video generation model catalog and ComfyUI/remote video generation pipeline.",
+      "runtime": "catalog",
+      "target": "open_video_model_catalog",
+      "tags": ["video", "comfyui", "generation"],
+      "aliases": ["video", "media", "catalog", "creative", "视频", "生成视频", "comfyui"],
+      "priority": 60,
+      "enabled": true
+    }
+  ]
+}

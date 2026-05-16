@@ -1,164 +1,148 @@
-"""Runtime capability registry and matcher."""
+"""Runtime capability registry — schema-driven matching, no hardcoded keyword tables."""
 
 from __future__ import annotations
 
 import json
+import os
 from pathlib import Path
-from typing import List, Optional
+from typing import Any, Dict, List, Optional
 
 from .models import Capability
 
 
-CORE_PLATFORM_ROOT = Path(__file__).resolve().parents[4]
-REGISTRY_ROOT = CORE_PLATFORM_ROOT / "data" / "capability_registry"
-REGISTRY_FILE = REGISTRY_ROOT / "capabilities.json"
+# ---------------------------------------------------------------------------
+# Path resolution
+# ---------------------------------------------------------------------------
 
-DEFAULT_CAPABILITIES = [
-    Capability(
-        id="chat.light",
-        name="轻量对话能力",
-        type="model",
-        description="低配电脑快速对话与基础问答。",
-        runtime="model",
-        target="qwen2.5:1.5b",
-        tags=["chat", "local_model", "light"],
-        priority=60,
-    ),
-    Capability(
-        id="chat.standard",
-        name="标准对话能力",
-        type="model",
-        description="中文对话、写作、总结与一般问答。",
-        runtime="model",
-        target="qwen2.5:7b",
-        tags=["chat", "local_model", "cn"],
-        priority=80,
-    ),
-    Capability(
-        id="code.standard",
-        name="代码能力",
-        type="model",
-        description="代码生成、代码审查、错误分析和项目修复。",
-        runtime="model",
-        target="qwen2.5-coder:7b",
-        tags=["code", "coding", "developer"],
-        priority=85,
-    ),
-    Capability(
-        id="reasoning.standard",
-        name="推理分析能力",
-        type="model",
-        description="复杂问题拆解、分析、推理和策略制定。",
-        runtime="model",
-        target="deepseek-r1:7b",
-        tags=["reasoning", "analysis", "planning"],
-        priority=85,
-    ),
-    Capability(
-        id="repo.memory",
-        name="项目知识能力",
-        type="tool",
-        description="查询本地仓库、GitHub Stars、参考仓摘要和 Repo Memory。",
-        runtime="mcp",
-        target="repo_memory.search",
-        tags=["repo", "memory", "rag", "knowledge", "agent", "mcp"],
-        priority=95,
-    ),
-    Capability(
-        id="skill.store",
-        name="技能仓能力",
-        type="tool",
-        description="列出和管理本地技能仓能力。",
-        runtime="mcp",
-        target="skill_store.list",
-        tags=["skill", "capability", "tools"],
-        priority=70,
-    ),
-    Capability(
-        id="workflow.store",
-        name="工作流能力",
-        type="tool",
-        description="列出和管理本地工作流。",
-        runtime="mcp",
-        target="workflow_store.list",
-        tags=["workflow", "automation"],
-        priority=70,
-    ),
-    Capability(
-        id="shell.sandbox",
-        name="沙箱命令能力",
-        type="tool",
-        description="审批后在沙箱中执行安全命令。",
-        runtime="mcp",
-        target="shell.exec",
-        tags=["shell", "sandbox", "execution"],
-        priority=40,
-        metadata={"requires_approval": True},
-    ),
-    Capability(
-        id="browser.fetch",
-        name="网页抓取能力",
-        type="tool",
-        description="安全抓取公开网页并生成本地 snapshot，用于后续联网搜索和资料读取。",
-        runtime="mcp",
-        target="browser.fetch",
-        tags=["browser", "web", "fetch", "snapshot", "网页抓取"],
-        priority=75,
-    ),
-    Capability(
-        id="web.search",
-        name="联网搜索能力",
-        type="tool",
-        description="搜索公开网页，并可抓取首个结果形成 browser snapshot。",
-        runtime="mcp",
-        target="web.search",
-        tags=["web", "search", "realtime", "browser"],
-        priority=95,
-        enabled=True,
-    ),
-    Capability(
-        id="weather.query",
-        name="天气查询能力",
-        type="tool",
-        description="通过 geocoding 和 Open-Meteo 查询实时天气。",
-        runtime="mcp",
-        target="weather.query",
-        tags=["weather", "realtime", "geocoding"],
-        priority=95,
-        enabled=True,
-    ),
-    Capability(
-        id="video.catalog",
-        name="视频生成目录能力",
-        type="catalog",
-        description="查询视频生成模型目录和后续 ComfyUI/远程视频生成规划。",
-        runtime="catalog",
-        target="open_video_model_catalog",
-        tags=["video", "comfyui", "generation"],
-        priority=60,
-    ),
-]
+def _core_platform_dir() -> Path:
+    """Resolve core-platform root from env or file location."""
+    env = os.environ.get("MAOMIAI_CORE_PLATFORM_DIR")
+    if env:
+        return Path(env).expanduser().resolve()
+    return Path(__file__).resolve().parents[4]
 
 
-def ensure_registry() -> None:
-    """Create runtime registry file when missing."""
+def _schema_registry_path() -> Path:
+    """Path to the external capability registry JSON."""
+    return _core_platform_dir() / "data" / "agent_policy" / "capability_registry.json"
 
-    REGISTRY_ROOT.mkdir(parents=True, exist_ok=True)
-    if not REGISTRY_FILE.exists():
-        save_capabilities(DEFAULT_CAPABILITIES)
+
+def _runtime_registry_path() -> Path:
+    """Path to the runtime capability registry (persisted edits)."""
+    root = _core_platform_dir() / "data" / "capability_registry"
+    root.mkdir(parents=True, exist_ok=True)
+    return root / "capabilities.json"
+
+
+# ---------------------------------------------------------------------------
+# External schema loader
+# ---------------------------------------------------------------------------
+
+def load_capability_schema() -> Dict[str, Any]:
+    """Load the external capability_registry.json schema."""
+    path = _schema_registry_path()
+    if not path.exists():
+        return {"version": "missing", "capabilities": []}
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+# ---------------------------------------------------------------------------
+# Tokenisation / term extraction
+# ---------------------------------------------------------------------------
+
+def _terms(value: str) -> set[str]:
+    """Extract search terms from a string — CJK n-gram aware."""
+    text = str(value or "").lower()
+    tokens: set[str] = set()
+    current: list[str] = []
+    for ch in text:
+        if ch.isalnum() or ch in {"_", "-", "."}:
+            current.append(ch)
+        else:
+            if current:
+                tokens.add("".join(current))
+                current = []
+    if current:
+        tokens.add("".join(current))
+    # CJK n-grams for Chinese/Japanese/Korean text
+    compact = "".join(ch for ch in str(value or "") if not ch.isspace())
+    for n in (2, 3, 4):
+        for i in range(max(0, len(compact) - n + 1)):
+            tokens.add(compact[i:i + n].lower())
+    return {x for x in tokens if x}
+
+
+def _capability_text(capability: dict[str, Any]) -> str:
+    """Collect all descriptive text from a capability dict for term matching."""
+    parts: list[str] = []
+    for key in ("id", "name", "type", "description", "runtime", "target"):
+        if capability.get(key):
+            parts.append(str(capability.get(key)))
+    for item in capability.get("tags", []) or []:
+        parts.append(str(item))
+    for item in capability.get("aliases", []) or []:
+        parts.append(str(item))
+    return " ".join(parts)
+
+
+# ---------------------------------------------------------------------------
+# Capability loading — merge schema + runtime overrides
+# ---------------------------------------------------------------------------
+
+_DEFAULT_CAPABILITIES: Optional[List[Capability]] = None
+
+
+def _capabilities_from_schema() -> List[Capability]:
+    """Build Capability objects from the external schema."""
+    schema = load_capability_schema()
+    caps: List[Capability] = []
+    for entry in schema.get("capabilities", []):
+        try:
+            caps.append(Capability(
+                id=entry["id"],
+                name=entry.get("name", entry["id"]),
+                type=entry.get("type", "model"),
+                description=entry.get("description", ""),
+                runtime=entry.get("runtime", "model"),
+                target=entry.get("target", ""),
+                priority=entry.get("priority", 50),
+                enabled=entry.get("enabled", True),
+                tags=entry.get("tags", []),
+                metadata=entry.get("metadata", {}),
+            ))
+        except Exception:
+            continue
+    return caps
 
 
 def load_capabilities() -> List[Capability]:
-    """Load registered capabilities."""
+    """Load capabilities: runtime overrides if present, else schema."""
+    global _DEFAULT_CAPABILITIES
+    runtime_path = _runtime_registry_path()
+    if runtime_path.exists():
+        try:
+            data = json.loads(runtime_path.read_text(encoding="utf-8"))
+            return [Capability.model_validate(item) for item in data]
+        except Exception:
+            pass
+    # Fallback to schema
+    caps = _capabilities_from_schema()
+    if caps:
+        _DEFAULT_CAPABILITIES = caps
+        return caps
+    # Last resort: empty list
+    return []
 
-    ensure_registry()
-    data = json.loads(REGISTRY_FILE.read_text(encoding="utf-8"))
-    return [Capability.model_validate(item) for item in data]
+
+def ensure_registry() -> None:
+    """Create runtime registry file when missing (from schema)."""
+    caps = load_capabilities()
+    if caps and not _runtime_registry_path().exists():
+        save_capabilities(caps)
 
 
 def list_capabilities(enabled_only: bool = False) -> List[dict]:
     """Return capability dictionaries for API responses."""
-
     items = load_capabilities()
     if enabled_only:
         items = [item for item in items if item.enabled]
@@ -167,7 +151,6 @@ def list_capabilities(enabled_only: bool = False) -> List[dict]:
 
 def get_capability(capability_id: str) -> Optional[Capability]:
     """Return one capability by id."""
-
     for item in load_capabilities():
         if item.id == capability_id:
             return item
@@ -176,9 +159,9 @@ def get_capability(capability_id: str) -> Optional[Capability]:
 
 def save_capabilities(items: List[Capability]) -> None:
     """Persist runtime capability registry."""
-
-    REGISTRY_ROOT.mkdir(parents=True, exist_ok=True)
-    REGISTRY_FILE.write_text(
+    path = _runtime_registry_path()
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(
         json.dumps([item.model_dump() for item in items], ensure_ascii=False, indent=2),
         encoding="utf-8",
     )
@@ -186,7 +169,6 @@ def save_capabilities(items: List[Capability]) -> None:
 
 def upsert_capability(capability: Capability) -> Capability:
     """Insert or replace one capability."""
-
     items = load_capabilities()
     for index, item in enumerate(items):
         if item.id == capability.id:
@@ -198,57 +180,80 @@ def upsert_capability(capability: Capability) -> Capability:
     return capability
 
 
+# ---------------------------------------------------------------------------
+# Schema-driven matching — no hardcoded keyword tables
+# ---------------------------------------------------------------------------
+
 def match_capabilities(
     query: str,
     intent: str | None = None,
     tags: list[str] | None = None,
     limit: int = 5,
 ) -> List[Capability]:
-    """Match a query and optional intent to enabled capabilities."""
+    """Match a query to enabled capabilities using schema text overlap scoring.
 
+    Scoring is based on term overlap between the query and the combined
+    descriptive text of each capability (id, name, type, description,
+    tags, aliases).  No hardcoded Chinese keyword tables are used.
+    """
     tags = tags or []
-    normalized_query = (query or "").lower()
+    query_terms = _terms(query)
+    if not query_terms:
+        return []
+
+    # Load schema to get aliases for scoring
+    schema = load_capability_schema()
+    alias_map: Dict[str, set[str]] = {}
+    for entry in schema.get("capabilities", []):
+        cap_id = entry.get("id", "")
+        entry_terms: set[str] = set()
+        for item in entry.get("aliases", []) or []:
+            entry_terms.update(_terms(str(item)))
+        for item in entry.get("tags", []) or []:
+            entry_terms.update(_terms(str(item)))
+        alias_map[cap_id] = entry_terms
+
     scored: list[tuple[float, Capability]] = []
     for capability in load_capabilities():
         if not capability.enabled:
             continue
-        score = 0.0
-        haystack = " ".join(
-            [
-                capability.id,
-                capability.name,
-                capability.type,
-                capability.description,
-                " ".join(capability.tags),
-                capability.runtime,
-                capability.target,
-            ]
-        ).lower()
-        for token in normalized_query.replace("/", " ").replace("_", " ").split():
-            if token and token in haystack:
-                score += 5
+        # Build text from capability fields
+        cap_text = " ".join([
+            capability.id,
+            capability.name,
+            capability.type,
+            capability.description,
+            " ".join(capability.tags),
+            capability.runtime,
+            capability.target,
+        ])
+        cap_terms = _terms(cap_text)
+        # Merge schema alias terms
+        cap_terms.update(alias_map.get(capability.id, set()))
+
+        # Compute overlap score
+        overlap = query_terms.intersection(cap_terms)
+        base_score = len(overlap) / max(1, min(len(query_terms), len(cap_terms)))
+
+        # Bonus for explicit tag match
+        tag_bonus = 0.0
         for tag in tags:
             if tag in capability.tags:
-                score += 10
-        if intent and (intent in capability.tags or intent in capability.id or intent in capability.type):
-            score += 20
-        if any(keyword in normalized_query for keyword in ["代码", "编程", "bug", "报错", "开发"]):
-            if "code" in capability.tags:
-                score += 30
-        if any(keyword in normalized_query for keyword in ["推理", "分析", "判断", "策略"]):
-            if "reasoning" in capability.tags:
-                score += 30
-        if any(keyword in normalized_query for keyword in ["仓", "项目", "mcp", "rag", "agent", "知识库"]):
-            if "memory" in capability.tags or "repo" in capability.tags:
-                score += 35
-        if any(keyword in normalized_query for keyword in ["视频", "生成视频", "comfyui"]):
-            if "video" in capability.tags:
-                score += 35
-        if any(keyword in normalized_query for keyword in ["网页", "抓取", "读取网页", "fetch", "url"]):
-            if "browser" in capability.tags or "fetch" in capability.tags:
-                score += 35
-        score += capability.priority / 100
+                tag_bonus += 0.1
+
+        # Bonus for intent match
+        intent_bonus = 0.0
+        if intent:
+            intent_terms = _terms(intent)
+            if intent_terms.intersection(cap_terms):
+                intent_bonus = 0.15
+
+        # Small priority-based tiebreaker (0..1 range, max ~1.0)
+        priority_bonus = capability.priority / 1000.0
+
+        score = round(base_score + tag_bonus + intent_bonus + priority_bonus, 4)
         if score > 0:
             scored.append((score, capability))
+
     scored.sort(key=lambda item: item[0], reverse=True)
     return [item[1] for item in scored[:limit]]
