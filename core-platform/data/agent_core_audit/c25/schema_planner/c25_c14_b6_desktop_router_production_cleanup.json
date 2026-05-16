@@ -1,0 +1,139 @@
+{
+  "checked_at": "2026-05-16T05:27:08.239452Z",
+  "file": "core-platform/apps/desktop/src/js/windows-demo-stable-router.js",
+  "finding_count_before": 24,
+  "findings_before": [
+    {
+      "category": "fallback",
+      "line": 4,
+      "text": "const MODEL_CATALOG_FALLBACK = ["
+    },
+    {
+      "category": "fallback",
+      "line": 30,
+      "text": "return window.__MAOMIAI_MODEL_CATALOG__ || MODEL_CATALOG_FALLBACK;"
+    },
+    {
+      "category": "fallback",
+      "line": 53,
+      "text": "return catalog.find((item) => item.profile === profile) || catalog[0] || MODEL_CATALOG_FALLBACK[0];"
+    },
+    {
+      "category": "fallback",
+      "line": 253,
+      "text": "return { ok: true, source: \"rust_autostart_fallback\", note: \"invoke failed but Rust autostart may be active\", error: err.message || String(err) };"
+    },
+    {
+      "category": "infer_view",
+      "line": 663,
+      "text": "function inferViewFromText(text) {"
+    },
+    {
+      "category": "infer_view",
+      "line": 683,
+      "text": "const view = inferViewFromText(text);"
+    },
+    {
+      "category": "fixed_test_buttons",
+      "line": 170,
+      "text": "box.innerHTML = messages || '<div class=\"demo-card\"><p>请输入问题，测试 Agent Runtime 是否可用。</p></div>';"
+    },
+    {
+      "category": "fixed_test_buttons",
+      "line": 551,
+      "text": "<button class=\"primary\" data-action=\"maomiai-test-infer\">测试 Agent Runtime</button>"
+    },
+    {
+      "category": "model_catalog_fallback",
+      "line": 4,
+      "text": "const MODEL_CATALOG_FALLBACK = ["
+    },
+    {
+      "category": "model_catalog_fallback",
+      "line": 30,
+      "text": "return window.__MAOMIAI_MODEL_CATALOG__ || MODEL_CATALOG_FALLBACK;"
+    },
+    {
+      "category": "model_catalog_fallback",
+      "line": 53,
+      "text": "return catalog.find((item) => item.profile === profile) || catalog[0] || MODEL_CATALOG_FALLBACK[0];"
+    },
+    {
+      "category": "keyword_includes",
+      "line": 36,
+      "text": "const installed = getCatalog().filter((item) => raw.includes(item.model));"
+    },
+    {
+      "category": "keyword_includes",
+      "line": 655,
+      "text": "if ([\"chat\"].includes(target)) return renderChat();"
+    },
+    {
+      "category": "keyword_includes",
+      "line": 656,
+      "text": "if ([\"models\", \"model\", \"local-model\", \"local-models\"].includes(target)) return renderLocalModels();"
+    },
+    {
+      "category": "keyword_includes",
+      "line": 657,
+      "text": "if ([\"artifacts\", \"files\", \"documents\"].includes(target)) return renderFiles();"
+    },
+    {
+      "category": "keyword_includes",
+      "line": 658,
+      "text": "if ([\"code-review\", \"code\"].includes(target)) return renderCodeReview();"
+    },
+    {
+      "category": "keyword_includes",
+      "line": 659,
+      "text": "if ([\"settings\", \"setting\"].includes(target)) return renderSettings();"
+    },
+    {
+      "category": "keyword_includes",
+      "line": 665,
+      "text": "if (value.includes(\"新对话\") || value.includes(\"新建会话\")) return \"chat\";"
+    },
+    {
+      "category": "keyword_includes",
+      "line": 666,
+      "text": "if (value.includes(\"本地模型\") || value.includes(\"模型\")) return \"models\";"
+    },
+    {
+      "category": "keyword_includes",
+      "line": 667,
+      "text": "if (value.includes(\"文件\") || value.includes(\"结果\") || value.includes(\"产物\")) return \"artifacts\";"
+    },
+    {
+      "category": "keyword_includes",
+      "line": 668,
+      "text": "if (value.includes(\"代码\")) return \"code-review\";"
+    },
+    {
+      "category": "keyword_includes",
+      "line": 669,
+      "text": "if (value.includes(\"设置\")) return \"settings\";"
+    },
+    {
+      "category": "keyword_includes",
+      "line": 774,
+      "text": "if (text === \"发送\" || text.includes(\"发送\")) {"
+    },
+    {
+      "category": "keyword_indexof",
+      "line": 81,
+      "text": "const first = text.indexOf(\"{\");"
+    }
+  ],
+  "checked_after": "2026-05-16T05:27:59.366413+00:00",
+  "checks_after": {
+    "has_production_agent_mode": true,
+    "dry_run_true_count": 0,
+    "old_test_agent_runtime_label": false,
+    "old_test_time_label": false,
+    "old_test_project_label": false,
+    "model_catalog_fallback_count": 0,
+    "model_catalog_demo_cache_count": 3,
+    "infer_view_marked_legacy": true
+  },
+  "note": "Desktop router production cleanup reduces dry_run/test/fallback user-facing paths. Remaining UI navigation helper is marked legacy UI-only."
+}

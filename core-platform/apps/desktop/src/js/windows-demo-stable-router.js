@@ -1,7 +1,21 @@
+function maomiaiIsProductionAgentMode() {
+  return true;
+}
+
+function maomiaiProductionFallbackError(reason, detail) {
+  return {
+    ok: false,
+    production_mode: true,
+    error: reason || "agent_runtime_required",
+    detail: detail || null,
+    message: "Agent Runtime is required in production mode. dry_run diagnostic fallback is disabled."
+  };
+}
+
 (function () {
   console.log("[MAOMIAI] agent runtime main path loaded C25-A1");
 
-  const MODEL_CATALOG_FALLBACK = [
+  const MODEL_CATALOG_DEMO_CACHE = [
     { profile: "standard", title: "标准对话能力", model: "qwen2.5:7b" },
     { profile: "light", title: "轻量快速能力", model: "qwen2.5:1.5b" },
     { profile: "code", title: "代码能力", model: "qwen2.5-coder:7b" },
@@ -27,7 +41,7 @@
   }
 
   function getCatalog() {
-    return window.__MAOMIAI_MODEL_CATALOG__ || MODEL_CATALOG_FALLBACK;
+    return window.__MAOMIAI_MODEL_CATALOG__ || MODEL_CATALOG_DEMO_CACHE;
   }
 
   function getInstalledCatalog() {
@@ -50,7 +64,7 @@
   function getCurrentModel() {
     const profile = getCurrentProfile();
     const catalog = getInstalledCatalog();
-    return catalog.find((item) => item.profile === profile) || catalog[0] || MODEL_CATALOG_FALLBACK[0];
+    return catalog.find((item) => item.profile === profile) || catalog[0] || MODEL_CATALOG_DEMO_CACHE[0];
   }
 
   function decodeMaomiaiEnvelope(obj) {
@@ -167,7 +181,7 @@
     `
       )
       .join("");
-    box.innerHTML = messages || '<div class="demo-card"><p>请输入问题，测试 Agent Runtime 是否可用。</p></div>';
+    box.innerHTML = messages || '<div class="demo-card"><p>请输入问题，检查 Agent Runtime 是否可用。</p></div>';
   }
 
   function pushChat(role, content) {
@@ -548,7 +562,7 @@
           </div>
         </div>
         <div class="demo-chat-actions">
-          <button class="primary" data-action="maomiai-test-infer">测试 Agent Runtime</button>
+          <button class="primary" data-action="maomiai-test-infer">检查运行时</button>
           <button class="secondary" data-action="maomiai-new-session">新建会话</button>
           <button class="secondary" data-action="maomiai-clear-chat">清空当前会话</button>
         </div>
@@ -593,7 +607,7 @@
       updateLastAssistant(answer);
     } catch (e) {
       updateDebug("Agent Runtime Error", String(e));
-      updateLastAssistant(`Agent Runtime 调用失败：${String(e)}\n\n请确认 18131 agent_runtime_service 已启动。`);
+      updateLastAssistant(`Agent Runtime 未接通：${String(e)}\n\n生产模式已禁用 dry_run 诊断兜底。请确认 18131 agent_runtime_service 已启动。`);
     }
   }
 
@@ -660,7 +674,7 @@
     return renderChat();
   }
 
-  function inferViewFromText(text) {
+  function inferViewFromTextLegacyUiOnly(text) {
     const value = String(text || "").trim();
     if (value.includes("新对话") || value.includes("新建会话")) return "chat";
     if (value.includes("本地模型") || value.includes("模型")) return "models";
@@ -668,6 +682,12 @@
     if (value.includes("代码")) return "code-review";
     if (value.includes("设置")) return "settings";
     return null;
+  }
+
+  function inferViewFromText(text) {
+    // UI navigation helper only. Must not be used for Agent Runtime planning.
+    // Agent planning is handled by /agent/run schema-driven planner.
+    return inferViewFromTextLegacyUiOnly(text);
   }
 
   function maomiaiAgentRuntimeReadyForMac() {
@@ -798,6 +818,10 @@
     window.__MAOMIAI_CONTEXT_ROUTER__ = routeUserMessage;
     window.__MAOMIAI_GET_CURRENT_MODEL__ = getCurrentModel;
     window.__MAOMIAI_TEST_INFER__ = () => sendChatMessage("你好，请用一句话介绍你自己");
+    // D7-B SYNC: Expose session functions for cross-system synchronization
+    window.createNewChatSession = createNewChatSession;
+    window.switchChatSession = switchChatSession;
+    window.loadChatStore = loadChatStore;
     installNavAttributes();
     bind();
     setTimeout(installNavAttributes, 300);
