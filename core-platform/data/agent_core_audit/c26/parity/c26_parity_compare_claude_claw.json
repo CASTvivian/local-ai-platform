@@ -1,0 +1,660 @@
+{
+  "checked_at": "2026-05-16T09:37:05.685256Z",
+  "summary": {
+    "total": 19,
+    "implemented": 18,
+    "partial": 1,
+    "gap": 0,
+    "average_score": 99.1
+  },
+  "items": [
+    {
+      "id": "planner.schema_driven",
+      "name": "Schema-driven planner",
+      "claude_claw_expected": "User request is converted into structured plan over available tools/capabilities.",
+      "paths": [
+        "services/agent_runtime_service/app/planner.py",
+        "services/agent_runtime_service/app/planning/schema_planner.py",
+        "data/agent_policy/planner_tool_schema.json"
+      ],
+      "must_have": [
+        "build_schema_plan",
+        "_normalize_model_plan",
+        "planner_tool_schema"
+      ],
+      "status": "partial",
+      "score": 82,
+      "hits": [
+        "build_schema_plan",
+        "_normalize_model_plan"
+      ],
+      "misses": [
+        "planner_tool_schema"
+      ],
+      "evidence": [
+        {
+          "path": "services/agent_runtime_service/app/planner.py",
+          "exists": true
+        },
+        {
+          "path": "services/agent_runtime_service/app/planning/schema_planner.py",
+          "exists": true
+        },
+        {
+          "path": "data/agent_policy/planner_tool_schema.json",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "planner.replan_loop",
+      "name": "Observe / validate / replan loop",
+      "claude_claw_expected": "Execution can observe results and replan after failure.",
+      "paths": [
+        "services/agent_runtime_service/app/loop",
+        "services/agent_runtime_service/app/service.py"
+      ],
+      "must_have": [
+        "replan",
+        "observation",
+        "validation"
+      ],
+      "status": "implemented",
+      "score": 100,
+      "hits": [
+        "replan",
+        "observation",
+        "validation"
+      ],
+      "misses": [],
+      "evidence": [
+        {
+          "path": "services/agent_runtime_service/app/loop",
+          "exists": true
+        },
+        {
+          "path": "services/agent_runtime_service/app/service.py",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "task.todo_state",
+      "name": "Todo/task state tracking",
+      "claude_claw_expected": "Agent maintains task list with pending/in_progress/completed/failed states.",
+      "paths": [
+        "services/agent_runtime_service/app/task_state/state_machine.py"
+      ],
+      "must_have": [
+        "create_task_run",
+        "update_task_status",
+        "start_next_pending_task",
+        "task_progress"
+      ],
+      "status": "implemented",
+      "score": 100,
+      "hits": [
+        "create_task_run",
+        "update_task_status",
+        "start_next_pending_task",
+        "task_progress"
+      ],
+      "misses": [],
+      "evidence": [
+        {
+          "path": "services/agent_runtime_service/app/task_state/state_machine.py",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "workspace.file_read",
+      "name": "Workspace file read",
+      "claude_claw_expected": "Agent can inspect local project files safely.",
+      "paths": [
+        "services/agent_runtime_service/app/workspace/patch_engine.py"
+      ],
+      "must_have": [
+        "read_workspace_file",
+        "_resolve_workspace_path"
+      ],
+      "status": "implemented",
+      "score": 100,
+      "hits": [
+        "read_workspace_file",
+        "_resolve_workspace_path"
+      ],
+      "misses": [],
+      "evidence": [
+        {
+          "path": "services/agent_runtime_service/app/workspace/patch_engine.py",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "workspace.diff_patch",
+      "name": "Diff and patch engine",
+      "claude_claw_expected": "Agent can propose/apply diffs with backup/audit.",
+      "paths": [
+        "services/agent_runtime_service/app/workspace/patch_engine.py"
+      ],
+      "must_have": [
+        "unified_diff",
+        "plan_replace_file",
+        "apply_replace_file",
+        "apply_text_replacement",
+        "_write_patch_audit"
+      ],
+      "status": "implemented",
+      "score": 100,
+      "hits": [
+        "unified_diff",
+        "plan_replace_file",
+        "apply_replace_file",
+        "apply_text_replacement",
+        "_write_patch_audit"
+      ],
+      "misses": [],
+      "evidence": [
+        {
+          "path": "services/agent_runtime_service/app/workspace/patch_engine.py",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "executor.tool_registry",
+      "name": "Tool dispatch registry",
+      "claude_claw_expected": "Tools are dispatched through registry, not fixed if/elif route logic.",
+      "paths": [
+        "services/agent_runtime_service/app/execution/tool_dispatch_registry.py",
+        "services/agent_runtime_service/app/executor.py"
+      ],
+      "must_have": [
+        "ToolDispatchRegistry",
+        "register_tool",
+        "execute_registered_tool"
+      ],
+      "status": "implemented",
+      "score": 100,
+      "hits": [
+        "ToolDispatchRegistry",
+        "register_tool",
+        "execute_registered_tool"
+      ],
+      "misses": [],
+      "evidence": [
+        {
+          "path": "services/agent_runtime_service/app/execution/tool_dispatch_registry.py",
+          "exists": true
+        },
+        {
+          "path": "services/agent_runtime_service/app/executor.py",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "executor.shell_sandbox",
+      "name": "Shell sandbox and policy",
+      "claude_claw_expected": "Shell execution is constrained and audited.",
+      "paths": [
+        "services/agent_runtime_service/app/runtime/sandbox_executor.py",
+        "services/agent_runtime_service/app/runtime/sandbox_policy.py",
+        "data/sandbox_policy/sandbox_policy.json"
+      ],
+      "must_have": [
+        "sandbox",
+        "policy",
+        "blocked"
+      ],
+      "status": "implemented",
+      "score": 100,
+      "hits": [
+        "sandbox",
+        "policy",
+        "blocked"
+      ],
+      "misses": [],
+      "evidence": [
+        {
+          "path": "services/agent_runtime_service/app/runtime/sandbox_executor.py",
+          "exists": true
+        },
+        {
+          "path": "services/agent_runtime_service/app/runtime/sandbox_policy.py",
+          "exists": true
+        },
+        {
+          "path": "data/sandbox_policy/sandbox_policy.json",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "executor.build_test_repair",
+      "name": "Build/test/repair loop",
+      "claude_claw_expected": "Agent can run command, capture failure, apply repair, and rerun.",
+      "paths": [
+        "services/agent_runtime_service/app/workspace/repair_loop.py"
+      ],
+      "must_have": [
+        "run_build_test_repair_loop",
+        "build_repair_context",
+        "_apply_repair_action"
+      ],
+      "status": "implemented",
+      "score": 100,
+      "hits": [
+        "run_build_test_repair_loop",
+        "build_repair_context",
+        "_apply_repair_action"
+      ],
+      "misses": [],
+      "evidence": [
+        {
+          "path": "services/agent_runtime_service/app/workspace/repair_loop.py",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "memory.repo",
+      "name": "Repo memory / project knowledge",
+      "claude_claw_expected": "Agent can retrieve project/repository knowledge.",
+      "paths": [
+        "services/repo_memory_service",
+        "data/brain_assets",
+        "data/repo_memory"
+      ],
+      "must_have": [
+        "repo_memory",
+        "brain"
+      ],
+      "status": "implemented",
+      "score": 100,
+      "hits": [
+        "repo_memory",
+        "brain"
+      ],
+      "misses": [],
+      "evidence": [
+        {
+          "path": "services/repo_memory_service",
+          "exists": true
+        },
+        {
+          "path": "data/brain_assets",
+          "exists": true
+        },
+        {
+          "path": "data/repo_memory",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "skills.default",
+      "name": "Default skills from local assets",
+      "claude_claw_expected": "Collected repositories become platform skills.",
+      "paths": [
+        "data/skill_brain/default_skills.json",
+        "services/agent_runtime_service/app/capability/registry.py",
+        "services/agent_runtime_service/app/planning/schema_planner.py"
+      ],
+      "must_have": [
+        "default_skills",
+        "load_default_skills",
+        "_skill_context_steps"
+      ],
+      "status": "implemented",
+      "score": 100,
+      "hits": [
+        "default_skills",
+        "load_default_skills",
+        "_skill_context_steps"
+      ],
+      "misses": [],
+      "evidence": [
+        {
+          "path": "data/skill_brain/default_skills.json",
+          "exists": true
+        },
+        {
+          "path": "services/agent_runtime_service/app/capability/registry.py",
+          "exists": true
+        },
+        {
+          "path": "services/agent_runtime_service/app/planning/schema_planner.py",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "skills.lifecycle",
+      "name": "Skill lifecycle and user control",
+      "claude_claw_expected": "Skills can be enabled/disabled/pinned and influence planning.",
+      "paths": [
+        "data/skill_brain/skill_state.json",
+        "services/agent_runtime_service/app/capability/registry.py"
+      ],
+      "must_have": [
+        "load_skill_state",
+        "set_skill_enabled",
+        "set_skill_pinned",
+        "record_skill_usage"
+      ],
+      "status": "implemented",
+      "score": 100,
+      "hits": [
+        "load_skill_state",
+        "set_skill_enabled",
+        "set_skill_pinned",
+        "record_skill_usage"
+      ],
+      "misses": [],
+      "evidence": [
+        {
+          "path": "data/skill_brain/skill_state.json",
+          "exists": true
+        },
+        {
+          "path": "services/agent_runtime_service/app/capability/registry.py",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "renderer.data_driven",
+      "name": "Data-driven renderer",
+      "claude_claw_expected": "Final answer rendering is data-driven, not hardcoded task branches.",
+      "paths": [
+        "services/agent_runtime_service/app/renderer.py",
+        "data/agent_policy/renderer_templates.json"
+      ],
+      "must_have": [
+        "renderer_templates",
+        "render_tool_result",
+        "render_answer"
+      ],
+      "status": "implemented",
+      "score": 100,
+      "hits": [
+        "renderer_templates",
+        "render_tool_result",
+        "render_answer"
+      ],
+      "misses": [],
+      "evidence": [
+        {
+          "path": "services/agent_runtime_service/app/renderer.py",
+          "exists": true
+        },
+        {
+          "path": "data/agent_policy/renderer_templates.json",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "replay.timeline",
+      "name": "Execution timeline/replay",
+      "claude_claw_expected": "User can inspect execution steps and tool results.",
+      "paths": [
+        "services/agent_runtime_service/app/replay",
+        "apps/desktop/src/js/windows-demo-stable-router.js"
+      ],
+      "must_have": [
+        "timeline",
+        "replay"
+      ],
+      "status": "implemented",
+      "score": 100,
+      "hits": [
+        "timeline",
+        "replay"
+      ],
+      "misses": [],
+      "evidence": [
+        {
+          "path": "services/agent_runtime_service/app/replay",
+          "exists": true
+        },
+        {
+          "path": "apps/desktop/src/js/windows-demo-stable-router.js",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "desktop.skill_store",
+      "name": "Desktop skill store",
+      "claude_claw_expected": "Skills are visible and searchable in UI.",
+      "paths": [
+        "apps/desktop/src/js/windows-demo-stable-router.js",
+        "apps/desktop/src/styles/main.css",
+        "data/skill_brain/default_skills.json"
+      ],
+      "must_have": [
+        "renderDefaultSkillStorePage",
+        "skill-brain",
+        "default_skills"
+      ],
+      "status": "implemented",
+      "score": 100,
+      "hits": [
+        "renderDefaultSkillStorePage",
+        "skill-brain",
+        "default_skills"
+      ],
+      "misses": [],
+      "evidence": [
+        {
+          "path": "apps/desktop/src/js/windows-demo-stable-router.js",
+          "exists": true
+        },
+        {
+          "path": "apps/desktop/src/styles/main.css",
+          "exists": true
+        },
+        {
+          "path": "data/skill_brain/default_skills.json",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "runtime.config",
+      "name": "Central runtime config",
+      "claude_claw_expected": "Ports/services/models are centralized instead of scattered.",
+      "paths": [
+        "data/runtime_config/runtime_config.json",
+        "services/agent_runtime_service/app/config/runtime_config.py",
+        "scripts/build/generate_desktop_runtime_config.py"
+      ],
+      "must_have": [
+        "runtime_config",
+        "get_service_base_url",
+        "generate_desktop_runtime_config"
+      ],
+      "status": "implemented",
+      "score": 100,
+      "hits": [
+        "runtime_config",
+        "get_service_base_url",
+        "generate_desktop_runtime_config"
+      ],
+      "misses": [],
+      "evidence": [
+        {
+          "path": "data/runtime_config/runtime_config.json",
+          "exists": true
+        },
+        {
+          "path": "services/agent_runtime_service/app/config/runtime_config.py",
+          "exists": true
+        },
+        {
+          "path": "scripts/build/generate_desktop_runtime_config.py",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "packaging.mac",
+      "name": "Mac package and smoke",
+      "claude_claw_expected": "Local desktop app can run on Mac for demo.",
+      "paths": [
+        "releases/macos-c25-final",
+        "docs/reports/C25_MAC_FINAL_SMOKE.md",
+        "data/agent_core_audit/c25/final/c25_mac_final_smoke.json"
+      ],
+      "must_have": [
+        "mac_final",
+        "agent_tests"
+      ],
+      "status": "implemented",
+      "score": 100,
+      "hits": [
+        "mac_final",
+        "agent_tests"
+      ],
+      "misses": [],
+      "evidence": [
+        {
+          "path": "releases/macos-c25-final",
+          "exists": true
+        },
+        {
+          "path": "docs/reports/C25_MAC_FINAL_SMOKE.md",
+          "exists": true
+        },
+        {
+          "path": "data/agent_core_audit/c25/final/c25_mac_final_smoke.json",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "packaging.windows",
+      "name": "Windows MSI package and smoke",
+      "claude_claw_expected": "Local desktop app can run on Windows with runtime autostart.",
+      "paths": [
+        "releases/windows-c25-c13-runtime-resources",
+        "scripts/windows",
+        "docs/reports"
+      ],
+      "must_have": [
+        "msi",
+        "start_all.ps1"
+      ],
+      "status": "implemented",
+      "score": 100,
+      "hits": [
+        "msi",
+        "start_all.ps1"
+      ],
+      "misses": [],
+      "evidence": [
+        {
+          "path": "releases/windows-c25-c13-runtime-resources",
+          "exists": true
+        },
+        {
+          "path": "scripts/windows",
+          "exists": true
+        },
+        {
+          "path": "docs/reports",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "offline.model_pack",
+      "name": "Offline model pack",
+      "claude_claw_expected": "Demo can run without unstable online model download.",
+      "paths": [
+        "data",
+        "docs/reports"
+      ],
+      "must_have": [
+        "offline",
+        "preseed"
+      ],
+      "status": "implemented",
+      "score": 100,
+      "hits": [
+        "offline",
+        "preseed"
+      ],
+      "misses": [],
+      "evidence": [
+        {
+          "path": "data",
+          "exists": true
+        },
+        {
+          "path": "docs/reports",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "own.builtin_skills",
+      "name": "Own rebuilt builtin skill modules",
+      "claude_claw_expected": "Reference repo capabilities are rebuilt into owned platform modules.",
+      "paths": [
+        "data/skill_brain",
+        "services/agent_runtime_service/app",
+        "docs/reports"
+      ],
+      "must_have": [
+        "our_builtin_skills",
+        "own",
+        "rebuild"
+      ],
+      "status": "implemented",
+      "score": 100,
+      "hits": [
+        "our_builtin_skills",
+        "own",
+        "rebuild"
+      ],
+      "misses": [],
+      "evidence": [
+        {
+          "path": "data/skill_brain",
+          "exists": true
+        },
+        {
+          "path": "services/agent_runtime_service/app",
+          "exists": true
+        },
+        {
+          "path": "docs/reports",
+          "exists": true
+        }
+      ]
+    }
+  ],
+  "critical_remaining": [],
+  "verdict": {
+    "core_agent_rebuild_complete": true,
+    "claude_claw_parity_foundation_complete": true,
+    "claude_claw_full_parity_complete": false,
+    "reason_full_parity_not_complete": [
+      "Windows final smoke not complete",
+      "offline model pack not complete",
+      "own rebuilt builtin skill modules not complete",
+      "timeline/replay may need final verification"
+    ],
+    "next_steps": [
+      "C26-R1 skill rebuild grading",
+      "C26-R2 own builtin skill modules",
+      "C25-WIN-FINAL-SMOKE",
+      "C26-OFFLINE-MODEL-PACK"
+    ]
+  }
+}
