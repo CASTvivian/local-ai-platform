@@ -1,0 +1,3502 @@
+{
+  "version": "c26-r2b",
+  "generated_at": "2026-05-16T11:58:35.044985Z",
+  "description": "Preserve core logic from every rebuild_core source reference before fusion.",
+  "source_count": 83,
+  "module_count": 12,
+  "source_core_logic_map": [
+    {
+      "target_builtin_module": "builtin.code_agent_core",
+      "target_builtin_title": "代码智能体核心模块",
+      "skill_id": "skill_forrestchang_andrej_karpathy_skills",
+      "title": "Andrej karpathy skills",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars/forrestchang__andrej-karpathy-skills",
+      "stars": 127053,
+      "score": 120,
+      "tags": [
+        "agent_runtime",
+        "code_agent",
+        "local_model",
+        "prompt_framework"
+      ],
+      "core_logic": [
+        "workspace understanding",
+        "code task planning",
+        "patch-oriented editing",
+        "developer workflow assistance",
+        "local model runtime",
+        "profile switching",
+        "model bootstrap or inference gateway",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "code-agent interaction and implementation pattern",
+        "local model runtime pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned code_agent_core patch/test/task workflow",
+        "map into owned local_model_runtime",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose code editing and workspace reasoning patterns",
+        "do not lose local/offline model operation assumptions",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.code_agent_core",
+      "target_builtin_title": "代码智能体核心模块",
+      "skill_id": "skill_garrytan_gstack",
+      "title": "Gstack",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/garrytan__gstack",
+      "stars": 94845,
+      "score": 118,
+      "tags": [
+        "agent_runtime",
+        "code_agent",
+        "mcp_tool",
+        "prompt_framework"
+      ],
+      "core_logic": [
+        "workspace understanding",
+        "code task planning",
+        "patch-oriented editing",
+        "developer workflow assistance",
+        "tool metadata protocol",
+        "tool invocation contract",
+        "tool discovery and routing",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "code-agent interaction and implementation pattern",
+        "MCP/tool protocol design pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned code_agent_core patch/test/task workflow",
+        "map into owned mcp_tool_hub registry and adapter model",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose code editing and workspace reasoning patterns",
+        "do not lose tool schema and invocation contract ideas",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.code_agent_core",
+      "target_builtin_title": "代码智能体核心模块",
+      "skill_id": "skill_coleam00_archon",
+      "title": "Archon",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/coleam00__Archon",
+      "stars": 21341,
+      "score": 118,
+      "tags": [
+        "agent_runtime",
+        "code_agent",
+        "mcp_tool",
+        "prompt_framework",
+        "workflow"
+      ],
+      "core_logic": [
+        "workspace understanding",
+        "code task planning",
+        "patch-oriented editing",
+        "developer workflow assistance",
+        "tool metadata protocol",
+        "tool invocation contract",
+        "tool discovery and routing",
+        "multi-step workflow orchestration",
+        "task dependency tracking",
+        "stateful execution",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "code-agent interaction and implementation pattern",
+        "MCP/tool protocol design pattern",
+        "workflow orchestration pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned code_agent_core patch/test/task workflow",
+        "map into owned mcp_tool_hub registry and adapter model",
+        "map into owned workflow_orchestrator and task_state",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose code editing and workspace reasoning patterns",
+        "do not lose tool schema and invocation contract ideas",
+        "do not lose state machine and dependency execution logic",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.code_agent_core",
+      "target_builtin_title": "代码智能体核心模块",
+      "skill_id": "skill_coleam00_claude_memory_compiler",
+      "title": "Claude memory compiler",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/coleam00__claude-memory-compiler",
+      "stars": 1040,
+      "score": 114,
+      "tags": [
+        "agent_runtime",
+        "code_agent",
+        "local_model",
+        "memory",
+        "prompt_framework"
+      ],
+      "core_logic": [
+        "workspace understanding",
+        "code task planning",
+        "patch-oriented editing",
+        "developer workflow assistance",
+        "retrieval augmented memory",
+        "semantic search",
+        "knowledge graph or repo graph reasoning",
+        "local model runtime",
+        "profile switching",
+        "model bootstrap or inference gateway",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "code-agent interaction and implementation pattern",
+        "memory/RAG/retrieval architecture pattern",
+        "local model runtime pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned code_agent_core patch/test/task workflow",
+        "map into owned memory_rag_core and repo memory layer",
+        "map into owned local_model_runtime",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose code editing and workspace reasoning patterns",
+        "do not lose retrieval evidence and graph/memory design",
+        "do not lose local/offline model operation assumptions",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.code_agent_core",
+      "target_builtin_title": "代码智能体核心模块",
+      "skill_id": "skill_vibe_with_me_tools_agent_reachout",
+      "title": "Agent reachout",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/vibe-with-me-tools__agent-reachout",
+      "stars": 42,
+      "score": 113,
+      "tags": [
+        "agent_runtime",
+        "code_agent",
+        "local_model",
+        "mcp_tool",
+        "prompt_framework",
+        "security",
+        "workflow"
+      ],
+      "core_logic": [
+        "workspace understanding",
+        "code task planning",
+        "patch-oriented editing",
+        "developer workflow assistance",
+        "tool metadata protocol",
+        "tool invocation contract",
+        "tool discovery and routing",
+        "multi-step workflow orchestration",
+        "task dependency tracking",
+        "stateful execution",
+        "local model runtime",
+        "profile switching",
+        "model bootstrap or inference gateway",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting",
+        "policy guard",
+        "sandbox boundary",
+        "security review pattern"
+      ],
+      "unique_capability": [
+        "code-agent interaction and implementation pattern",
+        "MCP/tool protocol design pattern",
+        "workflow orchestration pattern",
+        "local model runtime pattern",
+        "prompt skill organization pattern",
+        "security/sandbox policy pattern"
+      ],
+      "rebuild_value": [
+        "map into owned code_agent_core patch/test/task workflow",
+        "map into owned mcp_tool_hub registry and adapter model",
+        "map into owned workflow_orchestrator and task_state",
+        "map into owned local_model_runtime",
+        "map into owned prompt_skill_engine",
+        "map into owned security_sandbox"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose code editing and workspace reasoning patterns",
+        "do not lose tool schema and invocation contract ideas",
+        "do not lose state machine and dependency execution logic",
+        "do not lose local/offline model operation assumptions",
+        "do not lose prompt template and skill instruction structure",
+        "do not lose safety gate and audit policy"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.code_agent_core",
+      "target_builtin_title": "代码智能体核心模块",
+      "skill_id": "skill_karpathy_autoresearch",
+      "title": "Autoresearch",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/karpathy__autoresearch",
+      "stars": 80703,
+      "score": 112,
+      "tags": [
+        "agent_runtime",
+        "code_agent",
+        "local_model",
+        "ui_component"
+      ],
+      "core_logic": [
+        "workspace understanding",
+        "code task planning",
+        "patch-oriented editing",
+        "developer workflow assistance",
+        "local model runtime",
+        "profile switching",
+        "model bootstrap or inference gateway",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "code-agent interaction and implementation pattern",
+        "local model runtime pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned code_agent_core patch/test/task workflow",
+        "map into owned local_model_runtime",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose code editing and workspace reasoning patterns",
+        "do not lose local/offline model operation assumptions",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.code_agent_core",
+      "target_builtin_title": "代码智能体核心模块",
+      "skill_id": "skill_juliusbrussee_caveman",
+      "title": "Caveman",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/JuliusBrussee__caveman",
+      "stars": 59037,
+      "score": 112,
+      "tags": [
+        "agent_runtime",
+        "code_agent",
+        "local_model",
+        "prompt_framework",
+        "ui_component"
+      ],
+      "core_logic": [
+        "workspace understanding",
+        "code task planning",
+        "patch-oriented editing",
+        "developer workflow assistance",
+        "local model runtime",
+        "profile switching",
+        "model bootstrap or inference gateway",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "code-agent interaction and implementation pattern",
+        "local model runtime pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned code_agent_core patch/test/task workflow",
+        "map into owned local_model_runtime",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose code editing and workspace reasoning patterns",
+        "do not lose local/offline model operation assumptions",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.code_agent_core",
+      "target_builtin_title": "代码智能体核心模块",
+      "skill_id": "skill_zai_org_open_autoglm",
+      "title": "Open AutoGLM",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/zai-org__Open-AutoGLM",
+      "stars": 25253,
+      "score": 112,
+      "tags": [
+        "agent_runtime",
+        "code_agent",
+        "local_model"
+      ],
+      "core_logic": [
+        "workspace understanding",
+        "code task planning",
+        "patch-oriented editing",
+        "developer workflow assistance",
+        "local model runtime",
+        "profile switching",
+        "model bootstrap or inference gateway",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "code-agent interaction and implementation pattern",
+        "local model runtime pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned code_agent_core patch/test/task workflow",
+        "map into owned local_model_runtime",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose code editing and workspace reasoning patterns",
+        "do not lose local/offline model operation assumptions",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.code_agent_core",
+      "target_builtin_title": "代码智能体核心模块",
+      "skill_id": "skill_appcypher_awesome_mcp_servers",
+      "title": "Awesome mcp servers",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/appcypher__awesome-mcp-servers",
+      "stars": 5532,
+      "score": 109,
+      "tags": [
+        "agent_runtime",
+        "code_agent",
+        "local_model",
+        "mcp_tool",
+        "prompt_framework"
+      ],
+      "core_logic": [
+        "workspace understanding",
+        "code task planning",
+        "patch-oriented editing",
+        "developer workflow assistance",
+        "tool metadata protocol",
+        "tool invocation contract",
+        "tool discovery and routing",
+        "local model runtime",
+        "profile switching",
+        "model bootstrap or inference gateway",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "code-agent interaction and implementation pattern",
+        "MCP/tool protocol design pattern",
+        "local model runtime pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned code_agent_core patch/test/task workflow",
+        "map into owned mcp_tool_hub registry and adapter model",
+        "map into owned local_model_runtime",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose code editing and workspace reasoning patterns",
+        "do not lose tool schema and invocation contract ideas",
+        "do not lose local/offline model operation assumptions",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.code_agent_core",
+      "target_builtin_title": "代码智能体核心模块",
+      "skill_id": "skill_obra_superpowers",
+      "title": "Superpowers",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/obra__superpowers",
+      "stars": 188042,
+      "score": 108,
+      "tags": [
+        "agent_runtime",
+        "code_agent",
+        "prompt_framework",
+        "ui_component"
+      ],
+      "core_logic": [
+        "workspace understanding",
+        "code task planning",
+        "patch-oriented editing",
+        "developer workflow assistance",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "code-agent interaction and implementation pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned code_agent_core patch/test/task workflow",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose code editing and workspace reasoning patterns",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.code_agent_core",
+      "target_builtin_title": "代码智能体核心模块",
+      "skill_id": "skill_francyjglisboa_agent_skill_creator",
+      "title": "Agent skill creator",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/FrancyJGLisboa__agent-skill-creator",
+      "stars": 905,
+      "score": 106,
+      "tags": [
+        "agent_runtime",
+        "code_agent",
+        "mcp_tool",
+        "prompt_framework",
+        "workflow"
+      ],
+      "core_logic": [
+        "workspace understanding",
+        "code task planning",
+        "patch-oriented editing",
+        "developer workflow assistance",
+        "tool metadata protocol",
+        "tool invocation contract",
+        "tool discovery and routing",
+        "multi-step workflow orchestration",
+        "task dependency tracking",
+        "stateful execution",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "code-agent interaction and implementation pattern",
+        "MCP/tool protocol design pattern",
+        "workflow orchestration pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned code_agent_core patch/test/task workflow",
+        "map into owned mcp_tool_hub registry and adapter model",
+        "map into owned workflow_orchestrator and task_state",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose code editing and workspace reasoning patterns",
+        "do not lose tool schema and invocation contract ideas",
+        "do not lose state machine and dependency execution logic",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.code_agent_core",
+      "target_builtin_title": "代码智能体核心模块",
+      "skill_id": "skill_austin1serb_anthropic_leaked_source_code",
+      "title": "Anthropic Leaked Source Code",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/Austin1serb__Anthropic-Leaked-Source-Code",
+      "stars": 412,
+      "score": 106,
+      "tags": [
+        "agent_runtime",
+        "code_agent",
+        "mcp_tool",
+        "prompt_framework",
+        "ui_component",
+        "workflow"
+      ],
+      "core_logic": [
+        "workspace understanding",
+        "code task planning",
+        "patch-oriented editing",
+        "developer workflow assistance",
+        "tool metadata protocol",
+        "tool invocation contract",
+        "tool discovery and routing",
+        "multi-step workflow orchestration",
+        "task dependency tracking",
+        "stateful execution",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "code-agent interaction and implementation pattern",
+        "MCP/tool protocol design pattern",
+        "workflow orchestration pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned code_agent_core patch/test/task workflow",
+        "map into owned mcp_tool_hub registry and adapter model",
+        "map into owned workflow_orchestrator and task_state",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose code editing and workspace reasoning patterns",
+        "do not lose tool schema and invocation contract ideas",
+        "do not lose state machine and dependency execution logic",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.code_agent_core",
+      "target_builtin_title": "代码智能体核心模块",
+      "skill_id": "skill_sickn33_antigravity_awesome_skills",
+      "title": "Antigravity awesome skills",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/sickn33__antigravity-awesome-skills",
+      "stars": 37331,
+      "score": 103,
+      "tags": [
+        "agent_runtime",
+        "code_agent",
+        "mcp_tool",
+        "prompt_framework",
+        "workflow"
+      ],
+      "core_logic": [
+        "workspace understanding",
+        "code task planning",
+        "patch-oriented editing",
+        "developer workflow assistance",
+        "tool metadata protocol",
+        "tool invocation contract",
+        "tool discovery and routing",
+        "multi-step workflow orchestration",
+        "task dependency tracking",
+        "stateful execution",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "code-agent interaction and implementation pattern",
+        "MCP/tool protocol design pattern",
+        "workflow orchestration pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned code_agent_core patch/test/task workflow",
+        "map into owned mcp_tool_hub registry and adapter model",
+        "map into owned workflow_orchestrator and task_state",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose code editing and workspace reasoning patterns",
+        "do not lose tool schema and invocation contract ideas",
+        "do not lose state machine and dependency execution logic",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.code_agent_core",
+      "target_builtin_title": "代码智能体核心模块",
+      "skill_id": "skill_openai_codex",
+      "title": "Codex",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/openai__codex",
+      "stars": 82152,
+      "score": 100,
+      "tags": [
+        "agent_runtime",
+        "code_agent",
+        "prompt_framework",
+        "ui_component"
+      ],
+      "core_logic": [
+        "workspace understanding",
+        "code task planning",
+        "patch-oriented editing",
+        "developer workflow assistance",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "code-agent interaction and implementation pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned code_agent_core patch/test/task workflow",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose code editing and workspace reasoning patterns",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.code_agent_core",
+      "target_builtin_title": "代码智能体核心模块",
+      "skill_id": "skill_gsd_build_get_shit_done",
+      "title": "Get shit done",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/gsd-build__get-shit-done",
+      "stars": 61786,
+      "score": 100,
+      "tags": [
+        "agent_runtime",
+        "code_agent",
+        "prompt_framework",
+        "workflow"
+      ],
+      "core_logic": [
+        "workspace understanding",
+        "code task planning",
+        "patch-oriented editing",
+        "developer workflow assistance",
+        "multi-step workflow orchestration",
+        "task dependency tracking",
+        "stateful execution",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "code-agent interaction and implementation pattern",
+        "workflow orchestration pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned code_agent_core patch/test/task workflow",
+        "map into owned workflow_orchestrator and task_state",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose code editing and workspace reasoning patterns",
+        "do not lose state machine and dependency execution logic",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.code_agent_core",
+      "target_builtin_title": "代码智能体核心模块",
+      "skill_id": "skill_shanraisshan_claude_code_best_practice",
+      "title": "Claude code best practice",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/shanraisshan__claude-code-best-practice",
+      "stars": 52676,
+      "score": 100,
+      "tags": [
+        "agent_runtime",
+        "code_agent",
+        "prompt_framework",
+        "workflow"
+      ],
+      "core_logic": [
+        "workspace understanding",
+        "code task planning",
+        "patch-oriented editing",
+        "developer workflow assistance",
+        "multi-step workflow orchestration",
+        "task dependency tracking",
+        "stateful execution",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "code-agent interaction and implementation pattern",
+        "workflow orchestration pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned code_agent_core patch/test/task workflow",
+        "map into owned workflow_orchestrator and task_state",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose code editing and workspace reasoning patterns",
+        "do not lose state machine and dependency execution logic",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.code_agent_core",
+      "target_builtin_title": "代码智能体核心模块",
+      "skill_id": "skill_addyosmani_agent_skills",
+      "title": "Agent skills",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/addyosmani__agent-skills",
+      "stars": 40409,
+      "score": 100,
+      "tags": [
+        "agent_runtime",
+        "code_agent",
+        "prompt_framework"
+      ],
+      "core_logic": [
+        "workspace understanding",
+        "code task planning",
+        "patch-oriented editing",
+        "developer workflow assistance",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "code-agent interaction and implementation pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned code_agent_core patch/test/task workflow",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose code editing and workspace reasoning patterns",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.code_agent_core",
+      "target_builtin_title": "代码智能体核心模块",
+      "skill_id": "skill_coreyhaines31_marketingskills",
+      "title": "Marketingskills",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/coreyhaines31__marketingskills",
+      "stars": 28153,
+      "score": 100,
+      "tags": [
+        "agent_runtime",
+        "code_agent",
+        "prompt_framework"
+      ],
+      "core_logic": [
+        "workspace understanding",
+        "code task planning",
+        "patch-oriented editing",
+        "developer workflow assistance",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "code-agent interaction and implementation pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned code_agent_core patch/test/task workflow",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose code editing and workspace reasoning patterns",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.code_agent_core",
+      "target_builtin_title": "代码智能体核心模块",
+      "skill_id": "skill_multica_ai_multica",
+      "title": "Multica",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/multica-ai__multica",
+      "stars": 27728,
+      "score": 100,
+      "tags": [
+        "agent_runtime",
+        "code_agent"
+      ],
+      "core_logic": [
+        "workspace understanding",
+        "code task planning",
+        "patch-oriented editing",
+        "developer workflow assistance",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "code-agent interaction and implementation pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned code_agent_core patch/test/task workflow",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose code editing and workspace reasoning patterns",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.code_agent_core",
+      "target_builtin_title": "代码智能体核心模块",
+      "skill_id": "skill_openai_symphony",
+      "title": "Symphony",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/openai__symphony",
+      "stars": 23534,
+      "score": 100,
+      "tags": [
+        "agent_runtime",
+        "code_agent"
+      ],
+      "core_logic": [
+        "workspace understanding",
+        "code task planning",
+        "patch-oriented editing",
+        "developer workflow assistance",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "code-agent interaction and implementation pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned code_agent_core patch/test/task workflow",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose code editing and workspace reasoning patterns",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.code_agent_core",
+      "target_builtin_title": "代码智能体核心模块",
+      "skill_id": "skill_steipete_codexbar",
+      "title": "CodexBar",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/steipete__CodexBar",
+      "stars": 12076,
+      "score": 94,
+      "tags": [
+        "agent_runtime",
+        "code_agent",
+        "prompt_framework"
+      ],
+      "core_logic": [
+        "workspace understanding",
+        "code task planning",
+        "patch-oriented editing",
+        "developer workflow assistance",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "code-agent interaction and implementation pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned code_agent_core patch/test/task workflow",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose code editing and workspace reasoning patterns",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.code_agent_core",
+      "target_builtin_title": "代码智能体核心模块",
+      "skill_id": "skill_sanbuphy_learn_coding_agent",
+      "title": "Learn coding agent",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/sanbuphy__learn-coding-agent",
+      "stars": 11845,
+      "score": 94,
+      "tags": [
+        "agent_runtime",
+        "code_agent",
+        "prompt_framework",
+        "ui_component"
+      ],
+      "core_logic": [
+        "workspace understanding",
+        "code task planning",
+        "patch-oriented editing",
+        "developer workflow assistance",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "code-agent interaction and implementation pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned code_agent_core patch/test/task workflow",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose code editing and workspace reasoning patterns",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.code_agent_core",
+      "target_builtin_title": "代码智能体核心模块",
+      "skill_id": "skill_htdt_godogen",
+      "title": "Godogen",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/htdt__godogen",
+      "stars": 3163,
+      "score": 88,
+      "tags": [
+        "agent_runtime",
+        "code_agent",
+        "prompt_framework"
+      ],
+      "core_logic": [
+        "workspace understanding",
+        "code task planning",
+        "patch-oriented editing",
+        "developer workflow assistance",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "code-agent interaction and implementation pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned code_agent_core patch/test/task workflow",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose code editing and workspace reasoning patterns",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.code_agent_core",
+      "target_builtin_title": "代码智能体核心模块",
+      "skill_id": "skill_danau5tin_multi_agent_coding_system",
+      "title": "Multi agent coding system",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/Danau5tin__multi-agent-coding-system",
+      "stars": 1376,
+      "score": 88,
+      "tags": [
+        "agent_runtime",
+        "code_agent",
+        "prompt_framework",
+        "workflow"
+      ],
+      "core_logic": [
+        "workspace understanding",
+        "code task planning",
+        "patch-oriented editing",
+        "developer workflow assistance",
+        "multi-step workflow orchestration",
+        "task dependency tracking",
+        "stateful execution",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "code-agent interaction and implementation pattern",
+        "workflow orchestration pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned code_agent_core patch/test/task workflow",
+        "map into owned workflow_orchestrator and task_state",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose code editing and workspace reasoning patterns",
+        "do not lose state machine and dependency execution logic",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.code_agent_core",
+      "target_builtin_title": "代码智能体核心模块",
+      "skill_id": "skill_voltagent_awesome_design_md",
+      "title": "Awesome design md",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/VoltAgent__awesome-design-md",
+      "stars": 76678,
+      "score": 85,
+      "tags": [
+        "agent_runtime",
+        "code_agent",
+        "ui_component"
+      ],
+      "core_logic": [
+        "workspace understanding",
+        "code task planning",
+        "patch-oriented editing",
+        "developer workflow assistance",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "code-agent interaction and implementation pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned code_agent_core patch/test/task workflow",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose code editing and workspace reasoning patterns",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.code_agent_core",
+      "target_builtin_title": "代码智能体核心模块",
+      "skill_id": "skill_vercel_labs_agent_skills",
+      "title": "Agent skills",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/vercel-labs__agent-skills",
+      "stars": 26469,
+      "score": 85,
+      "tags": [
+        "agent_runtime",
+        "code_agent",
+        "ui_component"
+      ],
+      "core_logic": [
+        "workspace understanding",
+        "code task planning",
+        "patch-oriented editing",
+        "developer workflow assistance",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "code-agent interaction and implementation pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned code_agent_core patch/test/task workflow",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose code editing and workspace reasoning patterns",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.agent_runtime_core",
+      "target_builtin_title": "通用 Agent Runtime 模块",
+      "skill_id": "skill_hkuds_cli_anything",
+      "title": "CLI Anything",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/HKUDS__CLI-Anything",
+      "stars": 34315,
+      "score": 82,
+      "tags": [
+        "agent_runtime"
+      ],
+      "core_logic": [
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.agent_runtime_core",
+      "target_builtin_title": "通用 Agent Runtime 模块",
+      "skill_id": "skill_k_dense_ai_scientific_agent_skills",
+      "title": "Scientific agent skills",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/K-Dense-AI__scientific-agent-skills",
+      "stars": 20767,
+      "score": 82,
+      "tags": [
+        "agent_runtime"
+      ],
+      "core_logic": [
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "target_builtin_title": "MCP 工具协议模块",
+      "skill_id": "skill_datawhalechina_easy_vibe",
+      "title": "Easy vibe",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/datawhalechina__easy-vibe",
+      "stars": 10410,
+      "score": 124,
+      "tags": [
+        "agent_runtime",
+        "code_agent",
+        "local_model",
+        "mcp_tool",
+        "workflow"
+      ],
+      "core_logic": [
+        "workspace understanding",
+        "code task planning",
+        "patch-oriented editing",
+        "developer workflow assistance",
+        "tool metadata protocol",
+        "tool invocation contract",
+        "tool discovery and routing",
+        "multi-step workflow orchestration",
+        "task dependency tracking",
+        "stateful execution",
+        "local model runtime",
+        "profile switching",
+        "model bootstrap or inference gateway",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "code-agent interaction and implementation pattern",
+        "MCP/tool protocol design pattern",
+        "workflow orchestration pattern",
+        "local model runtime pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned code_agent_core patch/test/task workflow",
+        "map into owned mcp_tool_hub registry and adapter model",
+        "map into owned workflow_orchestrator and task_state",
+        "map into owned local_model_runtime",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose code editing and workspace reasoning patterns",
+        "do not lose tool schema and invocation contract ideas",
+        "do not lose state machine and dependency execution logic",
+        "do not lose local/offline model operation assumptions",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "target_builtin_title": "MCP 工具协议模块",
+      "skill_id": "skill_significant_gravitas_autogpt",
+      "title": "AutoGPT",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/Significant-Gravitas__AutoGPT",
+      "stars": 184250,
+      "score": 120,
+      "tags": [
+        "agent_runtime",
+        "local_model",
+        "mcp_tool"
+      ],
+      "core_logic": [
+        "tool metadata protocol",
+        "tool invocation contract",
+        "tool discovery and routing",
+        "local model runtime",
+        "profile switching",
+        "model bootstrap or inference gateway",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "MCP/tool protocol design pattern",
+        "local model runtime pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned mcp_tool_hub registry and adapter model",
+        "map into owned local_model_runtime",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose tool schema and invocation contract ideas",
+        "do not lose local/offline model operation assumptions",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "target_builtin_title": "MCP 工具协议模块",
+      "skill_id": "skill_anthropics_skills",
+      "title": "Skills",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/anthropics__skills",
+      "stars": 133030,
+      "score": 108,
+      "tags": [
+        "agent_runtime",
+        "mcp_tool",
+        "ui_component"
+      ],
+      "core_logic": [
+        "tool metadata protocol",
+        "tool invocation contract",
+        "tool discovery and routing",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "MCP/tool protocol design pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned mcp_tool_hub registry and adapter model",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose tool schema and invocation contract ideas",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "target_builtin_title": "MCP 工具协议模块",
+      "skill_id": "skill_panniantong_agent_reach",
+      "title": "Agent Reach",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/Panniantong__Agent-Reach",
+      "stars": 19344,
+      "score": 106,
+      "tags": [
+        "agent_runtime",
+        "local_model",
+        "mcp_tool",
+        "prompt_framework",
+        "workflow"
+      ],
+      "core_logic": [
+        "tool metadata protocol",
+        "tool invocation contract",
+        "tool discovery and routing",
+        "multi-step workflow orchestration",
+        "task dependency tracking",
+        "stateful execution",
+        "local model runtime",
+        "profile switching",
+        "model bootstrap or inference gateway",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "MCP/tool protocol design pattern",
+        "workflow orchestration pattern",
+        "local model runtime pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned mcp_tool_hub registry and adapter model",
+        "map into owned workflow_orchestrator and task_state",
+        "map into owned local_model_runtime",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose tool schema and invocation contract ideas",
+        "do not lose state machine and dependency execution logic",
+        "do not lose local/offline model operation assumptions",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "target_builtin_title": "MCP 工具协议模块",
+      "skill_id": "skill_vxcontrol_pentagi",
+      "title": "Pentagi",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/vxcontrol__pentagi",
+      "stars": 16812,
+      "score": 106,
+      "tags": [
+        "agent_runtime",
+        "local_model",
+        "mcp_tool",
+        "ui_component",
+        "workflow"
+      ],
+      "core_logic": [
+        "tool metadata protocol",
+        "tool invocation contract",
+        "tool discovery and routing",
+        "multi-step workflow orchestration",
+        "task dependency tracking",
+        "stateful execution",
+        "local model runtime",
+        "profile switching",
+        "model bootstrap or inference gateway",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "MCP/tool protocol design pattern",
+        "workflow orchestration pattern",
+        "local model runtime pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned mcp_tool_hub registry and adapter model",
+        "map into owned workflow_orchestrator and task_state",
+        "map into owned local_model_runtime",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose tool schema and invocation contract ideas",
+        "do not lose state machine and dependency execution logic",
+        "do not lose local/offline model operation assumptions",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "target_builtin_title": "MCP 工具协议模块",
+      "skill_id": "skill_luongnv89_claude_howto",
+      "title": "Claude howto",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/luongnv89__claude-howto",
+      "stars": 32542,
+      "score": 100,
+      "tags": [
+        "agent_runtime",
+        "mcp_tool",
+        "prompt_framework"
+      ],
+      "core_logic": [
+        "workspace understanding",
+        "code task planning",
+        "patch-oriented editing",
+        "developer workflow assistance",
+        "tool metadata protocol",
+        "tool invocation contract",
+        "tool discovery and routing",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "code-agent interaction and implementation pattern",
+        "MCP/tool protocol design pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned code_agent_core patch/test/task workflow",
+        "map into owned mcp_tool_hub registry and adapter model",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose code editing and workspace reasoning patterns",
+        "do not lose tool schema and invocation contract ideas",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "target_builtin_title": "MCP 工具协议模块",
+      "skill_id": "skill_vercel_labs_skills",
+      "title": "Skills",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/vercel-labs__skills",
+      "stars": 18195,
+      "score": 94,
+      "tags": [
+        "agent_runtime",
+        "mcp_tool",
+        "prompt_framework"
+      ],
+      "core_logic": [
+        "tool metadata protocol",
+        "tool invocation contract",
+        "tool discovery and routing",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "MCP/tool protocol design pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned mcp_tool_hub registry and adapter model",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose tool schema and invocation contract ideas",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "target_builtin_title": "MCP 工具协议模块",
+      "skill_id": "skill_ryoppippi_ccusage",
+      "title": "Ccusage",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/ryoppippi__ccusage",
+      "stars": 14095,
+      "score": 94,
+      "tags": [
+        "agent_runtime",
+        "mcp_tool",
+        "prompt_framework"
+      ],
+      "core_logic": [
+        "tool metadata protocol",
+        "tool invocation contract",
+        "tool discovery and routing",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "MCP/tool protocol design pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned mcp_tool_hub registry and adapter model",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose tool schema and invocation contract ideas",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "target_builtin_title": "MCP 工具协议模块",
+      "skill_id": "skill_sansan0_trendradar",
+      "title": "TrendRadar",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/sansan0__TrendRadar",
+      "stars": 57410,
+      "score": 92,
+      "tags": [
+        "local_model",
+        "mcp_tool",
+        "ui_component"
+      ],
+      "core_logic": [
+        "tool metadata protocol",
+        "tool invocation contract",
+        "tool discovery and routing",
+        "local model runtime",
+        "profile switching",
+        "model bootstrap or inference gateway",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "MCP/tool protocol design pattern",
+        "local model runtime pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned mcp_tool_hub registry and adapter model",
+        "map into owned local_model_runtime",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose tool schema and invocation contract ideas",
+        "do not lose local/offline model operation assumptions",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "target_builtin_title": "MCP 工具协议模块",
+      "skill_id": "skill_oboard_claude_code_rev",
+      "title": "Claude code rev",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/oboard__claude-code-rev",
+      "stars": 3123,
+      "score": 88,
+      "tags": [
+        "agent_runtime",
+        "mcp_tool",
+        "prompt_framework",
+        "workflow"
+      ],
+      "core_logic": [
+        "workspace understanding",
+        "code task planning",
+        "patch-oriented editing",
+        "developer workflow assistance",
+        "tool metadata protocol",
+        "tool invocation contract",
+        "tool discovery and routing",
+        "multi-step workflow orchestration",
+        "task dependency tracking",
+        "stateful execution",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "code-agent interaction and implementation pattern",
+        "MCP/tool protocol design pattern",
+        "workflow orchestration pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned code_agent_core patch/test/task workflow",
+        "map into owned mcp_tool_hub registry and adapter model",
+        "map into owned workflow_orchestrator and task_state",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose code editing and workspace reasoning patterns",
+        "do not lose tool schema and invocation contract ideas",
+        "do not lose state machine and dependency execution logic",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "target_builtin_title": "MCP 工具协议模块",
+      "skill_id": "skill_durang_gbrain_http_wrapper",
+      "title": "Gbrain http wrapper",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/durang__gbrain-http-wrapper",
+      "stars": 14,
+      "score": 88,
+      "tags": [
+        "agent_runtime",
+        "mcp_tool",
+        "prompt_framework",
+        "ui_component"
+      ],
+      "core_logic": [
+        "tool metadata protocol",
+        "tool invocation contract",
+        "tool discovery and routing",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "MCP/tool protocol design pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned mcp_tool_hub registry and adapter model",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose tool schema and invocation contract ideas",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "target_builtin_title": "MCP 工具协议模块",
+      "skill_id": "skill_ahujasid_blender_mcp",
+      "title": "Blender mcp",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/ahujasid__blender-mcp",
+      "stars": 21587,
+      "score": 80,
+      "tags": [
+        "mcp_tool"
+      ],
+      "core_logic": [
+        "tool metadata protocol",
+        "tool invocation contract",
+        "tool discovery and routing",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "MCP/tool protocol design pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned mcp_tool_hub registry and adapter model",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose tool schema and invocation contract ideas",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.browser_operator",
+      "target_builtin_title": "浏览器自动化模块",
+      "skill_id": "skill_safishamsi_graphify",
+      "title": "Graphify",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/safishamsi__graphify",
+      "stars": 47241,
+      "score": 130,
+      "tags": [
+        "agent_runtime",
+        "browser_agent",
+        "code_agent",
+        "memory",
+        "prompt_framework"
+      ],
+      "core_logic": [
+        "workspace understanding",
+        "code task planning",
+        "patch-oriented editing",
+        "developer workflow assistance",
+        "browser action planning",
+        "web research workflow",
+        "structured extraction",
+        "retrieval augmented memory",
+        "semantic search",
+        "knowledge graph or repo graph reasoning",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "code-agent interaction and implementation pattern",
+        "browser automation and research execution pattern",
+        "memory/RAG/retrieval architecture pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned code_agent_core patch/test/task workflow",
+        "map into owned browser_operator action schema",
+        "map into owned memory_rag_core and repo memory layer",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose code editing and workspace reasoning patterns",
+        "do not lose browser planning and evidence collection logic",
+        "do not lose retrieval evidence and graph/memory design",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.browser_operator",
+      "target_builtin_title": "浏览器自动化模块",
+      "skill_id": "skill_heygen_com_hyperframes",
+      "title": "Hyperframes",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/heygen-com__hyperframes",
+      "stars": 17624,
+      "score": 128,
+      "tags": [
+        "agent_runtime",
+        "browser_agent",
+        "code_agent",
+        "mcp_tool"
+      ],
+      "core_logic": [
+        "workspace understanding",
+        "code task planning",
+        "patch-oriented editing",
+        "developer workflow assistance",
+        "tool metadata protocol",
+        "tool invocation contract",
+        "tool discovery and routing",
+        "browser action planning",
+        "web research workflow",
+        "structured extraction",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "code-agent interaction and implementation pattern",
+        "MCP/tool protocol design pattern",
+        "browser automation and research execution pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned code_agent_core patch/test/task workflow",
+        "map into owned mcp_tool_hub registry and adapter model",
+        "map into owned browser_operator action schema",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose code editing and workspace reasoning patterns",
+        "do not lose tool schema and invocation contract ideas",
+        "do not lose browser planning and evidence collection logic",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.browser_operator",
+      "target_builtin_title": "浏览器自动化模块",
+      "skill_id": "skill_zhouxiaoka_autoclip",
+      "title": "Autoclip",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/zhouxiaoka__autoclip",
+      "stars": 5188,
+      "score": 122,
+      "tags": [
+        "agent_runtime",
+        "browser_agent",
+        "local_model",
+        "mcp_tool",
+        "ui_component"
+      ],
+      "core_logic": [
+        "tool metadata protocol",
+        "tool invocation contract",
+        "tool discovery and routing",
+        "browser action planning",
+        "web research workflow",
+        "structured extraction",
+        "local model runtime",
+        "profile switching",
+        "model bootstrap or inference gateway",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "MCP/tool protocol design pattern",
+        "browser automation and research execution pattern",
+        "local model runtime pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned mcp_tool_hub registry and adapter model",
+        "map into owned browser_operator action schema",
+        "map into owned local_model_runtime",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose tool schema and invocation contract ideas",
+        "do not lose browser planning and evidence collection logic",
+        "do not lose local/offline model operation assumptions",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.browser_operator",
+      "target_builtin_title": "浏览器自动化模块",
+      "skill_id": "skill_browser_use_browser_harness",
+      "title": "Browser harness",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/browser-use__browser-harness",
+      "stars": 12323,
+      "score": 104,
+      "tags": [
+        "agent_runtime",
+        "browser_agent",
+        "general_skill",
+        "local_model",
+        "prompt_framework"
+      ],
+      "core_logic": [
+        "browser action planning",
+        "web research workflow",
+        "structured extraction",
+        "local model runtime",
+        "profile switching",
+        "model bootstrap or inference gateway",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "browser automation and research execution pattern",
+        "local model runtime pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned browser_operator action schema",
+        "map into owned local_model_runtime",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose browser planning and evidence collection logic",
+        "do not lose local/offline model operation assumptions",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.browser_operator",
+      "target_builtin_title": "浏览器自动化模块",
+      "skill_id": "skill_hbai_ltd_toonflow_app",
+      "title": "Toonflow app",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/HBAI-Ltd__Toonflow-app",
+      "stars": 7875,
+      "score": 102,
+      "tags": [
+        "browser_agent",
+        "local_model",
+        "mcp_tool",
+        "ui_component",
+        "workflow"
+      ],
+      "core_logic": [
+        "tool metadata protocol",
+        "tool invocation contract",
+        "tool discovery and routing",
+        "browser action planning",
+        "web research workflow",
+        "structured extraction",
+        "multi-step workflow orchestration",
+        "task dependency tracking",
+        "stateful execution",
+        "local model runtime",
+        "profile switching",
+        "model bootstrap or inference gateway",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "MCP/tool protocol design pattern",
+        "browser automation and research execution pattern",
+        "workflow orchestration pattern",
+        "local model runtime pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned mcp_tool_hub registry and adapter model",
+        "map into owned browser_operator action schema",
+        "map into owned workflow_orchestrator and task_state",
+        "map into owned local_model_runtime",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose tool schema and invocation contract ideas",
+        "do not lose browser planning and evidence collection logic",
+        "do not lose state machine and dependency execution logic",
+        "do not lose local/offline model operation assumptions",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.browser_operator",
+      "target_builtin_title": "浏览器自动化模块",
+      "skill_id": "skill_comfy_org_comfyui",
+      "title": "ComfyUI",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/Comfy-Org__ComfyUI",
+      "stars": 112643,
+      "score": 98,
+      "tags": [
+        "browser_agent",
+        "general_skill",
+        "local_model"
+      ],
+      "core_logic": [
+        "browser action planning",
+        "web research workflow",
+        "structured extraction",
+        "local model runtime",
+        "profile switching",
+        "model bootstrap or inference gateway",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "browser automation and research execution pattern",
+        "local model runtime pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned browser_operator action schema",
+        "map into owned local_model_runtime",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose browser planning and evidence collection logic",
+        "do not lose local/offline model operation assumptions",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.browser_operator",
+      "target_builtin_title": "浏览器自动化模块",
+      "skill_id": "skill_vercel_labs_agent_browser",
+      "title": "Agent browser",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/vercel-labs__agent-browser",
+      "stars": 32819,
+      "score": 98,
+      "tags": [
+        "agent_runtime",
+        "browser_agent",
+        "workflow"
+      ],
+      "core_logic": [
+        "browser action planning",
+        "web research workflow",
+        "structured extraction",
+        "multi-step workflow orchestration",
+        "task dependency tracking",
+        "stateful execution",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "browser automation and research execution pattern",
+        "workflow orchestration pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned browser_operator action schema",
+        "map into owned workflow_orchestrator and task_state",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose browser planning and evidence collection logic",
+        "do not lose state machine and dependency execution logic",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.browser_operator",
+      "target_builtin_title": "浏览器自动化模块",
+      "skill_id": "skill_opendatalab_mineru_diffusion",
+      "title": "MinerU Diffusion",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/opendatalab__MinerU-Diffusion",
+      "stars": 590,
+      "score": 92,
+      "tags": [
+        "browser_agent",
+        "local_model",
+        "memory"
+      ],
+      "core_logic": [
+        "browser action planning",
+        "web research workflow",
+        "structured extraction",
+        "retrieval augmented memory",
+        "semantic search",
+        "knowledge graph or repo graph reasoning",
+        "local model runtime",
+        "profile switching",
+        "model bootstrap or inference gateway",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "browser automation and research execution pattern",
+        "memory/RAG/retrieval architecture pattern",
+        "local model runtime pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned browser_operator action schema",
+        "map into owned memory_rag_core and repo memory layer",
+        "map into owned local_model_runtime",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose browser planning and evidence collection logic",
+        "do not lose retrieval evidence and graph/memory design",
+        "do not lose local/offline model operation assumptions",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.browser_operator",
+      "target_builtin_title": "浏览器自动化模块",
+      "skill_id": "skill_zai_org_cogvideo",
+      "title": "CogVideo",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/zai-org__CogVideo",
+      "stars": 12717,
+      "score": 84,
+      "tags": [
+        "browser_agent",
+        "local_model"
+      ],
+      "core_logic": [
+        "browser action planning",
+        "web research workflow",
+        "structured extraction",
+        "local model runtime",
+        "profile switching",
+        "model bootstrap or inference gateway",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "browser automation and research execution pattern",
+        "local model runtime pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned browser_operator action schema",
+        "map into owned local_model_runtime",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose browser planning and evidence collection logic",
+        "do not lose local/offline model operation assumptions",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.memory_rag_core",
+      "target_builtin_title": "记忆与 RAG 检索模块",
+      "skill_id": "skill_affaan_m_everything_claude_code",
+      "title": "Everything claude code",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/affaan-m__everything-claude-code",
+      "stars": 180549,
+      "score": 134,
+      "tags": [
+        "agent_runtime",
+        "local_model",
+        "mcp_tool",
+        "memory",
+        "prompt_framework"
+      ],
+      "core_logic": [
+        "workspace understanding",
+        "code task planning",
+        "patch-oriented editing",
+        "developer workflow assistance",
+        "tool metadata protocol",
+        "tool invocation contract",
+        "tool discovery and routing",
+        "retrieval augmented memory",
+        "semantic search",
+        "knowledge graph or repo graph reasoning",
+        "local model runtime",
+        "profile switching",
+        "model bootstrap or inference gateway",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "code-agent interaction and implementation pattern",
+        "MCP/tool protocol design pattern",
+        "memory/RAG/retrieval architecture pattern",
+        "local model runtime pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned code_agent_core patch/test/task workflow",
+        "map into owned mcp_tool_hub registry and adapter model",
+        "map into owned memory_rag_core and repo memory layer",
+        "map into owned local_model_runtime",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose code editing and workspace reasoning patterns",
+        "do not lose tool schema and invocation contract ideas",
+        "do not lose retrieval evidence and graph/memory design",
+        "do not lose local/offline model operation assumptions",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.memory_rag_core",
+      "target_builtin_title": "记忆与 RAG 检索模块",
+      "skill_id": "skill_bytedance_deer_flow",
+      "title": "Deer flow",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/bytedance__deer-flow",
+      "stars": 67192,
+      "score": 126,
+      "tags": [
+        "agent_runtime",
+        "local_model",
+        "mcp_tool",
+        "memory",
+        "prompt_framework",
+        "workflow"
+      ],
+      "core_logic": [
+        "tool metadata protocol",
+        "tool invocation contract",
+        "tool discovery and routing",
+        "retrieval augmented memory",
+        "semantic search",
+        "knowledge graph or repo graph reasoning",
+        "multi-step workflow orchestration",
+        "task dependency tracking",
+        "stateful execution",
+        "local model runtime",
+        "profile switching",
+        "model bootstrap or inference gateway",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "MCP/tool protocol design pattern",
+        "memory/RAG/retrieval architecture pattern",
+        "workflow orchestration pattern",
+        "local model runtime pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned mcp_tool_hub registry and adapter model",
+        "map into owned memory_rag_core and repo memory layer",
+        "map into owned workflow_orchestrator and task_state",
+        "map into owned local_model_runtime",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose tool schema and invocation contract ideas",
+        "do not lose retrieval evidence and graph/memory design",
+        "do not lose state machine and dependency execution logic",
+        "do not lose local/offline model operation assumptions",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.memory_rag_core",
+      "target_builtin_title": "记忆与 RAG 检索模块",
+      "skill_id": "skill_howardpen9_hermes_gbrain_bridge",
+      "title": "Hermes gbrain bridge",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/howardpen9__hermes-gbrain-bridge",
+      "stars": 30,
+      "score": 114,
+      "tags": [
+        "agent_runtime",
+        "local_model",
+        "mcp_tool",
+        "memory",
+        "prompt_framework"
+      ],
+      "core_logic": [
+        "tool metadata protocol",
+        "tool invocation contract",
+        "tool discovery and routing",
+        "retrieval augmented memory",
+        "semantic search",
+        "knowledge graph or repo graph reasoning",
+        "local model runtime",
+        "profile switching",
+        "model bootstrap or inference gateway",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "MCP/tool protocol design pattern",
+        "memory/RAG/retrieval architecture pattern",
+        "local model runtime pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned mcp_tool_hub registry and adapter model",
+        "map into owned memory_rag_core and repo memory layer",
+        "map into owned local_model_runtime",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose tool schema and invocation contract ideas",
+        "do not lose retrieval evidence and graph/memory design",
+        "do not lose local/offline model operation assumptions",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.memory_rag_core",
+      "target_builtin_title": "记忆与 RAG 检索模块",
+      "skill_id": "skill_opendatalab_mineru",
+      "title": "MinerU",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/opendatalab__MinerU",
+      "stars": 62790,
+      "score": 108,
+      "tags": [
+        "agent_runtime",
+        "local_model",
+        "memory"
+      ],
+      "core_logic": [
+        "retrieval augmented memory",
+        "semantic search",
+        "knowledge graph or repo graph reasoning",
+        "local model runtime",
+        "profile switching",
+        "model bootstrap or inference gateway",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "memory/RAG/retrieval architecture pattern",
+        "local model runtime pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned memory_rag_core and repo memory layer",
+        "map into owned local_model_runtime",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose retrieval evidence and graph/memory design",
+        "do not lose local/offline model operation assumptions",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.memory_rag_core",
+      "target_builtin_title": "记忆与 RAG 检索模块",
+      "skill_id": "skill_666ghj_mirofish",
+      "title": "MiroFish",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/666ghj__MiroFish",
+      "stars": 60353,
+      "score": 108,
+      "tags": [
+        "agent_runtime",
+        "local_model",
+        "memory"
+      ],
+      "core_logic": [
+        "retrieval augmented memory",
+        "semantic search",
+        "knowledge graph or repo graph reasoning",
+        "local model runtime",
+        "profile switching",
+        "model bootstrap or inference gateway",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "memory/RAG/retrieval architecture pattern",
+        "local model runtime pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned memory_rag_core and repo memory layer",
+        "map into owned local_model_runtime",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose retrieval evidence and graph/memory design",
+        "do not lose local/offline model operation assumptions",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.memory_rag_core",
+      "target_builtin_title": "记忆与 RAG 检索模块",
+      "skill_id": "skill_datawhalechina_hello_agents",
+      "title": "Hello agents",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/datawhalechina__hello-agents",
+      "stars": 48290,
+      "score": 108,
+      "tags": [
+        "agent_runtime",
+        "local_model",
+        "memory"
+      ],
+      "core_logic": [
+        "retrieval augmented memory",
+        "semantic search",
+        "knowledge graph or repo graph reasoning",
+        "local model runtime",
+        "profile switching",
+        "model bootstrap or inference gateway",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "memory/RAG/retrieval architecture pattern",
+        "local model runtime pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned memory_rag_core and repo memory layer",
+        "map into owned local_model_runtime",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose retrieval evidence and graph/memory design",
+        "do not lose local/offline model operation assumptions",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.memory_rag_core",
+      "target_builtin_title": "记忆与 RAG 检索模块",
+      "skill_id": "skill_ageerle_ruoyi_ai",
+      "title": "Ruoyi ai",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/ageerle__ruoyi-ai",
+      "stars": 5247,
+      "score": 108,
+      "tags": [
+        "agent_runtime",
+        "mcp_tool",
+        "memory"
+      ],
+      "core_logic": [
+        "tool metadata protocol",
+        "tool invocation contract",
+        "tool discovery and routing",
+        "retrieval augmented memory",
+        "semantic search",
+        "knowledge graph or repo graph reasoning",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "MCP/tool protocol design pattern",
+        "memory/RAG/retrieval architecture pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned mcp_tool_hub registry and adapter model",
+        "map into owned memory_rag_core and repo memory layer",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose tool schema and invocation contract ideas",
+        "do not lose retrieval evidence and graph/memory design",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.memory_rag_core",
+      "target_builtin_title": "记忆与 RAG 检索模块",
+      "skill_id": "skill_transformeroptimus_superagi",
+      "title": "SuperAGI",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/TransformerOptimus__SuperAGI",
+      "stars": 17515,
+      "score": 102,
+      "tags": [
+        "agent_runtime",
+        "local_model",
+        "memory"
+      ],
+      "core_logic": [
+        "retrieval augmented memory",
+        "semantic search",
+        "knowledge graph or repo graph reasoning",
+        "local model runtime",
+        "profile switching",
+        "model bootstrap or inference gateway",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "memory/RAG/retrieval architecture pattern",
+        "local model runtime pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned memory_rag_core and repo memory layer",
+        "map into owned local_model_runtime",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose retrieval evidence and graph/memory design",
+        "do not lose local/offline model operation assumptions",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.memory_rag_core",
+      "target_builtin_title": "记忆与 RAG 检索模块",
+      "skill_id": "skill_garrytan_gbrain",
+      "title": "Gbrain",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/garrytan__gbrain",
+      "stars": 15199,
+      "score": 102,
+      "tags": [
+        "agent_runtime",
+        "local_model",
+        "memory"
+      ],
+      "core_logic": [
+        "retrieval augmented memory",
+        "semantic search",
+        "knowledge graph or repo graph reasoning",
+        "local model runtime",
+        "profile switching",
+        "model bootstrap or inference gateway",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "memory/RAG/retrieval architecture pattern",
+        "local model runtime pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned memory_rag_core and repo memory layer",
+        "map into owned local_model_runtime",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose retrieval evidence and graph/memory design",
+        "do not lose local/offline model operation assumptions",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.memory_rag_core",
+      "target_builtin_title": "记忆与 RAG 检索模块",
+      "skill_id": "skill_rowboatlabs_rowboat",
+      "title": "Rowboat",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/rowboatlabs__rowboat",
+      "stars": 14119,
+      "score": 102,
+      "tags": [
+        "agent_runtime",
+        "local_model",
+        "memory",
+        "prompt_framework",
+        "ui_component",
+        "workflow"
+      ],
+      "core_logic": [
+        "retrieval augmented memory",
+        "semantic search",
+        "knowledge graph or repo graph reasoning",
+        "multi-step workflow orchestration",
+        "task dependency tracking",
+        "stateful execution",
+        "local model runtime",
+        "profile switching",
+        "model bootstrap or inference gateway",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "memory/RAG/retrieval architecture pattern",
+        "workflow orchestration pattern",
+        "local model runtime pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned memory_rag_core and repo memory layer",
+        "map into owned workflow_orchestrator and task_state",
+        "map into owned local_model_runtime",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose retrieval evidence and graph/memory design",
+        "do not lose state machine and dependency execution logic",
+        "do not lose local/offline model operation assumptions",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.memory_rag_core",
+      "target_builtin_title": "记忆与 RAG 检索模块",
+      "skill_id": "skill_moyangzhan_langchain4j_aideepin",
+      "title": "Langchain4j aideepin",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/moyangzhan__langchain4j-aideepin",
+      "stars": 1273,
+      "score": 102,
+      "tags": [
+        "agent_runtime",
+        "mcp_tool",
+        "memory",
+        "ui_component",
+        "workflow"
+      ],
+      "core_logic": [
+        "tool metadata protocol",
+        "tool invocation contract",
+        "tool discovery and routing",
+        "retrieval augmented memory",
+        "semantic search",
+        "knowledge graph or repo graph reasoning",
+        "multi-step workflow orchestration",
+        "task dependency tracking",
+        "stateful execution",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "MCP/tool protocol design pattern",
+        "memory/RAG/retrieval architecture pattern",
+        "workflow orchestration pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned mcp_tool_hub registry and adapter model",
+        "map into owned memory_rag_core and repo memory layer",
+        "map into owned workflow_orchestrator and task_state",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose tool schema and invocation contract ideas",
+        "do not lose retrieval evidence and graph/memory design",
+        "do not lose state machine and dependency execution logic",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.memory_rag_core",
+      "target_builtin_title": "记忆与 RAG 检索模块",
+      "skill_id": "skill_abhigyanpatwari_gitnexus",
+      "title": "GitNexus",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/abhigyanpatwari__GitNexus",
+      "stars": 37994,
+      "score": 96,
+      "tags": [
+        "agent_runtime",
+        "memory"
+      ],
+      "core_logic": [
+        "retrieval augmented memory",
+        "semantic search",
+        "knowledge graph or repo graph reasoning",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "memory/RAG/retrieval architecture pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned memory_rag_core and repo memory layer",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose retrieval evidence and graph/memory design",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.memory_rag_core",
+      "target_builtin_title": "记忆与 RAG 检索模块",
+      "skill_id": "skill_simstudioai_sim",
+      "title": "Sim",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/simstudioai__sim",
+      "stars": 28481,
+      "score": 96,
+      "tags": [
+        "agent_runtime",
+        "memory",
+        "ui_component",
+        "workflow"
+      ],
+      "core_logic": [
+        "retrieval augmented memory",
+        "semantic search",
+        "knowledge graph or repo graph reasoning",
+        "multi-step workflow orchestration",
+        "task dependency tracking",
+        "stateful execution",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "memory/RAG/retrieval architecture pattern",
+        "workflow orchestration pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned memory_rag_core and repo memory layer",
+        "map into owned workflow_orchestrator and task_state",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose retrieval evidence and graph/memory design",
+        "do not lose state machine and dependency execution logic",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.memory_rag_core",
+      "target_builtin_title": "记忆与 RAG 检索模块",
+      "skill_id": "skill_supermemoryai_supermemory",
+      "title": "Supermemory",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/supermemoryai__supermemory",
+      "stars": 22535,
+      "score": 96,
+      "tags": [
+        "agent_runtime",
+        "memory"
+      ],
+      "core_logic": [
+        "retrieval augmented memory",
+        "semantic search",
+        "knowledge graph or repo graph reasoning",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "memory/RAG/retrieval architecture pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned memory_rag_core and repo memory layer",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose retrieval evidence and graph/memory design",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.memory_rag_core",
+      "target_builtin_title": "记忆与 RAG 检索模块",
+      "skill_id": "skill_moyangzhan_langchain4j_aideepin_web",
+      "title": "Langchain4j aideepin web",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/moyangzhan__langchain4j-aideepin-web",
+      "stars": 146,
+      "score": 94,
+      "tags": [
+        "local_model",
+        "mcp_tool",
+        "memory",
+        "ui_component",
+        "workflow"
+      ],
+      "core_logic": [
+        "tool metadata protocol",
+        "tool invocation contract",
+        "tool discovery and routing",
+        "retrieval augmented memory",
+        "semantic search",
+        "knowledge graph or repo graph reasoning",
+        "multi-step workflow orchestration",
+        "task dependency tracking",
+        "stateful execution",
+        "local model runtime",
+        "profile switching",
+        "model bootstrap or inference gateway",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "MCP/tool protocol design pattern",
+        "memory/RAG/retrieval architecture pattern",
+        "workflow orchestration pattern",
+        "local model runtime pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned mcp_tool_hub registry and adapter model",
+        "map into owned memory_rag_core and repo memory layer",
+        "map into owned workflow_orchestrator and task_state",
+        "map into owned local_model_runtime",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose tool schema and invocation contract ideas",
+        "do not lose retrieval evidence and graph/memory design",
+        "do not lose state machine and dependency execution logic",
+        "do not lose local/offline model operation assumptions",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.memory_rag_core",
+      "target_builtin_title": "记忆与 RAG 检索模块",
+      "skill_id": "skill_hkuds_openharness",
+      "title": "OpenHarness",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/HKUDS__OpenHarness",
+      "stars": 12429,
+      "score": 90,
+      "tags": [
+        "agent_runtime",
+        "memory",
+        "prompt_framework"
+      ],
+      "core_logic": [
+        "retrieval augmented memory",
+        "semantic search",
+        "knowledge graph or repo graph reasoning",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "memory/RAG/retrieval architecture pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned memory_rag_core and repo memory layer",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose retrieval evidence and graph/memory design",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.memory_rag_core",
+      "target_builtin_title": "记忆与 RAG 检索模块",
+      "skill_id": "skill_huytieu_cog_second_brain",
+      "title": "COG second brain",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/huytieu__COG-second-brain",
+      "stars": 419,
+      "score": 84,
+      "tags": [
+        "agent_runtime",
+        "memory",
+        "prompt_framework"
+      ],
+      "core_logic": [
+        "retrieval augmented memory",
+        "semantic search",
+        "knowledge graph or repo graph reasoning",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "memory/RAG/retrieval architecture pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned memory_rag_core and repo memory layer",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose retrieval evidence and graph/memory design",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.workflow_orchestrator",
+      "target_builtin_title": "工作流编排模块",
+      "skill_id": "skill_msitarzewski_agency_agents",
+      "title": "Agency agents",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/msitarzewski__agency-agents",
+      "stars": 96502,
+      "score": 82,
+      "tags": [
+        "agent_runtime",
+        "ui_component",
+        "workflow"
+      ],
+      "core_logic": [
+        "multi-step workflow orchestration",
+        "task dependency tracking",
+        "stateful execution",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "workflow orchestration pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned workflow_orchestrator and task_state",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose state machine and dependency execution logic",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.workflow_orchestrator",
+      "target_builtin_title": "工作流编排模块",
+      "skill_id": "skill_yeachan_heo_oh_my_codex",
+      "title": "Oh my codex",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/Yeachan-Heo__oh-my-codex",
+      "stars": 28395,
+      "score": 82,
+      "tags": [
+        "agent_runtime",
+        "prompt_framework",
+        "workflow"
+      ],
+      "core_logic": [
+        "workspace understanding",
+        "code task planning",
+        "patch-oriented editing",
+        "developer workflow assistance",
+        "multi-step workflow orchestration",
+        "task dependency tracking",
+        "stateful execution",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "code-agent interaction and implementation pattern",
+        "workflow orchestration pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned code_agent_core patch/test/task workflow",
+        "map into owned workflow_orchestrator and task_state",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose code editing and workspace reasoning patterns",
+        "do not lose state machine and dependency execution logic",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.workflow_orchestrator",
+      "target_builtin_title": "工作流编排模块",
+      "skill_id": "skill_liangdabiao_godogen",
+      "title": "Godogen",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/liangdabiao__Godogen",
+      "stars": 47,
+      "score": 82,
+      "tags": [
+        "agent_runtime",
+        "local_model",
+        "prompt_framework",
+        "workflow"
+      ],
+      "core_logic": [
+        "multi-step workflow orchestration",
+        "task dependency tracking",
+        "stateful execution",
+        "local model runtime",
+        "profile switching",
+        "model bootstrap or inference gateway",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "workflow orchestration pattern",
+        "local model runtime pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned workflow_orchestrator and task_state",
+        "map into owned local_model_runtime",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose state machine and dependency execution logic",
+        "do not lose local/offline model operation assumptions",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.local_model_runtime",
+      "target_builtin_title": "本地模型运行模块",
+      "skill_id": "skill_nousresearch_hermes_agent",
+      "title": "Hermes agent",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/NousResearch__hermes-agent",
+      "stars": 146973,
+      "score": 102,
+      "tags": [
+        "agent_runtime",
+        "local_model",
+        "prompt_framework",
+        "ui_component"
+      ],
+      "core_logic": [
+        "local model runtime",
+        "profile switching",
+        "model bootstrap or inference gateway",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "local model runtime pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned local_model_runtime",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose local/offline model operation assumptions",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.local_model_runtime",
+      "target_builtin_title": "本地模型运行模块",
+      "skill_id": "skill_shareai_lab_learn_claude_code",
+      "title": "Learn claude code",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/shareAI-lab__learn-claude-code",
+      "stars": 60059,
+      "score": 94,
+      "tags": [
+        "agent_runtime",
+        "local_model",
+        "prompt_framework"
+      ],
+      "core_logic": [
+        "workspace understanding",
+        "code task planning",
+        "patch-oriented editing",
+        "developer workflow assistance",
+        "local model runtime",
+        "profile switching",
+        "model bootstrap or inference gateway",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "code-agent interaction and implementation pattern",
+        "local model runtime pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned code_agent_core patch/test/task workflow",
+        "map into owned local_model_runtime",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose code editing and workspace reasoning patterns",
+        "do not lose local/offline model operation assumptions",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.local_model_runtime",
+      "target_builtin_title": "本地模型运行模块",
+      "skill_id": "skill_jingyaogong_minimind",
+      "title": "Minimind",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/jingyaogong__minimind",
+      "stars": 49610,
+      "score": 94,
+      "tags": [
+        "agent_runtime",
+        "local_model"
+      ],
+      "core_logic": [
+        "local model runtime",
+        "profile switching",
+        "model bootstrap or inference gateway",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "local model runtime pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned local_model_runtime",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose local/offline model operation assumptions",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.local_model_runtime",
+      "target_builtin_title": "本地模型运行模块",
+      "skill_id": "skill_microsoft_qlib",
+      "title": "Qlib",
+      "source_path": "/Users/mofamaomi/Documents/本地ai/qlib",
+      "stars": 42752,
+      "score": 94,
+      "tags": [
+        "agent_runtime",
+        "local_model"
+      ],
+      "core_logic": [
+        "local model runtime",
+        "profile switching",
+        "model bootstrap or inference gateway",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "local model runtime pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned local_model_runtime",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose local/offline model operation assumptions",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.local_model_runtime",
+      "target_builtin_title": "本地模型运行模块",
+      "skill_id": "skill_emcie_co_parlant",
+      "title": "Parlant",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/emcie-co__parlant",
+      "stars": 18069,
+      "score": 88,
+      "tags": [
+        "agent_runtime",
+        "local_model"
+      ],
+      "core_logic": [
+        "local model runtime",
+        "profile switching",
+        "model bootstrap or inference gateway",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "local model runtime pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned local_model_runtime",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose local/offline model operation assumptions",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.local_model_runtime",
+      "target_builtin_title": "本地模型运行模块",
+      "skill_id": "skill_enricoros_big_agi",
+      "title": "Big AGI",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/enricoros__big-AGI",
+      "stars": 6970,
+      "score": 88,
+      "tags": [
+        "agent_runtime",
+        "local_model",
+        "ui_component"
+      ],
+      "core_logic": [
+        "local model runtime",
+        "profile switching",
+        "model bootstrap or inference gateway",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "local model runtime pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned local_model_runtime",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose local/offline model operation assumptions",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.local_model_runtime",
+      "target_builtin_title": "本地模型运行模块",
+      "skill_id": "skill_nicedreamzapp_claude_code_local",
+      "title": "Claude code local",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/nicedreamzapp__claude-code-local",
+      "stars": 2597,
+      "score": 82,
+      "tags": [
+        "agent_runtime",
+        "local_model",
+        "prompt_framework"
+      ],
+      "core_logic": [
+        "workspace understanding",
+        "code task planning",
+        "patch-oriented editing",
+        "developer workflow assistance",
+        "local model runtime",
+        "profile switching",
+        "model bootstrap or inference gateway",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "code-agent interaction and implementation pattern",
+        "local model runtime pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned code_agent_core patch/test/task workflow",
+        "map into owned local_model_runtime",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose code editing and workspace reasoning patterns",
+        "do not lose local/offline model operation assumptions",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.local_model_runtime",
+      "target_builtin_title": "本地模型运行模块",
+      "skill_id": "skill_hyperspaceai_agi",
+      "title": "Agi",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/hyperspaceai__agi",
+      "stars": 1659,
+      "score": 82,
+      "tags": [
+        "agent_runtime",
+        "local_model"
+      ],
+      "core_logic": [
+        "local model runtime",
+        "profile switching",
+        "model bootstrap or inference gateway",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "local model runtime pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned local_model_runtime",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose local/offline model operation assumptions",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.local_model_runtime",
+      "target_builtin_title": "本地模型运行模块",
+      "skill_id": "skill_g122622_synthos",
+      "title": "Synthos",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/g122622__synthos",
+      "stars": 25,
+      "score": 82,
+      "tags": [
+        "agent_runtime",
+        "local_model"
+      ],
+      "core_logic": [
+        "local model runtime",
+        "profile switching",
+        "model bootstrap or inference gateway",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "local model runtime pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned local_model_runtime",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose local/offline model operation assumptions",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.prompt_skill_engine",
+      "target_builtin_title": "Prompt 技能引擎模块",
+      "skill_id": "skill_ultraworkers_claw_code",
+      "title": "Claw code",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/ultraworkers__claw-code",
+      "stars": 191229,
+      "score": 90,
+      "tags": [
+        "agent_runtime",
+        "prompt_framework"
+      ],
+      "core_logic": [
+        "workspace understanding",
+        "code task planning",
+        "patch-oriented editing",
+        "developer workflow assistance",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting"
+      ],
+      "unique_capability": [
+        "code-agent interaction and implementation pattern",
+        "prompt skill organization pattern"
+      ],
+      "rebuild_value": [
+        "map into owned code_agent_core patch/test/task workflow",
+        "map into owned prompt_skill_engine"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose code editing and workspace reasoning patterns",
+        "do not lose prompt template and skill instruction structure"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.security_sandbox",
+      "target_builtin_title": "安全沙箱与策略模块",
+      "skill_id": "skill_mukul975_anthropic_cybersecurity_skills",
+      "title": "Anthropic Cybersecurity Skills",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/mukul975__Anthropic-Cybersecurity-Skills",
+      "stars": 6246,
+      "score": 119,
+      "tags": [
+        "agent_runtime",
+        "code_agent",
+        "local_model",
+        "mcp_tool",
+        "prompt_framework",
+        "security",
+        "workflow"
+      ],
+      "core_logic": [
+        "workspace understanding",
+        "code task planning",
+        "patch-oriented editing",
+        "developer workflow assistance",
+        "tool metadata protocol",
+        "tool invocation contract",
+        "tool discovery and routing",
+        "multi-step workflow orchestration",
+        "task dependency tracking",
+        "stateful execution",
+        "local model runtime",
+        "profile switching",
+        "model bootstrap or inference gateway",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting",
+        "policy guard",
+        "sandbox boundary",
+        "security review pattern"
+      ],
+      "unique_capability": [
+        "code-agent interaction and implementation pattern",
+        "MCP/tool protocol design pattern",
+        "workflow orchestration pattern",
+        "local model runtime pattern",
+        "prompt skill organization pattern",
+        "security/sandbox policy pattern"
+      ],
+      "rebuild_value": [
+        "map into owned code_agent_core patch/test/task workflow",
+        "map into owned mcp_tool_hub registry and adapter model",
+        "map into owned workflow_orchestrator and task_state",
+        "map into owned local_model_runtime",
+        "map into owned prompt_skill_engine",
+        "map into owned security_sandbox"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose code editing and workspace reasoning patterns",
+        "do not lose tool schema and invocation contract ideas",
+        "do not lose state machine and dependency execution logic",
+        "do not lose local/offline model operation assumptions",
+        "do not lose prompt template and skill instruction structure",
+        "do not lose safety gate and audit policy"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.eval_benchmark",
+      "target_builtin_title": "评估与基准模块",
+      "skill_id": "skill_opendataloader_project_opendataloader_pdf",
+      "title": "Opendataloader pdf",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/opendataloader-project__opendataloader-pdf",
+      "stars": 21176,
+      "score": 108,
+      "tags": [
+        "agent_runtime",
+        "evaluation",
+        "local_model",
+        "memory",
+        "workflow"
+      ],
+      "core_logic": [
+        "retrieval augmented memory",
+        "semantic search",
+        "knowledge graph or repo graph reasoning",
+        "multi-step workflow orchestration",
+        "task dependency tracking",
+        "stateful execution",
+        "local model runtime",
+        "profile switching",
+        "model bootstrap or inference gateway",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting",
+        "benchmark scoring",
+        "quality evaluation",
+        "regression tracking"
+      ],
+      "unique_capability": [
+        "memory/RAG/retrieval architecture pattern",
+        "workflow orchestration pattern",
+        "local model runtime pattern",
+        "prompt skill organization pattern",
+        "evaluation and benchmark pattern"
+      ],
+      "rebuild_value": [
+        "map into owned memory_rag_core and repo memory layer",
+        "map into owned workflow_orchestrator and task_state",
+        "map into owned local_model_runtime",
+        "map into owned prompt_skill_engine",
+        "map into owned eval_benchmark"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose retrieval evidence and graph/memory design",
+        "do not lose state machine and dependency execution logic",
+        "do not lose local/offline model operation assumptions",
+        "do not lose prompt template and skill instruction structure",
+        "do not lose measurable quality gates"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.eval_benchmark",
+      "target_builtin_title": "评估与基准模块",
+      "skill_id": "skill_garrytan_gbrain_evals",
+      "title": "Gbrain evals",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/garrytan__gbrain-evals",
+      "stars": 121,
+      "score": 96,
+      "tags": [
+        "agent_runtime",
+        "evaluation",
+        "general_skill",
+        "local_model",
+        "memory"
+      ],
+      "core_logic": [
+        "retrieval augmented memory",
+        "semantic search",
+        "knowledge graph or repo graph reasoning",
+        "local model runtime",
+        "profile switching",
+        "model bootstrap or inference gateway",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting",
+        "benchmark scoring",
+        "quality evaluation",
+        "regression tracking"
+      ],
+      "unique_capability": [
+        "memory/RAG/retrieval architecture pattern",
+        "local model runtime pattern",
+        "prompt skill organization pattern",
+        "evaluation and benchmark pattern"
+      ],
+      "rebuild_value": [
+        "map into owned memory_rag_core and repo memory layer",
+        "map into owned local_model_runtime",
+        "map into owned prompt_skill_engine",
+        "map into owned eval_benchmark"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose retrieval evidence and graph/memory design",
+        "do not lose local/offline model operation assumptions",
+        "do not lose prompt template and skill instruction structure",
+        "do not lose measurable quality gates"
+      ]
+    },
+    {
+      "target_builtin_module": "builtin.eval_benchmark",
+      "target_builtin_title": "评估与基准模块",
+      "skill_id": "skill_mininglamp_ai_mano_p",
+      "title": "Mano P",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/Mininglamp-AI__Mano-P",
+      "stars": 1895,
+      "score": 82,
+      "tags": [
+        "agent_runtime",
+        "evaluation",
+        "local_model",
+        "ui_component",
+        "workflow"
+      ],
+      "core_logic": [
+        "multi-step workflow orchestration",
+        "task dependency tracking",
+        "stateful execution",
+        "local model runtime",
+        "profile switching",
+        "model bootstrap or inference gateway",
+        "prompt skill packaging",
+        "instruction templates",
+        "task-specific prompting",
+        "benchmark scoring",
+        "quality evaluation",
+        "regression tracking"
+      ],
+      "unique_capability": [
+        "workflow orchestration pattern",
+        "local model runtime pattern",
+        "prompt skill organization pattern",
+        "evaluation and benchmark pattern"
+      ],
+      "rebuild_value": [
+        "map into owned workflow_orchestrator and task_state",
+        "map into owned local_model_runtime",
+        "map into owned prompt_skill_engine",
+        "map into owned eval_benchmark"
+      ],
+      "what_must_not_be_lost": [
+        "do not lose state machine and dependency execution logic",
+        "do not lose local/offline model operation assumptions",
+        "do not lose prompt template and skill instruction structure",
+        "do not lose measurable quality gates"
+      ]
+    }
+  ],
+  "module_summaries": {
+    "builtin.code_agent_core": {
+      "source_count": 26,
+      "core_logic_count": 254,
+      "must_not_lose_count": 76
+    },
+    "builtin.agent_runtime_core": {
+      "source_count": 2,
+      "core_logic_count": 6,
+      "must_not_lose_count": 2
+    },
+    "builtin.mcp_tool_hub": {
+      "source_count": 12,
+      "core_logic_count": 111,
+      "must_not_lose_count": 36
+    },
+    "builtin.browser_operator": {
+      "source_count": 9,
+      "core_logic_count": 101,
+      "must_not_lose_count": 33
+    },
+    "builtin.memory_rag_core": {
+      "source_count": 17,
+      "core_logic_count": 169,
+      "must_not_lose_count": 56
+    },
+    "builtin.workflow_orchestrator": {
+      "source_count": 3,
+      "core_logic_count": 25,
+      "must_not_lose_count": 8
+    },
+    "builtin.local_model_runtime": {
+      "source_count": 9,
+      "core_logic_count": 62,
+      "must_not_lose_count": 20
+    },
+    "builtin.prompt_skill_engine": {
+      "source_count": 1,
+      "core_logic_count": 7,
+      "must_not_lose_count": 2
+    },
+    "builtin.security_sandbox": {
+      "source_count": 1,
+      "core_logic_count": 19,
+      "must_not_lose_count": 6
+    },
+    "builtin.eval_benchmark": {
+      "source_count": 3,
+      "core_logic_count": 39,
+      "must_not_lose_count": 13
+    },
+    "builtin.ui_desktop_operator": {
+      "source_count": 0,
+      "core_logic_count": 0,
+      "must_not_lose_count": 0
+    },
+    "builtin.artifact_report_engine": {
+      "source_count": 0,
+      "core_logic_count": 0,
+      "must_not_lose_count": 0
+    }
+  },
+  "rule": "Fusion must preserve per-source core logic, unique capability and rebuild value."
+}

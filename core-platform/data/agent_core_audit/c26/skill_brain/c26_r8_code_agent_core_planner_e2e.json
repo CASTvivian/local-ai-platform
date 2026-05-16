@@ -1,9 +1,9 @@
 {
-  "checked_at": "2026-05-16T11:31:57.875988Z",
+  "checked_at": "2026-05-16T12:07:23.944409+00:00",
   "tests": [
     {
       "query": "请用代码智能体检查项目文件并生成 patch",
-      "planner_mode": "schema_driven",
+      "planner_mode": null,
       "tools": [
         "capability.match",
         "filesystem.read",
@@ -732,10 +732,11 @@
     },
     {
       "query": "帮我检查 workspace 代码并运行测试",
-      "planner_mode": "schema_driven",
+      "planner_mode": null,
       "tools": [
         "capability.match",
         "filesystem.read",
+        "builtin.code_agent_core.execute",
         "builtin.code_agent_core.execute",
         "model.generate"
       ],
@@ -1395,12 +1396,11 @@
     },
     {
       "query": "我想让代码智能体修复一个文件",
-      "planner_mode": "schema_driven",
+      "planner_mode": null,
       "tools": [
         "capability.match",
         "filesystem.read",
         "builtin.code_agent_core.execute",
-        "filesystem.write",
         "model.generate"
       ],
       "top_matches": [

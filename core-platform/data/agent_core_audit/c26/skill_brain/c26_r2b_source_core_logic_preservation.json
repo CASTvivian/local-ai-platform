@@ -1,0 +1,71 @@
+{
+  "checked_at": "2026-05-16T11:58:35.049648Z",
+  "source_count": 83,
+  "module_count": 12,
+  "all_sources_have_core_logic": true,
+  "all_sources_have_unique_capability": true,
+  "all_sources_have_rebuild_value": true,
+  "all_sources_have_must_not_be_lost": true,
+  "module_summaries": {
+    "builtin.code_agent_core": {
+      "source_count": 26,
+      "core_logic_count": 254,
+      "must_not_lose_count": 76
+    },
+    "builtin.agent_runtime_core": {
+      "source_count": 2,
+      "core_logic_count": 6,
+      "must_not_lose_count": 2
+    },
+    "builtin.mcp_tool_hub": {
+      "source_count": 12,
+      "core_logic_count": 111,
+      "must_not_lose_count": 36
+    },
+    "builtin.browser_operator": {
+      "source_count": 9,
+      "core_logic_count": 101,
+      "must_not_lose_count": 33
+    },
+    "builtin.memory_rag_core": {
+      "source_count": 17,
+      "core_logic_count": 169,
+      "must_not_lose_count": 56
+    },
+    "builtin.workflow_orchestrator": {
+      "source_count": 3,
+      "core_logic_count": 25,
+      "must_not_lose_count": 8
+    },
+    "builtin.local_model_runtime": {
+      "source_count": 9,
+      "core_logic_count": 62,
+      "must_not_lose_count": 20
+    },
+    "builtin.prompt_skill_engine": {
+      "source_count": 1,
+      "core_logic_count": 7,
+      "must_not_lose_count": 2
+    },
+    "builtin.security_sandbox": {
+      "source_count": 1,
+      "core_logic_count": 19,
+      "must_not_lose_count": 6
+    },
+    "builtin.eval_benchmark": {
+      "source_count": 3,
+      "core_logic_count": 39,
+      "must_not_lose_count": 13
+    },
+    "builtin.ui_desktop_operator": {
+      "source_count": 0,
+      "core_logic_count": 0,
+      "must_not_lose_count": 0
+    },
+    "builtin.artifact_report_engine": {
+      "source_count": 0,
+      "core_logic_count": 0,
+      "must_not_lose_count": 0
+    }
+  }
+}
