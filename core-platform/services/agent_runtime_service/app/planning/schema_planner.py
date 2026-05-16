@@ -140,25 +140,29 @@ def _rank_tools(message: str, schema: dict[str, Any]) -> list[dict[str, Any]]:
     return ranked
 
 
+def _builtin_contract_context_step(message: str) -> dict[str, Any]:
+    """Request capability context including builtin execution contracts."""
+    return _step(
+        "capability.match",
+        {
+            "query": message,
+            "limit": 12,
+            "include_skills": True,
+            "include_builtin_contracts": True,
+            "source": "builtin_contract_aware_planner",
+        },
+        "discover relevant builtin modules, default skills and execution contracts",
+    )
+
+
 def _skill_context_steps(message: str) -> list[dict[str, Any]]:
-    """Add skill discovery context without hardcoded query routing.
+    """Add skill/builtin discovery context without hardcoded query routing.
 
     This uses capability.match over the external capability registry.
-    Since C26-B exposes default skills as skill.* capabilities, the planner can
-    discover relevant skills through the same schema-driven matching path.
+    Since C26-B/C26-R3 expose skill.* and builtin.* capabilities, the planner can
+    discover relevant owned modules and default skills through the same schema-driven path.
     """
-    return [
-        _step(
-            "capability.match",
-            {
-                "query": message,
-                "limit": 12,
-                "include_skills": True,
-                "source": "skill_aware_planner",
-            },
-            "discover relevant platform capabilities and default skills",
-        )
-    ]
+    return [_builtin_contract_context_step(message)]
 
 
 def _ensure_skill_context(message: str, steps: list[dict[str, Any]]) -> list[dict[str, Any]]:

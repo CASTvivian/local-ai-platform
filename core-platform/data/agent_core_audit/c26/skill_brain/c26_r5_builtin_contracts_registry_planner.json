@@ -1,0 +1,283 @@
+{
+  "checked_at": "2026-05-16T10:17:07.412302Z",
+  "contract_count": 12,
+  "builtin_capability_count": 12,
+  "all_builtin_have_contract": true,
+  "all_builtin_have_allowed_tools": true,
+  "all_builtin_owned_code_only": true,
+  "builtin_modules": [
+    {
+      "id": "builtin.code_agent_core",
+      "execution_mode": "workspace_agent",
+      "allowed_tools": [
+        "capability.match",
+        "repo_memory.search",
+        "filesystem.read",
+        "filesystem.write",
+        "shell.exec",
+        "model.generate"
+      ],
+      "has_contract": true
+    },
+    {
+      "id": "builtin.agent_runtime_core",
+      "execution_mode": "agent_plan",
+      "allowed_tools": [
+        "capability.match",
+        "repo_memory.search",
+        "model.generate"
+      ],
+      "has_contract": true
+    },
+    {
+      "id": "builtin.mcp_tool_hub",
+      "execution_mode": "tool_registry",
+      "allowed_tools": [
+        "capability.match",
+        "model.generate"
+      ],
+      "has_contract": true
+    },
+    {
+      "id": "builtin.browser_operator",
+      "execution_mode": "browser_plan",
+      "allowed_tools": [
+        "web.search",
+        "capability.match",
+        "model.generate"
+      ],
+      "has_contract": true
+    },
+    {
+      "id": "builtin.memory_rag_core",
+      "execution_mode": "retrieval",
+      "allowed_tools": [
+        "repo_memory.search",
+        "capability.match",
+        "model.generate"
+      ],
+      "has_contract": true
+    },
+    {
+      "id": "builtin.workflow_orchestrator",
+      "execution_mode": "workflow_plan",
+      "allowed_tools": [
+        "capability.match",
+        "workflow_store.list",
+        "model.generate"
+      ],
+      "has_contract": true
+    },
+    {
+      "id": "builtin.local_model_runtime",
+      "execution_mode": "model_runtime",
+      "allowed_tools": [
+        "model.generate",
+        "capability.match"
+      ],
+      "has_contract": true
+    },
+    {
+      "id": "builtin.prompt_skill_engine",
+      "execution_mode": "prompt_template",
+      "allowed_tools": [
+        "capability.match",
+        "repo_memory.search",
+        "model.generate"
+      ],
+      "has_contract": true
+    },
+    {
+      "id": "builtin.security_sandbox",
+      "execution_mode": "policy_gate",
+      "allowed_tools": [
+        "capability.match",
+        "repo_memory.search",
+        "model.generate"
+      ],
+      "has_contract": true
+    },
+    {
+      "id": "builtin.eval_benchmark",
+      "execution_mode": "evaluation",
+      "allowed_tools": [
+        "capability.match",
+        "repo_memory.search",
+        "model.generate"
+      ],
+      "has_contract": true
+    },
+    {
+      "id": "builtin.ui_desktop_operator",
+      "execution_mode": "ui_binding",
+      "allowed_tools": [
+        "capability.match",
+        "repo_memory.search",
+        "model.generate"
+      ],
+      "has_contract": true
+    },
+    {
+      "id": "builtin.artifact_report_engine",
+      "execution_mode": "report_generation",
+      "allowed_tools": [
+        "capability.match",
+        "repo_memory.search",
+        "model.generate"
+      ],
+      "has_contract": true
+    }
+  ],
+  "tests": [
+    {
+      "query": "我想做代码智能体",
+      "matches": [
+        {
+          "id": "builtin.code_agent_core",
+          "execution_mode": "workspace_agent",
+          "has_contract": true
+        },
+        {
+          "id": "builtin.agent_runtime_core",
+          "execution_mode": "agent_plan",
+          "has_contract": true
+        },
+        {
+          "id": "builtin.mcp_tool_hub",
+          "execution_mode": "tool_registry",
+          "has_contract": true
+        },
+        {
+          "id": "builtin.browser_operator",
+          "execution_mode": "browser_plan",
+          "has_contract": true
+        },
+        {
+          "id": "builtin.memory_rag_core",
+          "execution_mode": "retrieval",
+          "has_contract": true
+        }
+      ]
+    },
+    {
+      "query": "有没有 MCP 工具协议能力",
+      "matches": [
+        {
+          "id": "builtin.mcp_tool_hub",
+          "execution_mode": "tool_registry",
+          "has_contract": true
+        },
+        {
+          "id": "builtin.code_agent_core",
+          "execution_mode": "workspace_agent",
+          "has_contract": true
+        },
+        {
+          "id": "builtin.browser_operator",
+          "execution_mode": "browser_plan",
+          "has_contract": true
+        },
+        {
+          "id": "builtin.memory_rag_core",
+          "execution_mode": "retrieval",
+          "has_contract": true
+        },
+        {
+          "id": "builtin.security_sandbox",
+          "execution_mode": "policy_gate",
+          "has_contract": true
+        }
+      ]
+    },
+    {
+      "query": "浏览器自动化怎么做",
+      "matches": [
+        {
+          "id": "builtin.browser_operator",
+          "execution_mode": "browser_plan",
+          "has_contract": true
+        },
+        {
+          "id": "builtin.code_agent_core",
+          "execution_mode": "workspace_agent",
+          "has_contract": true
+        },
+        {
+          "id": "builtin.agent_runtime_core",
+          "execution_mode": "agent_plan",
+          "has_contract": true
+        },
+        {
+          "id": "builtin.mcp_tool_hub",
+          "execution_mode": "tool_registry",
+          "has_contract": true
+        },
+        {
+          "id": "builtin.memory_rag_core",
+          "execution_mode": "retrieval",
+          "has_contract": true
+        }
+      ]
+    },
+    {
+      "query": "本地记忆和 RAG 能力",
+      "matches": [
+        {
+          "id": "builtin.memory_rag_core",
+          "execution_mode": "retrieval",
+          "has_contract": true
+        },
+        {
+          "id": "builtin.local_model_runtime",
+          "execution_mode": "model_runtime",
+          "has_contract": true
+        },
+        {
+          "id": "builtin.code_agent_core",
+          "execution_mode": "workspace_agent",
+          "has_contract": true
+        },
+        {
+          "id": "builtin.agent_runtime_core",
+          "execution_mode": "agent_plan",
+          "has_contract": true
+        },
+        {
+          "id": "builtin.mcp_tool_hub",
+          "execution_mode": "tool_registry",
+          "has_contract": true
+        }
+      ]
+    },
+    {
+      "query": "本地模型运行能力",
+      "matches": [
+        {
+          "id": "builtin.local_model_runtime",
+          "execution_mode": "model_runtime",
+          "has_contract": true
+        },
+        {
+          "id": "time.current",
+          "execution_mode": null,
+          "has_contract": false
+        },
+        {
+          "id": "builtin.code_agent_core",
+          "execution_mode": "workspace_agent",
+          "has_contract": true
+        },
+        {
+          "id": "builtin.agent_runtime_core",
+          "execution_mode": "agent_plan",
+          "has_contract": true
+        },
+        {
+          "id": "builtin.mcp_tool_hub",
+          "execution_mode": "tool_registry",
+          "has_contract": true
+        }
+      ]
+    }
+  ]
+}

@@ -148,18 +148,53 @@ def load_builtin_modules() -> list[dict[str, Any]]:
     return [x for x in modules if isinstance(x, dict)]
 
 
+def _builtin_contracts_path() -> Path:
+    """Path to the builtin execution contracts JSON."""
+    return _core_platform_dir() / "data" / "skill_brain" / "builtin_execution_contracts.json"
+
+
+def load_builtin_contracts() -> dict[str, dict[str, Any]]:
+    """Load builtin execution contracts keyed by module id."""
+    path = _builtin_contracts_path()
+    if not path.exists():
+        return {}
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        return {}
+    contracts = payload.get("contracts", [])
+    if not isinstance(contracts, list):
+        return {}
+    return {
+        str(item.get("id")): item
+        for item in contracts
+        if isinstance(item, dict) and item.get("id")
+    }
+
+
 def _builtin_module_to_capability(module: dict[str, Any]) -> dict[str, Any]:
-    """Convert a builtin fusion module into a capability dict (id prefix builtin.*)."""
+    """Convert a builtin fusion module into a capability dict (id prefix builtin.*).
+
+    Since C26-R5 the returned dict includes the full execution contract:
+    execution_contract, execution_mode, allowed_tools, input_schema,
+    output_schema, acceptance_tests, runtime_dependency_policy.
+    """
     module_id = str(module.get("id") or "").strip()
     title = str(module.get("title") or module_id).strip()
     merged = [str(x) for x in module.get("merged_capabilities", []) or []]
     plan = [str(x) for x in module.get("implementation_plan", []) or []]
+    contract = load_builtin_contracts().get(module_id, {})
     tags: list[str] = []
     for ref in module.get("source_references", []) or []:
         for tag in ref.get("tags", []) or []:
             if tag not in tags:
                 tags.append(str(tag))
     description = "；".join(merged[:6])
+    allowed_tools = contract.get("allowed_tools") or [
+        "capability.match",
+        "repo_memory.search",
+        "model.generate",
+    ]
     return {
         "id": module_id,
         "name": title,
@@ -170,22 +205,24 @@ def _builtin_module_to_capability(module: dict[str, Any]) -> dict[str, Any]:
         "priority": 80,
         "enabled": True,
         "tags": tags,
-        "input_schema": {},
+        "input_schema": contract.get("input_schema") or {},
         "metadata": {
             "source_type": "own_builtin_module",
             "builtin": True,
             "builtin_priority": 1.0,
-            "implementation_status": module.get("implementation_status", "planned"),
+            "implementation_status": contract.get("implementation_status", module.get("implementation_status", "planned")),
             "source_reference_count": module.get("source_reference_count", 0),
             "merged_capabilities": merged,
             "implementation_plan": plan,
             "skill_tags": tags,
-            "tools": [
-                "capability.match",
-                "repo_memory.search",
-                "model.generate",
-            ],
+            "tools": allowed_tools,
             "risk": "safe",
+            "execution_contract": contract,
+            "execution_mode": contract.get("execution_mode"),
+            "allowed_tools": allowed_tools,
+            "output_schema": contract.get("output_schema"),
+            "acceptance_tests": contract.get("acceptance_tests", []),
+            "runtime_dependency_policy": contract.get("runtime_dependency_policy", "owned_code_only"),
         },
     }
 
