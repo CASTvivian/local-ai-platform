@@ -1,0 +1,128 @@
+{
+  "checked_at": "2026-05-16T04:47:27.604814Z",
+  "capability_count": 14,
+  "schema_version": "c25-c14-b11-fix-time-capability",
+  "tests": [
+    {
+      "input": "现在几点",
+      "matches": [
+        {
+          "id": "time.current",
+          "name": "本地时间日期能力",
+          "priority": 95
+        },
+        {
+          "id": "repo.memory",
+          "name": "项目知识能力",
+          "priority": 95
+        },
+        {
+          "id": "web.search",
+          "name": "联网搜索能力",
+          "priority": 95
+        },
+        {
+          "id": "weather.query",
+          "name": "天气查询能力",
+          "priority": 95
+        },
+        {
+          "id": "time.relative",
+          "name": "相对日期计算能力",
+          "priority": 90
+        }
+      ]
+    },
+    {
+      "input": "今天是几月几号",
+      "matches": [
+        {
+          "id": "time.current",
+          "name": "本地时间日期能力",
+          "priority": 95
+        },
+        {
+          "id": "repo.memory",
+          "name": "项目知识能力",
+          "priority": 95
+        },
+        {
+          "id": "web.search",
+          "name": "联网搜索能力",
+          "priority": 95
+        },
+        {
+          "id": "weather.query",
+          "name": "天气查询能力",
+          "priority": 95
+        },
+        {
+          "id": "time.relative",
+          "name": "相对日期计算能力",
+          "priority": 90
+        }
+      ]
+    },
+    {
+      "input": "请帮我分析代码结构",
+      "matches": [
+        {
+          "id": "code.standard",
+          "name": "代码能力",
+          "priority": 85
+        },
+        {
+          "id": "reasoning.standard",
+          "name": "推理分析能力",
+          "priority": 85
+        },
+        {
+          "id": "repo.memory",
+          "name": "项目知识能力",
+          "priority": 95
+        },
+        {
+          "id": "web.search",
+          "name": "联网搜索能力",
+          "priority": 95
+        },
+        {
+          "id": "weather.query",
+          "name": "天气查询能力",
+          "priority": 95
+        }
+      ]
+    },
+    {
+      "input": "我们有哪些项目资产",
+      "matches": [
+        {
+          "id": "repo.memory",
+          "name": "项目知识能力",
+          "priority": 95
+        },
+        {
+          "id": "web.search",
+          "name": "联网搜索能力",
+          "priority": 95
+        },
+        {
+          "id": "weather.query",
+          "name": "天气查询能力",
+          "priority": 95
+        },
+        {
+          "id": "time.current",
+          "name": "本地时间日期能力",
+          "priority": 95
+        },
+        {
+          "id": "time.relative",
+          "name": "相对日期计算能力",
+          "priority": 90
+        }
+      ]
+    }
+  ],
+  "note": "Added time.current and time.relative to external capability schema. No runtime keyword table was added. Registry.py still has no Chinese keyword scoring table."
+}

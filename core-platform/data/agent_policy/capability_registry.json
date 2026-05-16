@@ -1,5 +1,5 @@
 {
-  "version": "c25-c14-b11",
+  "version": "c25-c14-b11-fix-time-capability",
   "description": "External capability registry. Runtime matching must use schema descriptions and aliases from this file, not hardcoded keyword tables in Python.",
   "capabilities": [
     {
@@ -133,6 +133,30 @@
       "tags": ["weather", "realtime", "geocoding"],
       "aliases": ["weather", "forecast", "temperature", "天气"],
       "priority": 95,
+      "enabled": true
+    },
+    {
+      "id": "time.current",
+      "name": "本地时间日期能力",
+      "type": "tool",
+      "description": "Read current local date, time, timezone, clock information, and host machine current time.",
+      "runtime": "mcp",
+      "target": "time.now",
+      "tags": ["time", "date", "clock", "now", "current"],
+      "aliases": ["time", "date", "clock", "now", "current time", "current date", "local time", "local date", "几点", "时间", "日期", "现在几点", "当前时间", "今天"],
+      "priority": 95,
+      "enabled": true
+    },
+    {
+      "id": "time.relative",
+      "name": "相对日期计算能力",
+      "type": "tool",
+      "description": "Calculate relative date or date offset after planner resolves the offset argument.",
+      "runtime": "mcp",
+      "target": "time.date_math",
+      "tags": ["time", "date", "relative", "offset", "calculation"],
+      "aliases": ["relative date", "date offset", "days later", "days before", "date math", "几天后", "几天前", "相对日期", "日期计算"],
+      "priority": 90,
       "enabled": true
     },
     {
