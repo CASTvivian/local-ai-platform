@@ -1,0 +1,11 @@
+{
+  "checked_at": "2026-05-16T09:12:59.006026Z",
+  "module": "core-platform/services/agent_runtime_service/app/workspace/repair_loop.py",
+  "has_run_command": true,
+  "has_repair_context": true,
+  "has_loop": true,
+  "has_repair_action": true,
+  "has_audit": true,
+  "uses_patch_engine": true,
+  "has_workspace_boundary": true
+}
