@@ -1,4 +1,9 @@
-"""Read-only browser fetch runtime with SSRF protections."""
+"""Read-only browser fetch runtime with SSRF protections.
+
+Provides crawl and scrape capabilities for public web pages.
+Supports playwright-style page snapshotting via urllib fetch
+(no headless browser dependency required).
+"""
 
 from __future__ import annotations
 

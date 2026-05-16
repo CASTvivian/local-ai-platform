@@ -36,6 +36,9 @@ CAPABILITY_AREAS = [
             "services/agent_runtime_service/app/planner.py",
             "services/agent_runtime_service/app/executor.py",
             "services/agent_runtime_service/app/team",
+            "services/agent_runtime_service/app/agent_loop/runner.py",
+            "services/agent_runtime_service/app/loop/observer.py",
+            "services/agent_runtime_service/app/runtime/approval_executor.py",
         ],
     },
     {
@@ -106,6 +109,8 @@ CAPABILITY_AREAS = [
         "id": "browser_operator",
         "patterns": ["browser", "playwright", "web", "crawl", "scrape"],
         "ours": [
+            "services/agent_runtime_service/app/builtin/browser_operator.py",
+            "services/agent_runtime_service/app/runtime/browser_runtime.py",
             "data/skill_brain/our_builtin_skill_modules.json",
         ],
     },
@@ -113,6 +118,11 @@ CAPABILITY_AREAS = [
         "id": "security_sandbox",
         "patterns": ["security", "sandbox", "permission", "approval", "policy"],
         "ours": [
+            "services/agent_runtime_service/app/security/approval_store.py",
+            "services/agent_runtime_service/app/security/approval_models.py",
+            "services/agent_runtime_service/app/security/sandbox.py",
+            "services/agent_runtime_service/app/security/guard.py",
+            "services/agent_runtime_service/app/runtime/approval_executor.py",
             "data/sandbox_policy",
             "data/agent_policy/hardcode_guard.json",
         ],

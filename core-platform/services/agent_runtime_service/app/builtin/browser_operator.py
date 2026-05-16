@@ -2,6 +2,10 @@
 
 Browser/research planning adapter — safe foundation version.
 
+Analogous to Claude/Claw browser operator / playwright / crawl / scrape
+capabilities, but implemented via web search + URL fetch rather than
+headless browser automation.
+
 Connects:
 - task_state (progress tracking)
 - web.search (optional internet search)

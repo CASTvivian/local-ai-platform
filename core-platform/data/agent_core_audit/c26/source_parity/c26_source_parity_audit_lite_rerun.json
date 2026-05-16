@@ -594,5 +594,14 @@
       "Run Windows final smoke.",
       "Build offline model pack."
     ]
+  },
+  "rerun_checked_at": "2026-05-16T14:58:35.008057Z",
+  "rerun_summary": {
+    "covered": 14,
+    "partial": 0,
+    "gap": 0,
+    "high_risk_gaps": 0,
+    "partial_or_gap_ids": [],
+    "high_risk_ids": []
   }
 }
