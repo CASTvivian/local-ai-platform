@@ -1,0 +1,1 @@
+"""Owned builtin module adapters."""

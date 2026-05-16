@@ -1,0 +1,10 @@
+{
+  "checked_at": "2026-05-16T10:30:33.630111Z",
+  "adapter": "core-platform/services/agent_runtime_service/app/builtin/code_agent_core.py",
+  "has_execute": true,
+  "uses_task_state": true,
+  "uses_patch_engine": true,
+  "uses_repair_loop": true,
+  "writes_audit": true,
+  "owned_builtin_id": true
+}
