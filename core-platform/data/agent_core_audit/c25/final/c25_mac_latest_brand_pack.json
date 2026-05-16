@@ -1,0 +1,15 @@
+{
+  "checked_at": "2026-05-16T16:09:18.058390Z",
+  "head": "62c65b7c8c876bb812e5f3f22d318845ee7d3556",
+  "app": "core-platform/releases/macos-latest-brand-pack/app/Local AI Platform.app",
+  "app_exists": true,
+  "app_size_bytes": 60425649,
+  "dmg": "core-platform/releases/macos-latest-brand-pack/dmg/Local AI Platform_0.1.0_aarch64.dmg",
+  "dmg_exists": true,
+  "dmg_size_bytes": 6586163,
+  "intro": "core-platform/docs/PRODUCT_INTRO.md",
+  "readme": "core-platform/README.md",
+  "brand_positioning": "local_ai_agent_platform",
+  "skill_count_claim": "140+ builtin skills",
+  "forbidden_reforge_terms_removed": true
+}
