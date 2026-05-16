@@ -1,0 +1,430 @@
+{
+  "version": "c26-r4",
+  "generated_at": "2026-05-16T10:07:00.000000Z",
+  "description": "Execution contracts for own builtin fusion modules.",
+  "contract_count": 12,
+  "contracts": [
+    {
+      "id": "builtin.code_agent_core",
+      "title": "代码智能体核心模块",
+      "implementation_status": "planned",
+      "source_reference_count": 26,
+      "execution_mode": "workspace_agent",
+      "allowed_tools": [
+        "capability.match",
+        "repo_memory.search",
+        "filesystem.read",
+        "filesystem.write",
+        "shell.exec",
+        "model.generate"
+      ],
+      "input_schema": {
+        "type": "object",
+        "required": ["task"],
+        "properties": {
+          "task": {"type": "string"},
+          "workspace_root": {"type": "string"},
+          "files": {"type": "array", "items": {"type": "string"}}
+        }
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "summary": {"type": "string"},
+          "patches": {"type": "array"},
+          "tests": {"type": "array"},
+          "audit": {"type": "object"}
+        }
+      },
+      "acceptance_tests": [
+        "can read workspace file",
+        "can plan diff",
+        "can apply patch with backup",
+        "can run build/test command",
+        "can generate repair context"
+      ],
+      "runtime_dependency_policy": "owned_code_only",
+      "created_at": "2026-05-16T10:07:00.000000Z"
+    },
+    {
+      "id": "builtin.agent_runtime_core",
+      "title": "通用 Agent Runtime 模块",
+      "implementation_status": "planned",
+      "source_reference_count": 2,
+      "execution_mode": "agent_plan",
+      "allowed_tools": [
+        "capability.match",
+        "repo_memory.search",
+        "model.generate"
+      ],
+      "input_schema": {
+        "type": "object",
+        "required": ["goal"],
+        "properties": {
+          "goal": {"type": "string"},
+          "constraints": {"type": "array", "items": {"type": "string"}}
+        }
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "plan": {"type": "array"},
+          "observations": {"type": "array"},
+          "final_answer": {"type": "string"}
+        }
+      },
+      "acceptance_tests": [
+        "can create schema-driven plan",
+        "can execute tool registry steps",
+        "can render final answer"
+      ],
+      "runtime_dependency_policy": "owned_code_only",
+      "created_at": "2026-05-16T10:07:00.000000Z"
+    },
+    {
+      "id": "builtin.mcp_tool_hub",
+      "title": "MCP 工具协议模块",
+      "implementation_status": "planned",
+      "source_reference_count": 12,
+      "execution_mode": "tool_registry",
+      "allowed_tools": [
+        "capability.match",
+        "model.generate"
+      ],
+      "input_schema": {
+        "type": "object",
+        "required": ["tool_query"],
+        "properties": {
+          "tool_query": {"type": "string"}
+        }
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "tools": {"type": "array"},
+          "invoke_contract": {"type": "object"}
+        }
+      },
+      "acceptance_tests": [
+        "can list matching tools",
+        "can describe invocation contract",
+        "does not invoke unsafe tools without approval"
+      ],
+      "runtime_dependency_policy": "owned_code_only",
+      "created_at": "2026-05-16T10:07:00.000000Z"
+    },
+    {
+      "id": "builtin.browser_operator",
+      "title": "浏览器自动化模块",
+      "implementation_status": "planned",
+      "source_reference_count": 9,
+      "execution_mode": "browser_plan",
+      "allowed_tools": [
+        "web.search",
+        "capability.match",
+        "model.generate"
+      ],
+      "input_schema": {
+        "type": "object",
+        "required": ["research_task"],
+        "properties": {
+          "research_task": {"type": "string"},
+          "allowed_domains": {"type": "array", "items": {"type": "string"}}
+        }
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "research_plan": {"type": "array"},
+          "findings": {"type": "array"},
+          "citations": {"type": "array"}
+        }
+      },
+      "acceptance_tests": [
+        "can create browser/research plan",
+        "can summarize findings",
+        "can preserve evidence/citations"
+      ],
+      "runtime_dependency_policy": "owned_code_only",
+      "created_at": "2026-05-16T10:07:00.000000Z"
+    },
+    {
+      "id": "builtin.memory_rag_core",
+      "title": "记忆与 RAG 检索模块",
+      "implementation_status": "planned",
+      "source_reference_count": 17,
+      "execution_mode": "retrieval",
+      "allowed_tools": [
+        "repo_memory.search",
+        "capability.match",
+        "model.generate"
+      ],
+      "input_schema": {
+        "type": "object",
+        "required": ["query"],
+        "properties": {
+          "query": {"type": "string"},
+          "top_k": {"type": "integer"}
+        }
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "matches": {"type": "array"},
+          "summary": {"type": "string"},
+          "evidence": {"type": "array"}
+        }
+      },
+      "acceptance_tests": [
+        "can search repo memory",
+        "can return evidence",
+        "can summarize retrieved context"
+      ],
+      "runtime_dependency_policy": "owned_code_only",
+      "created_at": "2026-05-16T10:07:00.000000Z"
+    },
+    {
+      "id": "builtin.workflow_orchestrator",
+      "title": "工作流编排模块",
+      "implementation_status": "planned",
+      "source_reference_count": 3,
+      "execution_mode": "workflow_plan",
+      "allowed_tools": [
+        "capability.match",
+        "workflow_store.list",
+        "model.generate"
+      ],
+      "input_schema": {
+        "type": "object",
+        "required": ["workflow_goal"],
+        "properties": {
+          "workflow_goal": {"type": "string"}
+        }
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "workflow_steps": {"type": "array"},
+          "dependencies": {"type": "array"}
+        }
+      },
+      "acceptance_tests": [
+        "can create workflow steps",
+        "can express dependencies",
+        "can track progress through task state"
+      ],
+      "runtime_dependency_policy": "owned_code_only",
+      "created_at": "2026-05-16T10:07:00.000000Z"
+    },
+    {
+      "id": "builtin.local_model_runtime",
+      "title": "本地模型运行模块",
+      "implementation_status": "planned",
+      "source_reference_count": 9,
+      "execution_mode": "model_runtime",
+      "allowed_tools": [
+        "model.generate",
+        "capability.match"
+      ],
+      "input_schema": {
+        "type": "object",
+        "required": ["prompt"],
+        "properties": {
+          "prompt": {"type": "string"},
+          "profile": {"type": "string"}
+        }
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "answer": {"type": "string"},
+          "model": {"type": "string"},
+          "profile": {"type": "string"}
+        }
+      },
+      "acceptance_tests": [
+        "can call model_gateway",
+        "can switch profile",
+        "can report model health"
+      ],
+      "runtime_dependency_policy": "owned_code_only",
+      "created_at": "2026-05-16T10:07:00.000000Z"
+    },
+    {
+      "id": "builtin.prompt_skill_engine",
+      "title": "Prompt 技能引擎模块",
+      "implementation_status": "planned",
+      "source_reference_count": 1,
+      "execution_mode": "prompt_template",
+      "allowed_tools": [
+        "capability.match",
+        "repo_memory.search",
+        "model.generate"
+      ],
+      "input_schema": {
+        "type": "object",
+        "required": ["task_type"],
+        "properties": {
+          "task_type": {"type": "string"},
+          "context": {"type": "string"}
+        }
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "prompt": {"type": "string"},
+          "template_id": {"type": "string"},
+          "tool_guidance": {"type": "array"}
+        }
+      },
+      "acceptance_tests": [
+        "can load prompt template by task type",
+        "can inject context into template",
+        "can produce tool-use guidance"
+      ],
+      "runtime_dependency_policy": "owned_code_only",
+      "created_at": "2026-05-16T10:07:00.000000Z"
+    },
+    {
+      "id": "builtin.security_sandbox",
+      "title": "安全沙箱与策略模块",
+      "implementation_status": "planned",
+      "source_reference_count": 1,
+      "execution_mode": "policy_gate",
+      "allowed_tools": [
+        "capability.match",
+        "repo_memory.search",
+        "model.generate"
+      ],
+      "input_schema": {
+        "type": "object",
+        "required": ["action"],
+        "properties": {
+          "action": {"type": "string"},
+          "risk_level": {"type": "string"},
+          "context": {"type": "object"}
+        }
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "decision": {"type": "string"},
+          "reason": {"type": "string"},
+          "mitigations": {"type": "array"}
+        }
+      },
+      "acceptance_tests": [
+        "can evaluate action risk level",
+        "can block high-risk actions",
+        "can produce mitigation suggestions"
+      ],
+      "runtime_dependency_policy": "owned_code_only",
+      "created_at": "2026-05-16T10:07:00.000000Z"
+    },
+    {
+      "id": "builtin.eval_benchmark",
+      "title": "评估与基准模块",
+      "implementation_status": "planned",
+      "source_reference_count": 3,
+      "execution_mode": "evaluation",
+      "allowed_tools": [
+        "capability.match",
+        "repo_memory.search",
+        "model.generate"
+      ],
+      "input_schema": {
+        "type": "object",
+        "required": ["target"],
+        "properties": {
+          "target": {"type": "string"},
+          "metrics": {"type": "array", "items": {"type": "string"}}
+        }
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "scores": {"type": "object"},
+          "regression_status": {"type": "string"},
+          "report": {"type": "string"}
+        }
+      },
+      "acceptance_tests": [
+        "can score capability against benchmark",
+        "can detect regression from baseline",
+        "can generate evaluation report"
+      ],
+      "runtime_dependency_policy": "owned_code_only",
+      "created_at": "2026-05-16T10:07:00.000000Z"
+    },
+    {
+      "id": "builtin.ui_desktop_operator",
+      "title": "桌面 UI 操作模块",
+      "implementation_status": "planned",
+      "source_reference_count": 0,
+      "execution_mode": "ui_binding",
+      "allowed_tools": [
+        "capability.match",
+        "repo_memory.search",
+        "model.generate"
+      ],
+      "input_schema": {
+        "type": "object",
+        "required": ["view"],
+        "properties": {
+          "view": {"type": "string"},
+          "params": {"type": "object"}
+        }
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "rendered": {"type": "boolean"},
+          "view_id": {"type": "string"},
+          "bindings": {"type": "array"}
+        }
+      },
+      "acceptance_tests": [
+        "can navigate to skill store view",
+        "can bind capability to UI component",
+        "can render runtime status"
+      ],
+      "runtime_dependency_policy": "owned_code_only",
+      "created_at": "2026-05-16T10:07:00.000000Z"
+    },
+    {
+      "id": "builtin.artifact_report_engine",
+      "title": "产物与报告生成模块",
+      "implementation_status": "planned",
+      "source_reference_count": 0,
+      "execution_mode": "report_generation",
+      "allowed_tools": [
+        "capability.match",
+        "repo_memory.search",
+        "model.generate"
+      ],
+      "input_schema": {
+        "type": "object",
+        "required": ["task_result"],
+        "properties": {
+          "task_result": {"type": "object"},
+          "format": {"type": "string"}
+        }
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "artifact_id": {"type": "string"},
+          "report_url": {"type": "string"},
+          "lifecycle": {"type": "string"}
+        }
+      },
+      "acceptance_tests": [
+        "can register execution result as artifact",
+        "can generate report from task result",
+        "can track artifact lifecycle"
+      ],
+      "runtime_dependency_policy": "owned_code_only",
+      "created_at": "2026-05-16T10:07:00.000000Z"
+    }
+  ]
+}

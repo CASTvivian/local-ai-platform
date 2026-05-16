@@ -1,0 +1,35 @@
+{
+  "checked_at": "2026-05-16T10:07:00.000000Z",
+  "contract_count": 12,
+  "execution_modes": {
+    "workspace_agent": 1,
+    "agent_plan": 1,
+    "tool_registry": 1,
+    "browser_plan": 1,
+    "retrieval": 1,
+    "workflow_plan": 1,
+    "model_runtime": 1,
+    "prompt_template": 1,
+    "policy_gate": 1,
+    "evaluation": 1,
+    "ui_binding": 1,
+    "report_generation": 1
+  },
+  "all_have_input_schema": true,
+  "all_have_output_schema": true,
+  "all_have_allowed_tools": true,
+  "all_owned_code_only": true,
+  "modules_with_specialized_tools": {
+    "builtin.code_agent_core": ["filesystem.read", "filesystem.write", "shell.exec"],
+    "builtin.browser_operator": ["web.search"],
+    "builtin.workflow_orchestrator": ["workflow_store.list"],
+    "builtin.local_model_runtime": ["model.generate"],
+    "builtin.mcp_tool_hub": []
+  },
+  "implementation_status_summary": {
+    "planned": 12,
+    "implemented": 0,
+    "partial": 0
+  },
+  "unique_acceptance_tests_count": 35
+}
