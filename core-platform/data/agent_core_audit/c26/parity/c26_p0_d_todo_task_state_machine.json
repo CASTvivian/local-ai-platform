@@ -1,0 +1,12 @@
+{
+  "checked_at": "2026-05-16T17:20:00Z",
+  "module": "core-platform/services/agent_runtime_service/app/task_state/state_machine.py",
+  "has_create_task_run": true,
+  "has_update_task_status": true,
+  "has_start_next_pending_task": true,
+  "has_task_progress": true,
+  "has_append_task": true,
+  "has_list_task_runs": true,
+  "has_persistent_json": true,
+  "statuses": ["pending", "in_progress", "completed", "failed", "blocked", "cancelled"]
+}
