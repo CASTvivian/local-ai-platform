@@ -1,0 +1,2343 @@
+{
+  "version": "c26-ef-a",
+  "updated_at": "2026-05-16T08:56:54.258035Z",
+  "description": "User-controllable lifecycle state for default skills. Merged from default_skills with user overrides.",
+  "skills": {
+    "skill_public_apis_public_apis": {
+      "enabled": true,
+      "pinned": true,
+      "rating": null,
+      "usage_count": 1,
+      "last_used_at": "2026-05-16T08:58:05.202944+00:00",
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/public-apis__public-apis",
+      "title": "Public apis",
+      "tags": [
+        "general_skill"
+      ],
+      "updated_at": "2026-05-16T08:58:05.201364+00:00"
+    },
+    "skill_openclaw_openclaw": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/openclaw__openclaw",
+      "title": "Openclaw",
+      "tags": [
+        "general_skill",
+        "workflow"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258325Z"
+    },
+    "skill_ultraworkers_claw_code": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/ultraworkers__claw-code",
+      "title": "Claw code",
+      "tags": [
+        "agent_runtime",
+        "prompt_framework"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258327Z"
+    },
+    "skill_obra_superpowers": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/obra__superpowers",
+      "title": "Superpowers",
+      "tags": [
+        "agent_runtime",
+        "code_agent",
+        "prompt_framework",
+        "ui_component"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258329Z"
+    },
+    "skill_significant_gravitas_autogpt": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/Significant-Gravitas__AutoGPT",
+      "title": "AutoGPT",
+      "tags": [
+        "agent_runtime",
+        "local_model",
+        "mcp_tool"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258331Z"
+    },
+    "skill_affaan_m_everything_claude_code": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/affaan-m__everything-claude-code",
+      "title": "Everything claude code",
+      "tags": [
+        "agent_runtime",
+        "local_model",
+        "mcp_tool",
+        "memory",
+        "prompt_framework"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258333Z"
+    },
+    "skill_nousresearch_hermes_agent": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/NousResearch__hermes-agent",
+      "title": "Hermes agent",
+      "tags": [
+        "agent_runtime",
+        "local_model",
+        "prompt_framework",
+        "ui_component"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258335Z"
+    },
+    "skill_anthropics_skills": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/anthropics__skills",
+      "title": "Skills",
+      "tags": [
+        "agent_runtime",
+        "mcp_tool",
+        "ui_component"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258337Z"
+    },
+    "skill_forrestchang_andrej_karpathy_skills": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars/forrestchang__andrej-karpathy-skills",
+      "title": "Andrej karpathy skills",
+      "tags": [
+        "agent_runtime",
+        "code_agent",
+        "local_model",
+        "prompt_framework"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258339Z"
+    },
+    "skill_comfy_org_comfyui": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/Comfy-Org__ComfyUI",
+      "title": "ComfyUI",
+      "tags": [
+        "browser_agent",
+        "general_skill",
+        "local_model"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258341Z"
+    },
+    "skill_growinggit_github_chinese_top_charts": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/GrowingGit__GitHub-Chinese-Top-Charts",
+      "title": "GitHub Chinese Top Charts",
+      "tags": [
+        "general_skill"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258342Z"
+    },
+    "skill_msitarzewski_agency_agents": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/msitarzewski__agency-agents",
+      "title": "Agency agents",
+      "tags": [
+        "agent_runtime",
+        "ui_component",
+        "workflow"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258344Z"
+    },
+    "skill_garrytan_gstack": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/garrytan__gstack",
+      "title": "Gstack",
+      "tags": [
+        "agent_runtime",
+        "code_agent",
+        "mcp_tool",
+        "prompt_framework"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258346Z"
+    },
+    "skill_punkpeye_awesome_mcp_servers": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/punkpeye__awesome-mcp-servers",
+      "title": "Awesome mcp servers",
+      "tags": [
+        "mcp_tool"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258348Z"
+    },
+    "skill_openai_codex": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/openai__codex",
+      "title": "Codex",
+      "tags": [
+        "agent_runtime",
+        "code_agent",
+        "prompt_framework",
+        "ui_component"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258349Z"
+    },
+    "skill_karpathy_autoresearch": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/karpathy__autoresearch",
+      "title": "Autoresearch",
+      "tags": [
+        "agent_runtime",
+        "code_agent",
+        "local_model",
+        "ui_component"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258351Z"
+    },
+    "skill_nomic_ai_gpt4all": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/nomic-ai__gpt4all",
+      "title": "Gpt4all",
+      "tags": [
+        "local_model",
+        "ui_component"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258353Z"
+    },
+    "skill_voltagent_awesome_design_md": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/VoltAgent__awesome-design-md",
+      "title": "Awesome design md",
+      "tags": [
+        "agent_runtime",
+        "code_agent",
+        "ui_component"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258355Z"
+    },
+    "skill_bytedance_deer_flow": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/bytedance__deer-flow",
+      "title": "Deer flow",
+      "tags": [
+        "agent_runtime",
+        "local_model",
+        "mcp_tool",
+        "memory",
+        "prompt_framework",
+        "workflow"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258356Z"
+    },
+    "skill_xtekky_gpt4free": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/xtekky__gpt4free",
+      "title": "Gpt4free",
+      "tags": [
+        "general_skill",
+        "local_model",
+        "ui_component"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258358Z"
+    },
+    "skill_opendatalab_mineru": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/opendatalab__MinerU",
+      "title": "MinerU",
+      "tags": [
+        "agent_runtime",
+        "local_model",
+        "memory"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258360Z"
+    },
+    "skill_gsd_build_get_shit_done": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/gsd-build__get-shit-done",
+      "title": "Get shit done",
+      "tags": [
+        "agent_runtime",
+        "code_agent",
+        "prompt_framework",
+        "workflow"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258362Z"
+    },
+    "skill_666ghj_mirofish": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/666ghj__MiroFish",
+      "title": "MiroFish",
+      "tags": [
+        "agent_runtime",
+        "local_model",
+        "memory"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258364Z"
+    },
+    "skill_shareai_lab_learn_claude_code": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/shareAI-lab__learn-claude-code",
+      "title": "Learn claude code",
+      "tags": [
+        "agent_runtime",
+        "local_model",
+        "prompt_framework"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258366Z"
+    },
+    "skill_juliusbrussee_caveman": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/JuliusBrussee__caveman",
+      "title": "Caveman",
+      "tags": [
+        "agent_runtime",
+        "code_agent",
+        "local_model",
+        "prompt_framework",
+        "ui_component"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258367Z"
+    },
+    "skill_sansan0_trendradar": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/sansan0__TrendRadar",
+      "title": "TrendRadar",
+      "tags": [
+        "local_model",
+        "mcp_tool",
+        "ui_component"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258370Z"
+    },
+    "skill_shanraisshan_claude_code_best_practice": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/shanraisshan__claude-code-best-practice",
+      "title": "Claude code best practice",
+      "tags": [
+        "agent_runtime",
+        "code_agent",
+        "prompt_framework",
+        "workflow"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258372Z"
+    },
+    "skill_jingyaogong_minimind": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/jingyaogong__minimind",
+      "title": "Minimind",
+      "tags": [
+        "agent_runtime",
+        "local_model"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258373Z"
+    },
+    "skill_nanmicoder_mediacrawler": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/NanmiCoder__MediaCrawler",
+      "title": "MediaCrawler",
+      "tags": [
+        "general_skill"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258377Z"
+    },
+    "skill_lllyasviel_fooocus": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/lllyasviel__Fooocus",
+      "title": "Fooocus",
+      "tags": [
+        "general_skill",
+        "memory"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258379Z"
+    },
+    "skill_datawhalechina_hello_agents": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/datawhalechina__hello-agents",
+      "title": "Hello agents",
+      "tags": [
+        "agent_runtime",
+        "local_model",
+        "memory"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258381Z"
+    },
+    "skill_safishamsi_graphify": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/safishamsi__graphify",
+      "title": "Graphify",
+      "tags": [
+        "agent_runtime",
+        "browser_agent",
+        "code_agent",
+        "memory",
+        "prompt_framework"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258383Z"
+    },
+    "skill_chenglou_pretext": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/chenglou__pretext",
+      "title": "Pretext",
+      "tags": [
+        "general_skill"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258385Z"
+    },
+    "skill_microsoft_qlib": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "/Users/mofamaomi/Documents/本地ai/qlib",
+      "title": "Qlib",
+      "tags": [
+        "agent_runtime",
+        "local_model"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258386Z"
+    },
+    "skill_vnpy_vnpy": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "/Users/mofamaomi/Documents/本地ai/vnpy",
+      "title": "Vnpy",
+      "tags": [
+        "general_skill",
+        "workflow"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258388Z"
+    },
+    "skill_addyosmani_agent_skills": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/addyosmani__agent-skills",
+      "title": "Agent skills",
+      "tags": [
+        "agent_runtime",
+        "code_agent",
+        "prompt_framework"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258390Z"
+    },
+    "skill_abhigyanpatwari_gitnexus": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/abhigyanpatwari__GitNexus",
+      "title": "GitNexus",
+      "tags": [
+        "agent_runtime",
+        "memory"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258391Z"
+    },
+    "skill_sickn33_antigravity_awesome_skills": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/sickn33__antigravity-awesome-skills",
+      "title": "Antigravity awesome skills",
+      "tags": [
+        "agent_runtime",
+        "code_agent",
+        "mcp_tool",
+        "prompt_framework",
+        "workflow"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258393Z"
+    },
+    "skill_yunaiv_ruoyi_vue_pro": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/YunaiV__ruoyi-vue-pro",
+      "title": "Ruoyi vue pro",
+      "tags": [
+        "ui_component"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258395Z"
+    },
+    "skill_hkuds_cli_anything": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/HKUDS__CLI-Anything",
+      "title": "CLI Anything",
+      "tags": [
+        "agent_runtime"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258397Z"
+    },
+    "skill_vercel_labs_agent_browser": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/vercel-labs__agent-browser",
+      "title": "Agent browser",
+      "tags": [
+        "agent_runtime",
+        "browser_agent",
+        "workflow"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258398Z"
+    },
+    "skill_luongnv89_claude_howto": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/luongnv89__claude-howto",
+      "title": "Claude howto",
+      "tags": [
+        "agent_runtime",
+        "mcp_tool",
+        "prompt_framework"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258400Z"
+    },
+    "skill_ashishpatel26_500_ai_agents_projects": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/ashishpatel26__500-AI-Agents-Projects",
+      "title": "500 AI Agents Projects",
+      "tags": [
+        "agent_runtime",
+        "workflow"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258402Z"
+    },
+    "skill_simstudioai_sim": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/simstudioai__sim",
+      "title": "Sim",
+      "tags": [
+        "agent_runtime",
+        "memory",
+        "ui_component",
+        "workflow"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258404Z"
+    },
+    "skill_yeachan_heo_oh_my_codex": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/Yeachan-Heo__oh-my-codex",
+      "title": "Oh my codex",
+      "tags": [
+        "agent_runtime",
+        "prompt_framework",
+        "workflow"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258406Z"
+    },
+    "skill_coreyhaines31_marketingskills": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/coreyhaines31__marketingskills",
+      "title": "Marketingskills",
+      "tags": [
+        "agent_runtime",
+        "code_agent",
+        "prompt_framework"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258408Z"
+    },
+    "skill_soxoj_maigret": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/soxoj__maigret",
+      "title": "Maigret",
+      "tags": [
+        "security"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258410Z"
+    },
+    "skill_multica_ai_multica": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/multica-ai__multica",
+      "title": "Multica",
+      "tags": [
+        "agent_runtime",
+        "code_agent"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258412Z"
+    },
+    "skill_vercel_labs_agent_skills": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/vercel-labs__agent-skills",
+      "title": "Agent skills",
+      "tags": [
+        "agent_runtime",
+        "code_agent",
+        "ui_component"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258414Z"
+    },
+    "skill_zai_org_open_autoglm": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/zai-org__Open-AutoGLM",
+      "title": "Open AutoGLM",
+      "tags": [
+        "agent_runtime",
+        "code_agent",
+        "local_model"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258415Z"
+    },
+    "skill_shiyu_coder_kronos": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/shiyu-coder__Kronos",
+      "title": "Kronos",
+      "tags": [
+        "general_skill",
+        "local_model"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258417Z"
+    },
+    "skill_openai_symphony": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/openai__symphony",
+      "title": "Symphony",
+      "tags": [
+        "agent_runtime",
+        "code_agent"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258419Z"
+    },
+    "skill_supermemoryai_supermemory": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/supermemoryai__supermemory",
+      "title": "Supermemory",
+      "tags": [
+        "agent_runtime",
+        "memory"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258421Z"
+    },
+    "skill_ahujasid_blender_mcp": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/ahujasid__blender-mcp",
+      "title": "Blender mcp",
+      "tags": [
+        "mcp_tool"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258423Z"
+    },
+    "skill_voltagent_awesome_agent_skills": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/VoltAgent__awesome-agent-skills",
+      "title": "Awesome agent skills",
+      "tags": [
+        "agent_runtime",
+        "prompt_framework"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258424Z"
+    },
+    "skill_coleam00_archon": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/coleam00__Archon",
+      "title": "Archon",
+      "tags": [
+        "agent_runtime",
+        "code_agent",
+        "mcp_tool",
+        "prompt_framework",
+        "workflow"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258426Z"
+    },
+    "skill_opendataloader_project_opendataloader_pdf": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/opendataloader-project__opendataloader-pdf",
+      "title": "Opendataloader pdf",
+      "tags": [
+        "agent_runtime",
+        "evaluation",
+        "local_model",
+        "memory",
+        "workflow"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258428Z"
+    },
+    "skill_k_dense_ai_scientific_agent_skills": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/K-Dense-AI__scientific-agent-skills",
+      "title": "Scientific agent skills",
+      "tags": [
+        "agent_runtime"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258430Z"
+    },
+    "skill_davideuler_architecture_of_internet_product": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/davideuler__architecture.of.internet-product",
+      "title": "Architecture.of.internet product",
+      "tags": [
+        "local_model",
+        "ui_component"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258432Z"
+    },
+    "skill_panniantong_agent_reach": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/Panniantong__Agent-Reach",
+      "title": "Agent Reach",
+      "tags": [
+        "agent_runtime",
+        "local_model",
+        "mcp_tool",
+        "prompt_framework",
+        "workflow"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258433Z"
+    },
+    "skill_yunaiv_yudao_cloud": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/YunaiV__yudao-cloud",
+      "title": "Yudao cloud",
+      "tags": [
+        "general_skill",
+        "ui_component"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258435Z"
+    },
+    "skill_donchitos_claude_code_game_studios": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/Donchitos__Claude-Code-Game-Studios",
+      "title": "Claude Code Game Studios",
+      "tags": [
+        "agent_runtime",
+        "prompt_framework",
+        "ui_component",
+        "workflow"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258437Z"
+    },
+    "skill_openbmb_voxcpm": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "/Users/mofamaomi/Documents/本地ai/VoxCPM",
+      "title": "VoxCPM",
+      "tags": [
+        "general_skill",
+        "local_model"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258438Z"
+    },
+    "skill_agentskills_agentskills": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/agentskills__agentskills",
+      "title": "Agentskills",
+      "tags": [
+        "agent_runtime"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258440Z"
+    },
+    "skill_vercel_labs_skills": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/vercel-labs__skills",
+      "title": "Skills",
+      "tags": [
+        "agent_runtime",
+        "mcp_tool",
+        "prompt_framework"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258442Z"
+    },
+    "skill_microsoft_airsim": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/microsoft__AirSim",
+      "title": "AirSim",
+      "tags": [
+        "agent_runtime"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258443Z"
+    },
+    "skill_claude_code_best_claude_code": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/claude-code-best__claude-code",
+      "title": "Claude code",
+      "tags": [
+        "agent_runtime",
+        "prompt_framework"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258445Z"
+    },
+    "skill_emcie_co_parlant": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/emcie-co__parlant",
+      "title": "Parlant",
+      "tags": [
+        "agent_runtime",
+        "local_model"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258447Z"
+    },
+    "skill_heygen_com_hyperframes": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/heygen-com__hyperframes",
+      "title": "Hyperframes",
+      "tags": [
+        "agent_runtime",
+        "browser_agent",
+        "code_agent",
+        "mcp_tool"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258448Z"
+    },
+    "skill_transformeroptimus_superagi": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/TransformerOptimus__SuperAGI",
+      "title": "SuperAGI",
+      "tags": [
+        "agent_runtime",
+        "local_model",
+        "memory"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258450Z"
+    },
+    "skill_tanweai_pua": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/tanweai__pua",
+      "title": "Pua",
+      "tags": [
+        "agent_runtime",
+        "prompt_framework"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258452Z"
+    },
+    "skill_vxcontrol_pentagi": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/vxcontrol__pentagi",
+      "title": "Pentagi",
+      "tags": [
+        "agent_runtime",
+        "local_model",
+        "mcp_tool",
+        "ui_component",
+        "workflow"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258454Z"
+    },
+    "skill_garrytan_gbrain": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/garrytan__gbrain",
+      "title": "Gbrain",
+      "tags": [
+        "agent_runtime",
+        "local_model",
+        "memory"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258456Z"
+    },
+    "skill_rowboatlabs_rowboat": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/rowboatlabs__rowboat",
+      "title": "Rowboat",
+      "tags": [
+        "agent_runtime",
+        "local_model",
+        "memory",
+        "prompt_framework",
+        "ui_component",
+        "workflow"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258457Z"
+    },
+    "skill_ryoppippi_ccusage": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/ryoppippi__ccusage",
+      "title": "Ccusage",
+      "tags": [
+        "agent_runtime",
+        "mcp_tool",
+        "prompt_framework"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258459Z"
+    },
+    "skill_zai_org_cogvideo": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/zai-org__CogVideo",
+      "title": "CogVideo",
+      "tags": [
+        "browser_agent",
+        "local_model"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258461Z"
+    },
+    "skill_hkuds_openharness": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/HKUDS__OpenHarness",
+      "title": "OpenHarness",
+      "tags": [
+        "agent_runtime",
+        "memory",
+        "prompt_framework"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258462Z"
+    },
+    "skill_browser_use_browser_harness": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/browser-use__browser-harness",
+      "title": "Browser harness",
+      "tags": [
+        "agent_runtime",
+        "browser_agent",
+        "general_skill",
+        "local_model",
+        "prompt_framework"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258464Z"
+    },
+    "skill_steipete_codexbar": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/steipete__CodexBar",
+      "title": "CodexBar",
+      "tags": [
+        "agent_runtime",
+        "code_agent",
+        "prompt_framework"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258466Z"
+    },
+    "skill_sanbuphy_learn_coding_agent": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/sanbuphy__learn-coding-agent",
+      "title": "Learn coding agent",
+      "tags": [
+        "agent_runtime",
+        "code_agent",
+        "prompt_framework",
+        "ui_component"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258468Z"
+    },
+    "skill_datawhalechina_easy_vibe": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/datawhalechina__easy-vibe",
+      "title": "Easy vibe",
+      "tags": [
+        "agent_runtime",
+        "code_agent",
+        "local_model",
+        "mcp_tool",
+        "workflow"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258470Z"
+    },
+    "skill_vickscarlet_liferestart": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/VickScarlet__lifeRestart",
+      "title": "LifeRestart",
+      "tags": [
+        "general_skill"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258471Z"
+    },
+    "skill_chaitin_pandawiki": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/chaitin__PandaWiki",
+      "title": "PandaWiki",
+      "tags": [
+        "local_model",
+        "memory"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258473Z"
+    },
+    "skill_jingyaogong_minimind_v": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/jingyaogong__minimind-v",
+      "title": "Minimind v",
+      "tags": [
+        "general_skill",
+        "local_model",
+        "ui_component"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258475Z"
+    },
+    "skill_hbai_ltd_toonflow_app": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/HBAI-Ltd__Toonflow-app",
+      "title": "Toonflow app",
+      "tags": [
+        "browser_agent",
+        "local_model",
+        "mcp_tool",
+        "ui_component",
+        "workflow"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258478Z"
+    },
+    "skill_enricoros_big_agi": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/enricoros__big-AGI",
+      "title": "Big AGI",
+      "tags": [
+        "agent_runtime",
+        "local_model",
+        "ui_component"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258480Z"
+    },
+    "skill_mukul975_anthropic_cybersecurity_skills": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/mukul975__Anthropic-Cybersecurity-Skills",
+      "title": "Anthropic Cybersecurity Skills",
+      "tags": [
+        "agent_runtime",
+        "code_agent",
+        "local_model",
+        "mcp_tool",
+        "prompt_framework",
+        "security",
+        "workflow"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258485Z"
+    },
+    "skill_wangyuan389_mall_cook": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/wangyuan389__mall-cook",
+      "title": "Mall cook",
+      "tags": [
+        "browser_agent",
+        "general_skill",
+        "ui_component"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258487Z"
+    },
+    "skill_appcypher_awesome_mcp_servers": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/appcypher__awesome-mcp-servers",
+      "title": "Awesome mcp servers",
+      "tags": [
+        "agent_runtime",
+        "code_agent",
+        "local_model",
+        "mcp_tool",
+        "prompt_framework"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258522Z"
+    },
+    "skill_ageerle_ruoyi_ai": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/ageerle__ruoyi-ai",
+      "title": "Ruoyi ai",
+      "tags": [
+        "agent_runtime",
+        "mcp_tool",
+        "memory"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258537Z"
+    },
+    "skill_zhouxiaoka_autoclip": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/zhouxiaoka__autoclip",
+      "title": "Autoclip",
+      "tags": [
+        "agent_runtime",
+        "browser_agent",
+        "local_model",
+        "mcp_tool",
+        "ui_component"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258542Z"
+    },
+    "skill_gz_yami_mall4j": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/gz-yami__mall4j",
+      "title": "Mall4j",
+      "tags": [
+        "general_skill"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258547Z"
+    },
+    "skill_lilishop_lilishop": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/lilishop__lilishop",
+      "title": "Lilishop",
+      "tags": [
+        "ui_component"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258552Z"
+    },
+    "skill_danveloper_flash_moe": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/danveloper__flash-moe",
+      "title": "Flash moe",
+      "tags": [
+        "general_skill",
+        "local_model",
+        "memory",
+        "workflow"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258556Z"
+    },
+    "skill_htdt_godogen": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/htdt__godogen",
+      "title": "Godogen",
+      "tags": [
+        "agent_runtime",
+        "code_agent",
+        "prompt_framework"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258560Z"
+    },
+    "skill_oboard_claude_code_rev": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/oboard__claude-code-rev",
+      "title": "Claude code rev",
+      "tags": [
+        "agent_runtime",
+        "mcp_tool",
+        "prompt_framework",
+        "workflow"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258564Z"
+    },
+    "skill_88250_symphony": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/88250__symphony",
+      "title": "Symphony",
+      "tags": [
+        "general_skill",
+        "workflow"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258569Z"
+    },
+    "skill_openmoss_moss_tts_nano": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/OpenMOSS__MOSS-TTS-Nano",
+      "title": "MOSS TTS Nano",
+      "tags": [
+        "general_skill",
+        "local_model"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258573Z"
+    },
+    "skill_iamdarcy_hioshop_miniprogram": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/iamdarcy__hioshop-miniprogram",
+      "title": "Hioshop miniprogram",
+      "tags": [
+        "general_skill",
+        "ui_component"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258577Z"
+    },
+    "skill_nicedreamzapp_claude_code_local": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/nicedreamzapp__claude-code-local",
+      "title": "Claude code local",
+      "tags": [
+        "agent_runtime",
+        "local_model",
+        "prompt_framework"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258582Z"
+    },
+    "skill_shitagaki_lab_see_through": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/shitagaki-lab__see-through",
+      "title": "See through",
+      "tags": [
+        "general_skill"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258586Z"
+    },
+    "skill_alchaincyf_darwin_skill": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/alchaincyf__darwin-skill",
+      "title": "Darwin skill",
+      "tags": [
+        "agent_runtime",
+        "prompt_framework"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258590Z"
+    },
+    "skill_nikmcfly_mirofish_offline": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/nikmcfly__MiroFish-Offline",
+      "title": "MiroFish Offline",
+      "tags": [
+        "agent_runtime",
+        "local_model",
+        "security",
+        "ui_component"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258595Z"
+    },
+    "skill_voltagent_awesome_claude_design": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/VoltAgent__awesome-claude-design",
+      "title": "Awesome claude design",
+      "tags": [
+        "agent_runtime",
+        "prompt_framework",
+        "ui_component"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258599Z"
+    },
+    "skill_mininglamp_ai_mano_p": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/Mininglamp-AI__Mano-P",
+      "title": "Mano P",
+      "tags": [
+        "agent_runtime",
+        "evaluation",
+        "local_model",
+        "ui_component",
+        "workflow"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258603Z"
+    },
+    "skill_marketcalls_openalgo": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/marketcalls__openalgo",
+      "title": "Openalgo",
+      "tags": [
+        "ui_component",
+        "workflow"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258607Z"
+    },
+    "skill_chhsiching_github_chinese_top_charts": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/ChHsiching__GitHub-Chinese-Top-Charts",
+      "title": "GitHub Chinese Top Charts",
+      "tags": [
+        "general_skill",
+        "ui_component"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258617Z"
+    },
+    "skill_zyrouge_symphony": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/zyrouge__symphony",
+      "title": "Symphony",
+      "tags": [
+        "general_skill"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258621Z"
+    },
+    "skill_hyperspaceai_agi": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/hyperspaceai__agi",
+      "title": "Agi",
+      "tags": [
+        "agent_runtime",
+        "local_model"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258625Z"
+    },
+    "skill_perkfly_ex_skill": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/perkfly__ex-skill",
+      "title": "Ex skill",
+      "tags": [
+        "agent_runtime",
+        "prompt_framework"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258629Z"
+    },
+    "skill_danau5tin_multi_agent_coding_system": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/Danau5tin__multi-agent-coding-system",
+      "title": "Multi agent coding system",
+      "tags": [
+        "agent_runtime",
+        "code_agent",
+        "prompt_framework",
+        "workflow"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258634Z"
+    },
+    "skill_eliben_raft": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/eliben__raft",
+      "title": "Raft",
+      "tags": [
+        "general_skill"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258639Z"
+    },
+    "skill_moyangzhan_langchain4j_aideepin": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/moyangzhan__langchain4j-aideepin",
+      "title": "Langchain4j aideepin",
+      "tags": [
+        "agent_runtime",
+        "mcp_tool",
+        "memory",
+        "ui_component",
+        "workflow"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258643Z"
+    },
+    "skill_liangdabiao_seedance2_storyboard_generator": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/liangdabiao__Seedance2-Storyboard-Generator",
+      "title": "Seedance2 Storyboard Generator",
+      "tags": [
+        "agent_runtime",
+        "prompt_framework"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258648Z"
+    },
+    "skill_aaronjmars_miroshark": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/aaronjmars__MiroShark",
+      "title": "MiroShark",
+      "tags": [
+        "general_skill",
+        "security",
+        "ui_component"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258652Z"
+    },
+    "skill_modelscope_sirchmunk": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/modelscope__sirchmunk",
+      "title": "Sirchmunk",
+      "tags": [
+        "general_skill",
+        "local_model"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258656Z"
+    },
+    "skill_jingyaogong_minimind_o": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/jingyaogong__minimind-o",
+      "title": "Minimind o",
+      "tags": [
+        "general_skill",
+        "local_model",
+        "ui_component"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258661Z"
+    },
+    "skill_coleam00_claude_memory_compiler": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/coleam00__claude-memory-compiler",
+      "title": "Claude memory compiler",
+      "tags": [
+        "agent_runtime",
+        "code_agent",
+        "local_model",
+        "memory",
+        "prompt_framework"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258665Z"
+    },
+    "skill_zhouxiaoka_autoclip_mvp": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/zhouxiaoka__autoclip_mvp",
+      "title": "Autoclip mvp",
+      "tags": [
+        "browser_agent",
+        "local_model",
+        "ui_component"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258669Z"
+    },
+    "skill_francyjglisboa_agent_skill_creator": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/FrancyJGLisboa__agent-skill-creator",
+      "title": "Agent skill creator",
+      "tags": [
+        "agent_runtime",
+        "code_agent",
+        "mcp_tool",
+        "prompt_framework",
+        "workflow"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258694Z"
+    },
+    "skill_paidax01_math_curve_loaders": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/Paidax01__math-curve-loaders",
+      "title": "Math curve loaders",
+      "tags": [
+        "general_skill"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258698Z"
+    },
+    "skill_kzhrknt_awesome_design_md_jp": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/kzhrknt__awesome-design-md-jp",
+      "title": "Awesome design md jp",
+      "tags": [
+        "agent_runtime"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258700Z"
+    },
+    "skill_opendcai_dataflex": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/OpenDCAI__DataFlex",
+      "title": "DataFlex",
+      "tags": [
+        "general_skill",
+        "local_model"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258702Z"
+    },
+    "skill_opendatalab_mineru_diffusion": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/opendatalab__MinerU-Diffusion",
+      "title": "MinerU Diffusion",
+      "tags": [
+        "browser_agent",
+        "local_model",
+        "memory"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258704Z"
+    },
+    "skill_bergside_awesome_design_skills": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/bergside__awesome-design-skills",
+      "title": "Awesome design skills",
+      "tags": [
+        "agent_runtime",
+        "mcp_tool",
+        "prompt_framework",
+        "ui_component",
+        "workflow"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258706Z"
+    },
+    "skill_whoiszxl_shopzz": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/whoiszxl__shopzz",
+      "title": "Shopzz",
+      "tags": [
+        "general_skill",
+        "ui_component"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258708Z"
+    },
+    "skill_huytieu_cog_second_brain": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/huytieu__COG-second-brain",
+      "title": "COG second brain",
+      "tags": [
+        "agent_runtime",
+        "memory",
+        "prompt_framework"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258710Z"
+    },
+    "skill_austin1serb_anthropic_leaked_source_code": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/Austin1serb__Anthropic-Leaked-Source-Code",
+      "title": "Anthropic Leaked Source Code",
+      "tags": [
+        "agent_runtime",
+        "code_agent",
+        "mcp_tool",
+        "prompt_framework",
+        "ui_component",
+        "workflow"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258712Z"
+    },
+    "skill_nanbouking_wetravel": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/nanbouking__WeTravel",
+      "title": "WeTravel",
+      "tags": [
+        "general_skill"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258714Z"
+    },
+    "skill_t_lab_cuhksz_claude_code": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/T-Lab-CUHKSZ__claude-code",
+      "title": "Claude code",
+      "tags": [
+        "agent_runtime",
+        "prompt_framework"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258734Z"
+    },
+    "skill_thesaravanakumar_cognizant_early_engagement": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/thesaravanakumar__Cognizant-Early-Engagement",
+      "title": "Cognizant Early Engagement",
+      "tags": [
+        "agent_runtime",
+        "ui_component"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258746Z"
+    },
+    "skill_hu_uh_awesome_design_md": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/HU-UH__awesome-design-md",
+      "title": "Awesome design md",
+      "tags": [
+        "agent_runtime"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258813Z"
+    },
+    "skill_pixel_cellar_claude_code_game_studios": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/pixel-cellar__Claude-Code-Game-Studios",
+      "title": "Claude Code Game Studios",
+      "tags": [
+        "agent_runtime",
+        "prompt_framework"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258819Z"
+    },
+    "skill_moyangzhan_langchain4j_aideepin_web": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/moyangzhan__langchain4j-aideepin-web",
+      "title": "Langchain4j aideepin web",
+      "tags": [
+        "local_model",
+        "mcp_tool",
+        "memory",
+        "ui_component",
+        "workflow"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258821Z"
+    },
+    "skill_garrytan_gbrain_evals": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/garrytan__gbrain-evals",
+      "title": "Gbrain evals",
+      "tags": [
+        "agent_runtime",
+        "evaluation",
+        "general_skill",
+        "local_model",
+        "memory"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258823Z"
+    },
+    "skill_soxoj_maigret_tg_bot": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/soxoj__maigret-tg-bot",
+      "title": "Maigret tg bot",
+      "tags": [
+        "general_skill"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258825Z"
+    },
+    "skill_pzy2000_repogenesis": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/pzy2000__RepoGenesis",
+      "title": "RepoGenesis",
+      "tags": [
+        "code_agent",
+        "evaluation",
+        "general_skill",
+        "workflow"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258827Z"
+    },
+    "skill_fchangjun_awesome_design_md_cn": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/fchangjun__awesome-design-md-cn",
+      "title": "Awesome design md cn",
+      "tags": [
+        "agent_runtime"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258829Z"
+    },
+    "skill_liangdabiao_godogen": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/liangdabiao__Godogen",
+      "title": "Godogen",
+      "tags": [
+        "agent_runtime",
+        "local_model",
+        "prompt_framework",
+        "workflow"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258831Z"
+    },
+    "skill_vibe_with_me_tools_agent_reachout": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/vibe-with-me-tools__agent-reachout",
+      "title": "Agent reachout",
+      "tags": [
+        "agent_runtime",
+        "code_agent",
+        "local_model",
+        "mcp_tool",
+        "prompt_framework",
+        "security",
+        "workflow"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258832Z"
+    },
+    "skill_openmoss_moss_tts_nano_reader": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/OpenMOSS__MOSS-TTS-Nano-Reader",
+      "title": "MOSS TTS Nano Reader",
+      "tags": [
+        "general_skill"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258834Z"
+    },
+    "skill_howardpen9_hermes_gbrain_bridge": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/howardpen9__hermes-gbrain-bridge",
+      "title": "Hermes gbrain bridge",
+      "tags": [
+        "agent_runtime",
+        "local_model",
+        "mcp_tool",
+        "memory",
+        "prompt_framework"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258836Z"
+    },
+    "skill_meliwat_awesome_design_md_pre_paywall": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/Meliwat__awesome-design-md-pre-paywall",
+      "title": "Awesome design md pre paywall",
+      "tags": [
+        "agent_runtime"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258838Z"
+    },
+    "skill_g122622_synthos": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/g122622__synthos",
+      "title": "Synthos",
+      "tags": [
+        "agent_runtime",
+        "local_model"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258839Z"
+    },
+    "skill_durang_gbrain_http_wrapper": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/durang__gbrain-http-wrapper",
+      "title": "Gbrain http wrapper",
+      "tags": [
+        "agent_runtime",
+        "mcp_tool",
+        "prompt_framework",
+        "ui_component"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258841Z"
+    },
+    "skill_yhf98_moss_tts_nano_win": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/yhf98__MOSS-TTS-Nano-Win",
+      "title": "MOSS TTS Nano Win",
+      "tags": [
+        "general_skill"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258843Z"
+    },
+    "skill_castvivian_chenzaikuaipao_io": {
+      "enabled": true,
+      "pinned": false,
+      "rating": null,
+      "usage_count": 0,
+      "last_used_at": null,
+      "lifecycle": "enabled",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/CASTvivian__chenzaikuaipao.io",
+      "title": "Chenzaikuaipao.io",
+      "tags": [
+        "general_skill"
+      ],
+      "updated_at": "2026-05-16T08:56:54.258845Z"
+    }
+  }
+}

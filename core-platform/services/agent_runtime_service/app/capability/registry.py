@@ -39,6 +39,80 @@ def _default_skills_path() -> Path:
     return _core_platform_dir() / "data" / "skill_brain" / "default_skills.json"
 
 
+def _skill_state_path() -> Path:
+    """Path to the skill lifecycle state JSON."""
+    return _core_platform_dir() / "data" / "skill_brain" / "skill_state.json"
+
+
+# ---------------------------------------------------------------------------
+# Skill lifecycle state
+# ---------------------------------------------------------------------------
+
+def load_skill_state() -> dict[str, Any]:
+    """Load skill lifecycle state from skill_state.json."""
+    path = _skill_state_path()
+    if not path.exists():
+        return {"version": "missing", "skills": {}}
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        return {"version": "invalid", "skills": {}}
+    if not isinstance(payload.get("skills"), dict):
+        payload["skills"] = {}
+    return payload
+
+
+def save_skill_state(state: dict[str, Any]) -> None:
+    """Persist skill lifecycle state to skill_state.json."""
+    path = _skill_state_path()
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(state, ensure_ascii=False, indent=2), encoding="utf-8")
+
+
+def get_skill_state(skill_id: str) -> dict[str, Any]:
+    """Return lifecycle state for a single skill."""
+    state = load_skill_state()
+    item = state.get("skills", {}).get(skill_id)
+    return item if isinstance(item, dict) else {}
+
+
+def set_skill_enabled(skill_id: str, enabled: bool) -> dict[str, Any]:
+    """Enable or disable a skill and update its lifecycle label."""
+    from datetime import datetime, timezone
+    state = load_skill_state()
+    skills = state.setdefault("skills", {})
+    item = skills.setdefault(skill_id, {})
+    item["enabled"] = bool(enabled)
+    item["lifecycle"] = "enabled" if enabled else "disabled"
+    item["updated_at"] = datetime.now(timezone.utc).isoformat()
+    save_skill_state(state)
+    return item
+
+
+def set_skill_pinned(skill_id: str, pinned: bool) -> dict[str, Any]:
+    """Pin or unpin a skill (pinned skills get a ranking boost)."""
+    from datetime import datetime, timezone
+    state = load_skill_state()
+    skills = state.setdefault("skills", {})
+    item = skills.setdefault(skill_id, {})
+    item["pinned"] = bool(pinned)
+    item["updated_at"] = datetime.now(timezone.utc).isoformat()
+    save_skill_state(state)
+    return item
+
+
+def record_skill_usage(skill_id: str) -> dict[str, Any]:
+    """Increment usage count and update last_used_at for a skill."""
+    from datetime import datetime, timezone
+    state = load_skill_state()
+    skills = state.setdefault("skills", {})
+    item = skills.setdefault(skill_id, {})
+    item["usage_count"] = int(item.get("usage_count") or 0) + 1
+    item["last_used_at"] = datetime.now(timezone.utc).isoformat()
+    save_skill_state(state)
+    return item
+
+
 # ---------------------------------------------------------------------------
 # Default skills loader
 # ---------------------------------------------------------------------------
@@ -57,7 +131,11 @@ def load_default_skills() -> list[dict[str, Any]]:
 
 
 def _skill_to_capability(skill: dict[str, Any]) -> dict[str, Any]:
-    """Convert a default skill dict into a capability dict (id prefix skill.*)."""
+    """Convert a default skill dict into a capability dict (id prefix skill.*).
+
+    Merges lifecycle state from skill_state.json so that disabled/pinned/usage
+    information flows into the capability registry.
+    """
     skill_id = str(skill.get("id") or "").strip()
     title = str(skill.get("title") or skill_id).strip()
     description = str(skill.get("description") or "").strip()
@@ -65,6 +143,13 @@ def _skill_to_capability(skill: dict[str, Any]) -> dict[str, Any]:
     tools = [str(x) for x in skill.get("tools", []) or []] or [
         "repo_memory.search", "capability.match", "model.generate"
     ]
+    # Merge lifecycle state
+    lstate = get_skill_state(skill_id)
+    enabled = bool(lstate.get("enabled", skill.get("enabled_by_default", True)))
+    pinned = bool(lstate.get("pinned", False))
+    usage_count = int(lstate.get("usage_count") or 0)
+    rating = lstate.get("rating")
+    lifecycle = lstate.get("lifecycle", "enabled" if enabled else "disabled")
     return {
         "id": f"skill.{skill_id}",
         "name": title,
@@ -73,7 +158,7 @@ def _skill_to_capability(skill: dict[str, Any]) -> dict[str, Any]:
         "runtime": "skill_brain",
         "target": "capability.match",
         "priority": 40,
-        "enabled": True,
+        "enabled": enabled,
         "tags": tags,
         "input_schema": {},
         "metadata": {
@@ -88,6 +173,10 @@ def _skill_to_capability(skill: dict[str, Any]) -> dict[str, Any]:
             "stars": skill.get("stars"),
             "original_tags": skill.get("original_tags", []),
             "buckets": skill.get("buckets", []),
+            "lifecycle": lifecycle,
+            "pinned": pinned,
+            "usage_count": usage_count,
+            "rating": rating,
         },
     }
 
@@ -208,10 +297,12 @@ def list_capabilities(enabled_only: bool = False) -> List[dict]:
     if enabled_only:
         items = [item for item in items if item.enabled]
     result = [item.model_dump() for item in items]
-    # Append default skills that are not already present
+    # Append default skills that are not already present and not disabled
     existing_ids = {str(x.get("id")) for x in result}
     for skill in load_default_skills():
         cap = _skill_to_capability(skill)
+        if not cap.get("enabled", True):
+            continue
         if cap.get("id") not in existing_ids:
             result.append(cap)
             existing_ids.add(str(cap.get("id")))
@@ -350,6 +441,22 @@ def match_capabilities(
         priority_bonus = capability.priority / 1000.0
 
         score = round(base_score + tag_bonus + intent_bonus + priority_bonus, 4)
+
+        # Lifecycle boosts: pinned, usage, rating
+        meta = capability.metadata or {}
+        if meta.get("pinned"):
+            score += 0.08
+        usage_count = int(meta.get("usage_count") or 0)
+        if usage_count > 0:
+            score += min(0.05, usage_count * 0.005)
+        rating_val = meta.get("rating")
+        try:
+            if rating_val is not None:
+                score += max(0.0, min(0.05, float(rating_val) / 100.0))
+        except (TypeError, ValueError):
+            pass
+        score = round(score, 4)
+
         if score > 0:
             scored.append((score, capability))
 

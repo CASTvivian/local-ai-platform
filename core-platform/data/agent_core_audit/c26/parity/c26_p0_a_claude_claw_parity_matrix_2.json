@@ -1,0 +1,936 @@
+{
+  "checked_at": "2026-05-16T09:00:23.164353+00:00",
+  "summary": {
+    "total": 41,
+    "implemented": 29,
+    "partial": 10,
+    "gap": 2,
+    "avg_score": 88.4
+  },
+  "capabilities": [
+    {
+      "id": "workspace.file_tree",
+      "title": "Workspace file tree awareness",
+      "status": "gap",
+      "score": 50,
+      "term_hits": [
+        "directory",
+        "repo"
+      ],
+      "missing_terms": [
+        "file tree",
+        "workspace"
+      ],
+      "evidence": [
+        {
+          "path": "services/agent_runtime_service/app/filesystem",
+          "exists": false
+        },
+        {
+          "path": "services/repo_memory_service",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "workspace.file_read",
+      "title": "Read project files safely",
+      "status": "partial",
+      "score": 73,
+      "term_hits": [
+        "filesystem.read",
+        "read file"
+      ],
+      "missing_terms": [],
+      "evidence": [
+        {
+          "path": "services/agent_runtime_service/app/filesystem",
+          "exists": false
+        },
+        {
+          "path": "data/agent_policy/planner_tool_schema.json",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "workspace.file_write",
+      "title": "Write project files with approval",
+      "status": "partial",
+      "score": 73,
+      "term_hits": [
+        "filesystem.write",
+        "approval"
+      ],
+      "missing_terms": [],
+      "evidence": [
+        {
+          "path": "services/agent_runtime_service/app/filesystem",
+          "exists": false
+        },
+        {
+          "path": "services/agent_runtime_service/app/security",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "workspace.diff_review",
+      "title": "Diff review and patch summary",
+      "status": "implemented",
+      "score": 100,
+      "term_hits": [
+        "diff",
+        "patch",
+        "review"
+      ],
+      "missing_terms": [],
+      "evidence": [
+        {
+          "path": "services/agent_runtime_service/app",
+          "exists": true
+        },
+        {
+          "path": "docs/reports",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "workspace.repo_memory",
+      "title": "Repo memory search",
+      "status": "implemented",
+      "score": 85,
+      "term_hits": [
+        "brain_assets",
+        "repo memory"
+      ],
+      "missing_terms": [
+        "repo_memory.search"
+      ],
+      "evidence": [
+        {
+          "path": "services/repo_memory_service",
+          "exists": true
+        },
+        {
+          "path": "data/brain_assets",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "planner.schema",
+      "title": "Schema-driven planner",
+      "status": "partial",
+      "score": 78,
+      "term_hits": [
+        "schema_planner"
+      ],
+      "missing_terms": [
+        "planner_tool_schema"
+      ],
+      "evidence": [
+        {
+          "path": "services/agent_runtime_service/app/planning/schema_planner.py",
+          "exists": true
+        },
+        {
+          "path": "data/agent_policy/planner_tool_schema.json",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "planner.structured_output",
+      "title": "Planner model structured output",
+      "status": "implemented",
+      "score": 100,
+      "term_hits": [
+        "_normalize_model_plan",
+        "_extract_json_object"
+      ],
+      "missing_terms": [],
+      "evidence": [
+        {
+          "path": "services/agent_runtime_service/app/planning/schema_planner.py",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "planner.replan",
+      "title": "Observation and replan loop",
+      "status": "implemented",
+      "score": 100,
+      "term_hits": [
+        "replan",
+        "observation",
+        "validator"
+      ],
+      "missing_terms": [],
+      "evidence": [
+        {
+          "path": "services/agent_runtime_service/app/loop",
+          "exists": true
+        },
+        {
+          "path": "services/agent_runtime_service/app/service.py",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "planner.todo_state",
+      "title": "Todo/task state machine",
+      "status": "implemented",
+      "score": 85,
+      "term_hits": [
+        "todo",
+        "checklist"
+      ],
+      "missing_terms": [
+        "task state"
+      ],
+      "evidence": [
+        {
+          "path": "services/agent_runtime_service/app",
+          "exists": true
+        },
+        {
+          "path": "data",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "planner.session_resume",
+      "title": "Session resume",
+      "status": "gap",
+      "score": 0,
+      "term_hits": [],
+      "missing_terms": [
+        "session",
+        "resume",
+        "run_store"
+      ],
+      "evidence": [
+        {
+          "path": "services/agent_runtime_service/app/store",
+          "exists": false
+        }
+      ]
+    },
+    {
+      "id": "executor.registry_dispatch",
+      "title": "Tool registry dispatch",
+      "status": "implemented",
+      "score": 100,
+      "term_hits": [
+        "tool_dispatch_registry",
+        "execute_registered_tool"
+      ],
+      "missing_terms": [],
+      "evidence": [
+        {
+          "path": "services/agent_runtime_service/app/execution/tool_dispatch_registry.py",
+          "exists": true
+        },
+        {
+          "path": "services/agent_runtime_service/app/executor.py",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "executor.shell",
+      "title": "Shell execution with sandbox",
+      "status": "implemented",
+      "score": 100,
+      "term_hits": [
+        "shell.exec",
+        "sandbox"
+      ],
+      "missing_terms": [],
+      "evidence": [
+        {
+          "path": "services/agent_runtime_service/app/runtime",
+          "exists": true
+        },
+        {
+          "path": "data/sandbox_policy",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "executor.build_test_loop",
+      "title": "Build/test/repair loop",
+      "status": "implemented",
+      "score": 89,
+      "term_hits": [
+        "test",
+        "build",
+        "rerun"
+      ],
+      "missing_terms": [
+        "repair"
+      ],
+      "evidence": [
+        {
+          "path": "services/agent_runtime_service/app",
+          "exists": true
+        },
+        {
+          "path": "docs/reports",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "executor.approval_gate",
+      "title": "Approval gate for risky actions",
+      "status": "partial",
+      "score": 78,
+      "term_hits": [
+        "approval"
+      ],
+      "missing_terms": [
+        "requires_review"
+      ],
+      "evidence": [
+        {
+          "path": "services/agent_runtime_service/app/security",
+          "exists": true
+        },
+        {
+          "path": "services/agent_runtime_service/app/runtime",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "executor.artifacts",
+      "title": "Artifact generation and report chain",
+      "status": "implemented",
+      "score": 100,
+      "term_hits": [
+        "artifact",
+        "report",
+        "audit"
+      ],
+      "missing_terms": [],
+      "evidence": [
+        {
+          "path": "services/artifact_registry_service",
+          "exists": true
+        },
+        {
+          "path": "docs/reports",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "renderer.data_driven",
+      "title": "Data-driven renderer",
+      "status": "implemented",
+      "score": 100,
+      "term_hits": [
+        "renderer_templates",
+        "render_tool_result"
+      ],
+      "missing_terms": [],
+      "evidence": [
+        {
+          "path": "services/agent_runtime_service/app/renderer.py",
+          "exists": true
+        },
+        {
+          "path": "data/agent_policy/renderer_templates.json",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "replay.timeline",
+      "title": "Run timeline replay",
+      "status": "implemented",
+      "score": 100,
+      "term_hits": [
+        "timeline",
+        "replay"
+      ],
+      "missing_terms": [],
+      "evidence": [
+        {
+          "path": "services/agent_runtime_service/app/replay",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "trace.observability",
+      "title": "Trace observability",
+      "status": "implemented",
+      "score": 100,
+      "term_hits": [
+        "trace",
+        "observability"
+      ],
+      "missing_terms": [],
+      "evidence": [
+        {
+          "path": "services/trace_observability_service",
+          "exists": true
+        },
+        {
+          "path": "services/agent_runtime_service/app",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "mcp.runtime",
+      "title": "MCP runtime and invoke",
+      "status": "implemented",
+      "score": 100,
+      "term_hits": [
+        "mcp",
+        "invoke"
+      ],
+      "missing_terms": [],
+      "evidence": [
+        {
+          "path": "services/agent_runtime_service/app/mcp",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "skills.default_generation",
+      "title": "Default skills generated from repo assets",
+      "status": "implemented",
+      "score": 100,
+      "term_hits": [
+        "default_skills",
+        "skill_brain"
+      ],
+      "missing_terms": [],
+      "evidence": [
+        {
+          "path": "data/skill_brain/default_skills.json",
+          "exists": true
+        },
+        {
+          "path": "scripts/build/generate_default_skills.py",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "skills.capability_registry",
+      "title": "Default skills exposed as capabilities",
+      "status": "implemented",
+      "score": 100,
+      "term_hits": [
+        "skill.",
+        "load_default_skills"
+      ],
+      "missing_terms": [],
+      "evidence": [
+        {
+          "path": "services/agent_runtime_service/app/capability/registry.py",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "skills.planner_context",
+      "title": "Planner discovers skills",
+      "status": "implemented",
+      "score": 100,
+      "term_hits": [
+        "_skill_context_steps",
+        "include_skills"
+      ],
+      "missing_terms": [],
+      "evidence": [
+        {
+          "path": "services/agent_runtime_service/app/planning/schema_planner.py",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "skills.desktop_store",
+      "title": "Desktop skill store",
+      "status": "implemented",
+      "score": 100,
+      "term_hits": [
+        "renderDefaultSkillStorePage",
+        "skill-brain"
+      ],
+      "missing_terms": [],
+      "evidence": [
+        {
+          "path": "apps/desktop/src/js/windows-demo-stable-router.js",
+          "exists": true
+        },
+        {
+          "path": "apps/desktop/src/styles/main.css",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "skills.own_builtin",
+      "title": "Own rebuilt builtin skills",
+      "status": "partial",
+      "score": 55,
+      "term_hits": [],
+      "missing_terms": [
+        "our_builtin_skills",
+        "builtin_skill"
+      ],
+      "evidence": [
+        {
+          "path": "data/skill_brain",
+          "exists": true
+        },
+        {
+          "path": "data/agent_policy",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "skills.lifecycle_state",
+      "title": "Skill lifecycle state (enable/disable/pin/usage)",
+      "status": "implemented",
+      "score": 100,
+      "term_hits": [
+        "skill_state",
+        "set_skill_enabled",
+        "record_skill_usage"
+      ],
+      "missing_terms": [],
+      "evidence": [
+        {
+          "path": "data/skill_brain/skill_state.json",
+          "exists": true
+        },
+        {
+          "path": "services/agent_runtime_service/app/capability/registry.py",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "model.ollama",
+      "title": "Ollama local model runtime",
+      "status": "implemented",
+      "score": 100,
+      "term_hits": [
+        "ollama",
+        "11434"
+      ],
+      "missing_terms": [],
+      "evidence": [
+        {
+          "path": "services/model_gateway",
+          "exists": true
+        },
+        {
+          "path": "data/runtime_config/runtime_config.json",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "model.gateway",
+      "title": "Model gateway",
+      "status": "partial",
+      "score": 78,
+      "term_hits": [
+        "model_gateway"
+      ],
+      "missing_terms": [
+        "18080"
+      ],
+      "evidence": [
+        {
+          "path": "services/model_gateway",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "model.bootstrap",
+      "title": "Model bootstrap/download",
+      "status": "partial",
+      "score": 78,
+      "term_hits": [
+        "model_bootstrap"
+      ],
+      "missing_terms": [
+        "18100"
+      ],
+      "evidence": [
+        {
+          "path": "services/model_bootstrap_service",
+          "exists": true
+        },
+        {
+          "path": "scripts/windows/bootstrap_runtime.ps1",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "model.offline_pack",
+      "title": "Offline model preseed pack",
+      "status": "implemented",
+      "score": 100,
+      "term_hits": [
+        "offline",
+        "preseed",
+        "model pack"
+      ],
+      "missing_terms": [],
+      "evidence": [
+        {
+          "path": "data",
+          "exists": true
+        },
+        {
+          "path": "docs/reports",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "desktop.mac",
+      "title": "macOS packaged app",
+      "status": "implemented",
+      "score": 100,
+      "term_hits": [
+        "scripts/mac",
+        "macos",
+        "dmg"
+      ],
+      "missing_terms": [],
+      "evidence": [
+        {
+          "path": "scripts/mac",
+          "exists": true
+        },
+        {
+          "path": "releases/macos-c25-final",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "desktop.windows",
+      "title": "Windows MSI package",
+      "status": "implemented",
+      "score": 100,
+      "term_hits": [
+        "scripts/windows",
+        "msi"
+      ],
+      "missing_terms": [],
+      "evidence": [
+        {
+          "path": "scripts/windows",
+          "exists": true
+        },
+        {
+          "path": "releases",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "desktop.runtime_autostart",
+      "title": "Desktop runtime autostart",
+      "status": "partial",
+      "score": 78,
+      "term_hits": [
+        "start_all"
+      ],
+      "missing_terms": [
+        "autostart"
+      ],
+      "evidence": [
+        {
+          "path": "apps/desktop/src-tauri/src/lib.rs",
+          "exists": true
+        },
+        {
+          "path": "scripts/mac",
+          "exists": true
+        },
+        {
+          "path": "scripts/windows",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "desktop.runtime_config_generated",
+      "title": "Generated desktop runtime config",
+      "status": "implemented",
+      "score": 100,
+      "term_hits": [
+        "AUTO-GENERATED",
+        "generate_desktop_runtime_config"
+      ],
+      "missing_terms": [],
+      "evidence": [
+        {
+          "path": "apps/desktop/src/js/config/runtime-config.js",
+          "exists": true
+        },
+        {
+          "path": "scripts/build/generate_desktop_runtime_config.py",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "policy.sandbox_config",
+      "title": "Sandbox policy config",
+      "status": "implemented",
+      "score": 100,
+      "term_hits": [
+        "sandbox_policy",
+        "blocked"
+      ],
+      "missing_terms": [],
+      "evidence": [
+        {
+          "path": "data/sandbox_policy",
+          "exists": true
+        },
+        {
+          "path": "services/agent_runtime_service/app/runtime",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "policy.audit_guard",
+      "title": "Runtime hardcode guard",
+      "status": "partial",
+      "score": 78,
+      "term_hits": [
+        "hardcode_guard"
+      ],
+      "missing_terms": [
+        "check_runtime_no_hardcode"
+      ],
+      "evidence": [
+        {
+          "path": "scripts/quality/check_runtime_no_hardcode.py",
+          "exists": true
+        },
+        {
+          "path": "data/agent_policy/hardcode_guard.json",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "policy.enterprise_config",
+      "title": "Enterprise configurable policy",
+      "status": "implemented",
+      "score": 100,
+      "term_hits": [
+        "policy",
+        "config"
+      ],
+      "missing_terms": [],
+      "evidence": [
+        {
+          "path": "data/agent_policy",
+          "exists": true
+        },
+        {
+          "path": "services/agent_runtime_service/app/security",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "team.runtime",
+      "title": "Multi-agent runtime",
+      "status": "implemented",
+      "score": 100,
+      "term_hits": [
+        "team",
+        "coordinator",
+        "researcher",
+        "builder",
+        "reviewer"
+      ],
+      "missing_terms": [],
+      "evidence": [
+        {
+          "path": "services/agent_runtime_service/app/team",
+          "exists": true
+        },
+        {
+          "path": "data/agent_team",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "team.failure_isolation",
+      "title": "Team failure isolation",
+      "status": "implemented",
+      "score": 85,
+      "term_hits": [
+        "fallback",
+        "timeline"
+      ],
+      "missing_terms": [
+        "failed"
+      ],
+      "evidence": [
+        {
+          "path": "services/agent_runtime_service/app/team",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "own.skill_rebuild_matrix",
+      "title": "External repo to own skill rebuild matrix",
+      "status": "implemented",
+      "score": 100,
+      "term_hits": [
+        "rebuild",
+        "own",
+        "reference"
+      ],
+      "missing_terms": [],
+      "evidence": [
+        {
+          "path": "data/skill_brain",
+          "exists": true
+        },
+        {
+          "path": "docs/reports",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "own.core_skill_modules",
+      "title": "Own built-in skill modules",
+      "status": "partial",
+      "score": 78,
+      "term_hits": [
+        "builtin"
+      ],
+      "missing_terms": [
+        "skill module"
+      ],
+      "evidence": [
+        {
+          "path": "services/agent_runtime_service/app",
+          "exists": true
+        },
+        {
+          "path": "data/skill_brain",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "own.continuous_audit",
+      "title": "Self audit and project integrity check",
+      "status": "implemented",
+      "score": 85,
+      "term_hits": [
+        "audit",
+        "final"
+      ],
+      "missing_terms": [
+        "integrity"
+      ],
+      "evidence": [
+        {
+          "path": "data/agent_core_audit",
+          "exists": true
+        },
+        {
+          "path": "docs/reports",
+          "exists": true
+        }
+      ]
+    }
+  ],
+  "p0_missing_or_partial": [
+    {
+      "id": "skills.own_builtin",
+      "title": "Own rebuilt builtin skills",
+      "status": "partial",
+      "score": 55,
+      "term_hits": [],
+      "missing_terms": [
+        "our_builtin_skills",
+        "builtin_skill"
+      ],
+      "evidence": [
+        {
+          "path": "data/skill_brain",
+          "exists": true
+        },
+        {
+          "path": "data/agent_policy",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "own.core_skill_modules",
+      "title": "Own built-in skill modules",
+      "status": "partial",
+      "score": 78,
+      "term_hits": [
+        "builtin"
+      ],
+      "missing_terms": [
+        "skill module"
+      ],
+      "evidence": [
+        {
+          "path": "services/agent_runtime_service/app",
+          "exists": true
+        },
+        {
+          "path": "data/skill_brain",
+          "exists": true
+        }
+      ]
+    }
+  ],
+  "verdict": {
+    "core_rebuild_done": true,
+    "claude_claw_full_parity_done": false,
+    "own_skill_rebuild_done": false,
+    "can_demo_mac": true,
+    "next_required": [
+      "C26-P0-B workspace diff/patch engine",
+      "C26-P0-C build-test-repair loop",
+      "C26-P0-D task todo state machine",
+      "C26-R1 skill rebuild grading",
+      "C26-R2 own builtin skill modules",
+      "C25-WIN-FINAL-SMOKE"
+    ]
+  }
+}
