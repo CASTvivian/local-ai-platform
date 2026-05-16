@@ -1,0 +1,28 @@
+{
+  "step": "C25-WIN-FINAL-SMOKE",
+  "checked_at": "2026-05-16T15:36:36.479431Z",
+  "head": "72f13f413b4889ae839ecad85fae6dc24c2f5cf7",
+  "head_short": "72f13f4",
+  "run_id": 25965706969,
+  "run_url": "https://github.com/CASTvivian/local-ai-platform/actions/runs/25965706969",
+  "conclusion": "success",
+  "fix_applied": "removed gitignored data/capability_registry from tauri.conf.json resources",
+  "fix_commit": "72f13f4",
+  "msi": "core-platform/releases/windows-c25-final-smoke/local-ai-platform-win/Local AI Platform_0.1.0_x64_en-US.msi",
+  "msi_exists": true,
+  "msi_size_mb": 5.1,
+  "desktop_lib": "core-platform/releases/windows-c25-final-smoke/local-ai-platform-win/desktop_lib.exe",
+  "desktop_lib_exists": true,
+  "desktop_lib_size_mb": 8.4,
+  "build_info_commit": "72f13f4",
+  "build_info_label": "win-artifact-only",
+  "build_info_built_at": "2026-05-16T15:29:06.4335406+00:00",
+  "commit_match": true,
+  "pre_build_checks": {
+    "py_compile": "PASS",
+    "js_syntax": "PASS",
+    "hardcode_guard": "PASS",
+    "tauri_resources": "PASS (28 tracked, 1 gitignored removed)",
+    "runtime_config_regenerate": "PASS (19 services, c25-c14-b7d)"
+  }
+}
