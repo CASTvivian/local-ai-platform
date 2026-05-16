@@ -1,0 +1,3667 @@
+{
+  "checked_at": "2026-05-16T04:35:29.923342Z",
+  "target_files": [
+    "services/agent_runtime_service/app/planner.py",
+    "services/agent_runtime_service/app/planning/schema_planner.py",
+    "services/agent_runtime_service/app/planning/schema_loader.py",
+    "services/agent_runtime_service/app/planning/legacy_rule_planner.py",
+    "services/agent_runtime_service/app/executor.py",
+    "services/agent_runtime_service/app/service.py",
+    "services/agent_runtime_service/app/capability/registry.py",
+    "services/agent_runtime_service/app/renderer.py",
+    "services/agent_runtime_service/app/validator.py",
+    "services/model_gateway/main.py",
+    "apps/desktop/src/js/windows-demo-stable-router.js",
+    "apps/desktop/src/js/windows-click-model-setup.js",
+    "apps/desktop/src-tauri/src/lib.rs",
+    "data/agent_policy/planner_tool_schema.json",
+    "data/agent_policy/hardcode_guard.json",
+    "data/agent_team/team_registry.json",
+    "data/sandbox_policy/sandbox_policy.json",
+    "scripts/mac/start_all.sh",
+    "scripts/windows/start_all.ps1",
+    "scripts/windows/bootstrap_runtime.ps1"
+  ],
+  "finding_count": 1196,
+  "summary": {
+    "demo_mock_placeholder": 28,
+    "fallback_or_dry_run": 93,
+    "fixed_model_provider_profile": 394,
+    "fixed_ports_urls_paths": 69,
+    "fixed_task_or_intent": 42,
+    "fixed_tool_route": 109,
+    "query_intent_inference": 19,
+    "specific_user_visible_words": 110,
+    "static_mapping_or_registry": 332
+  },
+  "risk_summary": {
+    "accepted_legacy": 63,
+    "config_review": 82,
+    "critical": 123,
+    "high": 241,
+    "low": 60,
+    "medium": 588,
+    "ui_copy_review": 39
+  },
+  "top_files": [
+    {
+      "file": "scripts/windows/bootstrap_runtime.ps1",
+      "count": 232
+    },
+    {
+      "file": "apps/desktop/src/js/windows-click-model-setup.js",
+      "count": 141
+    },
+    {
+      "file": "apps/desktop/src/js/windows-demo-stable-router.js",
+      "count": 133
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "count": 91
+    },
+    {
+      "file": "services/agent_runtime_service/app/renderer.py",
+      "count": 75
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "count": 72
+    },
+    {
+      "file": "services/agent_runtime_service/app/planner.py",
+      "count": 63
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/legacy_rule_planner.py",
+      "count": 63
+    },
+    {
+      "file": "services/agent_runtime_service/app/capability/registry.py",
+      "count": 63
+    },
+    {
+      "file": "services/agent_runtime_service/app/executor.py",
+      "count": 60
+    },
+    {
+      "file": "apps/desktop/src-tauri/src/lib.rs",
+      "count": 59
+    },
+    {
+      "file": "services/model_gateway/main.py",
+      "count": 33
+    },
+    {
+      "file": "scripts/mac/start_all.sh",
+      "count": 22
+    },
+    {
+      "file": "scripts/windows/start_all.ps1",
+      "count": 21
+    },
+    {
+      "file": "data/agent_policy/hardcode_guard.json",
+      "count": 19
+    },
+    {
+      "file": "services/agent_runtime_service/app/validator.py",
+      "count": 15
+    },
+    {
+      "file": "services/agent_runtime_service/app/service.py",
+      "count": 13
+    },
+    {
+      "file": "data/sandbox_policy/sandbox_policy.json",
+      "count": 8
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_loader.py",
+      "count": 7
+    },
+    {
+      "file": "data/agent_team/team_registry.json",
+      "count": 6
+    }
+  ],
+  "structural": [
+    {
+      "id": "S1",
+      "verdict": "FAIL",
+      "detail": "planner.py 仍含关键词路由残留"
+    },
+    {
+      "id": "S2",
+      "verdict": "WARN",
+      "detail": "schema_planner 使用词法评分 fallback。词法评分 fallback，非真 planner model。 kind bias (safe+0.05, model.generate+0.12, restricted-0.10) 是结构性固定判断。"
+    },
+    {
+      "id": "S3",
+      "verdict": "WARN",
+      "detail": "schema_planner._schema_only_default_plan 含固定 tool name: ['repo_memory.search', 'capability.match', 'web.search', 'model.generate']"
+    },
+    {
+      "id": "S4",
+      "verdict": "PASS",
+      "detail": "executor.py 只执行 plan.tools，无用户意图推断"
+    },
+    {
+      "id": "S5",
+      "verdict": "WARN",
+      "detail": "executor.py 含固定 tool dispatch table: ['time.now', 'time.date_math', 'weather.query', 'web.search', 'capability.match', 'repo_memory.search', 'catalog.search', 'skill_store.list', 'workflow_store.list', 'capability.status', 'model.generate']。新增 tool 需要手动加分支。"
+    },
+    {
+      "id": "S6",
+      "verdict": "FAIL",
+      "detail": "capability/registry.py match_capabilities 含固定中文关键词匹配: ['\"代码\", \"编程\", \"bug\", \"报错\", \"开发\"', '\"推理\", \"分析\", \"判断\", \"策略\"', '\"仓\", \"项目\", \"mcp\", \"rag\", \"agent\", \"知识库\"', '\"视频\", \"生成视频\", \"comfyui\"', '\"网页\", \"抓取\", \"读取网页\", \"fetch\", \"url\"']"
+    },
+    {
+      "id": "S7",
+      "verdict": "WARN",
+      "detail": "renderer.py 含 intent 分支: [['time_now', 'date_math', 'weather', 'restricted_action', 'web_fact', 'project_architecture_services', 'project_architecture_capabilities', 'project_architecture_summary', 'capability_status', 'local_chat']], in_groups=[['\"project_knowledge\", \"catalog_knowledge\"']]"
+    },
+    {
+      "id": "S8",
+      "verdict": "FAIL",
+      "detail": "desktop router inferViewFromText() 含中文关键词路由"
+    },
+    {
+      "id": "S9",
+      "verdict": "WARN",
+      "detail": "desktop router 含固定测试消息: ['你好，请用一句话介绍你自己', '今天是几月几号，现在几点', '我们现在有哪些 Agent 和 MCP 相关仓库资产', '你好，请用一句话介绍你自己']"
+    },
+    {
+      "id": "S10",
+      "verdict": "WARN",
+      "detail": "model_gateway 含固定 PROFILE_MODEL_MAP"
+    },
+    {
+      "id": "S11",
+      "verdict": "WARN",
+      "detail": "model_gateway 含固定 OLLAMA_URL"
+    },
+    {
+      "id": "S12",
+      "verdict": "PASS",
+      "detail": "renderer.py 无硬编码状态列表"
+    },
+    {
+      "id": "S13",
+      "verdict": "ACCEPTED",
+      "detail": "scripts 含固定端口。mac: ['18125', '18121', '18126', '18100', '18080', '18131'], ps1: ['18100', '18080', '18125', '18121', '18126', '18131']"
+    },
+    {
+      "id": "S14",
+      "verdict": "WARN",
+      "detail": "mac start_all.sh 含开发者绝对路径 fallback"
+    },
+    {
+      "id": "S15",
+      "verdict": "WARN",
+      "detail": "bootstrap_runtime.ps1 含固定 profile→model 映射"
+    },
+    {
+      "id": "S16",
+      "verdict": "WARN",
+      "detail": "windows-click-model-setup.js MODEL_CATALOG 含固定模型目录"
+    },
+    {
+      "id": "S17",
+      "verdict": "ACCEPTED",
+      "detail": "hardcode_guard allowed_files 含 legacy_rule_planner.py，共 6 个允许文件"
+    },
+    {
+      "id": "S18",
+      "verdict": "FAIL",
+      "detail": "executor.py capability.status 含硬编码状态"
+    },
+    {
+      "id": "S19",
+      "verdict": "WARN",
+      "detail": "validator.py 含 intent 分支: [['weather', 'web_fact']], in_groups=[['\"project_knowledge\", \"catalog_knowledge\"']]"
+    },
+    {
+      "id": "S20",
+      "verdict": "CONFIG_REVIEW",
+      "detail": "planner_tool_schema.json 含 planner_hints: ['time.now', 'time.date_math', 'repo_memory.search', 'capability.match', 'web.search', 'weather.query', 'model.generate', 'filesystem.read', 'filesystem.write', 'shell.exec']"
+    }
+  ],
+  "verdict": {
+    "planner_py_main_clean": false,
+    "schema_planner_has_scoring_fallback": true,
+    "schema_planner_has_kind_bias": true,
+    "executor_has_query_intent_parser": false,
+    "capability_registry_has_keyword_matching": true,
+    "renderer_has_intent_branching": true,
+    "desktop_router_has_chinese_keyword_routing": true,
+    "model_gateway_has_fixed_profile_map": true,
+    "not_fully_autonomous_yet": true,
+    "reason": [
+      "schema_planner still uses lexical scoring fallback when planner model is disabled",
+      "planner_tool_schema contains fixed planner_hints and request_shapes as config",
+      "frontend still contains fixed demo buttons, test messages, and Chinese keyword view routing",
+      "capability/registry.py has hardcoded Chinese keyword scoring",
+      "renderer.py has intent-based branching coupled to planner intent names",
+      "executor.py has fixed tool dispatch table (new tools need manual branches)",
+      "executor.py capability.status returns hardcoded status list",
+      "model_gateway has fixed PROFILE_MODEL_MAP and OLLAMA_URL",
+      "service startup scripts contain fixed ports and dev fallback paths",
+      "bootstrap_runtime.ps1 has fixed profile→model mapping",
+      "validator.py has intent-based hallucination blocking coupled to planner intents"
+    ]
+  },
+  "critical_findings": [
+    {
+      "file": "services/agent_runtime_service/app/planner.py",
+      "line": 33,
+      "category": "query_intent_inference",
+      "risk": "critical",
+      "pattern": "if\\s+.*\\b(message|query|prompt|input)\\b",
+      "text": "if source and target and source in query:"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planner.py",
+      "line": 56,
+      "category": "fixed_tool_route",
+      "risk": "critical",
+      "pattern": "model\\.generate",
+      "text": "delegate = any(t == \"model.generate\" for t in tools)"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planner.py",
+      "line": 93,
+      "category": "fixed_tool_route",
+      "risk": "critical",
+      "pattern": "model\\.generate",
+      "text": "model.generate so the user still gets a response."
+    },
+    {
+      "file": "services/agent_runtime_service/app/planner.py",
+      "line": 98,
+      "category": "fixed_tool_route",
+      "risk": "critical",
+      "pattern": "model\\.generate",
+      "text": "tools=[\"model.generate\"],"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planner.py",
+      "line": 74,
+      "category": "fixed_task_or_intent",
+      "risk": "critical",
+      "pattern": "intent\\s*=",
+      "text": "intent=schema_plan.get(\"task_type\", \"schema_general\"),"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planner.py",
+      "line": 96,
+      "category": "fixed_task_or_intent",
+      "risk": "critical",
+      "pattern": "intent\\s*=",
+      "text": "intent=\"schema_planner_error\","
+    },
+    {
+      "file": "services/agent_runtime_service/app/planner.py",
+      "line": 31,
+      "category": "fixed_task_or_intent",
+      "risk": "critical",
+      "pattern": "source\\s*=",
+      "text": "source = str(item.get(\"from\") or \"\")"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planner.py",
+      "line": 66,
+      "category": "fallback_or_dry_run",
+      "risk": "critical",
+      "pattern": "fallback",
+      "text": "if schema_plan.get(\"fallback_reason\"):"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planner.py",
+      "line": 67,
+      "category": "fallback_or_dry_run",
+      "risk": "critical",
+      "pattern": "fallback",
+      "text": "args[\"fallback_reason\"] = schema_plan[\"fallback_reason\"]"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planner.py",
+      "line": 84,
+      "category": "fallback_or_dry_run",
+      "risk": "critical",
+      "pattern": "fallback",
+      "text": "def _schema_error_fallback_plan("
+    },
+    {
+      "file": "services/agent_runtime_service/app/planner.py",
+      "line": 90,
+      "category": "fallback_or_dry_run",
+      "risk": "critical",
+      "pattern": "fallback",
+      "text": "\"\"\"Fallback when schema planner itself fails structurally."
+    },
+    {
+      "file": "services/agent_runtime_service/app/planner.py",
+      "line": 104,
+      "category": "fallback_or_dry_run",
+      "risk": "critical",
+      "pattern": "fallback",
+      "text": "\"planner_source\": \"schema_error_fallback\","
+    },
+    {
+      "file": "services/agent_runtime_service/app/planner.py",
+      "line": 106,
+      "category": "fallback_or_dry_run",
+      "risk": "critical",
+      "pattern": "fallback",
+      "text": "\"fallback_reason\": error or \"schema_planner_failed\","
+    },
+    {
+      "file": "services/agent_runtime_service/app/planner.py",
+      "line": 135,
+      "category": "fallback_or_dry_run",
+      "risk": "critical",
+      "pattern": "fallback",
+      "text": "# Schema planner produced nothing useful — use schema error fallback,"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planner.py",
+      "line": 137,
+      "category": "fallback_or_dry_run",
+      "risk": "critical",
+      "pattern": "fallback",
+      "text": "return _schema_error_fallback_plan("
+    },
+    {
+      "file": "services/agent_runtime_service/app/planner.py",
+      "line": 160,
+      "category": "fallback_or_dry_run",
+      "risk": "critical",
+      "pattern": "fallback",
+      "text": "legacy.args[\"fallback_reason\"] = legacy.args.get(\"fallback_reason\") or \"legacy_env_forced\""
+    },
+    {
+      "file": "services/agent_runtime_service/app/planner.py",
+      "line": 66,
+      "category": "fallback_or_dry_run",
+      "risk": "critical",
+      "pattern": "fallback_reason",
+      "text": "if schema_plan.get(\"fallback_reason\"):"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planner.py",
+      "line": 67,
+      "category": "fallback_or_dry_run",
+      "risk": "critical",
+      "pattern": "fallback_reason",
+      "text": "args[\"fallback_reason\"] = schema_plan[\"fallback_reason\"]"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planner.py",
+      "line": 106,
+      "category": "fallback_or_dry_run",
+      "risk": "critical",
+      "pattern": "fallback_reason",
+      "text": "\"fallback_reason\": error or \"schema_planner_failed\","
+    },
+    {
+      "file": "services/agent_runtime_service/app/planner.py",
+      "line": 160,
+      "category": "fallback_or_dry_run",
+      "risk": "critical",
+      "pattern": "fallback_reason",
+      "text": "legacy.args[\"fallback_reason\"] = legacy.args.get(\"fallback_reason\") or \"legacy_env_forced\""
+    },
+    {
+      "file": "services/agent_runtime_service/app/planner.py",
+      "line": 4,
+      "category": "fallback_or_dry_run",
+      "risk": "critical",
+      "pattern": "legacy",
+      "text": "The legacy keyword/LLM rule chain is fully isolated in"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planner.py",
+      "line": 5,
+      "category": "fallback_or_dry_run",
+      "risk": "critical",
+      "pattern": "legacy",
+      "text": "``app/planning/legacy_rule_planner.py`` and is only reachable through"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planner.py",
+      "line": 6,
+      "category": "fallback_or_dry_run",
+      "risk": "critical",
+      "pattern": "legacy",
+      "text": "the ``MAOMIAI_LEGACY_PLANNER=1`` env var for rollback/debug."
+    },
+    {
+      "file": "services/agent_runtime_service/app/planner.py",
+      "line": 12,
+      "category": "fallback_or_dry_run",
+      "risk": "critical",
+      "pattern": "legacy",
+      "text": "- direct LLM planner calls (those belong in planning/legacy_rule_planner.py)"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planner.py",
+      "line": 92,
+      "category": "fallback_or_dry_run",
+      "risk": "critical",
+      "pattern": "legacy",
+      "text": "This is NOT the legacy rule planner.  It simply delegates to"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planner.py",
+      "line": 121,
+      "category": "fallback_or_dry_run",
+      "risk": "critical",
+      "pattern": "legacy",
+      "text": "Legacy rule planner is available only through MAOMIAI_LEGACY_PLANNER=1."
+    },
+    {
+      "file": "services/agent_runtime_service/app/planner.py",
+      "line": 136,
+      "category": "fallback_or_dry_run",
+      "risk": "critical",
+      "pattern": "legacy",
+      "text": "# NOT legacy rule planner.  Legacy is only reachable via env switch."
+    },
+    {
+      "file": "services/agent_runtime_service/app/planner.py",
+      "line": 153,
+      "category": "fallback_or_dry_run",
+      "risk": "critical",
+      "pattern": "legacy",
+      "text": "``MAOMIAI_LEGACY_PLANNER=1`` only for rollback/debug."
+    },
+    {
+      "file": "services/agent_runtime_service/app/planner.py",
+      "line": 155,
+      "category": "fallback_or_dry_run",
+      "risk": "critical",
+      "pattern": "legacy",
+      "text": "if os.environ.get(\"MAOMIAI_LEGACY_PLANNER\", \"\").lower() in {\"1\", \"true\", \"yes\", \"on\"}:"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planner.py",
+      "line": 156,
+      "category": "fallback_or_dry_run",
+      "risk": "critical",
+      "pattern": "legacy",
+      "text": "from .planning.legacy_rule_planner import build_plan_legacy"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planner.py",
+      "line": 157,
+      "category": "fallback_or_dry_run",
+      "risk": "critical",
+      "pattern": "legacy",
+      "text": "legacy = build_plan_legacy(message=message, **kwargs)"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planner.py",
+      "line": 158,
+      "category": "fallback_or_dry_run",
+      "risk": "critical",
+      "pattern": "legacy",
+      "text": "if isinstance(legacy, AgentPlan):"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planner.py",
+      "line": 159,
+      "category": "fallback_or_dry_run",
+      "risk": "critical",
+      "pattern": "legacy",
+      "text": "legacy.args[\"planner_mode\"] = \"legacy_rule_forced\""
+    },
+    {
+      "file": "services/agent_runtime_service/app/planner.py",
+      "line": 160,
+      "category": "fallback_or_dry_run",
+      "risk": "critical",
+      "pattern": "legacy",
+      "text": "legacy.args[\"fallback_reason\"] = legacy.args.get(\"fallback_reason\") or \"legacy_env_forced\""
+    },
+    {
+      "file": "services/agent_runtime_service/app/planner.py",
+      "line": 161,
+      "category": "fallback_or_dry_run",
+      "risk": "critical",
+      "pattern": "legacy",
+      "text": "return legacy"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planner.py",
+      "line": 84,
+      "category": "fallback_or_dry_run",
+      "risk": "critical",
+      "pattern": "schema_error_fallback",
+      "text": "def _schema_error_fallback_plan("
+    },
+    {
+      "file": "services/agent_runtime_service/app/planner.py",
+      "line": 104,
+      "category": "fallback_or_dry_run",
+      "risk": "critical",
+      "pattern": "schema_error_fallback",
+      "text": "\"planner_source\": \"schema_error_fallback\","
+    },
+    {
+      "file": "services/agent_runtime_service/app/planner.py",
+      "line": 137,
+      "category": "fallback_or_dry_run",
+      "risk": "critical",
+      "pattern": "schema_error_fallback",
+      "text": "return _schema_error_fallback_plan("
+    },
+    {
+      "file": "services/agent_runtime_service/app/planner.py",
+      "line": 70,
+      "category": "fixed_model_provider_profile",
+      "risk": "critical",
+      "pattern": "current_profile",
+      "text": "if schema_plan.get(\"current_profile\"):"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planner.py",
+      "line": 71,
+      "category": "fixed_model_provider_profile",
+      "risk": "critical",
+      "pattern": "current_profile",
+      "text": "args[\"current_profile\"] = schema_plan[\"current_profile\"]"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planner.py",
+      "line": 115,
+      "category": "fixed_model_provider_profile",
+      "risk": "critical",
+      "pattern": "current_profile",
+      "text": "current_profile: str | None = None,"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planner.py",
+      "line": 128,
+      "category": "fixed_model_provider_profile",
+      "risk": "critical",
+      "pattern": "current_profile",
+      "text": "current_profile=current_profile,"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planner.py",
+      "line": 70,
+      "category": "fixed_model_provider_profile",
+      "risk": "critical",
+      "pattern": "profile",
+      "text": "if schema_plan.get(\"current_profile\"):"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planner.py",
+      "line": 71,
+      "category": "fixed_model_provider_profile",
+      "risk": "critical",
+      "pattern": "profile",
+      "text": "args[\"current_profile\"] = schema_plan[\"current_profile\"]"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planner.py",
+      "line": 115,
+      "category": "fixed_model_provider_profile",
+      "risk": "critical",
+      "pattern": "profile",
+      "text": "current_profile: str | None = None,"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planner.py",
+      "line": 128,
+      "category": "fixed_model_provider_profile",
+      "risk": "critical",
+      "pattern": "profile",
+      "text": "current_profile=current_profile,"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planner.py",
+      "line": 155,
+      "category": "static_mapping_or_registry",
+      "risk": "critical",
+      "pattern": "\\{.*:",
+      "text": "if os.environ.get(\"MAOMIAI_LEGACY_PLANNER\", \"\").lower() in {\"1\", \"true\", \"yes\", \"on\"}:"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planner.py",
+      "line": 67,
+      "category": "static_mapping_or_registry",
+      "risk": "critical",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "args[\"fallback_reason\"] = schema_plan[\"fallback_reason\"]"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planner.py",
+      "line": 69,
+      "category": "static_mapping_or_registry",
+      "risk": "critical",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "args[\"session_id\"] = schema_plan[\"session_id\"]"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planner.py",
+      "line": 71,
+      "category": "static_mapping_or_registry",
+      "risk": "critical",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "args[\"current_profile\"] = schema_plan[\"current_profile\"]"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planner.py",
+      "line": 98,
+      "category": "static_mapping_or_registry",
+      "risk": "critical",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "tools=[\"model.generate\"],"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planner.py",
+      "line": 159,
+      "category": "static_mapping_or_registry",
+      "risk": "critical",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "legacy.args[\"planner_mode\"] = \"legacy_rule_forced\""
+    },
+    {
+      "file": "services/agent_runtime_service/app/planner.py",
+      "line": 160,
+      "category": "static_mapping_or_registry",
+      "risk": "critical",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "legacy.args[\"fallback_reason\"] = legacy.args.get(\"fallback_reason\") or \"legacy_env_forced\""
+    },
+    {
+      "file": "services/agent_runtime_service/app/planner.py",
+      "line": 55,
+      "category": "static_mapping_or_registry",
+      "risk": "critical",
+      "pattern": "tools",
+      "text": "tools = [str(s.get(\"tool\")) for s in schema_plan.get(\"steps\", []) if s.get(\"tool\")]"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planner.py",
+      "line": 56,
+      "category": "static_mapping_or_registry",
+      "risk": "critical",
+      "pattern": "tools",
+      "text": "delegate = any(t == \"model.generate\" for t in tools)"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planner.py",
+      "line": 76,
+      "category": "static_mapping_or_registry",
+      "risk": "critical",
+      "pattern": "tools",
+      "text": "tools=tools,"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planner.py",
+      "line": 98,
+      "category": "static_mapping_or_registry",
+      "risk": "critical",
+      "pattern": "tools",
+      "text": "tools=[\"model.generate\"],"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planner.py",
+      "line": 11,
+      "category": "specific_user_visible_words",
+      "risk": "critical",
+      "pattern": "天气",
+      "text": "- hardcoded Chinese query words (天气, 几点, MCP, 仓库, 资产, etc.)"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planner.py",
+      "line": 11,
+      "category": "specific_user_visible_words",
+      "risk": "critical",
+      "pattern": "几点",
+      "text": "- hardcoded Chinese query words (天气, 几点, MCP, 仓库, 资产, etc.)"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planner.py",
+      "line": 11,
+      "category": "specific_user_visible_words",
+      "risk": "critical",
+      "pattern": "仓库",
+      "text": "- hardcoded Chinese query words (天气, 几点, MCP, 仓库, 资产, etc.)"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planner.py",
+      "line": 11,
+      "category": "specific_user_visible_words",
+      "risk": "critical",
+      "pattern": "资产",
+      "text": "- hardcoded Chinese query words (天气, 几点, MCP, 仓库, 资产, etc.)"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planner.py",
+      "line": 11,
+      "category": "specific_user_visible_words",
+      "risk": "critical",
+      "pattern": "MCP",
+      "text": "- hardcoded Chinese query words (天气, 几点, MCP, 仓库, 资产, etc.)"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planner.py",
+      "line": 1,
+      "category": "specific_user_visible_words",
+      "risk": "critical",
+      "pattern": "Agent Runtime",
+      "text": "\"\"\"Schema-driven planner entrypoint for the MAOMIAI agent runtime."
+    },
+    {
+      "file": "services/agent_runtime_service/app/executor.py",
+      "line": 90,
+      "category": "query_intent_inference",
+      "risk": "critical",
+      "pattern": "if\\s+.*\\b(message|query|prompt|input)\\b",
+      "text": "elif tool == \"weather.query\":"
+    },
+    {
+      "file": "services/agent_runtime_service/app/executor.py",
+      "line": 131,
+      "category": "query_intent_inference",
+      "risk": "critical",
+      "pattern": "if\\s+.*\\b(message|query|prompt|input)\\b",
+      "text": "results.append(mcp_result if mcp_result.ok else repo_memory_search(plan.args.get(\"query\") or plan.normalized_query))"
+    },
+    {
+      "file": "services/agent_runtime_service/app/executor.py",
+      "line": 90,
+      "category": "query_intent_inference",
+      "risk": "critical",
+      "pattern": "elif\\s+.*\\b(message|query|prompt|input)\\b",
+      "text": "elif tool == \"weather.query\":"
+    },
+    {
+      "file": "services/agent_runtime_service/app/executor.py",
+      "line": 76,
+      "category": "fixed_tool_route",
+      "risk": "critical",
+      "pattern": "tool\\s*==",
+      "text": "if tool == \"time.now\":"
+    },
+    {
+      "file": "services/agent_runtime_service/app/executor.py",
+      "line": 78,
+      "category": "fixed_tool_route",
+      "risk": "critical",
+      "pattern": "tool\\s*==",
+      "text": "elif tool == \"time.date_math\":"
+    },
+    {
+      "file": "services/agent_runtime_service/app/executor.py",
+      "line": 90,
+      "category": "fixed_tool_route",
+      "risk": "critical",
+      "pattern": "tool\\s*==",
+      "text": "elif tool == \"weather.query\":"
+    },
+    {
+      "file": "services/agent_runtime_service/app/executor.py",
+      "line": 102,
+      "category": "fixed_tool_route",
+      "risk": "critical",
+      "pattern": "tool\\s*==",
+      "text": "elif tool == \"web.search\":"
+    },
+    {
+      "file": "services/agent_runtime_service/app/executor.py",
+      "line": 115,
+      "category": "fixed_tool_route",
+      "risk": "critical",
+      "pattern": "tool\\s*==",
+      "text": "elif tool == \"capability.match\":"
+    },
+    {
+      "file": "services/agent_runtime_service/app/executor.py",
+      "line": 124,
+      "category": "fixed_tool_route",
+      "risk": "critical",
+      "pattern": "tool\\s*==",
+      "text": "elif tool == \"repo_memory.search\":"
+    },
+    {
+      "file": "services/agent_runtime_service/app/executor.py",
+      "line": 132,
+      "category": "fixed_tool_route",
+      "risk": "critical",
+      "pattern": "tool\\s*==",
+      "text": "elif tool == \"catalog.search\":"
+    },
+    {
+      "file": "services/agent_runtime_service/app/executor.py",
+      "line": 134,
+      "category": "fixed_tool_route",
+      "risk": "critical",
+      "pattern": "tool\\s*==",
+      "text": "elif tool == \"skill_store.list\":"
+    },
+    {
+      "file": "services/agent_runtime_service/app/executor.py",
+      "line": 137,
+      "category": "fixed_tool_route",
+      "risk": "critical",
+      "pattern": "tool\\s*==",
+      "text": "elif tool == \"workflow_store.list\":"
+    },
+    {
+      "file": "services/agent_runtime_service/app/executor.py",
+      "line": 140,
+      "category": "fixed_tool_route",
+      "risk": "critical",
+      "pattern": "tool\\s*==",
+      "text": "elif tool == \"capability.status\":"
+    },
+    {
+      "file": "services/agent_runtime_service/app/executor.py",
+      "line": 165,
+      "category": "fixed_tool_route",
+      "risk": "critical",
+      "pattern": "tool\\s*==",
+      "text": "elif tool == \"model.generate\":"
+    },
+    {
+      "file": "services/agent_runtime_service/app/executor.py",
+      "line": 82,
+      "category": "fixed_tool_route",
+      "risk": "critical",
+      "pattern": "tool\\s*=\\s*[\"\\']",
+      "text": "tool=\"time.date_math\","
+    },
+    {
+      "file": "services/agent_runtime_service/app/executor.py",
+      "line": 123,
+      "category": "fixed_tool_route",
+      "risk": "critical",
+      "pattern": "tool\\s*=\\s*[\"\\']",
+      "text": "results.append(ToolResult(tool=\"capability.match\", ok=True, data=result.model_dump()))"
+    },
+    {
+      "file": "services/agent_runtime_service/app/executor.py",
+      "line": 143,
+      "category": "fixed_tool_route",
+      "risk": "critical",
+      "pattern": "tool\\s*=\\s*[\"\\']",
+      "text": "tool=\"capability.status\","
+    },
+    {
+      "file": "services/agent_runtime_service/app/executor.py",
+      "line": 115,
+      "category": "fixed_tool_route",
+      "risk": "critical",
+      "pattern": "capability\\.match",
+      "text": "elif tool == \"capability.match\":"
+    },
+    {
+      "file": "services/agent_runtime_service/app/executor.py",
+      "line": 123,
+      "category": "fixed_tool_route",
+      "risk": "critical",
+      "pattern": "capability\\.match",
+      "text": "results.append(ToolResult(tool=\"capability.match\", ok=True, data=result.model_dump()))"
+    },
+    {
+      "file": "services/agent_runtime_service/app/executor.py",
+      "line": 124,
+      "category": "fixed_tool_route",
+      "risk": "critical",
+      "pattern": "repo_memory\\.search",
+      "text": "elif tool == \"repo_memory.search\":"
+    },
+    {
+      "file": "services/agent_runtime_service/app/executor.py",
+      "line": 126,
+      "category": "fixed_tool_route",
+      "risk": "critical",
+      "pattern": "repo_memory\\.search",
+      "text": "\"repo_memory.search\","
+    },
+    {
+      "file": "services/agent_runtime_service/app/executor.py",
+      "line": 76,
+      "category": "fixed_tool_route",
+      "risk": "critical",
+      "pattern": "time\\.now",
+      "text": "if tool == \"time.now\":"
+    },
+    {
+      "file": "services/agent_runtime_service/app/executor.py",
+      "line": 78,
+      "category": "fixed_tool_route",
+      "risk": "critical",
+      "pattern": "time\\.date_math",
+      "text": "elif tool == \"time.date_math\":"
+    },
+    {
+      "file": "services/agent_runtime_service/app/executor.py",
+      "line": 82,
+      "category": "fixed_tool_route",
+      "risk": "critical",
+      "pattern": "time\\.date_math",
+      "text": "tool=\"time.date_math\","
+    },
+    {
+      "file": "services/agent_runtime_service/app/executor.py",
+      "line": 102,
+      "category": "fixed_tool_route",
+      "risk": "critical",
+      "pattern": "web\\.search",
+      "text": "elif tool == \"web.search\":"
+    },
+    {
+      "file": "services/agent_runtime_service/app/executor.py",
+      "line": 105,
+      "category": "fixed_tool_route",
+      "risk": "critical",
+      "pattern": "web\\.search",
+      "text": "\"web.search\","
+    },
+    {
+      "file": "services/agent_runtime_service/app/executor.py",
+      "line": 90,
+      "category": "fixed_tool_route",
+      "risk": "critical",
+      "pattern": "weather\\.query",
+      "text": "elif tool == \"weather.query\":"
+    },
+    {
+      "file": "services/agent_runtime_service/app/executor.py",
+      "line": 93,
+      "category": "fixed_tool_route",
+      "risk": "critical",
+      "pattern": "weather\\.query",
+      "text": "\"weather.query\","
+    },
+    {
+      "file": "services/agent_runtime_service/app/executor.py",
+      "line": 165,
+      "category": "fixed_tool_route",
+      "risk": "critical",
+      "pattern": "model\\.generate",
+      "text": "elif tool == \"model.generate\":"
+    },
+    {
+      "file": "services/agent_runtime_service/app/executor.py",
+      "line": 167,
+      "category": "fixed_tool_route",
+      "risk": "critical",
+      "pattern": "model\\.generate",
+      "text": "\"model.generate\","
+    },
+    {
+      "file": "services/agent_runtime_service/app/executor.py",
+      "line": 119,
+      "category": "fixed_task_or_intent",
+      "risk": "critical",
+      "pattern": "intent\\s*=",
+      "text": "intent=plan.intent,"
+    },
+    {
+      "file": "services/agent_runtime_service/app/executor.py",
+      "line": 170,
+      "category": "fixed_model_provider_profile",
+      "risk": "critical",
+      "pattern": "profile",
+      "text": "\"profile\": request.model_profile(),"
+    },
+    {
+      "file": "services/agent_runtime_service/app/executor.py",
+      "line": 177,
+      "category": "fixed_model_provider_profile",
+      "risk": "critical",
+      "pattern": "profile",
+      "text": "mcp_result if mcp_result.ok else model_generate(request.message_text(), request.model_profile(), request.model)"
+    },
+    {
+      "file": "services/agent_runtime_service/app/executor.py",
+      "line": 84,
+      "category": "static_mapping_or_registry",
+      "risk": "critical",
+      "pattern": "\\{.*:",
+      "text": "data={\"planner_args\": plan.args},"
+    },
+    {
+      "file": "services/agent_runtime_service/app/executor.py",
+      "line": 127,
+      "category": "static_mapping_or_registry",
+      "risk": "critical",
+      "pattern": "\\{.*:",
+      "text": "{\"query\": plan.args.get(\"query\") or plan.normalized_query, \"limit\": 8},"
+    },
+    {
+      "file": "services/agent_runtime_service/app/executor.py",
+      "line": 71,
+      "category": "static_mapping_or_registry",
+      "risk": "critical",
+      "pattern": "blocked",
+      "text": "blocked = guard_tool(tool, payload)"
+    },
+    {
+      "file": "services/agent_runtime_service/app/executor.py",
+      "line": 72,
+      "category": "static_mapping_or_registry",
+      "risk": "critical",
+      "pattern": "blocked",
+      "text": "if blocked:"
+    },
+    {
+      "file": "services/agent_runtime_service/app/executor.py",
+      "line": 73,
+      "category": "static_mapping_or_registry",
+      "risk": "critical",
+      "pattern": "blocked",
+      "text": "results.append(blocked)"
+    },
+    {
+      "file": "services/agent_runtime_service/app/executor.py",
+      "line": 13,
+      "category": "static_mapping_or_registry",
+      "risk": "critical",
+      "pattern": "tools",
+      "text": "from .tools import ("
+    },
+    {
+      "file": "services/agent_runtime_service/app/executor.py",
+      "line": 59,
+      "category": "static_mapping_or_registry",
+      "risk": "critical",
+      "pattern": "tools",
+      "text": "\"\"\"Execute planner-selected tools in order.\"\"\""
+    },
+    {
+      "file": "services/agent_runtime_service/app/executor.py",
+      "line": 62,
+      "category": "static_mapping_or_registry",
+      "risk": "critical",
+      "pattern": "tools",
+      "text": "for tool in plan.tools:"
+    },
+    {
+      "file": "services/agent_runtime_service/app/executor.py",
+      "line": 146,
+      "category": "demo_mock_placeholder",
+      "risk": "critical",
+      "pattern": "demo",
+      "text": "\"status\": \"demo_kernel\","
+    },
+    {
+      "file": "services/agent_runtime_service/app/executor.py",
+      "line": 9,
+      "category": "specific_user_visible_words",
+      "risk": "critical",
+      "pattern": "MCP",
+      "text": "from .mcp.invoker import invoke_mcp"
+    },
+    {
+      "file": "services/agent_runtime_service/app/executor.py",
+      "line": 10,
+      "category": "specific_user_visible_words",
+      "risk": "critical",
+      "pattern": "MCP",
+      "text": "from .mcp.models import MCPInvokeRequest"
+    },
+    {
+      "file": "services/agent_runtime_service/app/executor.py",
+      "line": 25,
+      "category": "specific_user_visible_words",
+      "risk": "critical",
+      "pattern": "MCP",
+      "text": "def execute_mcp_tool("
+    },
+    {
+      "file": "services/agent_runtime_service/app/executor.py",
+      "line": 31,
+      "category": "specific_user_visible_words",
+      "risk": "critical",
+      "pattern": "MCP",
+      "text": "\"\"\"Invoke a registered MCP-style tool and return a ToolResult.\"\"\""
+    },
+    {
+      "file": "services/agent_runtime_service/app/executor.py",
+      "line": 33,
+      "category": "specific_user_visible_words",
+      "risk": "critical",
+      "pattern": "MCP",
+      "text": "result = invoke_mcp("
+    },
+    {
+      "file": "services/agent_runtime_service/app/executor.py",
+      "line": 34,
+      "category": "specific_user_visible_words",
+      "risk": "critical",
+      "pattern": "MCP",
+      "text": "MCPInvokeRequest("
+    },
+    {
+      "file": "services/agent_runtime_service/app/executor.py",
+      "line": 92,
+      "category": "specific_user_visible_words",
+      "risk": "critical",
+      "pattern": "MCP",
+      "text": "execute_mcp_tool("
+    },
+    {
+      "file": "services/agent_runtime_service/app/executor.py",
+      "line": 104,
+      "category": "specific_user_visible_words",
+      "risk": "critical",
+      "pattern": "MCP",
+      "text": "execute_mcp_tool("
+    },
+    {
+      "file": "services/agent_runtime_service/app/executor.py",
+      "line": 125,
+      "category": "specific_user_visible_words",
+      "risk": "critical",
+      "pattern": "MCP",
+      "text": "mcp_result = execute_mcp_tool("
+    },
+    {
+      "file": "services/agent_runtime_service/app/executor.py",
+      "line": 131,
+      "category": "specific_user_visible_words",
+      "risk": "critical",
+      "pattern": "MCP",
+      "text": "results.append(mcp_result if mcp_result.ok else repo_memory_search(plan.args.get(\"query\") or plan.normalized_query))"
+    },
+    {
+      "file": "services/agent_runtime_service/app/executor.py",
+      "line": 135,
+      "category": "specific_user_visible_words",
+      "risk": "critical",
+      "pattern": "MCP",
+      "text": "mcp_result = execute_mcp_tool(\"skill_store.list\", {}, run_id=run_id, session_id=session_id)"
+    },
+    {
+      "file": "services/agent_runtime_service/app/executor.py",
+      "line": 136,
+      "category": "specific_user_visible_words",
+      "risk": "critical",
+      "pattern": "MCP",
+      "text": "results.append(mcp_result if mcp_result.ok else skill_store_list())"
+    },
+    {
+      "file": "services/agent_runtime_service/app/executor.py",
+      "line": 138,
+      "category": "specific_user_visible_words",
+      "risk": "critical",
+      "pattern": "MCP",
+      "text": "mcp_result = execute_mcp_tool(\"workflow_store.list\", {}, run_id=run_id, session_id=session_id)"
+    },
+    {
+      "file": "services/agent_runtime_service/app/executor.py",
+      "line": 139,
+      "category": "specific_user_visible_words",
+      "risk": "critical",
+      "pattern": "MCP",
+      "text": "results.append(mcp_result if mcp_result.ok else workflow_store_list())"
+    },
+    {
+      "file": "services/agent_runtime_service/app/executor.py",
+      "line": 158,
+      "category": "specific_user_visible_words",
+      "risk": "critical",
+      "pattern": "MCP",
+      "text": "\"mcp_gateway\","
+    }
+  ],
+  "high_findings": [
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 29,
+      "category": "query_intent_inference",
+      "risk": "high",
+      "pattern": "if\\s+.*\\b(message|query|prompt|input)\\b",
+      "text": "if message is None:"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 164,
+      "category": "fixed_tool_route",
+      "risk": "high",
+      "pattern": "capability\\.match",
+      "text": "{\"query\": message} if name in {\"repo_memory.search\", \"capability.match\", \"web.search\"} else {},"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 171,
+      "category": "fixed_tool_route",
+      "risk": "high",
+      "pattern": "capability\\.match",
+      "text": "if not selected and any(t.get(\"name\") == \"capability.match\" for t in schema.get(\"tools\", [])):"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 172,
+      "category": "fixed_tool_route",
+      "risk": "high",
+      "pattern": "capability\\.match",
+      "text": "selected.append(_step(\"capability.match\", {\"query\": message}, \"schema fallback capability discovery\"))"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 164,
+      "category": "fixed_tool_route",
+      "risk": "high",
+      "pattern": "repo_memory\\.search",
+      "text": "{\"query\": message} if name in {\"repo_memory.search\", \"capability.match\", \"web.search\"} else {},"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 164,
+      "category": "fixed_tool_route",
+      "risk": "high",
+      "pattern": "web\\.search",
+      "text": "{\"query\": message} if name in {\"repo_memory.search\", \"capability.match\", \"web.search\"} else {},"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 58,
+      "category": "fixed_tool_route",
+      "risk": "high",
+      "pattern": "model\\.generate",
+      "text": "\"requires_model_reasoning\": any(s.get(\"tool\") == \"model.generate\" for s in steps),"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 121,
+      "category": "fixed_tool_route",
+      "risk": "high",
+      "pattern": "model\\.generate",
+      "text": "if name == \"model.generate\":"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 155,
+      "category": "fixed_tool_route",
+      "risk": "high",
+      "pattern": "model\\.generate",
+      "text": "if name == \"model.generate\":"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 174,
+      "category": "fixed_tool_route",
+      "risk": "high",
+      "pattern": "model\\.generate",
+      "text": "if any(t.get(\"name\") == \"model.generate\" for t in schema.get(\"tools\", [])):"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 175,
+      "category": "fixed_tool_route",
+      "risk": "high",
+      "pattern": "model\\.generate",
+      "text": "selected.append(_step(\"model.generate\", {\"prompt\": message}, \"compose final answer from selected tool observations\"))"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 177,
+      "category": "fixed_tool_route",
+      "risk": "high",
+      "pattern": "model\\.generate",
+      "text": "selected.append(_step(\"model.generate\", {\"prompt\": message}, \"last resort final answer\"))"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 276,
+      "category": "fixed_tool_route",
+      "risk": "high",
+      "pattern": "model\\.generate",
+      "text": "str(s.get(\"tool\")) == \"model.generate\" for s in model_plan.get(\"steps\", []) if isinstance(s, dict)"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 183,
+      "category": "fixed_task_or_intent",
+      "risk": "high",
+      "pattern": "task_type\\s*=",
+      "text": "task_type=\"schema_scored\","
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 257,
+      "category": "fixed_task_or_intent",
+      "risk": "high",
+      "pattern": "task_type\\s*=",
+      "text": "task_type=\"empty\","
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 186,
+      "category": "fixed_task_or_intent",
+      "risk": "high",
+      "pattern": "source\\s*=",
+      "text": "source=\"schema_scoring\","
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 260,
+      "category": "fixed_task_or_intent",
+      "risk": "high",
+      "pattern": "source\\s*=",
+      "text": "source=\"schema_empty\","
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 263,
+      "category": "fixed_task_or_intent",
+      "risk": "high",
+      "pattern": "source\\s*=",
+      "text": "return SchemaPlanResult(ok=True, plan=plan, source=\"schema_empty\")"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 283,
+      "category": "fixed_task_or_intent",
+      "risk": "high",
+      "pattern": "source\\s*=",
+      "text": "return SchemaPlanResult(ok=True, plan=plan, source=\"schema_model\")"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 288,
+      "category": "fixed_task_or_intent",
+      "risk": "high",
+      "pattern": "source\\s*=",
+      "text": "return SchemaPlanResult(ok=True, plan=plan, source=\"schema_default\")"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 50,
+      "category": "fallback_or_dry_run",
+      "risk": "high",
+      "pattern": "fallback",
+      "text": "fallback_reason: str | None = None,"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 59,
+      "category": "fallback_or_dry_run",
+      "risk": "high",
+      "pattern": "fallback",
+      "text": "\"fallback_reason\": fallback_reason,"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 68,
+      "category": "fallback_or_dry_run",
+      "risk": "high",
+      "pattern": "fallback",
+      "text": "similarity fallback when planner model is unavailable."
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 144,
+      "category": "fallback_or_dry_run",
+      "risk": "high",
+      "pattern": "fallback",
+      "text": "\"\"\"Schema scoring fallback when planner model is unavailable."
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 172,
+      "category": "fallback_or_dry_run",
+      "risk": "high",
+      "pattern": "fallback",
+      "text": "selected.append(_step(\"capability.match\", {\"query\": message}, \"schema fallback capability discovery\"))"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 187,
+      "category": "fallback_or_dry_run",
+      "risk": "high",
+      "pattern": "fallback",
+      "text": "fallback_reason=None,"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 261,
+      "category": "fallback_or_dry_run",
+      "risk": "high",
+      "pattern": "fallback",
+      "text": "fallback_reason=\"empty_message\","
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 278,
+      "category": "fallback_or_dry_run",
+      "risk": "high",
+      "pattern": "fallback",
+      "text": "\"fallback_reason\": None,"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 50,
+      "category": "fallback_or_dry_run",
+      "risk": "high",
+      "pattern": "fallback_reason",
+      "text": "fallback_reason: str | None = None,"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 59,
+      "category": "fallback_or_dry_run",
+      "risk": "high",
+      "pattern": "fallback_reason",
+      "text": "\"fallback_reason\": fallback_reason,"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 187,
+      "category": "fallback_or_dry_run",
+      "risk": "high",
+      "pattern": "fallback_reason",
+      "text": "fallback_reason=None,"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 261,
+      "category": "fallback_or_dry_run",
+      "risk": "high",
+      "pattern": "fallback_reason",
+      "text": "fallback_reason=\"empty_message\","
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 278,
+      "category": "fallback_or_dry_run",
+      "risk": "high",
+      "pattern": "fallback_reason",
+      "text": "\"fallback_reason\": None,"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 288,
+      "category": "fallback_or_dry_run",
+      "risk": "high",
+      "pattern": "schema_default",
+      "text": "return SchemaPlanResult(ok=True, plan=plan, source=\"schema_default\")"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 248,
+      "category": "fixed_model_provider_profile",
+      "risk": "high",
+      "pattern": "current_profile",
+      "text": "current_profile: str | None = None,"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 281,
+      "category": "fixed_model_provider_profile",
+      "risk": "high",
+      "pattern": "current_profile",
+      "text": "\"current_profile\": current_profile,"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 287,
+      "category": "fixed_model_provider_profile",
+      "risk": "high",
+      "pattern": "current_profile",
+      "text": "plan[\"current_profile\"] = current_profile"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 248,
+      "category": "fixed_model_provider_profile",
+      "risk": "high",
+      "pattern": "profile",
+      "text": "current_profile: str | None = None,"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 281,
+      "category": "fixed_model_provider_profile",
+      "risk": "high",
+      "pattern": "profile",
+      "text": "\"current_profile\": current_profile,"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 287,
+      "category": "fixed_model_provider_profile",
+      "risk": "high",
+      "pattern": "profile",
+      "text": "plan[\"current_profile\"] = current_profile"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 67,
+      "category": "fixed_model_provider_profile",
+      "risk": "high",
+      "pattern": "light",
+      "text": "This is not a business/entity router. It is only a lightweight lexical"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 36,
+      "category": "static_mapping_or_registry",
+      "risk": "high",
+      "pattern": "\\{.*:",
+      "text": "\"id\": f\"step_{uuid.uuid4().hex[:8]}\","
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 74,
+      "category": "static_mapping_or_registry",
+      "risk": "high",
+      "pattern": "\\{.*:",
+      "text": "if ch.isalnum() or ch in {\"_\", \"-\", \".\"}:"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 101,
+      "category": "static_mapping_or_registry",
+      "risk": "high",
+      "pattern": "\\{.*:",
+      "text": "for key, value in (tool.get(\"input_schema\") or {}).items():"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 164,
+      "category": "static_mapping_or_registry",
+      "risk": "high",
+      "pattern": "\\{.*:",
+      "text": "{\"query\": message} if name in {\"repo_memory.search\", \"capability.match\", \"web.search\"} else {},"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 172,
+      "category": "static_mapping_or_registry",
+      "risk": "high",
+      "pattern": "\\{.*:",
+      "text": "selected.append(_step(\"capability.match\", {\"query\": message}, \"schema fallback capability discovery\"))"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 175,
+      "category": "static_mapping_or_registry",
+      "risk": "high",
+      "pattern": "\\{.*:",
+      "text": "selected.append(_step(\"model.generate\", {\"prompt\": message}, \"compose final answer from selected tool observations\"))"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 177,
+      "category": "static_mapping_or_registry",
+      "risk": "high",
+      "pattern": "\\{.*:",
+      "text": "selected.append(_step(\"model.generate\", {\"prompt\": message}, \"last resort final answer\"))"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 229,
+      "category": "static_mapping_or_registry",
+      "risk": "high",
+      "pattern": "\\{.*:",
+      "text": "if mode not in {\"1\", \"true\", \"yes\", \"on\"}:"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 139,
+      "category": "static_mapping_or_registry",
+      "risk": "high",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "ranked.sort(key=lambda x: x[\"score\"], reverse=True)"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 152,
+      "category": "static_mapping_or_registry",
+      "risk": "high",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "tool = item[\"tool\"]"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 153,
+      "category": "static_mapping_or_registry",
+      "risk": "high",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "score = item[\"score\"]"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 180,
+      "category": "static_mapping_or_registry",
+      "risk": "high",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "avg = sum(x[\"score\"] for x in ranked[:3]) / max(1, min(3, len(ranked)))"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 286,
+      "category": "static_mapping_or_registry",
+      "risk": "high",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "plan[\"session_id\"] = session_id"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 287,
+      "category": "static_mapping_or_registry",
+      "risk": "high",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "plan[\"current_profile\"] = current_profile"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 123,
+      "category": "static_mapping_or_registry",
+      "risk": "high",
+      "pattern": "restricted",
+      "text": "# Restricted tools must not be selected by weak lexical overlap."
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 124,
+      "category": "static_mapping_or_registry",
+      "risk": "high",
+      "pattern": "restricted",
+      "text": "if kind == \"restricted\":"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 158,
+      "category": "static_mapping_or_registry",
+      "risk": "high",
+      "pattern": "restricted",
+      "text": "if kind == \"restricted\" and score < 0.65:"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 98,
+      "category": "static_mapping_or_registry",
+      "risk": "high",
+      "pattern": "planner_hints",
+      "text": "hints = tool.get(\"planner_hints\") or {}"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 99,
+      "category": "static_mapping_or_registry",
+      "risk": "high",
+      "pattern": "request_shapes",
+      "text": "for item in hints.get(\"request_shapes\", []) or []:"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 96,
+      "category": "static_mapping_or_registry",
+      "risk": "high",
+      "pattern": "capabilities",
+      "text": "for item in tool.get(\"capabilities\", []) or []:"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 117,
+      "category": "static_mapping_or_registry",
+      "risk": "high",
+      "pattern": "tools",
+      "text": "# General safe context tools are useful as low-risk planning context."
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 123,
+      "category": "static_mapping_or_registry",
+      "risk": "high",
+      "pattern": "tools",
+      "text": "# Restricted tools must not be selected by weak lexical overlap."
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 129,
+      "category": "static_mapping_or_registry",
+      "risk": "high",
+      "pattern": "tools",
+      "text": "def _rank_tools(message: str, schema: dict[str, Any]) -> list[dict[str, Any]]:"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 130,
+      "category": "static_mapping_or_registry",
+      "risk": "high",
+      "pattern": "tools",
+      "text": "\"\"\"Rank all tools by relevance score for a given request.\"\"\""
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 132,
+      "category": "static_mapping_or_registry",
+      "risk": "high",
+      "pattern": "tools",
+      "text": "for tool in schema.get(\"tools\", []) or []:"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 147,
+      "category": "static_mapping_or_registry",
+      "risk": "high",
+      "pattern": "tools",
+      "text": "It ranks tools by similarity between request text and tool/capability schema."
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 149,
+      "category": "static_mapping_or_registry",
+      "risk": "high",
+      "pattern": "tools",
+      "text": "ranked = _rank_tools(message, schema)"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 171,
+      "category": "static_mapping_or_registry",
+      "risk": "high",
+      "pattern": "tools",
+      "text": "if not selected and any(t.get(\"name\") == \"capability.match\" for t in schema.get(\"tools\", [])):"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 174,
+      "category": "static_mapping_or_registry",
+      "risk": "high",
+      "pattern": "tools",
+      "text": "if any(t.get(\"name\") == \"model.generate\" for t in schema.get(\"tools\", [])):"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 196,
+      "category": "static_mapping_or_registry",
+      "risk": "high",
+      "pattern": "tools",
+      "text": "\"Use only tools listed in tool_schema. \""
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/schema_planner.py",
+      "line": 1,
+      "category": "specific_user_visible_words",
+      "risk": "high",
+      "pattern": "Agent Runtime",
+      "text": "\"\"\"Schema-driven planner for the MAOMIAI agent runtime."
+    },
+    {
+      "file": "services/agent_runtime_service/app/capability/registry.py",
+      "line": 63,
+      "category": "fixed_tool_route",
+      "risk": "high",
+      "pattern": "repo_memory\\.search",
+      "text": "target=\"repo_memory.search\","
+    },
+    {
+      "file": "services/agent_runtime_service/app/capability/registry.py",
+      "line": 109,
+      "category": "fixed_tool_route",
+      "risk": "high",
+      "pattern": "web\\.search",
+      "text": "id=\"web.search\","
+    },
+    {
+      "file": "services/agent_runtime_service/app/capability/registry.py",
+      "line": 114,
+      "category": "fixed_tool_route",
+      "risk": "high",
+      "pattern": "web\\.search",
+      "text": "target=\"web.search\","
+    },
+    {
+      "file": "services/agent_runtime_service/app/capability/registry.py",
+      "line": 120,
+      "category": "fixed_tool_route",
+      "risk": "high",
+      "pattern": "weather\\.query",
+      "text": "id=\"weather.query\","
+    },
+    {
+      "file": "services/agent_runtime_service/app/capability/registry.py",
+      "line": 125,
+      "category": "fixed_tool_route",
+      "risk": "high",
+      "pattern": "weather\\.query",
+      "text": "target=\"weather.query\","
+    },
+    {
+      "file": "services/agent_runtime_service/app/capability/registry.py",
+      "line": 93,
+      "category": "fixed_tool_route",
+      "risk": "high",
+      "pattern": "shell\\.exec",
+      "text": "target=\"shell.exec\","
+    },
+    {
+      "file": "services/agent_runtime_service/app/capability/registry.py",
+      "line": 99,
+      "category": "fixed_tool_route",
+      "risk": "high",
+      "pattern": "browser\\.",
+      "text": "id=\"browser.fetch\","
+    },
+    {
+      "file": "services/agent_runtime_service/app/capability/registry.py",
+      "line": 104,
+      "category": "fixed_tool_route",
+      "risk": "high",
+      "pattern": "browser\\.",
+      "text": "target=\"browser.fetch\","
+    },
+    {
+      "file": "services/agent_runtime_service/app/capability/registry.py",
+      "line": 23,
+      "category": "fixed_model_provider_profile",
+      "risk": "high",
+      "pattern": "qwen",
+      "text": "target=\"qwen2.5:1.5b\","
+    },
+    {
+      "file": "services/agent_runtime_service/app/capability/registry.py",
+      "line": 33,
+      "category": "fixed_model_provider_profile",
+      "risk": "high",
+      "pattern": "qwen",
+      "text": "target=\"qwen2.5:7b\","
+    },
+    {
+      "file": "services/agent_runtime_service/app/capability/registry.py",
+      "line": 43,
+      "category": "fixed_model_provider_profile",
+      "risk": "high",
+      "pattern": "qwen",
+      "text": "target=\"qwen2.5-coder:7b\","
+    },
+    {
+      "file": "services/agent_runtime_service/app/capability/registry.py",
+      "line": 18,
+      "category": "fixed_model_provider_profile",
+      "risk": "high",
+      "pattern": "light",
+      "text": "id=\"chat.light\","
+    },
+    {
+      "file": "services/agent_runtime_service/app/capability/registry.py",
+      "line": 24,
+      "category": "fixed_model_provider_profile",
+      "risk": "high",
+      "pattern": "light",
+      "text": "tags=[\"chat\", \"local_model\", \"light\"],"
+    },
+    {
+      "file": "services/agent_runtime_service/app/capability/registry.py",
+      "line": 43,
+      "category": "fixed_model_provider_profile",
+      "risk": "high",
+      "pattern": "coder",
+      "text": "target=\"qwen2.5-coder:7b\","
+    },
+    {
+      "file": "services/agent_runtime_service/app/capability/registry.py",
+      "line": 96,
+      "category": "static_mapping_or_registry",
+      "risk": "high",
+      "pattern": "\\{.*:",
+      "text": "metadata={\"requires_approval\": True},"
+    },
+    {
+      "file": "services/agent_runtime_service/app/capability/registry.py",
+      "line": 24,
+      "category": "static_mapping_or_registry",
+      "risk": "high",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "tags=[\"chat\", \"local_model\", \"light\"],"
+    },
+    {
+      "file": "services/agent_runtime_service/app/capability/registry.py",
+      "line": 34,
+      "category": "static_mapping_or_registry",
+      "risk": "high",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "tags=[\"chat\", \"local_model\", \"cn\"],"
+    },
+    {
+      "file": "services/agent_runtime_service/app/capability/registry.py",
+      "line": 44,
+      "category": "static_mapping_or_registry",
+      "risk": "high",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "tags=[\"code\", \"coding\", \"developer\"],"
+    },
+    {
+      "file": "services/agent_runtime_service/app/capability/registry.py",
+      "line": 54,
+      "category": "static_mapping_or_registry",
+      "risk": "high",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "tags=[\"reasoning\", \"analysis\", \"planning\"],"
+    },
+    {
+      "file": "services/agent_runtime_service/app/capability/registry.py",
+      "line": 64,
+      "category": "static_mapping_or_registry",
+      "risk": "high",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "tags=[\"repo\", \"memory\", \"rag\", \"knowledge\", \"agent\", \"mcp\"],"
+    },
+    {
+      "file": "services/agent_runtime_service/app/capability/registry.py",
+      "line": 74,
+      "category": "static_mapping_or_registry",
+      "risk": "high",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "tags=[\"skill\", \"capability\", \"tools\"],"
+    },
+    {
+      "file": "services/agent_runtime_service/app/capability/registry.py",
+      "line": 84,
+      "category": "static_mapping_or_registry",
+      "risk": "high",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "tags=[\"workflow\", \"automation\"],"
+    },
+    {
+      "file": "services/agent_runtime_service/app/capability/registry.py",
+      "line": 94,
+      "category": "static_mapping_or_registry",
+      "risk": "high",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "tags=[\"shell\", \"sandbox\", \"execution\"],"
+    },
+    {
+      "file": "services/agent_runtime_service/app/capability/registry.py",
+      "line": 105,
+      "category": "static_mapping_or_registry",
+      "risk": "high",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "tags=[\"browser\", \"web\", \"fetch\", \"snapshot\", \"网页抓取\"],"
+    },
+    {
+      "file": "services/agent_runtime_service/app/capability/registry.py",
+      "line": 115,
+      "category": "static_mapping_or_registry",
+      "risk": "high",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "tags=[\"web\", \"search\", \"realtime\", \"browser\"],"
+    },
+    {
+      "file": "services/agent_runtime_service/app/capability/registry.py",
+      "line": 126,
+      "category": "static_mapping_or_registry",
+      "risk": "high",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "tags=[\"weather\", \"realtime\", \"geocoding\"],"
+    },
+    {
+      "file": "services/agent_runtime_service/app/capability/registry.py",
+      "line": 137,
+      "category": "static_mapping_or_registry",
+      "risk": "high",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "tags=[\"video\", \"comfyui\", \"generation\"],"
+    },
+    {
+      "file": "services/agent_runtime_service/app/capability/registry.py",
+      "line": 235,
+      "category": "static_mapping_or_registry",
+      "risk": "high",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "if any(keyword in normalized_query for keyword in [\"代码\", \"编程\", \"bug\", \"报错\", \"开发\"]):"
+    },
+    {
+      "file": "services/agent_runtime_service/app/capability/registry.py",
+      "line": 238,
+      "category": "static_mapping_or_registry",
+      "risk": "high",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "if any(keyword in normalized_query for keyword in [\"推理\", \"分析\", \"判断\", \"策略\"]):"
+    },
+    {
+      "file": "services/agent_runtime_service/app/capability/registry.py",
+      "line": 241,
+      "category": "static_mapping_or_registry",
+      "risk": "high",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "if any(keyword in normalized_query for keyword in [\"仓\", \"项目\", \"mcp\", \"rag\", \"agent\", \"知识库\"]):"
+    },
+    {
+      "file": "services/agent_runtime_service/app/capability/registry.py",
+      "line": 244,
+      "category": "static_mapping_or_registry",
+      "risk": "high",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "if any(keyword in normalized_query for keyword in [\"视频\", \"生成视频\", \"comfyui\"]):"
+    },
+    {
+      "file": "services/agent_runtime_service/app/capability/registry.py",
+      "line": 247,
+      "category": "static_mapping_or_registry",
+      "risk": "high",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "if any(keyword in normalized_query for keyword in [\"网页\", \"抓取\", \"读取网页\", \"fetch\", \"url\"]):"
+    },
+    {
+      "file": "services/agent_runtime_service/app/capability/registry.py",
+      "line": 14,
+      "category": "static_mapping_or_registry",
+      "risk": "high",
+      "pattern": "capabilities",
+      "text": "REGISTRY_FILE = REGISTRY_ROOT / \"capabilities.json\""
+    },
+    {
+      "file": "services/agent_runtime_service/app/capability/registry.py",
+      "line": 16,
+      "category": "static_mapping_or_registry",
+      "risk": "high",
+      "pattern": "capabilities",
+      "text": "DEFAULT_CAPABILITIES = ["
+    },
+    {
+      "file": "services/agent_runtime_service/app/capability/registry.py",
+      "line": 148,
+      "category": "static_mapping_or_registry",
+      "risk": "high",
+      "pattern": "capabilities",
+      "text": "save_capabilities(DEFAULT_CAPABILITIES)"
+    },
+    {
+      "file": "services/agent_runtime_service/app/capability/registry.py",
+      "line": 151,
+      "category": "static_mapping_or_registry",
+      "risk": "high",
+      "pattern": "capabilities",
+      "text": "def load_capabilities() -> List[Capability]:"
+    },
+    {
+      "file": "services/agent_runtime_service/app/capability/registry.py",
+      "line": 152,
+      "category": "static_mapping_or_registry",
+      "risk": "high",
+      "pattern": "capabilities",
+      "text": "\"\"\"Load registered capabilities.\"\"\""
+    },
+    {
+      "file": "services/agent_runtime_service/app/capability/registry.py",
+      "line": 159,
+      "category": "static_mapping_or_registry",
+      "risk": "high",
+      "pattern": "capabilities",
+      "text": "def list_capabilities(enabled_only: bool = False) -> List[dict]:"
+    },
+    {
+      "file": "services/agent_runtime_service/app/capability/registry.py",
+      "line": 162,
+      "category": "static_mapping_or_registry",
+      "risk": "high",
+      "pattern": "capabilities",
+      "text": "items = load_capabilities()"
+    },
+    {
+      "file": "services/agent_runtime_service/app/capability/registry.py",
+      "line": 171,
+      "category": "static_mapping_or_registry",
+      "risk": "high",
+      "pattern": "capabilities",
+      "text": "for item in load_capabilities():"
+    },
+    {
+      "file": "services/agent_runtime_service/app/capability/registry.py",
+      "line": 177,
+      "category": "static_mapping_or_registry",
+      "risk": "high",
+      "pattern": "capabilities",
+      "text": "def save_capabilities(items: List[Capability]) -> None:"
+    },
+    {
+      "file": "services/agent_runtime_service/app/capability/registry.py",
+      "line": 190,
+      "category": "static_mapping_or_registry",
+      "risk": "high",
+      "pattern": "capabilities",
+      "text": "items = load_capabilities()"
+    },
+    {
+      "file": "services/agent_runtime_service/app/capability/registry.py",
+      "line": 194,
+      "category": "static_mapping_or_registry",
+      "risk": "high",
+      "pattern": "capabilities",
+      "text": "save_capabilities(items)"
+    },
+    {
+      "file": "services/agent_runtime_service/app/capability/registry.py",
+      "line": 197,
+      "category": "static_mapping_or_registry",
+      "risk": "high",
+      "pattern": "capabilities",
+      "text": "save_capabilities(items)"
+    },
+    {
+      "file": "services/agent_runtime_service/app/capability/registry.py",
+      "line": 201,
+      "category": "static_mapping_or_registry",
+      "risk": "high",
+      "pattern": "capabilities",
+      "text": "def match_capabilities("
+    },
+    {
+      "file": "services/agent_runtime_service/app/capability/registry.py",
+      "line": 207,
+      "category": "static_mapping_or_registry",
+      "risk": "high",
+      "pattern": "capabilities",
+      "text": "\"\"\"Match a query and optional intent to enabled capabilities.\"\"\""
+    },
+    {
+      "file": "services/agent_runtime_service/app/capability/registry.py",
+      "line": 212,
+      "category": "static_mapping_or_registry",
+      "risk": "high",
+      "pattern": "capabilities",
+      "text": "for capability in load_capabilities():"
+    },
+    {
+      "file": "services/agent_runtime_service/app/capability/registry.py",
+      "line": 74,
+      "category": "static_mapping_or_registry",
+      "risk": "high",
+      "pattern": "tools",
+      "text": "tags=[\"skill\", \"capability\", \"tools\"],"
+    }
+  ],
+  "config_review_findings": [
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 22,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "\"input_fields\": [\"message\", \"session_id\", \"current_profile\", \"available_tools\", \"capabilities\", \"memory_context\"],"
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 23,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "\"output_fields\": [\"task_type\", \"confidence\", \"steps\", \"requires_model_reasoning\", \"fallback_reason\"],"
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 24,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "\"step_fields\": [\"id\", \"tool\", \"args\", \"reason\", \"depends_on\"]"
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 36,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "\"capabilities\": [\"time.current\", \"date.current\"],"
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 38,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "\"request_shapes\": [\"asks for current local date\", \"asks for current local time\", \"asks for now\"],"
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 52,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "\"capabilities\": [\"time.relative\", \"date.relative\"],"
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 54,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "\"request_shapes\": [\"asks for relative date calculation after offset has been resolved\"],"
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 55,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "\"requires_resolved_args\": [\"offset_days\"],"
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 70,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "\"capabilities\": [\"project.knowledge\", \"repo.memory\", \"brain.assets\", \"mcp.assets\"],"
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 72,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "\"request_shapes\": [\"asks about local project\", \"asks about repositories\", \"asks about internal assets\", \"asks about architecture\"],"
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 86,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "\"capabilities\": [\"capability.discovery\", \"tool.discovery\"],"
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 88,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "\"request_shapes\": [\"unknown request type\", \"capability discovery\", \"tool discovery\"],"
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 103,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "\"capabilities\": [\"web.fact\", \"fresh.info\"],"
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 105,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "\"request_shapes\": [\"asks for fresh public facts\", \"asks for online source\", \"asks for latest information\"],"
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 119,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "\"capabilities\": [\"weather.current\", \"weather.forecast\"],"
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 121,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "\"request_shapes\": [\"asks for weather or forecast and planner can resolve location\"],"
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 122,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "\"requires_resolved_args\": [\"location\"],"
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 137,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "\"capabilities\": [\"general.chat\", \"reasoning.text\"],"
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 139,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "\"request_shapes\": [\"requires natural language final answer\", \"requires general reasoning\", \"requires explanation\"],"
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 153,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "\"capabilities\": [\"file.read\"],"
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 155,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "\"request_shapes\": [\"asks to read or write local files inside workspace\"],"
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 170,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "\"capabilities\": [\"file.write\"],"
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 172,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "\"request_shapes\": [\"asks to read or write local files inside workspace\"],"
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 189,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "\"capabilities\": [\"shell.exec\", \"developer.task\"],"
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 191,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "\"request_shapes\": [\"asks to run command or execute development task\"],"
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 10,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "restricted",
+      "text": "\"Use restricted tools only if the planner explicitly asks and approval policy allows.\","
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 161,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "restricted",
+      "text": "\"kind\": \"restricted\","
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 179,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "restricted",
+      "text": "\"kind\": \"restricted\","
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 235,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "restricted",
+      "text": "\"restricted_tools_require_approval\": true,"
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 37,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "planner_hints",
+      "text": "\"planner_hints\": {"
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 53,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "planner_hints",
+      "text": "\"planner_hints\": {"
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 71,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "planner_hints",
+      "text": "\"planner_hints\": {"
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 87,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "planner_hints",
+      "text": "\"planner_hints\": {"
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 104,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "planner_hints",
+      "text": "\"planner_hints\": {"
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 120,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "planner_hints",
+      "text": "\"planner_hints\": {"
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 138,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "planner_hints",
+      "text": "\"planner_hints\": {"
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 154,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "planner_hints",
+      "text": "\"planner_hints\": {"
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 171,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "planner_hints",
+      "text": "\"planner_hints\": {"
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 190,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "planner_hints",
+      "text": "\"planner_hints\": {"
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 38,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "request_shapes",
+      "text": "\"request_shapes\": [\"asks for current local date\", \"asks for current local time\", \"asks for now\"],"
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 54,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "request_shapes",
+      "text": "\"request_shapes\": [\"asks for relative date calculation after offset has been resolved\"],"
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 72,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "request_shapes",
+      "text": "\"request_shapes\": [\"asks about local project\", \"asks about repositories\", \"asks about internal assets\", \"asks about architecture\"],"
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 88,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "request_shapes",
+      "text": "\"request_shapes\": [\"unknown request type\", \"capability discovery\", \"tool discovery\"],"
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 105,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "request_shapes",
+      "text": "\"request_shapes\": [\"asks for fresh public facts\", \"asks for online source\", \"asks for latest information\"],"
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 121,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "request_shapes",
+      "text": "\"request_shapes\": [\"asks for weather or forecast and planner can resolve location\"],"
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 139,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "request_shapes",
+      "text": "\"request_shapes\": [\"requires natural language final answer\", \"requires general reasoning\", \"requires explanation\"],"
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 155,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "request_shapes",
+      "text": "\"request_shapes\": [\"asks to read or write local files inside workspace\"],"
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 172,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "request_shapes",
+      "text": "\"request_shapes\": [\"asks to read or write local files inside workspace\"],"
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 191,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "request_shapes",
+      "text": "\"request_shapes\": [\"asks to run command or execute development task\"],"
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 22,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "capabilities",
+      "text": "\"input_fields\": [\"message\", \"session_id\", \"current_profile\", \"available_tools\", \"capabilities\", \"memory_context\"],"
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 36,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "capabilities",
+      "text": "\"capabilities\": [\"time.current\", \"date.current\"],"
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 52,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "capabilities",
+      "text": "\"capabilities\": [\"time.relative\", \"date.relative\"],"
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 70,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "capabilities",
+      "text": "\"capabilities\": [\"project.knowledge\", \"repo.memory\", \"brain.assets\", \"mcp.assets\"],"
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 79,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "capabilities",
+      "text": "\"description\": \"Match user request against registered platform capabilities.\","
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 86,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "capabilities",
+      "text": "\"capabilities\": [\"capability.discovery\", \"tool.discovery\"],"
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 103,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "capabilities",
+      "text": "\"capabilities\": [\"web.fact\", \"fresh.info\"],"
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 119,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "capabilities",
+      "text": "\"capabilities\": [\"weather.current\", \"weather.forecast\"],"
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 137,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "capabilities",
+      "text": "\"capabilities\": [\"general.chat\", \"reasoning.text\"],"
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 153,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "capabilities",
+      "text": "\"capabilities\": [\"file.read\"],"
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 170,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "capabilities",
+      "text": "\"capabilities\": [\"file.write\"],"
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 189,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "capabilities",
+      "text": "\"capabilities\": [\"shell.exec\", \"developer.task\"],"
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 197,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "capabilities",
+      "text": "\"capabilities\": ["
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 5,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "tools",
+      "text": "\"description\": \"Planner chooses tools by comparing request lexical signals with tool/capability descriptions. Runtime code must not contain business entity keyword routes.\","
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 9,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "tools",
+      "text": "\"Prefer safe context tools before model.generate.\","
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 10,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "tools",
+      "text": "\"Use restricted tools only if the planner explicitly asks and approval policy allows.\","
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 22,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "tools",
+      "text": "\"input_fields\": [\"message\", \"session_id\", \"current_profile\", \"available_tools\", \"capabilities\", \"memory_context\"],"
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 26,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "tools",
+      "text": "\"tools\": ["
+    },
+    {
+      "file": "data/agent_policy/planner_tool_schema.json",
+      "line": 235,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "tools",
+      "text": "\"restricted_tools_require_approval\": true,"
+    },
+    {
+      "file": "data/agent_policy/hardcode_guard.json",
+      "line": 19,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "blocked",
+      "text": "\"blocked_literals\": ["
+    },
+    {
+      "file": "data/agent_policy/hardcode_guard.json",
+      "line": 83,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "capabilities",
+      "text": "\"capabilities\","
+    },
+    {
+      "file": "data/agent_policy/hardcode_guard.json",
+      "line": 82,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "tools",
+      "text": "\"tools\","
+    },
+    {
+      "file": "data/agent_team/team_registry.json",
+      "line": 16,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "\"capability_tags\": [\"planning\", \"coordination\", \"reasoning\"],"
+    },
+    {
+      "file": "data/agent_team/team_registry.json",
+      "line": 24,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "\"capability_tags\": [\"repo\", \"memory\", \"web\", \"browser\", \"rag\", \"catalog\"],"
+    },
+    {
+      "file": "data/agent_team/team_registry.json",
+      "line": 32,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "\"capability_tags\": [\"code\", \"filesystem\", \"workflow\", \"shell\", \"sandbox\"],"
+    },
+    {
+      "file": "data/agent_team/team_registry.json",
+      "line": 40,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "\"capability_tags\": [\"validation\", \"review\", \"quality\", \"safety\"],"
+    },
+    {
+      "file": "data/agent_team/team_registry.json",
+      "line": 23,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "tools",
+      "text": "\"role\": \"Use memory, web, browser snapshots, and catalog tools to collect evidence.\","
+    },
+    {
+      "file": "data/agent_team/team_registry.json",
+      "line": 31,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "tools",
+      "text": "\"role\": \"Use code, filesystem sandbox, workflow, and shell sandbox tools after approval.\","
+    },
+    {
+      "file": "data/sandbox_policy/sandbox_policy.json",
+      "line": 35,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "allowlist",
+      "text": "\"env_allowlist\": ["
+    },
+    {
+      "file": "data/sandbox_policy/sandbox_policy.json",
+      "line": 14,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "blocked",
+      "text": "\"blocked_binaries\": ["
+    },
+    {
+      "file": "data/sandbox_policy/sandbox_policy.json",
+      "line": 3,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "restricted",
+      "text": "\"default_profile\": \"local_restricted\","
+    },
+    {
+      "file": "data/sandbox_policy/sandbox_policy.json",
+      "line": 5,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "restricted",
+      "text": "\"local_restricted\": {"
+    },
+    {
+      "file": "data/sandbox_policy/sandbox_policy.json",
+      "line": 6,
+      "category": "static_mapping_or_registry",
+      "risk": "config_review",
+      "pattern": "restricted",
+      "text": "\"description\": \"Restricted local sandbox execution profile.\","
+    }
+  ],
+  "ui_copy_review_findings": [
+    {
+      "file": "apps/desktop/src/js/windows-demo-stable-router.js",
+      "line": 717,
+      "category": "specific_user_visible_words",
+      "risk": "ui_copy_review",
+      "pattern": "几点",
+      "text": "sendChatMessage(\"今天是几月几号，现在几点\");"
+    },
+    {
+      "file": "apps/desktop/src/js/windows-demo-stable-router.js",
+      "line": 717,
+      "category": "specific_user_visible_words",
+      "risk": "ui_copy_review",
+      "pattern": "几月几号",
+      "text": "sendChatMessage(\"今天是几月几号，现在几点\");"
+    },
+    {
+      "file": "apps/desktop/src/js/windows-demo-stable-router.js",
+      "line": 723,
+      "category": "specific_user_visible_words",
+      "risk": "ui_copy_review",
+      "pattern": "仓库",
+      "text": "sendChatMessage(\"我们现在有哪些 Agent 和 MCP 相关仓库资产\");"
+    },
+    {
+      "file": "apps/desktop/src/js/windows-demo-stable-router.js",
+      "line": 723,
+      "category": "specific_user_visible_words",
+      "risk": "ui_copy_review",
+      "pattern": "资产",
+      "text": "sendChatMessage(\"我们现在有哪些 Agent 和 MCP 相关仓库资产\");"
+    },
+    {
+      "file": "apps/desktop/src/js/windows-demo-stable-router.js",
+      "line": 170,
+      "category": "specific_user_visible_words",
+      "risk": "ui_copy_review",
+      "pattern": "测试",
+      "text": "box.innerHTML = messages || '<div class=\"demo-card\"><p>请输入问题，测试 Agent Runtime 是否可用。</p></div>';"
+    },
+    {
+      "file": "apps/desktop/src/js/windows-demo-stable-router.js",
+      "line": 551,
+      "category": "specific_user_visible_words",
+      "risk": "ui_copy_review",
+      "pattern": "测试",
+      "text": "<button class=\"primary\" data-action=\"maomiai-test-infer\">测试 Agent Runtime</button>"
+    },
+    {
+      "file": "apps/desktop/src/js/windows-demo-stable-router.js",
+      "line": 622,
+      "category": "specific_user_visible_words",
+      "risk": "ui_copy_review",
+      "pattern": "测试",
+      "text": "<h2>代码检查测试</h2>"
+    },
+    {
+      "file": "apps/desktop/src/js/windows-demo-stable-router.js",
+      "line": 546,
+      "category": "specific_user_visible_words",
+      "risk": "ui_copy_review",
+      "pattern": "当前能力",
+      "text": "<span>当前能力</span>"
+    },
+    {
+      "file": "apps/desktop/src/js/windows-demo-stable-router.js",
+      "line": 560,
+      "category": "specific_user_visible_words",
+      "risk": "ui_copy_review",
+      "pattern": "当前能力",
+      "text": "<pre>Agent Runtime ready. 当前能力：${escapeHtml(current.title)} / ${escapeHtml(current.model)}</pre>"
+    },
+    {
+      "file": "apps/desktop/src/js/windows-demo-stable-router.js",
+      "line": 570,
+      "category": "specific_user_visible_words",
+      "risk": "ui_copy_review",
+      "pattern": "当前能力",
+      "text": "pushChat(\"assistant\", `已切换当前能力：${model.title}`);"
+    },
+    {
+      "file": "apps/desktop/src/js/windows-demo-stable-router.js",
+      "line": 6,
+      "category": "specific_user_visible_words",
+      "risk": "ui_copy_review",
+      "pattern": "快速",
+      "text": "{ profile: \"light\", title: \"轻量快速能力\", model: \"qwen2.5:1.5b\" },"
+    },
+    {
+      "file": "apps/desktop/src/js/windows-demo-stable-router.js",
+      "line": 723,
+      "category": "specific_user_visible_words",
+      "risk": "ui_copy_review",
+      "pattern": "MCP",
+      "text": "sendChatMessage(\"我们现在有哪些 Agent 和 MCP 相关仓库资产\");"
+    },
+    {
+      "file": "apps/desktop/src/js/windows-demo-stable-router.js",
+      "line": 2,
+      "category": "specific_user_visible_words",
+      "risk": "ui_copy_review",
+      "pattern": "Agent Runtime",
+      "text": "console.log(\"[MAOMIAI] agent runtime main path loaded C25-A1\");"
+    },
+    {
+      "file": "apps/desktop/src/js/windows-demo-stable-router.js",
+      "line": 170,
+      "category": "specific_user_visible_words",
+      "risk": "ui_copy_review",
+      "pattern": "Agent Runtime",
+      "text": "box.innerHTML = messages || '<div class=\"demo-card\"><p>请输入问题，测试 Agent Runtime 是否可用。</p></div>';"
+    },
+    {
+      "file": "apps/desktop/src/js/windows-demo-stable-router.js",
+      "line": 291,
+      "category": "specific_user_visible_words",
+      "risk": "ui_copy_review",
+      "pattern": "Agent Runtime",
+      "text": "throw new Error(`Agent Runtime auto-start failed: ${JSON.stringify(runtimeReady)}`);"
+    },
+    {
+      "file": "apps/desktop/src/js/windows-demo-stable-router.js",
+      "line": 309,
+      "category": "specific_user_visible_words",
+      "risk": "ui_copy_review",
+      "pattern": "Agent Runtime",
+      "text": "throw new Error(`Agent Runtime HTTP ${response.status}: ${raw}`);"
+    },
+    {
+      "file": "apps/desktop/src/js/windows-demo-stable-router.js",
+      "line": 315,
+      "category": "specific_user_visible_words",
+      "risk": "ui_copy_review",
+      "pattern": "Agent Runtime",
+      "text": "if (!result) return \"Agent runtime returned empty response.\";"
+    },
+    {
+      "file": "apps/desktop/src/js/windows-demo-stable-router.js",
+      "line": 329,
+      "category": "specific_user_visible_words",
+      "risk": "ui_copy_review",
+      "pattern": "Agent Runtime",
+      "text": "updateDebug(\"Agent Runtime\", {"
+    },
+    {
+      "file": "apps/desktop/src/js/windows-demo-stable-router.js",
+      "line": 336,
+      "category": "specific_user_visible_words",
+      "risk": "ui_copy_review",
+      "pattern": "Agent Runtime",
+      "text": "updateDebug(\"Agent Runtime Result\", result);"
+    },
+    {
+      "file": "apps/desktop/src/js/windows-demo-stable-router.js",
+      "line": 543,
+      "category": "specific_user_visible_words",
+      "risk": "ui_copy_review",
+      "pattern": "Agent Runtime",
+      "text": "<p>Agent Runtime 已接管 | 会话：${escapeHtml(window.__MAOMIAI_SESSION_ID__ || \"default\")}</p>"
+    },
+    {
+      "file": "apps/desktop/src/js/windows-demo-stable-router.js",
+      "line": 551,
+      "category": "specific_user_visible_words",
+      "risk": "ui_copy_review",
+      "pattern": "Agent Runtime",
+      "text": "<button class=\"primary\" data-action=\"maomiai-test-infer\">测试 Agent Runtime</button>"
+    },
+    {
+      "file": "apps/desktop/src/js/windows-demo-stable-router.js",
+      "line": 560,
+      "category": "specific_user_visible_words",
+      "risk": "ui_copy_review",
+      "pattern": "Agent Runtime",
+      "text": "<pre>Agent Runtime ready. 当前能力：${escapeHtml(current.title)} / ${escapeHtml(current.model)}</pre>"
+    },
+    {
+      "file": "apps/desktop/src/js/windows-demo-stable-router.js",
+      "line": 590,
+      "category": "specific_user_visible_words",
+      "risk": "ui_copy_review",
+      "pattern": "Agent Runtime",
+      "text": "pushChat(\"assistant\", \"正在进入 Agent Runtime...\");"
+    },
+    {
+      "file": "apps/desktop/src/js/windows-demo-stable-router.js",
+      "line": 595,
+      "category": "specific_user_visible_words",
+      "risk": "ui_copy_review",
+      "pattern": "Agent Runtime",
+      "text": "updateDebug(\"Agent Runtime Error\", String(e));"
+    },
+    {
+      "file": "apps/desktop/src/js/windows-demo-stable-router.js",
+      "line": 596,
+      "category": "specific_user_visible_words",
+      "risk": "ui_copy_review",
+      "pattern": "Agent Runtime",
+      "text": "updateLastAssistant(`Agent Runtime 调用失败：${String(e)}\\n\\n请确认 18131 agent_runtime_service 已启动。`);"
+    },
+    {
+      "file": "apps/desktop/src/js/windows-demo-stable-router.js",
+      "line": 632,
+      "category": "specific_user_visible_words",
+      "risk": "ui_copy_review",
+      "pattern": "Agent Runtime",
+      "text": "<div class=\"demo-card\"><h2>运行模式</h2><p>当前为本地运行模式，Agent Runtime 已接管。</p></div>"
+    },
+    {
+      "file": "apps/desktop/src/js/windows-demo-stable-router.js",
+      "line": 810,
+      "category": "specific_user_visible_words",
+      "risk": "ui_copy_review",
+      "pattern": "Agent Runtime",
+      "text": "console.log(\"[MAOMIAI] agent runtime main path ready C25-A1\");"
+    },
+    {
+      "file": "apps/desktop/src/js/windows-click-model-setup.js",
+      "line": 297,
+      "category": "specific_user_visible_words",
+      "risk": "ui_copy_review",
+      "pattern": "时间",
+      "text": "${running ? `<div class=\"model-download-progress-hint\">如果日志长时间没有变化，可能是网络连接 Ollama 模型源较慢；若进程变为未运行且模型未安装，状态会自动变为需重试。</div>` : \"\"}"
+    },
+    {
+      "file": "apps/desktop/src/js/windows-click-model-setup.js",
+      "line": 57,
+      "category": "specific_user_visible_words",
+      "risk": "ui_copy_review",
+      "pattern": "测试",
+      "text": "desc: \"适合英文问答、通用任务、跨语言测试和国际化场景。\","
+    },
+    {
+      "file": "apps/desktop/src/js/windows-click-model-setup.js",
+      "line": 67,
+      "category": "specific_user_visible_words",
+      "risk": "ui_copy_review",
+      "pattern": "测试",
+      "text": "desc: \"适合轻量问答、快速测试和低配置机器。\","
+    },
+    {
+      "file": "apps/desktop/src/js/windows-click-model-setup.js",
+      "line": 378,
+      "category": "specific_user_visible_words",
+      "risk": "ui_copy_review",
+      "pattern": "当前能力",
+      "text": "setResult(\"当前能力已切换\", \"ok\", `当前对话将优先使用：${item.title}`, {"
+    },
+    {
+      "file": "apps/desktop/src/js/windows-click-model-setup.js",
+      "line": 24,
+      "category": "specific_user_visible_words",
+      "risk": "ui_copy_review",
+      "pattern": "低配",
+      "text": "tag: \"低配优先\","
+    },
+    {
+      "file": "apps/desktop/src/js/windows-click-model-setup.js",
+      "line": 26,
+      "category": "specific_user_visible_words",
+      "risk": "ui_copy_review",
+      "pattern": "低配",
+      "text": "hardware: \"低配置电脑可用\","
+    },
+    {
+      "file": "apps/desktop/src/js/windows-click-model-setup.js",
+      "line": 27,
+      "category": "specific_user_visible_words",
+      "risk": "ui_copy_review",
+      "pattern": "低配",
+      "text": "desc: \"适合低配电脑、快速响应、简单问答和轻量任务。\","
+    },
+    {
+      "file": "apps/desktop/src/js/windows-click-model-setup.js",
+      "line": 66,
+      "category": "specific_user_visible_words",
+      "risk": "ui_copy_review",
+      "pattern": "低配",
+      "text": "hardware: \"低配置电脑可用\","
+    },
+    {
+      "file": "apps/desktop/src/js/windows-click-model-setup.js",
+      "line": 67,
+      "category": "specific_user_visible_words",
+      "risk": "ui_copy_review",
+      "pattern": "低配",
+      "text": "desc: \"适合轻量问答、快速测试和低配置机器。\","
+    },
+    {
+      "file": "apps/desktop/src/js/windows-click-model-setup.js",
+      "line": 22,
+      "category": "specific_user_visible_words",
+      "risk": "ui_copy_review",
+      "pattern": "快速",
+      "text": "title: \"轻量快速能力\","
+    },
+    {
+      "file": "apps/desktop/src/js/windows-click-model-setup.js",
+      "line": 27,
+      "category": "specific_user_visible_words",
+      "risk": "ui_copy_review",
+      "pattern": "快速",
+      "text": "desc: \"适合低配电脑、快速响应、简单问答和轻量任务。\","
+    },
+    {
+      "file": "apps/desktop/src/js/windows-click-model-setup.js",
+      "line": 67,
+      "category": "specific_user_visible_words",
+      "risk": "ui_copy_review",
+      "pattern": "快速",
+      "text": "desc: \"适合轻量问答、快速测试和低配置机器。\","
+    }
+  ],
+  "accepted_legacy_findings": [
+    {
+      "file": "services/agent_runtime_service/app/planning/legacy_rule_planner.py",
+      "line": 35,
+      "category": "query_intent_inference",
+      "risk": "accepted_legacy",
+      "pattern": "if\\s+.*\\b(message|query|prompt|input)\\b",
+      "text": "if source and target and source in query:"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/legacy_rule_planner.py",
+      "line": 91,
+      "category": "fixed_tool_route",
+      "risk": "accepted_legacy",
+      "pattern": "repo_memory\\.search",
+      "text": "tools=[\"repo_memory.search\"],"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/legacy_rule_planner.py",
+      "line": 80,
+      "category": "fixed_tool_route",
+      "risk": "accepted_legacy",
+      "pattern": "time\\.now",
+      "text": "tools=[\"time.now\"],"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/legacy_rule_planner.py",
+      "line": 9,
+      "category": "fixed_tool_route",
+      "risk": "accepted_legacy",
+      "pattern": "model\\.generate",
+      "text": "- _fallback_local_chat: final fallback to model.generate"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/legacy_rule_planner.py",
+      "line": 52,
+      "category": "fixed_tool_route",
+      "risk": "accepted_legacy",
+      "pattern": "model\\.generate",
+      "text": "tools=[\"model.generate\"],"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/legacy_rule_planner.py",
+      "line": 50,
+      "category": "fixed_task_or_intent",
+      "risk": "accepted_legacy",
+      "pattern": "intent\\s*=",
+      "text": "intent=\"local_chat\","
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/legacy_rule_planner.py",
+      "line": 78,
+      "category": "fixed_task_or_intent",
+      "risk": "accepted_legacy",
+      "pattern": "intent\\s*=",
+      "text": "intent=\"time_now\","
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/legacy_rule_planner.py",
+      "line": 89,
+      "category": "fixed_task_or_intent",
+      "risk": "accepted_legacy",
+      "pattern": "intent\\s*=",
+      "text": "intent=\"project_knowledge\","
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/legacy_rule_planner.py",
+      "line": 108,
+      "category": "fixed_task_or_intent",
+      "risk": "accepted_legacy",
+      "pattern": "intent\\s*=",
+      "text": "intent=\"capability_status\","
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/legacy_rule_planner.py",
+      "line": 138,
+      "category": "fixed_task_or_intent",
+      "risk": "accepted_legacy",
+      "pattern": "intent\\s*=",
+      "text": "intent=llm_plan.intent,"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/legacy_rule_planner.py",
+      "line": 33,
+      "category": "fixed_task_or_intent",
+      "risk": "accepted_legacy",
+      "pattern": "source\\s*=",
+      "text": "source = str(item.get(\"from\") or \"\")"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/legacy_rule_planner.py",
+      "line": 9,
+      "category": "fallback_or_dry_run",
+      "risk": "accepted_legacy",
+      "pattern": "fallback",
+      "text": "- _fallback_local_chat: final fallback to model.generate"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/legacy_rule_planner.py",
+      "line": 10,
+      "category": "fallback_or_dry_run",
+      "risk": "accepted_legacy",
+      "pattern": "fallback",
+      "text": "- build_plan_legacy: composite legacy chain (keyword -> llm -> fallback)"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/legacy_rule_planner.py",
+      "line": 47,
+      "category": "fallback_or_dry_run",
+      "risk": "accepted_legacy",
+      "pattern": "fallback",
+      "text": "def _fallback_local_chat(normalized: str, corrections: List[Dict[str, Any]]) -> AgentPlan:"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/legacy_rule_planner.py",
+      "line": 53,
+      "category": "fallback_or_dry_run",
+      "risk": "accepted_legacy",
+      "pattern": "fallback",
+      "text": "reason=\"planner fallback: delegate to local model\","
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/legacy_rule_planner.py",
+      "line": 58,
+      "category": "fallback_or_dry_run",
+      "risk": "accepted_legacy",
+      "pattern": "fallback",
+      "text": "\"planner_source\": \"fallback_local_chat\","
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/legacy_rule_planner.py",
+      "line": 59,
+      "category": "fallback_or_dry_run",
+      "risk": "accepted_legacy",
+      "pattern": "fallback",
+      "text": "\"fallback_reason\": \"llm_planner_unavailable\","
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/legacy_rule_planner.py",
+      "line": 149,
+      "category": "fallback_or_dry_run",
+      "risk": "accepted_legacy",
+      "pattern": "fallback",
+      "text": "\"\"\"Legacy planner: keyword rules -> LLM planner -> fallback chat."
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/legacy_rule_planner.py",
+      "line": 165,
+      "category": "fallback_or_dry_run",
+      "risk": "accepted_legacy",
+      "pattern": "fallback",
+      "text": "return _fallback_local_chat(normalized, corrections)"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/legacy_rule_planner.py",
+      "line": 59,
+      "category": "fallback_or_dry_run",
+      "risk": "accepted_legacy",
+      "pattern": "fallback_reason",
+      "text": "\"fallback_reason\": \"llm_planner_unavailable\","
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/legacy_rule_planner.py",
+      "line": 1,
+      "category": "fallback_or_dry_run",
+      "risk": "accepted_legacy",
+      "pattern": "legacy",
+      "text": "\"\"\"Legacy rule planner isolated from the public planner runtime."
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/legacy_rule_planner.py",
+      "line": 10,
+      "category": "fallback_or_dry_run",
+      "risk": "accepted_legacy",
+      "pattern": "legacy",
+      "text": "- build_plan_legacy: composite legacy chain (keyword -> llm -> fallback)"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/legacy_rule_planner.py",
+      "line": 62,
+      "category": "fallback_or_dry_run",
+      "risk": "accepted_legacy",
+      "pattern": "legacy",
+      "text": "\"planner_mode\": \"legacy\","
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/legacy_rule_planner.py",
+      "line": 70,
+      "category": "fallback_or_dry_run",
+      "risk": "accepted_legacy",
+      "pattern": "legacy",
+      "text": "LEGACY: This keyword-matching logic is isolated here for rollback only."
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/legacy_rule_planner.py",
+      "line": 84,
+      "category": "fallback_or_dry_run",
+      "risk": "accepted_legacy",
+      "pattern": "legacy",
+      "text": "args={\"corrections\": corrections, \"planner_source\": \"keyword_rule\", \"planner_mode\": \"legacy\"},"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/legacy_rule_planner.py",
+      "line": 99,
+      "category": "fallback_or_dry_run",
+      "risk": "accepted_legacy",
+      "pattern": "legacy",
+      "text": "\"planner_mode\": \"legacy\","
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/legacy_rule_planner.py",
+      "line": 114,
+      "category": "fallback_or_dry_run",
+      "risk": "accepted_legacy",
+      "pattern": "legacy",
+      "text": "args={\"corrections\": corrections, \"planner_source\": \"keyword_rule\", \"planner_mode\": \"legacy\"},"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/legacy_rule_planner.py",
+      "line": 136,
+      "category": "fallback_or_dry_run",
+      "risk": "accepted_legacy",
+      "pattern": "legacy",
+      "text": "args[\"planner_mode\"] = \"legacy\""
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/legacy_rule_planner.py",
+      "line": 148,
+      "category": "fallback_or_dry_run",
+      "risk": "accepted_legacy",
+      "pattern": "legacy",
+      "text": "def build_plan_legacy(message: str, **kwargs: Any) -> AgentPlan:"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/legacy_rule_planner.py",
+      "line": 149,
+      "category": "fallback_or_dry_run",
+      "risk": "accepted_legacy",
+      "pattern": "legacy",
+      "text": "\"\"\"Legacy planner: keyword rules -> LLM planner -> fallback chat."
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/legacy_rule_planner.py",
+      "line": 151,
+      "category": "fallback_or_dry_run",
+      "risk": "accepted_legacy",
+      "pattern": "legacy",
+      "text": "Only used when MAOMIAI_LEGACY_PLANNER=1 is explicitly set."
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/legacy_rule_planner.py",
+      "line": 9,
+      "category": "fallback_or_dry_run",
+      "risk": "accepted_legacy",
+      "pattern": "local_chat",
+      "text": "- _fallback_local_chat: final fallback to model.generate"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/legacy_rule_planner.py",
+      "line": 47,
+      "category": "fallback_or_dry_run",
+      "risk": "accepted_legacy",
+      "pattern": "local_chat",
+      "text": "def _fallback_local_chat(normalized: str, corrections: List[Dict[str, Any]]) -> AgentPlan:"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/legacy_rule_planner.py",
+      "line": 50,
+      "category": "fallback_or_dry_run",
+      "risk": "accepted_legacy",
+      "pattern": "local_chat",
+      "text": "intent=\"local_chat\","
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/legacy_rule_planner.py",
+      "line": 58,
+      "category": "fallback_or_dry_run",
+      "risk": "accepted_legacy",
+      "pattern": "local_chat",
+      "text": "\"planner_source\": \"fallback_local_chat\","
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/legacy_rule_planner.py",
+      "line": 165,
+      "category": "fallback_or_dry_run",
+      "risk": "accepted_legacy",
+      "pattern": "local_chat",
+      "text": "return _fallback_local_chat(normalized, corrections)"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/legacy_rule_planner.py",
+      "line": 84,
+      "category": "static_mapping_or_registry",
+      "risk": "accepted_legacy",
+      "pattern": "\\{.*:",
+      "text": "args={\"corrections\": corrections, \"planner_source\": \"keyword_rule\", \"planner_mode\": \"legacy\"},"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/legacy_rule_planner.py",
+      "line": 114,
+      "category": "static_mapping_or_registry",
+      "risk": "accepted_legacy",
+      "pattern": "\\{.*:",
+      "text": "args={\"corrections\": corrections, \"planner_source\": \"keyword_rule\", \"planner_mode\": \"legacy\"},"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/legacy_rule_planner.py",
+      "line": 161,
+      "category": "static_mapping_or_registry",
+      "risk": "accepted_legacy",
+      "pattern": "\\{.*:",
+      "text": "if mode in {\"llm\", \"llm_first\"}:"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/legacy_rule_planner.py",
+      "line": 52,
+      "category": "static_mapping_or_registry",
+      "risk": "accepted_legacy",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "tools=[\"model.generate\"],"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/legacy_rule_planner.py",
+      "line": 76,
+      "category": "static_mapping_or_registry",
+      "risk": "accepted_legacy",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "if any(token in normalized for token in [\"现在几点\", \"现在几号\", \"今天几月几号\", \"今天是几月几号\", \"当前时间\", \"现在时间\"]):"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/legacy_rule_planner.py",
+      "line": 80,
+      "category": "static_mapping_or_registry",
+      "risk": "accepted_legacy",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "tools=[\"time.now\"],"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/legacy_rule_planner.py",
+      "line": 87,
+      "category": "static_mapping_or_registry",
+      "risk": "accepted_legacy",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "if any(token in normalized for token in [\"仓库资产\", \"repo 资产\", \"mcp 相关仓库\", \"agent 和 mcp\", \"agent与mcp\", \"agent mcp\"]):"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/legacy_rule_planner.py",
+      "line": 91,
+      "category": "static_mapping_or_registry",
+      "risk": "accepted_legacy",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "tools=[\"repo_memory.search\"],"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/legacy_rule_planner.py",
+      "line": 105,
+      "category": "static_mapping_or_registry",
+      "risk": "accepted_legacy",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "and any(token in normalized for token in [\"智能体\", \"平台\", \"agent\"])"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/legacy_rule_planner.py",
+      "line": 110,
+      "category": "static_mapping_or_registry",
+      "risk": "accepted_legacy",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "tools=[\"capability.status\"],"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/legacy_rule_planner.py",
+      "line": 133,
+      "category": "static_mapping_or_registry",
+      "risk": "accepted_legacy",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "args[\"corrections\"] = corrections"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/legacy_rule_planner.py",
+      "line": 134,
+      "category": "static_mapping_or_registry",
+      "risk": "accepted_legacy",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "args[\"planner_source\"] = \"llm\""
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/legacy_rule_planner.py",
+      "line": 135,
+      "category": "static_mapping_or_registry",
+      "risk": "accepted_legacy",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "args[\"planner_confidence\"] = llm_plan.confidence"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/legacy_rule_planner.py",
+      "line": 136,
+      "category": "static_mapping_or_registry",
+      "risk": "accepted_legacy",
+      "pattern": "\\[\\s*[\"\\']",
+      "text": "args[\"planner_mode\"] = \"legacy\""
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/legacy_rule_planner.py",
+      "line": 52,
+      "category": "static_mapping_or_registry",
+      "risk": "accepted_legacy",
+      "pattern": "tools",
+      "text": "tools=[\"model.generate\"],"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/legacy_rule_planner.py",
+      "line": 80,
+      "category": "static_mapping_or_registry",
+      "risk": "accepted_legacy",
+      "pattern": "tools",
+      "text": "tools=[\"time.now\"],"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/legacy_rule_planner.py",
+      "line": 91,
+      "category": "static_mapping_or_registry",
+      "risk": "accepted_legacy",
+      "pattern": "tools",
+      "text": "tools=[\"repo_memory.search\"],"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/legacy_rule_planner.py",
+      "line": 110,
+      "category": "static_mapping_or_registry",
+      "risk": "accepted_legacy",
+      "pattern": "tools",
+      "text": "tools=[\"capability.status\"],"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/legacy_rule_planner.py",
+      "line": 140,
+      "category": "static_mapping_or_registry",
+      "risk": "accepted_legacy",
+      "pattern": "tools",
+      "text": "tools=llm_plan.tools,"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/legacy_rule_planner.py",
+      "line": 68,
+      "category": "demo_mock_placeholder",
+      "risk": "accepted_legacy",
+      "pattern": "demo",
+      "text": "\"\"\"Handle demo-critical grounded intents without depending on the LLM planner."
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/legacy_rule_planner.py",
+      "line": 76,
+      "category": "specific_user_visible_words",
+      "risk": "accepted_legacy",
+      "pattern": "时间",
+      "text": "if any(token in normalized for token in [\"现在几点\", \"现在几号\", \"今天几月几号\", \"今天是几月几号\", \"当前时间\", \"现在时间\"]):"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/legacy_rule_planner.py",
+      "line": 76,
+      "category": "specific_user_visible_words",
+      "risk": "accepted_legacy",
+      "pattern": "几点",
+      "text": "if any(token in normalized for token in [\"现在几点\", \"现在几号\", \"今天几月几号\", \"今天是几月几号\", \"当前时间\", \"现在时间\"]):"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/legacy_rule_planner.py",
+      "line": 76,
+      "category": "specific_user_visible_words",
+      "risk": "accepted_legacy",
+      "pattern": "几月几号",
+      "text": "if any(token in normalized for token in [\"现在几点\", \"现在几号\", \"今天几月几号\", \"今天是几月几号\", \"当前时间\", \"现在时间\"]):"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/legacy_rule_planner.py",
+      "line": 87,
+      "category": "specific_user_visible_words",
+      "risk": "accepted_legacy",
+      "pattern": "仓库",
+      "text": "if any(token in normalized for token in [\"仓库资产\", \"repo 资产\", \"mcp 相关仓库\", \"agent 和 mcp\", \"agent与mcp\", \"agent mcp\"]):"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/legacy_rule_planner.py",
+      "line": 87,
+      "category": "specific_user_visible_words",
+      "risk": "accepted_legacy",
+      "pattern": "资产",
+      "text": "if any(token in normalized for token in [\"仓库资产\", \"repo 资产\", \"mcp 相关仓库\", \"agent 和 mcp\", \"agent与mcp\", \"agent mcp\"]):"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/legacy_rule_planner.py",
+      "line": 87,
+      "category": "specific_user_visible_words",
+      "risk": "accepted_legacy",
+      "pattern": "MCP",
+      "text": "if any(token in normalized for token in [\"仓库资产\", \"repo 资产\", \"mcp 相关仓库\", \"agent 和 mcp\", \"agent与mcp\", \"agent mcp\"]):"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/legacy_rule_planner.py",
+      "line": 92,
+      "category": "specific_user_visible_words",
+      "risk": "accepted_legacy",
+      "pattern": "MCP",
+      "text": "reason=\"keyword rule: repo or MCP asset query\","
+    }
+  ],
+  "next_actions": [
+    "B4: enable planner model structured JSON output by default when model_gateway is healthy",
+    "B5: move planner_hints/request_shapes into editable policy with audit categories",
+    "B6: remove production dry_run/fallback UI path; clean Chinese keyword routing in inferViewFromText()",
+    "B7: centralize ports/models/profiles/providers into runtime config",
+    "B8: fail CI when critical structural hardcode appears outside allowed files",
+    "B9: refactor executor.py tool dispatch from if/elif to registry pattern",
+    "B10: refactor renderer.py intent branching to data-driven template rendering",
+    "B11: refactor capability/registry.py keyword scoring to schema-driven matching",
+    "B12: remove hardcoded capability_status list from executor.py"
+  ]
+}
