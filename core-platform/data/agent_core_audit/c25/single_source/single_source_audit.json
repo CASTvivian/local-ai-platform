@@ -1,0 +1,138 @@
+{
+  "audit_id": "C25-C15-SINGLE-SOURCE",
+  "checked_at": "2026-05-16T03:25:00Z",
+  "verdict": "PASS_WITH_ISSUES",
+  "summary": "No Win/Mac code fork detected. All business logic is single-source. However, 3 issues found: (1) stale embedded scripts in src-tauri/resources/scripts/, (2) legacy root-level scripts with old service lists, (3) no Mac CI workflow",
+  "git": {
+    "head": "d6008adbe35ef00ffb434b7c4f3ec6fea73dd672",
+    "origin_main": "d6008adbe35ef00ffb434b7c4f3ec6fea73dd672",
+    "branch_sync": true
+  },
+  "single_source_roots": {
+    "apps/desktop/src": { "exists": true, "file_count": 18 },
+    "apps/desktop/src-tauri/src": { "exists": true, "file_count": 2 },
+    "services/agent_runtime_service": { "exists": true, "file_count": 123 },
+    "services/model_gateway": { "exists": true, "file_count": 4 },
+    "services/model_bootstrap_service": { "exists": true, "file_count": 5 },
+    "services/repo_memory_service": { "exists": true, "file_count": 13 },
+    "services/skill_store_service": { "exists": true, "file_count": 15 },
+    "services/workflow_store_service": { "exists": true, "file_count": 13 },
+    "data/agent_policy": { "exists": true, "file_count": 3 },
+    "data/agent_team": { "exists": true, "file_count": 14 },
+    "data/sandbox_policy": { "exists": true, "file_count": 1 },
+    "data/brain_assets/manifests": { "exists": true, "file_count": 13 },
+    "data/brain_assets/model_catalog": { "exists": true, "file_count": 1 },
+    "data/brain_assets/video_catalog": { "exists": true, "file_count": 1 }
+  },
+  "platform_specific_roots": {
+    "scripts/windows": { "exists": true, "file_count": 7, "files": ["acceptance/c25_final_acceptance.ps1", "bootstrap_runtime.ps1", "ensure_runtime.ps1", "start_all.ps1", "status_all.ps1", "stop_all.ps1", "verify_installation.ps1"] },
+    "scripts/mac": { "exists": true, "file_count": 2, "files": ["start_all.sh", "status_all.sh"] },
+    ".github/workflows": { "exists": true, "file_count": 1, "files": ["build-win-release.yml"] }
+  },
+  "bad_split_candidates": [],
+  "tauri_resources": {
+    "count": 19,
+    "has_windows_scripts": true,
+    "has_mac_scripts": true,
+    "has_services": true,
+    "resources": [
+      "resources/scripts/start_all.sh",
+      "resources/scripts/stop_all.sh",
+      "../../../scripts/windows/ensure_runtime.ps1",
+      "../../../scripts/windows/bootstrap_runtime.ps1",
+      "../../../scripts/windows/start_all.ps1",
+      "../../../scripts/windows/stop_all.ps1",
+      "../../../scripts/windows/status_all.ps1",
+      "../../../services/model_bootstrap_service",
+      "../../../services/model_gateway",
+      "../../../services/agent_runtime_service",
+      "../../../services/repo_memory_service",
+      "../../../services/skill_store_service",
+      "../../../services/workflow_store_service",
+      "../../../data/agent_policy",
+      "../../../data/sandbox_policy",
+      "../../../data/agent_team",
+      "../../../data/brain_assets/manifests",
+      "../../../data/brain_assets/model_catalog",
+      "../../../data/brain_assets/reports",
+      "../../../data/brain_assets/video_catalog",
+      "../../../data/github_stars",
+      "../../../scripts/mac"
+    ]
+  },
+  "issues": [
+    {
+      "id": "ISSUE-1",
+      "severity": "MEDIUM",
+      "title": "Stale embedded scripts in src-tauri/resources/scripts/",
+      "description": "apps/desktop/src-tauri/resources/scripts/start_all.sh and stop_all.sh are OLD versions with hardcoded paths (/Users/mofamaomi/...) and outdated service list (only 4 old services). They are NOT the same as scripts/mac/start_all.sh which has RUNTIME_ROOT resolution and current 6 services. The Tauri resource config references 'resources/scripts/start_all.sh' which embeds these stale files.",
+      "files": [
+        "apps/desktop/src-tauri/resources/scripts/start_all.sh",
+        "apps/desktop/src-tauri/resources/scripts/stop_all.sh"
+      ]
+    },
+    {
+      "id": "ISSUE-2",
+      "severity": "LOW",
+      "title": "Legacy root-level scripts with outdated service lists",
+      "description": "scripts/start_all.sh (55 lines) only starts 4 old services (model_gateway, plugin_manager, eval_engine, agent_orchestrator). scripts/start_all.bat references obsolete services (real_impl, agent_team, research_real, hyperframes). These are NOT used by the Tauri bundle but create confusion.",
+      "files": [
+        "scripts/start_all.sh",
+        "scripts/stop_all.sh",
+        "scripts/start_all.bat",
+        "scripts/stop_all.bat",
+        "scripts/start_all_desktop.sh",
+        "scripts/start_service.sh",
+        "scripts/status_all.sh"
+      ]
+    },
+    {
+      "id": "ISSUE-3",
+      "severity": "MEDIUM",
+      "title": "No Mac CI workflow",
+      "description": ".github/workflows/ only has build-win-release.yml. There is no build-mac-release.yml. Mac builds are done locally only. This means Mac and Windows packages are NOT guaranteed to be built from the same commit automatically.",
+      "files": [".github/workflows/build-win-release.yml"]
+    },
+    {
+      "id": "ISSUE-4",
+      "severity": "LOW",
+      "title": "Build INFO commits differ across platforms",
+      "description": "macos-c25-latest: d52ce18, macos-c25-runtime-autostart: 8603bfd, windows-c25-c12-msi-only: edf07e9, windows-c25-c13-runtime-resources: 4eb9866. All different commits - expected for now since they were built at different times, but a single CI pipeline would ensure same-commit builds.",
+      "files": []
+    }
+  ],
+  "lib_rs_platform_handling": {
+    "correct": true,
+    "description": "lib.rs uses #[cfg(target_os = \"windows\")] and #[cfg(target_os = \"macos\")] properly. All business logic is shared. Platform differences are only in startup script invocation (PowerShell vs Bash) and path resolution. This is the correct pattern.",
+    "platform_specific_functions": [
+      "start_backend (Windows .bat)",
+      "start_desktop_services (Windows PowerShell / Unix Bash)",
+      "stop_desktop_services (Windows PowerShell / Unix Bash)",
+      "write_embedded_windows_bootstrap (Windows only)",
+      "run_windows_start_all_background (Windows + macOS separate paths)",
+      "start_local_ai_runtime (Windows only)",
+      "run_windows_bootstrap (Windows only)",
+      "run_windows_bootstrap_with_prompt (Windows only)"
+    ]
+  },
+  "services_no_fork": {
+    "verified": true,
+    "description": "No services/ subdirectory contains Windows-only or Mac-only variants. All Python service code is platform-agnostic."
+  },
+  "build_outputs": {
+    "macos-c25-latest": { "exists": true, "commit": "d52ce18", "platform": "macos" },
+    "macos-c25-runtime-autostart": { "exists": true, "commit": "8603bfd", "platform": "macos" },
+    "windows-c25-c12-msi-only": { "exists": true, "commit": "edf07e9", "platform": "windows" },
+    "windows-c25-c13-runtime-resources": { "exists": true, "commit": "4eb9866", "platform": "windows" }
+  },
+  "rules": [
+    "1. Agent Runtime 只维护一份 (services/agent_runtime_service)",
+    "2. Desktop 前端只维护一份 (apps/desktop/src)",
+    "3. services 只维护一份 (services/*)",
+    "4. Win/Mac 不允许各自复制一套业务代码",
+    "5. 平台差异只能在启动脚本(scripts/windows|mac)、打包资源、Tauri cfg、lib.rs #[cfg] 中处理",
+    "6. 所有包都必须从同一个 git commit 构建",
+    "7. BUILD_INFO 必须记录 commit",
+    "8. Mac 和 Win 验收报告必须标明 build commit"
+  ]
+}

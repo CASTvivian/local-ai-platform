@@ -31,8 +31,6 @@
       "icons/icon.png"
     ],
     "resources": [
-      "resources/scripts/start_all.sh",
-      "resources/scripts/stop_all.sh",
       "../../../scripts/windows/ensure_runtime.ps1",
       "../../../scripts/windows/bootstrap_runtime.ps1",
       "../../../scripts/windows/start_all.ps1",
