@@ -1,0 +1,64 @@
+{
+  "checked_at": "2026-05-16T04:25:42.025984Z",
+  "schema_version": "c25-c14-b3",
+  "tests": [
+    {
+      "input": "你好，请用一句话介绍你自己",
+      "planner_mode": "schema_driven",
+      "source": "schema_scoring",
+      "task_type": "schema_scored",
+      "confidence": 0.5233,
+      "tools": [
+        "capability.match",
+        "model.generate"
+      ]
+    },
+    {
+      "input": "今天是几月几号，现在几点",
+      "planner_mode": "schema_driven",
+      "source": "schema_scoring",
+      "task_type": "schema_scored",
+      "confidence": 0.5233,
+      "tools": [
+        "capability.match",
+        "model.generate"
+      ]
+    },
+    {
+      "input": "我们现在有哪些 Agent 和 MCP 相关仓库资产",
+      "planner_mode": "schema_driven",
+      "source": "schema_scoring",
+      "task_type": "schema_scored",
+      "confidence": 0.5962,
+      "tools": [
+        "repo_memory.search",
+        "time.date_math",
+        "time.now",
+        "model.generate"
+      ]
+    },
+    {
+      "input": "请帮我查一下公开资料",
+      "planner_mode": "schema_driven",
+      "source": "schema_scoring",
+      "task_type": "schema_scored",
+      "confidence": 0.5233,
+      "tools": [
+        "capability.match",
+        "model.generate"
+      ]
+    },
+    {
+      "input": "帮我看看项目代码结构",
+      "planner_mode": "schema_driven",
+      "source": "schema_scoring",
+      "task_type": "schema_scored",
+      "confidence": 0.5233,
+      "tools": [
+        "capability.match",
+        "model.generate"
+      ]
+    }
+  ],
+  "note": "Schema planner now ranks tools by schema text similarity instead of fixed query keyword routes."
+}

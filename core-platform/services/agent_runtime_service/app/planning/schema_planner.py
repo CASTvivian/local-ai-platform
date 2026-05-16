@@ -61,37 +61,129 @@ def _base_plan(
     }
 
 
-def _schema_only_default_plan(message: str, schema: dict[str, Any]) -> dict[str, Any]:
-    """Default plan when no planner model is available.
+def _text_terms(value: str) -> set[str]:
+    """Extract generic terms for schema matching.
 
-    This function must not parse concrete business entities or
-    hardcoded product/city/date names.  It uses schema-level
-    capability/tool descriptions and generic request-shape signals only.
+    This is not a business/entity router. It is only a lightweight lexical
+    similarity fallback when planner model is unavailable.
     """
-    available = set(list_tool_names(schema))
-    steps: list[dict[str, Any]] = []
+    text = value.lower()
+    tokens: set[str] = set()
+    current: list[str] = []
+    for ch in text:
+        if ch.isalnum() or ch in {"_", "-", "."}:
+            current.append(ch)
+        else:
+            if current:
+                tokens.add("".join(current))
+                current = []
+    if current:
+        tokens.add("".join(current))
+    # For CJK, keep short character n-grams for generic lexical overlap with schema text.
+    compact = "".join(ch for ch in value if not ch.isspace())
+    for n in (2, 3, 4):
+        for i in range(max(0, len(compact) - n + 1)):
+            tokens.add(compact[i:i + n].lower())
+    return {t for t in tokens if t}
 
-    # Generic safe discovery first: capability.match can inspect schema/registry.
-    if "capability.match" in available:
-        steps.append(_step("capability.match", {"query": message}, "match request against capability schema"))
 
-    # Local project knowledge/memory is safe and useful as context for many requests.
-    if "repo_memory.search" in available:
-        steps.append(_step("repo_memory.search", {"query": message, "limit": 8}, "retrieve local project/repo memory context"))
+def _schema_text_for_tool(tool: dict[str, Any]) -> str:
+    """Collect all descriptive text from a tool schema for scoring."""
+    parts: list[str] = []
+    for key in ("name", "kind", "description"):
+        if tool.get(key):
+            parts.append(str(tool.get(key)))
+    for item in tool.get("capabilities", []) or []:
+        parts.append(str(item))
+    hints = tool.get("planner_hints") or {}
+    for item in hints.get("request_shapes", []) or []:
+        parts.append(str(item))
+    for key, value in (tool.get("input_schema") or {}).items():
+        parts.append(str(key))
+        parts.append(str(value))
+    return " ".join(parts)
 
-    # Final answer should normally be composed by the model from observations.
-    if "model.generate" in available:
-        steps.append(_step("model.generate", {"prompt": message}, "compose final answer from observations and context"))
 
-    if not steps:
-        steps = [_step("model.generate", {"prompt": message}, "fallback to model response")]
+def _score_tool_for_request(message: str, tool: dict[str, Any]) -> float:
+    """Score a tool's relevance to a user request using schema text overlap."""
+    request_terms = _text_terms(message)
+    schema_terms = _text_terms(_schema_text_for_tool(tool))
+    if not request_terms or not schema_terms:
+        return 0.0
+    overlap = request_terms.intersection(schema_terms)
+    score = len(overlap) / max(1, min(len(request_terms), len(schema_terms)))
+    kind = str(tool.get("kind") or "")
+    name = str(tool.get("name") or "")
+    # General safe context tools are useful as low-risk planning context.
+    if kind == "safe":
+        score += 0.05
+    # Final natural-language generation is almost always needed.
+    if name == "model.generate":
+        score += 0.12
+    # Restricted tools must not be selected by weak lexical overlap.
+    if kind == "restricted":
+        score -= 0.10
+    return round(max(0.0, score), 4)
 
+
+def _rank_tools(message: str, schema: dict[str, Any]) -> list[dict[str, Any]]:
+    """Rank all tools by relevance score for a given request."""
+    ranked: list[dict[str, Any]] = []
+    for tool in schema.get("tools", []) or []:
+        if not isinstance(tool, dict) or not tool.get("name"):
+            continue
+        ranked.append({
+            "tool": tool,
+            "score": _score_tool_for_request(message, tool),
+        })
+    ranked.sort(key=lambda x: x["score"], reverse=True)
+    return ranked
+
+
+def _schema_only_default_plan(message: str, schema: dict[str, Any]) -> dict[str, Any]:
+    """Schema scoring fallback when planner model is unavailable.
+
+    It does not parse concrete user entities or hardcoded query words.
+    It ranks tools by similarity between request text and tool/capability schema.
+    """
+    ranked = _rank_tools(message, schema)
+    selected: list[dict[str, Any]] = []
+    for item in ranked:
+        tool = item["tool"]
+        score = item["score"]
+        name = str(tool.get("name"))
+        if name == "model.generate":
+            continue
+        kind = str(tool.get("kind") or "")
+        if kind == "restricted" and score < 0.65:
+            continue
+        if score >= 0.08:
+            selected.append(
+                _step(
+                    name,
+                    {"query": message} if name in {"repo_memory.search", "capability.match", "web.search"} else {},
+                    f"schema score {score}",
+                )
+            )
+        if len(selected) >= 3:
+            break
+    # Capability discovery is safe context if nothing else scored.
+    if not selected and any(t.get("name") == "capability.match" for t in schema.get("tools", [])):
+        selected.append(_step("capability.match", {"query": message}, "schema fallback capability discovery"))
+    # Final composition.
+    if any(t.get("name") == "model.generate" for t in schema.get("tools", [])):
+        selected.append(_step("model.generate", {"prompt": message}, "compose final answer from selected tool observations"))
+    if not selected:
+        selected.append(_step("model.generate", {"prompt": message}, "last resort final answer"))
+    avg = 0.0
+    if ranked:
+        avg = sum(x["score"] for x in ranked[:3]) / max(1, min(3, len(ranked)))
     return _base_plan(
         message=message,
-        task_type="schema_general",
-        steps=steps,
-        confidence=0.55,
-        source="schema_default",
+        task_type="schema_scored",
+        steps=selected,
+        confidence=round(max(0.45, min(0.85, avg + 0.45)), 4),
+        source="schema_scoring",
         fallback_reason=None,
     )
 

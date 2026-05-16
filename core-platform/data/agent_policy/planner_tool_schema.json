@@ -1,6 +1,23 @@
 {
-  "version": "c25-c14-b1",
-  "description": "Schema-driven planner registry. Runtime should plan from tool/capability schemas instead of hardcoded query words.",
+  "version": "c25-c14-b3",
+  "description": "Schema-driven planner registry with capability scoring. Runtime plans from tool/capability schemas using semantic similarity instead of hardcoded keyword routing.",
+  "planning_strategy": {
+    "description": "Planner chooses tools by comparing request lexical signals with tool/capability descriptions. Runtime code must not contain business entity keyword routes.",
+    "steps": [
+      "Load tool schema and capability schema.",
+      "Compute generic semantic score from request text to tool/capability descriptions.",
+      "Prefer safe context tools before model.generate.",
+      "Use restricted tools only if the planner explicitly asks and approval policy allows.",
+      "Use model.generate for final composition."
+    ],
+    "constraints": [
+      "No product-specific hardcoding.",
+      "No city-specific hardcoding.",
+      "No natural language date parser in runtime code.",
+      "No user-query if/else route tables.",
+      "Fallback must be based on schema coverage, not concrete keywords."
+    ]
+  },
   "planner_contract": {
     "input_fields": ["message", "session_id", "current_profile", "available_tools", "capabilities", "memory_context"],
     "output_fields": ["task_type", "confidence", "steps", "requires_model_reasoning", "fallback_reason"],
@@ -16,7 +33,11 @@
         "now": "string",
         "timezone": "string"
       },
-      "capabilities": ["time.current", "date.current"]
+      "capabilities": ["time.current", "date.current"],
+      "planner_hints": {
+        "request_shapes": ["asks for current local date", "asks for current local time", "asks for now"],
+        "position": "context"
+      }
     },
     {
       "name": "time.date_math",
@@ -28,7 +49,12 @@
       "output_schema": {
         "target_date": "string"
       },
-      "capabilities": ["time.relative", "date.relative"]
+      "capabilities": ["time.relative", "date.relative"],
+      "planner_hints": {
+        "request_shapes": ["asks for relative date calculation after offset has been resolved"],
+        "requires_resolved_args": ["offset_days"],
+        "position": "context"
+      }
     },
     {
       "name": "repo_memory.search",
@@ -41,7 +67,11 @@
       "output_schema": {
         "items": "array"
       },
-      "capabilities": ["project.knowledge", "repo.memory", "brain.assets", "mcp.assets"]
+      "capabilities": ["project.knowledge", "repo.memory", "brain.assets", "mcp.assets"],
+      "planner_hints": {
+        "request_shapes": ["asks about local project", "asks about repositories", "asks about internal assets", "asks about architecture"],
+        "position": "context"
+      }
     },
     {
       "name": "capability.match",
@@ -53,7 +83,11 @@
       "output_schema": {
         "matches": "array"
       },
-      "capabilities": ["capability.discovery", "tool.discovery"]
+      "capabilities": ["capability.discovery", "tool.discovery"],
+      "planner_hints": {
+        "request_shapes": ["unknown request type", "capability discovery", "tool discovery"],
+        "position": "context"
+      }
     },
     {
       "name": "web.search",
@@ -66,7 +100,11 @@
       "output_schema": {
         "results": "array"
       },
-      "capabilities": ["web.fact", "fresh.info"]
+      "capabilities": ["web.fact", "fresh.info"],
+      "planner_hints": {
+        "request_shapes": ["asks for fresh public facts", "asks for online source", "asks for latest information"],
+        "position": "context"
+      }
     },
     {
       "name": "weather.query",
@@ -78,7 +116,12 @@
       "output_schema": {
         "forecast": "object"
       },
-      "capabilities": ["weather.current", "weather.forecast"]
+      "capabilities": ["weather.current", "weather.forecast"],
+      "planner_hints": {
+        "request_shapes": ["asks for weather or forecast and planner can resolve location"],
+        "requires_resolved_args": ["location"],
+        "position": "context"
+      }
     },
     {
       "name": "model.generate",
@@ -91,7 +134,11 @@
       "output_schema": {
         "text": "string"
       },
-      "capabilities": ["general.chat", "reasoning.text"]
+      "capabilities": ["general.chat", "reasoning.text"],
+      "planner_hints": {
+        "request_shapes": ["requires natural language final answer", "requires general reasoning", "requires explanation"],
+        "position": "final"
+      }
     },
     {
       "name": "filesystem.read",
@@ -103,7 +150,11 @@
       "output_schema": {
         "content": "string"
       },
-      "capabilities": ["file.read"]
+      "capabilities": ["file.read"],
+      "planner_hints": {
+        "request_shapes": ["asks to read or write local files inside workspace"],
+        "position": "action"
+      }
     },
     {
       "name": "filesystem.write",
@@ -116,7 +167,12 @@
       "output_schema": {
         "ok": "boolean"
       },
-      "capabilities": ["file.write"]
+      "capabilities": ["file.write"],
+      "planner_hints": {
+        "request_shapes": ["asks to read or write local files inside workspace"],
+        "position": "action",
+        "requires_approval": true
+      }
     },
     {
       "name": "shell.exec",
@@ -130,7 +186,12 @@
         "stderr": "string",
         "returncode": "integer"
       },
-      "capabilities": ["shell.exec", "developer.task"]
+      "capabilities": ["shell.exec", "developer.task"],
+      "planner_hints": {
+        "request_shapes": ["asks to run command or execute development task"],
+        "position": "action",
+        "requires_approval": true
+      }
     }
   ],
   "capabilities": [
