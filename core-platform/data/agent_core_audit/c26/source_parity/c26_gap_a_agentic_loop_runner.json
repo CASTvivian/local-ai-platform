@@ -1,0 +1,9 @@
+{
+  "checked_at": "2026-05-16T14:19:36.047263Z",
+  "has_plan_act_observe_validate_replan": true,
+  "has_loop_observation": true,
+  "has_agent_loop_result": true,
+  "has_max_iterations": true,
+  "has_replan_count": true,
+  "validator_checks_current_iteration_only": true
+}
