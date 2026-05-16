@@ -1,0 +1,44 @@
+{
+  "version": "c25-c14-b10",
+  "description": "Renderer templates for agent final answer. Renderer should prefer observations/final model text and use templates as fallback only.",
+  "default": {
+    "empty": "我已经完成处理，但没有拿到可展示的结果。",
+    "tool_error": "任务执行时有工具返回错误，请查看执行记录。",
+    "model_unavailable": "本地模型暂时不可用，请检查 model_gateway 和本地模型状态。"
+  },
+  "tool_summaries": {
+    "time.now": {
+      "template": "本机时间：{text}"
+    },
+    "time.date_math": {
+      "template": "{text}"
+    },
+    "repo_memory.search": {
+      "template": "已查询本地项目知识，结果如下：\n{text}"
+    },
+    "web.search": {
+      "template": "已查询公开资料，结果如下：\n{text}"
+    },
+    "weather.query": {
+      "template": "天气查询结果：\n{text}"
+    },
+    "capability.match": {
+      "template": "已匹配当前能力：\n{text}"
+    },
+    "capability.status": {
+      "template": "{text}"
+    },
+    "catalog.search": {
+      "template": "已查询能力目录：\n{text}"
+    },
+    "skill_store.list": {
+      "template": "已查询技能库：\n{text}"
+    },
+    "workflow_store.list": {
+      "template": "已查询工作流库：\n{text}"
+    },
+    "model.generate": {
+      "template": "{text}"
+    }
+  }
+}

@@ -1,0 +1,397 @@
+{
+  "checked_before": "2026-05-16T06:20:18.932483Z",
+  "before_count": 75,
+  "before": [
+    {
+      "category": "task_type_branch",
+      "line": 29,
+      "text": "if plan.intent == \"time_now\":"
+    },
+    {
+      "category": "task_type_branch",
+      "line": 34,
+      "text": "if plan.intent == \"date_math\":"
+    },
+    {
+      "category": "task_type_branch",
+      "line": 47,
+      "text": "if plan.intent == \"weather\":"
+    },
+    {
+      "category": "task_type_branch",
+      "line": 48,
+      "text": "weather = next((item for item in results if item.tool == \"weather.query\" and item.ok), None)"
+    },
+    {
+      "category": "task_type_branch",
+      "line": 49,
+      "text": "if not weather:"
+    },
+    {
+      "category": "task_type_branch",
+      "line": 50,
+      "text": "error = next((item.error for item in results if item.tool == \"weather.query\" and item.error), None)"
+    },
+    {
+      "category": "task_type_branch",
+      "line": 52,
+      "text": "current = weather.data.get(\"current\") or {}"
+    },
+    {
+      "category": "task_type_branch",
+      "line": 53,
+      "text": "daily = weather.data.get(\"daily\") or []"
+    },
+    {
+      "category": "task_type_branch",
+      "line": 54,
+      "text": "metadata = weather.data.get(\"metadata\") or {}"
+    },
+    {
+      "category": "task_type_branch",
+      "line": 56,
+      "text": "f\"天气查询结果：{weather.data.get('resolved_location') or weather.data.get('location')}\","
+    },
+    {
+      "category": "task_type_branch",
+      "line": 61,
+      "text": "f\"- 天气代码：{current.get('weather_code')}\","
+    },
+    {
+      "category": "task_type_branch",
+      "line": 68,
+      "text": "f\"天气代码 {today.get('weather_code')}，\""
+    },
+    {
+      "category": "task_type_branch",
+      "line": 76,
+      "text": "if plan.intent == \"restricted_action\":"
+    },
+    {
+      "category": "task_type_branch",
+      "line": 87,
+      "text": "if plan.intent == \"web_fact\":"
+    },
+    {
+      "category": "task_type_branch",
+      "line": 112,
+      "text": "if plan.intent in (\"project_knowledge\", \"catalog_knowledge\"):"
+    },
+    {
+      "category": "task_type_branch",
+      "line": 145,
+      "text": "if plan.intent == \"project_architecture_services\":"
+    },
+    {
+      "category": "task_type_branch",
+      "line": 159,
+      "text": "if plan.intent == \"project_architecture_capabilities\":"
+    },
+    {
+      "category": "task_type_branch",
+      "line": 172,
+      "text": "if plan.intent == \"project_architecture_summary\":"
+    },
+    {
+      "category": "task_type_branch",
+      "line": 180,
+      "text": "if plan.intent == \"capability_status\":"
+    },
+    {
+      "category": "task_type_branch",
+      "line": 194,
+      "text": "\"2. Weather Tool；\","
+    },
+    {
+      "category": "task_type_branch",
+      "line": 201,
+      "text": "if plan.intent == \"local_chat\":"
+    },
+    {
+      "category": "if_branch",
+      "line": 29,
+      "text": "if plan.intent == \"time_now\":"
+    },
+    {
+      "category": "if_branch",
+      "line": 30,
+      "text": "current = next((item for item in results if item.tool == \"time.now\" and item.ok), None)"
+    },
+    {
+      "category": "if_branch",
+      "line": 31,
+      "text": "if current:"
+    },
+    {
+      "category": "if_branch",
+      "line": 34,
+      "text": "if plan.intent == \"date_math\":"
+    },
+    {
+      "category": "if_branch",
+      "line": 35,
+      "text": "current = next((item for item in results if item.tool == \"time.now\" and item.ok), None)"
+    },
+    {
+      "category": "if_branch",
+      "line": 36,
+      "text": "target = next((item for item in results if item.tool == \"time.date_math\" and item.ok), None)"
+    },
+    {
+      "category": "if_branch",
+      "line": 37,
+      "text": "if target:"
+    },
+    {
+      "category": "if_branch",
+      "line": 39,
+      "text": "if current:"
+    },
+    {
+      "category": "if_branch",
+      "line": 47,
+      "text": "if plan.intent == \"weather\":"
+    },
+    {
+      "category": "if_branch",
+      "line": 48,
+      "text": "weather = next((item for item in results if item.tool == \"weather.query\" and item.ok), None)"
+    },
+    {
+      "category": "if_branch",
+      "line": 49,
+      "text": "if not weather:"
+    },
+    {
+      "category": "if_branch",
+      "line": 50,
+      "text": "error = next((item.error for item in results if item.tool == \"weather.query\" and item.error), None)"
+    },
+    {
+      "category": "if_branch",
+      "line": 64,
+      "text": "if daily:"
+    },
+    {
+      "category": "if_branch",
+      "line": 72,
+      "text": "if metadata.get(\"source_url\"):"
+    },
+    {
+      "category": "if_branch",
+      "line": 76,
+      "text": "if plan.intent == \"restricted_action\":"
+    },
+    {
+      "category": "if_branch",
+      "line": 77,
+      "text": "blocked = next((item for item in results if item.data.get(\"requires_approval\")), None)"
+    },
+    {
+      "category": "if_branch",
+      "line": 78,
+      "text": "if blocked:"
+    },
+    {
+      "category": "if_branch",
+      "line": 87,
+      "text": "if plan.intent == \"web_fact\":"
+    },
+    {
+      "category": "if_branch",
+      "line": 90,
+      "text": "if corrections:"
+    },
+    {
+      "category": "if_branch",
+      "line": 92,
+      "text": "web_result = next((item for item in results if item.tool == \"web.search\" and item.ok), None)"
+    },
+    {
+      "category": "if_branch",
+      "line": 93,
+      "text": "if web_result:"
+    },
+    {
+      "category": "if_branch",
+      "line": 95,
+      "text": "if items:"
+    },
+    {
+      "category": "if_branch",
+      "line": 103,
+      "text": "if snapshot_id:"
+    },
+    {
+      "category": "if_branch",
+      "line": 105,
+      "text": "if snippet:"
+    },
+    {
+      "category": "if_branch",
+      "line": 108,
+      "text": "error_result = next((item for item in results if item.tool == \"web.search\"), None)"
+    },
+    {
+      "category": "if_branch",
+      "line": 109,
+      "text": "error = error_result.error if error_result else \"web.search did not run\""
+    },
+    {
+      "category": "if_branch",
+      "line": 112,
+      "text": "if plan.intent in (\"project_knowledge\", \"catalog_knowledge\"):"
+    },
+    {
+      "category": "if_branch",
+      "line": 114,
+      "text": "(item for item in results if item.tool == \"repo_memory.search\" and item.ok),"
+    },
+    {
+      "category": "if_branch",
+      "line": 117,
+      "text": "if not repo_result:"
+    },
+    {
+      "category": "if_branch",
+      "line": 121,
+      "text": "if not items:"
+    },
+    {
+      "category": "if_branch",
+      "line": 142,
+      "text": "lines.append(f\"- {name}\" + (f\"：{clean_description}\" if clean_description else \"\"))"
+    },
+    {
+      "category": "if_branch",
+      "line": 145,
+      "text": "if plan.intent == \"project_architecture_services\":"
+    },
+    {
+      "category": "if_branch",
+      "line": 147,
+      "text": "(item for item in results if item.tool == \"repo_memory.search\" and item.ok),"
+    },
+    {
+      "category": "if_branch",
+      "line": 150,
+      "text": "if not repo_result:"
+    },
+    {
+      "category": "if_branch",
+      "line": 159,
+      "text": "if plan.intent == \"project_architecture_capabilities\":"
+    },
+    {
+      "category": "if_branch",
+      "line": 160,
+      "text": "catalog = next((item for item in results if item.tool == \"catalog.search\" and item.ok), None)"
+    },
+    {
+      "category": "if_branch",
+      "line": 161,
+      "text": "skill_store = next((item for item in results if item.tool == \"skill_store.list\" and item.ok), None)"
+    },
+    {
+      "category": "if_branch",
+      "line": 162,
+      "text": "workflow_store = next((item for item in results if item.tool == \"workflow_store.list\" and item.ok), None)"
+    },
+    {
+      "category": "if_branch",
+      "line": 166,
+      "text": "f\"- catalog.search: {'ok' if catalog else 'unavailable'}\","
+    },
+    {
+      "category": "if_branch",
+      "line": 167,
+      "text": "f\"- skill_store.list: {'ok' if skill_store else 'unavailable'}\","
+    },
+    {
+      "category": "if_branch",
+      "line": 168,
+      "text": "f\"- workflow_store.list: {'ok' if workflow_store else 'unavailable'}\","
+    },
+    {
+      "category": "if_branch",
+      "line": 172,
+      "text": "if plan.intent == \"project_architecture_summary\":"
+    },
+    {
+      "category": "if_branch",
+      "line": 180,
+      "text": "if plan.intent == \"capability_status\":"
+    },
+    {
+      "category": "if_branch",
+      "line": 201,
+      "text": "if plan.intent == \"local_chat\":"
+    },
+    {
+      "category": "if_branch",
+      "line": 203,
+      "text": "(item for item in results if item.tool == \"model.generate\" and item.ok),"
+    },
+    {
+      "category": "if_branch",
+      "line": 206,
+      "text": "if model_result:"
+    },
+    {
+      "category": "fixed_text",
+      "line": 32,
+      "text": "return \"现在是本机时间：\" + _format_local_time(current.data) + \"。\""
+    },
+    {
+      "category": "fixed_text",
+      "line": 40,
+      "text": "prefix = \"现在是本机时间：\" + _format_local_time(current.data) + \"。\\n\""
+    },
+    {
+      "category": "fixed_text",
+      "line": 51,
+      "text": "return f\"这是实时天气问题，但天气工具没有返回可用结果：{error or 'unknown error'}\""
+    },
+    {
+      "category": "fixed_text",
+      "line": 56,
+      "text": "f\"天气查询结果：{weather.data.get('resolved_location') or weather.data.get('location')}\","
+    },
+    {
+      "category": "fixed_text",
+      "line": 61,
+      "text": "f\"- 天气代码：{current.get('weather_code')}\","
+    },
+    {
+      "category": "fixed_text",
+      "line": 68,
+      "text": "f\"天气代码 {today.get('weather_code')}，\""
+    },
+    {
+      "category": "fixed_text",
+      "line": 96,
+      "text": "lines = [prefix + \"我已联网搜索，相关证据如下：\"]"
+    },
+    {
+      "category": "fixed_text",
+      "line": 110,
+      "text": "return prefix + f\"这是需要事实来源的问题，但联网搜索没有返回可用结果：{error}\""
+    }
+  ],
+  "checked_after": "2026-05-16T06:22:40.090865+00:00",
+  "after_count": 2,
+  "after": [
+    {
+      "category": "task_type_branch",
+      "line": 3,
+      "text": "Data-driven renderer: no task_type/intent-specific branches."
+    },
+    {
+      "category": "task_type_branch",
+      "line": 160,
+      "text": "No task_type/intent-specific branches. Priority:"
+    }
+  ],
+  "renderer_templates": "core-platform/data/agent_policy/renderer_templates.json",
+  "note": "renderer.py now renders by final text/tool results and external templates, not task_type-specific branches."
+}
