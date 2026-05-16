@@ -1,0 +1,14 @@
+{
+  "checked_at": "2026-05-16T14:41:30.146410Z",
+  "has_approval_request": true,
+  "has_create_request": true,
+  "has_decide_approval": true,
+  "has_list_approvals": true,
+  "has_requires_approval": true,
+  "has_ensure_approved_or_request": true,
+  "has_cancel_approval": true,
+  "has_audit": true,
+  "has_risk_levels": true,
+  "has_dangerous_actions": true,
+  "all_checks_pass": true
+}

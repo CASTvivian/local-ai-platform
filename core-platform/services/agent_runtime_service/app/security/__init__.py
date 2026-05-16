@@ -1,1 +1,1 @@
-"""Security boundary for Agent Runtime tools."""
+"""Interactive permission and approval system."""
