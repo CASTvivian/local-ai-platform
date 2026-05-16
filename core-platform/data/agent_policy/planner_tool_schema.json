@@ -1,0 +1,177 @@
+{
+  "version": "c25-c14-b1",
+  "description": "Schema-driven planner registry. Runtime should plan from tool/capability schemas instead of hardcoded query words.",
+  "planner_contract": {
+    "input_fields": ["message", "session_id", "current_profile", "available_tools", "capabilities", "memory_context"],
+    "output_fields": ["task_type", "confidence", "steps", "requires_model_reasoning", "fallback_reason"],
+    "step_fields": ["id", "tool", "args", "reason", "depends_on"]
+  },
+  "tools": [
+    {
+      "name": "time.now",
+      "kind": "safe",
+      "description": "Return current local date and time from the host machine.",
+      "input_schema": {},
+      "output_schema": {
+        "now": "string",
+        "timezone": "string"
+      },
+      "capabilities": ["time.current", "date.current"]
+    },
+    {
+      "name": "time.date_math",
+      "kind": "safe",
+      "description": "Calculate relative dates when the planner has already resolved the offset.",
+      "input_schema": {
+        "offset_days": "integer"
+      },
+      "output_schema": {
+        "target_date": "string"
+      },
+      "capabilities": ["time.relative", "date.relative"]
+    },
+    {
+      "name": "repo_memory.search",
+      "kind": "safe",
+      "description": "Search local repository memory, brain assets, starred repository summaries, and project knowledge.",
+      "input_schema": {
+        "query": "string",
+        "limit": "integer"
+      },
+      "output_schema": {
+        "items": "array"
+      },
+      "capabilities": ["project.knowledge", "repo.memory", "brain.assets", "mcp.assets"]
+    },
+    {
+      "name": "capability.match",
+      "kind": "safe",
+      "description": "Match user request against registered platform capabilities.",
+      "input_schema": {
+        "query": "string"
+      },
+      "output_schema": {
+        "matches": "array"
+      },
+      "capabilities": ["capability.discovery", "tool.discovery"]
+    },
+    {
+      "name": "web.search",
+      "kind": "network",
+      "description": "Search the public web when local memory is insufficient and network access is allowed.",
+      "input_schema": {
+        "query": "string",
+        "limit": "integer"
+      },
+      "output_schema": {
+        "results": "array"
+      },
+      "capabilities": ["web.fact", "fresh.info"]
+    },
+    {
+      "name": "weather.query",
+      "kind": "network",
+      "description": "Query weather through provider geocoding. The planner must provide a location, not runtime keyword parsing.",
+      "input_schema": {
+        "location": "string"
+      },
+      "output_schema": {
+        "forecast": "object"
+      },
+      "capabilities": ["weather.current", "weather.forecast"]
+    },
+    {
+      "name": "model.generate",
+      "kind": "model",
+      "description": "Generate natural language response using configured local model through model gateway.",
+      "input_schema": {
+        "prompt": "string",
+        "profile": "string"
+      },
+      "output_schema": {
+        "text": "string"
+      },
+      "capabilities": ["general.chat", "reasoning.text"]
+    },
+    {
+      "name": "filesystem.read",
+      "kind": "sandbox",
+      "description": "Read files inside an allowed sandbox or approved workspace.",
+      "input_schema": {
+        "path": "string"
+      },
+      "output_schema": {
+        "content": "string"
+      },
+      "capabilities": ["file.read"]
+    },
+    {
+      "name": "filesystem.write",
+      "kind": "restricted",
+      "description": "Write files only after approval and sandbox validation.",
+      "input_schema": {
+        "path": "string",
+        "content": "string"
+      },
+      "output_schema": {
+        "ok": "boolean"
+      },
+      "capabilities": ["file.write"]
+    },
+    {
+      "name": "shell.exec",
+      "kind": "restricted",
+      "description": "Execute shell commands only after approval and sandbox validation.",
+      "input_schema": {
+        "command": "string"
+      },
+      "output_schema": {
+        "stdout": "string",
+        "stderr": "string",
+        "returncode": "integer"
+      },
+      "capabilities": ["shell.exec", "developer.task"]
+    }
+  ],
+  "capabilities": [
+    {
+      "id": "general.chat",
+      "description": "Open-ended conversation, summarization, explanation, rewriting, and natural language response."
+    },
+    {
+      "id": "project.knowledge",
+      "description": "Answer questions about this local AI platform, codebase, repo assets, architecture, services, and reports."
+    },
+    {
+      "id": "repo.memory",
+      "description": "Search repository memory and seeded brain asset summaries."
+    },
+    {
+      "id": "fresh.info",
+      "description": "Requires external web search or fresh online information."
+    },
+    {
+      "id": "time.current",
+      "description": "Current local time or date."
+    },
+    {
+      "id": "time.relative",
+      "description": "Relative date calculation after planner resolves offset."
+    },
+    {
+      "id": "weather.current",
+      "description": "Current weather or forecast for a planner-provided location."
+    },
+    {
+      "id": "developer.task",
+      "description": "Code, shell, filesystem, build, test, and repository operations."
+    }
+  ],
+  "policy": {
+    "runtime_code_must_not_parse_user_query_by_keywords": true,
+    "planner_should_use_schema_descriptions": true,
+    "executor_must_execute_plan_not_infer_user_intent": true,
+    "restricted_tools_require_approval": true,
+    "fallback_must_be_marked_legacy": true
+  }
+}

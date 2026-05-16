@@ -1,0 +1,17 @@
+{
+  "checked_at": "2026-05-16T04:07:49.800862Z",
+  "task": "C25-C14-B1",
+  "schema_file": "core-platform/data/agent_policy/planner_tool_schema.json",
+  "schema_planner": "core-platform/services/agent_runtime_service/app/planning/schema_planner.py",
+  "schema_loader": "core-platform/services/agent_runtime_service/app/planning/schema_loader.py",
+  "public_build_plan_is_schema_first": true,
+  "legacy_planner_retained_as_build_plan_legacy": true,
+  "keyword_plan_retained_as_legacy": true,
+  "env_var_for_rollback": "MAOMIAI_LEGACY_PLANNER",
+  "known_remaining_issues": [
+    "legacy keyword rule body (_keyword_plan) still exists and must be removed in C25-C14-B2",
+    "legacy _llm_plan and _fallback_local_chat still exist as fallback chain",
+    "executor.py still has tool-by-tool if/elif dispatch (not schema-driven)",
+    "time/date queries currently return schema_general (not time_now) because schema_default does not do capability matching on keywords - this is correct behavior per schema-driven design, capability.match step will discover the right tool at execution time"
+  ]
+}
