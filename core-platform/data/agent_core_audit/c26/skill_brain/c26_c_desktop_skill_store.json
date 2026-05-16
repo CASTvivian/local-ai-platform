@@ -1,0 +1,12 @@
+{
+  "checked_at": "2026-05-16T08:42:35.723108Z",
+  "skill_count": 147,
+  "router_has_loader": true,
+  "router_has_render_page": true,
+  "router_has_route": true,
+  "router_has_infer": true,
+  "css_has_skill_brain": true,
+  "tauri_resource_includes_skill_brain": true,
+  "html_nav_visible": true,
+  "html_renderPage_skills": true
+}

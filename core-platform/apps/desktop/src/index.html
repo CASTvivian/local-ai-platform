@@ -32,7 +32,7 @@
       <button id="nav-new-chat" onclick="setView('new-chat')">＋ 新对话</button>
       <button id="nav-launch" class="hidden-internal" onclick="setView('launch')">🚀 Launch</button>
       <button id="nav-brain" class="hidden-internal" onclick="setView('brain')">🧠 Brain Status</button>
-      <button id="nav-skills" class="hidden-internal" onclick="setView('skills')">🧩 Skill Store</button>
+      <button id="nav-skills" onclick="setView('skills')">🧩 技能商店</button>
       <button id="nav-documents" class="hidden-internal" onclick="setView('documents')">📄 Documents</button>
       <button id="nav-workflows" class="hidden-internal" onclick="setView('workflows')">🧬 Workflows</button>
       <button id="nav-artifacts" onclick="setView('artifacts')">📁 文件与结果</button>
@@ -310,7 +310,10 @@ function updateNavActive() {
 function renderPage(content, view) {
   if (view === "launch") return renderLaunchPage(content);
   if (view === "brain") return renderBrainPage(content);
-  if (view === "skills") return renderSkillsPage(content);
+  if (view === "skills") {
+    if (window.renderDefaultSkillStorePage) return window.renderDefaultSkillStorePage();
+    return renderSkillsPage(content);
+  }
   if (view === "documents") return renderDocumentsPage(content);
   if (view === "workflows") return renderWorkflowsPage(content);
   if (view === "artifacts") return renderArtifactsPage(content);

@@ -675,6 +675,7 @@ function maomiaiProductionFallbackError(reason, detail) {
     if (["models", "model", "local-model", "local-models"].includes(target)) return renderLocalModels();
     if (["artifacts", "files", "documents"].includes(target)) return renderFiles();
     if (["code-review", "code"].includes(target)) return renderCodeReview();
+    if (["skills", "skill-store"].includes(target)) return window.renderDefaultSkillStorePage ? window.renderDefaultSkillStorePage() : renderChat();
     if (["settings", "setting"].includes(target)) return renderSettings();
     return renderChat();
   }
@@ -684,6 +685,7 @@ function maomiaiProductionFallbackError(reason, detail) {
     if (value.includes("新对话") || value.includes("新建会话")) return "chat";
     if (value.includes("本地模型") || value.includes("模型")) return "models";
     if (value.includes("文件") || value.includes("结果") || value.includes("产物")) return "artifacts";
+    if (value.includes("技能") || value.includes("skill")) return "skills";
     if (value.includes("代码")) return "code-review";
     if (value.includes("设置")) return "settings";
     return null;
@@ -839,3 +841,116 @@ function maomiaiProductionFallbackError(reason, detail) {
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
   else boot();
 })();
+
+/* C26-C: Default Skill Store — loads from data/skill_brain/default_skills.json */
+async function maomiaiLoadDefaultSkills() {
+  try {
+    const resp = await fetch("./data/skill_brain/default_skills.json");
+    if (!resp.ok) {
+      return { ok: false, error: "default_skills_not_found", skills: [] };
+    }
+    const data = await resp.json();
+    return {
+      ok: true,
+      version: data.version,
+      skill_count: data.skill_count || (data.skills || []).length,
+      skills: data.skills || []
+    };
+  } catch (error) {
+    return {
+      ok: false,
+      error: String(error && error.message ? error.message : error),
+      skills: []
+    };
+  }
+}
+
+function maomiaiSkillTags(skills) {
+  const counts = {};
+  for (const skill of skills || []) {
+    for (const tag of skill.tags || []) {
+      counts[tag] = (counts[tag] || 0) + 1;
+    }
+  }
+  return Object.entries(counts)
+    .sort((a, b) => b[1] - a[1])
+    .map(([tag, count]) => ({ tag, count }));
+}
+
+function maomiaiRenderSkillCard(skill) {
+  const title = maomiaiEscapeHtml(skill.title || skill.id || "Untitled Skill");
+  const desc = maomiaiEscapeHtml(skill.description || "");
+  const tags = (skill.tags || []).slice(0, 5).map(t => `<span class="skill-brain-tag">${maomiaiEscapeHtml(t)}</span>`).join("");
+  const source = maomiaiEscapeHtml(skill.source_repo || skill.source_path || "");
+  const stars = skill.stars ? `<span class="skill-brain-stars">★ ${maomiaiEscapeHtml(String(skill.stars))}</span>` : "";
+  const lang = skill.language ? `<span class="skill-brain-lang">${maomiaiEscapeHtml(skill.language)}</span>` : "";
+  return `
+    <div class="skill-brain-card" data-skill-id="${maomiaiEscapeHtml(skill.id || "")}">
+      <div class="skill-brain-card-head">
+        <div>
+          <div class="skill-brain-title">${title}</div>
+          <div class="skill-brain-source">${source}</div>
+        </div>
+        ${stars}
+      </div>
+      <div class="skill-brain-desc">${desc}</div>
+      <div class="skill-brain-tags">${tags}${lang}</div>
+    </div>
+  `;
+}
+
+async function renderDefaultSkillStorePage(filterTag, searchText) {
+  filterTag = filterTag || "";
+  searchText = searchText || "";
+  const mount = document.getElementById("app") || document.getElementById("content") || document.getElementById("mainContent") || document.body;
+  const result = await maomiaiLoadDefaultSkills();
+  const skills = result.skills || [];
+  const tags = maomiaiSkillTags(skills);
+  const q = String(searchText || "").toLowerCase().trim();
+  const filtered = skills.filter(skill => {
+    const tagOk = !filterTag || (skill.tags || []).includes(filterTag);
+    const text = `${skill.title || ""} ${skill.id || ""} ${skill.description || ""} ${(skill.tags || []).join(" ")} ${skill.source_path || ""} ${skill.source_repo || ""} ${skill.language || ""}`.toLowerCase();
+    const searchOk = !q || text.includes(q);
+    return tagOk && searchOk;
+  });
+  mount.innerHTML = `
+    <main class="skill-brain-page">
+      <section class="skill-brain-hero">
+        <div>
+          <h1>技能商店</h1>
+          <p>默认技能来自本地 brain assets / GitHub stars / repo memory，已接入 capability registry 和 skill-aware planner。</p>
+        </div>
+        <div class="skill-brain-stat">
+          <strong>${filtered.length}</strong>
+          <span>/ ${skills.length} skills</span>
+        </div>
+      </section>
+      <section class="skill-brain-toolbar">
+        <input id="skill-brain-search" class="skill-brain-search" placeholder="搜索技能、仓库、标签..." value="${maomiaiEscapeHtml(searchText || "")}" />
+        <button class="skill-brain-filter ${!filterTag ? "active" : ""}" data-skill-filter="">全部</button>
+        ${tags.slice(0, 14).map(item => `
+          <button class="skill-brain-filter ${filterTag === item.tag ? "active" : ""}" data-skill-filter="${maomiaiEscapeHtml(item.tag)}">
+            ${maomiaiEscapeHtml(item.tag)} <span>${item.count}</span>
+          </button>
+        `).join("")}
+      </section>
+      ${!result.ok ? `<section class="skill-brain-warning">默认技能加载失败：${maomiaiEscapeHtml(result.error || "unknown")}</section>` : ""}
+      <section class="skill-brain-grid">
+        ${filtered.slice(0, 120).map(maomiaiRenderSkillCard).join("")}
+      </section>
+    </main>
+  `;
+  const input = document.getElementById("skill-brain-search");
+  if (input) {
+    input.addEventListener("input", () => {
+      renderDefaultSkillStorePage(filterTag, input.value);
+    });
+  }
+  document.querySelectorAll("[data-skill-filter]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      renderDefaultSkillStorePage(btn.getAttribute("data-skill-filter") || "", input ? input.value : "");
+    });
+  });
+}
+
+window.renderDefaultSkillStorePage = renderDefaultSkillStorePage;
