@@ -47,7 +47,10 @@
       "../../../data/agent_policy",
       "../../../data/sandbox_policy",
       "../../../data/agent_team",
-      "../../../data/brain_assets",
+      "../../../data/brain_assets/manifests",
+      "../../../data/brain_assets/model_catalog",
+      "../../../data/brain_assets/reports",
+      "../../../data/brain_assets/video_catalog",
       "../../../data/github_stars"
     ]
   }
