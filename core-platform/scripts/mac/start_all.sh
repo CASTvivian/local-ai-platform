@@ -7,38 +7,36 @@ PID_DIR="/tmp/maomiai-runtime/pids"
 mkdir -p "$LOG_DIR" "$PID_DIR"
 
 # --- Resolve RUNTIME_ROOT ---
-# Try multiple locations for the core-platform root:
-# 1. SCRIPT_DIR/../../..  (scripts/mac/ -> core-platform/)
-# 2. Walk up from exe to find core-platform/services
-# 3. Hardcoded fallback for dev mode
-RUNTIME_ROOT=""
-if [ -d "$SCRIPT_DIR/../../services" ]; then
+# Priority: MAOMIAI_RUNTIME_ROOT env var (set by Rust launcher)
+# Then try SCRIPT_DIR/../../.. (scripts/mac/ -> core-platform/)
+# Then search up from SCRIPT_DIR
+if [ -n "${MAOMIAI_RUNTIME_ROOT:-}" ] && [ -d "${MAOMIAI_RUNTIME_ROOT}/services" ]; then
+  RUNTIME_ROOT="$MAOMIAI_RUNTIME_ROOT"
+elif [ -d "$SCRIPT_DIR/../../services" ]; then
   RUNTIME_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 elif [ -d "$SCRIPT_DIR/../../../core-platform/services" ]; then
   RUNTIME_ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)/core-platform"
-fi
-
-# Fallback: search via exe path (when bundled in .app)
-if [ -z "$RUNTIME_ROOT" ]; then
-  # Try to find core-platform by walking up
+else
+  # Walk up from SCRIPT_DIR to find a directory with services/
+  RUNTIME_ROOT=""
   dir="$SCRIPT_DIR"
   for _ in $(seq 1 10); do
-    if [ -d "$dir/core-platform/services" ]; then
-      RUNTIME_ROOT="$dir/core-platform"
+    if [ -d "$dir/services" ]; then
+      RUNTIME_ROOT="$dir"
       break
     fi
     parent="$(dirname "$dir")"
     if [ "$parent" = "$dir" ]; then break; fi
     dir="$parent"
   done
-fi
-
-# Last resort: dev-time path
-if [ -z "$RUNTIME_ROOT" ]; then
-  RUNTIME_ROOT="/Users/mofamaomi/Documents/本地ai/core-platform"
+  # Last resort: dev-time path
+  if [ -z "$RUNTIME_ROOT" ]; then
+    RUNTIME_ROOT="/Users/mofamaomi/Documents/本地ai/core-platform"
+  fi
 fi
 
 echo "[C25-MAC] RUNTIME_ROOT=$RUNTIME_ROOT"
+echo "[C25-MAC] services dir exists: $([ -d "$RUNTIME_ROOT/services" ] && echo YES || echo NO)"
 
 find_python() {
   # 1. venv in RUNTIME_ROOT
@@ -90,11 +88,11 @@ start_service() {
     return 1
   fi
 
-  cd "$RUNTIME_ROOT" || { echo "{\"name\":\"$name\",\"ok\":false,\"error\":\"cd_failed\"}"; return 1; }
+  cd "$RUNTIME_ROOT" || { echo "{\"name\":\"$name\",\"ok\":false,\"error\":\"cd_failed_to_$RUNTIME_ROOT\"}"; return 1; }
   local out="$LOG_DIR/${name}.out.log"
   local err="$LOG_DIR/${name}.err.log"
 
-  echo "[C25-MAC] Starting $name on :$port with $py ($mode mode)"
+  echo "[C25-MAC] Starting $name on :$port with $py ($mode mode, cwd=$RUNTIME_ROOT)"
 
   if [ "$mode" = "uvicorn" ]; then
     nohup "$py" -m uvicorn "$module:app" --host 127.0.0.1 --port "$port" > "$out" 2> "$err" &

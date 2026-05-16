@@ -323,18 +323,20 @@ fn run_windows_start_all_background(app: tauri::AppHandle) {
                     return;
                 }
             };
+            eprintln!("[C25-MAC] resource_dir: {:?}", resource_dir);
             // Search for scripts/mac/start_all.sh in multiple locations:
-            // 1. Bundled resource: <resource_dir>/scripts/mac/start_all.sh
-            // 2. Nested resource: <resource_dir>/resources/scripts/mac/start_all.sh
-            // 3. Dev-time: walk up from exe to find core-platform/scripts/mac/start_all.sh
+            // Tauri bundles ../../../scripts/mac as _up_/_up_/_up_/scripts/mac/
             let candidates = vec![
                 resource_dir.join("scripts").join("mac").join("start_all.sh"),
                 resource_dir.join("resources").join("scripts").join("mac").join("start_all.sh"),
+                // Tauri's _up_ encoding for ../../../
+                resource_dir.join("_up_").join("_up_").join("_up_").join("scripts").join("mac").join("start_all.sh"),
+                // Also try with resources/ prefix
+                resource_dir.join("resources").join("_up_").join("_up_").join("_up_").join("scripts").join("mac").join("start_all.sh"),
             ];
             // Also try walking up from exe directory (dev mode)
             if let Ok(exe) = std::env::current_exe() {
                 if let Some(exe_dir) = exe.parent() {
-                    // Walk up to find project root
                     let mut dir = exe_dir;
                     for _ in 0..8 {
                         let candidate = dir.join("core-platform").join("scripts").join("mac").join("start_all.sh");
@@ -360,12 +362,29 @@ fn run_windows_start_all_background(app: tauri::AppHandle) {
             let script = match candidates.into_iter().find(|p| p.exists()) {
                 Some(p) => p,
                 None => {
-                    eprintln!("[C25-MAC] start_all.sh not found in any candidate path");
+                    eprintln!("[C25-MAC] start_all.sh not found in any candidate path; listing resource_dir:");
+                    // Debug: list what's actually in resource_dir
+                    if let Ok(entries) = std::fs::read_dir(&resource_dir) {
+                        for entry in entries.flatten() {
+                            eprintln!("[C25-MAC]   {:?}", entry.path());
+                        }
+                    }
                     return;
                 }
             };
+            eprintln!("[C25-MAC] found start_all.sh: {:?}", script);
+            // Determine RUNTIME_ROOT: the directory containing services/
+            // When bundled: script is at .../_up_/_up_/_up_/scripts/mac/start_all.sh
+            // services/ is at .../_up_/_up_/_up_/services/
+            let runtime_root = script.parent()
+                .and_then(|p| p.parent())  // scripts/mac/ -> scripts/
+                .and_then(|p| p.parent())  // scripts/ -> _up_/_up_/_up_/
+                .map(|p| p.to_path_buf())
+                .unwrap_or_else(|| resource_dir.clone());
+            eprintln!("[C25-MAC] RUNTIME_ROOT: {:?}", runtime_root);
             match std::process::Command::new("bash")
                 .arg(&script)
+                .env("MAOMIAI_RUNTIME_ROOT", &runtime_root)
                 .spawn()
             {
                 Ok(_) => eprintln!("[C25-MAC] start_all.sh spawned: {:?}", script),
