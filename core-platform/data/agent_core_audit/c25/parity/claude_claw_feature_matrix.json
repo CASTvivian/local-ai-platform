@@ -1,0 +1,379 @@
+{
+  "checked_at": "2026-05-16T12:50:00Z",
+  "schema_version": "c25-parity-v1",
+  "summary": {
+    "implemented": 8,
+    "partial": 6,
+    "missing": 2,
+    "total": 16,
+    "avg_score": 73.1,
+    "p0_gap_count": 3,
+    "p1_gap_count": 4,
+    "p2_gap_count": 1
+  },
+  "features": [
+    {
+      "id": "agent_runtime_entry",
+      "title": "统一 Agent Runtime 入口",
+      "claude_claw_target": "agent/run endpoint with planner→executor→validator→renderer pipeline",
+      "status": "implemented",
+      "score": 95,
+      "path_ratio": 1.0,
+      "hit_ratio": 0.8,
+      "missing_terms": [],
+      "evidence": [
+        {"path": "services/agent_runtime_service/main.py", "exists": true, "size": 12600, "note": "392 lines, port 18131, 30+ endpoints"},
+        {"path": "services/agent_runtime_service/app/service.py", "exists": true, "size": 6270, "note": "run_agent_loop, MAX_AGENT_STEPS=6"},
+        {"path": "services/agent_runtime_service/app/planner.py", "exists": true, "size": 5730, "note": "Schema-driven planner bridge"},
+        {"path": "services/agent_runtime_service/app/executor.py", "exists": true, "size": 6200, "note": "Tool dispatch executor"},
+        {"path": "services/agent_runtime_service/app/validator.py", "exists": true, "size": 1620, "note": "Anti-hallucination validator"},
+        {"path": "services/agent_runtime_service/app/renderer.py", "exists": true, "size": 9540, "note": "User-facing answer renderer"}
+      ],
+      "gap": "Renderer still has intent branches (B10). Executor tool dispatch still if/elif (B9).",
+      "priority": "P1"
+    },
+    {
+      "id": "schema_planner",
+      "title": "Schema-driven Planner",
+      "claude_claw_target": "Schema-based tool matching replaces keyword routing",
+      "status": "implemented",
+      "score": 88,
+      "path_ratio": 1.0,
+      "hit_ratio": 1.0,
+      "missing_terms": [],
+      "evidence": [
+        {"path": "data/agent_policy/planner_tool_schema.json", "exists": true, "size": 9100, "note": "v c25-c14-b3, 10 tools with planner_hints"},
+        {"path": "services/agent_runtime_service/app/planning/schema_planner.py", "exists": true, "size": 9820, "note": "289 lines, scoring engine"},
+        {"path": "services/agent_runtime_service/app/planning/schema_loader.py", "exists": true, "size": 1960, "note": "63 lines, schema loading"},
+        {"path": "services/agent_runtime_service/app/planning/legacy_rule_planner.py", "exists": true, "size": 5800, "note": "166 lines, ISOLATED behind env var"}
+      ],
+      "gap": "Legacy planner fully isolated. Schema scoring is lightweight fallback. B4 needed for model-structured output.",
+      "priority": "P0"
+    },
+    {
+      "id": "planner_model_structured_output",
+      "title": "Planner Model 结构化输出",
+      "claude_claw_target": "LLM produces structured JSON plan, not just lexical scoring",
+      "status": "partial",
+      "score": 55,
+      "path_ratio": 1.0,
+      "hit_ratio": 0.33,
+      "missing_terms": ["structured json plan", "planner model"],
+      "evidence": [
+        {"path": "services/agent_runtime_service/app/planning/schema_planner.py", "exists": true, "size": 9820, "note": "_call_planner_model exists but gated by MAOMIAI_SCHEMA_PLANNER_MODEL env"},
+        {"path": "services/agent_runtime_service/app/planning/llm_planner.py", "exists": true, "size": 5540, "note": "169 lines, call_planner_model function exists"}
+      ],
+      "gap": "Planner model path exists but is not enabled by default. Falls through to lexical scoring. Need B4 to make it production.",
+      "priority": "P0"
+    },
+    {
+      "id": "tool_registry_mcp",
+      "title": "Tool Registry / MCP Runtime",
+      "claude_claw_target": "Dynamic tool registry, MCP protocol, runtime tool registration",
+      "status": "implemented",
+      "score": 85,
+      "path_ratio": 1.0,
+      "hit_ratio": 1.0,
+      "missing_terms": [],
+      "evidence": [
+        {"path": "services/agent_runtime_service/app/mcp/invoker.py", "exists": true, "size": 5340, "note": "134 lines, invoke_mcp with HTTP and LOCAL dispatch"},
+        {"path": "services/agent_runtime_service/app/mcp/registry.py", "exists": true, "size": 6050, "note": "203 lines, DEFAULT_TOOLS, upsert_tool, load/save"},
+        {"path": "services/agent_runtime_service/app/mcp/models.py", "exists": true, "size": 1030, "note": "MCPTool, MCPInvokeRequest, MCPInvokeResult"},
+        {"path": "services/agent_runtime_service/app/tools.py", "exists": true, "size": 4680, "note": "146 lines, built-in tool adapters"}
+      ],
+      "gap": "MCP invoker LOCAL dispatch still has if/elif per tool name (B9). Should be registry-driven.",
+      "priority": "P1"
+    },
+    {
+      "id": "executor_loop",
+      "title": "Executor 执行 plan.steps",
+      "claude_claw_target": "Execute plan steps with tool dispatch, result collection",
+      "status": "partial",
+      "score": 70,
+      "path_ratio": 1.0,
+      "hit_ratio": 0.67,
+      "missing_terms": ["steps"],
+      "evidence": [
+        {"path": "services/agent_runtime_service/app/executor.py", "exists": true, "size": 6200, "note": "182 lines, execute_plan iterates plan.tools not plan.steps"}
+      ],
+      "gap": "Executor iterates plan.tools with if/elif dispatch (time.now, weather.query, web.search, etc.). Should use tool registry. Capability.status hardcoded (B12).",
+      "priority": "P0"
+    },
+    {
+      "id": "observation_replan",
+      "title": "Observation / Replan Loop",
+      "claude_claw_target": "Observer evaluates step results, triggers replan if needed",
+      "status": "implemented",
+      "score": 82,
+      "path_ratio": 1.0,
+      "hit_ratio": 1.0,
+      "missing_terms": [],
+      "evidence": [
+        {"path": "services/agent_runtime_service/app/loop/observer.py", "exists": true, "size": 1770, "note": "54 lines, build_observation + summarize"},
+        {"path": "services/agent_runtime_service/app/loop/replanner.py", "exists": true, "size": 2480, "note": "76 lines, replan() + ReplanDecision"},
+        {"path": "services/agent_runtime_service/app/service.py", "exists": true, "size": 6270, "note": "run_agent_loop uses observer + replanner"}
+      ],
+      "gap": "Observer/replanner exist and are wired. Replanner is LLM-based but could be more sophisticated with multi-step reasoning.",
+      "priority": "P2"
+    },
+    {
+      "id": "approval_sandbox",
+      "title": "Approval / Sandbox",
+      "claude_claw_target": "Approval gate, sandboxed execution, security policies",
+      "status": "implemented",
+      "score": 90,
+      "path_ratio": 1.0,
+      "hit_ratio": 1.0,
+      "missing_terms": [],
+      "evidence": [
+        {"path": "services/agent_runtime_service/app/security/approval_store.py", "exists": true, "size": 1540, "note": "52 lines, JSON file approval store"},
+        {"path": "services/agent_runtime_service/app/security/guard.py", "exists": true, "size": 1060, "note": "40 lines, approval gate"},
+        {"path": "services/agent_runtime_service/app/security/sandbox.py", "exists": true, "size": 1140, "note": "56 lines, sandbox policy evaluation"},
+        {"path": "services/agent_runtime_service/app/runtime/sandbox_executor.py", "exists": true, "size": 3580, "note": "113 lines, sandboxed subprocess execution"},
+        {"path": "services/agent_runtime_service/app/runtime/approval_executor.py", "exists": true, "size": 6290, "note": "179 lines, approval-based execution bridge"}
+      ],
+      "gap": "Full approval+sandbox pipeline. Could use more granular policies (file-level, network-level).",
+      "priority": "P2"
+    },
+    {
+      "id": "run_store_session_replay",
+      "title": "Run Store / Session / Replay",
+      "claude_claw_target": "Run persistence, session management, timeline replay",
+      "status": "implemented",
+      "score": 88,
+      "path_ratio": 1.0,
+      "hit_ratio": 1.0,
+      "missing_terms": [],
+      "evidence": [
+        {"path": "services/agent_runtime_service/app/run_store/store.py", "exists": true, "size": 1240, "note": "JSON file run store"},
+        {"path": "services/agent_runtime_service/app/session_store/store.py", "exists": true, "size": 1550, "note": "Session persistence"},
+        {"path": "services/agent_runtime_service/app/replay/timeline.py", "exists": true, "size": 4500, "note": "build_run_timeline"},
+        {"path": "main.py endpoints", "exists": true, "size": 0, "note": "/agent/run/{id}, /agent/session/{id}, /agent/replay/timeline/{id}"}
+      ],
+      "gap": "Full run+session+replay pipeline. Timeline replay available in desktop UI.",
+      "priority": null
+    },
+    {
+      "id": "filesystem_tools",
+      "title": "Filesystem Tools",
+      "claude_claw_target": "Sandboxed filesystem read/write/list/delete operations",
+      "status": "implemented",
+      "score": 85,
+      "path_ratio": 1.0,
+      "hit_ratio": 0.67,
+      "missing_terms": ["sandbox (in path)"],
+      "evidence": [
+        {"path": "services/agent_runtime_service/app/runtime/filesystem_sandbox.py", "exists": true, "size": 4550, "note": "create_sandbox, read_file, write_file, list_files, delete_file"},
+        {"path": "services/agent_runtime_service/app/runtime/filesystem_models.py", "exists": true, "size": 387, "note": "FileReadRequest, FileWriteRequest, FileListRequest, FileDeleteRequest"},
+        {"path": "main.py endpoints", "exists": true, "size": 0, "note": "/agent/filesystem/sandbox, write, read, list, delete, manifest"}
+      ],
+      "gap": "Filesystem tools exist with sandbox isolation. Missing: workspace-aware file editing like Claude Code (in-place edits, diff-based).",
+      "priority": "P1"
+    },
+    {
+      "id": "shell_tools",
+      "title": "Shell Execution Tools",
+      "claude_claw_target": "Sandboxed shell command execution with approval",
+      "status": "implemented",
+      "score": 80,
+      "path_ratio": 1.0,
+      "hit_ratio": 1.0,
+      "missing_terms": [],
+      "evidence": [
+        {"path": "services/agent_runtime_service/app/runtime/sandbox_executor.py", "exists": true, "size": 3580, "note": "execute_sandboxed with policy validation"},
+        {"path": "services/agent_runtime_service/app/runtime/approval_executor.py", "exists": true, "size": 6290, "note": "execute_approved_action bridge"},
+        {"path": "services/agent_runtime_service/app/runtime/sandbox_policy.py", "exists": true, "size": 2140, "note": "Profile-based command validation"}
+      ],
+      "gap": "Shell execution exists with sandbox + approval. Missing: auto-repair loop (build → test → fix), stronger output parsing.",
+      "priority": "P1"
+    },
+    {
+      "id": "browser_web_tools",
+      "title": "Browser / Web Tools",
+      "claude_claw_target": "Web page fetch, web search, browser snapshots",
+      "status": "implemented",
+      "score": 85,
+      "path_ratio": 0.67,
+      "hit_ratio": 1.0,
+      "missing_terms": [],
+      "evidence": [
+        {"path": "services/agent_runtime_service/app/runtime/browser_runtime.py", "exists": true, "size": 7970, "note": "252 lines, fetch_url with SSRF protection, snapshot"},
+        {"path": "services/agent_runtime_service/app/runtime/web_search_runtime.py", "exists": true, "size": 9010, "note": "244 lines, DuckDuckGo + Bing fallback"},
+        {"path": "services/agent_runtime_service/app/runtime/weather_runtime.py", "exists": true, "size": 7800, "note": "Open-Meteo weather with geocoding"},
+        {"path": "app/web/search_runtime.py", "exists": false, "size": 0, "note": "NOT at expected path; actual is runtime/web_search_runtime.py"}
+      ],
+      "gap": "Full browser+search+weather stack. Search uses DuckDuckGo/Bing HTML scraping. Could use API-based search for reliability.",
+      "priority": null
+    },
+    {
+      "id": "capability_registry",
+      "title": "Capability Registry",
+      "claude_claw_target": "External schema-driven capability matching, no hardcoded keywords",
+      "status": "implemented",
+      "score": 92,
+      "path_ratio": 1.0,
+      "hit_ratio": 1.0,
+      "missing_terms": [],
+      "evidence": [
+        {"path": "data/agent_policy/capability_registry.json", "exists": true, "size": 4800, "note": "v c25-c14-b11-fix-time-capability, 14 capabilities with aliases"},
+        {"path": "services/agent_runtime_service/app/capability/registry.py", "exists": true, "size": 8790, "note": "260 lines, schema-driven match_capabilities, NO hardcoded keyword tables"}
+      ],
+      "gap": "Capability registry fully schema-driven. B11 fix confirmed: time.current/time.relative in schema, no Python keyword tables. Executor still has capability.status hardcoded (B12).",
+      "priority": "P0"
+    },
+    {
+      "id": "repo_memory_brain",
+      "title": "Repo Memory / Brain Assets",
+      "claude_claw_target": "Repository memory, brain assets, GitHub stars knowledge",
+      "status": "implemented",
+      "score": 90,
+      "path_ratio": 1.0,
+      "hit_ratio": 1.0,
+      "missing_terms": [],
+      "evidence": [
+        {"path": "services/repo_memory_service/main.py", "exists": true, "size": 12100, "note": "235 lines, v0.3.1-enterprise, full CRUD"},
+        {"path": "data/brain_assets/", "exists": true, "size": 0, "note": "Rich directory: manifests, model_catalog, video_catalog, repos, reports"},
+        {"path": "data/github_stars/", "exists": true, "size": 0, "note": "3 files: starred repos JSON + MD + classified"}
+      ],
+      "gap": "Full repo memory + brain assets. Enterprise-grade with fix records, context snapshots, knowledge search. Could auto-update from git.",
+      "priority": null
+    },
+    {
+      "id": "multi_agent",
+      "title": "Multi-Agent Runtime",
+      "claude_claw_target": "Team-based multi-agent coordination with worker roles",
+      "status": "partial",
+      "score": 60,
+      "path_ratio": 1.0,
+      "hit_ratio": 0.67,
+      "missing_terms": ["worker"],
+      "evidence": [
+        {"path": "services/agent_runtime_service/app/team/coordinator.py", "exists": true, "size": 7670, "note": "run_team with task decomposition"},
+        {"path": "data/agent_team/team_registry.json", "exists": true, "size": 1200, "note": "1 team with 4 agents: coordinator, researcher, builder, reviewer"},
+        {"path": "main.py endpoints", "exists": true, "size": 0, "note": "/agent/team/registry, /agent/team/run, /agent/team/{id}"}
+      ],
+      "gap": "Team structure exists with registry and coordinator. Workers are simulated via capability_tags, not truly independent agent instances. Needs real worker spawning.",
+      "priority": "P1"
+    },
+    {
+      "id": "desktop_integration",
+      "title": "Desktop Chat Integration",
+      "claude_claw_target": "Frontend chat wired to agent/run with session management",
+      "status": "partial",
+      "score": 65,
+      "path_ratio": 1.0,
+      "hit_ratio": 1.0,
+      "missing_terms": [],
+      "evidence": [
+        {"path": "apps/desktop/src/js/windows-demo-stable-router.js", "exists": true, "size": 32700, "note": "816 lines, full chat + session + replay"},
+        {"path": "apps/desktop/src-tauri/src/lib.rs", "exists": true, "size": 0, "note": "Rust backend with autostart"}
+      ],
+      "gap": "Desktop works for demo but has: MODEL_CATALOG_FALLBACK hardcoded, inferViewFromText with Chinese keyword routing, test buttons with hardcoded messages (B6). Needs cleanup.",
+      "priority": "P1"
+    },
+    {
+      "id": "cross_platform_packaging",
+      "title": "Single Source Win/Mac Packaging",
+      "claude_claw_target": "Same codebase builds for both platforms, no code fork",
+      "status": "partial",
+      "score": 70,
+      "path_ratio": 1.0,
+      "hit_ratio": 0.67,
+      "missing_terms": ["tauri resources (partial - only 6 of 19 services in resources)"],
+      "evidence": [
+        {"path": "scripts/windows/start_all.ps1", "exists": true, "size": 9400, "note": "236 lines, 6 services"},
+        {"path": "scripts/mac/start_all.sh", "exists": true, "size": 4700, "note": "130 lines, 6 services"},
+        {"path": "apps/desktop/src-tauri/tauri.conf.json", "exists": true, "size": 1800, "note": "withGlobalTauri:true, resources include both platforms"}
+      ],
+      "gap": "Single source confirmed (C15 audit). But only 6 of 7 workbench services in start scripts (missing artifact/code_review/document/design). tauri.conf.json resources incomplete for full enterprise deployment.",
+      "priority": "P1"
+    }
+  ],
+  "verdict": {
+    "can_demo_on_mac": true,
+    "can_demo_on_windows": true,
+    "can_claim_full_rebuild": false,
+    "core_rebuild_pct": 70,
+    "demo_mac_pct": 75,
+    "demo_win_pct": 60,
+    "parity_vs_claude_claw_pct": 65,
+    "reason": [
+      "Core Agent Runtime exists with full pipeline (planner→executor→validator→renderer).",
+      "Schema planner + capability registry are schema-driven, no hardcoded keywords in production path.",
+      "Tool/MCP/Sandbox/Replay/Run-Store all exist and functional.",
+      "But: Planner model structured output is not enabled by default (B4).",
+      "Executor still uses if/elif tool dispatch instead of registry (B9).",
+      "Renderer still has intent-based branches (B10).",
+      "Desktop has hardcoded fallbacks and test buttons (B6).",
+      "Executor has capability.status hardcoded (B12).",
+      "Multi-agent is structural but not truly parallel.",
+      "Cross-platform packaging missing 4 enterprise services in start scripts."
+    ]
+  },
+  "gap_analysis": {
+    "P0_critical": [
+      {
+        "id": "C25-C14-B4",
+        "title": "Planner Model Structured Output",
+        "description": "Enable MAOMIAI_SCHEMA_PLANNER_MODEL by default, wire to model gateway, produce structured JSON plans instead of lexical scoring fallback",
+        "impact": "Planner accuracy, tool selection quality, Claude/Claw parity"
+      },
+      {
+        "id": "C25-C14-B9",
+        "title": "Executor Tool Dispatch Registry化",
+        "description": "Replace if/elif tool dispatch in executor.py with MCP registry lookup. executor should call invoke_mcp or tools.py adapter based on registry.",
+        "impact": "Extensibility, new tools require zero executor code changes"
+      },
+      {
+        "id": "C25-C14-B12",
+        "title": "清 executor capability.status 硬编码",
+        "description": "Remove hardcoded capability.status handling from executor, route through capability registry service call instead.",
+        "impact": "Consistency, single source of truth for capability resolution"
+      }
+    ],
+    "P1_important": [
+      {
+        "id": "C25-C14-B6",
+        "title": "清 desktop router dry_run / 固定测试按钮",
+        "description": "Remove MODEL_CATALOG_FALLBACK, inferViewFromText keyword routing, hardcoded test messages from windows-demo-stable-router.js",
+        "impact": "Production readiness, code cleanliness"
+      },
+      {
+        "id": "C25-C14-B10",
+        "title": "Renderer intent 分支清理",
+        "description": "Replace intent-based branches in renderer.py with schema-driven formatting, remove hardcoded intent strings",
+        "impact": "Consistency with schema-driven architecture"
+      },
+      {
+        "id": "C25-C14-B7",
+        "title": "Model/Profile/Provider 配置归一",
+        "description": "Consolidate scattered model config into single schema-driven model profile registry",
+        "impact": "Configuration consistency, Claude/Claw parity"
+      },
+      {
+        "id": "C25-OFFLINE",
+        "title": "离线模型预种/Demo Pack",
+        "description": "Pre-seed model weights for demo, ensure offline operation",
+        "impact": "Demo reliability, no-network scenarios"
+      }
+    ],
+    "P2_nice_to_have": [
+      {
+        "id": "C25-MULTI-AGENT-V2",
+        "title": "Real Worker Agent Spawning",
+        "description": "Replace simulated multi-agent with actual parallel worker instances",
+        "impact": "True multi-agent capability"
+      }
+    ]
+  },
+  "next_priority": [
+    "C25-C14-B4: Planner Model Structured Output (P0)",
+    "C25-C14-B9: Executor Tool Dispatch Registry化 (P0)",
+    "C25-C14-B12: 清 executor capability.status 硬编码 (P0)",
+    "C25-C14-B6: 清 desktop router fallback (P1)",
+    "C25-C14-B10: Renderer intent 分支清理 (P1)",
+    "C25-C14-B7: Model/Profile/Provider 配置归一 (P1)",
+    "C25-OFFLINE: 离线模型预种 (P1)",
+    "C25-FINAL: 最终 Mac/Win 路演包"
+  ]
+}
