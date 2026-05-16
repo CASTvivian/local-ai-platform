@@ -1,0 +1,280 @@
+{
+  "checked_at": "2026-05-16T10:01:46.960665Z",
+  "builtin_module_count": 12,
+  "builtin_capability_count": 12,
+  "skill_capability_count": 148,
+  "total_capability_count": 173,
+  "tests": [
+    {
+      "query": "我想做代码智能体",
+      "has_builtin": true,
+      "matches": [
+        {
+          "id": "builtin.code_agent_core",
+          "name": "代码智能体核心模块",
+          "source_type": "own_builtin_module",
+          "builtin": true
+        },
+        {
+          "id": "builtin.agent_runtime_core",
+          "name": "通用 Agent Runtime 模块",
+          "source_type": "own_builtin_module",
+          "builtin": true
+        },
+        {
+          "id": "builtin.mcp_tool_hub",
+          "name": "MCP 工具协议模块",
+          "source_type": "own_builtin_module",
+          "builtin": true
+        },
+        {
+          "id": "builtin.browser_operator",
+          "name": "浏览器自动化模块",
+          "source_type": "own_builtin_module",
+          "builtin": true
+        },
+        {
+          "id": "builtin.memory_rag_core",
+          "name": "记忆与 RAG 检索模块",
+          "source_type": "own_builtin_module",
+          "builtin": true
+        },
+        {
+          "id": "builtin.workflow_orchestrator",
+          "name": "工作流编排模块",
+          "source_type": "own_builtin_module",
+          "builtin": true
+        },
+        {
+          "id": "builtin.local_model_runtime",
+          "name": "本地模型运行模块",
+          "source_type": "own_builtin_module",
+          "builtin": true
+        },
+        {
+          "id": "builtin.prompt_skill_engine",
+          "name": "Prompt 技能引擎模块",
+          "source_type": "own_builtin_module",
+          "builtin": true
+        }
+      ]
+    },
+    {
+      "query": "有没有 MCP 工具协议能力",
+      "has_builtin": true,
+      "matches": [
+        {
+          "id": "builtin.mcp_tool_hub",
+          "name": "MCP 工具协议模块",
+          "source_type": "own_builtin_module",
+          "builtin": true
+        },
+        {
+          "id": "builtin.code_agent_core",
+          "name": "代码智能体核心模块",
+          "source_type": "own_builtin_module",
+          "builtin": true
+        },
+        {
+          "id": "builtin.browser_operator",
+          "name": "浏览器自动化模块",
+          "source_type": "own_builtin_module",
+          "builtin": true
+        },
+        {
+          "id": "builtin.memory_rag_core",
+          "name": "记忆与 RAG 检索模块",
+          "source_type": "own_builtin_module",
+          "builtin": true
+        },
+        {
+          "id": "builtin.security_sandbox",
+          "name": "安全沙箱与策略模块",
+          "source_type": "own_builtin_module",
+          "builtin": true
+        },
+        {
+          "id": "repo.memory",
+          "name": "项目知识能力",
+          "source_type": null,
+          "builtin": null
+        },
+        {
+          "id": "web.search",
+          "name": "联网搜索能力",
+          "source_type": null,
+          "builtin": null
+        },
+        {
+          "id": "weather.query",
+          "name": "天气查询能力",
+          "source_type": null,
+          "builtin": null
+        }
+      ]
+    },
+    {
+      "query": "浏览器自动化怎么做",
+      "has_builtin": true,
+      "matches": [
+        {
+          "id": "builtin.browser_operator",
+          "name": "浏览器自动化模块",
+          "source_type": "own_builtin_module",
+          "builtin": true
+        },
+        {
+          "id": "builtin.code_agent_core",
+          "name": "代码智能体核心模块",
+          "source_type": "own_builtin_module",
+          "builtin": true
+        },
+        {
+          "id": "builtin.agent_runtime_core",
+          "name": "通用 Agent Runtime 模块",
+          "source_type": "own_builtin_module",
+          "builtin": true
+        },
+        {
+          "id": "builtin.mcp_tool_hub",
+          "name": "MCP 工具协议模块",
+          "source_type": "own_builtin_module",
+          "builtin": true
+        },
+        {
+          "id": "builtin.memory_rag_core",
+          "name": "记忆与 RAG 检索模块",
+          "source_type": "own_builtin_module",
+          "builtin": true
+        },
+        {
+          "id": "builtin.workflow_orchestrator",
+          "name": "工作流编排模块",
+          "source_type": "own_builtin_module",
+          "builtin": true
+        },
+        {
+          "id": "builtin.local_model_runtime",
+          "name": "本地模型运行模块",
+          "source_type": "own_builtin_module",
+          "builtin": true
+        },
+        {
+          "id": "builtin.prompt_skill_engine",
+          "name": "Prompt 技能引擎模块",
+          "source_type": "own_builtin_module",
+          "builtin": true
+        }
+      ]
+    },
+    {
+      "query": "本地记忆和 RAG 能力",
+      "has_builtin": true,
+      "matches": [
+        {
+          "id": "builtin.memory_rag_core",
+          "name": "记忆与 RAG 检索模块",
+          "source_type": "own_builtin_module",
+          "builtin": true
+        },
+        {
+          "id": "builtin.local_model_runtime",
+          "name": "本地模型运行模块",
+          "source_type": "own_builtin_module",
+          "builtin": true
+        },
+        {
+          "id": "builtin.code_agent_core",
+          "name": "代码智能体核心模块",
+          "source_type": "own_builtin_module",
+          "builtin": true
+        },
+        {
+          "id": "builtin.agent_runtime_core",
+          "name": "通用 Agent Runtime 模块",
+          "source_type": "own_builtin_module",
+          "builtin": true
+        },
+        {
+          "id": "builtin.mcp_tool_hub",
+          "name": "MCP 工具协议模块",
+          "source_type": "own_builtin_module",
+          "builtin": true
+        },
+        {
+          "id": "builtin.browser_operator",
+          "name": "浏览器自动化模块",
+          "source_type": "own_builtin_module",
+          "builtin": true
+        },
+        {
+          "id": "builtin.workflow_orchestrator",
+          "name": "工作流编排模块",
+          "source_type": "own_builtin_module",
+          "builtin": true
+        },
+        {
+          "id": "builtin.prompt_skill_engine",
+          "name": "Prompt 技能引擎模块",
+          "source_type": "own_builtin_module",
+          "builtin": true
+        }
+      ]
+    },
+    {
+      "query": "本地模型运行能力",
+      "has_builtin": true,
+      "matches": [
+        {
+          "id": "builtin.local_model_runtime",
+          "name": "本地模型运行模块",
+          "source_type": "own_builtin_module",
+          "builtin": true
+        },
+        {
+          "id": "time.current",
+          "name": "本地时间日期能力",
+          "source_type": null,
+          "builtin": null
+        },
+        {
+          "id": "builtin.code_agent_core",
+          "name": "代码智能体核心模块",
+          "source_type": "own_builtin_module",
+          "builtin": true
+        },
+        {
+          "id": "builtin.agent_runtime_core",
+          "name": "通用 Agent Runtime 模块",
+          "source_type": "own_builtin_module",
+          "builtin": true
+        },
+        {
+          "id": "builtin.mcp_tool_hub",
+          "name": "MCP 工具协议模块",
+          "source_type": "own_builtin_module",
+          "builtin": true
+        },
+        {
+          "id": "builtin.browser_operator",
+          "name": "浏览器自动化模块",
+          "source_type": "own_builtin_module",
+          "builtin": true
+        },
+        {
+          "id": "builtin.memory_rag_core",
+          "name": "记忆与 RAG 检索模块",
+          "source_type": "own_builtin_module",
+          "builtin": true
+        },
+        {
+          "id": "builtin.workflow_orchestrator",
+          "name": "工作流编排模块",
+          "source_type": "own_builtin_module",
+          "builtin": true
+        }
+      ]
+    }
+  ],
+  "note": "Own builtin fusion modules are exposed as builtin.* capabilities and receive a ranking boost over external-reference skill.* capabilities."
+}
