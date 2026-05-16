@@ -1,0 +1,268 @@
+{
+  "checked_at": "2026-05-16T09:40:51.895192Z",
+  "total": 147,
+  "summary": {
+    "rebuild_core": 83,
+    "reference": 29,
+    "knowledge_only": 2,
+    "defer": 13,
+    "exclude": 20
+  },
+  "module_summary": {
+    "agent_runtime": 96,
+    "mcp_tools": 5,
+    "browser_agent": 5,
+    "memory": 3,
+    "workflow": 4,
+    "code_agent": 1,
+    "knowledge": 33
+  },
+  "top_10": [
+    {
+      "id": "skill_affaan_m_everything_claude_code",
+      "title": "Everything claude code",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/affaan-m__everything-claude-code",
+      "stars": 180549,
+      "tags": [
+        "agent_runtime",
+        "local_model",
+        "mcp_tool",
+        "memory",
+        "prompt_framework"
+      ],
+      "grade": "rebuild_core",
+      "score": 134,
+      "reasons": [
+        "high_value_capability_tag",
+        "agent_runtime",
+        "mcp_tool",
+        "memory_or_rag",
+        "local_model",
+        "very_high_stars",
+        "strategic_keyword"
+      ],
+      "suggested_builtin_module": "agent_runtime"
+    },
+    {
+      "id": "skill_safishamsi_graphify",
+      "title": "Graphify",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/safishamsi__graphify",
+      "stars": 47241,
+      "tags": [
+        "agent_runtime",
+        "browser_agent",
+        "code_agent",
+        "memory",
+        "prompt_framework"
+      ],
+      "grade": "rebuild_core",
+      "score": 130,
+      "reasons": [
+        "high_value_capability_tag",
+        "agent_runtime",
+        "code_agent",
+        "browser_agent",
+        "memory_or_rag",
+        "high_stars",
+        "strategic_keyword"
+      ],
+      "suggested_builtin_module": "agent_runtime"
+    },
+    {
+      "id": "skill_heygen_com_hyperframes",
+      "title": "Hyperframes",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/heygen-com__hyperframes",
+      "stars": 17624,
+      "tags": [
+        "agent_runtime",
+        "browser_agent",
+        "code_agent",
+        "mcp_tool"
+      ],
+      "grade": "rebuild_core",
+      "score": 128,
+      "reasons": [
+        "high_value_capability_tag",
+        "agent_runtime",
+        "mcp_tool",
+        "code_agent",
+        "browser_agent",
+        "medium_stars",
+        "strategic_keyword"
+      ],
+      "suggested_builtin_module": "agent_runtime"
+    },
+    {
+      "id": "skill_bytedance_deer_flow",
+      "title": "Deer flow",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/bytedance__deer-flow",
+      "stars": 67192,
+      "tags": [
+        "agent_runtime",
+        "local_model",
+        "mcp_tool",
+        "memory",
+        "prompt_framework",
+        "workflow"
+      ],
+      "grade": "rebuild_core",
+      "score": 126,
+      "reasons": [
+        "high_value_capability_tag",
+        "agent_runtime",
+        "mcp_tool",
+        "memory_or_rag",
+        "local_model",
+        "high_stars",
+        "strategic_keyword"
+      ],
+      "suggested_builtin_module": "agent_runtime"
+    },
+    {
+      "id": "skill_datawhalechina_easy_vibe",
+      "title": "Easy vibe",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/datawhalechina__easy-vibe",
+      "stars": 10410,
+      "tags": [
+        "agent_runtime",
+        "code_agent",
+        "local_model",
+        "mcp_tool",
+        "workflow"
+      ],
+      "grade": "rebuild_core",
+      "score": 124,
+      "reasons": [
+        "high_value_capability_tag",
+        "agent_runtime",
+        "mcp_tool",
+        "code_agent",
+        "local_model",
+        "medium_stars",
+        "strategic_keyword"
+      ],
+      "suggested_builtin_module": "agent_runtime"
+    },
+    {
+      "id": "skill_zhouxiaoka_autoclip",
+      "title": "Autoclip",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/zhouxiaoka__autoclip",
+      "stars": 5188,
+      "tags": [
+        "agent_runtime",
+        "browser_agent",
+        "local_model",
+        "mcp_tool",
+        "ui_component"
+      ],
+      "grade": "rebuild_core",
+      "score": 122,
+      "reasons": [
+        "high_value_capability_tag",
+        "agent_runtime",
+        "mcp_tool",
+        "browser_agent",
+        "local_model",
+        "medium_stars",
+        "strategic_keyword"
+      ],
+      "suggested_builtin_module": "agent_runtime"
+    },
+    {
+      "id": "skill_significant_gravitas_autogpt",
+      "title": "AutoGPT",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/Significant-Gravitas__AutoGPT",
+      "stars": 184250,
+      "tags": [
+        "agent_runtime",
+        "local_model",
+        "mcp_tool"
+      ],
+      "grade": "rebuild_core",
+      "score": 120,
+      "reasons": [
+        "high_value_capability_tag",
+        "agent_runtime",
+        "mcp_tool",
+        "local_model",
+        "very_high_stars",
+        "strategic_keyword"
+      ],
+      "suggested_builtin_module": "agent_runtime"
+    },
+    {
+      "id": "skill_forrestchang_andrej_karpathy_skills",
+      "title": "Andrej karpathy skills",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars/forrestchang__andrej-karpathy-skills",
+      "stars": 127053,
+      "tags": [
+        "agent_runtime",
+        "code_agent",
+        "local_model",
+        "prompt_framework"
+      ],
+      "grade": "rebuild_core",
+      "score": 120,
+      "reasons": [
+        "high_value_capability_tag",
+        "agent_runtime",
+        "code_agent",
+        "local_model",
+        "very_high_stars",
+        "strategic_keyword"
+      ],
+      "suggested_builtin_module": "agent_runtime"
+    },
+    {
+      "id": "skill_mukul975_anthropic_cybersecurity_skills",
+      "title": "Anthropic Cybersecurity Skills",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/mukul975__Anthropic-Cybersecurity-Skills",
+      "stars": 6246,
+      "tags": [
+        "agent_runtime",
+        "code_agent",
+        "local_model",
+        "mcp_tool",
+        "prompt_framework",
+        "security",
+        "workflow"
+      ],
+      "grade": "rebuild_core",
+      "score": 119,
+      "reasons": [
+        "high_value_capability_tag",
+        "agent_runtime",
+        "mcp_tool",
+        "code_agent",
+        "local_model",
+        "medium_stars",
+        "strategic_keyword",
+        "requires_safety_review"
+      ],
+      "suggested_builtin_module": "agent_runtime"
+    },
+    {
+      "id": "skill_garrytan_gstack",
+      "title": "Gstack",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/garrytan__gstack",
+      "stars": 94845,
+      "tags": [
+        "agent_runtime",
+        "code_agent",
+        "mcp_tool",
+        "prompt_framework"
+      ],
+      "grade": "rebuild_core",
+      "score": 118,
+      "reasons": [
+        "high_value_capability_tag",
+        "agent_runtime",
+        "mcp_tool",
+        "code_agent",
+        "high_stars",
+        "strategic_keyword"
+      ],
+      "suggested_builtin_module": "agent_runtime"
+    }
+  ]
+}
