@@ -1,0 +1,82 @@
+{
+  "checked_at": "2026-05-16T05:34:36.780685Z",
+  "config_file": "core-platform/data/runtime_config/runtime_config.json",
+  "loader_file": "core-platform/services/agent_runtime_service/app/config/runtime_config.py",
+  "version": "c25-c14-b7a",
+  "services": {
+    "ollama": {
+      "port": 11434,
+      "base_url": "http://127.0.0.1:11434",
+      "health": "http://127.0.0.1:11434/api/tags"
+    },
+    "model_gateway": {
+      "port": 18080,
+      "base_url": "http://127.0.0.1:18080",
+      "health": "http://127.0.0.1:18080/health"
+    },
+    "model_bootstrap_service": {
+      "port": 18100,
+      "base_url": "http://127.0.0.1:18100",
+      "health": "http://127.0.0.1:18100/health"
+    },
+    "skill_store_service": {
+      "port": 18121,
+      "base_url": "http://127.0.0.1:18121",
+      "health": "http://127.0.0.1:18121/health"
+    },
+    "repo_memory_service": {
+      "port": 18125,
+      "base_url": "http://127.0.0.1:18125",
+      "health": "http://127.0.0.1:18125/health"
+    },
+    "workflow_store_service": {
+      "port": 18126,
+      "base_url": "http://127.0.0.1:18126",
+      "health": "http://127.0.0.1:18126/health"
+    },
+    "agent_runtime_service": {
+      "port": 18131,
+      "base_url": "http://127.0.0.1:18131",
+      "health": "http://127.0.0.1:18131/health"
+    }
+  },
+  "model_profiles": {
+    "light": {
+      "title": "Light local model",
+      "provider": "ollama",
+      "model": "qwen2.5:1.5b",
+      "purpose": "fast local demo and low-resource chat"
+    },
+    "balanced": {
+      "title": "Balanced local model",
+      "provider": "ollama",
+      "model": "qwen2.5:7b",
+      "purpose": "general reasoning and demo"
+    },
+    "coder": {
+      "title": "Coder local model",
+      "provider": "ollama",
+      "model": "qwen2.5-coder:7b",
+      "purpose": "coding, repo analysis, and developer tasks"
+    }
+  },
+  "light_profile": {
+    "title": "Light local model",
+    "provider": "ollama",
+    "model": "qwen2.5:1.5b",
+    "purpose": "fast local demo and low-resource chat",
+    "id": "light"
+  },
+  "defaults": {
+    "profile": "light",
+    "planner_model_mode": "auto",
+    "agent_runtime_required": true,
+    "dry_run_enabled": false
+  },
+  "packaging": {
+    "single_source": true,
+    "mac_start_script": "scripts/mac/start_all.sh",
+    "windows_start_script": "scripts/windows/start_all.ps1"
+  },
+  "note": "B7-A introduces central runtime config. Later B7-B/B7-C should migrate JS/scripts/model_gateway to read or generate from this config."
+}

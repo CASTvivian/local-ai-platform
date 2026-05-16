@@ -1,0 +1,73 @@
+{
+  "version": "c25-c14-b7a",
+  "description": "Central runtime configuration for local AI platform services, ports, endpoints, model profiles, and provider defaults.",
+  "host": "127.0.0.1",
+  "services": {
+    "ollama": {
+      "port": 11434,
+      "health_path": "/api/tags",
+      "base_url": "http://127.0.0.1:11434"
+    },
+    "model_gateway": {
+      "port": 18080,
+      "health_path": "/health",
+      "base_url": "http://127.0.0.1:18080"
+    },
+    "model_bootstrap_service": {
+      "port": 18100,
+      "health_path": "/health",
+      "base_url": "http://127.0.0.1:18100"
+    },
+    "skill_store_service": {
+      "port": 18121,
+      "health_path": "/health",
+      "base_url": "http://127.0.0.1:18121"
+    },
+    "repo_memory_service": {
+      "port": 18125,
+      "health_path": "/health",
+      "base_url": "http://127.0.0.1:18125"
+    },
+    "workflow_store_service": {
+      "port": 18126,
+      "health_path": "/health",
+      "base_url": "http://127.0.0.1:18126"
+    },
+    "agent_runtime_service": {
+      "port": 18131,
+      "health_path": "/health",
+      "base_url": "http://127.0.0.1:18131"
+    }
+  },
+  "model_profiles": {
+    "light": {
+      "title": "Light local model",
+      "provider": "ollama",
+      "model": "qwen2.5:1.5b",
+      "purpose": "fast local demo and low-resource chat"
+    },
+    "balanced": {
+      "title": "Balanced local model",
+      "provider": "ollama",
+      "model": "qwen2.5:7b",
+      "purpose": "general reasoning and demo"
+    },
+    "coder": {
+      "title": "Coder local model",
+      "provider": "ollama",
+      "model": "qwen2.5-coder:7b",
+      "purpose": "coding, repo analysis, and developer tasks"
+    }
+  },
+  "defaults": {
+    "profile": "light",
+    "planner_model_mode": "auto",
+    "agent_runtime_required": true,
+    "dry_run_enabled": false
+  },
+  "packaging": {
+    "single_source": true,
+    "mac_start_script": "scripts/mac/start_all.sh",
+    "windows_start_script": "scripts/windows/start_all.ps1"
+  }
+}

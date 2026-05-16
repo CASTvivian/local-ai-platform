@@ -17,6 +17,8 @@
     "core-platform/data/agent_policy/capability_registry.json",
     "core-platform/data/agent_policy/capability_status.json",
     "core-platform/services/agent_runtime_service/app/execution/tool_dispatch_registry.py",
+    "core-platform/services/agent_runtime_service/app/config/runtime_config.py",
+    "core-platform/data/runtime_config/runtime_config.json",
     "core-platform/docs/reports"
   ],
   "blocked_literals": [
