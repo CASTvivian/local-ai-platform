@@ -1,0 +1,18 @@
+{
+  "checked_at": "2026-05-16T15:55:41.222892Z",
+  "head": "095d69d0a48ce2acbb542f4a2811d4ebe74527d2",
+  "run_id": "25966166018",
+  "msi": "core-platform/releases/windows-latest-full-pack/local-ai-platform-win/Local AI Platform_0.1.0_x64_en-US.msi",
+  "msi_exists": true,
+  "msi_size": 5346360,
+  "desktop_lib": "core-platform/releases/windows-latest-full-pack/local-ai-platform-win/desktop_lib.exe",
+  "desktop_lib_exists": true,
+  "desktop_lib_size": 8823808,
+  "build_info": {
+    "commit": "095d69d",
+    "built_at": "2026-05-16T15:49:50.5540570+00:00",
+    "workflow": "build-win-release",
+    "label": "win-artifact-only"
+  },
+  "build_info_commit_matches_head": true
+}
