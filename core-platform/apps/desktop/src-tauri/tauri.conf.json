@@ -49,7 +49,6 @@
       "../../../services/agent_orchestrator",
       "../../../data/agent_policy",
       "../../../data/runtime_config",
-      "../../../data/capability_registry",
       "../../../data/planner_runtime",
       "../../../data/sandbox_policy",
       "../../../data/agent_team",
