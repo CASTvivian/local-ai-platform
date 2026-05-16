@@ -1,0 +1,248 @@
+{
+  "version": "c26-skill-brain-default-a",
+  "checked_at": "2026-05-16T07:47:50Z",
+  "sources": {
+    "brain_asset_index": "/Users/mofamaomi/Documents/本地ai/core-platform/data/brain_assets/manifests/brain_asset_index.json",
+    "github_stars": "/Users/mofamaomi/Documents/本地ai/core-platform/data/github_stars/CASTvivian_starred_repos.json",
+    "repo_memory_seed": "/Users/mofamaomi/Documents/本地ai/core-platform/data/repo_memory/brain_asset_seed.json"
+  },
+  "skill_count": 147,
+  "tag_summary": {
+    "agent_runtime": 96,
+    "local_model": 56,
+    "prompt_framework": 52,
+    "ui_component": 42,
+    "general_skill": 38,
+    "workflow": 34,
+    "code_agent": 31,
+    "mcp_tool": 31,
+    "memory": 25,
+    "browser_agent": 11,
+    "security": 5,
+    "evaluation": 4
+  },
+  "source_type_summary": {
+    "brain_asset": 147
+  },
+  "language_summary": {
+    "Python": 57,
+    "TypeScript": 26,
+    "JavaScript": 13,
+    "None": 12,
+    "Java": 11,
+    "HTML": 9,
+    "Shell": 6,
+    "Rust": 3,
+    "C++": 2,
+    "Go": 2,
+    "Vue": 2,
+    "Elixir": 1,
+    "Swift": 1,
+    "Objective-C": 1,
+    "Kotlin": 1
+  },
+  "top_stars": [
+    {
+      "id": "skill_public_apis_public_apis",
+      "title": "Public apis",
+      "stars": 434539,
+      "tags": [
+        "general_skill"
+      ]
+    },
+    {
+      "id": "skill_openclaw_openclaw",
+      "title": "Openclaw",
+      "stars": 371302,
+      "tags": [
+        "general_skill",
+        "workflow"
+      ]
+    },
+    {
+      "id": "skill_ultraworkers_claw_code",
+      "title": "Claw code",
+      "stars": 191229,
+      "tags": [
+        "agent_runtime",
+        "prompt_framework"
+      ]
+    },
+    {
+      "id": "skill_obra_superpowers",
+      "title": "Superpowers",
+      "stars": 188042,
+      "tags": [
+        "agent_runtime",
+        "code_agent",
+        "prompt_framework",
+        "ui_component"
+      ]
+    },
+    {
+      "id": "skill_significant_gravitas_autogpt",
+      "title": "AutoGPT",
+      "stars": 184250,
+      "tags": [
+        "agent_runtime",
+        "local_model",
+        "mcp_tool"
+      ]
+    },
+    {
+      "id": "skill_affaan_m_everything_claude_code",
+      "title": "Everything claude code",
+      "stars": 180549,
+      "tags": [
+        "agent_runtime",
+        "local_model",
+        "mcp_tool",
+        "memory",
+        "prompt_framework"
+      ]
+    },
+    {
+      "id": "skill_nousresearch_hermes_agent",
+      "title": "Hermes agent",
+      "stars": 146973,
+      "tags": [
+        "agent_runtime",
+        "local_model",
+        "prompt_framework",
+        "ui_component"
+      ]
+    },
+    {
+      "id": "skill_anthropics_skills",
+      "title": "Skills",
+      "stars": 133030,
+      "tags": [
+        "agent_runtime",
+        "mcp_tool",
+        "ui_component"
+      ]
+    },
+    {
+      "id": "skill_forrestchang_andrej_karpathy_skills",
+      "title": "Andrej karpathy skills",
+      "stars": 127053,
+      "tags": [
+        "agent_runtime",
+        "code_agent",
+        "local_model",
+        "prompt_framework"
+      ]
+    },
+    {
+      "id": "skill_comfy_org_comfyui",
+      "title": "ComfyUI",
+      "stars": 112643,
+      "tags": [
+        "browser_agent",
+        "general_skill",
+        "local_model"
+      ]
+    },
+    {
+      "id": "skill_growinggit_github_chinese_top_charts",
+      "title": "GitHub Chinese Top Charts",
+      "stars": 107921,
+      "tags": [
+        "general_skill"
+      ]
+    },
+    {
+      "id": "skill_msitarzewski_agency_agents",
+      "title": "Agency agents",
+      "stars": 96502,
+      "tags": [
+        "agent_runtime",
+        "ui_component",
+        "workflow"
+      ]
+    },
+    {
+      "id": "skill_garrytan_gstack",
+      "title": "Gstack",
+      "stars": 94845,
+      "tags": [
+        "agent_runtime",
+        "code_agent",
+        "mcp_tool",
+        "prompt_framework"
+      ]
+    },
+    {
+      "id": "skill_punkpeye_awesome_mcp_servers",
+      "title": "Awesome mcp servers",
+      "stars": 86780,
+      "tags": [
+        "mcp_tool"
+      ]
+    },
+    {
+      "id": "skill_openai_codex",
+      "title": "Codex",
+      "stars": 82152,
+      "tags": [
+        "agent_runtime",
+        "code_agent",
+        "prompt_framework",
+        "ui_component"
+      ]
+    },
+    {
+      "id": "skill_karpathy_autoresearch",
+      "title": "Autoresearch",
+      "stars": 80703,
+      "tags": [
+        "agent_runtime",
+        "code_agent",
+        "local_model",
+        "ui_component"
+      ]
+    },
+    {
+      "id": "skill_nomic_ai_gpt4all",
+      "title": "Gpt4all",
+      "stars": 77365,
+      "tags": [
+        "local_model",
+        "ui_component"
+      ]
+    },
+    {
+      "id": "skill_voltagent_awesome_design_md",
+      "title": "Awesome design md",
+      "stars": 76678,
+      "tags": [
+        "agent_runtime",
+        "code_agent",
+        "ui_component"
+      ]
+    },
+    {
+      "id": "skill_bytedance_deer_flow",
+      "title": "Deer flow",
+      "stars": 67192,
+      "tags": [
+        "agent_runtime",
+        "local_model",
+        "mcp_tool",
+        "memory",
+        "prompt_framework",
+        "workflow"
+      ]
+    },
+    {
+      "id": "skill_xtekky_gpt4free",
+      "title": "Gpt4free",
+      "stars": 66212,
+      "tags": [
+        "general_skill",
+        "local_model",
+        "ui_component"
+      ]
+    }
+  ]
+}
