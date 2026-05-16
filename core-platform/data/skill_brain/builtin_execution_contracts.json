@@ -155,10 +155,11 @@
     {
       "id": "builtin.memory_rag_core",
       "title": "记忆与 RAG 检索模块",
-      "implementation_status": "planned",
+      "implementation_status": "implemented_adapter",
       "source_reference_count": 17,
       "execution_mode": "retrieval",
       "allowed_tools": [
+        "builtin.memory_rag_core.execute",
         "repo_memory.search",
         "capability.match",
         "model.generate"
@@ -182,7 +183,10 @@
       "acceptance_tests": [
         "can search repo memory",
         "can return evidence",
-        "can summarize retrieved context"
+        "can summarize retrieved context",
+        "can execute builtin.memory_rag_core.execute through executor registry",
+        "can create task run during retrieval",
+        "can return normalized evidence and audit"
       ],
       "runtime_dependency_policy": "owned_code_only",
       "created_at": "2026-05-16T10:07:00.000000Z"

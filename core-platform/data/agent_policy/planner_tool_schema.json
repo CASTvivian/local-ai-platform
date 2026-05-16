@@ -231,6 +231,39 @@
         ],
         "position": "action"
       }
+    },
+    {
+      "name": "builtin.memory_rag_core.execute",
+      "kind": "builtin",
+      "risk": "safe",
+      "description": "Execute owned memory/RAG core adapter for local project memory retrieval, evidence normalization and summary.",
+      "input_schema": {
+        "type": "object",
+        "required": ["query"],
+        "properties": {
+          "query": {"type": "string"},
+          "top_k": {"type": "integer"}
+        }
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {"type": "boolean"},
+          "task_run_id": {"type": "string"},
+          "matches": {"type": "array"},
+          "evidence": {"type": "array"},
+          "summary": {"type": "string"},
+          "audit": {"type": "object"}
+        }
+      },
+      "capabilities": ["memory", "rag", "retrieval", "repo_memory", "knowledge", "evidence"],
+      "planner_hints": {
+        "request_shapes": [
+          "asks about project memory, repository assets, local knowledge, RAG, evidence or stored documents",
+          "asks about own warehouse resources, brain assets, project knowledge"
+        ],
+        "position": "context"
+      }
     }
   ],
   "capabilities": [

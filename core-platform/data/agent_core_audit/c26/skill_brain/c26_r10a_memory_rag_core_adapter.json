@@ -1,0 +1,765 @@
+{
+  "checked_at": "2026-05-16T13:13:52.147641Z",
+  "registered_tool_count": 13,
+  "has_memory_tool": true,
+  "schema_has_tool": true,
+  "contract_allows_tool": true,
+  "memory_contract_status": "implemented_adapter",
+  "match_top": [
+    {
+      "id": "builtin.code_agent_core",
+      "name": "代码智能体核心模块",
+      "type": "own_builtin_module",
+      "description": "workspace file understanding；code patch planning；diff review；repair loop；task todo tracking；developer workflow automation",
+      "runtime": "builtin_fusion",
+      "target": "capability.match",
+      "priority": 80,
+      "enabled": true,
+      "tags": [
+        "agent_runtime",
+        "code_agent",
+        "local_model",
+        "prompt_framework",
+        "mcp_tool",
+        "workflow",
+        "memory",
+        "security",
+        "ui_component"
+      ],
+      "input_schema": {
+        "type": "object",
+        "required": [
+          "task"
+        ],
+        "properties": {
+          "task": {
+            "type": "string"
+          },
+          "workspace_root": {
+            "type": "string"
+          },
+          "files": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "metadata": {
+        "source_type": "own_builtin_module",
+        "builtin": true,
+        "builtin_priority": 1.0,
+        "implementation_status": "implemented_adapter",
+        "source_reference_count": 26,
+        "merged_capabilities": [
+          "workspace file understanding",
+          "code patch planning",
+          "diff review",
+          "repair loop",
+          "task todo tracking",
+          "developer workflow automation"
+        ],
+        "implementation_plan": [
+          "Use references only for capability design.",
+          "Implement owned workspace read/patch/build/test APIs.",
+          "Connect task_state + patch_engine + repair_loop.",
+          "Expose as builtin.code_agent_core capability."
+        ],
+        "skill_tags": [
+          "agent_runtime",
+          "code_agent",
+          "local_model",
+          "prompt_framework",
+          "mcp_tool",
+          "workflow",
+          "memory",
+          "security",
+          "ui_component"
+        ],
+        "tools": [
+          "builtin.code_agent_core.execute",
+          "capability.match",
+          "repo_memory.search",
+          "filesystem.read",
+          "filesystem.write",
+          "shell.exec",
+          "model.generate"
+        ],
+        "risk": "safe",
+        "execution_contract": {
+          "id": "builtin.code_agent_core",
+          "title": "代码智能体核心模块",
+          "implementation_status": "implemented_adapter",
+          "source_reference_count": 26,
+          "execution_mode": "workspace_agent",
+          "allowed_tools": [
+            "builtin.code_agent_core.execute",
+            "capability.match",
+            "repo_memory.search",
+            "filesystem.read",
+            "filesystem.write",
+            "shell.exec",
+            "model.generate"
+          ],
+          "input_schema": {
+            "type": "object",
+            "required": [
+              "task"
+            ],
+            "properties": {
+              "task": {
+                "type": "string"
+              },
+              "workspace_root": {
+                "type": "string"
+              },
+              "files": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "output_schema": {
+            "type": "object",
+            "properties": {
+              "summary": {
+                "type": "string"
+              },
+              "patches": {
+                "type": "array"
+              },
+              "tests": {
+                "type": "array"
+              },
+              "audit": {
+                "type": "object"
+              }
+            }
+          },
+          "acceptance_tests": [
+            "can read workspace file",
+            "can plan diff",
+            "can apply patch with backup",
+            "can run build/test command",
+            "can generate repair context",
+            "can execute builtin.code_agent_core.execute through executor registry",
+            "can create task run during execution",
+            "can produce patch plan and repair loop audit"
+          ],
+          "runtime_dependency_policy": "owned_code_only",
+          "created_at": "2026-05-16T10:07:00.000000Z"
+        },
+        "execution_mode": "workspace_agent",
+        "allowed_tools": [
+          "builtin.code_agent_core.execute",
+          "capability.match",
+          "repo_memory.search",
+          "filesystem.read",
+          "filesystem.write",
+          "shell.exec",
+          "model.generate"
+        ],
+        "output_schema": {
+          "type": "object",
+          "properties": {
+            "summary": {
+              "type": "string"
+            },
+            "patches": {
+              "type": "array"
+            },
+            "tests": {
+              "type": "array"
+            },
+            "audit": {
+              "type": "object"
+            }
+          }
+        },
+        "acceptance_tests": [
+          "can read workspace file",
+          "can plan diff",
+          "can apply patch with backup",
+          "can run build/test command",
+          "can generate repair context",
+          "can execute builtin.code_agent_core.execute through executor registry",
+          "can create task run during execution",
+          "can produce patch plan and repair loop audit"
+        ],
+        "runtime_dependency_policy": "owned_code_only"
+      }
+    },
+    {
+      "id": "builtin.mcp_tool_hub",
+      "name": "MCP 工具协议模块",
+      "type": "own_builtin_module",
+      "description": "MCP tool metadata registry；tool invocation contract；tool discovery；safe adapter model",
+      "runtime": "builtin_fusion",
+      "target": "capability.match",
+      "priority": 80,
+      "enabled": true,
+      "tags": [
+        "agent_runtime",
+        "code_agent",
+        "local_model",
+        "mcp_tool",
+        "workflow",
+        "ui_component",
+        "prompt_framework"
+      ],
+      "input_schema": {
+        "type": "object",
+        "required": [
+          "tool_query"
+        ],
+        "properties": {
+          "tool_query": {
+            "type": "string"
+          }
+        }
+      },
+      "metadata": {
+        "source_type": "own_builtin_module",
+        "builtin": true,
+        "builtin_priority": 1.0,
+        "implementation_status": "planned",
+        "source_reference_count": 12,
+        "merged_capabilities": [
+          "MCP tool metadata registry",
+          "tool invocation contract",
+          "tool discovery",
+          "safe adapter model"
+        ],
+        "implementation_plan": [
+          "Normalize MCP tool metadata.",
+          "Register MCP tools into capability registry.",
+          "Route invocations through execution registry."
+        ],
+        "skill_tags": [
+          "agent_runtime",
+          "code_agent",
+          "local_model",
+          "mcp_tool",
+          "workflow",
+          "ui_component",
+          "prompt_framework"
+        ],
+        "tools": [
+          "capability.match",
+          "model.generate"
+        ],
+        "risk": "safe",
+        "execution_contract": {
+          "id": "builtin.mcp_tool_hub",
+          "title": "MCP 工具协议模块",
+          "implementation_status": "planned",
+          "source_reference_count": 12,
+          "execution_mode": "tool_registry",
+          "allowed_tools": [
+            "capability.match",
+            "model.generate"
+          ],
+          "input_schema": {
+            "type": "object",
+            "required": [
+              "tool_query"
+            ],
+            "properties": {
+              "tool_query": {
+                "type": "string"
+              }
+            }
+          },
+          "output_schema": {
+            "type": "object",
+            "properties": {
+              "tools": {
+                "type": "array"
+              },
+              "invoke_contract": {
+                "type": "object"
+              }
+            }
+          },
+          "acceptance_tests": [
+            "can list matching tools",
+            "can describe invocation contract",
+            "does not invoke unsafe tools without approval"
+          ],
+          "runtime_dependency_policy": "owned_code_only",
+          "created_at": "2026-05-16T10:07:00.000000Z"
+        },
+        "execution_mode": "tool_registry",
+        "allowed_tools": [
+          "capability.match",
+          "model.generate"
+        ],
+        "output_schema": {
+          "type": "object",
+          "properties": {
+            "tools": {
+              "type": "array"
+            },
+            "invoke_contract": {
+              "type": "object"
+            }
+          }
+        },
+        "acceptance_tests": [
+          "can list matching tools",
+          "can describe invocation contract",
+          "does not invoke unsafe tools without approval"
+        ],
+        "runtime_dependency_policy": "owned_code_only"
+      }
+    },
+    {
+      "id": "builtin.browser_operator",
+      "name": "浏览器自动化模块",
+      "type": "own_builtin_module",
+      "description": "web page research；browser action planning；structured extraction；safe browsing guard",
+      "runtime": "builtin_fusion",
+      "target": "capability.match",
+      "priority": 80,
+      "enabled": true,
+      "tags": [
+        "agent_runtime",
+        "browser_agent",
+        "code_agent",
+        "memory",
+        "prompt_framework",
+        "mcp_tool",
+        "local_model",
+        "ui_component",
+        "general_skill",
+        "workflow"
+      ],
+      "input_schema": {
+        "type": "object",
+        "required": [
+          "research_task"
+        ],
+        "properties": {
+          "research_task": {
+            "type": "string"
+          },
+          "allowed_domains": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "metadata": {
+        "source_type": "own_builtin_module",
+        "builtin": true,
+        "builtin_priority": 1.0,
+        "implementation_status": "planned",
+        "source_reference_count": 9,
+        "merged_capabilities": [
+          "web page research",
+          "browser action planning",
+          "structured extraction",
+          "safe browsing guard"
+        ],
+        "implementation_plan": [
+          "Build owned browser action schema.",
+          "Integrate web.search / browser.fetch tools.",
+          "Add audit trail for browser actions."
+        ],
+        "skill_tags": [
+          "agent_runtime",
+          "browser_agent",
+          "code_agent",
+          "memory",
+          "prompt_framework",
+          "mcp_tool",
+          "local_model",
+          "ui_component",
+          "general_skill",
+          "workflow"
+        ],
+        "tools": [
+          "web.search",
+          "capability.match",
+          "model.generate"
+        ],
+        "risk": "safe",
+        "execution_contract": {
+          "id": "builtin.browser_operator",
+          "title": "浏览器自动化模块",
+          "implementation_status": "planned",
+          "source_reference_count": 9,
+          "execution_mode": "browser_plan",
+          "allowed_tools": [
+            "web.search",
+            "capability.match",
+            "model.generate"
+          ],
+          "input_schema": {
+            "type": "object",
+            "required": [
+              "research_task"
+            ],
+            "properties": {
+              "research_task": {
+                "type": "string"
+              },
+              "allowed_domains": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "output_schema": {
+            "type": "object",
+            "properties": {
+              "research_plan": {
+                "type": "array"
+              },
+              "findings": {
+                "type": "array"
+              },
+              "citations": {
+                "type": "array"
+              }
+            }
+          },
+          "acceptance_tests": [
+            "can create browser/research plan",
+            "can summarize findings",
+            "can preserve evidence/citations"
+          ],
+          "runtime_dependency_policy": "owned_code_only",
+          "created_at": "2026-05-16T10:07:00.000000Z"
+        },
+        "execution_mode": "browser_plan",
+        "allowed_tools": [
+          "web.search",
+          "capability.match",
+          "model.generate"
+        ],
+        "output_schema": {
+          "type": "object",
+          "properties": {
+            "research_plan": {
+              "type": "array"
+            },
+            "findings": {
+              "type": "array"
+            },
+            "citations": {
+              "type": "array"
+            }
+          }
+        },
+        "acceptance_tests": [
+          "can create browser/research plan",
+          "can summarize findings",
+          "can preserve evidence/citations"
+        ],
+        "runtime_dependency_policy": "owned_code_only"
+      }
+    },
+    {
+      "id": "builtin.memory_rag_core",
+      "name": "记忆与 RAG 检索模块",
+      "type": "own_builtin_module",
+      "description": "repo memory；document retrieval；semantic search；knowledge summarization；skill context retrieval",
+      "runtime": "builtin_fusion",
+      "target": "capability.match",
+      "priority": 80,
+      "enabled": true,
+      "tags": [
+        "agent_runtime",
+        "local_model",
+        "mcp_tool",
+        "memory",
+        "prompt_framework",
+        "workflow",
+        "ui_component"
+      ],
+      "input_schema": {
+        "type": "object",
+        "required": [
+          "query"
+        ],
+        "properties": {
+          "query": {
+            "type": "string"
+          },
+          "top_k": {
+            "type": "integer"
+          }
+        }
+      },
+      "metadata": {
+        "source_type": "own_builtin_module",
+        "builtin": true,
+        "builtin_priority": 1.0,
+        "implementation_status": "implemented_adapter",
+        "source_reference_count": 17,
+        "merged_capabilities": [
+          "repo memory",
+          "document retrieval",
+          "semantic search",
+          "knowledge summarization",
+          "skill context retrieval"
+        ],
+        "implementation_plan": [
+          "Use repo_memory_service as base.",
+          "Add skill-aware retrieval context.",
+          "Support local knowledge evidence tracking."
+        ],
+        "skill_tags": [
+          "agent_runtime",
+          "local_model",
+          "mcp_tool",
+          "memory",
+          "prompt_framework",
+          "workflow",
+          "ui_component"
+        ],
+        "tools": [
+          "builtin.memory_rag_core.execute",
+          "repo_memory.search",
+          "capability.match",
+          "model.generate"
+        ],
+        "risk": "safe",
+        "execution_contract": {
+          "id": "builtin.memory_rag_core",
+          "title": "记忆与 RAG 检索模块",
+          "implementation_status": "implemented_adapter",
+          "source_reference_count": 17,
+          "execution_mode": "retrieval",
+          "allowed_tools": [
+            "builtin.memory_rag_core.execute",
+            "repo_memory.search",
+            "capability.match",
+            "model.generate"
+          ],
+          "input_schema": {
+            "type": "object",
+            "required": [
+              "query"
+            ],
+            "properties": {
+              "query": {
+                "type": "string"
+              },
+              "top_k": {
+                "type": "integer"
+              }
+            }
+          },
+          "output_schema": {
+            "type": "object",
+            "properties": {
+              "matches": {
+                "type": "array"
+              },
+              "summary": {
+                "type": "string"
+              },
+              "evidence": {
+                "type": "array"
+              }
+            }
+          },
+          "acceptance_tests": [
+            "can search repo memory",
+            "can return evidence",
+            "can summarize retrieved context",
+            "can execute builtin.memory_rag_core.execute through executor registry",
+            "can create task run during retrieval",
+            "can return normalized evidence and audit"
+          ],
+          "runtime_dependency_policy": "owned_code_only",
+          "created_at": "2026-05-16T10:07:00.000000Z"
+        },
+        "execution_mode": "retrieval",
+        "allowed_tools": [
+          "builtin.memory_rag_core.execute",
+          "repo_memory.search",
+          "capability.match",
+          "model.generate"
+        ],
+        "output_schema": {
+          "type": "object",
+          "properties": {
+            "matches": {
+              "type": "array"
+            },
+            "summary": {
+              "type": "string"
+            },
+            "evidence": {
+              "type": "array"
+            }
+          }
+        },
+        "acceptance_tests": [
+          "can search repo memory",
+          "can return evidence",
+          "can summarize retrieved context",
+          "can execute builtin.memory_rag_core.execute through executor registry",
+          "can create task run during retrieval",
+          "can return normalized evidence and audit"
+        ],
+        "runtime_dependency_policy": "owned_code_only"
+      }
+    },
+    {
+      "id": "builtin.security_sandbox",
+      "name": "安全沙箱与策略模块",
+      "type": "own_builtin_module",
+      "description": "sandbox policy；approval gate；high-risk action detection；audit guard",
+      "runtime": "builtin_fusion",
+      "target": "capability.match",
+      "priority": 80,
+      "enabled": true,
+      "tags": [
+        "agent_runtime",
+        "code_agent",
+        "local_model",
+        "mcp_tool",
+        "prompt_framework",
+        "security",
+        "workflow"
+      ],
+      "input_schema": {
+        "type": "object",
+        "required": [
+          "action"
+        ],
+        "properties": {
+          "action": {
+            "type": "string"
+          },
+          "risk_level": {
+            "type": "string"
+          },
+          "context": {
+            "type": "object"
+          }
+        }
+      },
+      "metadata": {
+        "source_type": "own_builtin_module",
+        "builtin": true,
+        "builtin_priority": 1.0,
+        "implementation_status": "planned",
+        "source_reference_count": 1,
+        "merged_capabilities": [
+          "sandbox policy",
+          "approval gate",
+          "high-risk action detection",
+          "audit guard"
+        ],
+        "implementation_plan": [
+          "Use sandbox_policy and hardcode_guard.",
+          "Add enterprise configurable policies.",
+          "Integrate with shell and file patch actions."
+        ],
+        "skill_tags": [
+          "agent_runtime",
+          "code_agent",
+          "local_model",
+          "mcp_tool",
+          "prompt_framework",
+          "security",
+          "workflow"
+        ],
+        "tools": [
+          "capability.match",
+          "repo_memory.search",
+          "model.generate"
+        ],
+        "risk": "safe",
+        "execution_contract": {
+          "id": "builtin.security_sandbox",
+          "title": "安全沙箱与策略模块",
+          "implementation_status": "planned",
+          "source_reference_count": 1,
+          "execution_mode": "policy_gate",
+          "allowed_tools": [
+            "capability.match",
+            "repo_memory.search",
+            "model.generate"
+          ],
+          "input_schema": {
+            "type": "object",
+            "required": [
+              "action"
+            ],
+            "properties": {
+              "action": {
+                "type": "string"
+              },
+              "risk_level": {
+                "type": "string"
+              },
+              "context": {
+                "type": "object"
+              }
+            }
+          },
+          "output_schema": {
+            "type": "object",
+            "properties": {
+              "decision": {
+                "type": "string"
+              },
+              "reason": {
+                "type": "string"
+              },
+              "mitigations": {
+                "type": "array"
+              }
+            }
+          },
+          "acceptance_tests": [
+            "can evaluate action risk level",
+            "can block high-risk actions",
+            "can produce mitigation suggestions"
+          ],
+          "runtime_dependency_policy": "owned_code_only",
+          "created_at": "2026-05-16T10:07:00.000000Z"
+        },
+        "execution_mode": "policy_gate",
+        "allowed_tools": [
+          "capability.match",
+          "repo_memory.search",
+          "model.generate"
+        ],
+        "output_schema": {
+          "type": "object",
+          "properties": {
+            "decision": {
+              "type": "string"
+            },
+            "reason": {
+              "type": "string"
+            },
+            "mitigations": {
+              "type": "array"
+            }
+          }
+        },
+        "acceptance_tests": [
+          "can evaluate action risk level",
+          "can block high-risk actions",
+          "can produce mitigation suggestions"
+        ],
+        "runtime_dependency_policy": "owned_code_only"
+      }
+    }
+  ]
+}
