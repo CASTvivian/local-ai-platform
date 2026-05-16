@@ -1,11 +1,11 @@
 // AUTO-GENERATED FILE. DO NOT EDIT BY HAND.
 // Source: data/runtime_config/runtime_config.json
 // Generator: scripts/build/generate_desktop_runtime_config.py
-// GeneratedAt: 2026-05-16T06:11:58.938989+00:00
+// GeneratedAt: 2026-05-16T07:08:26.549471+00:00
 (function () {
   var config = {
   "version": "c25-c14-b7d",
-  "generatedAt": "2026-05-16T06:11:58.938989+00:00",
+  "generatedAt": "2026-05-16T07:08:26.549471+00:00",
   "source": "data/runtime_config/runtime_config.json",
   "host": "127.0.0.1",
   "services": {

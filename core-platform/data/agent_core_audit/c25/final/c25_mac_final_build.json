@@ -1,0 +1,40 @@
+{
+  "checked_at": "2026-05-16T07:11:08.982313Z",
+  "git_head": "2eeebb1476696b085139baec4fef9622412fdcce",
+  "git_status_dirty": 77,
+  "release_dir": "core-platform/releases/macos-c25-final",
+  "app_exists": true,
+  "app_size_mb": 50.0,
+  "dmg_files": [
+    "core-platform/releases/macos-c25-final/dmg/Local AI Platform_0.1.0_aarch64.dmg"
+  ],
+  "dmg_count": 1,
+  "runtime_config_generated": true,
+  "py_compile": "PASSED",
+  "js_syntax": "PASSED",
+  "hardcode_guard": "PASSED",
+  "tauri_build": "SUCCESS",
+  "app_resource_checks": {
+    "mac_start_script": true,
+    "agent_runtime_service": true,
+    "runtime_config_json": true,
+    "capability_registry_dir": true,
+    "planner_runtime_dir": true,
+    "artifact_registry_service": true,
+    "code_review_gate_service": true,
+    "design_system_service": true,
+    "document_ingestion_service": true,
+    "agent_orchestrator": true,
+    "agent_policy_dir": true
+  },
+  "tauri_resources_added": [
+    "services/artifact_registry_service",
+    "services/code_review_gate_service",
+    "services/design_system_service",
+    "services/document_ingestion_service",
+    "services/agent_orchestrator",
+    "data/runtime_config",
+    "data/capability_registry",
+    "data/planner_runtime"
+  ]
+}
