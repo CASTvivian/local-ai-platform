@@ -1,5 +1,5 @@
 {
-  "version": "c25-c14-b7a",
+  "version": "c25-c14-b7d",
   "description": "Central runtime configuration for local AI platform services, ports, endpoints, model profiles, and provider defaults.",
   "host": "127.0.0.1",
   "services": {
@@ -13,30 +13,95 @@
       "health_path": "/health",
       "base_url": "http://127.0.0.1:18080"
     },
+    "auto_router": {
+      "port": 18093,
+      "health_path": "/health",
+      "base_url": "http://127.0.0.1:18093"
+    },
     "model_bootstrap_service": {
       "port": 18100,
       "health_path": "/health",
-      "base_url": "http://127.0.0.1:18100"
+      "base_url": "http://127.0.0.1:18100",
+      "js_key": "modelBootstrap"
+    },
+    "reference_skill": {
+      "port": 18101,
+      "health_path": "/health",
+      "base_url": "http://127.0.0.1:18101"
+    },
+    "capability_learning": {
+      "port": 18102,
+      "health_path": "/health",
+      "base_url": "http://127.0.0.1:18102"
+    },
+    "runtime_execution": {
+      "port": 18104,
+      "health_path": "/health",
+      "base_url": "http://127.0.0.1:18104"
+    },
+    "policy_engine": {
+      "port": 18110,
+      "health_path": "/health",
+      "base_url": "http://127.0.0.1:18110"
+    },
+    "trace_observability": {
+      "port": 18111,
+      "health_path": "/health",
+      "base_url": "http://127.0.0.1:18111"
+    },
+    "eval_gateway": {
+      "port": 18112,
+      "health_path": "/health",
+      "base_url": "http://127.0.0.1:18112"
+    },
+    "document_ingestion": {
+      "port": 18120,
+      "health_path": "/health",
+      "base_url": "http://127.0.0.1:18120"
     },
     "skill_store_service": {
       "port": 18121,
       "health_path": "/health",
-      "base_url": "http://127.0.0.1:18121"
+      "base_url": "http://127.0.0.1:18121",
+      "js_key": "skillStore"
+    },
+    "job_orchestrator": {
+      "port": 18122,
+      "health_path": "/health",
+      "base_url": "http://127.0.0.1:18122"
+    },
+    "artifact_registry": {
+      "port": 18123,
+      "health_path": "/health",
+      "base_url": "http://127.0.0.1:18123"
+    },
+    "code_review_gate": {
+      "port": 18124,
+      "health_path": "/health",
+      "base_url": "http://127.0.0.1:18124"
     },
     "repo_memory_service": {
       "port": 18125,
       "health_path": "/health",
-      "base_url": "http://127.0.0.1:18125"
+      "base_url": "http://127.0.0.1:18125",
+      "js_key": "repoMemory"
     },
     "workflow_store_service": {
       "port": 18126,
       "health_path": "/health",
-      "base_url": "http://127.0.0.1:18126"
+      "base_url": "http://127.0.0.1:18126",
+      "js_key": "workflowStore"
+    },
+    "design_system": {
+      "port": 18127,
+      "health_path": "/health",
+      "base_url": "http://127.0.0.1:18127"
     },
     "agent_runtime_service": {
       "port": 18131,
       "health_path": "/health",
-      "base_url": "http://127.0.0.1:18131"
+      "base_url": "http://127.0.0.1:18131",
+      "js_key": "agentRuntime"
     }
   },
   "model_profiles": {

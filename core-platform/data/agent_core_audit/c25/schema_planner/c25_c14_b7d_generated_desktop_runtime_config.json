@@ -1,0 +1,15 @@
+{
+  "checked_at": "2026-05-16T06:04:43.029107+00:00",
+  "generator": "scripts/build/generate_desktop_runtime_config.py",
+  "source_config": "data/runtime_config/runtime_config.json",
+  "output_js": "apps/desktop/src/js/config/runtime-config.js",
+  "source_version": "c25-c14-b7d",
+  "service_count": 19,
+  "profile_count": 3,
+  "output_url_count": 19,
+  "generated_marker": true,
+  "has_modelProfile": true,
+  "has_serviceNames": true,
+  "has_allPorts": true,
+  "has_serviceByPort": true
+}

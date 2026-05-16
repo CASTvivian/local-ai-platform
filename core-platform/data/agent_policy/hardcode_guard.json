@@ -24,6 +24,7 @@
     "core-platform/services/agent_runtime_service/app/planning/llm_planner.py",
     "core-platform/services/model_gateway/main.py",
     "core-platform/data/runtime_config/runtime_config.json",
+    "core-platform/scripts/build/generate_desktop_runtime_config.py",
     "core-platform/docs/reports"
   ],
   "blocked_literals": [
