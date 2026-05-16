@@ -1,0 +1,237 @@
+{
+  "checked_at": "2026-05-16T05:42:51.702236Z",
+  "before": [
+    {
+      "file": "services/agent_runtime_service/app/tools.py",
+      "line": 90,
+      "text": "\"http://127.0.0.1:18125/brain/search\","
+    },
+    {
+      "file": "services/agent_runtime_service/app/tools.py",
+      "line": 124,
+      "text": "return ok(\"skill_store.list\", _get_json(\"http://127.0.0.1:18121/list\", timeout=5))"
+    },
+    {
+      "file": "services/agent_runtime_service/app/tools.py",
+      "line": 131,
+      "text": "return ok(\"workflow_store.list\", _get_json(\"http://127.0.0.1:18126/list\", timeout=5))"
+    },
+    {
+      "file": "services/agent_runtime_service/app/tools.py",
+      "line": 139,
+      "text": "\"http://127.0.0.1:18080/generate\","
+    },
+    {
+      "file": "services/agent_runtime_service/app/health/planner_health.py",
+      "line": 23,
+      "text": "MODEL_GATEWAY_HEALTH_URL = os.environ.get(\"MAOMIAI_MODEL_GATEWAY_HEALTH_URL\", \"http://127.0.0.1:18080/health\")"
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/llm_planner.py",
+      "line": 107,
+      "text": "endpoint = os.environ.get(\"MAOMIAI_PLANNER_MODEL_ENDPOINT\", \"http://127.0.0.1:18080/generate\")"
+    },
+    {
+      "file": "services/agent_runtime_service/app/mcp/registry.py",
+      "line": 20,
+      "text": "endpoint=\"http://127.0.0.1:18125/brain/search\","
+    },
+    {
+      "file": "services/agent_runtime_service/app/mcp/registry.py",
+      "line": 31,
+      "text": "endpoint=\"http://127.0.0.1:18121/skills\","
+    },
+    {
+      "file": "services/agent_runtime_service/app/mcp/registry.py",
+      "line": 41,
+      "text": "endpoint=\"http://127.0.0.1:18126/workflows\","
+    },
+    {
+      "file": "services/agent_runtime_service/app/mcp/registry.py",
+      "line": 51,
+      "text": "endpoint=\"http://127.0.0.1:18080/generate\","
+    },
+    {
+      "file": "services/model_gateway/main.py",
+      "line": 7,
+      "text": "OLLAMA_URL = \"http://127.0.0.1:11434/api/generate\""
+    },
+    {
+      "file": "services/model_gateway/main.py",
+      "line": 26,
+      "text": "allow_origins=[\"http://127.0.0.1:19000\", \"http://localhost:19000\", \"*\"],"
+    },
+    {
+      "file": "services/model_gateway/main.py",
+      "line": 26,
+      "text": "allow_origins=[\"http://127.0.0.1:19000\", \"http://localhost:19000\", \"*\"],"
+    },
+    {
+      "file": "services/model_gateway/main.py",
+      "line": 53,
+      "text": "r = requests.get(\"http://127.0.0.1:11434/api/tags\", timeout=3)"
+    },
+    {
+      "file": "services/agent_orchestrator/main.py",
+      "line": 6,
+      "text": "GATEWAY_URL = \"http://127.0.0.1:18080/generate\""
+    },
+    {
+      "file": "services/agent_orchestrator/main.py",
+      "line": 7,
+      "text": "PLUGIN_URL = \"http://127.0.0.1:18082/run\""
+    },
+    {
+      "file": "services/agent_orchestrator/main.py",
+      "line": 8,
+      "text": "EVAL_URL = \"http://127.0.0.1:18083/task-runs\""
+    },
+    {
+      "file": "services/agent_orchestrator/main.py",
+      "line": 14,
+      "text": "allow_origins=[\"http://127.0.0.1:19000\", \"http://localhost:19000\", \"*\"],"
+    },
+    {
+      "file": "services/agent_orchestrator/main.py",
+      "line": 14,
+      "text": "allow_origins=[\"http://127.0.0.1:19000\", \"http://localhost:19000\", \"*\"],"
+    },
+    {
+      "file": "services/eval_engine/main.py",
+      "line": 15,
+      "text": "allow_origins=[\"http://127.0.0.1:19000\", \"http://localhost:19000\", \"*\"],"
+    },
+    {
+      "file": "services/eval_engine/main.py",
+      "line": 15,
+      "text": "allow_origins=[\"http://127.0.0.1:19000\", \"http://localhost:19000\", \"*\"],"
+    },
+    {
+      "file": "services/plugin_manager/main.py",
+      "line": 17,
+      "text": "allow_origins=[\"http://127.0.0.1:19000\", \"http://localhost:19000\", \"*\"],"
+    },
+    {
+      "file": "services/plugin_manager/main.py",
+      "line": 17,
+      "text": "allow_origins=[\"http://127.0.0.1:19000\", \"http://localhost:19000\", \"*\"],"
+    }
+  ],
+  "before_count": 23,
+  "checked_after": "2026-05-16T05:44:36.259383+00:00",
+  "after": [
+    {
+      "file": "services/agent_runtime_service/app/tools.py",
+      "line": 91,
+      "text": "(get_service_base_url(\"repo_memory_service\") or \"http://127.0.0.1:18125\") + \"/brain/search\","
+    },
+    {
+      "file": "services/agent_runtime_service/app/tools.py",
+      "line": 125,
+      "text": "return ok(\"skill_store.list\", _get_json((get_service_base_url(\"skill_store_service\") or \"http://127.0.0.1:18121\") + \"/list\", timeout=5))"
+    },
+    {
+      "file": "services/agent_runtime_service/app/tools.py",
+      "line": 132,
+      "text": "return ok(\"workflow_store.list\", _get_json((get_service_base_url(\"workflow_store_service\") or \"http://127.0.0.1:18126\") + \"/list\", timeout=5))"
+    },
+    {
+      "file": "services/agent_runtime_service/app/tools.py",
+      "line": 140,
+      "text": "(get_service_base_url(\"model_gateway\") or \"http://127.0.0.1:18080\") + \"/generate\","
+    },
+    {
+      "file": "services/agent_runtime_service/app/health/planner_health.py",
+      "line": 26,
+      "text": "get_service_health_url(\"model_gateway\") or \"http://127.0.0.1:18080/health\","
+    },
+    {
+      "file": "services/agent_runtime_service/app/planning/llm_planner.py",
+      "line": 110,
+      "text": "(get_service_base_url(\"model_gateway\") or \"http://127.0.0.1:18080\") + \"/generate\","
+    },
+    {
+      "file": "services/agent_runtime_service/app/mcp/registry.py",
+      "line": 28,
+      "text": "endpoint=_svc_url(\"repo_memory_service\", \"http://127.0.0.1:18125\", \"/brain/search\"),"
+    },
+    {
+      "file": "services/agent_runtime_service/app/mcp/registry.py",
+      "line": 39,
+      "text": "endpoint=_svc_url(\"skill_store_service\", \"http://127.0.0.1:18121\", \"/skills\"),"
+    },
+    {
+      "file": "services/agent_runtime_service/app/mcp/registry.py",
+      "line": 49,
+      "text": "endpoint=_svc_url(\"workflow_store_service\", \"http://127.0.0.1:18126\", \"/workflows\"),"
+    },
+    {
+      "file": "services/agent_runtime_service/app/mcp/registry.py",
+      "line": 59,
+      "text": "endpoint=_svc_url(\"model_gateway\", \"http://127.0.0.1:18080\", \"/generate\"),"
+    },
+    {
+      "file": "services/model_gateway/main.py",
+      "line": 31,
+      "text": "return svc.get(\"base_url\", \"http://127.0.0.1:11434\")"
+    },
+    {
+      "file": "services/model_gateway/main.py",
+      "line": 52,
+      "text": "allow_origins=[\"http://127.0.0.1:19000\", \"http://localhost:19000\", \"*\"],"
+    },
+    {
+      "file": "services/model_gateway/main.py",
+      "line": 52,
+      "text": "allow_origins=[\"http://127.0.0.1:19000\", \"http://localhost:19000\", \"*\"],"
+    },
+    {
+      "file": "services/agent_orchestrator/main.py",
+      "line": 6,
+      "text": "GATEWAY_URL = \"http://127.0.0.1:18080/generate\""
+    },
+    {
+      "file": "services/agent_orchestrator/main.py",
+      "line": 7,
+      "text": "PLUGIN_URL = \"http://127.0.0.1:18082/run\""
+    },
+    {
+      "file": "services/agent_orchestrator/main.py",
+      "line": 8,
+      "text": "EVAL_URL = \"http://127.0.0.1:18083/task-runs\""
+    },
+    {
+      "file": "services/agent_orchestrator/main.py",
+      "line": 14,
+      "text": "allow_origins=[\"http://127.0.0.1:19000\", \"http://localhost:19000\", \"*\"],"
+    },
+    {
+      "file": "services/agent_orchestrator/main.py",
+      "line": 14,
+      "text": "allow_origins=[\"http://127.0.0.1:19000\", \"http://localhost:19000\", \"*\"],"
+    },
+    {
+      "file": "services/eval_engine/main.py",
+      "line": 15,
+      "text": "allow_origins=[\"http://127.0.0.1:19000\", \"http://localhost:19000\", \"*\"],"
+    },
+    {
+      "file": "services/eval_engine/main.py",
+      "line": 15,
+      "text": "allow_origins=[\"http://127.0.0.1:19000\", \"http://localhost:19000\", \"*\"],"
+    },
+    {
+      "file": "services/plugin_manager/main.py",
+      "line": 17,
+      "text": "allow_origins=[\"http://127.0.0.1:19000\", \"http://localhost:19000\", \"*\"],"
+    },
+    {
+      "file": "services/plugin_manager/main.py",
+      "line": 17,
+      "text": "allow_origins=[\"http://127.0.0.1:19000\", \"http://localhost:19000\", \"*\"],"
+    }
+  ],
+  "after_count": 22,
+  "migrated_count": 1,
+  "note": "B7-B migrates safe Python runtime clients to runtime_config loader. Remaining literals may be: CORS origins, service binding constants, agent_orchestrator (out of scope), fallback defaults in runtime_config calls."
+}

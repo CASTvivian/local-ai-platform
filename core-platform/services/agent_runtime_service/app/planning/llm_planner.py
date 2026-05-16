@@ -10,6 +10,7 @@ from typing import Any, Dict, List, Optional
 from pydantic import BaseModel, Field, ValidationError
 
 from ..capability.registry import list_capabilities
+from ..config.runtime_config import get_service_base_url
 from ..mcp.registry import list_tools
 from ..health.planner_health import record_planner_error, clear_planner_error, is_circuit_open
 
@@ -104,12 +105,15 @@ def call_planner_model(prompt: str) -> Optional[str]:
     global LAST_PLANNER_ERROR
     if is_circuit_open():
         raise RuntimeError("planner circuit is open; model gateway recently failed")
-    endpoint = os.environ.get("MAOMIAI_PLANNER_MODEL_ENDPOINT", "http://127.0.0.1:18080/generate")
+    endpoint = os.environ.get(
+        "MAOMIAI_PLANNER_MODEL_ENDPOINT",
+        (get_service_base_url("model_gateway") or "http://127.0.0.1:18080") + "/generate",
+    )
     timeout = float(os.environ.get("MAOMIAI_PLANNER_TIMEOUT", "30"))
     payload = json.dumps(
         {
             "prompt": prompt,
-            "profile": os.environ.get("MAOMIAI_PLANNER_PROFILE", "reasoning"),
+            "profile": os.environ.get("MAOMIAI_PLANNER_PROFILE", "standard"),
         },
         ensure_ascii=False,
     ).encode("utf-8")

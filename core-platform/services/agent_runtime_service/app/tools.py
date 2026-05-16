@@ -8,6 +8,7 @@ from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Any, Dict
 
+from .config.runtime_config import get_service_base_url
 from .models import ToolResult
 
 
@@ -87,7 +88,7 @@ def _get_json(url: str, timeout: int) -> Dict[str, Any]:
 def repo_memory_search(query: str, limit: int = 8) -> ToolResult:
     try:
         data = _post_json(
-            "http://127.0.0.1:18125/brain/search",
+            (get_service_base_url("repo_memory_service") or "http://127.0.0.1:18125") + "/brain/search",
             {"query": query, "limit": limit},
             timeout=5,
         )
@@ -121,14 +122,14 @@ def catalog_search(query: str) -> ToolResult:
 
 def skill_store_list() -> ToolResult:
     try:
-        return ok("skill_store.list", _get_json("http://127.0.0.1:18121/list", timeout=5))
+        return ok("skill_store.list", _get_json((get_service_base_url("skill_store_service") or "http://127.0.0.1:18121") + "/list", timeout=5))
     except Exception as exc:
         return fail("skill_store.list", str(exc))
 
 
 def workflow_store_list() -> ToolResult:
     try:
-        return ok("workflow_store.list", _get_json("http://127.0.0.1:18126/list", timeout=5))
+        return ok("workflow_store.list", _get_json((get_service_base_url("workflow_store_service") or "http://127.0.0.1:18126") + "/list", timeout=5))
     except Exception as exc:
         return fail("workflow_store.list", str(exc))
 
@@ -136,7 +137,7 @@ def workflow_store_list() -> ToolResult:
 def model_generate(prompt: str, profile: str | None = None, model: str | None = None) -> ToolResult:
     try:
         data = _post_json(
-            "http://127.0.0.1:18080/generate",
+            (get_service_base_url("model_gateway") or "http://127.0.0.1:18080") + "/generate",
             {"prompt": prompt, "profile": profile, "model": model},
             timeout=180,
         )

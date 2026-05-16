@@ -6,6 +6,7 @@ import json
 from pathlib import Path
 from typing import List, Optional
 
+from ..config.runtime_config import get_service_base_url
 from .models import MCPTool
 
 
@@ -13,11 +14,18 @@ CORE_PLATFORM_ROOT = Path(__file__).resolve().parents[4]
 REGISTRY_ROOT = CORE_PLATFORM_ROOT / "data" / "mcp_registry"
 REGISTRY_FILE = REGISTRY_ROOT / "tools.json"
 
+
+def _svc_url(name: str, fallback: str, path: str = "") -> str:
+    """Resolve a service URL from runtime_config with fallback default."""
+    base = get_service_base_url(name) or fallback
+    return base + path if path else base
+
+
 DEFAULT_TOOLS = [
     MCPTool(
         name="repo_memory.search",
         description="Search local repository memory and brain asset summaries.",
-        endpoint="http://127.0.0.1:18125/brain/search",
+        endpoint=_svc_url("repo_memory_service", "http://127.0.0.1:18125", "/brain/search"),
         method="POST",
         input_schema={"query": "string", "limit": "integer"},
         risk="low",
@@ -28,7 +36,7 @@ DEFAULT_TOOLS = [
     MCPTool(
         name="skill_store.list",
         description="List local skill store capabilities.",
-        endpoint="http://127.0.0.1:18121/skills",
+        endpoint=_svc_url("skill_store_service", "http://127.0.0.1:18121", "/skills"),
         method="GET",
         risk="low",
         enabled=True,
@@ -38,7 +46,7 @@ DEFAULT_TOOLS = [
     MCPTool(
         name="workflow_store.list",
         description="List local workflow store definitions.",
-        endpoint="http://127.0.0.1:18126/workflows",
+        endpoint=_svc_url("workflow_store_service", "http://127.0.0.1:18126", "/workflows"),
         method="GET",
         risk="low",
         enabled=True,
@@ -48,7 +56,7 @@ DEFAULT_TOOLS = [
     MCPTool(
         name="model.generate",
         description="Generate local model response through model gateway.",
-        endpoint="http://127.0.0.1:18080/generate",
+        endpoint=_svc_url("model_gateway", "http://127.0.0.1:18080", "/generate"),
         method="POST",
         input_schema={"prompt": "string", "profile": "string", "model": "string"},
         risk="low",

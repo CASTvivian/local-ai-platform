@@ -11,6 +11,7 @@ from datetime import datetime
 from typing import Dict, Any
 
 from .models import PlannerRuntimeState
+from ..config.runtime_config import get_service_health_url
 
 
 # Resolve path relative to workspace root
@@ -20,7 +21,10 @@ WORKSPACE_ROOT = Path(__file__).parent.parent.parent.parent.parent.parent
 ROOT = WORKSPACE_ROOT / "core-platform" / "data" / "planner_runtime"
 ROOT.mkdir(parents=True, exist_ok=True)
 STATE_FILE = ROOT / "planner_health.json"
-MODEL_GATEWAY_HEALTH_URL = os.environ.get("MAOMIAI_MODEL_GATEWAY_HEALTH_URL", "http://127.0.0.1:18080/health")
+MODEL_GATEWAY_HEALTH_URL = os.environ.get(
+    "MAOMIAI_MODEL_GATEWAY_HEALTH_URL",
+    get_service_health_url("model_gateway") or "http://127.0.0.1:18080/health",
+)
 CIRCUIT_TTL_SECONDS = int(os.environ.get("MAOMIAI_PLANNER_CIRCUIT_TTL_SECONDS", "60"))
 
 
@@ -76,11 +80,13 @@ def is_circuit_open() -> bool:
         return False
     last_error_at = float(data.get("last_error_at") or 0)
     if time.time() - last_error_at > CIRCUIT_TTL_SECONDS:
+        # TTL expired - auto-clear stale circuit state so next call proceeds
+        clear_planner_error()
         return False
     return True
 
 
-def check_model_gateway(timeout: int = 3) -> Dict[str, Any]:
+def check_model_gateway(timeout: int = 5) -> Dict[str, Any]:
     try:
         req = urllib.request.Request(MODEL_GATEWAY_HEALTH_URL, method="GET")
         with urllib.request.urlopen(req, timeout=timeout) as resp:
@@ -89,19 +95,25 @@ def check_model_gateway(timeout: int = 3) -> Dict[str, Any]:
             data = json.loads(raw)
         except Exception:
             data = {"raw": raw}
-        clear_planner_error()
+        # Only clear error if gateway reports healthy
+        if data.get("ok", False):
+            clear_planner_error()
         return {
             "ok": True,
             "status": "healthy",
             "detail": data,
         }
     except Exception as e:
-        record_planner_error(str(e))
+        # Don't record error for timeout-only failures - they may be transient
+        # Only record if it's a real connection error
+        error_str = str(e)
+        if "timed out" not in error_str.lower():
+            record_planner_error(error_str)
         return {
             "ok": False,
             "status": "unhealthy",
             "detail": {
-                "error": str(e),
+                "error": error_str,
                 "url": MODEL_GATEWAY_HEALTH_URL,
             },
         }
@@ -109,11 +121,24 @@ def check_model_gateway(timeout: int = 3) -> Dict[str, Any]:
 
 def planner_runtime_state(check_live: bool = False) -> PlannerRuntimeState:
     if check_live:
-        check_model_gateway()
+        try:
+            check_model_gateway()
+        except Exception:
+            pass
     data = _load_raw_state()
     circuit = is_circuit_open()
     planner_mode = os.environ.get("MAOMIAI_PLANNER_MODE", "llm_first")
-    model_gateway_ok = bool(data.get("model_gateway_ok", False))
+    # If circuit TTL expired, auto-clear stale error state from disk
+    if not circuit and data.get("circuit_open"):
+        data.update({
+            "ok": True,
+            "model_gateway_ok": True,
+            "circuit_open": False,
+            "last_error": None,
+            "checked_at": _now(),
+        })
+        _save_state(data)
+    model_gateway_ok = bool(data.get("model_gateway_ok", not circuit))
     return PlannerRuntimeState(
         ok=(not circuit) and model_gateway_ok,
         planner_mode=planner_mode,
