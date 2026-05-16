@@ -245,7 +245,8 @@ function maomiaiProductionFallbackError(reason, detail) {
 
   async function maomiaiAgentRuntimeHealth() {
     try {
-      const response = await fetch("http://127.0.0.1:18131/health", { method: "GET" });
+      const healthUrl = window.maomiaiRuntimeHealthUrl ? window.maomiaiRuntimeHealthUrl("agentRuntime") : "http://127.0.0.1:18131/health";
+      const response = await fetch(healthUrl, { method: "GET" });
       return { ok: response.ok, status: response.status };
     } catch (err) {
       return { ok: false, error: err.message || String(err) };
@@ -304,7 +305,8 @@ function maomiaiProductionFallbackError(reason, detail) {
     if (!runtimeReady.ok) {
       throw new Error(`Agent Runtime auto-start failed: ${JSON.stringify(runtimeReady)}`);
     }
-    const response = await fetch("http://127.0.0.1:18131/agent/run", {
+    const agentRunUrl = window.maomiaiRuntimeApiUrl ? window.maomiaiRuntimeApiUrl("agentRuntime", "agent/run") : "http://127.0.0.1:18131/agent/run";
+    const response = await fetch(agentRunUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -341,7 +343,7 @@ function maomiaiProductionFallbackError(reason, detail) {
 
   async function routeUserMessage(query) {
     updateDebug("Agent Runtime", {
-      endpoint: "http://127.0.0.1:18131/agent/run",
+      endpoint: window.maomiaiRuntimeApiUrl ? window.maomiaiRuntimeApiUrl("agentRuntime", "agent/run") : "http://127.0.0.1:18131/agent/run",
       session_id: window.__MAOMIAI_SESSION_ID__ || "desktop-default",
       current_profile: localStorage.getItem("maomiai_current_model_profile") || getCurrentModel().profile,
     });
@@ -377,7 +379,10 @@ function maomiaiProductionFallbackError(reason, detail) {
   }
 
   async function fetchAgentTimeline(runId) {
-    const response = await fetch(`http://127.0.0.1:18131/agent/replay/timeline/${encodeURIComponent(runId)}`, {
+    const timelineUrl = window.maomiaiRuntimeBaseUrl
+      ? window.maomiaiRuntimeBaseUrl("agentRuntime") + "/agent/replay/timeline/" + encodeURIComponent(runId)
+      : "http://127.0.0.1:18131/agent/replay/timeline/" + encodeURIComponent(runId);
+    const response = await fetch(timelineUrl, {
       method: "GET",
       headers: { "Content-Type": "application/json" }
     });
@@ -692,7 +697,8 @@ function maomiaiProductionFallbackError(reason, detail) {
 
   function maomiaiAgentRuntimeReadyForMac() {
     // Mac autostart: check if 18131 agent_runtime is reachable
-    return fetch("http://127.0.0.1:18131/health", { method: "GET" })
+    var url = window.maomiaiRuntimeHealthUrl ? window.maomiaiRuntimeHealthUrl("agentRuntime") : "http://127.0.0.1:18131/health";
+    return fetch(url, { method: "GET" })
       .then(function (r) { return r.ok; })
       .catch(function () { return false; });
   }

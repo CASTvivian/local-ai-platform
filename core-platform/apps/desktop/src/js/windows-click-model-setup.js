@@ -1,7 +1,8 @@
 (function () {
+  // C25-C14-B7-C: URLs from centralized runtime config with fallback
   const API = {
-    bootstrap: "http://127.0.0.1:18100",
-    gateway: "http://127.0.0.1:18080"
+    bootstrap: window.maomiaiRuntimeBaseUrl ? window.maomiaiRuntimeBaseUrl("modelBootstrap") : "http://127.0.0.1:18100",
+    gateway:   window.maomiaiRuntimeBaseUrl ? window.maomiaiRuntimeBaseUrl("modelGateway")   : "http://127.0.0.1:18080"
   };
   window.__MAOMIAI_MODEL_STATUS__ = window.__MAOMIAI_MODEL_STATUS__ || null;
   window.__MAOMIAI_MODEL_JOBS__ = window.__MAOMIAI_MODEL_JOBS__ || {};

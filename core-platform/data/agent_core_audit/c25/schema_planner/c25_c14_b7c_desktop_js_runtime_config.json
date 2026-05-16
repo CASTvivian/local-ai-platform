@@ -1,0 +1,124 @@
+{
+  "checked_after": "2026-05-16T05:58:54.707365Z",
+  "after_count": 19,
+  "after_fallback_count": 19,
+  "after": [
+    {
+      "file": "core-platform/apps/desktop/src/js/windows-demo-stable-router.js",
+      "line": 248,
+      "text": "const healthUrl = window.maomiaiRuntimeHealthUrl ? window.maomiaiRuntimeHealthUrl(\"agentRuntime\") : \"http://127.0.0.1:18131/health\";",
+      "is_fallback": true
+    },
+    {
+      "file": "core-platform/apps/desktop/src/js/windows-demo-stable-router.js",
+      "line": 308,
+      "text": "const agentRunUrl = window.maomiaiRuntimeApiUrl ? window.maomiaiRuntimeApiUrl(\"agentRuntime\", \"agent/run\") : \"http://127.0.0.1:18131/agent/run\";",
+      "is_fallback": true
+    },
+    {
+      "file": "core-platform/apps/desktop/src/js/windows-demo-stable-router.js",
+      "line": 346,
+      "text": "endpoint: window.maomiaiRuntimeApiUrl ? window.maomiaiRuntimeApiUrl(\"agentRuntime\", \"agent/run\") : \"http://127.0.0.1:18131/agent/run\",",
+      "is_fallback": true
+    },
+    {
+      "file": "core-platform/apps/desktop/src/js/windows-demo-stable-router.js",
+      "line": 384,
+      "text": ": \"http://127.0.0.1:18131/agent/replay/timeline/\" + encodeURIComponent(runId);",
+      "is_fallback": true
+    },
+    {
+      "file": "core-platform/apps/desktop/src/js/windows-demo-stable-router.js",
+      "line": 700,
+      "text": "var url = window.maomiaiRuntimeHealthUrl ? window.maomiaiRuntimeHealthUrl(\"agentRuntime\") : \"http://127.0.0.1:18131/health\";",
+      "is_fallback": true
+    },
+    {
+      "file": "core-platform/apps/desktop/src/js/windows-click-model-setup.js",
+      "line": 4,
+      "text": "bootstrap: window.maomiaiRuntimeBaseUrl ? window.maomiaiRuntimeBaseUrl(\"modelBootstrap\") : \"http://127.0.0.1:18100\",",
+      "is_fallback": true
+    },
+    {
+      "file": "core-platform/apps/desktop/src/js/windows-click-model-setup.js",
+      "line": 5,
+      "text": "gateway:   window.maomiaiRuntimeBaseUrl ? window.maomiaiRuntimeBaseUrl(\"modelGateway\")   : \"http://127.0.0.1:18080\"",
+      "is_fallback": true
+    },
+    {
+      "file": "core-platform/apps/desktop/src/js/api.js",
+      "line": 4,
+      "text": "router:       window.maomiaiRuntimeBaseUrl ? window.maomiaiRuntimeBaseUrl(\"autoRouter\")       : \"http://127.0.0.1:18093\",",
+      "is_fallback": true
+    },
+    {
+      "file": "core-platform/apps/desktop/src/js/api.js",
+      "line": 5,
+      "text": "runtime:      window.maomiaiRuntimeBaseUrl ? window.maomiaiRuntimeBaseUrl(\"runtimeExecution\")  : \"http://127.0.0.1:18104\",",
+      "is_fallback": true
+    },
+    {
+      "file": "core-platform/apps/desktop/src/js/api.js",
+      "line": 6,
+      "text": "trace:        window.maomiaiRuntimeBaseUrl ? window.maomiaiRuntimeBaseUrl(\"traceObservability\"): \"http://127.0.0.1:18111\",",
+      "is_fallback": true
+    },
+    {
+      "file": "core-platform/apps/desktop/src/js/api.js",
+      "line": 7,
+      "text": "artifact:     window.maomiaiRuntimeBaseUrl ? window.maomiaiRuntimeBaseUrl(\"artifactRegistry\")  : \"http://127.0.0.1:18123\",",
+      "is_fallback": true
+    },
+    {
+      "file": "core-platform/apps/desktop/src/js/api.js",
+      "line": 8,
+      "text": "eval:         window.maomiaiRuntimeBaseUrl ? window.maomiaiRuntimeBaseUrl(\"evalGateway\")       : \"http://127.0.0.1:18112\",",
+      "is_fallback": true
+    },
+    {
+      "file": "core-platform/apps/desktop/src/js/api.js",
+      "line": 9,
+      "text": "skill:        window.maomiaiRuntimeBaseUrl ? window.maomiaiRuntimeBaseUrl(\"skillStore\")        : \"http://127.0.0.1:18121\",",
+      "is_fallback": true
+    },
+    {
+      "file": "core-platform/apps/desktop/src/js/api.js",
+      "line": 10,
+      "text": "doc:          window.maomiaiRuntimeBaseUrl ? window.maomiaiRuntimeBaseUrl(\"documentIngestion\") : \"http://127.0.0.1:18120\",",
+      "is_fallback": true
+    },
+    {
+      "file": "core-platform/apps/desktop/src/js/api.js",
+      "line": 11,
+      "text": "designSystem: window.maomiaiRuntimeBaseUrl ? window.maomiaiRuntimeBaseUrl(\"designSystem\")      : \"http://127.0.0.1:18127\",",
+      "is_fallback": true
+    },
+    {
+      "file": "core-platform/apps/desktop/src/js/api.js",
+      "line": 12,
+      "text": "codeReview:   window.maomiaiRuntimeBaseUrl ? window.maomiaiRuntimeBaseUrl(\"codeReviewGate\")    : \"http://127.0.0.1:18124\",",
+      "is_fallback": true
+    },
+    {
+      "file": "core-platform/apps/desktop/src/js/api.js",
+      "line": 13,
+      "text": "repoMemory:   window.maomiaiRuntimeBaseUrl ? window.maomiaiRuntimeBaseUrl(\"repoMemory\")        : \"http://127.0.0.1:18125\",",
+      "is_fallback": true
+    },
+    {
+      "file": "core-platform/apps/desktop/src/js/api.js",
+      "line": 14,
+      "text": "workflow:     window.maomiaiRuntimeBaseUrl ? window.maomiaiRuntimeBaseUrl(\"workflowStore\")     : \"http://127.0.0.1:18126\",",
+      "is_fallback": true
+    },
+    {
+      "file": "core-platform/apps/desktop/src/js/api.js",
+      "line": 15,
+      "text": "model:        window.maomiaiRuntimeBaseUrl ? window.maomiaiRuntimeBaseUrl(\"modelBootstrap\")    : \"http://127.0.0.1:18100\"",
+      "is_fallback": true
+    }
+  ],
+  "runtime_config_js_count": 19,
+  "runtime_config_js": "core-platform/apps/desktop/src/js/config/runtime-config.js",
+  "note": "Remaining literals are fallback defaults in ternary expressions. runtime-config.js is the single source of truth."
+}

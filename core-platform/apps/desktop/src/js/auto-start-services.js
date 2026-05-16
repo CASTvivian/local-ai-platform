@@ -1,16 +1,17 @@
 // D7-C1: auto-start services on app launch
 // C25-C12-FIX: Rust now auto-starts runtime on app startup.
-// This JS function serves as a fallback + health verification.
+// C25-C14-B7-C: Ports from centralized runtime config.
 
-const C25_BACKEND_PORTS = [
+const C25_BACKEND_PORTS = (window.maomiaiRuntimeAllPorts ? window.maomiaiRuntimeAllPorts() : [
   18080, 18081, 18093, 18100, 18101, 18102, 18104,
   18110, 18111, 18112, 18120, 18121, 18122, 18123,
   18124, 18125, 18126, 18127, 18131
-];
+]);
 
 async function checkBackendHealth(port) {
   try {
-    const res = await fetch(`http://127.0.0.1:${port}/health`, {
+    const host = (window.MAOMIAI_RUNTIME_CONFIG && window.MAOMIAI_RUNTIME_CONFIG.host) || "127.0.0.1";
+    const res = await fetch(`http://${host}:${port}/health`, {
       method: "GET",
       signal: AbortSignal.timeout(3000),
     });
