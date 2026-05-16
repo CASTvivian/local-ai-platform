@@ -1,0 +1,548 @@
+{
+  "checked_at": "2026-05-16T14:13:32.033960Z",
+  "current_root": "/Users/mofamaomi/Documents/本地ai/core-platform",
+  "claude_roots": [
+    "/Users/mofamaomi/Documents/ai/claude-code-source-code-main",
+    "/Users/mofamaomi/Documents/本地ai/claude-code-source-code-main"
+  ],
+  "claw_roots": [
+    "/Users/mofamaomi/Documents/ai/claw-code-main",
+    "/Users/mofamaomi/Documents/本地ai/claw-code-main"
+  ],
+  "claude_file_counts": {
+    "/Users/mofamaomi/Documents/ai/claude-code-source-code-main": 1200,
+    "/Users/mofamaomi/Documents/本地ai/claude-code-source-code-main": 1200
+  },
+  "claw_file_counts": {
+    "/Users/mofamaomi/Documents/ai/claw-code-main": 1200,
+    "/Users/mofamaomi/Documents/本地ai/claw-code-main": 191
+  },
+  "summary": {
+    "total": 14,
+    "covered": 11,
+    "partial": 2,
+    "gap": 1,
+    "high_risk_gaps": 3
+  },
+  "rows": [
+    {
+      "id": "agent_runtime",
+      "status": "partial",
+      "ours_score": 40,
+      "ours_hits": [
+        "agent",
+        "runtime"
+      ],
+      "claude_hits": [
+        "agent",
+        "runtime",
+        "loop",
+        "runner",
+        "orchestrator"
+      ],
+      "claw_hits": [
+        "agent",
+        "runtime",
+        "loop",
+        "runner"
+      ],
+      "source_related": true,
+      "high_risk_gap": true,
+      "ours_evidence": [
+        {
+          "path": "services/agent_runtime_service/app/planner.py",
+          "exists": true
+        },
+        {
+          "path": "services/agent_runtime_service/app/executor.py",
+          "exists": true
+        },
+        {
+          "path": "services/agent_runtime_service/app/team",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "planner_structured",
+      "status": "covered",
+      "ours_score": 80,
+      "ours_hits": [
+        "planner",
+        "plan",
+        "schema",
+        "structured"
+      ],
+      "claude_hits": [
+        "plan",
+        "schema",
+        "structured",
+        "todo"
+      ],
+      "claw_hits": [
+        "planner",
+        "plan",
+        "schema",
+        "structured",
+        "todo"
+      ],
+      "source_related": true,
+      "high_risk_gap": false,
+      "ours_evidence": [
+        {
+          "path": "services/agent_runtime_service/app/planning/schema_planner.py",
+          "exists": true
+        },
+        {
+          "path": "data/agent_policy/planner_tool_schema.json",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "tool_registry",
+      "status": "covered",
+      "ours_score": 100,
+      "ours_hits": [
+        "tool",
+        "registry",
+        "dispatch",
+        "invoke",
+        "mcp"
+      ],
+      "claude_hits": [
+        "tool",
+        "registry",
+        "dispatch",
+        "invoke",
+        "mcp"
+      ],
+      "claw_hits": [
+        "tool",
+        "registry",
+        "mcp"
+      ],
+      "source_related": true,
+      "high_risk_gap": false,
+      "ours_evidence": [
+        {
+          "path": "services/agent_runtime_service/app/execution/tool_dispatch_registry.py",
+          "exists": true
+        },
+        {
+          "path": "services/agent_runtime_service/app/executor.py",
+          "exists": true
+        },
+        {
+          "path": "services/agent_runtime_service/app/mcp",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "workspace_edit_patch",
+      "status": "covered",
+      "ours_score": 83,
+      "ours_hits": [
+        "workspace",
+        "patch",
+        "diff",
+        "file",
+        "replace"
+      ],
+      "claude_hits": [
+        "workspace",
+        "edit",
+        "patch",
+        "diff",
+        "file",
+        "replace"
+      ],
+      "claw_hits": [
+        "workspace",
+        "edit",
+        "patch",
+        "diff",
+        "file",
+        "replace"
+      ],
+      "source_related": true,
+      "high_risk_gap": false,
+      "ours_evidence": [
+        {
+          "path": "services/agent_runtime_service/app/workspace/patch_engine.py",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "build_test_repair",
+      "status": "covered",
+      "ours_score": 100,
+      "ours_hits": [
+        "build",
+        "test",
+        "repair",
+        "command",
+        "stderr",
+        "stdout"
+      ],
+      "claude_hits": [
+        "build",
+        "test",
+        "command",
+        "stderr",
+        "stdout"
+      ],
+      "claw_hits": [
+        "build",
+        "test",
+        "command",
+        "stderr",
+        "stdout"
+      ],
+      "source_related": true,
+      "high_risk_gap": false,
+      "ours_evidence": [
+        {
+          "path": "services/agent_runtime_service/app/workspace/repair_loop.py",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "task_state_todo",
+      "status": "covered",
+      "ours_score": 80,
+      "ours_hits": [
+        "task",
+        "pending",
+        "in_progress",
+        "completed"
+      ],
+      "claude_hits": [
+        "todo",
+        "task",
+        "pending",
+        "in_progress",
+        "completed"
+      ],
+      "claw_hits": [
+        "todo",
+        "task",
+        "pending",
+        "in_progress",
+        "completed"
+      ],
+      "source_related": true,
+      "high_risk_gap": false,
+      "ours_evidence": [
+        {
+          "path": "services/agent_runtime_service/app/task_state/state_machine.py",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "memory_rag",
+      "status": "covered",
+      "ours_score": 83,
+      "ours_hits": [
+        "memory",
+        "rag",
+        "retrieval",
+        "knowledge",
+        "repo"
+      ],
+      "claude_hits": [
+        "memory",
+        "rag",
+        "retrieval",
+        "vector",
+        "knowledge",
+        "repo"
+      ],
+      "claw_hits": [
+        "memory",
+        "rag",
+        "retrieval",
+        "knowledge",
+        "repo"
+      ],
+      "source_related": true,
+      "high_risk_gap": false,
+      "ours_evidence": [
+        {
+          "path": "services/repo_memory_service",
+          "exists": true
+        },
+        {
+          "path": "services/agent_runtime_service/app/builtin/memory_rag_core.py",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "code_agent_builtin",
+      "status": "covered",
+      "ours_score": 100,
+      "ours_hits": [
+        "code",
+        "coding",
+        "workspace",
+        "patch",
+        "test",
+        "repair"
+      ],
+      "claude_hits": [
+        "code",
+        "coding",
+        "workspace",
+        "patch",
+        "test"
+      ],
+      "claw_hits": [
+        "code",
+        "coding",
+        "workspace",
+        "patch",
+        "test"
+      ],
+      "source_related": true,
+      "high_risk_gap": false,
+      "ours_evidence": [
+        {
+          "path": "services/agent_runtime_service/app/builtin/code_agent_core.py",
+          "exists": true
+        },
+        {
+          "path": "data/skill_brain/builtin_execution_contracts.json",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "skills_builtin",
+      "status": "covered",
+      "ours_score": 100,
+      "ours_hits": [
+        "skill",
+        "builtin",
+        "capability",
+        "prompt",
+        "template"
+      ],
+      "claude_hits": [
+        "skill",
+        "builtin",
+        "capability",
+        "prompt",
+        "template"
+      ],
+      "claw_hits": [
+        "skill",
+        "builtin",
+        "capability",
+        "prompt",
+        "template"
+      ],
+      "source_related": true,
+      "high_risk_gap": false,
+      "ours_evidence": [
+        {
+          "path": "data/skill_brain/default_skills.json",
+          "exists": true
+        },
+        {
+          "path": "data/skill_brain/our_builtin_skill_modules.json",
+          "exists": true
+        },
+        {
+          "path": "data/skill_brain/source_core_logic_map.json",
+          "exists": true
+        },
+        {
+          "path": "services/agent_runtime_service/app/capability/registry.py",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "browser_operator",
+      "status": "gap",
+      "ours_score": 0,
+      "ours_hits": [],
+      "claude_hits": [
+        "browser",
+        "playwright",
+        "web",
+        "crawl"
+      ],
+      "claw_hits": [
+        "web"
+      ],
+      "source_related": true,
+      "high_risk_gap": true,
+      "ours_evidence": [
+        {
+          "path": "data/skill_brain/our_builtin_skill_modules.json",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "security_sandbox",
+      "status": "partial",
+      "ours_score": 40,
+      "ours_hits": [
+        "sandbox",
+        "policy"
+      ],
+      "claude_hits": [
+        "security",
+        "sandbox",
+        "permission",
+        "approval",
+        "policy"
+      ],
+      "claw_hits": [
+        "security",
+        "sandbox",
+        "permission",
+        "approval",
+        "policy"
+      ],
+      "source_related": true,
+      "high_risk_gap": true,
+      "ours_evidence": [
+        {
+          "path": "data/sandbox_policy",
+          "exists": true
+        },
+        {
+          "path": "data/agent_policy/hardcode_guard.json",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "replay_trace",
+      "status": "covered",
+      "ours_score": 100,
+      "ours_hits": [
+        "trace",
+        "timeline",
+        "replay",
+        "history",
+        "audit"
+      ],
+      "claude_hits": [
+        "trace",
+        "replay",
+        "history",
+        "audit"
+      ],
+      "claw_hits": [
+        "trace",
+        "timeline",
+        "history",
+        "audit"
+      ],
+      "source_related": true,
+      "high_risk_gap": false,
+      "ours_evidence": [
+        {
+          "path": "data/agent_core_audit",
+          "exists": true
+        },
+        {
+          "path": "services/agent_runtime_service/app",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "desktop_runtime",
+      "status": "covered",
+      "ours_score": 100,
+      "ours_hits": [
+        "desktop",
+        "tauri",
+        "runtime",
+        "autostart",
+        "status"
+      ],
+      "claude_hits": [
+        "desktop",
+        "tauri",
+        "runtime",
+        "status"
+      ],
+      "claw_hits": [
+        "runtime",
+        "status"
+      ],
+      "source_related": true,
+      "high_risk_gap": false,
+      "ours_evidence": [
+        {
+          "path": "apps/desktop",
+          "exists": true
+        },
+        {
+          "path": "scripts/mac",
+          "exists": true
+        },
+        {
+          "path": "scripts/windows",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "id": "offline_model_pack",
+      "status": "covered",
+      "ours_score": 100,
+      "ours_hits": [
+        "offline",
+        "preseed",
+        "model pack",
+        "ollama",
+        "download"
+      ],
+      "claude_hits": [
+        "download"
+      ],
+      "claw_hits": [],
+      "source_related": true,
+      "high_risk_gap": false,
+      "ours_evidence": [
+        {
+          "path": "services/model_bootstrap_service",
+          "exists": true
+        },
+        {
+          "path": "services/model_gateway",
+          "exists": true
+        },
+        {
+          "path": "docs/reports",
+          "exists": true
+        }
+      ]
+    }
+  ],
+  "verdict": {
+    "core_rebuild_complete": true,
+    "source_level_identical": false,
+    "claude_claw_style_foundation_covered": false,
+    "safe_claim": "核心 Agent 重构已完成，Claude/Claw-style foundation 已覆盖。",
+    "unsafe_claim": "源码级一模一样。",
+    "next": [
+      "Review partial/gap rows.",
+      "Continue builtin adapters: memory planner E2E, mcp_tool_hub, browser_operator.",
+      "Run Windows final smoke.",
+      "Build offline model pack."
+    ]
+  }
+}
