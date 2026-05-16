@@ -176,6 +176,58 @@ def _ensure_skill_context(message: str, steps: list[dict[str, Any]]) -> list[dic
     return _skill_context_steps(message) + steps
 
 
+def _contract_tool_steps_from_capabilities(message: str, schema: dict[str, Any]) -> list[dict[str, Any]]:
+    """Select implemented builtin contract tools through schema metadata.
+
+    This is not keyword routing. It uses capability.match to discover builtin
+    modules, then asks the tool schema whether a corresponding implemented
+    builtin execution tool exists.
+    """
+    try:
+        from ..capability.registry import match_capabilities
+    except Exception:
+        return []
+
+    available_tool_names = {
+        str(tool.get("name"))
+        for tool in schema.get("tools", [])
+        if isinstance(tool, dict) and tool.get("name")
+    }
+
+    try:
+        matches = match_capabilities(message, limit=8)
+    except Exception:
+        return []
+
+    steps: list[dict[str, Any]] = []
+    for cap in matches:
+        cap_id = str(getattr(cap, "id", "") or "")
+        metadata = getattr(cap, "metadata", {}) or {}
+        if not cap_id.startswith("builtin."):
+            continue
+        contract = metadata.get("execution_contract") or {}
+        allowed_tools = contract.get("allowed_tools") or metadata.get("allowed_tools") or []
+        for tool_name in allowed_tools:
+            tool_name = str(tool_name)
+            if not tool_name.startswith("builtin."):
+                continue
+            if tool_name not in available_tool_names:
+                continue
+            steps.append(
+                _step(
+                    tool_name,
+                    {
+                        "task": message,
+                        "source_builtin": cap_id,
+                        "planner_source": "builtin_contract_tool_selection",
+                    },
+                    f"execute owned builtin module {cap_id}",
+                )
+            )
+            return steps
+    return steps
+
+
 def _schema_only_default_plan(message: str, schema: dict[str, Any]) -> dict[str, Any]:
     """Schema scoring fallback when planner model is unavailable.
 
@@ -203,6 +255,15 @@ def _schema_only_default_plan(message: str, schema: dict[str, Any]) -> dict[str,
             )
         if len(selected) >= 3:
             break
+    # Builtin contract tool selection (C26-R8): if a discovered builtin
+    # capability has an implemented tool in planner_tool_schema, add it.
+    contract_steps = _contract_tool_steps_from_capabilities(message, schema)
+    if contract_steps:
+        existing_tools = {str(step.get("tool")) for step in selected}
+        for step in contract_steps:
+            if str(step.get("tool")) not in existing_tools:
+                selected.insert(0, step)
+                existing_tools.add(str(step.get("tool")))
     # Ensure skill discovery context is present (C26-D skill-aware planner).
     selected = _ensure_skill_context(message, selected)
     # Final composition.

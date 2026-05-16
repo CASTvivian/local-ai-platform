@@ -251,6 +251,11 @@ def execute_plan(
     """Execute planner-selected tools in order via the dispatch registry."""
 
     results: List[ToolResult] = []
+    # Pre-index steps by tool name so per-step args can be merged into payloads.
+    steps_by_tool: dict[str, dict[str, Any]] = {}
+    for step in plan.args.get("steps") or []:
+        if isinstance(step, dict) and step.get("tool"):
+            steps_by_tool.setdefault(str(step["tool"]), step)
     for tool in plan.tools:
         payload = {
             "run_id": run_id,
@@ -269,6 +274,11 @@ def execute_plan(
             "query": plan.args.get("query"),
             "limit": plan.args.get("limit"),
         }
+        # Merge step-level args into the payload so builtin tools receive
+        # their structured parameters (task, workspace_root, files, patch, etc.)
+        step = steps_by_tool.get(tool)
+        if step and isinstance(step.get("args"), dict):
+            payload.update(step["args"])
 
         # Security gate
         blocked = guard_tool(tool, payload)

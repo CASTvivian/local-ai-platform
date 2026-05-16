@@ -19,6 +19,9 @@ SAFE_TOOLS = {
     "filesystem.list",
     "weather.query",
     "web.search",
+    # Owned builtin adapters — execution paths are fully controlled by
+    # owned code with task_state tracking and audit logging.
+    "builtin.code_agent_core.execute",
 }
 
 RESTRICTED_TOOLS = {
