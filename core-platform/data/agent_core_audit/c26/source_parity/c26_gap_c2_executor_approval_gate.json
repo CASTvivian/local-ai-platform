@@ -1,0 +1,11 @@
+{
+  "checked_at": "2026-05-16T14:48:56.915746Z",
+  "has_approval_import": true,
+  "has_approval_gate_helper": true,
+  "has_high_risk_tools_map": true,
+  "code_agent_core_gated": true,
+  "browser_operator_gated": true,
+  "memory_rag_core_gated": true,
+  "approval_required_path": true,
+  "safe_tools_not_gated": true
+}

@@ -24,6 +24,7 @@ from .execution.tool_dispatch_registry import (
     list_registered_tools,
     register_tool,
 )
+from .security.approval_store import ensure_approved_or_request
 from .mcp.invoker import invoke_mcp
 from .mcp.models import MCPInvokeRequest
 from .models import AgentPlan, AgentRunRequest, ToolResult
@@ -199,7 +200,41 @@ def _handler_model_generate(args: dict[str, Any]) -> ToolResult:
     return mcp_result if mcp_result.ok else model_generate(args.get("prompt", ""), args.get("profile"), args.get("model"))
 
 
+# ---------------------------------------------------------------------------
+# Approval gate — high-risk tools must pass approval before execution
+# ---------------------------------------------------------------------------
+
+_HIGH_RISK_TOOLS: dict[str, str] = {
+    "builtin.code_agent_core.execute": "high",
+    "builtin.browser_operator.execute": "high",
+    "builtin.memory_rag_core.execute": "high",
+}
+
+
+def _approval_gate_for_tool(tool: str, args: dict[str, Any], risk: str = "medium") -> ToolResult | None:
+    approval_id = args.get("approval_id") if isinstance(args, dict) else None
+    decision = ensure_approved_or_request(
+        action=tool,
+        risk=risk,
+        reason=f"Approval required for {tool}",
+        payload=args or {},
+        requester="agent_runtime",
+        approval_id=approval_id,
+    )
+    if decision.get("ok"):
+        return None
+    return ToolResult(
+        tool=tool,
+        ok=False,
+        data=decision,
+        error=decision.get("error") or "approval_required",
+    )
+
+
 def _handler_builtin_code_agent_core_execute(args: dict[str, Any]) -> ToolResult:
+    gate = _approval_gate_for_tool("builtin.code_agent_core.execute", args or {}, risk="high")
+    if gate is not None:
+        return gate
     result = execute_code_agent_core(args or {})
     return ToolResult(
         tool="builtin.code_agent_core.execute",
@@ -210,6 +245,9 @@ def _handler_builtin_code_agent_core_execute(args: dict[str, Any]) -> ToolResult
 
 
 def _handler_builtin_memory_rag_core_execute(args: dict[str, Any]) -> ToolResult:
+    gate = _approval_gate_for_tool("builtin.memory_rag_core.execute", args or {}, risk="high")
+    if gate is not None:
+        return gate
     result = execute_memory_rag_core(args or {})
     return ToolResult(
         tool="builtin.memory_rag_core.execute",
@@ -220,6 +258,9 @@ def _handler_builtin_memory_rag_core_execute(args: dict[str, Any]) -> ToolResult
 
 
 def _handler_builtin_browser_operator_execute(args: dict[str, Any]) -> ToolResult:
+    gate = _approval_gate_for_tool("builtin.browser_operator.execute", args or {}, risk="high")
+    if gate is not None:
+        return gate
     result = execute_browser_operator(args or {})
     return ToolResult(
         tool="builtin.browser_operator.execute",
