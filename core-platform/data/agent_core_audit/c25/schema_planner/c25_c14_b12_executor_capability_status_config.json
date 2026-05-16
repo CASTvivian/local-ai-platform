@@ -1,0 +1,14 @@
+{
+  "checked_at": "2026-05-16T13:17:00Z",
+  "config_file": "core-platform/data/agent_policy/capability_status.json",
+  "executor_file": "core-platform/services/agent_runtime_service/app/executor.py",
+  "config_version": "c25-c14-b12",
+  "status_count": 10,
+  "executor_uses_external_config": true,
+  "executor_uses_load_capability_status_config": true,
+  "executor_source_field": "external_config",
+  "hardcode_guard_passed": true,
+  "hardcoded_markers_removed": ["demo_kernel", "desktop_app", "local_model_runtime", "video_generation_runtime", "enabled/pending lists"],
+  "path_resolution": "walk-up-to-data-agent-policy with parents[3] fallback",
+  "note": "capability.status data moved from executor hardcoded list into external config. Executor now reads capability_status.json at runtime."
+}

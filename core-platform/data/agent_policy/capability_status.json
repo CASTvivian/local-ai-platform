@@ -1,0 +1,56 @@
+{
+  "version": "c25-c14-b12",
+  "description": "Capability status configuration used by executor capability.status. Runtime code must not hardcode capability state lists.",
+  "status": {
+    "agent_runtime": {
+      "state": "enabled",
+      "label": "Agent Runtime",
+      "description": "Unified local agent runtime entrypoint."
+    },
+    "schema_planner": {
+      "state": "enabled",
+      "label": "Schema Planner",
+      "description": "Schema-driven planner with structured model output and scoring fallback."
+    },
+    "mcp_runtime": {
+      "state": "enabled",
+      "label": "MCP Runtime",
+      "description": "Local tool registry and tool invocation runtime."
+    },
+    "repo_memory": {
+      "state": "enabled",
+      "label": "Repo Memory",
+      "description": "Local repository memory and project knowledge retrieval."
+    },
+    "capability_registry": {
+      "state": "enabled",
+      "label": "Capability Registry",
+      "description": "Schema-driven capability registry."
+    },
+    "approval_sandbox": {
+      "state": "enabled",
+      "label": "Approval and Sandbox",
+      "description": "Approval gate and sandboxed execution audit."
+    },
+    "browser_web": {
+      "state": "enabled",
+      "label": "Browser and Web",
+      "description": "Browser fetch and web search runtime."
+    },
+    "team_runtime": {
+      "state": "partial",
+      "label": "Team Runtime",
+      "description": "Multi-agent coordination runtime; still under parity improvement."
+    },
+    "offline_model_pack": {
+      "state": "pending",
+      "label": "Offline Model Pack",
+      "description": "Preseeded model package for demo and offline deployment."
+    },
+    "desktop_production_cleanup": {
+      "state": "pending",
+      "label": "Desktop Production Cleanup",
+      "description": "Remove desktop dry-run and diagnostic fallback from production mode."
+    }
+  }
+}

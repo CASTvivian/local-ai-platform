@@ -2,7 +2,10 @@
 
 from __future__ import annotations
 
-from typing import List
+import json
+import os
+from pathlib import Path
+from typing import Any, List
 
 from .capability.models import CapabilityMatchRequest
 from .capability.service import match_capability
@@ -20,6 +23,29 @@ from .tools import (
     time_now,
     workflow_store_list,
 )
+
+
+def _core_platform_dir_for_executor() -> Path:
+    env = os.environ.get("MAOMIAI_CORE_PLATFORM_DIR")
+    if env:
+        return Path(env).expanduser().resolve()
+    # Walk upward from __file__ until we find data/agent_policy — that dir is core-platform root.
+    for parent in Path(__file__).resolve().parents:
+        if (parent / "data" / "agent_policy").is_dir():
+            return parent
+    # Fallback: same depth as app/executor.py (5 levels up = core-platform).
+    return Path(__file__).resolve().parents[3]
+
+
+def load_capability_status_config() -> dict[str, Any]:
+    path = _core_platform_dir_for_executor() / "data" / "agent_policy" / "capability_status.json"
+    if not path.exists():
+        return {
+            "version": "missing",
+            "status": {},
+            "error": f"capability_status.json not found: {path}",
+        }
+    return json.loads(path.read_text(encoding="utf-8"))
 
 
 def execute_mcp_tool(
@@ -138,27 +164,16 @@ def execute_plan(
             mcp_result = execute_mcp_tool("workflow_store.list", {}, run_id=run_id, session_id=session_id)
             results.append(mcp_result if mcp_result.ok else workflow_store_list())
         elif tool == "capability.status":
+            config = load_capability_status_config()
             results.append(
                 ToolResult(
                     tool="capability.status",
                     ok=True,
                     data={
-                        "status": "demo_kernel",
-                        "enabled": [
-                            "desktop_app",
-                            "local_model_runtime",
-                            "model_download",
-                            "model_selection",
-                            "repo_memory_assets",
-                            "agent_runtime_planner",
-                        ],
-                        "pending": [
-                            "web_search",
-                            "weather_tool",
-                            "mcp_gateway",
-                            "graph_memory",
-                            "video_generation_runtime",
-                        ],
+                        "source": "external_config",
+                        "version": config.get("version"),
+                        "status": config.get("status", {}),
+                        "error": config.get("error"),
                     },
                 )
             )
