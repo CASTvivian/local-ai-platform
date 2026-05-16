@@ -319,44 +319,57 @@ fn run_windows_start_all_background(app: tauri::AppHandle) {
             let resource_dir = match app.path().resource_dir() {
                 Ok(d) => d,
                 Err(e) => {
-                    eprintln!("[C25-C12-FIX] macOS resource_dir failed: {}", e);
+                    eprintln!("[C25-MAC] macOS resource_dir failed: {}", e);
                     return;
                 }
             };
-            let script = resource_dir.join("resources").join("scripts").join("start_all.sh");
-            // Fallback: try dev-time path relative to project root
-            let script = if script.exists() {
-                script
-            } else {
-                let exe = match std::env::current_exe() {
-                    Ok(e) => e,
-                    Err(_) => return,
-                };
-                let project_root = exe.parent()
-                    .and_then(|p| p.parent())
-                    .and_then(|p| p.parent())
-                    .and_then(|p| p.parent())
-                    .and_then(|p| p.parent())
-                    .and_then(|p| p.parent());
-                match project_root {
-                    Some(root) => root.join("core-platform").join("scripts").join("mac"),
-                    None => return,
+            // Search for scripts/mac/start_all.sh in multiple locations:
+            // 1. Bundled resource: <resource_dir>/scripts/mac/start_all.sh
+            // 2. Nested resource: <resource_dir>/resources/scripts/mac/start_all.sh
+            // 3. Dev-time: walk up from exe to find core-platform/scripts/mac/start_all.sh
+            let candidates = vec![
+                resource_dir.join("scripts").join("mac").join("start_all.sh"),
+                resource_dir.join("resources").join("scripts").join("mac").join("start_all.sh"),
+            ];
+            // Also try walking up from exe directory (dev mode)
+            if let Ok(exe) = std::env::current_exe() {
+                if let Some(exe_dir) = exe.parent() {
+                    // Walk up to find project root
+                    let mut dir = exe_dir;
+                    for _ in 0..8 {
+                        let candidate = dir.join("core-platform").join("scripts").join("mac").join("start_all.sh");
+                        if candidate.exists() {
+                            eprintln!("[C25-MAC] found start_all.sh via exe walk: {:?}", candidate);
+                            match std::process::Command::new("bash")
+                                .arg(&candidate)
+                                .spawn()
+                            {
+                                Ok(_) => eprintln!("[C25-MAC] start_all.sh spawned: {:?}", candidate),
+                                Err(e) => eprintln!("[C25-MAC] start_all.sh spawn failed: {}", e),
+                            }
+                            return;
+                        }
+                        if let Some(parent) = dir.parent() {
+                            dir = parent;
+                        } else {
+                            break;
+                        }
+                    }
+                }
+            }
+            let script = match candidates.into_iter().find(|p| p.exists()) {
+                Some(p) => p,
+                None => {
+                    eprintln!("[C25-MAC] start_all.sh not found in any candidate path");
+                    return;
                 }
             };
-            let start_script = script.parent()
-                .map(|d| d.join("start_all.sh"))
-                .unwrap_or(script.clone());
-            let start_script = if start_script.exists() { start_script } else { script };
-            if !start_script.exists() {
-                eprintln!("[C25-C12-FIX] macOS start script not found: {:?}", start_script);
-                return;
-            }
             match std::process::Command::new("bash")
-                .arg(&start_script)
+                .arg(&script)
                 .spawn()
             {
-                Ok(_) => eprintln!("[C25-C12-FIX] macOS start_all.sh spawned: {:?}", start_script),
-                Err(e) => eprintln!("[C25-C12-FIX] macOS start_all.sh spawn failed: {}", e),
+                Ok(_) => eprintln!("[C25-MAC] start_all.sh spawned: {:?}", script),
+                Err(e) => eprintln!("[C25-MAC] start_all.sh spawn failed: {}", e),
             }
         });
     }

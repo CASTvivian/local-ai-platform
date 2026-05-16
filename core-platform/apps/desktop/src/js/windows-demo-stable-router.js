@@ -670,6 +670,13 @@
     return null;
   }
 
+  function maomiaiAgentRuntimeReadyForMac() {
+    // Mac autostart: check if 18131 agent_runtime is reachable
+    return fetch("http://127.0.0.1:18131/health", { method: "GET" })
+      .then(function (r) { return r.ok; })
+      .catch(function () { return false; });
+  }
+
   function installNavAttributes() {
     document.querySelectorAll("button, a, .nav-item, .sidebar-item, [role='button'], li, div").forEach((el) => {
       const text = (el.textContent || "").trim();

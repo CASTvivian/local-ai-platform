@@ -51,7 +51,8 @@
       "../../../data/brain_assets/model_catalog",
       "../../../data/brain_assets/reports",
       "../../../data/brain_assets/video_catalog",
-      "../../../data/github_stars"
+      "../../../data/github_stars",
+      "../../../scripts/mac"
     ]
   }
 }
