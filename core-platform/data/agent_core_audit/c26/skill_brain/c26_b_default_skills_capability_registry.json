@@ -1,0 +1,234 @@
+{
+  "checked_at": "2026-05-16T08:10:24.335066Z",
+  "default_skill_count": 147,
+  "total_capability_count": 161,
+  "skill_capability_count": 148,
+  "tests": [
+    {
+      "input": "有哪些 MCP 工具",
+      "matches": [
+        {
+          "id": "skill.skill_sansan0_trendradar",
+          "name": "TrendRadar",
+          "type": "default_skill"
+        },
+        {
+          "id": "skill.skill_hbai_ltd_toonflow_app",
+          "name": "Toonflow app",
+          "type": "default_skill"
+        },
+        {
+          "id": "skill.skill_zhouxiaoka_autoclip",
+          "name": "Autoclip",
+          "type": "default_skill"
+        },
+        {
+          "id": "skill.skill_moyangzhan_langchain4j_aideepin",
+          "name": "Langchain4j aideepin",
+          "type": "default_skill"
+        },
+        {
+          "id": "skill.skill_moyangzhan_langchain4j_aideepin_web",
+          "name": "Langchain4j aideepin web",
+          "type": "default_skill"
+        },
+        {
+          "id": "repo.memory",
+          "name": "项目知识能力",
+          "type": "tool"
+        },
+        {
+          "id": "web.search",
+          "name": "联网搜索能力",
+          "type": "tool"
+        },
+        {
+          "id": "weather.query",
+          "name": "天气查询能力",
+          "type": "tool"
+        }
+      ]
+    },
+    {
+      "input": "有没有本地模型相关技能",
+      "matches": [
+        {
+          "id": "time.current",
+          "name": "本地时间日期能力",
+          "type": "tool"
+        },
+        {
+          "id": "skill.store",
+          "name": "技能仓能力",
+          "type": "tool"
+        },
+        {
+          "id": "repo.memory",
+          "name": "项目知识能力",
+          "type": "tool"
+        },
+        {
+          "id": "web.search",
+          "name": "联网搜索能力",
+          "type": "tool"
+        },
+        {
+          "id": "weather.query",
+          "name": "天气查询能力",
+          "type": "tool"
+        },
+        {
+          "id": "time.relative",
+          "name": "相对日期计算能力",
+          "type": "tool"
+        },
+        {
+          "id": "code.standard",
+          "name": "代码能力",
+          "type": "model"
+        },
+        {
+          "id": "reasoning.standard",
+          "name": "推理分析能力",
+          "type": "model"
+        }
+      ]
+    },
+    {
+      "input": "浏览器自动化相关能力",
+      "matches": [
+        {
+          "id": "skill.skill_mininglamp_ai_mano_p",
+          "name": "Mano P",
+          "type": "default_skill"
+        },
+        {
+          "id": "repo.memory",
+          "name": "项目知识能力",
+          "type": "tool"
+        },
+        {
+          "id": "web.search",
+          "name": "联网搜索能力",
+          "type": "tool"
+        },
+        {
+          "id": "weather.query",
+          "name": "天气查询能力",
+          "type": "tool"
+        },
+        {
+          "id": "time.current",
+          "name": "本地时间日期能力",
+          "type": "tool"
+        },
+        {
+          "id": "time.relative",
+          "name": "相对日期计算能力",
+          "type": "tool"
+        },
+        {
+          "id": "code.standard",
+          "name": "代码能力",
+          "type": "model"
+        },
+        {
+          "id": "reasoning.standard",
+          "name": "推理分析能力",
+          "type": "model"
+        }
+      ]
+    },
+    {
+      "input": "代码智能体相关仓库",
+      "matches": [
+        {
+          "id": "skill.skill_datawhalechina_hello_agents",
+          "name": "Hello agents",
+          "type": "default_skill"
+        },
+        {
+          "id": "skill.skill_ageerle_ruoyi_ai",
+          "name": "Ruoyi ai",
+          "type": "default_skill"
+        },
+        {
+          "id": "code.standard",
+          "name": "代码能力",
+          "type": "model"
+        },
+        {
+          "id": "repo.memory",
+          "name": "项目知识能力",
+          "type": "tool"
+        },
+        {
+          "id": "web.search",
+          "name": "联网搜索能力",
+          "type": "tool"
+        },
+        {
+          "id": "weather.query",
+          "name": "天气查询能力",
+          "type": "tool"
+        },
+        {
+          "id": "time.current",
+          "name": "本地时间日期能力",
+          "type": "tool"
+        },
+        {
+          "id": "time.relative",
+          "name": "相对日期计算能力",
+          "type": "tool"
+        }
+      ]
+    },
+    {
+      "input": "Claude Code 技能",
+      "matches": [
+        {
+          "id": "skill.skill_liangdabiao_godogen",
+          "name": "Godogen",
+          "type": "default_skill"
+        },
+        {
+          "id": "skill.skill_affaan_m_everything_claude_code",
+          "name": "Everything claude code",
+          "type": "default_skill"
+        },
+        {
+          "id": "skill.skill_forrestchang_andrej_karpathy_skills",
+          "name": "Andrej karpathy skills",
+          "type": "default_skill"
+        },
+        {
+          "id": "skill.skill_garrytan_gstack",
+          "name": "Gstack",
+          "type": "default_skill"
+        },
+        {
+          "id": "skill.skill_gsd_build_get_shit_done",
+          "name": "Get shit done",
+          "type": "default_skill"
+        },
+        {
+          "id": "skill.skill_shareai_lab_learn_claude_code",
+          "name": "Learn claude code",
+          "type": "default_skill"
+        },
+        {
+          "id": "skill.skill_juliusbrussee_caveman",
+          "name": "Caveman",
+          "type": "default_skill"
+        },
+        {
+          "id": "skill.skill_shanraisshan_claude_code_best_practice",
+          "name": "Claude code best practice",
+          "type": "default_skill"
+        }
+      ]
+    }
+  ],
+  "note": "Default skills are now exposed as capabilities with id prefix skill.*"
+}
