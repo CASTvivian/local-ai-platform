@@ -1,0 +1,258 @@
+{
+  "checked_at": "2026-05-16T08:28:52.689120Z",
+  "tests": [
+    {
+      "input": "有没有 Claude Code 相关技能",
+      "planner_mode": "schema_driven",
+      "source": "schema_scoring",
+      "tools": [
+        "weather.query",
+        "capability.match",
+        "time.date_math",
+        "model.generate"
+      ],
+      "skill_matches": [
+        {
+          "id": "skill.skill_liangdabiao_godogen",
+          "name": "Godogen",
+          "source_type": "default_skill",
+          "skill_tags": [
+            "agent_runtime",
+            "local_model",
+            "prompt_framework",
+            "workflow"
+          ]
+        },
+        {
+          "id": "skill.skill_affaan_m_everything_claude_code",
+          "name": "Everything claude code",
+          "source_type": "default_skill",
+          "skill_tags": [
+            "agent_runtime",
+            "local_model",
+            "mcp_tool",
+            "memory",
+            "prompt_framework"
+          ]
+        },
+        {
+          "id": "skill.skill_forrestchang_andrej_karpathy_skills",
+          "name": "Andrej karpathy skills",
+          "source_type": "default_skill",
+          "skill_tags": [
+            "agent_runtime",
+            "code_agent",
+            "local_model",
+            "prompt_framework"
+          ]
+        },
+        {
+          "id": "skill.skill_garrytan_gstack",
+          "name": "Gstack",
+          "source_type": "default_skill",
+          "skill_tags": [
+            "agent_runtime",
+            "code_agent",
+            "mcp_tool",
+            "prompt_framework"
+          ]
+        },
+        {
+          "id": "skill.skill_gsd_build_get_shit_done",
+          "name": "Get shit done",
+          "source_type": "default_skill",
+          "skill_tags": [
+            "agent_runtime",
+            "code_agent",
+            "prompt_framework",
+            "workflow"
+          ]
+        },
+        {
+          "id": "skill.skill_shareai_lab_learn_claude_code",
+          "name": "Learn claude code",
+          "source_type": "default_skill",
+          "skill_tags": [
+            "agent_runtime",
+            "local_model",
+            "prompt_framework"
+          ]
+        },
+        {
+          "id": "skill.skill_juliusbrussee_caveman",
+          "name": "Caveman",
+          "source_type": "default_skill",
+          "skill_tags": [
+            "agent_runtime",
+            "code_agent",
+            "local_model",
+            "prompt_framework",
+            "ui_component"
+          ]
+        },
+        {
+          "id": "skill.skill_shanraisshan_claude_code_best_practice",
+          "name": "Claude code best practice",
+          "source_type": "default_skill",
+          "skill_tags": [
+            "agent_runtime",
+            "code_agent",
+            "prompt_framework",
+            "workflow"
+          ]
+        }
+      ]
+    },
+    {
+      "input": "有哪些 MCP 工具",
+      "planner_mode": "schema_driven",
+      "source": "schema_scoring",
+      "tools": [
+        "repo_memory.search",
+        "capability.match",
+        "model.generate"
+      ],
+      "skill_matches": [
+        {
+          "id": "skill.skill_sansan0_trendradar",
+          "name": "TrendRadar",
+          "source_type": "default_skill",
+          "skill_tags": [
+            "local_model",
+            "mcp_tool",
+            "ui_component"
+          ]
+        },
+        {
+          "id": "skill.skill_hbai_ltd_toonflow_app",
+          "name": "Toonflow app",
+          "source_type": "default_skill",
+          "skill_tags": [
+            "browser_agent",
+            "local_model",
+            "mcp_tool",
+            "ui_component",
+            "workflow"
+          ]
+        },
+        {
+          "id": "skill.skill_zhouxiaoka_autoclip",
+          "name": "Autoclip",
+          "source_type": "default_skill",
+          "skill_tags": [
+            "agent_runtime",
+            "browser_agent",
+            "local_model",
+            "mcp_tool",
+            "ui_component"
+          ]
+        },
+        {
+          "id": "skill.skill_moyangzhan_langchain4j_aideepin",
+          "name": "Langchain4j aideepin",
+          "source_type": "default_skill",
+          "skill_tags": [
+            "agent_runtime",
+            "mcp_tool",
+            "memory",
+            "ui_component",
+            "workflow"
+          ]
+        },
+        {
+          "id": "skill.skill_moyangzhan_langchain4j_aideepin_web",
+          "name": "Langchain4j aideepin web",
+          "source_type": "default_skill",
+          "skill_tags": [
+            "local_model",
+            "mcp_tool",
+            "memory",
+            "ui_component",
+            "workflow"
+          ]
+        }
+      ]
+    },
+    {
+      "input": "找一个适合浏览器自动化的仓",
+      "planner_mode": "schema_driven",
+      "source": "schema_scoring",
+      "tools": [
+        "capability.match",
+        "model.generate"
+      ],
+      "skill_matches": [
+        {
+          "id": "skill.skill_mininglamp_ai_mano_p",
+          "name": "Mano P",
+          "source_type": "default_skill",
+          "skill_tags": [
+            "agent_runtime",
+            "evaluation",
+            "local_model",
+            "ui_component",
+            "workflow"
+          ]
+        },
+        {
+          "id": "skill.skill_alchaincyf_darwin_skill",
+          "name": "Darwin skill",
+          "source_type": "default_skill",
+          "skill_tags": [
+            "agent_runtime",
+            "prompt_framework"
+          ]
+        }
+      ]
+    },
+    {
+      "input": "我想做一个代码智能体，应该用哪些仓",
+      "planner_mode": "schema_driven",
+      "source": "schema_scoring",
+      "tools": [
+        "capability.match",
+        "model.generate"
+      ],
+      "skill_matches": [
+        {
+          "id": "skill.skill_datawhalechina_hello_agents",
+          "name": "Hello agents",
+          "source_type": "default_skill",
+          "skill_tags": [
+            "agent_runtime",
+            "local_model",
+            "memory"
+          ]
+        },
+        {
+          "id": "skill.skill_ageerle_ruoyi_ai",
+          "name": "Ruoyi ai",
+          "source_type": "default_skill",
+          "skill_tags": [
+            "agent_runtime",
+            "mcp_tool",
+            "memory"
+          ]
+        }
+      ]
+    },
+    {
+      "input": "有没有本地模型相关技能",
+      "planner_mode": "schema_driven",
+      "source": "schema_scoring",
+      "tools": [
+        "capability.match",
+        "model.generate"
+      ],
+      "skill_matches": [
+        {
+          "id": "skill.store",
+          "name": "技能仓能力",
+          "source_type": null,
+          "skill_tags": null
+        }
+      ]
+    }
+  ],
+  "note": "Planner now ensures capability.match context so default skill capabilities can be discovered during planning."
+}

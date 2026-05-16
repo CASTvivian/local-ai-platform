@@ -140,6 +140,38 @@ def _rank_tools(message: str, schema: dict[str, Any]) -> list[dict[str, Any]]:
     return ranked
 
 
+def _skill_context_steps(message: str) -> list[dict[str, Any]]:
+    """Add skill discovery context without hardcoded query routing.
+
+    This uses capability.match over the external capability registry.
+    Since C26-B exposes default skills as skill.* capabilities, the planner can
+    discover relevant skills through the same schema-driven matching path.
+    """
+    return [
+        _step(
+            "capability.match",
+            {
+                "query": message,
+                "limit": 12,
+                "include_skills": True,
+                "source": "skill_aware_planner",
+            },
+            "discover relevant platform capabilities and default skills",
+        )
+    ]
+
+
+def _ensure_skill_context(message: str, steps: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Ensure capability.match context is present for skill discovery.
+
+    If steps already include a capability.match step, no duplication.
+    Otherwise prepend one so the planner always has skill awareness.
+    """
+    if any(step.get("tool") == "capability.match" for step in steps):
+        return steps
+    return _skill_context_steps(message) + steps
+
+
 def _schema_only_default_plan(message: str, schema: dict[str, Any]) -> dict[str, Any]:
     """Schema scoring fallback when planner model is unavailable.
 
@@ -167,12 +199,11 @@ def _schema_only_default_plan(message: str, schema: dict[str, Any]) -> dict[str,
             )
         if len(selected) >= 3:
             break
-    # Capability discovery is safe context if nothing else scored.
-    if not selected and any(t.get("name") == "capability.match" for t in schema.get("tools", [])):
-        selected.append(_step("capability.match", {"query": message}, "schema fallback capability discovery"))
+    # Ensure skill discovery context is present (C26-D skill-aware planner).
+    selected = _ensure_skill_context(message, selected)
     # Final composition.
     if any(t.get("name") == "model.generate" for t in schema.get("tools", [])):
-        selected.append(_step("model.generate", {"prompt": message}, "compose final answer from selected tool observations"))
+        selected.append(_step("model.generate", {"prompt": message}, "compose final answer from selected tool observations and skill context"))
     if not selected:
         selected.append(_step("model.generate", {"prompt": message}, "last resort final answer"))
     avg = 0.0
@@ -279,6 +310,7 @@ def _normalize_model_plan(obj: dict[str, Any], schema: dict[str, Any]) -> dict[s
         confidence = float(confidence)
     except Exception:
         confidence = 0.75
+    steps = _ensure_skill_context(str(obj.get("input") or obj.get("query") or obj.get("prompt") or ""), steps)
     return {
         "task_type": str(obj.get("task_type") or "schema_model"),
         "confidence": max(0.0, min(1.0, confidence)),
