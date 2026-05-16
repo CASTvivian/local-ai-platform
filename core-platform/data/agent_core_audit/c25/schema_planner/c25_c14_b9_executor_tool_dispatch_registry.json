@@ -1,0 +1,29 @@
+{
+  "checked_at": "2026-05-16T13:20:00Z",
+  "phase": "C25-C14-B9",
+  "registry_file": "core-platform/services/agent_runtime_service/app/execution/tool_dispatch_registry.py",
+  "registered_tools": [
+    "capability.match",
+    "capability.status",
+    "catalog.search",
+    "model.generate",
+    "repo_memory.search",
+    "skill_store.list",
+    "time.date_math",
+    "time.now",
+    "weather.query",
+    "web.search",
+    "workflow_store.list"
+  ],
+  "tool_count": 11,
+  "capability_status_source": "external_config",
+  "unknown_tool_returns": "tool_not_registered",
+  "executor_has_registry_dispatch": true,
+  "executor_has_if_tool_branches": false,
+  "executor_has_elif_tool_branches": false,
+  "hardcode_guard_result": "PASS",
+  "py_compile_registry": "PASS",
+  "py_compile_executor": "PASS",
+  "handler_return_type": "ToolResult (Pydantic) or dict for errors",
+  "note": "B9 complete. All if/elif tool dispatch removed from executor.py. Registry-driven dispatch in place."
+}
