@@ -192,6 +192,45 @@
         "position": "action",
         "requires_approval": true
       }
+    },
+    {
+      "name": "builtin.code_agent_core.execute",
+      "kind": "builtin",
+      "risk": "medium",
+      "description": "Execute owned code agent core adapter for workspace inspection, patch planning and build/test repair loop.",
+      "input_schema": {
+        "type": "object",
+        "required": ["task"],
+        "properties": {
+          "task": {"type": "string"},
+          "workspace_root": {"type": "string"},
+          "files": {"type": "array", "items": {"type": "string"}},
+          "patch": {"type": "object"},
+          "test_command": {"type": "string"},
+          "cwd": {"type": "string"},
+          "timeout": {"type": "integer"}
+        }
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {"type": "boolean"},
+          "task_run_id": {"type": "string"},
+          "patches": {"type": "array"},
+          "tests": {"type": "array"},
+          "audit": {"type": "object"}
+        }
+      },
+      "capabilities": ["code", "workspace", "patch", "diff", "repair", "test", "task_state"],
+      "planner_hints": {
+        "request_shapes": [
+          "asks to inspect code or workspace files",
+          "asks to plan a patch or diff",
+          "asks to run tests or repair a build",
+          "code agent workspace task"
+        ],
+        "position": "action"
+      }
     }
   ],
   "capabilities": [

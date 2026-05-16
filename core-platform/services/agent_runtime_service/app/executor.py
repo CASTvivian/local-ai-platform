@@ -15,6 +15,7 @@ from typing import Any, List
 
 from .capability.models import CapabilityMatchRequest
 from .capability.service import match_capability
+from .builtin.code_agent_core import execute_code_agent_core
 from .execution.tool_dispatch_registry import (
     execute_registered_tool,
     has_registered_tool,
@@ -196,6 +197,16 @@ def _handler_model_generate(args: dict[str, Any]) -> ToolResult:
     return mcp_result if mcp_result.ok else model_generate(args.get("prompt", ""), args.get("profile"), args.get("model"))
 
 
+def _handler_builtin_code_agent_core_execute(args: dict[str, Any]) -> ToolResult:
+    result = execute_code_agent_core(args or {})
+    return ToolResult(
+        tool="builtin.code_agent_core.execute",
+        ok=bool(result.get("ok")),
+        data=result,
+        error=result.get("error"),
+    )
+
+
 # ---------------------------------------------------------------------------
 # Handler registration — called once at import time
 # ---------------------------------------------------------------------------
@@ -221,6 +232,7 @@ def register_default_executor_tools() -> None:
     register_tool("workflow_store.list", _handler_workflow_store_list)
     register_tool("capability.status", _handler_capability_status)
     register_tool("model.generate", _handler_model_generate)
+    register_tool("builtin.code_agent_core.execute", _handler_builtin_code_agent_core_execute)
 
 
 register_default_executor_tools()

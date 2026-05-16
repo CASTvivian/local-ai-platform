@@ -7,10 +7,11 @@
     {
       "id": "builtin.code_agent_core",
       "title": "代码智能体核心模块",
-      "implementation_status": "planned",
+      "implementation_status": "implemented_adapter",
       "source_reference_count": 26,
       "execution_mode": "workspace_agent",
       "allowed_tools": [
+        "builtin.code_agent_core.execute",
         "capability.match",
         "repo_memory.search",
         "filesystem.read",
@@ -41,7 +42,10 @@
         "can plan diff",
         "can apply patch with backup",
         "can run build/test command",
-        "can generate repair context"
+        "can generate repair context",
+        "can execute builtin.code_agent_core.execute through executor registry",
+        "can create task run during execution",
+        "can produce patch plan and repair loop audit"
       ],
       "runtime_dependency_policy": "owned_code_only",
       "created_at": "2026-05-16T10:07:00.000000Z"
