@@ -264,6 +264,40 @@
         ],
         "position": "context"
       }
+    },
+    {
+      "name": "builtin.browser_operator.execute",
+      "kind": "builtin",
+      "risk": "safe",
+      "description": "Execute owned browser operator adapter for browser/research planning, optional web search, finding extraction and citations.",
+      "input_schema": {
+        "type": "object",
+        "required": ["research_task"],
+        "properties": {
+          "research_task": {"type": "string"},
+          "allowed_domains": {"type": "array", "items": {"type": "string"}},
+          "do_search": {"type": "boolean"}
+        }
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "ok": {"type": "boolean"},
+          "task_run_id": {"type": "string"},
+          "action_plan": {"type": "array"},
+          "findings": {"type": "array"},
+          "citations": {"type": "array"},
+          "audit": {"type": "object"}
+        }
+      },
+      "capabilities": ["browser", "web", "research", "search", "evidence", "citation"],
+      "planner_hints": {
+        "request_shapes": [
+          "asks for browser automation, web research, public information search, evidence collection or citation-backed findings",
+          "asks to research a topic online, find sources, or browse web content"
+        ],
+        "position": "context"
+      }
     }
   ],
   "capabilities": [

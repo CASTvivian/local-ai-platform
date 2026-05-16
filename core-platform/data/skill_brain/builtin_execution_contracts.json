@@ -120,10 +120,11 @@
     {
       "id": "builtin.browser_operator",
       "title": "浏览器自动化模块",
-      "implementation_status": "planned",
+      "implementation_status": "implemented_adapter",
       "source_reference_count": 9,
       "execution_mode": "browser_plan",
       "allowed_tools": [
+        "builtin.browser_operator.execute",
         "web.search",
         "capability.match",
         "model.generate"
@@ -147,7 +148,10 @@
       "acceptance_tests": [
         "can create browser/research plan",
         "can summarize findings",
-        "can preserve evidence/citations"
+        "can preserve evidence/citations",
+        "can execute builtin.browser_operator.execute through executor registry",
+        "can create browser/research action plan",
+        "can return normalized findings/citations and audit"
       ],
       "runtime_dependency_policy": "owned_code_only",
       "created_at": "2026-05-16T10:07:00.000000Z"
