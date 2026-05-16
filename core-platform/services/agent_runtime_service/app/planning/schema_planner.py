@@ -218,27 +218,99 @@ def _build_planner_prompt(message: str, schema: dict[str, Any], memory_context: 
     return json.dumps(payload, ensure_ascii=False, indent=2)
 
 
-def _call_planner_model(prompt: str) -> dict[str, Any] | None:
-    """Optional planner model call.
+def _extract_json_object(text: str) -> dict[str, Any] | None:
+    """Extract a JSON object from model text."""
+    if not text:
+        return None
+    stripped = text.strip()
+    try:
+        obj = json.loads(stripped)
+        if isinstance(obj, dict):
+            return obj
+    except Exception:
+        pass
+    start = stripped.find("{")
+    end = stripped.rfind("}")
+    if start >= 0 and end > start:
+        try:
+            obj = json.loads(stripped[start:end + 1])
+            if isinstance(obj, dict):
+                return obj
+        except Exception:
+            return None
+    return None
 
-    This is deliberately best-effort. If unavailable, schema default
-    planner is used.  The model gateway integration can be tightened in
-    C25-C14-B2.
+
+def _normalize_model_plan(obj: dict[str, Any], schema: dict[str, Any]) -> dict[str, Any] | None:
+    """Normalize model generated plan into the planner contract."""
+    if not isinstance(obj, dict):
+        return None
+    available_tools = set(list_tool_names(schema))
+    raw_steps = obj.get("steps")
+    if not isinstance(raw_steps, list):
+        return None
+    steps: list[dict[str, Any]] = []
+    for index, raw in enumerate(raw_steps):
+        if not isinstance(raw, dict):
+            continue
+        tool = str(raw.get("tool") or "").strip()
+        if not tool or tool not in available_tools:
+            continue
+        args = raw.get("args")
+        if not isinstance(args, dict):
+            args = {}
+        depends_on = raw.get("depends_on")
+        if not isinstance(depends_on, list):
+            depends_on = []
+        steps.append({
+            "id": str(raw.get("id") or f"model_step_{index + 1}"),
+            "tool": tool,
+            "args": args,
+            "reason": str(raw.get("reason") or "planner model selected this tool"),
+            "depends_on": depends_on,
+        })
+    if not steps:
+        return None
+    # Ensure final natural language composition unless the model explicitly planned one.
+    if "model.generate" in available_tools and not any(s.get("tool") == "model.generate" for s in steps):
+        steps.append(_step("model.generate", {"prompt": obj.get("final_prompt") or ""}, "compose final answer"))
+    confidence = obj.get("confidence")
+    try:
+        confidence = float(confidence)
+    except Exception:
+        confidence = 0.75
+    return {
+        "task_type": str(obj.get("task_type") or "schema_model"),
+        "confidence": max(0.0, min(1.0, confidence)),
+        "steps": steps,
+    }
+
+
+def _call_planner_model(prompt: str, schema: dict[str, Any]) -> dict[str, Any] | None:
+    """Best-effort structured planner model call.
+
+    B4 changes behavior:
+    - planner model is enabled by default unless explicitly disabled.
+    - if model_gateway/llm planner is unavailable, schema scoring fallback is used.
+    - output must be normalized against available tool schema.
     """
-    mode = os.environ.get("MAOMIAI_SCHEMA_PLANNER_MODEL", "").lower().strip()
-    if mode not in {"1", "true", "yes", "on"}:
+    mode = os.environ.get("MAOMIAI_SCHEMA_PLANNER_MODEL", "auto").lower().strip()
+    if mode in {"0", "false", "no", "off", "disabled"}:
         return None
     try:
         from .llm_planner import call_planner_model  # type: ignore[attr-defined]
 
         raw = call_planner_model(prompt)
+        obj: dict[str, Any] | None = None
         if isinstance(raw, dict):
-            return raw
-        if isinstance(raw, str):
-            return json.loads(raw)
+            obj = raw
+        elif isinstance(raw, str):
+            obj = _extract_json_object(raw)
+        if not obj:
+            return None
+        return _normalize_model_plan(obj, schema)
     except Exception:
         return None
-    return None
 
 
 def build_schema_plan(
@@ -263,14 +335,14 @@ def build_schema_plan(
         return SchemaPlanResult(ok=True, plan=plan, source="schema_empty")
 
     prompt = _build_planner_prompt(msg, schema, memory_context=memory_context)
-    model_plan = _call_planner_model(prompt)
+    model_plan = _call_planner_model(prompt, schema)
 
     if isinstance(model_plan, dict) and model_plan.get("steps"):
         plan = {
             "task_type": model_plan.get("task_type") or "schema_model",
             "confidence": float(model_plan.get("confidence") or 0.7),
             "steps": model_plan.get("steps") or [],
-            "source": "schema_model",
+            "source": "schema_model_structured",
             "planner_mode": "schema_driven",
             "requires_model_reasoning": any(
                 str(s.get("tool")) == "model.generate" for s in model_plan.get("steps", []) if isinstance(s, dict)

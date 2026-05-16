@@ -1,0 +1,97 @@
+{
+  "checked_at": "2026-05-16T05:03:15.734666Z",
+  "planner_model_default": "auto",
+  "structured_normalizer_available": true,
+  "sample_model_output_normalized": {
+    "task_type": "developer_task",
+    "confidence": 0.91,
+    "steps": [
+      {
+        "id": "read",
+        "tool": "repo_memory.search",
+        "args": {
+          "query": "planner model structured output",
+          "limit": 5
+        },
+        "reason": "gather local context",
+        "depends_on": []
+      },
+      {
+        "id": "final",
+        "tool": "model.generate",
+        "args": {
+          "prompt": "produce concise result"
+        },
+        "reason": "final composition",
+        "depends_on": [
+          "read"
+        ]
+      }
+    ]
+  },
+  "runtime_tests": [
+    {
+      "input": "你好，请用一句话介绍你自己",
+      "planner_mode": "schema_driven",
+      "source": "schema_scoring",
+      "task_type": "schema_scored",
+      "confidence": 0.5233,
+      "tools": [
+        "capability.match",
+        "model.generate"
+      ],
+      "fallback_reason": null
+    },
+    {
+      "input": "今天是几月几号，现在几点",
+      "planner_mode": "schema_driven",
+      "source": "schema_scoring",
+      "task_type": "schema_scored",
+      "confidence": 0.5233,
+      "tools": [
+        "capability.match",
+        "model.generate"
+      ],
+      "fallback_reason": null
+    },
+    {
+      "input": "我们现在有哪些 Agent 和 MCP 相关仓库资产",
+      "planner_mode": "schema_driven",
+      "source": "schema_scoring",
+      "task_type": "schema_scored",
+      "confidence": 0.5962,
+      "tools": [
+        "repo_memory.search",
+        "time.date_math",
+        "time.now",
+        "model.generate"
+      ],
+      "fallback_reason": null
+    },
+    {
+      "input": "帮我分析这个项目的架构",
+      "planner_mode": "schema_driven",
+      "source": "schema_scoring",
+      "task_type": "schema_scored",
+      "confidence": 0.5233,
+      "tools": [
+        "capability.match",
+        "model.generate"
+      ],
+      "fallback_reason": null
+    },
+    {
+      "input": "请查一下公开资料",
+      "planner_mode": "schema_driven",
+      "source": "schema_scoring",
+      "task_type": "schema_scored",
+      "confidence": 0.5233,
+      "tools": [
+        "capability.match",
+        "model.generate"
+      ],
+      "fallback_reason": null
+    }
+  ],
+  "note": "Planner model structured output is now attempted by default. If unavailable, schema scoring fallback is used."
+}
