@@ -1,0 +1,10 @@
+{
+  "checked_at": "2026-05-16T06:12:21.848617Z",
+  "package_json": "core-platform/apps/desktop/package.json",
+  "has_generate_script": true,
+  "has_prebuild": true,
+  "has_pretauri": true,
+  "workflow_has_generate_step": true,
+  "generated_marker": true,
+  "service_count": 19
+}

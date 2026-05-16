@@ -4,7 +4,10 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "tauri": "tauri"
+    "tauri": "tauri",
+    "generate:runtime-config": "python3 ../../scripts/build/generate_desktop_runtime_config.py",
+    "prebuild": "npm run generate:runtime-config",
+    "pretauri": "npm run generate:runtime-config"
   },
   "devDependencies": {
     "@tauri-apps/cli": "^2"

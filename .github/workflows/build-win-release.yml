@@ -129,6 +129,12 @@ jobs:
         run: |
           Write-Host "Building MSI only to avoid NSIS download 504 during CI."
 
+      - name: Generate runtime config
+        working-directory: ./core-platform/apps/desktop
+        shell: pwsh
+        run: |
+          npm run generate:runtime-config
+
       - name: Build Tauri Windows bundle
         working-directory: ./core-platform/apps/desktop
         shell: pwsh
