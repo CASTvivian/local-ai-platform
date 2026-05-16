@@ -1,0 +1,48 @@
+{
+  "step": "C25-C14-B2",
+  "checked_at": "2026-05-16T04:17:52.446976+00:00",
+  "planner_keyword_left": [
+    {
+      "file": "planner.py",
+      "line": 9,
+      "pattern": "_keyword_plan",
+      "text": "- _keyword_plan or any keyword-matching logic"
+    },
+    {
+      "file": "planner.py",
+      "line": 11,
+      "pattern": "天气",
+      "text": "- hardcoded Chinese query words (天气, 几点, MCP, 仓库, 资产, etc.)"
+    },
+    {
+      "file": "planner.py",
+      "line": 11,
+      "pattern": "几点",
+      "text": "- hardcoded Chinese query words (天气, 几点, MCP, 仓库, 资产, etc.)"
+    },
+    {
+      "file": "planner.py",
+      "line": 11,
+      "pattern": "MCP",
+      "text": "- hardcoded Chinese query words (天气, 几点, MCP, 仓库, 资产, etc.)"
+    },
+    {
+      "file": "planner.py",
+      "line": 11,
+      "pattern": "仓库",
+      "text": "- hardcoded Chinese query words (天气, 几点, MCP, 仓库, 资产, etc.)"
+    },
+    {
+      "file": "planner.py",
+      "line": 11,
+      "pattern": "资产",
+      "text": "- hardcoded Chinese query words (天气, 几点, MCP, 仓库, 资产, etc.)"
+    }
+  ],
+  "planner_has_legacy_in_code": false,
+  "legacy_exists": true,
+  "legacy_size": 5845,
+  "legacy_contains_keyword_plan": true,
+  "executor_query_parse": [],
+  "hardcode_guard_passed": true
+}
