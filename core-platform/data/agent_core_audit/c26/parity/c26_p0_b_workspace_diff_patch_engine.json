@@ -1,0 +1,11 @@
+{
+  "checked_at": "2026-05-16T09:08:14.270444Z",
+  "engine": "core-platform/services/agent_runtime_service/app/workspace/patch_engine.py",
+  "has_read_file": true,
+  "has_unified_diff": true,
+  "has_plan_replace_file": true,
+  "has_apply_replace_file": true,
+  "has_apply_text_replacement": true,
+  "has_workspace_boundary_check": true,
+  "has_patch_audit": true
+}
