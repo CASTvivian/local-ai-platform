@@ -1,0 +1,2629 @@
+{
+  "version": "c26-r2-fusion-result",
+  "generated_at": "2026-05-16T09:53:44.236865Z",
+  "policy_version": "c26-r2-fusion-policy",
+  "assignment_count": 42,
+  "new_module_candidate_count": 22,
+  "assignments": [
+    {
+      "skill_id": "skill_openclaw_openclaw",
+      "title": "Openclaw",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/openclaw__openclaw",
+      "tags": [
+        "general_skill",
+        "workflow"
+      ],
+      "best_match": {
+        "module_id": "builtin.code_agent_core",
+        "module_title": "代码智能体核心模块",
+        "score": 0.28
+      },
+      "top_matches": [
+        {
+          "module_id": "builtin.code_agent_core",
+          "module_title": "代码智能体核心模块",
+          "score": 0.28
+        },
+        {
+          "module_id": "builtin.workflow_orchestrator",
+          "module_title": "工作流编排模块",
+          "score": 0.28
+        },
+        {
+          "module_id": "builtin.agent_runtime_core",
+          "module_title": "通用 Agent Runtime 模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.mcp_tool_hub",
+          "module_title": "MCP 工具协议模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.browser_operator",
+          "module_title": "浏览器自动化模块",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "skill_id": "skill_punkpeye_awesome_mcp_servers",
+      "title": "Awesome mcp servers",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/punkpeye__awesome-mcp-servers",
+      "tags": [
+        "mcp_tool"
+      ],
+      "best_match": {
+        "module_id": "builtin.mcp_tool_hub",
+        "module_title": "MCP 工具协议模块",
+        "score": 0.28
+      },
+      "top_matches": [
+        {
+          "module_id": "builtin.mcp_tool_hub",
+          "module_title": "MCP 工具协议模块",
+          "score": 0.28
+        },
+        {
+          "module_id": "builtin.code_agent_core",
+          "module_title": "代码智能体核心模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.agent_runtime_core",
+          "module_title": "通用 Agent Runtime 模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.browser_operator",
+          "module_title": "浏览器自动化模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.memory_rag_core",
+          "module_title": "记忆与 RAG 检索模块",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "skill_id": "skill_nomic_ai_gpt4all",
+      "title": "Gpt4all",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/nomic-ai__gpt4all",
+      "tags": [
+        "local_model",
+        "ui_component"
+      ],
+      "best_match": {
+        "module_id": "builtin.local_model_runtime",
+        "module_title": "本地模型运行模块",
+        "score": 0.31
+      },
+      "top_matches": [
+        {
+          "module_id": "builtin.local_model_runtime",
+          "module_title": "本地模型运行模块",
+          "score": 0.31
+        },
+        {
+          "module_id": "builtin.memory_rag_core",
+          "module_title": "记忆与 RAG 检索模块",
+          "score": 0.03
+        },
+        {
+          "module_id": "builtin.ui_desktop_operator",
+          "module_title": "桌面 UI 操作模块",
+          "score": 0.03
+        },
+        {
+          "module_id": "builtin.code_agent_core",
+          "module_title": "代码智能体核心模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.agent_runtime_core",
+          "module_title": "通用 Agent Runtime 模块",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "skill_id": "skill_xtekky_gpt4free",
+      "title": "Gpt4free",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/xtekky__gpt4free",
+      "tags": [
+        "general_skill",
+        "local_model",
+        "ui_component"
+      ],
+      "best_match": {
+        "module_id": "builtin.local_model_runtime",
+        "module_title": "本地模型运行模块",
+        "score": 0.28
+      },
+      "top_matches": [
+        {
+          "module_id": "builtin.local_model_runtime",
+          "module_title": "本地模型运行模块",
+          "score": 0.28
+        },
+        {
+          "module_id": "builtin.code_agent_core",
+          "module_title": "代码智能体核心模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.agent_runtime_core",
+          "module_title": "通用 Agent Runtime 模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.mcp_tool_hub",
+          "module_title": "MCP 工具协议模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.browser_operator",
+          "module_title": "浏览器自动化模块",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "skill_id": "skill_lllyasviel_fooocus",
+      "title": "Fooocus",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/lllyasviel__Fooocus",
+      "tags": [
+        "general_skill",
+        "memory"
+      ],
+      "best_match": {
+        "module_id": "builtin.memory_rag_core",
+        "module_title": "记忆与 RAG 检索模块",
+        "score": 0.28
+      },
+      "top_matches": [
+        {
+          "module_id": "builtin.memory_rag_core",
+          "module_title": "记忆与 RAG 检索模块",
+          "score": 0.28
+        },
+        {
+          "module_id": "builtin.code_agent_core",
+          "module_title": "代码智能体核心模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.agent_runtime_core",
+          "module_title": "通用 Agent Runtime 模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.mcp_tool_hub",
+          "module_title": "MCP 工具协议模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.browser_operator",
+          "module_title": "浏览器自动化模块",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "skill_id": "skill_vnpy_vnpy",
+      "title": "Vnpy",
+      "source_path": "/Users/mofamaomi/Documents/本地ai/vnpy",
+      "tags": [
+        "general_skill",
+        "workflow"
+      ],
+      "best_match": {
+        "module_id": "builtin.code_agent_core",
+        "module_title": "代码智能体核心模块",
+        "score": 0.28
+      },
+      "top_matches": [
+        {
+          "module_id": "builtin.code_agent_core",
+          "module_title": "代码智能体核心模块",
+          "score": 0.28
+        },
+        {
+          "module_id": "builtin.workflow_orchestrator",
+          "module_title": "工作流编排模块",
+          "score": 0.28
+        },
+        {
+          "module_id": "builtin.agent_runtime_core",
+          "module_title": "通用 Agent Runtime 模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.mcp_tool_hub",
+          "module_title": "MCP 工具协议模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.browser_operator",
+          "module_title": "浏览器自动化模块",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "skill_id": "skill_ashishpatel26_500_ai_agents_projects",
+      "title": "500 AI Agents Projects",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/ashishpatel26__500-AI-Agents-Projects",
+      "tags": [
+        "agent_runtime",
+        "workflow"
+      ],
+      "best_match": {
+        "module_id": "builtin.code_agent_core",
+        "module_title": "代码智能体核心模块",
+        "score": 0.31
+      },
+      "top_matches": [
+        {
+          "module_id": "builtin.code_agent_core",
+          "module_title": "代码智能体核心模块",
+          "score": 0.31
+        },
+        {
+          "module_id": "builtin.agent_runtime_core",
+          "module_title": "通用 Agent Runtime 模块",
+          "score": 0.31
+        },
+        {
+          "module_id": "builtin.workflow_orchestrator",
+          "module_title": "工作流编排模块",
+          "score": 0.28
+        },
+        {
+          "module_id": "builtin.prompt_skill_engine",
+          "module_title": "Prompt 技能引擎模块",
+          "score": 0.03
+        },
+        {
+          "module_id": "builtin.eval_benchmark",
+          "module_title": "评估与基准模块",
+          "score": 0.03
+        }
+      ]
+    },
+    {
+      "skill_id": "skill_soxoj_maigret",
+      "title": "Maigret",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/soxoj__maigret",
+      "tags": [
+        "security"
+      ],
+      "best_match": {
+        "module_id": "builtin.security_sandbox",
+        "module_title": "安全沙箱与策略模块",
+        "score": 0.28
+      },
+      "top_matches": [
+        {
+          "module_id": "builtin.security_sandbox",
+          "module_title": "安全沙箱与策略模块",
+          "score": 0.28
+        },
+        {
+          "module_id": "builtin.code_agent_core",
+          "module_title": "代码智能体核心模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.agent_runtime_core",
+          "module_title": "通用 Agent Runtime 模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.mcp_tool_hub",
+          "module_title": "MCP 工具协议模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.browser_operator",
+          "module_title": "浏览器自动化模块",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "skill_id": "skill_shiyu_coder_kronos",
+      "title": "Kronos",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/shiyu-coder__Kronos",
+      "tags": [
+        "general_skill",
+        "local_model"
+      ],
+      "best_match": {
+        "module_id": "builtin.local_model_runtime",
+        "module_title": "本地模型运行模块",
+        "score": 0.31
+      },
+      "top_matches": [
+        {
+          "module_id": "builtin.local_model_runtime",
+          "module_title": "本地模型运行模块",
+          "score": 0.31
+        },
+        {
+          "module_id": "builtin.mcp_tool_hub",
+          "module_title": "MCP 工具协议模块",
+          "score": 0.03
+        },
+        {
+          "module_id": "builtin.ui_desktop_operator",
+          "module_title": "桌面 UI 操作模块",
+          "score": 0.03
+        },
+        {
+          "module_id": "builtin.code_agent_core",
+          "module_title": "代码智能体核心模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.agent_runtime_core",
+          "module_title": "通用 Agent Runtime 模块",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "skill_id": "skill_voltagent_awesome_agent_skills",
+      "title": "Awesome agent skills",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/VoltAgent__awesome-agent-skills",
+      "tags": [
+        "agent_runtime",
+        "prompt_framework"
+      ],
+      "best_match": {
+        "module_id": "builtin.agent_runtime_core",
+        "module_title": "通用 Agent Runtime 模块",
+        "score": 0.34
+      },
+      "top_matches": [
+        {
+          "module_id": "builtin.agent_runtime_core",
+          "module_title": "通用 Agent Runtime 模块",
+          "score": 0.34
+        },
+        {
+          "module_id": "builtin.code_agent_core",
+          "module_title": "代码智能体核心模块",
+          "score": 0.06
+        },
+        {
+          "module_id": "builtin.prompt_skill_engine",
+          "module_title": "Prompt 技能引擎模块",
+          "score": 0.06
+        },
+        {
+          "module_id": "builtin.eval_benchmark",
+          "module_title": "评估与基准模块",
+          "score": 0.06
+        },
+        {
+          "module_id": "builtin.security_sandbox",
+          "module_title": "安全沙箱与策略模块",
+          "score": 0.03
+        }
+      ]
+    },
+    {
+      "skill_id": "skill_davideuler_architecture_of_internet_product",
+      "title": "Architecture.of.internet product",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/davideuler__architecture.of.internet-product",
+      "tags": [
+        "local_model",
+        "ui_component"
+      ],
+      "best_match": {
+        "module_id": "builtin.local_model_runtime",
+        "module_title": "本地模型运行模块",
+        "score": 0.28
+      },
+      "top_matches": [
+        {
+          "module_id": "builtin.local_model_runtime",
+          "module_title": "本地模型运行模块",
+          "score": 0.28
+        },
+        {
+          "module_id": "builtin.code_agent_core",
+          "module_title": "代码智能体核心模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.agent_runtime_core",
+          "module_title": "通用 Agent Runtime 模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.mcp_tool_hub",
+          "module_title": "MCP 工具协议模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.browser_operator",
+          "module_title": "浏览器自动化模块",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "skill_id": "skill_donchitos_claude_code_game_studios",
+      "title": "Claude Code Game Studios",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/Donchitos__Claude-Code-Game-Studios",
+      "tags": [
+        "agent_runtime",
+        "prompt_framework",
+        "ui_component",
+        "workflow"
+      ],
+      "best_match": {
+        "module_id": "builtin.code_agent_core",
+        "module_title": "代码智能体核心模块",
+        "score": 0.37
+      },
+      "top_matches": [
+        {
+          "module_id": "builtin.code_agent_core",
+          "module_title": "代码智能体核心模块",
+          "score": 0.37
+        },
+        {
+          "module_id": "builtin.agent_runtime_core",
+          "module_title": "通用 Agent Runtime 模块",
+          "score": 0.31
+        },
+        {
+          "module_id": "builtin.workflow_orchestrator",
+          "module_title": "工作流编排模块",
+          "score": 0.31
+        },
+        {
+          "module_id": "builtin.security_sandbox",
+          "module_title": "安全沙箱与策略模块",
+          "score": 0.06
+        },
+        {
+          "module_id": "builtin.mcp_tool_hub",
+          "module_title": "MCP 工具协议模块",
+          "score": 0.03
+        }
+      ]
+    },
+    {
+      "skill_id": "skill_openbmb_voxcpm",
+      "title": "VoxCPM",
+      "source_path": "/Users/mofamaomi/Documents/本地ai/VoxCPM",
+      "tags": [
+        "general_skill",
+        "local_model"
+      ],
+      "best_match": {
+        "module_id": "builtin.local_model_runtime",
+        "module_title": "本地模型运行模块",
+        "score": 0.28
+      },
+      "top_matches": [
+        {
+          "module_id": "builtin.local_model_runtime",
+          "module_title": "本地模型运行模块",
+          "score": 0.28
+        },
+        {
+          "module_id": "builtin.code_agent_core",
+          "module_title": "代码智能体核心模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.agent_runtime_core",
+          "module_title": "通用 Agent Runtime 模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.mcp_tool_hub",
+          "module_title": "MCP 工具协议模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.browser_operator",
+          "module_title": "浏览器自动化模块",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "skill_id": "skill_agentskills_agentskills",
+      "title": "Agentskills",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/agentskills__agentskills",
+      "tags": [
+        "agent_runtime"
+      ],
+      "best_match": {
+        "module_id": "builtin.agent_runtime_core",
+        "module_title": "通用 Agent Runtime 模块",
+        "score": 0.31
+      },
+      "top_matches": [
+        {
+          "module_id": "builtin.agent_runtime_core",
+          "module_title": "通用 Agent Runtime 模块",
+          "score": 0.31
+        },
+        {
+          "module_id": "builtin.code_agent_core",
+          "module_title": "代码智能体核心模块",
+          "score": 0.03
+        },
+        {
+          "module_id": "builtin.prompt_skill_engine",
+          "module_title": "Prompt 技能引擎模块",
+          "score": 0.03
+        },
+        {
+          "module_id": "builtin.eval_benchmark",
+          "module_title": "评估与基准模块",
+          "score": 0.03
+        },
+        {
+          "module_id": "builtin.mcp_tool_hub",
+          "module_title": "MCP 工具协议模块",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "skill_id": "skill_microsoft_airsim",
+      "title": "AirSim",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/microsoft__AirSim",
+      "tags": [
+        "agent_runtime"
+      ],
+      "best_match": {
+        "module_id": "builtin.agent_runtime_core",
+        "module_title": "通用 Agent Runtime 模块",
+        "score": 0.34
+      },
+      "top_matches": [
+        {
+          "module_id": "builtin.agent_runtime_core",
+          "module_title": "通用 Agent Runtime 模块",
+          "score": 0.34
+        },
+        {
+          "module_id": "builtin.code_agent_core",
+          "module_title": "代码智能体核心模块",
+          "score": 0.06
+        },
+        {
+          "module_id": "builtin.browser_operator",
+          "module_title": "浏览器自动化模块",
+          "score": 0.06
+        },
+        {
+          "module_id": "builtin.prompt_skill_engine",
+          "module_title": "Prompt 技能引擎模块",
+          "score": 0.06
+        },
+        {
+          "module_id": "builtin.artifact_report_engine",
+          "module_title": "产物与报告生成模块",
+          "score": 0.06
+        }
+      ]
+    },
+    {
+      "skill_id": "skill_claude_code_best_claude_code",
+      "title": "Claude code",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/claude-code-best__claude-code",
+      "tags": [
+        "agent_runtime",
+        "prompt_framework"
+      ],
+      "best_match": {
+        "module_id": "builtin.agent_runtime_core",
+        "module_title": "通用 Agent Runtime 模块",
+        "score": 0.28
+      },
+      "top_matches": [
+        {
+          "module_id": "builtin.agent_runtime_core",
+          "module_title": "通用 Agent Runtime 模块",
+          "score": 0.28
+        },
+        {
+          "module_id": "builtin.code_agent_core",
+          "module_title": "代码智能体核心模块",
+          "score": 0.06
+        },
+        {
+          "module_id": "builtin.security_sandbox",
+          "module_title": "安全沙箱与策略模块",
+          "score": 0.06
+        },
+        {
+          "module_id": "builtin.mcp_tool_hub",
+          "module_title": "MCP 工具协议模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.browser_operator",
+          "module_title": "浏览器自动化模块",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "skill_id": "skill_tanweai_pua",
+      "title": "Pua",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/tanweai__pua",
+      "tags": [
+        "agent_runtime",
+        "prompt_framework"
+      ],
+      "best_match": {
+        "module_id": "builtin.agent_runtime_core",
+        "module_title": "通用 Agent Runtime 模块",
+        "score": 0.28
+      },
+      "top_matches": [
+        {
+          "module_id": "builtin.agent_runtime_core",
+          "module_title": "通用 Agent Runtime 模块",
+          "score": 0.28
+        },
+        {
+          "module_id": "builtin.code_agent_core",
+          "module_title": "代码智能体核心模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.mcp_tool_hub",
+          "module_title": "MCP 工具协议模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.browser_operator",
+          "module_title": "浏览器自动化模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.memory_rag_core",
+          "module_title": "记忆与 RAG 检索模块",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "skill_id": "skill_chaitin_pandawiki",
+      "title": "PandaWiki",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/chaitin__PandaWiki",
+      "tags": [
+        "local_model",
+        "memory"
+      ],
+      "best_match": {
+        "module_id": "builtin.memory_rag_core",
+        "module_title": "记忆与 RAG 检索模块",
+        "score": 0.28
+      },
+      "top_matches": [
+        {
+          "module_id": "builtin.memory_rag_core",
+          "module_title": "记忆与 RAG 检索模块",
+          "score": 0.28
+        },
+        {
+          "module_id": "builtin.local_model_runtime",
+          "module_title": "本地模型运行模块",
+          "score": 0.28
+        },
+        {
+          "module_id": "builtin.code_agent_core",
+          "module_title": "代码智能体核心模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.agent_runtime_core",
+          "module_title": "通用 Agent Runtime 模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.mcp_tool_hub",
+          "module_title": "MCP 工具协议模块",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "skill_id": "skill_jingyaogong_minimind_v",
+      "title": "Minimind v",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/jingyaogong__minimind-v",
+      "tags": [
+        "general_skill",
+        "local_model",
+        "ui_component"
+      ],
+      "best_match": {
+        "module_id": "builtin.local_model_runtime",
+        "module_title": "本地模型运行模块",
+        "score": 0.28
+      },
+      "top_matches": [
+        {
+          "module_id": "builtin.local_model_runtime",
+          "module_title": "本地模型运行模块",
+          "score": 0.28
+        },
+        {
+          "module_id": "builtin.code_agent_core",
+          "module_title": "代码智能体核心模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.agent_runtime_core",
+          "module_title": "通用 Agent Runtime 模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.mcp_tool_hub",
+          "module_title": "MCP 工具协议模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.browser_operator",
+          "module_title": "浏览器自动化模块",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "skill_id": "skill_danveloper_flash_moe",
+      "title": "Flash moe",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/danveloper__flash-moe",
+      "tags": [
+        "general_skill",
+        "local_model",
+        "memory",
+        "workflow"
+      ],
+      "best_match": {
+        "module_id": "builtin.local_model_runtime",
+        "module_title": "本地模型运行模块",
+        "score": 0.31
+      },
+      "top_matches": [
+        {
+          "module_id": "builtin.local_model_runtime",
+          "module_title": "本地模型运行模块",
+          "score": 0.31
+        },
+        {
+          "module_id": "builtin.code_agent_core",
+          "module_title": "代码智能体核心模块",
+          "score": 0.28
+        },
+        {
+          "module_id": "builtin.memory_rag_core",
+          "module_title": "记忆与 RAG 检索模块",
+          "score": 0.28
+        },
+        {
+          "module_id": "builtin.workflow_orchestrator",
+          "module_title": "工作流编排模块",
+          "score": 0.28
+        },
+        {
+          "module_id": "builtin.mcp_tool_hub",
+          "module_title": "MCP 工具协议模块",
+          "score": 0.03
+        }
+      ]
+    },
+    {
+      "skill_id": "skill_88250_symphony",
+      "title": "Symphony",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/88250__symphony",
+      "tags": [
+        "general_skill",
+        "workflow"
+      ],
+      "best_match": {
+        "module_id": "builtin.code_agent_core",
+        "module_title": "代码智能体核心模块",
+        "score": 0.28
+      },
+      "top_matches": [
+        {
+          "module_id": "builtin.code_agent_core",
+          "module_title": "代码智能体核心模块",
+          "score": 0.28
+        },
+        {
+          "module_id": "builtin.workflow_orchestrator",
+          "module_title": "工作流编排模块",
+          "score": 0.28
+        },
+        {
+          "module_id": "builtin.agent_runtime_core",
+          "module_title": "通用 Agent Runtime 模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.mcp_tool_hub",
+          "module_title": "MCP 工具协议模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.browser_operator",
+          "module_title": "浏览器自动化模块",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "skill_id": "skill_openmoss_moss_tts_nano",
+      "title": "MOSS TTS Nano",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/OpenMOSS__MOSS-TTS-Nano",
+      "tags": [
+        "general_skill",
+        "local_model"
+      ],
+      "best_match": {
+        "module_id": "builtin.local_model_runtime",
+        "module_title": "本地模型运行模块",
+        "score": 0.34
+      },
+      "top_matches": [
+        {
+          "module_id": "builtin.local_model_runtime",
+          "module_title": "本地模型运行模块",
+          "score": 0.34
+        },
+        {
+          "module_id": "builtin.ui_desktop_operator",
+          "module_title": "桌面 UI 操作模块",
+          "score": 0.06
+        },
+        {
+          "module_id": "builtin.code_agent_core",
+          "module_title": "代码智能体核心模块",
+          "score": 0.03
+        },
+        {
+          "module_id": "builtin.mcp_tool_hub",
+          "module_title": "MCP 工具协议模块",
+          "score": 0.03
+        },
+        {
+          "module_id": "builtin.memory_rag_core",
+          "module_title": "记忆与 RAG 检索模块",
+          "score": 0.03
+        }
+      ]
+    },
+    {
+      "skill_id": "skill_alchaincyf_darwin_skill",
+      "title": "Darwin skill",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/alchaincyf__darwin-skill",
+      "tags": [
+        "agent_runtime",
+        "prompt_framework"
+      ],
+      "best_match": {
+        "module_id": "builtin.agent_runtime_core",
+        "module_title": "通用 Agent Runtime 模块",
+        "score": 0.34
+      },
+      "top_matches": [
+        {
+          "module_id": "builtin.agent_runtime_core",
+          "module_title": "通用 Agent Runtime 模块",
+          "score": 0.34
+        },
+        {
+          "module_id": "builtin.memory_rag_core",
+          "module_title": "记忆与 RAG 检索模块",
+          "score": 0.06
+        },
+        {
+          "module_id": "builtin.prompt_skill_engine",
+          "module_title": "Prompt 技能引擎模块",
+          "score": 0.06
+        },
+        {
+          "module_id": "builtin.ui_desktop_operator",
+          "module_title": "桌面 UI 操作模块",
+          "score": 0.06
+        },
+        {
+          "module_id": "builtin.code_agent_core",
+          "module_title": "代码智能体核心模块",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "skill_id": "skill_nikmcfly_mirofish_offline",
+      "title": "MiroFish Offline",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/nikmcfly__MiroFish-Offline",
+      "tags": [
+        "agent_runtime",
+        "local_model",
+        "security",
+        "ui_component"
+      ],
+      "best_match": {
+        "module_id": "builtin.local_model_runtime",
+        "module_title": "本地模型运行模块",
+        "score": 0.37
+      },
+      "top_matches": [
+        {
+          "module_id": "builtin.local_model_runtime",
+          "module_title": "本地模型运行模块",
+          "score": 0.37
+        },
+        {
+          "module_id": "builtin.security_sandbox",
+          "module_title": "安全沙箱与策略模块",
+          "score": 0.31
+        },
+        {
+          "module_id": "builtin.agent_runtime_core",
+          "module_title": "通用 Agent Runtime 模块",
+          "score": 0.28
+        },
+        {
+          "module_id": "builtin.memory_rag_core",
+          "module_title": "记忆与 RAG 检索模块",
+          "score": 0.03
+        },
+        {
+          "module_id": "builtin.ui_desktop_operator",
+          "module_title": "桌面 UI 操作模块",
+          "score": 0.03
+        }
+      ]
+    },
+    {
+      "skill_id": "skill_voltagent_awesome_claude_design",
+      "title": "Awesome claude design",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/VoltAgent__awesome-claude-design",
+      "tags": [
+        "agent_runtime",
+        "prompt_framework",
+        "ui_component"
+      ],
+      "best_match": {
+        "module_id": "builtin.agent_runtime_core",
+        "module_title": "通用 Agent Runtime 模块",
+        "score": 0.28
+      },
+      "top_matches": [
+        {
+          "module_id": "builtin.agent_runtime_core",
+          "module_title": "通用 Agent Runtime 模块",
+          "score": 0.28
+        },
+        {
+          "module_id": "builtin.code_agent_core",
+          "module_title": "代码智能体核心模块",
+          "score": 0.06
+        },
+        {
+          "module_id": "builtin.mcp_tool_hub",
+          "module_title": "MCP 工具协议模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.browser_operator",
+          "module_title": "浏览器自动化模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.memory_rag_core",
+          "module_title": "记忆与 RAG 检索模块",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "skill_id": "skill_marketcalls_openalgo",
+      "title": "Openalgo",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/marketcalls__openalgo",
+      "tags": [
+        "ui_component",
+        "workflow"
+      ],
+      "best_match": {
+        "module_id": "builtin.code_agent_core",
+        "module_title": "代码智能体核心模块",
+        "score": 0.28
+      },
+      "top_matches": [
+        {
+          "module_id": "builtin.code_agent_core",
+          "module_title": "代码智能体核心模块",
+          "score": 0.28
+        },
+        {
+          "module_id": "builtin.workflow_orchestrator",
+          "module_title": "工作流编排模块",
+          "score": 0.28
+        },
+        {
+          "module_id": "builtin.agent_runtime_core",
+          "module_title": "通用 Agent Runtime 模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.mcp_tool_hub",
+          "module_title": "MCP 工具协议模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.browser_operator",
+          "module_title": "浏览器自动化模块",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "skill_id": "skill_perkfly_ex_skill",
+      "title": "Ex skill",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/perkfly__ex-skill",
+      "tags": [
+        "agent_runtime",
+        "prompt_framework"
+      ],
+      "best_match": {
+        "module_id": "builtin.agent_runtime_core",
+        "module_title": "通用 Agent Runtime 模块",
+        "score": 0.28
+      },
+      "top_matches": [
+        {
+          "module_id": "builtin.agent_runtime_core",
+          "module_title": "通用 Agent Runtime 模块",
+          "score": 0.28
+        },
+        {
+          "module_id": "builtin.memory_rag_core",
+          "module_title": "记忆与 RAG 检索模块",
+          "score": 0.06
+        },
+        {
+          "module_id": "builtin.prompt_skill_engine",
+          "module_title": "Prompt 技能引擎模块",
+          "score": 0.06
+        },
+        {
+          "module_id": "builtin.ui_desktop_operator",
+          "module_title": "桌面 UI 操作模块",
+          "score": 0.06
+        },
+        {
+          "module_id": "builtin.code_agent_core",
+          "module_title": "代码智能体核心模块",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "skill_id": "skill_liangdabiao_seedance2_storyboard_generator",
+      "title": "Seedance2 Storyboard Generator",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/liangdabiao__Seedance2-Storyboard-Generator",
+      "tags": [
+        "agent_runtime",
+        "prompt_framework"
+      ],
+      "best_match": {
+        "module_id": "builtin.agent_runtime_core",
+        "module_title": "通用 Agent Runtime 模块",
+        "score": 0.28
+      },
+      "top_matches": [
+        {
+          "module_id": "builtin.agent_runtime_core",
+          "module_title": "通用 Agent Runtime 模块",
+          "score": 0.28
+        },
+        {
+          "module_id": "builtin.code_agent_core",
+          "module_title": "代码智能体核心模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.mcp_tool_hub",
+          "module_title": "MCP 工具协议模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.browser_operator",
+          "module_title": "浏览器自动化模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.memory_rag_core",
+          "module_title": "记忆与 RAG 检索模块",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "skill_id": "skill_aaronjmars_miroshark",
+      "title": "MiroShark",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/aaronjmars__MiroShark",
+      "tags": [
+        "general_skill",
+        "security",
+        "ui_component"
+      ],
+      "best_match": {
+        "module_id": "builtin.security_sandbox",
+        "module_title": "安全沙箱与策略模块",
+        "score": 0.28
+      },
+      "top_matches": [
+        {
+          "module_id": "builtin.security_sandbox",
+          "module_title": "安全沙箱与策略模块",
+          "score": 0.28
+        },
+        {
+          "module_id": "builtin.code_agent_core",
+          "module_title": "代码智能体核心模块",
+          "score": 0.03
+        },
+        {
+          "module_id": "builtin.prompt_skill_engine",
+          "module_title": "Prompt 技能引擎模块",
+          "score": 0.03
+        },
+        {
+          "module_id": "builtin.artifact_report_engine",
+          "module_title": "产物与报告生成模块",
+          "score": 0.03
+        },
+        {
+          "module_id": "builtin.agent_runtime_core",
+          "module_title": "通用 Agent Runtime 模块",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "skill_id": "skill_modelscope_sirchmunk",
+      "title": "Sirchmunk",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/modelscope__sirchmunk",
+      "tags": [
+        "general_skill",
+        "local_model"
+      ],
+      "best_match": {
+        "module_id": "builtin.local_model_runtime",
+        "module_title": "本地模型运行模块",
+        "score": 0.28
+      },
+      "top_matches": [
+        {
+          "module_id": "builtin.local_model_runtime",
+          "module_title": "本地模型运行模块",
+          "score": 0.28
+        },
+        {
+          "module_id": "builtin.mcp_tool_hub",
+          "module_title": "MCP 工具协议模块",
+          "score": 0.03
+        },
+        {
+          "module_id": "builtin.code_agent_core",
+          "module_title": "代码智能体核心模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.agent_runtime_core",
+          "module_title": "通用 Agent Runtime 模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.browser_operator",
+          "module_title": "浏览器自动化模块",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "skill_id": "skill_jingyaogong_minimind_o",
+      "title": "Minimind o",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/jingyaogong__minimind-o",
+      "tags": [
+        "general_skill",
+        "local_model",
+        "ui_component"
+      ],
+      "best_match": {
+        "module_id": "builtin.local_model_runtime",
+        "module_title": "本地模型运行模块",
+        "score": 0.31
+      },
+      "top_matches": [
+        {
+          "module_id": "builtin.local_model_runtime",
+          "module_title": "本地模型运行模块",
+          "score": 0.31
+        },
+        {
+          "module_id": "builtin.mcp_tool_hub",
+          "module_title": "MCP 工具协议模块",
+          "score": 0.03
+        },
+        {
+          "module_id": "builtin.ui_desktop_operator",
+          "module_title": "桌面 UI 操作模块",
+          "score": 0.03
+        },
+        {
+          "module_id": "builtin.code_agent_core",
+          "module_title": "代码智能体核心模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.agent_runtime_core",
+          "module_title": "通用 Agent Runtime 模块",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "skill_id": "skill_zhouxiaoka_autoclip_mvp",
+      "title": "Autoclip mvp",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/zhouxiaoka__autoclip_mvp",
+      "tags": [
+        "browser_agent",
+        "local_model",
+        "ui_component"
+      ],
+      "best_match": {
+        "module_id": "builtin.local_model_runtime",
+        "module_title": "本地模型运行模块",
+        "score": 0.28
+      },
+      "top_matches": [
+        {
+          "module_id": "builtin.local_model_runtime",
+          "module_title": "本地模型运行模块",
+          "score": 0.28
+        },
+        {
+          "module_id": "builtin.artifact_report_engine",
+          "module_title": "产物与报告生成模块",
+          "score": 0.03
+        },
+        {
+          "module_id": "builtin.code_agent_core",
+          "module_title": "代码智能体核心模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.agent_runtime_core",
+          "module_title": "通用 Agent Runtime 模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.mcp_tool_hub",
+          "module_title": "MCP 工具协议模块",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "skill_id": "skill_kzhrknt_awesome_design_md_jp",
+      "title": "Awesome design md jp",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/kzhrknt__awesome-design-md-jp",
+      "tags": [
+        "agent_runtime"
+      ],
+      "best_match": {
+        "module_id": "builtin.agent_runtime_core",
+        "module_title": "通用 Agent Runtime 模块",
+        "score": 0.28
+      },
+      "top_matches": [
+        {
+          "module_id": "builtin.agent_runtime_core",
+          "module_title": "通用 Agent Runtime 模块",
+          "score": 0.28
+        },
+        {
+          "module_id": "builtin.code_agent_core",
+          "module_title": "代码智能体核心模块",
+          "score": 0.03
+        },
+        {
+          "module_id": "builtin.security_sandbox",
+          "module_title": "安全沙箱与策略模块",
+          "score": 0.03
+        },
+        {
+          "module_id": "builtin.mcp_tool_hub",
+          "module_title": "MCP 工具协议模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.browser_operator",
+          "module_title": "浏览器自动化模块",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "skill_id": "skill_opendcai_dataflex",
+      "title": "DataFlex",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/OpenDCAI__DataFlex",
+      "tags": [
+        "general_skill",
+        "local_model"
+      ],
+      "best_match": {
+        "module_id": "builtin.local_model_runtime",
+        "module_title": "本地模型运行模块",
+        "score": 0.31
+      },
+      "top_matches": [
+        {
+          "module_id": "builtin.local_model_runtime",
+          "module_title": "本地模型运行模块",
+          "score": 0.31
+        },
+        {
+          "module_id": "builtin.mcp_tool_hub",
+          "module_title": "MCP 工具协议模块",
+          "score": 0.03
+        },
+        {
+          "module_id": "builtin.ui_desktop_operator",
+          "module_title": "桌面 UI 操作模块",
+          "score": 0.03
+        },
+        {
+          "module_id": "builtin.code_agent_core",
+          "module_title": "代码智能体核心模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.agent_runtime_core",
+          "module_title": "通用 Agent Runtime 模块",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "skill_id": "skill_bergside_awesome_design_skills",
+      "title": "Awesome design skills",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/bergside__awesome-design-skills",
+      "tags": [
+        "agent_runtime",
+        "mcp_tool",
+        "prompt_framework",
+        "ui_component",
+        "workflow"
+      ],
+      "best_match": {
+        "module_id": "builtin.code_agent_core",
+        "module_title": "代码智能体核心模块",
+        "score": 0.34
+      },
+      "top_matches": [
+        {
+          "module_id": "builtin.code_agent_core",
+          "module_title": "代码智能体核心模块",
+          "score": 0.34
+        },
+        {
+          "module_id": "builtin.mcp_tool_hub",
+          "module_title": "MCP 工具协议模块",
+          "score": 0.34
+        },
+        {
+          "module_id": "builtin.agent_runtime_core",
+          "module_title": "通用 Agent Runtime 模块",
+          "score": 0.28
+        },
+        {
+          "module_id": "builtin.workflow_orchestrator",
+          "module_title": "工作流编排模块",
+          "score": 0.28
+        },
+        {
+          "module_id": "builtin.browser_operator",
+          "module_title": "浏览器自动化模块",
+          "score": 0.06
+        }
+      ]
+    },
+    {
+      "skill_id": "skill_t_lab_cuhksz_claude_code",
+      "title": "Claude code",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/T-Lab-CUHKSZ__claude-code",
+      "tags": [
+        "agent_runtime",
+        "prompt_framework"
+      ],
+      "best_match": {
+        "module_id": "builtin.agent_runtime_core",
+        "module_title": "通用 Agent Runtime 模块",
+        "score": 0.28
+      },
+      "top_matches": [
+        {
+          "module_id": "builtin.agent_runtime_core",
+          "module_title": "通用 Agent Runtime 模块",
+          "score": 0.28
+        },
+        {
+          "module_id": "builtin.code_agent_core",
+          "module_title": "代码智能体核心模块",
+          "score": 0.09
+        },
+        {
+          "module_id": "builtin.security_sandbox",
+          "module_title": "安全沙箱与策略模块",
+          "score": 0.09
+        },
+        {
+          "module_id": "builtin.browser_operator",
+          "module_title": "浏览器自动化模块",
+          "score": 0.06
+        },
+        {
+          "module_id": "builtin.mcp_tool_hub",
+          "module_title": "MCP 工具协议模块",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "skill_id": "skill_thesaravanakumar_cognizant_early_engagement",
+      "title": "Cognizant Early Engagement",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/thesaravanakumar__Cognizant-Early-Engagement",
+      "tags": [
+        "agent_runtime",
+        "ui_component"
+      ],
+      "best_match": {
+        "module_id": "builtin.agent_runtime_core",
+        "module_title": "通用 Agent Runtime 模块",
+        "score": 0.28
+      },
+      "top_matches": [
+        {
+          "module_id": "builtin.agent_runtime_core",
+          "module_title": "通用 Agent Runtime 模块",
+          "score": 0.28
+        },
+        {
+          "module_id": "builtin.memory_rag_core",
+          "module_title": "记忆与 RAG 检索模块",
+          "score": 0.03
+        },
+        {
+          "module_id": "builtin.prompt_skill_engine",
+          "module_title": "Prompt 技能引擎模块",
+          "score": 0.03
+        },
+        {
+          "module_id": "builtin.ui_desktop_operator",
+          "module_title": "桌面 UI 操作模块",
+          "score": 0.03
+        },
+        {
+          "module_id": "builtin.code_agent_core",
+          "module_title": "代码智能体核心模块",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "skill_id": "skill_hu_uh_awesome_design_md",
+      "title": "Awesome design md",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/HU-UH__awesome-design-md",
+      "tags": [
+        "agent_runtime"
+      ],
+      "best_match": {
+        "module_id": "builtin.agent_runtime_core",
+        "module_title": "通用 Agent Runtime 模块",
+        "score": 0.28
+      },
+      "top_matches": [
+        {
+          "module_id": "builtin.agent_runtime_core",
+          "module_title": "通用 Agent Runtime 模块",
+          "score": 0.28
+        },
+        {
+          "module_id": "builtin.code_agent_core",
+          "module_title": "代码智能体核心模块",
+          "score": 0.03
+        },
+        {
+          "module_id": "builtin.mcp_tool_hub",
+          "module_title": "MCP 工具协议模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.browser_operator",
+          "module_title": "浏览器自动化模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.memory_rag_core",
+          "module_title": "记忆与 RAG 检索模块",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "skill_id": "skill_pixel_cellar_claude_code_game_studios",
+      "title": "Claude Code Game Studios",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/pixel-cellar__Claude-Code-Game-Studios",
+      "tags": [
+        "agent_runtime",
+        "prompt_framework"
+      ],
+      "best_match": {
+        "module_id": "builtin.agent_runtime_core",
+        "module_title": "通用 Agent Runtime 模块",
+        "score": 0.28
+      },
+      "top_matches": [
+        {
+          "module_id": "builtin.agent_runtime_core",
+          "module_title": "通用 Agent Runtime 模块",
+          "score": 0.28
+        },
+        {
+          "module_id": "builtin.code_agent_core",
+          "module_title": "代码智能体核心模块",
+          "score": 0.06
+        },
+        {
+          "module_id": "builtin.security_sandbox",
+          "module_title": "安全沙箱与策略模块",
+          "score": 0.06
+        },
+        {
+          "module_id": "builtin.mcp_tool_hub",
+          "module_title": "MCP 工具协议模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.browser_operator",
+          "module_title": "浏览器自动化模块",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "skill_id": "skill_pzy2000_repogenesis",
+      "title": "RepoGenesis",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/pzy2000__RepoGenesis",
+      "tags": [
+        "code_agent",
+        "evaluation",
+        "general_skill",
+        "workflow"
+      ],
+      "best_match": {
+        "module_id": "builtin.code_agent_core",
+        "module_title": "代码智能体核心模块",
+        "score": 0.56
+      },
+      "top_matches": [
+        {
+          "module_id": "builtin.code_agent_core",
+          "module_title": "代码智能体核心模块",
+          "score": 0.56
+        },
+        {
+          "module_id": "builtin.workflow_orchestrator",
+          "module_title": "工作流编排模块",
+          "score": 0.28
+        },
+        {
+          "module_id": "builtin.eval_benchmark",
+          "module_title": "评估与基准模块",
+          "score": 0.03
+        },
+        {
+          "module_id": "builtin.artifact_report_engine",
+          "module_title": "产物与报告生成模块",
+          "score": 0.03
+        },
+        {
+          "module_id": "builtin.agent_runtime_core",
+          "module_title": "通用 Agent Runtime 模块",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "skill_id": "skill_fchangjun_awesome_design_md_cn",
+      "title": "Awesome design md cn",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/fchangjun__awesome-design-md-cn",
+      "tags": [
+        "agent_runtime"
+      ],
+      "best_match": {
+        "module_id": "builtin.agent_runtime_core",
+        "module_title": "通用 Agent Runtime 模块",
+        "score": 0.31
+      },
+      "top_matches": [
+        {
+          "module_id": "builtin.agent_runtime_core",
+          "module_title": "通用 Agent Runtime 模块",
+          "score": 0.31
+        },
+        {
+          "module_id": "builtin.code_agent_core",
+          "module_title": "代码智能体核心模块",
+          "score": 0.06
+        },
+        {
+          "module_id": "builtin.prompt_skill_engine",
+          "module_title": "Prompt 技能引擎模块",
+          "score": 0.03
+        },
+        {
+          "module_id": "builtin.eval_benchmark",
+          "module_title": "评估与基准模块",
+          "score": 0.03
+        },
+        {
+          "module_id": "builtin.mcp_tool_hub",
+          "module_title": "MCP 工具协议模块",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "skill_id": "skill_meliwat_awesome_design_md_pre_paywall",
+      "title": "Awesome design md pre paywall",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/Meliwat__awesome-design-md-pre-paywall",
+      "tags": [
+        "agent_runtime"
+      ],
+      "best_match": {
+        "module_id": "builtin.agent_runtime_core",
+        "module_title": "通用 Agent Runtime 模块",
+        "score": 0.28
+      },
+      "top_matches": [
+        {
+          "module_id": "builtin.agent_runtime_core",
+          "module_title": "通用 Agent Runtime 模块",
+          "score": 0.28
+        },
+        {
+          "module_id": "builtin.code_agent_core",
+          "module_title": "代码智能体核心模块",
+          "score": 0.03
+        },
+        {
+          "module_id": "builtin.mcp_tool_hub",
+          "module_title": "MCP 工具协议模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.browser_operator",
+          "module_title": "浏览器自动化模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.memory_rag_core",
+          "module_title": "记忆与 RAG 检索模块",
+          "score": 0.0
+        }
+      ]
+    }
+  ],
+  "new_module_candidates": [
+    {
+      "skill_id": "skill_public_apis_public_apis",
+      "title": "Public apis",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/public-apis__public-apis",
+      "tags": [
+        "general_skill"
+      ],
+      "best_match": {
+        "module_id": "builtin.code_agent_core",
+        "module_title": "代码智能体核心模块",
+        "score": 0.06
+      },
+      "top_matches": [
+        {
+          "module_id": "builtin.code_agent_core",
+          "module_title": "代码智能体核心模块",
+          "score": 0.06
+        },
+        {
+          "module_id": "builtin.agent_runtime_core",
+          "module_title": "通用 Agent Runtime 模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.mcp_tool_hub",
+          "module_title": "MCP 工具协议模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.browser_operator",
+          "module_title": "浏览器自动化模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.memory_rag_core",
+          "module_title": "记忆与 RAG 检索模块",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "skill_id": "skill_growinggit_github_chinese_top_charts",
+      "title": "GitHub Chinese Top Charts",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/GrowingGit__GitHub-Chinese-Top-Charts",
+      "tags": [
+        "general_skill"
+      ],
+      "best_match": {
+        "module_id": "builtin.code_agent_core",
+        "module_title": "代码智能体核心模块",
+        "score": 0.0
+      },
+      "top_matches": [
+        {
+          "module_id": "builtin.code_agent_core",
+          "module_title": "代码智能体核心模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.agent_runtime_core",
+          "module_title": "通用 Agent Runtime 模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.mcp_tool_hub",
+          "module_title": "MCP 工具协议模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.browser_operator",
+          "module_title": "浏览器自动化模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.memory_rag_core",
+          "module_title": "记忆与 RAG 检索模块",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "skill_id": "skill_nanmicoder_mediacrawler",
+      "title": "MediaCrawler",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/NanmiCoder__MediaCrawler",
+      "tags": [
+        "general_skill"
+      ],
+      "best_match": {
+        "module_id": "builtin.code_agent_core",
+        "module_title": "代码智能体核心模块",
+        "score": 0.0
+      },
+      "top_matches": [
+        {
+          "module_id": "builtin.code_agent_core",
+          "module_title": "代码智能体核心模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.agent_runtime_core",
+          "module_title": "通用 Agent Runtime 模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.mcp_tool_hub",
+          "module_title": "MCP 工具协议模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.browser_operator",
+          "module_title": "浏览器自动化模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.memory_rag_core",
+          "module_title": "记忆与 RAG 检索模块",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "skill_id": "skill_chenglou_pretext",
+      "title": "Pretext",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/chenglou__pretext",
+      "tags": [
+        "general_skill"
+      ],
+      "best_match": {
+        "module_id": "builtin.memory_rag_core",
+        "module_title": "记忆与 RAG 检索模块",
+        "score": 0.03
+      },
+      "top_matches": [
+        {
+          "module_id": "builtin.memory_rag_core",
+          "module_title": "记忆与 RAG 检索模块",
+          "score": 0.03
+        },
+        {
+          "module_id": "builtin.code_agent_core",
+          "module_title": "代码智能体核心模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.agent_runtime_core",
+          "module_title": "通用 Agent Runtime 模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.mcp_tool_hub",
+          "module_title": "MCP 工具协议模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.browser_operator",
+          "module_title": "浏览器自动化模块",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "skill_id": "skill_yunaiv_ruoyi_vue_pro",
+      "title": "Ruoyi vue pro",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/YunaiV__ruoyi-vue-pro",
+      "tags": [
+        "ui_component"
+      ],
+      "best_match": {
+        "module_id": "builtin.local_model_runtime",
+        "module_title": "本地模型运行模块",
+        "score": 0.03
+      },
+      "top_matches": [
+        {
+          "module_id": "builtin.local_model_runtime",
+          "module_title": "本地模型运行模块",
+          "score": 0.03
+        },
+        {
+          "module_id": "builtin.code_agent_core",
+          "module_title": "代码智能体核心模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.agent_runtime_core",
+          "module_title": "通用 Agent Runtime 模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.mcp_tool_hub",
+          "module_title": "MCP 工具协议模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.browser_operator",
+          "module_title": "浏览器自动化模块",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "skill_id": "skill_yunaiv_yudao_cloud",
+      "title": "Yudao cloud",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/YunaiV__yudao-cloud",
+      "tags": [
+        "general_skill",
+        "ui_component"
+      ],
+      "best_match": {
+        "module_id": "builtin.code_agent_core",
+        "module_title": "代码智能体核心模块",
+        "score": 0.0
+      },
+      "top_matches": [
+        {
+          "module_id": "builtin.code_agent_core",
+          "module_title": "代码智能体核心模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.agent_runtime_core",
+          "module_title": "通用 Agent Runtime 模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.mcp_tool_hub",
+          "module_title": "MCP 工具协议模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.browser_operator",
+          "module_title": "浏览器自动化模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.memory_rag_core",
+          "module_title": "记忆与 RAG 检索模块",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "skill_id": "skill_vickscarlet_liferestart",
+      "title": "LifeRestart",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/VickScarlet__lifeRestart",
+      "tags": [
+        "general_skill"
+      ],
+      "best_match": {
+        "module_id": "builtin.code_agent_core",
+        "module_title": "代码智能体核心模块",
+        "score": 0.0
+      },
+      "top_matches": [
+        {
+          "module_id": "builtin.code_agent_core",
+          "module_title": "代码智能体核心模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.agent_runtime_core",
+          "module_title": "通用 Agent Runtime 模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.mcp_tool_hub",
+          "module_title": "MCP 工具协议模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.browser_operator",
+          "module_title": "浏览器自动化模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.memory_rag_core",
+          "module_title": "记忆与 RAG 检索模块",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "skill_id": "skill_wangyuan389_mall_cook",
+      "title": "Mall cook",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/wangyuan389__mall-cook",
+      "tags": [
+        "browser_agent",
+        "general_skill",
+        "ui_component"
+      ],
+      "best_match": {
+        "module_id": "builtin.code_agent_core",
+        "module_title": "代码智能体核心模块",
+        "score": 0.0
+      },
+      "top_matches": [
+        {
+          "module_id": "builtin.code_agent_core",
+          "module_title": "代码智能体核心模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.agent_runtime_core",
+          "module_title": "通用 Agent Runtime 模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.mcp_tool_hub",
+          "module_title": "MCP 工具协议模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.browser_operator",
+          "module_title": "浏览器自动化模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.memory_rag_core",
+          "module_title": "记忆与 RAG 检索模块",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "skill_id": "skill_gz_yami_mall4j",
+      "title": "Mall4j",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/gz-yami__mall4j",
+      "tags": [
+        "general_skill"
+      ],
+      "best_match": {
+        "module_id": "builtin.code_agent_core",
+        "module_title": "代码智能体核心模块",
+        "score": 0.0
+      },
+      "top_matches": [
+        {
+          "module_id": "builtin.code_agent_core",
+          "module_title": "代码智能体核心模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.agent_runtime_core",
+          "module_title": "通用 Agent Runtime 模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.mcp_tool_hub",
+          "module_title": "MCP 工具协议模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.browser_operator",
+          "module_title": "浏览器自动化模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.memory_rag_core",
+          "module_title": "记忆与 RAG 检索模块",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "skill_id": "skill_lilishop_lilishop",
+      "title": "Lilishop",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/lilishop__lilishop",
+      "tags": [
+        "ui_component"
+      ],
+      "best_match": {
+        "module_id": "builtin.code_agent_core",
+        "module_title": "代码智能体核心模块",
+        "score": 0.0
+      },
+      "top_matches": [
+        {
+          "module_id": "builtin.code_agent_core",
+          "module_title": "代码智能体核心模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.agent_runtime_core",
+          "module_title": "通用 Agent Runtime 模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.mcp_tool_hub",
+          "module_title": "MCP 工具协议模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.browser_operator",
+          "module_title": "浏览器自动化模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.memory_rag_core",
+          "module_title": "记忆与 RAG 检索模块",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "skill_id": "skill_iamdarcy_hioshop_miniprogram",
+      "title": "Hioshop miniprogram",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/iamdarcy__hioshop-miniprogram",
+      "tags": [
+        "general_skill",
+        "ui_component"
+      ],
+      "best_match": {
+        "module_id": "builtin.code_agent_core",
+        "module_title": "代码智能体核心模块",
+        "score": 0.0
+      },
+      "top_matches": [
+        {
+          "module_id": "builtin.code_agent_core",
+          "module_title": "代码智能体核心模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.agent_runtime_core",
+          "module_title": "通用 Agent Runtime 模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.mcp_tool_hub",
+          "module_title": "MCP 工具协议模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.browser_operator",
+          "module_title": "浏览器自动化模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.memory_rag_core",
+          "module_title": "记忆与 RAG 检索模块",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "skill_id": "skill_shitagaki_lab_see_through",
+      "title": "See through",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/shitagaki-lab__see-through",
+      "tags": [
+        "general_skill"
+      ],
+      "best_match": {
+        "module_id": "builtin.agent_runtime_core",
+        "module_title": "通用 Agent Runtime 模块",
+        "score": 0.03
+      },
+      "top_matches": [
+        {
+          "module_id": "builtin.agent_runtime_core",
+          "module_title": "通用 Agent Runtime 模块",
+          "score": 0.03
+        },
+        {
+          "module_id": "builtin.mcp_tool_hub",
+          "module_title": "MCP 工具协议模块",
+          "score": 0.03
+        },
+        {
+          "module_id": "builtin.code_agent_core",
+          "module_title": "代码智能体核心模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.browser_operator",
+          "module_title": "浏览器自动化模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.memory_rag_core",
+          "module_title": "记忆与 RAG 检索模块",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "skill_id": "skill_chhsiching_github_chinese_top_charts",
+      "title": "GitHub Chinese Top Charts",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/ChHsiching__GitHub-Chinese-Top-Charts",
+      "tags": [
+        "general_skill",
+        "ui_component"
+      ],
+      "best_match": {
+        "module_id": "builtin.code_agent_core",
+        "module_title": "代码智能体核心模块",
+        "score": 0.0
+      },
+      "top_matches": [
+        {
+          "module_id": "builtin.code_agent_core",
+          "module_title": "代码智能体核心模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.agent_runtime_core",
+          "module_title": "通用 Agent Runtime 模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.mcp_tool_hub",
+          "module_title": "MCP 工具协议模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.browser_operator",
+          "module_title": "浏览器自动化模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.memory_rag_core",
+          "module_title": "记忆与 RAG 检索模块",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "skill_id": "skill_zyrouge_symphony",
+      "title": "Symphony",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/zyrouge__symphony",
+      "tags": [
+        "general_skill"
+      ],
+      "best_match": {
+        "module_id": "builtin.code_agent_core",
+        "module_title": "代码智能体核心模块",
+        "score": 0.0
+      },
+      "top_matches": [
+        {
+          "module_id": "builtin.code_agent_core",
+          "module_title": "代码智能体核心模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.agent_runtime_core",
+          "module_title": "通用 Agent Runtime 模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.mcp_tool_hub",
+          "module_title": "MCP 工具协议模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.browser_operator",
+          "module_title": "浏览器自动化模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.memory_rag_core",
+          "module_title": "记忆与 RAG 检索模块",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "skill_id": "skill_eliben_raft",
+      "title": "Raft",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/eliben__raft",
+      "tags": [
+        "general_skill"
+      ],
+      "best_match": {
+        "module_id": "builtin.code_agent_core",
+        "module_title": "代码智能体核心模块",
+        "score": 0.0
+      },
+      "top_matches": [
+        {
+          "module_id": "builtin.code_agent_core",
+          "module_title": "代码智能体核心模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.agent_runtime_core",
+          "module_title": "通用 Agent Runtime 模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.mcp_tool_hub",
+          "module_title": "MCP 工具协议模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.browser_operator",
+          "module_title": "浏览器自动化模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.memory_rag_core",
+          "module_title": "记忆与 RAG 检索模块",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "skill_id": "skill_paidax01_math_curve_loaders",
+      "title": "Math curve loaders",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/Paidax01__math-curve-loaders",
+      "tags": [
+        "general_skill"
+      ],
+      "best_match": {
+        "module_id": "builtin.security_sandbox",
+        "module_title": "安全沙箱与策略模块",
+        "score": 0.06
+      },
+      "top_matches": [
+        {
+          "module_id": "builtin.security_sandbox",
+          "module_title": "安全沙箱与策略模块",
+          "score": 0.06
+        },
+        {
+          "module_id": "builtin.code_agent_core",
+          "module_title": "代码智能体核心模块",
+          "score": 0.03
+        },
+        {
+          "module_id": "builtin.agent_runtime_core",
+          "module_title": "通用 Agent Runtime 模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.mcp_tool_hub",
+          "module_title": "MCP 工具协议模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.browser_operator",
+          "module_title": "浏览器自动化模块",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "skill_id": "skill_whoiszxl_shopzz",
+      "title": "Shopzz",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/whoiszxl__shopzz",
+      "tags": [
+        "general_skill",
+        "ui_component"
+      ],
+      "best_match": {
+        "module_id": "builtin.code_agent_core",
+        "module_title": "代码智能体核心模块",
+        "score": 0.03
+      },
+      "top_matches": [
+        {
+          "module_id": "builtin.code_agent_core",
+          "module_title": "代码智能体核心模块",
+          "score": 0.03
+        },
+        {
+          "module_id": "builtin.agent_runtime_core",
+          "module_title": "通用 Agent Runtime 模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.mcp_tool_hub",
+          "module_title": "MCP 工具协议模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.browser_operator",
+          "module_title": "浏览器自动化模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.memory_rag_core",
+          "module_title": "记忆与 RAG 检索模块",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "skill_id": "skill_nanbouking_wetravel",
+      "title": "WeTravel",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/nanbouking__WeTravel",
+      "tags": [
+        "general_skill"
+      ],
+      "best_match": {
+        "module_id": "builtin.code_agent_core",
+        "module_title": "代码智能体核心模块",
+        "score": 0.0
+      },
+      "top_matches": [
+        {
+          "module_id": "builtin.code_agent_core",
+          "module_title": "代码智能体核心模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.agent_runtime_core",
+          "module_title": "通用 Agent Runtime 模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.mcp_tool_hub",
+          "module_title": "MCP 工具协议模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.browser_operator",
+          "module_title": "浏览器自动化模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.memory_rag_core",
+          "module_title": "记忆与 RAG 检索模块",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "skill_id": "skill_soxoj_maigret_tg_bot",
+      "title": "Maigret tg bot",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/soxoj__maigret-tg-bot",
+      "tags": [
+        "general_skill"
+      ],
+      "best_match": {
+        "module_id": "builtin.code_agent_core",
+        "module_title": "代码智能体核心模块",
+        "score": 0.0
+      },
+      "top_matches": [
+        {
+          "module_id": "builtin.code_agent_core",
+          "module_title": "代码智能体核心模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.agent_runtime_core",
+          "module_title": "通用 Agent Runtime 模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.mcp_tool_hub",
+          "module_title": "MCP 工具协议模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.browser_operator",
+          "module_title": "浏览器自动化模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.memory_rag_core",
+          "module_title": "记忆与 RAG 检索模块",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "skill_id": "skill_openmoss_moss_tts_nano_reader",
+      "title": "MOSS TTS Nano Reader",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/OpenMOSS__MOSS-TTS-Nano-Reader",
+      "tags": [
+        "general_skill"
+      ],
+      "best_match": {
+        "module_id": "builtin.code_agent_core",
+        "module_title": "代码智能体核心模块",
+        "score": 0.0
+      },
+      "top_matches": [
+        {
+          "module_id": "builtin.code_agent_core",
+          "module_title": "代码智能体核心模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.agent_runtime_core",
+          "module_title": "通用 Agent Runtime 模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.mcp_tool_hub",
+          "module_title": "MCP 工具协议模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.browser_operator",
+          "module_title": "浏览器自动化模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.memory_rag_core",
+          "module_title": "记忆与 RAG 检索模块",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "skill_id": "skill_yhf98_moss_tts_nano_win",
+      "title": "MOSS TTS Nano Win",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/yhf98__MOSS-TTS-Nano-Win",
+      "tags": [
+        "general_skill"
+      ],
+      "best_match": {
+        "module_id": "builtin.code_agent_core",
+        "module_title": "代码智能体核心模块",
+        "score": 0.0
+      },
+      "top_matches": [
+        {
+          "module_id": "builtin.code_agent_core",
+          "module_title": "代码智能体核心模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.agent_runtime_core",
+          "module_title": "通用 Agent Runtime 模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.mcp_tool_hub",
+          "module_title": "MCP 工具协议模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.browser_operator",
+          "module_title": "浏览器自动化模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.memory_rag_core",
+          "module_title": "记忆与 RAG 检索模块",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "skill_id": "skill_castvivian_chenzaikuaipao_io",
+      "title": "Chenzaikuaipao.io",
+      "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/CASTvivian__chenzaikuaipao.io",
+      "tags": [
+        "general_skill"
+      ],
+      "best_match": {
+        "module_id": "builtin.code_agent_core",
+        "module_title": "代码智能体核心模块",
+        "score": 0.0
+      },
+      "top_matches": [
+        {
+          "module_id": "builtin.code_agent_core",
+          "module_title": "代码智能体核心模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.agent_runtime_core",
+          "module_title": "通用 Agent Runtime 模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.mcp_tool_hub",
+          "module_title": "MCP 工具协议模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.browser_operator",
+          "module_title": "浏览器自动化模块",
+          "score": 0.0
+        },
+        {
+          "module_id": "builtin.memory_rag_core",
+          "module_title": "记忆与 RAG 检索模块",
+          "score": 0.0
+        }
+      ]
+    }
+  ],
+  "note": "This file is an audit/proposal. It does not auto-enable new runtime capabilities."
+}

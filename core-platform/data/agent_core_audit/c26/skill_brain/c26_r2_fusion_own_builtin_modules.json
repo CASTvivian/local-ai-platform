@@ -1,0 +1,560 @@
+{
+  "checked_at": "2026-05-16T09:53:15.135773+00:00",
+  "rebuild_core_count": 83,
+  "assigned_reference_count": 83,
+  "module_count": 12,
+  "module_summary": {
+    "builtin.code_agent_core": 26,
+    "builtin.agent_runtime_core": 2,
+    "builtin.mcp_tool_hub": 12,
+    "builtin.browser_operator": 9,
+    "builtin.memory_rag_core": 17,
+    "builtin.workflow_orchestrator": 3,
+    "builtin.local_model_runtime": 9,
+    "builtin.prompt_skill_engine": 1,
+    "builtin.security_sandbox": 1,
+    "builtin.eval_benchmark": 3,
+    "builtin.ui_desktop_operator": 0,
+    "builtin.artifact_report_engine": 0
+  },
+  "top_modules": [
+    {
+      "id": "builtin.code_agent_core",
+      "title": "代码智能体核心模块",
+      "source_reference_count": 26,
+      "top_sources": [
+        {
+          "skill_id": "skill_forrestchang_andrej_karpathy_skills",
+          "title": "Andrej karpathy skills",
+          "source_path": "core-platform/data/brain_assets/repos/github_stars/forrestchang__andrej-karpathy-skills",
+          "stars": 127053,
+          "score": 120,
+          "tags": [
+            "agent_runtime",
+            "code_agent",
+            "local_model",
+            "prompt_framework"
+          ]
+        },
+        {
+          "skill_id": "skill_garrytan_gstack",
+          "title": "Gstack",
+          "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/garrytan__gstack",
+          "stars": 94845,
+          "score": 118,
+          "tags": [
+            "agent_runtime",
+            "code_agent",
+            "mcp_tool",
+            "prompt_framework"
+          ]
+        },
+        {
+          "skill_id": "skill_coleam00_archon",
+          "title": "Archon",
+          "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/coleam00__Archon",
+          "stars": 21341,
+          "score": 118,
+          "tags": [
+            "agent_runtime",
+            "code_agent",
+            "mcp_tool",
+            "prompt_framework",
+            "workflow"
+          ]
+        },
+        {
+          "skill_id": "skill_coleam00_claude_memory_compiler",
+          "title": "Claude memory compiler",
+          "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/coleam00__claude-memory-compiler",
+          "stars": 1040,
+          "score": 114,
+          "tags": [
+            "agent_runtime",
+            "code_agent",
+            "local_model",
+            "memory",
+            "prompt_framework"
+          ]
+        },
+        {
+          "skill_id": "skill_vibe_with_me_tools_agent_reachout",
+          "title": "Agent reachout",
+          "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/vibe-with-me-tools__agent-reachout",
+          "stars": 42,
+          "score": 113,
+          "tags": [
+            "agent_runtime",
+            "code_agent",
+            "local_model",
+            "mcp_tool",
+            "prompt_framework",
+            "security",
+            "workflow"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "builtin.memory_rag_core",
+      "title": "记忆与 RAG 检索模块",
+      "source_reference_count": 17,
+      "top_sources": [
+        {
+          "skill_id": "skill_affaan_m_everything_claude_code",
+          "title": "Everything claude code",
+          "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/affaan-m__everything-claude-code",
+          "stars": 180549,
+          "score": 134,
+          "tags": [
+            "agent_runtime",
+            "local_model",
+            "mcp_tool",
+            "memory",
+            "prompt_framework"
+          ]
+        },
+        {
+          "skill_id": "skill_bytedance_deer_flow",
+          "title": "Deer flow",
+          "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/bytedance__deer-flow",
+          "stars": 67192,
+          "score": 126,
+          "tags": [
+            "agent_runtime",
+            "local_model",
+            "mcp_tool",
+            "memory",
+            "prompt_framework",
+            "workflow"
+          ]
+        },
+        {
+          "skill_id": "skill_howardpen9_hermes_gbrain_bridge",
+          "title": "Hermes gbrain bridge",
+          "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/howardpen9__hermes-gbrain-bridge",
+          "stars": 30,
+          "score": 114,
+          "tags": [
+            "agent_runtime",
+            "local_model",
+            "mcp_tool",
+            "memory",
+            "prompt_framework"
+          ]
+        },
+        {
+          "skill_id": "skill_opendatalab_mineru",
+          "title": "MinerU",
+          "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/opendatalab__MinerU",
+          "stars": 62790,
+          "score": 108,
+          "tags": [
+            "agent_runtime",
+            "local_model",
+            "memory"
+          ]
+        },
+        {
+          "skill_id": "skill_666ghj_mirofish",
+          "title": "MiroFish",
+          "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/666ghj__MiroFish",
+          "stars": 60353,
+          "score": 108,
+          "tags": [
+            "agent_runtime",
+            "local_model",
+            "memory"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "builtin.mcp_tool_hub",
+      "title": "MCP 工具协议模块",
+      "source_reference_count": 12,
+      "top_sources": [
+        {
+          "skill_id": "skill_datawhalechina_easy_vibe",
+          "title": "Easy vibe",
+          "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/datawhalechina__easy-vibe",
+          "stars": 10410,
+          "score": 124,
+          "tags": [
+            "agent_runtime",
+            "code_agent",
+            "local_model",
+            "mcp_tool",
+            "workflow"
+          ]
+        },
+        {
+          "skill_id": "skill_significant_gravitas_autogpt",
+          "title": "AutoGPT",
+          "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/Significant-Gravitas__AutoGPT",
+          "stars": 184250,
+          "score": 120,
+          "tags": [
+            "agent_runtime",
+            "local_model",
+            "mcp_tool"
+          ]
+        },
+        {
+          "skill_id": "skill_anthropics_skills",
+          "title": "Skills",
+          "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/anthropics__skills",
+          "stars": 133030,
+          "score": 108,
+          "tags": [
+            "agent_runtime",
+            "mcp_tool",
+            "ui_component"
+          ]
+        },
+        {
+          "skill_id": "skill_panniantong_agent_reach",
+          "title": "Agent Reach",
+          "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/Panniantong__Agent-Reach",
+          "stars": 19344,
+          "score": 106,
+          "tags": [
+            "agent_runtime",
+            "local_model",
+            "mcp_tool",
+            "prompt_framework",
+            "workflow"
+          ]
+        },
+        {
+          "skill_id": "skill_vxcontrol_pentagi",
+          "title": "Pentagi",
+          "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/vxcontrol__pentagi",
+          "stars": 16812,
+          "score": 106,
+          "tags": [
+            "agent_runtime",
+            "local_model",
+            "mcp_tool",
+            "ui_component",
+            "workflow"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "builtin.browser_operator",
+      "title": "浏览器自动化模块",
+      "source_reference_count": 9,
+      "top_sources": [
+        {
+          "skill_id": "skill_safishamsi_graphify",
+          "title": "Graphify",
+          "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/safishamsi__graphify",
+          "stars": 47241,
+          "score": 130,
+          "tags": [
+            "agent_runtime",
+            "browser_agent",
+            "code_agent",
+            "memory",
+            "prompt_framework"
+          ]
+        },
+        {
+          "skill_id": "skill_heygen_com_hyperframes",
+          "title": "Hyperframes",
+          "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/heygen-com__hyperframes",
+          "stars": 17624,
+          "score": 128,
+          "tags": [
+            "agent_runtime",
+            "browser_agent",
+            "code_agent",
+            "mcp_tool"
+          ]
+        },
+        {
+          "skill_id": "skill_zhouxiaoka_autoclip",
+          "title": "Autoclip",
+          "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/zhouxiaoka__autoclip",
+          "stars": 5188,
+          "score": 122,
+          "tags": [
+            "agent_runtime",
+            "browser_agent",
+            "local_model",
+            "mcp_tool",
+            "ui_component"
+          ]
+        },
+        {
+          "skill_id": "skill_browser_use_browser_harness",
+          "title": "Browser harness",
+          "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/browser-use__browser-harness",
+          "stars": 12323,
+          "score": 104,
+          "tags": [
+            "agent_runtime",
+            "browser_agent",
+            "general_skill",
+            "local_model",
+            "prompt_framework"
+          ]
+        },
+        {
+          "skill_id": "skill_hbai_ltd_toonflow_app",
+          "title": "Toonflow app",
+          "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/HBAI-Ltd__Toonflow-app",
+          "stars": 7875,
+          "score": 102,
+          "tags": [
+            "browser_agent",
+            "local_model",
+            "mcp_tool",
+            "ui_component",
+            "workflow"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "builtin.local_model_runtime",
+      "title": "本地模型运行模块",
+      "source_reference_count": 9,
+      "top_sources": [
+        {
+          "skill_id": "skill_nousresearch_hermes_agent",
+          "title": "Hermes agent",
+          "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/NousResearch__hermes-agent",
+          "stars": 146973,
+          "score": 102,
+          "tags": [
+            "agent_runtime",
+            "local_model",
+            "prompt_framework",
+            "ui_component"
+          ]
+        },
+        {
+          "skill_id": "skill_shareai_lab_learn_claude_code",
+          "title": "Learn claude code",
+          "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/shareAI-lab__learn-claude-code",
+          "stars": 60059,
+          "score": 94,
+          "tags": [
+            "agent_runtime",
+            "local_model",
+            "prompt_framework"
+          ]
+        },
+        {
+          "skill_id": "skill_jingyaogong_minimind",
+          "title": "Minimind",
+          "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/jingyaogong__minimind",
+          "stars": 49610,
+          "score": 94,
+          "tags": [
+            "agent_runtime",
+            "local_model"
+          ]
+        },
+        {
+          "skill_id": "skill_microsoft_qlib",
+          "title": "Qlib",
+          "source_path": "/Users/mofamaomi/Documents/本地ai/qlib",
+          "stars": 42752,
+          "score": 94,
+          "tags": [
+            "agent_runtime",
+            "local_model"
+          ]
+        },
+        {
+          "skill_id": "skill_emcie_co_parlant",
+          "title": "Parlant",
+          "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/emcie-co__parlant",
+          "stars": 18069,
+          "score": 88,
+          "tags": [
+            "agent_runtime",
+            "local_model"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "builtin.workflow_orchestrator",
+      "title": "工作流编排模块",
+      "source_reference_count": 3,
+      "top_sources": [
+        {
+          "skill_id": "skill_msitarzewski_agency_agents",
+          "title": "Agency agents",
+          "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/msitarzewski__agency-agents",
+          "stars": 96502,
+          "score": 82,
+          "tags": [
+            "agent_runtime",
+            "ui_component",
+            "workflow"
+          ]
+        },
+        {
+          "skill_id": "skill_yeachan_heo_oh_my_codex",
+          "title": "Oh my codex",
+          "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/Yeachan-Heo__oh-my-codex",
+          "stars": 28395,
+          "score": 82,
+          "tags": [
+            "agent_runtime",
+            "prompt_framework",
+            "workflow"
+          ]
+        },
+        {
+          "skill_id": "skill_liangdabiao_godogen",
+          "title": "Godogen",
+          "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/liangdabiao__Godogen",
+          "stars": 47,
+          "score": 82,
+          "tags": [
+            "agent_runtime",
+            "local_model",
+            "prompt_framework",
+            "workflow"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "builtin.eval_benchmark",
+      "title": "评估与基准模块",
+      "source_reference_count": 3,
+      "top_sources": [
+        {
+          "skill_id": "skill_opendataloader_project_opendataloader_pdf",
+          "title": "Opendataloader pdf",
+          "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/opendataloader-project__opendataloader-pdf",
+          "stars": 21176,
+          "score": 108,
+          "tags": [
+            "agent_runtime",
+            "evaluation",
+            "local_model",
+            "memory",
+            "workflow"
+          ]
+        },
+        {
+          "skill_id": "skill_garrytan_gbrain_evals",
+          "title": "Gbrain evals",
+          "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/garrytan__gbrain-evals",
+          "stars": 121,
+          "score": 96,
+          "tags": [
+            "agent_runtime",
+            "evaluation",
+            "general_skill",
+            "local_model",
+            "memory"
+          ]
+        },
+        {
+          "skill_id": "skill_mininglamp_ai_mano_p",
+          "title": "Mano P",
+          "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/Mininglamp-AI__Mano-P",
+          "stars": 1895,
+          "score": 82,
+          "tags": [
+            "agent_runtime",
+            "evaluation",
+            "local_model",
+            "ui_component",
+            "workflow"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "builtin.agent_runtime_core",
+      "title": "通用 Agent Runtime 模块",
+      "source_reference_count": 2,
+      "top_sources": [
+        {
+          "skill_id": "skill_hkuds_cli_anything",
+          "title": "CLI Anything",
+          "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/HKUDS__CLI-Anything",
+          "stars": 34315,
+          "score": 82,
+          "tags": [
+            "agent_runtime"
+          ]
+        },
+        {
+          "skill_id": "skill_k_dense_ai_scientific_agent_skills",
+          "title": "Scientific agent skills",
+          "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/K-Dense-AI__scientific-agent-skills",
+          "stars": 20767,
+          "score": 82,
+          "tags": [
+            "agent_runtime"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "builtin.prompt_skill_engine",
+      "title": "Prompt 技能引擎模块",
+      "source_reference_count": 1,
+      "top_sources": [
+        {
+          "skill_id": "skill_ultraworkers_claw_code",
+          "title": "Claw code",
+          "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/ultraworkers__claw-code",
+          "stars": 191229,
+          "score": 90,
+          "tags": [
+            "agent_runtime",
+            "prompt_framework"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "builtin.security_sandbox",
+      "title": "安全沙箱与策略模块",
+      "source_reference_count": 1,
+      "top_sources": [
+        {
+          "skill_id": "skill_mukul975_anthropic_cybersecurity_skills",
+          "title": "Anthropic Cybersecurity Skills",
+          "source_path": "core-platform/data/brain_assets/repos/github_stars_missing/mukul975__Anthropic-Cybersecurity-Skills",
+          "stars": 6246,
+          "score": 119,
+          "tags": [
+            "agent_runtime",
+            "code_agent",
+            "local_model",
+            "mcp_tool",
+            "prompt_framework",
+            "security",
+            "workflow"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "builtin.ui_desktop_operator",
+      "title": "桌面 UI 操作模块",
+      "source_reference_count": 0,
+      "top_sources": []
+    },
+    {
+      "id": "builtin.artifact_report_engine",
+      "title": "产物与报告生成模块",
+      "source_reference_count": 0,
+      "top_sources": []
+    }
+  ]
+}

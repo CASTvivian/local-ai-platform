@@ -1,0 +1,68 @@
+{
+  "version": "c26-r2-fusion-policy",
+  "principle": "External repositories and research materials are references only. Runtime capability must be implemented as owned builtin modules.",
+  "rules": [
+    {
+      "id": "reference_only",
+      "title": "External assets are reference only",
+      "description": "External repositories, starred repositories, papers, docs and experiments must not become runtime dependencies by default."
+    },
+    {
+      "id": "fusion_first",
+      "title": "Fuse before creating new skills",
+      "description": "New assets should first be matched into existing builtin modules. Create a new module only when no existing module fits."
+    },
+    {
+      "id": "no_one_repo_one_skill",
+      "title": "No one-repo-one-skill default",
+      "description": "Multiple similar repositories should strengthen one owned module instead of producing duplicate skills."
+    },
+    {
+      "id": "manual_review_required",
+      "title": "Manual review before enablement",
+      "description": "New module candidates require human review before becoming runtime capabilities."
+    },
+    {
+      "id": "owned_runtime_only",
+      "title": "Owned runtime only",
+      "description": "Planner and executor should use owned builtin modules and approved tools, not external repo code directly."
+    }
+  ],
+  "asset_lifecycle": [
+    "discovered",
+    "classified",
+    "matched_to_builtin_module",
+    "merged_as_reference",
+    "manual_reviewed",
+    "implemented_as_owned_module",
+    "enabled"
+  ],
+  "module_creation_policy": {
+    "create_new_module_when": [
+      "no existing builtin module has strong semantic/tag match",
+      "asset introduces materially new runtime capability",
+      "capability has clear acceptance criteria",
+      "implementation can be owned and audited"
+    ],
+    "do_not_create_when": [
+      "asset is only a list/awesome collection",
+      "asset duplicates an existing builtin module",
+      "asset cannot be implemented safely",
+      "asset would require external runtime dependency"
+    ]
+  },
+  "default_builtin_modules": [
+    "builtin.code_agent_core",
+    "builtin.agent_runtime_core",
+    "builtin.mcp_tool_hub",
+    "builtin.browser_operator",
+    "builtin.memory_rag_core",
+    "builtin.workflow_orchestrator",
+    "builtin.local_model_runtime",
+    "builtin.prompt_skill_engine",
+    "builtin.security_sandbox",
+    "builtin.eval_benchmark",
+    "builtin.ui_desktop_operator",
+    "builtin.artifact_report_engine"
+  ]
+}

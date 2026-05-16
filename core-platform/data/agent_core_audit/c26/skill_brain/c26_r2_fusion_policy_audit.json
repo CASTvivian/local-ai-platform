@@ -1,0 +1,10 @@
+{
+  "checked_at": "2026-05-16T09:53:37.058596+00:00",
+  "policy_version": "c26-r2-fusion-policy",
+  "rule_count": 5,
+  "default_builtin_module_count": 12,
+  "assignment_count": 0,
+  "new_module_candidate_count": 147,
+  "has_reference_only_rule": true,
+  "has_fusion_first_rule": true
+}
