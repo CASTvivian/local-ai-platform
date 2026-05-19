@@ -1,0 +1,37 @@
+{
+  "checked_at": "2026-05-19T02:04:25.782913Z",
+  "skill_count": 338,
+  "builtin_module_count": 12,
+  "execution_contract_count": 12,
+  "source_logic_count": 274,
+  "executable_builtin_modules": [
+    "builtin.code_agent_core",
+    "builtin.browser_operator",
+    "builtin.memory_rag_core"
+  ],
+  "planned_builtin_modules": [
+    "builtin.agent_runtime_core",
+    "builtin.mcp_tool_hub",
+    "builtin.workflow_orchestrator",
+    "builtin.local_model_runtime",
+    "builtin.prompt_skill_engine",
+    "builtin.security_sandbox",
+    "builtin.eval_benchmark",
+    "builtin.ui_desktop_operator",
+    "builtin.artifact_report_engine"
+  ],
+  "parity_summary": {
+    "total": 14,
+    "covered": 14,
+    "partial": 0,
+    "gap": 0,
+    "high_risk_gaps": 0
+  },
+  "truth_summary": {},
+  "truth_verdict": {},
+  "public_claim": {
+    "core_rebuild_complete": true,
+    "skill_asset_fusion_complete": true,
+    "all_skills_independently_executable": false
+  }
+}
