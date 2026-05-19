@@ -1,0 +1,500 @@
+{
+  "generated_at": "2026-05-19T01:14:22.665729Z",
+  "project_status": {
+    "core_rebuild_complete": true,
+    "core_capability_alignment_complete": true,
+    "productization_phase": true,
+    "source_level_identical_claim": false,
+    "full_experience_superiority_claim": false
+  },
+  "parity_summary": {
+    "total": 14,
+    "covered": 14,
+    "partial": 0,
+    "gap": 0,
+    "high_risk_gaps": 0
+  },
+  "skill_summary": {
+    "total_skill_count": 338,
+    "enabled_skill_count": 338,
+    "pinned_skill_count": 1,
+    "builtin_module_count": 12,
+    "execution_contract_count": 12,
+    "source_core_logic_count": 274,
+    "latest_star_count": 337,
+    "newly_synced_skill_count": 191
+  },
+  "top_tags": [
+    [
+      "agent_runtime",
+      287
+    ],
+    [
+      "code_agent",
+      108
+    ],
+    [
+      "mcp_tool",
+      92
+    ],
+    [
+      "python",
+      63
+    ],
+    [
+      "prompt_framework",
+      58
+    ],
+    [
+      "local_model",
+      56
+    ],
+    [
+      "memory",
+      47
+    ],
+    [
+      "ui_component",
+      43
+    ],
+    [
+      "general_skill",
+      38
+    ],
+    [
+      "workflow",
+      34
+    ],
+    [
+      "browser_agent",
+      33
+    ],
+    [
+      "claude_code",
+      33
+    ],
+    [
+      "typescript",
+      30
+    ],
+    [
+      "llm",
+      22
+    ],
+    [
+      "ai",
+      20
+    ],
+    [
+      "claude",
+      19
+    ],
+    [
+      "agent",
+      19
+    ],
+    [
+      "agent_skills",
+      18
+    ],
+    [
+      "ai_agents",
+      16
+    ],
+    [
+      "javascript",
+      15
+    ],
+    [
+      "codex",
+      14
+    ],
+    [
+      "skills",
+      13
+    ],
+    [
+      "anthropic",
+      12
+    ],
+    [
+      "ai_agent",
+      11
+    ],
+    [
+      "mcp",
+      10
+    ],
+    [
+      "shell",
+      10
+    ],
+    [
+      "claude_skills",
+      10
+    ],
+    [
+      "security",
+      9
+    ],
+    [
+      "cli",
+      8
+    ],
+    [
+      "agentic_ai",
+      8
+    ]
+  ],
+  "top_languages": [
+    [
+      "Python",
+      126
+    ],
+    [
+      "TypeScript",
+      62
+    ],
+    [
+      "JavaScript",
+      28
+    ],
+    [
+      "Shell",
+      16
+    ],
+    [
+      "Java",
+      13
+    ],
+    [
+      "None",
+      12
+    ],
+    [
+      "HTML",
+      12
+    ],
+    [
+      "Rust",
+      9
+    ],
+    [
+      "Go",
+      7
+    ],
+    [
+      "C++",
+      5
+    ],
+    [
+      "Jupyter Notebook",
+      4
+    ],
+    [
+      "C#",
+      3
+    ],
+    [
+      "Vue",
+      2
+    ],
+    [
+      "PowerShell",
+      2
+    ],
+    [
+      "Elixir",
+      1
+    ],
+    [
+      "Swift",
+      1
+    ],
+    [
+      "Objective-C",
+      1
+    ],
+    [
+      "Kotlin",
+      1
+    ],
+    [
+      "CSS",
+      1
+    ],
+    [
+      "MDX",
+      1
+    ]
+  ],
+  "module_skill_counter": {
+    "builtin.mcp_tool_hub": 61,
+    "builtin.memory_rag_core": 19,
+    "builtin.code_agent_core": 77,
+    "builtin.agent_runtime_core": 3,
+    "builtin.browser_operator": 22,
+    "builtin.prompt_skill_engine": 6,
+    "builtin.eval_benchmark": 1,
+    "builtin.artifact_report_engine": 1,
+    "builtin.ui_desktop_operator": 1
+  },
+  "module_rows": [
+    {
+      "id": "builtin.code_agent_core",
+      "title": "代码智能体核心模块",
+      "summary": "",
+      "source_reference_count": 103,
+      "core_logic_count": 485,
+      "execution_mode": "workspace_agent",
+      "implementation_status": "implemented_adapter",
+      "allowed_tools": [
+        "builtin.code_agent_core.execute",
+        "capability.match",
+        "repo_memory.search",
+        "filesystem.read",
+        "filesystem.write",
+        "shell.exec",
+        "model.generate"
+      ]
+    },
+    {
+      "id": "builtin.mcp_tool_hub",
+      "title": "MCP 工具协议模块",
+      "summary": "",
+      "source_reference_count": 73,
+      "core_logic_count": 294,
+      "execution_mode": "tool_registry",
+      "implementation_status": "planned",
+      "allowed_tools": [
+        "capability.match",
+        "model.generate"
+      ]
+    },
+    {
+      "id": "builtin.memory_rag_core",
+      "title": "记忆与 RAG 检索模块",
+      "summary": "",
+      "source_reference_count": 36,
+      "core_logic_count": 226,
+      "execution_mode": "retrieval",
+      "implementation_status": "implemented_adapter",
+      "allowed_tools": [
+        "builtin.memory_rag_core.execute",
+        "repo_memory.search",
+        "capability.match",
+        "model.generate"
+      ]
+    },
+    {
+      "id": "builtin.browser_operator",
+      "title": "浏览器自动化模块",
+      "summary": "",
+      "source_reference_count": 31,
+      "core_logic_count": 167,
+      "execution_mode": "browser_plan",
+      "implementation_status": "implemented_adapter",
+      "allowed_tools": [
+        "builtin.browser_operator.execute",
+        "web.search",
+        "capability.match",
+        "model.generate"
+      ]
+    },
+    {
+      "id": "builtin.local_model_runtime",
+      "title": "本地模型运行模块",
+      "summary": "",
+      "source_reference_count": 9,
+      "core_logic_count": 62,
+      "execution_mode": "model_runtime",
+      "implementation_status": "planned",
+      "allowed_tools": [
+        "model.generate",
+        "capability.match"
+      ]
+    },
+    {
+      "id": "builtin.prompt_skill_engine",
+      "title": "Prompt 技能引擎模块",
+      "summary": "",
+      "source_reference_count": 7,
+      "core_logic_count": 25,
+      "execution_mode": "prompt_template",
+      "implementation_status": "planned",
+      "allowed_tools": [
+        "capability.match",
+        "repo_memory.search",
+        "model.generate"
+      ]
+    },
+    {
+      "id": "builtin.agent_runtime_core",
+      "title": "通用 Agent Runtime 模块",
+      "summary": "",
+      "source_reference_count": 5,
+      "core_logic_count": 12,
+      "execution_mode": "agent_plan",
+      "implementation_status": "planned",
+      "allowed_tools": [
+        "capability.match",
+        "repo_memory.search",
+        "model.generate"
+      ]
+    },
+    {
+      "id": "builtin.eval_benchmark",
+      "title": "评估与基准模块",
+      "summary": "",
+      "source_reference_count": 4,
+      "core_logic_count": 42,
+      "execution_mode": "evaluation",
+      "implementation_status": "planned",
+      "allowed_tools": [
+        "capability.match",
+        "repo_memory.search",
+        "model.generate"
+      ]
+    },
+    {
+      "id": "builtin.workflow_orchestrator",
+      "title": "工作流编排模块",
+      "summary": "",
+      "source_reference_count": 3,
+      "core_logic_count": 25,
+      "execution_mode": "workflow_plan",
+      "implementation_status": "planned",
+      "allowed_tools": [
+        "capability.match",
+        "workflow_store.list",
+        "model.generate"
+      ]
+    },
+    {
+      "id": "builtin.artifact_report_engine",
+      "title": "产物与报告生成模块",
+      "summary": "",
+      "source_reference_count": 1,
+      "core_logic_count": 2,
+      "execution_mode": "report_generation",
+      "implementation_status": "planned",
+      "allowed_tools": [
+        "capability.match",
+        "repo_memory.search",
+        "model.generate"
+      ]
+    },
+    {
+      "id": "builtin.security_sandbox",
+      "title": "安全沙箱与策略模块",
+      "summary": "",
+      "source_reference_count": 1,
+      "core_logic_count": 19,
+      "execution_mode": "policy_gate",
+      "implementation_status": "planned",
+      "allowed_tools": [
+        "capability.match",
+        "repo_memory.search",
+        "model.generate"
+      ]
+    },
+    {
+      "id": "builtin.ui_desktop_operator",
+      "title": "桌面 UI 操作模块",
+      "summary": "",
+      "source_reference_count": 1,
+      "core_logic_count": 2,
+      "execution_mode": "ui_binding",
+      "implementation_status": "planned",
+      "allowed_tools": [
+        "capability.match",
+        "repo_memory.search",
+        "model.generate"
+      ]
+    }
+  ],
+  "capability_groups": [
+    {
+      "name": "本地模型运行",
+      "items": [
+        "本地模型网关与健康检查",
+        "模型 profile 管理",
+        "轻量模型与代码模型切换",
+        "本地运行时自动启动",
+        "离线模型包扩展接口"
+      ]
+    },
+    {
+      "name": "智能体规划",
+      "items": [
+        "Schema-driven planner",
+        "结构化 tool selection",
+        "builtin capability 匹配",
+        "execution contract 识别",
+        "agentic loop: plan → act → observe → validate → replan"
+      ]
+    },
+    {
+      "name": "代码智能体",
+      "items": [
+        "工作区文件读取",
+        "patch / diff 生成",
+        "build / test / repair loop",
+        "task run 状态追踪",
+        "高危写入动作 approval gate",
+        "审计记录输出"
+      ]
+    },
+    {
+      "name": "本地知识与记忆",
+      "items": [
+        "Repo Memory 检索",
+        "RAG 证据归一化",
+        "技能上下文召回",
+        "项目资料查询",
+        "结果摘要与审计"
+      ]
+    },
+    {
+      "name": "浏览器研究",
+      "items": [
+        "浏览器/网页研究计划",
+        "Web 搜索",
+        "findings / citations 结构化",
+        "URL fetch 扩展基础",
+        "研究任务审计"
+      ]
+    },
+    {
+      "name": "工具系统",
+      "items": [
+        "Executor tool registry",
+        "MCP tool hub 基础",
+        "工具 schema 注册",
+        "builtin adapter 注册",
+        "未知工具安全失败"
+      ]
+    },
+    {
+      "name": "权限与安全",
+      "items": [
+        "交互式 approval request",
+        "pending / approved / rejected / cancelled 状态",
+        "高危工具执行前审批",
+        "审批审计",
+        "sandbox policy 基础"
+      ]
+    },
+    {
+      "name": "桌面端与交付",
+      "items": [
+        "Mac 桌面包",
+        "Windows MSI 包",
+        "本地服务自动启动",
+        "运行状态检查",
+        "技能商店展示",
+        "本地诊断面板"
+      ]
+    }
+  ]
+}
