@@ -1,0 +1,76 @@
+{
+  "checked_at": "2026-05-19T01:22:44.967751Z",
+  "readme": "core-platform/README.md",
+  "skill_count": 338,
+  "builtin_module_count": 12,
+  "execution_contract_count": 12,
+  "parity_summary": {
+    "total": 14,
+    "covered": 14,
+    "partial": 0,
+    "gap": 0,
+    "high_risk_gaps": 0
+  },
+  "module_rows": [
+    {
+      "id": "builtin.code_agent_core",
+      "title": "代码智能体核心模块",
+      "count": 103
+    },
+    {
+      "id": "builtin.mcp_tool_hub",
+      "title": "MCP 工具协议模块",
+      "count": 73
+    },
+    {
+      "id": "builtin.memory_rag_core",
+      "title": "记忆与 RAG 检索模块",
+      "count": 36
+    },
+    {
+      "id": "builtin.browser_operator",
+      "title": "浏览器自动化模块",
+      "count": 31
+    },
+    {
+      "id": "builtin.local_model_runtime",
+      "title": "本地模型运行模块",
+      "count": 9
+    },
+    {
+      "id": "builtin.prompt_skill_engine",
+      "title": "Prompt 技能引擎模块",
+      "count": 7
+    },
+    {
+      "id": "builtin.agent_runtime_core",
+      "title": "通用 Agent Runtime 模块",
+      "count": 5
+    },
+    {
+      "id": "builtin.eval_benchmark",
+      "title": "评估与基准模块",
+      "count": 4
+    },
+    {
+      "id": "builtin.workflow_orchestrator",
+      "title": "工作流编排模块",
+      "count": 3
+    },
+    {
+      "id": "builtin.artifact_report_engine",
+      "title": "产物与报告生成模块",
+      "count": 1
+    },
+    {
+      "id": "builtin.security_sandbox",
+      "title": "安全沙箱与策略模块",
+      "count": 1
+    },
+    {
+      "id": "builtin.ui_desktop_operator",
+      "title": "桌面 UI 操作模块",
+      "count": 1
+    }
+  ]
+}
