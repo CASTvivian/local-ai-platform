@@ -1,5 +1,5 @@
 {
-  "version": "c26-skill-brain-default-a",
+  "version": "c26-star-sync-fusion",
   "generated_at": "2026-05-16T07:47:50Z",
   "description": "Default skills generated from local brain assets, GitHub stars, and repository memory.",
   "source_summary": {
@@ -7,7 +7,7 @@
     "github_stars": 147,
     "repo_memory_seed": 147
   },
-  "skill_count": 147,
+  "skill_count": 338,
   "skills": [
     {
       "id": "skill_public_apis_public_apis",
@@ -5381,6 +5381,5436 @@
       ],
       "risk": "safe",
       "created_at": "2026-05-16T07:47:50Z"
+    },
+    {
+      "id": "skill_star_1jehuang_jcode",
+      "title": "1jehuang/jcode",
+      "description": "Coding Agent Harness",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/1jehuang/jcode",
+      "repo_full_name": "1jehuang/jcode",
+      "language": "Rust",
+      "stars": 6317,
+      "tags": [
+        "mcp_tool",
+        "agent_runtime",
+        "ai",
+        "claude",
+        "cli",
+        "coding_agent",
+        "llm",
+        "mcp",
+        "openai",
+        "rust",
+        "terminal",
+        "tui"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "classification_score": 89,
+      "classification_hits": [
+        "mcp"
+      ],
+      "created_at": "2026-05-19T00:39:53.122025Z"
+    },
+    {
+      "id": "skill_star_2025emma_vibe_coding_cn",
+      "title": "2025Emma/vibe-coding-cn",
+      "description": "<!-- ------------------------------------------------------------------------------- 项目头部区域 (HEADER) ------------------------------------------------------------------------------- --> <p align=\"center\"> <!-- 建议尺寸: 1280x640px。可以使用 Canva, Fi",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/2025Emma/vibe-coding-cn",
+      "repo_full_name": "2025Emma/vibe-coding-cn",
+      "language": "Python",
+      "stars": 20987,
+      "tags": [
+        "memory",
+        "agent_runtime",
+        "python"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.memory_rag_core",
+      "classification_score": 84,
+      "classification_hits": [
+        "graph"
+      ],
+      "created_at": "2026-05-19T00:39:53.122507Z"
+    },
+    {
+      "id": "skill_star_ai4bharat_openhands",
+      "title": "AI4Bharat/OpenHands",
+      "description": "👐OpenHands : Making Sign Language Recognition Accessible. | **NOTE:** No longer actively maintained. If you are interested to own this and take it forward, please raise an issue",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/AI4Bharat/OpenHands",
+      "repo_full_name": "AI4Bharat/OpenHands",
+      "language": "Python",
+      "stars": 127,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "python"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 80,
+      "classification_hits": [
+        "ide"
+      ],
+      "created_at": "2026-05-19T00:39:53.122659Z"
+    },
+    {
+      "id": "skill_star_amap_ml_skillclaw",
+      "title": "AMAP-ML/SkillClaw",
+      "description": "Let Skills Evolve Collectively with Agentic Evolver ",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/AMAP-ML/SkillClaw",
+      "repo_full_name": "AMAP-ML/SkillClaw",
+      "language": "Python",
+      "stars": 1344,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "agent",
+        "agentic_ai",
+        "ai_agent",
+        "collective_intelligence",
+        "continual_learning",
+        "hermes",
+        "llm",
+        "llms",
+        "openclaw",
+        "self_evolving",
+        "skill_evolution",
+        "skill_learning",
+        "skills",
+        "python"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 80,
+      "classification_hits": [
+        "ide"
+      ],
+      "created_at": "2026-05-19T00:39:53.122812Z"
+    },
+    {
+      "id": "skill_star_agricidaniel_claude_obsidian",
+      "title": "AgriciDaniel/claude-obsidian",
+      "description": "Claude + Obsidian knowledge companion. Persistent, compounding wiki vault based on Karpathy's LLM Wiki pattern. /wiki /save /autoresearch",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/AgriciDaniel/claude-obsidian",
+      "repo_full_name": "AgriciDaniel/claude-obsidian",
+      "language": "Python",
+      "stars": 5157,
+      "tags": [
+        "memory",
+        "agent_runtime",
+        "agent_skills",
+        "ai",
+        "ai_second_brain",
+        "autonomous_research",
+        "claude_code",
+        "claude_code_skill",
+        "claude_plugin",
+        "karpathy_llm_wiki",
+        "knowledge_graph",
+        "knowledge_management",
+        "llm",
+        "multi_agent",
+        "obsidian",
+        "obsidian_ai"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.memory_rag_core",
+      "classification_score": 92,
+      "classification_hits": [
+        "rag",
+        "memory",
+        "graph"
+      ],
+      "created_at": "2026-05-19T00:39:53.122942Z"
+    },
+    {
+      "id": "skill_star_alishahryar1_free_claude_code",
+      "title": "Alishahryar1/free-claude-code",
+      "description": "Use claude-code for free in the terminal, VSCode extension or discord like OpenClaw (voice supported)",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/Alishahryar1/free-claude-code",
+      "repo_full_name": "Alishahryar1/free-claude-code",
+      "language": "Python",
+      "stars": 25699,
+      "tags": [
+        "mcp_tool",
+        "agent_runtime",
+        "python"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "classification_score": 89,
+      "classification_hits": [
+        "protocol"
+      ],
+      "created_at": "2026-05-19T00:39:53.123073Z"
+    },
+    {
+      "id": "skill_star_all_hands_ai_openhands_resolver",
+      "title": "All-Hands-AI/openhands-resolver",
+      "description": "A system that tries to resolve all issues on a github repo with OpenHands.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/All-Hands-AI/openhands-resolver",
+      "repo_full_name": "All-Hands-AI/openhands-resolver",
+      "language": "Python",
+      "stars": 122,
+      "tags": [
+        "agent_runtime",
+        "python"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.agent_runtime_core",
+      "classification_score": 30,
+      "classification_hits": [],
+      "created_at": "2026-05-19T00:39:53.123108Z"
+    },
+    {
+      "id": "skill_star_allthingssmitty_css_protips",
+      "title": "AllThingsSmitty/css-protips",
+      "description": "⚡️ A collection of tips to help take your CSS skills pro 🦾",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/AllThingsSmitty/css-protips",
+      "repo_full_name": "AllThingsSmitty/css-protips",
+      "language": null,
+      "stars": 30051,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "awesome",
+        "awesome_list",
+        "css",
+        "css_flexbox",
+        "css_grid",
+        "css_tricks",
+        "css3",
+        "flexbox",
+        "learning_resources",
+        "protip",
+        "tips",
+        "tips_and_tricks",
+        "useful"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 80,
+      "classification_hits": [
+        "ide"
+      ],
+      "created_at": "2026-05-19T00:39:53.123248Z"
+    },
+    {
+      "id": "skill_star_ar9av_obsidian_wiki",
+      "title": "Ar9av/obsidian-wiki",
+      "description": "Framework for AI agents to build and maintain an Obsidian wiki using Karpathy's LLM Wiki pattern",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/Ar9av/obsidian-wiki",
+      "repo_full_name": "Ar9av/obsidian-wiki",
+      "language": "Python",
+      "stars": 1336,
+      "tags": [
+        "mcp_tool",
+        "agent_runtime",
+        "agent_skills",
+        "knowledge_base",
+        "llm_tools",
+        "obsidian",
+        "wiki",
+        "python"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "classification_score": 89,
+      "classification_hits": [
+        "tools"
+      ],
+      "created_at": "2026-05-19T00:39:53.123380Z"
+    },
+    {
+      "id": "skill_star_bankrbot_skills",
+      "title": "BankrBot/skills",
+      "description": "Bankr Skills equip builders with plug-and-play tools to build more powerful agents.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/BankrBot/skills",
+      "repo_full_name": "BankrBot/skills",
+      "language": "Shell",
+      "stars": 1121,
+      "tags": [
+        "mcp_tool",
+        "agent_runtime",
+        "skills",
+        "shell"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "classification_score": 93,
+      "classification_hits": [
+        "tools",
+        "protocol"
+      ],
+      "created_at": "2026-05-19T00:39:53.123498Z"
+    },
+    {
+      "id": "skill_star_behisecc_awesome_claude_skills",
+      "title": "BehiSecc/awesome-claude-skills",
+      "description": "A curated list of Claude Skills.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/BehiSecc/awesome-claude-skills",
+      "repo_full_name": "BehiSecc/awesome-claude-skills",
+      "language": null,
+      "stars": 9143,
+      "tags": [
+        "mcp_tool",
+        "agent_runtime"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "classification_score": 89,
+      "classification_hits": [
+        "tools"
+      ],
+      "created_at": "2026-05-19T00:39:53.123626Z"
+    },
+    {
+      "id": "skill_star_bloopai_vibe_kanban",
+      "title": "BloopAI/vibe-kanban",
+      "description": "Get 10X more out of Claude Code, Codex or any coding agent",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/BloopAI/vibe-kanban",
+      "repo_full_name": "BloopAI/vibe-kanban",
+      "language": "Rust",
+      "stars": 26332,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "agent",
+        "ai_agents",
+        "kanban",
+        "management",
+        "task_manager",
+        "rust"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 88,
+      "classification_hits": [
+        "coding agent",
+        "diff",
+        "code"
+      ],
+      "created_at": "2026-05-19T00:39:53.123755Z"
+    },
+    {
+      "id": "skill_star_bluespire_durandal",
+      "title": "BlueSpire/Durandal",
+      "description": "Durandal has evolved to the next generation: Aurelia.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/BlueSpire/Durandal",
+      "repo_full_name": "BlueSpire/Durandal",
+      "language": "JavaScript",
+      "stars": 1708,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "javascript"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 80,
+      "classification_hits": [
+        "ide"
+      ],
+      "created_at": "2026-05-19T00:39:53.123889Z"
+    },
+    {
+      "id": "skill_star_chalarangelo_30_seconds_of_code",
+      "title": "Chalarangelo/30-seconds-of-code",
+      "description": "Coding articles to level up your development skills",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/Chalarangelo/30-seconds-of-code",
+      "repo_full_name": "Chalarangelo/30-seconds-of-code",
+      "language": "JavaScript",
+      "stars": 127856,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "astro",
+        "awesome_list",
+        "css",
+        "education",
+        "es6_javascript",
+        "git",
+        "html",
+        "javascript",
+        "learn_to_code",
+        "learning_resources",
+        "nodejs",
+        "programming",
+        "snippets"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 88,
+      "classification_hits": [
+        "ide",
+        "source code",
+        "code"
+      ],
+      "created_at": "2026-05-19T00:39:53.123998Z"
+    },
+    {
+      "id": "skill_star_composiohq_awesome_claude_skills",
+      "title": "ComposioHQ/awesome-claude-skills",
+      "description": "A curated list of awesome Claude Skills, resources, and tools for customizing Claude AI workflows",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/ComposioHQ/awesome-claude-skills",
+      "repo_full_name": "ComposioHQ/awesome-claude-skills",
+      "language": "Python",
+      "stars": 60497,
+      "tags": [
+        "mcp_tool",
+        "agent_runtime",
+        "agent_skills",
+        "ai_agents",
+        "antigravity",
+        "automation",
+        "claude",
+        "claude_code",
+        "codex",
+        "composio",
+        "cursor",
+        "developer_tools",
+        "gemini_cli",
+        "mcp",
+        "openai_codex",
+        "rube"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "classification_score": 93,
+      "classification_hits": [
+        "mcp",
+        "tools"
+      ],
+      "created_at": "2026-05-19T00:39:53.124118Z"
+    },
+    {
+      "id": "skill_star_composiohq_awesome_codex_skills",
+      "title": "ComposioHQ/awesome-codex-skills",
+      "description": "A curated list of practical Codex skills for automating workflows across the Codex CLI and API.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/ComposioHQ/awesome-codex-skills",
+      "repo_full_name": "ComposioHQ/awesome-codex-skills",
+      "language": "Python",
+      "stars": 10434,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "awesome",
+        "awesome_lists",
+        "awesome_resources",
+        "codex",
+        "codex_cli",
+        "codex_skills",
+        "coding_agent_skills",
+        "coding_agents",
+        "gpt_5_1_codex",
+        "gpt_5_codex",
+        "llm",
+        "skills",
+        "python"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 80,
+      "classification_hits": [
+        "code"
+      ],
+      "created_at": "2026-05-19T00:39:53.124253Z"
+    },
+    {
+      "id": "skill_star_conardli_garden_skills",
+      "title": "ConardLi/garden-skills",
+      "description": "ConardLi's open-source Skills collection, featuring web design, knowledge retrieval, image generation, and more.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/ConardLi/garden-skills",
+      "repo_full_name": "ConardLi/garden-skills",
+      "language": "CSS",
+      "stars": 5219,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "agent",
+        "claude",
+        "gpt_image_2",
+        "rag",
+        "skills",
+        "web_design",
+        "css"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 88,
+      "classification_hits": [
+        "coding agent",
+        "ide",
+        "code"
+      ],
+      "created_at": "2026-05-19T00:39:53.124366Z"
+    },
+    {
+      "id": "skill_star_conway_research_automaton",
+      "title": "Conway-Research/automaton",
+      "description": "The first AI that can earn its own existence, replicate, and evolve — without needing a human",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/Conway-Research/automaton",
+      "repo_full_name": "Conway-Research/automaton",
+      "language": "TypeScript",
+      "stars": 4486,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "typescript"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 80,
+      "classification_hits": [
+        "ide"
+      ],
+      "created_at": "2026-05-19T00:39:53.124497Z"
+    },
+    {
+      "id": "skill_star_dimimikadze_orca",
+      "title": "DimiMikadze/orca",
+      "description": "AI agent for deep LinkedIn profile analysis.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/DimiMikadze/orca",
+      "repo_full_name": "DimiMikadze/orca",
+      "language": "TypeScript",
+      "stars": 1271,
+      "tags": [
+        "browser_agent",
+        "agent_runtime",
+        "typescript"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.browser_operator",
+      "classification_score": 94,
+      "classification_hits": [
+        "scrape"
+      ],
+      "created_at": "2026-05-19T00:39:53.124618Z"
+    },
+    {
+      "id": "skill_star_dimillian_skills",
+      "title": "Dimillian/Skills",
+      "description": "My Codex Skills",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/Dimillian/Skills",
+      "repo_full_name": "Dimillian/Skills",
+      "language": "Shell",
+      "stars": 3526,
+      "tags": [
+        "mcp_tool",
+        "agent_runtime",
+        "shell"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "classification_score": 89,
+      "classification_hits": [
+        "mcp"
+      ],
+      "created_at": "2026-05-19T00:39:53.124733Z"
+    },
+    {
+      "id": "skill_star_enzed_vibe_coding",
+      "title": "EnzeD/vibe-coding",
+      "description": "# Ultimate Guide to Vibe Coding V1.2.2 **Author:** [Nicolas Zullo, https://x.com/NicolasZu](https://x.com/NicolasZu) **Creation Date:** March 12, 2025 **Last Update Date:** March 5, 2026 --- ## Getting Started To begin vibe coding, you only",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/EnzeD/vibe-coding",
+      "repo_full_name": "EnzeD/vibe-coding",
+      "language": null,
+      "stars": 4500,
+      "tags": [
+        "mcp_tool",
+        "agent_runtime"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "classification_score": 89,
+      "classification_hits": [
+        "tools"
+      ],
+      "created_at": "2026-05-19T00:39:53.124849Z"
+    },
+    {
+      "id": "skill_star_evermind_ai_everos",
+      "title": "EverMind-AI/EverOS",
+      "description": "Build, evaluate, and integrate long-term memory for self-evolving agents.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/EverMind-AI/EverOS",
+      "repo_full_name": "EverMind-AI/EverOS",
+      "language": "Python",
+      "stars": 4922,
+      "tags": [
+        "mcp_tool",
+        "agent_runtime",
+        "agent_memory",
+        "agentic_ai",
+        "ai",
+        "chats",
+        "clawdbot",
+        "clawdbot_skill",
+        "llm",
+        "long_term_memory",
+        "mcp",
+        "memory",
+        "memory_management",
+        "python3",
+        "rag",
+        "skills"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "classification_score": 89,
+      "classification_hits": [
+        "mcp"
+      ],
+      "created_at": "2026-05-19T00:39:53.124984Z"
+    },
+    {
+      "id": "skill_star_evoagentx_evoagentx",
+      "title": "EvoAgentX/EvoAgentX",
+      "description": "🚀 EvoAgentX: Building a Self-Evolving Ecosystem of AI Agents",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/EvoAgentX/EvoAgentX",
+      "repo_full_name": "EvoAgentX/EvoAgentX",
+      "language": "Python",
+      "stars": 3019,
+      "tags": [
+        "mcp_tool",
+        "agent_runtime",
+        "agent",
+        "ai",
+        "ai_agents",
+        "llms",
+        "memory",
+        "multi_agent_systems",
+        "natural_language_processing",
+        "rag",
+        "self_evolving",
+        "tool",
+        "tools",
+        "python"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "classification_score": 89,
+      "classification_hits": [
+        "tools"
+      ],
+      "created_at": "2026-05-19T00:39:53.125107Z"
+    },
+    {
+      "id": "skill_star_evomap_evolver",
+      "title": "EvoMap/evolver",
+      "description": "The GEP-powered self-evolving engine for AI agents. Auditable evolution with Genes, Capsules, and Events. | evomap.ai",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/EvoMap/evolver",
+      "repo_full_name": "EvoMap/evolver",
+      "language": "JavaScript",
+      "stars": 7480,
+      "tags": [
+        "mcp_tool",
+        "agent_runtime",
+        "a2a",
+        "agent_evolution",
+        "agent_framework",
+        "agent_protocol",
+        "ai_agent",
+        "auditable_ai",
+        "autonomous_agent",
+        "cli",
+        "evomap",
+        "gep",
+        "llm_agent",
+        "mcp",
+        "memory_system",
+        "nodejs"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "classification_score": 93,
+      "classification_hits": [
+        "mcp",
+        "protocol"
+      ],
+      "created_at": "2026-05-19T00:39:53.125256Z"
+    },
+    {
+      "id": "skill_star_evoscientist_evoscientist",
+      "title": "EvoScientist/EvoScientist",
+      "description": "🔬 Harness Vibe Research with Self-evolving AI Scientists",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/EvoScientist/EvoScientist",
+      "repo_full_name": "EvoScientist/EvoScientist",
+      "language": "Python",
+      "stars": 3092,
+      "tags": [
+        "agent_runtime",
+        "ai_agent",
+        "ai4science",
+        "multi_agent_system",
+        "vibe_research",
+        "python"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.agent_runtime_core",
+      "classification_score": 53,
+      "classification_hits": [
+        "agent",
+        "multi-agent"
+      ],
+      "created_at": "2026-05-19T00:39:53.125388Z"
+    },
+    {
+      "id": "skill_star_fulu_foundation_orcaslicer_bambulab",
+      "title": "FULU-Foundation/OrcaSlicer-bambulab",
+      "description": "<div align=\"center\"> <picture> <img alt=\"OrcaSlicer logo\" src=\"resources/images/OrcaSlicer.png\" width=\"15%\" height=\"15%\"> </picture> ## This version of OrcaSlicer restores full BambuNetwork support for Bambu Lab printers. You are not limite",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/FULU-Foundation/OrcaSlicer-bambulab",
+      "repo_full_name": "FULU-Foundation/OrcaSlicer-bambulab",
+      "language": "C++",
+      "stars": 5915,
+      "tags": [
+        "memory",
+        "agent_runtime",
+        "c++"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.memory_rag_core",
+      "classification_score": 84,
+      "classification_hits": [
+        "rag"
+      ],
+      "created_at": "2026-05-19T00:39:53.125453Z"
+    },
+    {
+      "id": "skill_star_firstgeargames_fishnet",
+      "title": "FirstGearGames/FishNet",
+      "description": "FishNet: Unity Networking Evolved. ",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/FirstGearGames/FishNet",
+      "repo_full_name": "FirstGearGames/FishNet",
+      "language": "C#",
+      "stars": 1926,
+      "tags": [
+        "mcp_tool",
+        "agent_runtime",
+        "c#"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "classification_score": 89,
+      "classification_hits": [
+        "tools"
+      ],
+      "created_at": "2026-05-19T00:39:53.125563Z"
+    },
+    {
+      "id": "skill_star_gudastudio_skills",
+      "title": "GuDaStudio/skills",
+      "description": "This repository contains a collection of Agent Skills developed by GudaStudio, enabling seamless collaboration between Claude and other AI models and tools.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/GuDaStudio/skills",
+      "repo_full_name": "GuDaStudio/skills",
+      "language": "PowerShell",
+      "stars": 2011,
+      "tags": [
+        "mcp_tool",
+        "agent_runtime",
+        "powershell"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "classification_score": 89,
+      "classification_hits": [
+        "tools"
+      ],
+      "created_at": "2026-05-19T00:39:53.125685Z"
+    },
+    {
+      "id": "skill_star_hkuds_openspace",
+      "title": "HKUDS/OpenSpace",
+      "description": "\"OpenSpace: Make Your Agents: Smarter, Low-Cost, Self-Evolving\" -- Community: https://open-space.cloud/",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/HKUDS/OpenSpace",
+      "repo_full_name": "HKUDS/OpenSpace",
+      "language": "Python",
+      "stars": 6255,
+      "tags": [
+        "mcp_tool",
+        "agent_runtime",
+        "python"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "classification_score": 89,
+      "classification_hits": [
+        "protocol"
+      ],
+      "created_at": "2026-05-19T00:39:53.125806Z"
+    },
+    {
+      "id": "skill_star_imbad0202_academic_research_skills",
+      "title": "Imbad0202/academic-research-skills",
+      "description": "Academic Research Skills for Claude Code: research → write → review → revise → finalize",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/Imbad0202/academic-research-skills",
+      "repo_full_name": "Imbad0202/academic-research-skills",
+      "language": "Python",
+      "stars": 11725,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "academic_pipeline",
+        "academic_writing",
+        "ai_research",
+        "claude",
+        "claude_code",
+        "literature_review",
+        "peer_review",
+        "prompt_engineering",
+        "python"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 88,
+      "classification_hits": [
+        "ide",
+        "copilot",
+        "code"
+      ],
+      "created_at": "2026-05-19T00:39:53.125935Z"
+    },
+    {
+      "id": "skill_star_jeffallan_claude_skills",
+      "title": "Jeffallan/claude-skills",
+      "description": "66 Specialized Skills for Full-Stack Developers. Transform Claude Code into your expert pair programmer.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/Jeffallan/claude-skills",
+      "repo_full_name": "Jeffallan/claude-skills",
+      "language": "Python",
+      "stars": 9187,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "ai_agents",
+        "claude",
+        "claude_code",
+        "claude_marketplace",
+        "claude_skills",
+        "python"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 84,
+      "classification_hits": [
+        "developer",
+        "code"
+      ],
+      "created_at": "2026-05-19T00:39:53.126045Z"
+    },
+    {
+      "id": "skill_star_jimliu_baoyu_skills",
+      "title": "JimLiu/baoyu-skills",
+      "description": "# baoyu-skills English | [中文](./README.zh.md) Skills shared by Baoyu for improving daily work efficiency with AI Agents (Claude Code, Codex, etc.). ## Prerequisites - Node.js environment installed - Ability to run `npx bun` commands ## Inst",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/JimLiu/baoyu-skills",
+      "repo_full_name": "JimLiu/baoyu-skills",
+      "language": "TypeScript",
+      "stars": 18715,
+      "tags": [
+        "mcp_tool",
+        "agent_runtime",
+        "agent_skills",
+        "claude_skills",
+        "codex_skills",
+        "openclaw_skills",
+        "typescript"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "classification_score": 89,
+      "classification_hits": [
+        "tools"
+      ],
+      "created_at": "2026-05-19T00:39:53.126169Z"
+    },
+    {
+      "id": "skill_star_jordanmccann_agentmemory",
+      "title": "JordanMcCann/agentmemory",
+      "description": "Memory system for AI agents. #1 on LongMemEval — 96.2% (481/500). Beats every published system including Chronos, Mastra, Supermemory, and Emergence. Built solo in 16 days for $1,000.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/JordanMcCann/agentmemory",
+      "repo_full_name": "JordanMcCann/agentmemory",
+      "language": "Python",
+      "stars": 23,
+      "tags": [
+        "memory",
+        "agent_runtime",
+        "python"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.memory_rag_core",
+      "classification_score": 88,
+      "classification_hits": [
+        "memory",
+        "retrieval"
+      ],
+      "created_at": "2026-05-19T00:39:53.126289Z"
+    },
+    {
+      "id": "skill_star_josephrp_agentmemory",
+      "title": "Josephrp/agentmemory",
+      "description": "Easy-to-use agent memory, powered by chromadb",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/Josephrp/agentmemory",
+      "repo_full_name": "Josephrp/agentmemory",
+      "language": null,
+      "stars": 1,
+      "tags": [
+        "memory",
+        "agent_runtime"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.memory_rag_core",
+      "classification_score": 92,
+      "classification_hits": [
+        "rag",
+        "memory",
+        "embedding"
+      ],
+      "created_at": "2026-05-19T00:39:53.126391Z"
+    },
+    {
+      "id": "skill_star_kjohnson_700_cyllene",
+      "title": "KJohnson-700/Cyllene",
+      "description": "Telegram miniapp Voice interface framework for Hermes Agent",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/KJohnson-700/Cyllene",
+      "repo_full_name": "KJohnson-700/Cyllene",
+      "language": "TypeScript",
+      "stars": 1,
+      "tags": [
+        "browser_agent",
+        "agent_runtime",
+        "typescript"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.browser_operator",
+      "classification_score": 94,
+      "classification_hits": [
+        "browser"
+      ],
+      "created_at": "2026-05-19T00:39:53.126497Z"
+    },
+    {
+      "id": "skill_star_kkkkhazix_khazix_skills",
+      "title": "KKKKhazix/khazix-skills",
+      "description": "数字生命卡兹克开源的 AI Skills 合集",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/KKKKhazix/khazix-skills",
+      "repo_full_name": "KKKKhazix/khazix-skills",
+      "language": "Python",
+      "stars": 11037,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "python"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 80,
+      "classification_hits": [
+        "code"
+      ],
+      "created_at": "2026-05-19T00:39:53.126606Z"
+    },
+    {
+      "id": "skill_star_keygraphhq_shannon",
+      "title": "KeygraphHQ/shannon",
+      "description": "Shannon Lite is an autonomous, white-box AI pentester for web applications and APIs. It analyzes your source code, identifies attack vectors, and executes real exploits to prove vulnerabilities before they reach production.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/KeygraphHQ/shannon",
+      "repo_full_name": "KeygraphHQ/shannon",
+      "language": "TypeScript",
+      "stars": 43008,
+      "tags": [
+        "browser_agent",
+        "agent_runtime",
+        "penetration_testing",
+        "pentesting",
+        "security_audit",
+        "security_automation",
+        "security_tools",
+        "typescript"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.browser_operator",
+      "classification_score": 94,
+      "classification_hits": [
+        "browser"
+      ],
+      "created_at": "2026-05-19T00:39:53.126735Z"
+    },
+    {
+      "id": "skill_star_khazp_vibe_coding_prompt_template",
+      "title": "KhazP/vibe-coding-prompt-template",
+      "description": "Templates and workflow for generating PRDs, Tech Designs, and MVP and more using LLMs for AI IDEs",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/KhazP/vibe-coding-prompt-template",
+      "repo_full_name": "KhazP/vibe-coding-prompt-template",
+      "language": null,
+      "stars": 2384,
+      "tags": [
+        "mcp_tool",
+        "agent_runtime",
+        "ai_agents",
+        "ai_workflow",
+        "beginner_friendly",
+        "claude_code",
+        "claude_code_skills",
+        "claude_skills",
+        "dev_tools",
+        "development_workflows",
+        "llm_tools",
+        "llm_workflow",
+        "low_code",
+        "mvp_development",
+        "no_code",
+        "product_requirement_document"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "classification_score": 89,
+      "classification_hits": [
+        "tools"
+      ],
+      "created_at": "2026-05-19T00:39:53.126849Z"
+    },
+    {
+      "id": "skill_star_kocoro_lab_shannon",
+      "title": "Kocoro-lab/Shannon",
+      "description": "A production-oriented multi-agent orchestration framework.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/Kocoro-lab/Shannon",
+      "repo_full_name": "Kocoro-lab/Shannon",
+      "language": "Go",
+      "stars": 1871,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "agent",
+        "ai",
+        "multi_agent_systems",
+        "go"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 80,
+      "classification_hits": [
+        "code"
+      ],
+      "created_at": "2026-05-19T00:39:53.126969Z"
+    },
+    {
+      "id": "skill_star_mervinpraison_praisonai",
+      "title": "MervinPraison/PraisonAI",
+      "description": "PraisonAI 🦞 — Hire a 24/7 AI Workforce. Stop writing boilerplate and start shipping autonomous self-improving agents that research, plan, code, and execute tasks. Deployed in 5 lines of code with built-in memory, RAG, and support for 100+ LLMs.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/MervinPraison/PraisonAI",
+      "repo_full_name": "MervinPraison/PraisonAI",
+      "language": "Python",
+      "stars": 7823,
+      "tags": [
+        "mcp_tool",
+        "agent_runtime",
+        "agents",
+        "ai",
+        "ai_agent_framework",
+        "ai_agent_sdk",
+        "ai_agents",
+        "ai_agents_framework",
+        "ai_agents_sdk",
+        "ai_framwork",
+        "aiagent",
+        "aiagentframework",
+        "aiagents",
+        "aiagentsframework",
+        "claw",
+        "framework"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "classification_score": 93,
+      "classification_hits": [
+        "mcp",
+        "protocol"
+      ],
+      "created_at": "2026-05-19T00:39:53.127115Z"
+    },
+    {
+      "id": "skill_star_minatoz997_openhands_backend",
+      "title": "Minatoz997/OpenHands-Backend",
+      "description": "--- title: Human-Like Writing Assistant emoji: 🎭 colorFrom: blue colorTo: purple sdk: docker sdk_version: \"4.36.0\" app_file: app.py pinned: false license: mit app_port: 7860 --- # 🎭 Human-Like Writing Assistant A premium AI writing assistan",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/Minatoz997/OpenHands-Backend",
+      "repo_full_name": "Minatoz997/OpenHands-Backend",
+      "language": "Python",
+      "stars": 2,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "python"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 80,
+      "classification_hits": [
+        "ide"
+      ],
+      "created_at": "2026-05-19T00:39:53.127239Z"
+    },
+    {
+      "id": "skill_star_minimax_ai_skills",
+      "title": "MiniMax-AI/skills",
+      "description": "# MiniMax Skills [中文版](./README_zh.md) > **Beta** — This project is under active development. Skills, APIs, and configuration formats may change without notice. We welcome feedback and contributions. Development skills for AI coding agents.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/MiniMax-AI/skills",
+      "repo_full_name": "MiniMax-AI/skills",
+      "language": "C#",
+      "stars": 11926,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "c#"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 84,
+      "classification_hits": [
+        "coding agent",
+        "ide"
+      ],
+      "created_at": "2026-05-19T00:39:53.127354Z"
+    },
+    {
+      "id": "skill_star_opengvlab_scalecua",
+      "title": "OpenGVLab/ScaleCUA",
+      "description": "[ICLR 2026 Oral] ScaleCUA is the open-sourced computer use agents that can operate on cross-platform environments (Windows, macOS, Ubuntu, Android).",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/OpenGVLab/ScaleCUA",
+      "repo_full_name": "OpenGVLab/ScaleCUA",
+      "language": "Python",
+      "stars": 1113,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "computer_use_agents",
+        "data",
+        "gui_agents",
+        "models",
+        "online_evaluation_suite",
+        "scalecua",
+        "python"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 80,
+      "classification_hits": [
+        "ide"
+      ],
+      "created_at": "2026-05-19T00:39:53.127483Z"
+    },
+    {
+      "id": "skill_star_openhands_openhands",
+      "title": "OpenHands/OpenHands",
+      "description": "🙌 OpenHands: AI-Driven Development",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/OpenHands/OpenHands",
+      "repo_full_name": "OpenHands/OpenHands",
+      "language": "Python",
+      "stars": 74005,
+      "tags": [
+        "mcp_tool",
+        "agent_runtime",
+        "agent",
+        "artificial_intelligence",
+        "chatgpt",
+        "claude_ai",
+        "cli",
+        "developer_tools",
+        "gpt",
+        "llm",
+        "openai",
+        "python"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "classification_score": 89,
+      "classification_hits": [
+        "tools"
+      ],
+      "created_at": "2026-05-19T00:39:53.127606Z"
+    },
+    {
+      "id": "skill_star_openhands_openhands_cli",
+      "title": "OpenHands/OpenHands-CLI",
+      "description": "Lightweight OpenHands CLI in a binary executable",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/OpenHands/OpenHands-CLI",
+      "repo_full_name": "OpenHands/OpenHands-CLI",
+      "language": "Python",
+      "stars": 181,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "python"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 80,
+      "classification_hits": [
+        "ide"
+      ],
+      "created_at": "2026-05-19T00:39:53.127725Z"
+    },
+    {
+      "id": "skill_star_openhands_openhands_cloud",
+      "title": "OpenHands/OpenHands-Cloud",
+      "description": "All Hands AI OpenHands Self-hosted Cloud",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/OpenHands/OpenHands-Cloud",
+      "repo_full_name": "OpenHands/OpenHands-Cloud",
+      "language": "Python",
+      "stars": 46,
+      "tags": [
+        "prompt_framework",
+        "agent_runtime",
+        "python"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.prompt_skill_engine",
+      "classification_score": 70,
+      "classification_hits": [
+        "instruction"
+      ],
+      "created_at": "2026-05-19T00:39:53.127801Z"
+    },
+    {
+      "id": "skill_star_openhands_benchmarks",
+      "title": "OpenHands/benchmarks",
+      "description": "Evaluation harness for OpenHands V1.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/OpenHands/benchmarks",
+      "repo_full_name": "OpenHands/benchmarks",
+      "language": "Python",
+      "stars": 83,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "python"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 80,
+      "classification_hits": [
+        "ide"
+      ],
+      "created_at": "2026-05-19T00:39:53.127924Z"
+    },
+    {
+      "id": "skill_star_openhands_docs",
+      "title": "OpenHands/docs",
+      "description": "Aggregated documentations across multiple repos, including OpenHands, agent-sdk, etc.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/OpenHands/docs",
+      "repo_full_name": "OpenHands/docs",
+      "language": "MDX",
+      "stars": 6,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "mdx"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 80,
+      "classification_hits": [
+        "ide"
+      ],
+      "created_at": "2026-05-19T00:39:53.127977Z"
+    },
+    {
+      "id": "skill_star_openhands_extensions",
+      "title": "OpenHands/extensions",
+      "description": "Public registry for OpenHands extensions.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/OpenHands/extensions",
+      "repo_full_name": "OpenHands/extensions",
+      "language": "Python",
+      "stars": 101,
+      "tags": [
+        "mcp_tool",
+        "agent_runtime",
+        "python"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "classification_score": 89,
+      "classification_hits": [
+        "mcp"
+      ],
+      "created_at": "2026-05-19T00:39:53.128092Z"
+    },
+    {
+      "id": "skill_star_openhands_openhands_aci",
+      "title": "OpenHands/openhands-aci",
+      "description": "Agent computer interface for AI software engineer.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/OpenHands/openhands-aci",
+      "repo_full_name": "OpenHands/openhands-aci",
+      "language": "Python",
+      "stars": 128,
+      "tags": [
+        "mcp_tool",
+        "agent_runtime",
+        "python"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "classification_score": 89,
+      "classification_hits": [
+        "tools"
+      ],
+      "created_at": "2026-05-19T00:39:53.128205Z"
+    },
+    {
+      "id": "skill_star_openhands_openhands_chrome_extension",
+      "title": "OpenHands/openhands-chrome-extension",
+      "description": "# OpenHands GitHub Launcher A Chrome extension that adds a \"Launch in OpenHands\" button to GitHub repositories and pull requests, allowing you to start an OpenHands conversation with one click. ## Features - Adds a \"Launch with OpenHands\" d",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/OpenHands/openhands-chrome-extension",
+      "repo_full_name": "OpenHands/openhands-chrome-extension",
+      "language": "JavaScript",
+      "stars": 28,
+      "tags": [
+        "browser_agent",
+        "agent_runtime",
+        "javascript"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.browser_operator",
+      "classification_score": 94,
+      "classification_hits": [
+        "browser"
+      ],
+      "created_at": "2026-05-19T00:39:53.128313Z"
+    },
+    {
+      "id": "skill_star_openhands_software_agent_sdk",
+      "title": "OpenHands/software-agent-sdk",
+      "description": "A clean, modular SDK for building AI agents with OpenHands V1.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/OpenHands/software-agent-sdk",
+      "repo_full_name": "OpenHands/software-agent-sdk",
+      "language": "Python",
+      "stars": 726,
+      "tags": [
+        "evaluation",
+        "agent_runtime",
+        "agent",
+        "sdk",
+        "python"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.eval_benchmark",
+      "classification_score": 68,
+      "classification_hits": [
+        "benchmark",
+        "score"
+      ],
+      "created_at": "2026-05-19T00:39:53.128429Z"
+    },
+    {
+      "id": "skill_star_orcaslicer_orcaslicer",
+      "title": "OrcaSlicer/OrcaSlicer",
+      "description": "G-code generator for 3D printers (Bambu, Prusa, Voron, VzBot, RatRig, Creality, etc.)",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/OrcaSlicer/OrcaSlicer",
+      "repo_full_name": "OrcaSlicer/OrcaSlicer",
+      "language": "C++",
+      "stars": 14109,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "3d_printer",
+        "3d_printing",
+        "makers",
+        "orca",
+        "orcaslicer",
+        "slicer",
+        "c++"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 80,
+      "classification_hits": [
+        "code"
+      ],
+      "created_at": "2026-05-19T00:39:53.128553Z"
+    },
+    {
+      "id": "skill_star_orchestra_research_ai_research_skills",
+      "title": "Orchestra-Research/AI-Research-SKILLs",
+      "description": "Comprehensive open-source library of AI research and engineering skills for any AI model. Package the skills and your claude code/codex/gemini agent will be an AI research agent with full horsepower. Maintained by Orchestra Research.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/Orchestra-Research/AI-Research-SKILLs",
+      "repo_full_name": "Orchestra-Research/AI-Research-SKILLs",
+      "language": "TeX",
+      "stars": 8611,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "ai",
+        "ai_research",
+        "claude",
+        "claude_code",
+        "claude_skills",
+        "codex",
+        "gemini",
+        "gpt_5",
+        "grpo",
+        "huggingface",
+        "machine_leanring",
+        "megatron",
+        "skills",
+        "vllm"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 84,
+      "classification_hits": [
+        "ide",
+        "code"
+      ],
+      "created_at": "2026-05-19T00:39:53.128687Z"
+    },
+    {
+      "id": "skill_star_python_world_python_mini_projects",
+      "title": "Python-World/python-mini-projects",
+      "description": "A collection of simple python mini projects to enhance your python skills",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/Python-World/python-mini-projects",
+      "repo_full_name": "Python-World/python-mini-projects",
+      "language": "Python",
+      "stars": 18560,
+      "tags": [
+        "mcp_tool",
+        "agent_runtime",
+        "automate",
+        "learn_to_code",
+        "miniprojects",
+        "opensource",
+        "projects",
+        "python",
+        "stuff",
+        "tools"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "classification_score": 89,
+      "classification_hits": [
+        "tools"
+      ],
+      "created_at": "2026-05-19T00:39:53.128800Z"
+    },
+    {
+      "id": "skill_star_quantaalpha_repomaster",
+      "title": "QuantaAlpha/RepoMaster",
+      "description": "RepoMaster: The open-source AI agent that masters GitHub. It turns any code repository into a powerful tool, achieving a new level of autonomous task-solving. An open alternative to Claude-Code.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/QuantaAlpha/RepoMaster",
+      "repo_full_name": "QuantaAlpha/RepoMaster",
+      "language": "Python",
+      "stars": 523,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "claude_code",
+        "gittaskbench",
+        "mle_bench",
+        "openhands",
+        "swe_agent",
+        "python"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 80,
+      "classification_hits": [
+        "code"
+      ],
+      "created_at": "2026-05-19T00:39:53.128928Z"
+    },
+    {
+      "id": "skill_star_samuraigpt_llm_wiki_agent",
+      "title": "SamurAIGPT/llm-wiki-agent",
+      "description": "A personal knowledge base that builds and maintains itself. Drop in sources — Claude (or Codex/Gemini) reads them, extracts knowledge, and maintains a persistent interlinked wiki. Works with Claude Code, Codex, OpenCode, Gemini CLI. No API key needed.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/SamurAIGPT/llm-wiki-agent",
+      "repo_full_name": "SamurAIGPT/llm-wiki-agent",
+      "language": "Python",
+      "stars": 2661,
+      "tags": [
+        "browser_agent",
+        "agent_runtime",
+        "claude_code",
+        "codex",
+        "gemini",
+        "knowledge_base",
+        "knowledge_graph",
+        "llm",
+        "markdown",
+        "obsidian",
+        "personal_knowledge_management",
+        "rag",
+        "wiki",
+        "python"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.browser_operator",
+      "classification_score": 94,
+      "classification_hits": [
+        "browser"
+      ],
+      "created_at": "2026-05-19T00:39:53.129060Z"
+    },
+    {
+      "id": "skill_star_savagenoah_evoagentx_report",
+      "title": "SavageNoah/evoagentx-report",
+      "description": "EvoAgentX vs Hermes vs GSD 深度对比报告",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/SavageNoah/evoagentx-report",
+      "repo_full_name": "SavageNoah/evoagentx-report",
+      "language": "HTML",
+      "stars": 1,
+      "tags": [
+        "artifact",
+        "agent_runtime",
+        "html"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.artifact_report_engine",
+      "classification_score": 54,
+      "classification_hits": [
+        "report"
+      ],
+      "created_at": "2026-05-19T00:39:53.129081Z"
+    },
+    {
+      "id": "skill_star_tencent_tencentdb_agent_memory",
+      "title": "Tencent/TencentDB-Agent-Memory",
+      "description": "TencentDB Agent Memory delivers fully local long-term memory for AI Agents via a 4-tier progressive pipeline, with zero external API dependencies.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/Tencent/TencentDB-Agent-Memory",
+      "repo_full_name": "Tencent/TencentDB-Agent-Memory",
+      "language": "TypeScript",
+      "stars": 3333,
+      "tags": [
+        "memory",
+        "agent_runtime",
+        "agent",
+        "ai_agent",
+        "embedding",
+        "llm",
+        "local_first",
+        "long_term_memory",
+        "openclaw_plugin",
+        "vector_search",
+        "typescript"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.memory_rag_core",
+      "classification_score": 96,
+      "classification_hits": [
+        "rag",
+        "memory",
+        "vector",
+        "embedding"
+      ],
+      "created_at": "2026-05-19T00:39:53.129210Z"
+    },
+    {
+      "id": "skill_star_tencent_weknora",
+      "title": "Tencent/WeKnora",
+      "description": "Open-source LLM knowledge platform: turn raw documents into a queryable RAG, an autonomous reasoning agent, and a self-maintaining Wiki.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/Tencent/WeKnora",
+      "repo_full_name": "Tencent/WeKnora",
+      "language": "Go",
+      "stars": 15188,
+      "tags": [
+        "memory",
+        "agent_runtime",
+        "agent",
+        "agentic",
+        "ai",
+        "chatbot",
+        "embeddings",
+        "evaluation",
+        "generative_ai",
+        "golang",
+        "knowledge_base",
+        "llm",
+        "multi_tenant",
+        "multimodel",
+        "ollama",
+        "openai"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.memory_rag_core",
+      "classification_score": 92,
+      "classification_hits": [
+        "rag",
+        "vector",
+        "embedding"
+      ],
+      "created_at": "2026-05-19T00:39:53.129338Z"
+    },
+    {
+      "id": "skill_star_th0rgal_open_ralph_wiggum",
+      "title": "Th0rgal/open-ralph-wiggum",
+      "description": "Type `ralph \"prompt\"` to start open code in a ralph loop. Also supports a prompt file & status check. Open Code, Claude Code, Codex, Copilot",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/Th0rgal/open-ralph-wiggum",
+      "repo_full_name": "Th0rgal/open-ralph-wiggum",
+      "language": "TypeScript",
+      "stars": 1706,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "claude_code",
+        "open_code",
+        "opencode",
+        "ralph",
+        "ralph_wiggum",
+        "typescript"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 84,
+      "classification_hits": [
+        "copilot",
+        "code"
+      ],
+      "created_at": "2026-05-19T00:39:53.129461Z"
+    },
+    {
+      "id": "skill_star_the_cool_coders_project_ideas_and_resources",
+      "title": "The-Cool-Coders/Project-Ideas-And-Resources",
+      "description": "A Collection of application ideas that can be used to improve your coding skills ❤.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/The-Cool-Coders/Project-Ideas-And-Resources",
+      "repo_full_name": "The-Cool-Coders/Project-Ideas-And-Resources",
+      "language": null,
+      "stars": 13956,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "beginner",
+        "contribution",
+        "contributions_welcome",
+        "css",
+        "frontend",
+        "hacktoberfest",
+        "html",
+        "javascript",
+        "open_source",
+        "opensource",
+        "php",
+        "projects",
+        "python",
+        "react"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 88,
+      "classification_hits": [
+        "developer",
+        "ide",
+        "code"
+      ],
+      "created_at": "2026-05-19T00:39:53.129601Z"
+    },
+    {
+      "id": "skill_star_turixai_turix_cua",
+      "title": "TurixAI/TuriX-CUA",
+      "description": "This is the official website for TuriX Computer-use-Agent",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/TurixAI/TuriX-CUA",
+      "repo_full_name": "TurixAI/TuriX-CUA",
+      "language": "Python",
+      "stars": 2976,
+      "tags": [
+        "browser_agent",
+        "agent_runtime",
+        "agent",
+        "ai_agents",
+        "browser_use",
+        "computer_automation",
+        "computer_use",
+        "computer_use_agent",
+        "cua",
+        "gui_agent",
+        "gui_operator",
+        "mcp",
+        "qwen3_vl",
+        "python"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.browser_operator",
+      "classification_score": 94,
+      "classification_hits": [
+        "browser"
+      ],
+      "created_at": "2026-05-19T00:39:53.129724Z"
+    },
+    {
+      "id": "skill_star_vamfi_claude_user_memory",
+      "title": "VAMFI/claude-user-memory",
+      "description": " Autonomous agent substrate for Claude Code CLI. Research→Plan→Implement workflows with quality gates, TDD   enforcement, and multi-agent coordination. 4.8-5.5x faster development. Built on Anthropic's engineering research.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/VAMFI/claude-user-memory",
+      "repo_full_name": "VAMFI/claude-user-memory",
+      "language": "Shell",
+      "stars": 187,
+      "tags": [
+        "memory",
+        "agent_runtime",
+        "agent_orchestration",
+        "ai_agents",
+        "ai_coding_assistant",
+        "autonomous_agents",
+        "claude_ai",
+        "claude_code",
+        "developer_tools",
+        "multi_agent_system",
+        "research_driven_development",
+        "tdd",
+        "workflow_automation",
+        "shell"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.memory_rag_core",
+      "classification_score": 92,
+      "classification_hits": [
+        "memory",
+        "knowledge graph",
+        "graph"
+      ],
+      "created_at": "2026-05-19T00:39:53.129852Z"
+    },
+    {
+      "id": "skill_star_voltagent_awesome_openclaw_skills",
+      "title": "VoltAgent/awesome-openclaw-skills",
+      "description": "The awesome collection of OpenClaw skills. 5,400+ skills filtered and categorized from the official OpenClaw Skills Registry.🦞",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/VoltAgent/awesome-openclaw-skills",
+      "repo_full_name": "VoltAgent/awesome-openclaw-skills",
+      "language": null,
+      "stars": 48945,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "agent_skills",
+        "awesome",
+        "awesome_list",
+        "awesome_lists",
+        "clawd",
+        "clawdbot",
+        "clawdbot_skill",
+        "clawdhub",
+        "moltbot",
+        "moltbot_skills",
+        "openclaw",
+        "openclaw_skills"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 84,
+      "classification_hits": [
+        "developer",
+        "code"
+      ],
+      "created_at": "2026-05-19T00:39:53.129987Z"
+    },
+    {
+      "id": "skill_star_yeqing17_2026_omniagent",
+      "title": "YeQing17-2026/OmniAgent",
+      "description": "An agent capable of self-evolving and dynamically hardening security",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/YeQing17-2026/OmniAgent",
+      "repo_full_name": "YeQing17-2026/OmniAgent",
+      "language": "Python",
+      "stars": 1186,
+      "tags": [
+        "memory",
+        "agent_runtime",
+        "agent",
+        "hermes",
+        "open_claw",
+        "python"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.memory_rag_core",
+      "classification_score": 88,
+      "classification_hits": [
+        "rag",
+        "memory"
+      ],
+      "created_at": "2026-05-19T00:39:53.130112Z"
+    },
+    {
+      "id": "skill_star_yuan1z0825_nature_skills",
+      "title": "Yuan1z0825/nature-skills",
+      "description": "符合nature论文学术表达和科研绘图的Skill",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/Yuan1z0825/nature-skills",
+      "repo_full_name": "Yuan1z0825/nature-skills",
+      "language": "Python",
+      "stars": 8352,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "codex_skills",
+        "nature",
+        "nature_skills",
+        "python"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 80,
+      "classification_hits": [
+        "code"
+      ],
+      "created_at": "2026-05-19T00:39:53.130228Z"
+    },
+    {
+      "id": "skill_star_ace_agent_ace",
+      "title": "ace-agent/ace",
+      "description": "Evolve your language agent with Agentic Context Engineering (ACE) ",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/ace-agent/ace",
+      "repo_full_name": "ace-agent/ace",
+      "language": "Python",
+      "stars": 1086,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "python"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 80,
+      "classification_hits": [
+        "ide"
+      ],
+      "created_at": "2026-05-19T00:39:53.130354Z"
+    },
+    {
+      "id": "skill_star_adityasoni9998_openhands_versa",
+      "title": "adityasoni9998/OpenHands-Versa",
+      "description": "Code for the paper \"Coding Agents with Multimodal Browsing are Generalist Problem Solvers\"",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/adityasoni9998/OpenHands-Versa",
+      "repo_full_name": "adityasoni9998/OpenHands-Versa",
+      "language": "Python",
+      "stars": 102,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "python"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 92,
+      "classification_hits": [
+        "coding agent",
+        "developer",
+        "ide",
+        "code"
+      ],
+      "created_at": "2026-05-19T00:39:53.130484Z"
+    },
+    {
+      "id": "skill_star_aiming_lab_agent0",
+      "title": "aiming-lab/Agent0",
+      "description": "Agent0 Series: Self-Evolving Agents from Zero Data",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/aiming-lab/Agent0",
+      "repo_full_name": "aiming-lab/Agent0",
+      "language": "Python",
+      "stars": 1192,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "python"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 84,
+      "classification_hits": [
+        "ide",
+        "code"
+      ],
+      "created_at": "2026-05-19T00:39:53.130605Z"
+    },
+    {
+      "id": "skill_star_aiming_lab_autoresearchclaw",
+      "title": "aiming-lab/AutoResearchClaw",
+      "description": "Fully autonomous & self-evolving research from idea to paper. Chat an Idea. Get a Paper. 🦞",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/aiming-lab/AutoResearchClaw",
+      "repo_full_name": "aiming-lab/AutoResearchClaw",
+      "language": "Python",
+      "stars": 12294,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "autonomous_research",
+        "citation_verification",
+        "llm_agents",
+        "metaclaw",
+        "multi_agent_debate",
+        "openclaw",
+        "paper_generation",
+        "scientific_discovery",
+        "self_evolving",
+        "python"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 80,
+      "classification_hits": [
+        "ide"
+      ],
+      "created_at": "2026-05-19T00:39:53.130732Z"
+    },
+    {
+      "id": "skill_star_aiming_lab_metaclaw",
+      "title": "aiming-lab/MetaClaw",
+      "description": "🦞 Just talk to your agent — it learns and EVOLVES 🧬.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/aiming-lab/MetaClaw",
+      "repo_full_name": "aiming-lab/MetaClaw",
+      "language": "Python",
+      "stars": 3393,
+      "tags": [
+        "prompt_framework",
+        "agent_runtime",
+        "agent",
+        "ai_agent",
+        "continual_learning",
+        "fine_tuning",
+        "llm",
+        "lora",
+        "meta_learning",
+        "metaclaw",
+        "online_learning",
+        "openclaw",
+        "reinforcement_learning",
+        "skill_learning",
+        "tinker",
+        "python"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.prompt_skill_engine",
+      "classification_score": 70,
+      "classification_hits": [
+        "skill"
+      ],
+      "created_at": "2026-05-19T00:39:53.130858Z"
+    },
+    {
+      "id": "skill_star_aiwaves_cn_agents",
+      "title": "aiwaves-cn/agents",
+      "description": "An Open-source Framework for Data-centric, Self-evolving Autonomous Language Agents",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/aiwaves-cn/agents",
+      "repo_full_name": "aiwaves-cn/agents",
+      "language": "Python",
+      "stars": 5926,
+      "tags": [
+        "mcp_tool",
+        "agent_runtime",
+        "autonomous_agents",
+        "language_model",
+        "llm",
+        "python"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "classification_score": 89,
+      "classification_hits": [
+        "tools"
+      ],
+      "created_at": "2026-05-19T00:39:53.130979Z"
+    },
+    {
+      "id": "skill_star_alirezarezvani_claude_skills",
+      "title": "alirezarezvani/claude-skills",
+      "description": "313+ Claude Code skills & agent plugins for Claude Code, Codex, Gemini CLI, Cursor, and 8 more coding agents — engineering, marketing, product, compliance, C-level advisory, research and your daily productivity skills.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/alirezarezvani/claude-skills",
+      "repo_full_name": "alirezarezvani/claude-skills",
+      "language": "Python",
+      "stars": 15381,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "agent_plugins",
+        "agent_skills",
+        "agentic_ai",
+        "ai_coding_agent",
+        "anthropic_claude",
+        "claude_ai",
+        "claude_code",
+        "claude_code_plugins",
+        "claude_code_skills",
+        "claude_skills",
+        "codex_skills",
+        "coding_agent_plugins",
+        "cursor_skills",
+        "developer_tools"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 92,
+      "classification_hits": [
+        "coding agent",
+        "developer",
+        "ide",
+        "code"
+      ],
+      "created_at": "2026-05-19T00:39:53.131118Z"
+    },
+    {
+      "id": "skill_star_allegro_ralph",
+      "title": "allegro/ralph",
+      "description": "Ralph is the CMDB / Asset Management system for data center and back office hardware.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/allegro/ralph",
+      "repo_full_name": "allegro/ralph",
+      "language": "Python",
+      "stars": 2494,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "assets_management",
+        "backoffice",
+        "cmdb",
+        "data_center",
+        "dcim",
+        "django",
+        "hacktoberfest",
+        "inventory",
+        "inventory_management",
+        "python3",
+        "python"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 88,
+      "classification_hits": [
+        "ide",
+        "source code",
+        "code"
+      ],
+      "created_at": "2026-05-19T00:39:53.131232Z"
+    },
+    {
+      "id": "skill_star_alxshelepenok_lumen",
+      "title": "alxshelepenok/lumen",
+      "description": "A constantly evolving and thoughtful architecture for creating static blogs.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/alxshelepenok/lumen",
+      "repo_full_name": "alxshelepenok/lumen",
+      "language": "TypeScript",
+      "stars": 2016,
+      "tags": [
+        "browser_agent",
+        "agent_runtime",
+        "architecture",
+        "blog",
+        "bun",
+        "gatsby",
+        "graphql",
+        "infrastructure",
+        "jamstack",
+        "react",
+        "sentry",
+        "static",
+        "typescript"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.browser_operator",
+      "classification_score": 94,
+      "classification_hits": [
+        "browser"
+      ],
+      "created_at": "2026-05-19T00:39:53.131357Z"
+    },
+    {
+      "id": "skill_star_andreasbm_web_skills",
+      "title": "andreasbm/web-skills",
+      "description": "A visual overview of useful skills to learn as a web developer",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/andreasbm/web-skills",
+      "repo_full_name": "andreasbm/web-skills",
+      "language": "JavaScript",
+      "stars": 7542,
+      "tags": [
+        "mcp_tool",
+        "agent_runtime",
+        "accessibility",
+        "algorithms",
+        "architecture",
+        "backend",
+        "build_tools",
+        "css",
+        "design",
+        "frameworks",
+        "html",
+        "javascript",
+        "pwa",
+        "testing",
+        "web_components"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "classification_score": 89,
+      "classification_hits": [
+        "tools"
+      ],
+      "created_at": "2026-05-19T00:39:53.131514Z"
+    },
+    {
+      "id": "skill_star_android_skills",
+      "title": "android/skills",
+      "description": "## Android skills **Android skills** are a dedicated repository of **AI-optimized, modular instructions** and resources, to help LLMs better understand and execute specific patterns that follow the best practices and guidance on Android dev",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/android/skills",
+      "repo_full_name": "android/skills",
+      "language": null,
+      "stars": 5073,
+      "tags": [
+        "mcp_tool",
+        "agent_runtime"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "classification_score": 89,
+      "classification_hits": [
+        "tools"
+      ],
+      "created_at": "2026-05-19T00:39:53.131614Z"
+    },
+    {
+      "id": "skill_star_antfu_skills",
+      "title": "antfu/skills",
+      "description": "Anthony Fu's curated collection of agent skills.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/antfu/skills",
+      "repo_full_name": "antfu/skills",
+      "language": "TypeScript",
+      "stars": 4989,
+      "tags": [
+        "mcp_tool",
+        "agent_runtime",
+        "agent_skills",
+        "skills",
+        "typescript"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "classification_score": 89,
+      "classification_hits": [
+        "tools"
+      ],
+      "created_at": "2026-05-19T00:39:53.131717Z"
+    },
+    {
+      "id": "skill_star_anthropics_claude_plugins_official",
+      "title": "anthropics/claude-plugins-official",
+      "description": "Official, Anthropic-managed directory of high quality Claude Code Plugins.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/anthropics/claude-plugins-official",
+      "repo_full_name": "anthropics/claude-plugins-official",
+      "language": "Python",
+      "stars": 19697,
+      "tags": [
+        "mcp_tool",
+        "agent_runtime",
+        "claude_code",
+        "mcp",
+        "skills",
+        "python"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "classification_score": 89,
+      "classification_hits": [
+        "mcp"
+      ],
+      "created_at": "2026-05-19T00:39:53.131836Z"
+    },
+    {
+      "id": "skill_star_apify_agent_skills",
+      "title": "apify/agent-skills",
+      "description": "Collection of Apify Agent Skills",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/apify/agent-skills",
+      "repo_full_name": "apify/agent-skills",
+      "language": "Python",
+      "stars": 2049,
+      "tags": [
+        "browser_agent",
+        "agent_runtime",
+        "python"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.browser_operator",
+      "classification_score": 94,
+      "classification_hits": [
+        "scrape"
+      ],
+      "created_at": "2026-05-19T00:39:53.131933Z"
+    },
+    {
+      "id": "skill_star_apple_servicetalk",
+      "title": "apple/servicetalk",
+      "description": "A networking framework that evolves with your application",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/apple/servicetalk",
+      "repo_full_name": "apple/servicetalk",
+      "language": "Java",
+      "stars": 1020,
+      "tags": [
+        "mcp_tool",
+        "agent_runtime",
+        "framework",
+        "grpc",
+        "http",
+        "http2",
+        "java",
+        "microservices",
+        "netty",
+        "reactive",
+        "reactive_streams",
+        "rpc"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "classification_score": 89,
+      "classification_hits": [
+        "protocol"
+      ],
+      "created_at": "2026-05-19T00:39:53.132043Z"
+    },
+    {
+      "id": "skill_star_atomicstrata_llm_wiki_compiler",
+      "title": "atomicstrata/llm-wiki-compiler",
+      "description": "The knowledge compiler. Raw sources in, interlinked wiki out. Inspired by Karpathy's LLM Wiki pattern.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/atomicstrata/llm-wiki-compiler",
+      "repo_full_name": "atomicstrata/llm-wiki-compiler",
+      "language": "TypeScript",
+      "stars": 1222,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "cli",
+        "compiler",
+        "context_engineering",
+        "karpathy",
+        "knowledge_base",
+        "knowledge_compilation",
+        "llm",
+        "markdown",
+        "obsidian",
+        "wiki",
+        "typescript"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 88,
+      "classification_hits": [
+        "ide",
+        "diff",
+        "code"
+      ],
+      "created_at": "2026-05-19T00:39:53.132170Z"
+    },
+    {
+      "id": "skill_star_autoclaw_cc_xiaohongshu_skills",
+      "title": "autoclaw-cc/xiaohongshu-skills",
+      "description": "xiaohongshu-skills",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/autoclaw-cc/xiaohongshu-skills",
+      "repo_full_name": "autoclaw-cc/xiaohongshu-skills",
+      "language": "Python",
+      "stars": 1301,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "python"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 80,
+      "classification_hits": [
+        "code"
+      ],
+      "created_at": "2026-05-19T00:39:53.132274Z"
+    },
+    {
+      "id": "skill_star_bencodezen_vue_enterprise_boilerplate",
+      "title": "bencodezen/vue-enterprise-boilerplate",
+      "description": "An ever-evolving, very opinionated architecture and dev environment for new Vue SPA projects using Vue CLI.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/bencodezen/vue-enterprise-boilerplate",
+      "repo_full_name": "bencodezen/vue-enterprise-boilerplate",
+      "language": "SCSS",
+      "stars": 7777,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "boilerplate",
+        "frontend",
+        "javascript",
+        "vue",
+        "scss"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 88,
+      "classification_hits": [
+        "developer",
+        "ide",
+        "code"
+      ],
+      "created_at": "2026-05-19T00:39:53.132401Z"
+    },
+    {
+      "id": "skill_star_browserbase_skills",
+      "title": "browserbase/skills",
+      "description": "Browserbase's official collection of agent skills to access the web.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/browserbase/skills",
+      "repo_full_name": "browserbase/skills",
+      "language": "JavaScript",
+      "stars": 3332,
+      "tags": [
+        "browser_agent",
+        "agent_runtime",
+        "javascript"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.browser_operator",
+      "classification_score": 94,
+      "classification_hits": [
+        "browser"
+      ],
+      "created_at": "2026-05-19T00:39:53.132522Z"
+    },
+    {
+      "id": "skill_star_catherinedevlin_ipython_sql",
+      "title": "catherinedevlin/ipython-sql",
+      "description": "%%sql magic for IPython, hopefully evolving into full SQL client",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/catherinedevlin/ipython-sql",
+      "repo_full_name": "catherinedevlin/ipython-sql",
+      "language": "Python",
+      "stars": 1804,
+      "tags": [
+        "memory",
+        "agent_runtime",
+        "python"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.memory_rag_core",
+      "classification_score": 84,
+      "classification_hits": [
+        "database"
+      ],
+      "created_at": "2026-05-19T00:39:53.132628Z"
+    },
+    {
+      "id": "skill_star_chen_rn_cua",
+      "title": "chen-rn/CUA",
+      "description": "(deprecateed) create-universal-app(CUA) is an opinionated template for creating fullstack universal apps (Expo, Next, tRPC, Prisma, Clerk, Solito, Tamagui)",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/chen-rn/CUA",
+      "repo_full_name": "chen-rn/CUA",
+      "language": "TypeScript",
+      "stars": 1012,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "expo",
+        "nextjs",
+        "prisma",
+        "react",
+        "react_native",
+        "react_native_web",
+        "reactjs",
+        "solito",
+        "tamagui",
+        "template",
+        "typescript"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 80,
+      "classification_hits": [
+        "code"
+      ],
+      "created_at": "2026-05-19T00:39:53.132753Z"
+    },
+    {
+      "id": "skill_star_cisco_ai_defense_skill_scanner",
+      "title": "cisco-ai-defense/skill-scanner",
+      "description": "Security Scanner for Agent Skills",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/cisco-ai-defense/skill-scanner",
+      "repo_full_name": "cisco-ai-defense/skill-scanner",
+      "language": "Python",
+      "stars": 2004,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "agent",
+        "agent_skills",
+        "security",
+        "python"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 84,
+      "classification_hits": [
+        "ide",
+        "code"
+      ],
+      "created_at": "2026-05-19T00:39:53.132859Z"
+    },
+    {
+      "id": "skill_star_clawvader_tech_hermes_telegram_miniapp",
+      "title": "clawvader-tech/hermes-telegram-miniapp",
+      "description": "React SPA dashboard for Telegram Mini App v2.0 — 10-page mobile-first UI. Runs locally.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/clawvader-tech/hermes-telegram-miniapp",
+      "repo_full_name": "clawvader-tech/hermes-telegram-miniapp",
+      "language": "TypeScript",
+      "stars": 224,
+      "tags": [
+        "memory",
+        "agent_runtime",
+        "typescript"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.memory_rag_core",
+      "classification_score": 84,
+      "classification_hits": [
+        "graph"
+      ],
+      "created_at": "2026-05-19T00:39:53.132975Z"
+    },
+    {
+      "id": "skill_star_cloudflare_pingora",
+      "title": "cloudflare/pingora",
+      "description": "A library for building fast, reliable and evolvable network services.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/cloudflare/pingora",
+      "repo_full_name": "cloudflare/pingora",
+      "language": "Rust",
+      "stars": 26658,
+      "tags": [
+        "mcp_tool",
+        "agent_runtime",
+        "rust"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "classification_score": 93,
+      "classification_hits": [
+        "tools",
+        "protocol"
+      ],
+      "created_at": "2026-05-19T00:39:53.133079Z"
+    },
+    {
+      "id": "skill_star_cloudflare_skills",
+      "title": "cloudflare/skills",
+      "description": "Skills for teaching agents how to build on Cloudflare.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/cloudflare/skills",
+      "repo_full_name": "cloudflare/skills",
+      "language": null,
+      "stars": 1577,
+      "tags": [
+        "mcp_tool",
+        "agent_runtime",
+        "agents",
+        "cloudflare",
+        "skills",
+        "workers"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "classification_score": 89,
+      "classification_hits": [
+        "mcp"
+      ],
+      "created_at": "2026-05-19T00:39:53.133183Z"
+    },
+    {
+      "id": "skill_star_cloudflare_vibesdk",
+      "title": "cloudflare/vibesdk",
+      "description": "An open-source vibe coding platform that helps you build your own vibe-coding platform, built entirely on Cloudflare stack ",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/cloudflare/vibesdk",
+      "repo_full_name": "cloudflare/vibesdk",
+      "language": "TypeScript",
+      "stars": 5032,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "ai",
+        "cloudflare_workers",
+        "coding_agent",
+        "durable_objects",
+        "text_to_app",
+        "vibe_coding",
+        "typescript"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 88,
+      "classification_hits": [
+        "developer",
+        "ide",
+        "code"
+      ],
+      "created_at": "2026-05-19T00:39:53.133309Z"
+    },
+    {
+      "id": "skill_star_cyberagiinc_devdocs",
+      "title": "cyberagiinc/DevDocs",
+      "description": "Completely free, private, UI based Tech Documentation MCP server. Designed for coders and software developers in mind. Easily integrate into Cursor, Windsurf, Cline, Roo Code, Claude Desktop App ",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/cyberagiinc/DevDocs",
+      "repo_full_name": "cyberagiinc/DevDocs",
+      "language": "TypeScript",
+      "stars": 2073,
+      "tags": [
+        "browser_agent",
+        "agent_runtime",
+        "cline",
+        "crawl4ai",
+        "cursor",
+        "documentation",
+        "llm",
+        "playwright",
+        "python3",
+        "scraper",
+        "security",
+        "typescript",
+        "windsurf"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.browser_operator",
+      "classification_score": 102,
+      "classification_hits": [
+        "playwright",
+        "crawl",
+        "scrape"
+      ],
+      "created_at": "2026-05-19T00:39:53.133439Z"
+    },
+    {
+      "id": "skill_star_czlonkowski_n8n_skills",
+      "title": "czlonkowski/n8n-skills",
+      "description": "n8n skillset for Claude Code to build flawless n8n workflows",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/czlonkowski/n8n-skills",
+      "repo_full_name": "czlonkowski/n8n-skills",
+      "language": "Shell",
+      "stars": 5047,
+      "tags": [
+        "mcp_tool",
+        "agent_runtime",
+        "ai_agents",
+        "n8n",
+        "workflow_automation",
+        "shell"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "classification_score": 93,
+      "classification_hits": [
+        "mcp",
+        "tools"
+      ],
+      "created_at": "2026-05-19T00:39:53.133548Z"
+    },
+    {
+      "id": "skill_star_datawhalechina_vibe_vibe",
+      "title": "datawhalechina/vibe-vibe",
+      "description": "AI for All: The First Systematic Vibe Coding Tutorial | From Zero to Full-Stack, Bring Your Ideas to Life | Live at: www.vibevibe.cn   ；全民AI学习第一课，首个系统化 Vibe Coding 开源教程 | 零基础到全栈实战，让人人都能借助 AI 实现自己的想法与创意 | 在线地址：www.vibevibe.cn",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/datawhalechina/vibe-vibe",
+      "repo_full_name": "datawhalechina/vibe-vibe",
+      "language": "Dockerfile",
+      "stars": 5073,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "agent",
+        "agentic_ai",
+        "ai",
+        "coding_assistant",
+        "programming",
+        "vibe_coding",
+        "vibecoding",
+        "dockerfile"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 84,
+      "classification_hits": [
+        "ide",
+        "code"
+      ],
+      "created_at": "2026-05-19T00:39:53.133659Z"
+    },
+    {
+      "id": "skill_star_decolua_9router",
+      "title": "decolua/9router",
+      "description": "Unlimited FREE AI coding. Connect Claude Code, Codex, Cursor, Cline, Copilot, Antigravity to FREE Claude/GPT/Gemini via 40+ providers. Auto-fallback, RTK -40% tokens, never hit limits.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/decolua/9router",
+      "repo_full_name": "decolua/9router",
+      "language": "JavaScript",
+      "stars": 12163,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "ai_agents",
+        "ai_gateway",
+        "anthropic",
+        "chatgpt",
+        "claude",
+        "claude_code",
+        "cline",
+        "codex",
+        "copilot",
+        "cursor",
+        "deepseek",
+        "free_ai",
+        "gemini",
+        "gemini_cli"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 92,
+      "classification_hits": [
+        "ide",
+        "copilot",
+        "diff",
+        "code"
+      ],
+      "created_at": "2026-05-19T00:39:53.133791Z"
+    },
+    {
+      "id": "skill_star_dontbesilent2025_dbskill",
+      "title": "dontbesilent2025/dbskill",
+      "description": "dontbesilent 的商业诊断 Skills",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/dontbesilent2025/dbskill",
+      "repo_full_name": "dontbesilent2025/dbskill",
+      "language": "Shell",
+      "stars": 4951,
+      "tags": [
+        "mcp_tool",
+        "agent_runtime",
+        "shell"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "classification_score": 89,
+      "classification_hits": [
+        "tools"
+      ],
+      "created_at": "2026-05-19T00:39:53.133893Z"
+    },
+    {
+      "id": "skill_star_dotnet_skills",
+      "title": "dotnet/skills",
+      "description": "Repository for skills to assist AI coding agents with .NET and C#",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/dotnet/skills",
+      "repo_full_name": "dotnet/skills",
+      "language": "C#",
+      "stars": 1759,
+      "tags": [
+        "mcp_tool",
+        "agent_runtime",
+        "agent_skills",
+        "c#"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "classification_score": 89,
+      "classification_hits": [
+        "mcp"
+      ],
+      "created_at": "2026-05-19T00:39:53.134009Z"
+    },
+    {
+      "id": "skill_star_expo_skills",
+      "title": "expo/skills",
+      "description": "A collection of AI agent skills for working with Expo projects and Expo Application Services",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/expo/skills",
+      "repo_full_name": "expo/skills",
+      "language": "JavaScript",
+      "stars": 1940,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "javascript"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 80,
+      "classification_hits": [
+        "code"
+      ],
+      "created_at": "2026-05-19T00:39:53.134125Z"
+    },
+    {
+      "id": "skill_star_fancyai_official_skills",
+      "title": "fancyai-official/skills",
+      "description": "# FancyAI Skills Collection **Premium AI insights and creative tools for creators, marketers, and retailers.** FancyAI Skills are expert-level workflows designed for **all industries** — fashion, FMCG, beauty, tech, sportswear, luxury, and ",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/fancyai-official/skills",
+      "repo_full_name": "fancyai-official/skills",
+      "language": "Python",
+      "stars": 1056,
+      "tags": [
+        "mcp_tool",
+        "agent_runtime",
+        "python"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "classification_score": 89,
+      "classification_hits": [
+        "tools"
+      ],
+      "created_at": "2026-05-19T00:39:53.134238Z"
+    },
+    {
+      "id": "skill_star_filipecalegario_awesome_vibe_coding",
+      "title": "filipecalegario/awesome-vibe-coding",
+      "description": "A curated list of vibe coding references, collaborating with AI to write code.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/filipecalegario/awesome-vibe-coding",
+      "repo_full_name": "filipecalegario/awesome-vibe-coding",
+      "language": null,
+      "stars": 4435,
+      "tags": [
+        "browser_agent",
+        "agent_runtime",
+        "ai_agent",
+        "ai_agents",
+        "ai_coding_assistant",
+        "ai_coding_tools",
+        "awesome",
+        "awesome_list",
+        "cursor",
+        "lovable",
+        "vibe_coding"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.browser_operator",
+      "classification_score": 94,
+      "classification_hits": [
+        "browser"
+      ],
+      "created_at": "2026-05-19T00:39:53.134361Z"
+    },
+    {
+      "id": "skill_star_firebug_firebug",
+      "title": "firebug/firebug",
+      "description": "Web Development Evolved - The Firebug you have known and loved",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/firebug/firebug",
+      "repo_full_name": "firebug/firebug",
+      "language": "JavaScript",
+      "stars": 1366,
+      "tags": [
+        "browser_agent",
+        "agent_runtime",
+        "javascript"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.browser_operator",
+      "classification_score": 94,
+      "classification_hits": [
+        "browser"
+      ],
+      "created_at": "2026-05-19T00:39:53.134466Z"
+    },
+    {
+      "id": "skill_star_florinpop17_app_ideas",
+      "title": "florinpop17/app-ideas",
+      "description": "A Collection of application ideas which can be used to improve your coding skills.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/florinpop17/app-ideas",
+      "repo_full_name": "florinpop17/app-ideas",
+      "language": null,
+      "stars": 94005,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "applications",
+        "coding",
+        "codingchallenges",
+        "css",
+        "hacktoberfest",
+        "html",
+        "ideas",
+        "javascript",
+        "practice"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 88,
+      "classification_hits": [
+        "developer",
+        "ide",
+        "code"
+      ],
+      "created_at": "2026-05-19T00:39:53.134588Z"
+    },
+    {
+      "id": "skill_star_flutter_skills",
+      "title": "flutter/skills",
+      "description": "# Flutter Agent Skills Agent skills for Flutter, maintained by the Flutter team. A collection of skills providing tailored instructions for happy path Flutter app development workflows. By giving the agent actual domain expertise and repeat",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/flutter/skills",
+      "repo_full_name": "flutter/skills",
+      "language": "Dart",
+      "stars": 2028,
+      "tags": [
+        "mcp_tool",
+        "agent_runtime",
+        "dart"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "classification_score": 93,
+      "classification_hits": [
+        "mcp",
+        "tools"
+      ],
+      "created_at": "2026-05-19T00:39:53.134703Z"
+    },
+    {
+      "id": "skill_star_frankbria_ralph_claude_code",
+      "title": "frankbria/ralph-claude-code",
+      "description": "Autonomous AI development loop for Claude Code with intelligent exit detection",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/frankbria/ralph-claude-code",
+      "repo_full_name": "frankbria/ralph-claude-code",
+      "language": "Shell",
+      "stars": 9162,
+      "tags": [
+        "mcp_tool",
+        "agent_runtime",
+        "ai",
+        "ai_agent",
+        "ai_agents",
+        "ai_development",
+        "ai_development_tools",
+        "claude_code",
+        "claude_code_cli",
+        "development_tools",
+        "development_workflow",
+        "shell"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "classification_score": 89,
+      "classification_hits": [
+        "tools"
+      ],
+      "created_at": "2026-05-19T00:39:53.134816Z"
+    },
+    {
+      "id": "skill_star_futurice_backend_best_practices",
+      "title": "futurice/backend-best-practices",
+      "description": "An evolving description of general best practices for backend development.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/futurice/backend-best-practices",
+      "repo_full_name": "futurice/backend-best-practices",
+      "language": null,
+      "stars": 2355,
+      "tags": [
+        "memory",
+        "agent_runtime",
+        "best_practices"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.memory_rag_core",
+      "classification_score": 92,
+      "classification_hits": [
+        "rag",
+        "graph",
+        "database"
+      ],
+      "created_at": "2026-05-19T00:39:53.134927Z"
+    },
+    {
+      "id": "skill_star_git_game_git_game",
+      "title": "git-game/git-game",
+      "description": "terminal game to test git skills",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/git-game/git-game",
+      "repo_full_name": "git-game/git-game",
+      "language": null,
+      "stars": 3183,
+      "tags": [
+        "mcp_tool",
+        "agent_runtime"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "classification_score": 89,
+      "classification_hits": [
+        "tools"
+      ],
+      "created_at": "2026-05-19T00:39:53.134997Z"
+    },
+    {
+      "id": "skill_star_github_awesome_copilot",
+      "title": "github/awesome-copilot",
+      "description": "Community-contributed instructions, agents, skills, and configurations to help you make the most of GitHub Copilot.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/github/awesome-copilot",
+      "repo_full_name": "github/awesome-copilot",
+      "language": "Python",
+      "stars": 33280,
+      "tags": [
+        "mcp_tool",
+        "agent_runtime",
+        "agent_skills",
+        "agents",
+        "ai",
+        "awesome",
+        "custom_agents",
+        "github_copilot",
+        "hacktoberfest",
+        "prompt_engineering",
+        "python"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "classification_score": 93,
+      "classification_hits": [
+        "mcp",
+        "tools"
+      ],
+      "created_at": "2026-05-19T00:39:53.135119Z"
+    },
+    {
+      "id": "skill_star_google_labs_code_stitch_skills",
+      "title": "google-labs-code/stitch-skills",
+      "description": "A library of Agent Skills designed to work with the Stitch MCP server. Each skill follows the Agent Skills open standard, for compatibility with coding agents such as Antigravity, Gemini CLI, Claude Code, Cursor.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/google-labs-code/stitch-skills",
+      "repo_full_name": "google-labs-code/stitch-skills",
+      "language": "TypeScript",
+      "stars": 5475,
+      "tags": [
+        "mcp_tool",
+        "agent_runtime",
+        "typescript"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "classification_score": 89,
+      "classification_hits": [
+        "mcp"
+      ],
+      "created_at": "2026-05-19T00:39:53.135226Z"
+    },
+    {
+      "id": "skill_star_google_skills",
+      "title": "google/skills",
+      "description": "Agent Skills for Google products and technologies",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/google/skills",
+      "repo_full_name": "google/skills",
+      "language": null,
+      "stars": 9847,
+      "tags": [
+        "prompt_framework",
+        "agent_runtime",
+        "google",
+        "googlecloud",
+        "skills"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.prompt_skill_engine",
+      "classification_score": 70,
+      "classification_hits": [
+        "skill"
+      ],
+      "created_at": "2026-05-19T00:39:53.135330Z"
+    },
+    {
+      "id": "skill_star_grablab_openhand_hardware",
+      "title": "grablab/openhand-hardware",
+      "description": "CAD files for the OpenHand hand designs",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/grablab/openhand-hardware",
+      "repo_full_name": "grablab/openhand-hardware",
+      "language": "Python",
+      "stars": 203,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "python"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 84,
+      "classification_hits": [
+        "ide",
+        "code"
+      ],
+      "created_at": "2026-05-19T00:39:53.135444Z"
+    },
+    {
+      "id": "skill_star_grablab_openhand_node",
+      "title": "grablab/openhand_node",
+      "description": "ROS (Python) package for controlling Yale Grablab Openhands",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/grablab/openhand_node",
+      "repo_full_name": "grablab/openhand_node",
+      "language": "Python",
+      "stars": 13,
+      "tags": [
+        "mcp_tool",
+        "agent_runtime",
+        "python"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "classification_score": 89,
+      "classification_hits": [
+        "protocol"
+      ],
+      "created_at": "2026-05-19T00:39:53.135549Z"
+    },
+    {
+      "id": "skill_star_guipsamora_pandas_exercises",
+      "title": "guipsamora/pandas_exercises",
+      "description": "Practice your pandas skills!",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/guipsamora/pandas_exercises",
+      "repo_full_name": "guipsamora/pandas_exercises",
+      "language": "Jupyter Notebook",
+      "stars": 12744,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "jupyter_notebooks",
+        "pandas",
+        "pandas_tutorial",
+        "python_pandas",
+        "jupyter notebook"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 88,
+      "classification_hits": [
+        "ide",
+        "diff",
+        "code"
+      ],
+      "created_at": "2026-05-19T00:39:53.135669Z"
+    },
+    {
+      "id": "skill_star_heilcheng_awesome_agent_skills",
+      "title": "heilcheng/awesome-agent-skills",
+      "description": "Tutorials, Guides and Agent Skills Directories",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/heilcheng/awesome-agent-skills",
+      "repo_full_name": "heilcheng/awesome-agent-skills",
+      "language": "TypeScript",
+      "stars": 4892,
+      "tags": [
+        "mcp_tool",
+        "agent_runtime",
+        "agent_skills",
+        "ai_agents",
+        "ai_development",
+        "anthropic",
+        "automation",
+        "awesome",
+        "awesome_list",
+        "claude",
+        "codex",
+        "github_copilot",
+        "llm",
+        "mcp",
+        "openai",
+        "productivity"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "classification_score": 89,
+      "classification_hits": [
+        "mcp"
+      ],
+      "created_at": "2026-05-19T00:39:53.135793Z"
+    },
+    {
+      "id": "skill_star_hesreallyhim_awesome_claude_code",
+      "title": "hesreallyhim/awesome-claude-code",
+      "description": "A curated list of awesome skills, hooks, slash-commands, agent orchestrators, applications, and plugins for Claude Code by Anthropic",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/hesreallyhim/awesome-claude-code",
+      "repo_full_name": "hesreallyhim/awesome-claude-code",
+      "language": "Python",
+      "stars": 44159,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "agent_skills",
+        "agentic_code",
+        "agentic_coding",
+        "ai_workflow_optimization",
+        "ai_workflows",
+        "anthropic",
+        "anthropic_claude",
+        "awesome",
+        "awesome_claude_code",
+        "awesome_list",
+        "awesome_lists",
+        "awesome_resources",
+        "claude",
+        "claude_code"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 92,
+      "classification_hits": [
+        "code agent",
+        "developer",
+        "ide",
+        "code"
+      ],
+      "created_at": "2026-05-19T00:39:53.135888Z"
+    },
+    {
+      "id": "skill_star_huggingface_skills",
+      "title": "huggingface/skills",
+      "description": "Give your agents the power of the Hugging Face ecosystem",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/huggingface/skills",
+      "repo_full_name": "huggingface/skills",
+      "language": "Python",
+      "stars": 10518,
+      "tags": [
+        "mcp_tool",
+        "agent_runtime",
+        "python"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "classification_score": 89,
+      "classification_hits": [
+        "tools"
+      ],
+      "created_at": "2026-05-19T00:39:53.135989Z"
+    },
+    {
+      "id": "skill_star_hundredrabbits_orca",
+      "title": "hundredrabbits/Orca",
+      "description": "Esoteric Programming Language",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/hundredrabbits/Orca",
+      "repo_full_name": "hundredrabbits/Orca",
+      "language": "JavaScript",
+      "stars": 5005,
+      "tags": [
+        "browser_agent",
+        "agent_runtime",
+        "esoteric_language",
+        "livecoding",
+        "midi",
+        "osc",
+        "programming_language",
+        "udp",
+        "javascript"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.browser_operator",
+      "classification_score": 94,
+      "classification_hits": [
+        "browser"
+      ],
+      "created_at": "2026-05-19T00:39:53.136110Z"
+    },
+    {
+      "id": "skill_star_iblinkq_llm_wiki_obsidian_blink",
+      "title": "iBlinkQ/llm-wiki-obsidian-blink",
+      "description": "一个基于 Andrej Karpathy 的 LLM Wiki 模式 实现的 Obsidian 知识库，利用 LLM 维护可复利的个人知识层。",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/iBlinkQ/llm-wiki-obsidian-blink",
+      "repo_full_name": "iBlinkQ/llm-wiki-obsidian-blink",
+      "language": null,
+      "stars": 383,
+      "tags": [
+        "agent_runtime"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.agent_runtime_core",
+      "classification_score": 30,
+      "classification_hits": [],
+      "created_at": "2026-05-19T00:39:53.136217Z"
+    },
+    {
+      "id": "skill_star_iofficeai_aionui",
+      "title": "iOfficeAI/AionUi",
+      "description": "Free, local, open-source 24/7 Cowork app for OpenClaw, Hermes Agent, Claude Code, Codex, OpenCode, Gemini CLI and 20+ more CLI | Customize your assistants | Star if you like it!",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/iOfficeAI/AionUi",
+      "repo_full_name": "iOfficeAI/AionUi",
+      "language": "TypeScript",
+      "stars": 25700,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "acp",
+        "agent_team",
+        "ai",
+        "ai_agent",
+        "chat",
+        "chatbot",
+        "claude_code",
+        "clawdbot",
+        "codex",
+        "cowork",
+        "gemini",
+        "gemini_cli",
+        "hermes",
+        "llm"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 80,
+      "classification_hits": [
+        "code"
+      ],
+      "created_at": "2026-05-19T00:39:53.136355Z"
+    },
+    {
+      "id": "skill_star_imbue_ai_darwinian_evolver",
+      "title": "imbue-ai/darwinian_evolver",
+      "description": "Framework for evolving code and prompts inspired by Darwinian evolution",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/imbue-ai/darwinian_evolver",
+      "repo_full_name": "imbue-ai/darwinian_evolver",
+      "language": "Python",
+      "stars": 414,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "python"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 88,
+      "classification_hits": [
+        "ide",
+        "diff",
+        "code"
+      ],
+      "created_at": "2026-05-19T00:39:53.136461Z"
+    },
+    {
+      "id": "skill_star_imthenachoman_how_to_secure_a_linux_server",
+      "title": "imthenachoman/How-To-Secure-A-Linux-Server",
+      "description": "An evolving how-to guide for securing a Linux server.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/imthenachoman/How-To-Secure-A-Linux-Server",
+      "repo_full_name": "imthenachoman/How-To-Secure-A-Linux-Server",
+      "language": null,
+      "stars": 27383,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "cc_by_sa",
+        "hardening",
+        "hardening_steps",
+        "linux",
+        "linux_server",
+        "security",
+        "security_hardening",
+        "server"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 84,
+      "classification_hits": [
+        "ide",
+        "diff"
+      ],
+      "created_at": "2026-05-19T00:39:53.136574Z"
+    },
+    {
+      "id": "skill_star_iris_networks_terminator",
+      "title": "iris-networks/terminator",
+      "description": "Completely free opensource alternative to manus, openhands and cua",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/iris-networks/terminator",
+      "repo_full_name": "iris-networks/terminator",
+      "language": "TypeScript",
+      "stars": 69,
+      "tags": [
+        "mcp_tool",
+        "agent_runtime",
+        "agentic_ai",
+        "ai",
+        "artifical_intelligense",
+        "autonomous_agent",
+        "chatgpt",
+        "claude_ai",
+        "cli",
+        "developer_tools",
+        "llm",
+        "ollama",
+        "typescript"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "classification_score": 89,
+      "classification_hits": [
+        "tools"
+      ],
+      "created_at": "2026-05-19T00:39:53.136682Z"
+    },
+    {
+      "id": "skill_star_itsmostafa_aws_agent_skills",
+      "title": "itsmostafa/aws-agent-skills",
+      "description": "AWS Skills for Agents",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/itsmostafa/aws-agent-skills",
+      "repo_full_name": "itsmostafa/aws-agent-skills",
+      "language": "Python",
+      "stars": 1101,
+      "tags": [
+        "mcp_tool",
+        "agent_runtime",
+        "agent_skills",
+        "agentic_ai",
+        "aws",
+        "claude_code",
+        "claude_skills",
+        "codex",
+        "coding_agents",
+        "python"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "classification_score": 89,
+      "classification_hits": [
+        "mcp"
+      ],
+      "created_at": "2026-05-19T00:39:53.136803Z"
+    },
+    {
+      "id": "skill_star_jcodec_jcodec",
+      "title": "jcodec/jcodec",
+      "description": "JCodec main repo",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/jcodec/jcodec",
+      "repo_full_name": "jcodec/jcodec",
+      "language": "Java",
+      "stars": 1287,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "java"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 84,
+      "classification_hits": [
+        "ide",
+        "code"
+      ],
+      "created_at": "2026-05-19T00:39:53.136903Z"
+    },
+    {
+      "id": "skill_star_jgravelle_jcodemunch_mcp",
+      "title": "jgravelle/jcodemunch-mcp",
+      "description": "The leading, most token-efficient MCP server for GitHub source code exploration via tree-sitter AST parsing",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/jgravelle/jcodemunch-mcp",
+      "repo_full_name": "jgravelle/jcodemunch-mcp",
+      "language": "Python",
+      "stars": 1838,
+      "tags": [
+        "mcp_tool",
+        "agent_runtime",
+        "claude",
+        "claude_code",
+        "serena",
+        "token",
+        "token_savings",
+        "tokens",
+        "python"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "classification_score": 89,
+      "classification_hits": [
+        "mcp"
+      ],
+      "created_at": "2026-05-19T00:39:53.137035Z"
+    },
+    {
+      "id": "skill_star_johnwheeler_flask_ask",
+      "title": "johnwheeler/flask-ask",
+      "description": "Alexa Skills Kit for Python",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/johnwheeler/flask-ask",
+      "repo_full_name": "johnwheeler/flask-ask",
+      "language": "Python",
+      "stars": 1910,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "alexa",
+        "alexa_skills_kit",
+        "echo",
+        "flask",
+        "flask_extensions",
+        "python_2",
+        "python3",
+        "python"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 88,
+      "classification_hits": [
+        "developer",
+        "ide",
+        "code"
+      ],
+      "created_at": "2026-05-19T00:39:53.137144Z"
+    },
+    {
+      "id": "skill_star_kepano_obsidian_skills",
+      "title": "kepano/obsidian-skills",
+      "description": "Agent skills for Obsidian. Teach your agent to use Markdown, Bases, JSON Canvas, and use the CLI.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/kepano/obsidian-skills",
+      "repo_full_name": "kepano/obsidian-skills",
+      "language": null,
+      "stars": 31938,
+      "tags": [
+        "mcp_tool",
+        "agent_runtime",
+        "claude",
+        "clawdbot",
+        "cli",
+        "codex",
+        "defuddle",
+        "obsidian",
+        "openclaw",
+        "opencode",
+        "skills"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "classification_score": 89,
+      "classification_hits": [
+        "tools"
+      ],
+      "created_at": "2026-05-19T00:39:53.137269Z"
+    },
+    {
+      "id": "skill_star_kytmanov_obsidian_llm_wiki_local",
+      "title": "kytmanov/obsidian-llm-wiki-local",
+      "description": "Karpathy’s LLM Wiki, 100% local with Ollama. Drop Markdown notes → AI extracts concepts → your Obsidian wiki auto-links and grows. Zero sharing. Your notes stay yours.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/kytmanov/obsidian-llm-wiki-local",
+      "repo_full_name": "kytmanov/obsidian-llm-wiki-local",
+      "language": "Python",
+      "stars": 623,
+      "tags": [
+        "mcp_tool",
+        "agent_runtime",
+        "git_based_wiki",
+        "karpathy",
+        "knowledge_base",
+        "llm_knowledge_base",
+        "llm_pipeline",
+        "llm_tools",
+        "llm_wiki",
+        "local_first_ai",
+        "local_llm",
+        "markdown_wiki",
+        "obsidian",
+        "obsidian_llm",
+        "obsidian_wiki",
+        "ollama"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "classification_score": 89,
+      "classification_hits": [
+        "tools"
+      ],
+      "created_at": "2026-05-19T00:39:53.137407Z"
+    },
+    {
+      "id": "skill_star_lijigang_ljg_skills",
+      "title": "lijigang/ljg-skills",
+      "description": "# ljg-skills 我的 [Claude Code](https://docs.anthropic.com/en/docs/claude-code) 自定义技能集。 ## 安装 使用 [skills CLI](https://github.com/vercel-labs/skills)（基于 `npx`）一行安装： ```bash # 安装全部技能（全局，org-mode 格式） npx skills add lijigang/ljg-skills -g --all #",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/lijigang/ljg-skills",
+      "repo_full_name": "lijigang/ljg-skills",
+      "language": "HTML",
+      "stars": 5111,
+      "tags": [
+        "browser_agent",
+        "agent_runtime",
+        "html"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.browser_operator",
+      "classification_score": 94,
+      "classification_hits": [
+        "playwright"
+      ],
+      "created_at": "2026-05-19T00:39:53.137508Z"
+    },
+    {
+      "id": "skill_star_lucasrosati_claude_code_memory_setup",
+      "title": "lucasrosati/claude-code-memory-setup",
+      "description": "Up to 71.5x fewer tokens per session on Claude Code with Obsidian + Graphify. Persistent memory, codebase knowledge graphs, and chat import pipeline. 🇧🇷 PT-BR included.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/lucasrosati/claude-code-memory-setup",
+      "repo_full_name": "lucasrosati/claude-code-memory-setup",
+      "language": "Python",
+      "stars": 663,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "ai_tools",
+        "claude_code",
+        "coding_agent",
+        "developer_productivity",
+        "graphify",
+        "knowledge_graph",
+        "obsidian",
+        "second_brain",
+        "token_optimization",
+        "zettelkasten",
+        "python"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 92,
+      "classification_hits": [
+        "developer",
+        "ide",
+        "diff",
+        "code"
+      ],
+      "created_at": "2026-05-19T00:39:53.137639Z"
+    },
+    {
+      "id": "skill_star_markdown_viewer_skills",
+      "title": "markdown-viewer/skills",
+      "description": "Opinionated skills for AI coding agents to create stunning diagrams and visualizations directly in Markdown. These skills extend agent capabilities across diagram generation, data visualization, and technical documentation.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/markdown-viewer/skills",
+      "repo_full_name": "markdown-viewer/skills",
+      "language": null,
+      "stars": 2462,
+      "tags": [
+        "code_agent",
+        "agent_runtime"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 88,
+      "classification_hits": [
+        "coding agent",
+        "copilot",
+        "code"
+      ],
+      "created_at": "2026-05-19T00:39:53.137768Z"
+    },
+    {
+      "id": "skill_star_matt1398_claude_devtools",
+      "title": "matt1398/claude-devtools",
+      "description": "The missing DevTools for Claude Code — inspect session logs, tool calls, token usage, subagents, and context window in a visual UI. Free, open source.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/matt1398/claude-devtools",
+      "repo_full_name": "matt1398/claude-devtools",
+      "language": "TypeScript",
+      "stars": 3400,
+      "tags": [
+        "mcp_tool",
+        "agent_runtime",
+        "ai",
+        "ai_agent",
+        "ai_debugging",
+        "ai_tools",
+        "anthropic",
+        "claude",
+        "claude_code",
+        "claude_code_tools",
+        "debugging",
+        "desktop_app",
+        "developer_tools",
+        "devtools",
+        "electron",
+        "llm"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "classification_score": 89,
+      "classification_hits": [
+        "tools"
+      ],
+      "created_at": "2026-05-19T00:39:53.137901Z"
+    },
+    {
+      "id": "skill_star_mattpocock_skills",
+      "title": "mattpocock/skills",
+      "description": "Skills for Real Engineers. Straight from my .claude directory.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/mattpocock/skills",
+      "repo_full_name": "mattpocock/skills",
+      "language": "Shell",
+      "stars": 91832,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "shell"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 80,
+      "classification_hits": [
+        "coding agent"
+      ],
+      "created_at": "2026-05-19T00:39:53.138006Z"
+    },
+    {
+      "id": "skill_star_mcollina_skills",
+      "title": "mcollina/skills",
+      "description": "My own collection of skills for modern Node.js development",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/mcollina/skills",
+      "repo_full_name": "mcollina/skills",
+      "language": "TypeScript",
+      "stars": 1803,
+      "tags": [
+        "memory",
+        "agent_runtime",
+        "typescript"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.memory_rag_core",
+      "classification_score": 84,
+      "classification_hits": [
+        "graph"
+      ],
+      "created_at": "2026-05-19T00:39:53.138097Z"
+    },
+    {
+      "id": "skill_star_memodb_io_acontext",
+      "title": "memodb-io/Acontext",
+      "description": "Agent Skills as a Memory Layer",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/memodb-io/Acontext",
+      "repo_full_name": "memodb-io/Acontext",
+      "language": "JavaScript",
+      "stars": 3374,
+      "tags": [
+        "memory",
+        "agent_runtime",
+        "agent",
+        "agent_development_kit",
+        "agent_observability",
+        "ai_agent",
+        "anthropic",
+        "context_data_platform",
+        "context_engineering",
+        "data_platform",
+        "llm",
+        "llm_observability",
+        "llmops",
+        "openai",
+        "self_evolving",
+        "self_learning"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.memory_rag_core",
+      "classification_score": 84,
+      "classification_hits": [
+        "memory"
+      ],
+      "created_at": "2026-05-19T00:39:53.138224Z"
+    },
+    {
+      "id": "skill_star_michaelshimeles_ralphy",
+      "title": "michaelshimeles/ralphy",
+      "description": "My Ralph Wiggum setup, an autonomous bash script that runs Claude Code, Codex, OpenCode, Cursor agent, Qwen & Droid in a loop until your PRD is complete.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/michaelshimeles/ralphy",
+      "repo_full_name": "michaelshimeles/ralphy",
+      "language": "TypeScript",
+      "stars": 2865,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "claude_code",
+        "opencode",
+        "ralph_loop",
+        "ralph_wiggum",
+        "ralphy",
+        "typescript"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 88,
+      "classification_hits": [
+        "ide",
+        "copilot",
+        "code"
+      ],
+      "created_at": "2026-05-19T00:39:53.138338Z"
+    },
+    {
+      "id": "skill_star_microsoft_fara",
+      "title": "microsoft/fara",
+      "description": "Fara-7B: An Efficient Agentic Model for Computer Use",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/microsoft/fara",
+      "repo_full_name": "microsoft/fara",
+      "language": "Python",
+      "stars": 5181,
+      "tags": [
+        "browser_agent",
+        "agent_runtime",
+        "agent",
+        "browser_use",
+        "computer_use",
+        "computer_use_agent",
+        "cua",
+        "python"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.browser_operator",
+      "classification_score": 94,
+      "classification_hits": [
+        "browser"
+      ],
+      "created_at": "2026-05-19T00:39:53.138459Z"
+    },
+    {
+      "id": "skill_star_microsoft_magentic_ui",
+      "title": "microsoft/magentic-ui",
+      "description": "A research prototype of a human-centered web agent",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/microsoft/magentic-ui",
+      "repo_full_name": "microsoft/magentic-ui",
+      "language": "Python",
+      "stars": 9813,
+      "tags": [
+        "browser_agent",
+        "agent_runtime",
+        "agents",
+        "ai",
+        "ai_ux",
+        "autogen",
+        "browser_use",
+        "computer_use_agent",
+        "cua",
+        "ui",
+        "python"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.browser_operator",
+      "classification_score": 98,
+      "classification_hits": [
+        "browser",
+        "web agent"
+      ],
+      "created_at": "2026-05-19T00:39:53.138576Z"
+    },
+    {
+      "id": "skill_star_microsoft_skills",
+      "title": "microsoft/skills",
+      "description": "Skills, MCP servers, Custom Agents, Agents.md for SDKs to ground Coding Agents",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/microsoft/skills",
+      "repo_full_name": "microsoft/skills",
+      "language": "TypeScript",
+      "stars": 2342,
+      "tags": [
+        "mcp_tool",
+        "agent_runtime",
+        "agent_skills",
+        "agents",
+        "azure",
+        "foundry",
+        "mcp",
+        "sdk",
+        "skills",
+        "typescript"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "classification_score": 89,
+      "classification_hits": [
+        "mcp"
+      ],
+      "created_at": "2026-05-19T00:39:53.146697Z"
+    },
+    {
+      "id": "skill_star_mikeyobrien_ralph_orchestrator",
+      "title": "mikeyobrien/ralph-orchestrator",
+      "description": "An improved implementation of the Ralph Wiggum technique for autonomous AI agent orchestration",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/mikeyobrien/ralph-orchestrator",
+      "repo_full_name": "mikeyobrien/ralph-orchestrator",
+      "language": "Rust",
+      "stars": 2874,
+      "tags": [
+        "mcp_tool",
+        "agent_runtime",
+        "ai",
+        "ai_agents",
+        "ai_agents_framework",
+        "ai_developer_tools",
+        "claude_code",
+        "claude_code_cli",
+        "codex_cli",
+        "development_tools",
+        "development_workflow",
+        "gemini_cli",
+        "kiro",
+        "kiro_cli",
+        "opencode",
+        "ralph_loop"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "classification_score": 89,
+      "classification_hits": [
+        "tools"
+      ],
+      "created_at": "2026-05-19T00:39:53.146809Z"
+    },
+    {
+      "id": "skill_star_mikke89_rmlui",
+      "title": "mikke89/RmlUi",
+      "description": "RmlUi - The HTML/CSS User Interface library evolved",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/mikke89/RmlUi",
+      "repo_full_name": "mikke89/RmlUi",
+      "language": "C++",
+      "stars": 4095,
+      "tags": [
+        "browser_agent",
+        "agent_runtime",
+        "c++"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.browser_operator",
+      "classification_score": 94,
+      "classification_hits": [
+        "browser"
+      ],
+      "created_at": "2026-05-19T00:39:53.146934Z"
+    },
+    {
+      "id": "skill_star_mistralai_mistral_vibe",
+      "title": "mistralai/mistral-vibe",
+      "description": "Minimal CLI coding agent by Mistral",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/mistralai/mistral-vibe",
+      "repo_full_name": "mistralai/mistral-vibe",
+      "language": "Python",
+      "stars": 4228,
+      "tags": [
+        "mcp_tool",
+        "agent_runtime",
+        "python"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "classification_score": 89,
+      "classification_hits": [
+        "tools"
+      ],
+      "created_at": "2026-05-19T00:39:53.147049Z"
+    },
+    {
+      "id": "skill_star_modelscope_agentevolver",
+      "title": "modelscope/AgentEvolver",
+      "description": "AgentEvolver: Towards Efficient Self-Evolving Agent System",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/modelscope/AgentEvolver",
+      "repo_full_name": "modelscope/AgentEvolver",
+      "language": "Python",
+      "stars": 1436,
+      "tags": [
+        "ui_component",
+        "agent_runtime",
+        "agent",
+        "agent_system",
+        "llm",
+        "reinforcement_learning",
+        "self_evolving",
+        "python"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.ui_desktop_operator",
+      "classification_score": 59,
+      "classification_hits": [
+        "ui"
+      ],
+      "created_at": "2026-05-19T00:39:53.147174Z"
+    },
+    {
+      "id": "skill_star_mrgoonie_claudekit_skills",
+      "title": "mrgoonie/claudekit-skills",
+      "description": "All powerful skills of ClaudeKit.cc!",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/mrgoonie/claudekit-skills",
+      "repo_full_name": "mrgoonie/claudekit-skills",
+      "language": "Python",
+      "stars": 2090,
+      "tags": [
+        "mcp_tool",
+        "agent_runtime",
+        "python"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "classification_score": 93,
+      "classification_hits": [
+        "mcp",
+        "tools"
+      ],
+      "created_at": "2026-05-19T00:39:53.147286Z"
+    },
+    {
+      "id": "skill_star_multica_ai_andrej_karpathy_skills",
+      "title": "multica-ai/andrej-karpathy-skills",
+      "description": "A single CLAUDE.md file to improve Claude Code behavior, derived from Andrej Karpathy's observations on LLM coding pitfalls.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/multica-ai/andrej-karpathy-skills",
+      "repo_full_name": "multica-ai/andrej-karpathy-skills",
+      "language": null,
+      "stars": 135945,
+      "tags": [
+        "code_agent",
+        "agent_runtime"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 88,
+      "classification_hits": [
+        "coding agent",
+        "ide",
+        "code"
+      ],
+      "created_at": "2026-05-19T00:39:53.147403Z"
+    },
+    {
+      "id": "skill_star_muratcankoylan_agent_skills_for_context_engineering",
+      "title": "muratcankoylan/Agent-Skills-for-Context-Engineering",
+      "description": "A comprehensive collection of Agent Skills for context engineering, multi-agent architectures, and production agent systems. Use when building, optimizing, or debugging agent systems that require effective context management.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering",
+      "repo_full_name": "muratcankoylan/Agent-Skills-for-Context-Engineering",
+      "language": "Python",
+      "stars": 15758,
+      "tags": [
+        "prompt_framework",
+        "agent_runtime",
+        "python"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.prompt_skill_engine",
+      "classification_score": 82,
+      "classification_hits": [
+        "prompt",
+        "skill",
+        "instruction",
+        "system prompt"
+      ],
+      "created_at": "2026-05-19T00:39:53.147552Z"
+    },
+    {
+      "id": "skill_star_nashsu_llm_wiki",
+      "title": "nashsu/llm_wiki",
+      "description": "LLM Wiki is a cross-platform desktop application that turns your documents into an organized, interlinked knowledge base — automatically. Instead of traditional RAG (retrieve-and-answer from scratch every time), the LLM incrementally builds and maintains a persistent wiki from your sources。",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/nashsu/llm_wiki",
+      "repo_full_name": "nashsu/llm_wiki",
+      "language": "TypeScript",
+      "stars": 7957,
+      "tags": [
+        "memory",
+        "agent_runtime",
+        "typescript"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.memory_rag_core",
+      "classification_score": 100,
+      "classification_hits": [
+        "rag",
+        "vector",
+        "embedding",
+        "retrieval",
+        "knowledge graph",
+        "graph"
+      ],
+      "created_at": "2026-05-19T00:39:53.147675Z"
+    },
+    {
+      "id": "skill_star_norvig_pytudes",
+      "title": "norvig/pytudes",
+      "description": "Python programs, usually short, of considerable difficulty, to perfect particular skills.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/norvig/pytudes",
+      "repo_full_name": "norvig/pytudes",
+      "language": "Jupyter Notebook",
+      "stars": 24327,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "demonstrate_skills",
+        "practice",
+        "programming",
+        "python",
+        "python_3",
+        "jupyter notebook"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 84,
+      "classification_hits": [
+        "ide",
+        "diff"
+      ],
+      "created_at": "2026-05-19T00:39:53.147796Z"
+    },
+    {
+      "id": "skill_star_numman_ali_openskills",
+      "title": "numman-ali/openskills",
+      "description": "Universal skills loader for AI coding agents - npm i -g openskills",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/numman-ali/openskills",
+      "repo_full_name": "numman-ali/openskills",
+      "language": "TypeScript",
+      "stars": 10198,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "typescript"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 88,
+      "classification_hits": [
+        "coding agent",
+        "ide",
+        "code"
+      ],
+      "created_at": "2026-05-19T00:39:53.147911Z"
+    },
+    {
+      "id": "skill_star_openai_openai_cua_sample_app",
+      "title": "openai/openai-cua-sample-app",
+      "description": "Learn how to use CUA (our Computer Using Agent) via the API on multiple computer environments.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/openai/openai-cua-sample-app",
+      "repo_full_name": "openai/openai-cua-sample-app",
+      "language": "TypeScript",
+      "stars": 1718,
+      "tags": [
+        "browser_agent",
+        "agent_runtime",
+        "typescript"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.browser_operator",
+      "classification_score": 98,
+      "classification_hits": [
+        "browser",
+        "playwright"
+      ],
+      "created_at": "2026-05-19T00:39:53.148019Z"
+    },
+    {
+      "id": "skill_star_openai_skills",
+      "title": "openai/skills",
+      "description": "Skills Catalog for Codex",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/openai/skills",
+      "repo_full_name": "openai/skills",
+      "language": "Python",
+      "stars": 19491,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "python"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 88,
+      "classification_hits": [
+        "developer",
+        "ide",
+        "code"
+      ],
+      "created_at": "2026-05-19T00:39:53.148099Z"
+    },
+    {
+      "id": "skill_star_openclaw_clawhub",
+      "title": "openclaw/clawhub",
+      "description": "Skill Directory for OpenClaw",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/openclaw/clawhub",
+      "repo_full_name": "openclaw/clawhub",
+      "language": "TypeScript",
+      "stars": 8672,
+      "tags": [
+        "memory",
+        "agent_runtime",
+        "directory",
+        "skill",
+        "typescript"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.memory_rag_core",
+      "classification_score": 88,
+      "classification_hits": [
+        "vector",
+        "embedding"
+      ],
+      "created_at": "2026-05-19T00:39:53.148219Z"
+    },
+    {
+      "id": "skill_star_oracle_devrel_oracle_ai_developer_hub",
+      "title": "oracle-devrel/oracle-ai-developer-hub",
+      "description": "Technical resources for AI developers to build applications, agents, and systems using Oracle AI Database and OCI services",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/oracle-devrel/oracle-ai-developer-hub",
+      "repo_full_name": "oracle-devrel/oracle-ai-developer-hub",
+      "language": "Jupyter Notebook",
+      "stars": 2163,
+      "tags": [
+        "memory",
+        "agent_runtime",
+        "agentmemory",
+        "agents",
+        "ai",
+        "ai_developer",
+        "artificial_intelligence",
+        "generative_ai",
+        "kubernetes",
+        "kustomize",
+        "oracle_database",
+        "oracleaidatabase",
+        "oraclejet",
+        "rag",
+        "jupyter notebook"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.memory_rag_core",
+      "classification_score": 100,
+      "classification_hits": [
+        "rag",
+        "memory",
+        "vector",
+        "graph",
+        "database"
+      ],
+      "created_at": "2026-05-19T00:39:53.148357Z"
+    },
+    {
+      "id": "skill_star_paoloanzn_free_code",
+      "title": "paoloanzn/free-code",
+      "description": "The free build of Claude Code. All telemetry removed, security-prompt guardrails stripped, all experimental features enabled.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/paoloanzn/free-code",
+      "repo_full_name": "paoloanzn/free-code",
+      "language": "TypeScript",
+      "stars": 8354,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "typescript"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 84,
+      "classification_hits": [
+        "ide",
+        "code"
+      ],
+      "created_at": "2026-05-19T00:39:53.148460Z"
+    },
+    {
+      "id": "skill_star_phuryn_pm_skills",
+      "title": "phuryn/pm-skills",
+      "description": "PM Skills Marketplace: 100+ agentic skills, commands, and plugins — from discovery to strategy, execution, launch, and growth.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/phuryn/pm-skills",
+      "repo_full_name": "phuryn/pm-skills",
+      "language": null,
+      "stars": 11369,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "agent_skill_repository",
+        "agent_skills",
+        "agentic_skills",
+        "claude_code_marketplace",
+        "claude_code_plugins",
+        "claude_cowork_plugin",
+        "product_management"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 84,
+      "classification_hits": [
+        "ide",
+        "code"
+      ],
+      "created_at": "2026-05-19T00:39:53.148587Z"
+    },
+    {
+      "id": "skill_star_pmotschmann_evolve",
+      "title": "pmotschmann/Evolve",
+      "description": "An incremental game about evolving a civilization",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/pmotschmann/Evolve",
+      "repo_full_name": "pmotschmann/Evolve",
+      "language": "JavaScript",
+      "stars": 1153,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "civilization",
+        "incremental_game",
+        "javascript"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 80,
+      "classification_hits": [
+        "code"
+      ],
+      "created_at": "2026-05-19T00:39:53.148698Z"
+    },
+    {
+      "id": "skill_star_prometheus_openmetrics",
+      "title": "prometheus/OpenMetrics",
+      "description": "Evolving the Prometheus exposition format into a standard.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/prometheus/OpenMetrics",
+      "repo_full_name": "prometheus/OpenMetrics",
+      "language": "Go",
+      "stars": 2523,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "go"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 80,
+      "classification_hits": [
+        "code"
+      ],
+      "created_at": "2026-05-19T00:39:53.148829Z"
+    },
+    {
+      "id": "skill_star_red42_html5_genetic_cars",
+      "title": "red42/HTML5_Genetic_Cars",
+      "description": "A genetic algorithm car evolver in HTML5 canvas.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/red42/HTML5_Genetic_Cars",
+      "repo_full_name": "red42/HTML5_Genetic_Cars",
+      "language": "JavaScript",
+      "stars": 1220,
+      "tags": [
+        "browser_agent",
+        "agent_runtime",
+        "javascript"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.browser_operator",
+      "classification_score": 94,
+      "classification_hits": [
+        "browser"
+      ],
+      "created_at": "2026-05-19T00:39:53.148877Z"
+    },
+    {
+      "id": "skill_star_refly_ai_refly",
+      "title": "refly-ai/refly",
+      "description": "The first open-source agent skills builder. Define skills by vibe workflow, run on Claude Code, Cursor, Codex & more. Build Clawdbot 🦞· APIs for Lovable · Bots for Slack & Lark/Feishu · Skills are infrastructure, not prompts.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/refly-ai/refly",
+      "repo_full_name": "refly-ai/refly",
+      "language": "TypeScript",
+      "stars": 7320,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "agent",
+        "agent_skills",
+        "automation",
+        "claude",
+        "clawdbot",
+        "codex",
+        "cursor",
+        "lark_bot",
+        "lovable",
+        "n8n_alternative",
+        "skills",
+        "skills_builder",
+        "slack",
+        "slack_bot"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 80,
+      "classification_hits": [
+        "code"
+      ],
+      "created_at": "2026-05-19T00:39:53.149006Z"
+    },
+    {
+      "id": "skill_star_remotion_dev_skills",
+      "title": "remotion-dev/skills",
+      "description": "Agent Skills",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/remotion-dev/skills",
+      "repo_full_name": "remotion-dev/skills",
+      "language": "TypeScript",
+      "stars": 3214,
+      "tags": [
+        "prompt_framework",
+        "agent_runtime",
+        "typescript"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.prompt_skill_engine",
+      "classification_score": 70,
+      "classification_hits": [
+        "skill"
+      ],
+      "created_at": "2026-05-19T00:39:53.149039Z"
+    },
+    {
+      "id": "skill_star_rmurphey_js_assessment",
+      "title": "rmurphey/js-assessment",
+      "description": "A test-driven approach to assessing JS skills",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/rmurphey/js-assessment",
+      "repo_full_name": "rmurphey/js-assessment",
+      "language": "JavaScript",
+      "stars": 5148,
+      "tags": [
+        "browser_agent",
+        "agent_runtime",
+        "javascript"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.browser_operator",
+      "classification_score": 94,
+      "classification_hits": [
+        "browser"
+      ],
+      "created_at": "2026-05-19T00:39:53.149140Z"
+    },
+    {
+      "id": "skill_star_rohitg00_agentmemory",
+      "title": "rohitg00/agentmemory",
+      "description": "#1 Persistent memory for AI coding agents based on real-world benchmarks",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/rohitg00/agentmemory",
+      "repo_full_name": "rohitg00/agentmemory",
+      "language": "TypeScript",
+      "stars": 12849,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "agentmemory",
+        "agents",
+        "ai",
+        "claude",
+        "claudecode",
+        "codex",
+        "copilot",
+        "cursor",
+        "genai",
+        "harness",
+        "hermes",
+        "memory",
+        "openclaw",
+        "typescript"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 92,
+      "classification_hits": [
+        "coding agent",
+        "ide",
+        "copilot",
+        "code"
+      ],
+      "created_at": "2026-05-19T00:39:53.149259Z"
+    },
+    {
+      "id": "skill_star_router_for_me_cliproxyapi",
+      "title": "router-for-me/CLIProxyAPI",
+      "description": "Wrap Gemini CLI, Antigravity, ChatGPT Codex, Claude Code, Grok Build as an OpenAI/Gemini/Claude/Codex compatible API service, allowing you to enjoy the free Gemini 3.1 Pro, GPT 5.5, Grok 4.3, Claude model through API",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/router-for-me/CLIProxyAPI",
+      "repo_full_name": "router-for-me/CLIProxyAPI",
+      "language": "Go",
+      "stars": 33374,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "antigravity",
+        "claude_code",
+        "cluade",
+        "codex",
+        "gemini",
+        "openai",
+        "go"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 84,
+      "classification_hits": [
+        "ide",
+        "code"
+      ],
+      "created_at": "2026-05-19T00:39:53.149399Z"
+    },
+    {
+      "id": "skill_star_rtk_ai_rtk",
+      "title": "rtk-ai/rtk",
+      "description": "CLI proxy that reduces LLM token consumption by 60-90% on common dev commands. Single Rust binary, zero dependencies",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/rtk-ai/rtk",
+      "repo_full_name": "rtk-ai/rtk",
+      "language": "Rust",
+      "stars": 49990,
+      "tags": [
+        "mcp_tool",
+        "agent_runtime",
+        "agentic_coding",
+        "ai_coding",
+        "anthropic",
+        "claude_code",
+        "cli",
+        "command_line_tool",
+        "cost_reduction",
+        "developer_tools",
+        "llm",
+        "open_source",
+        "productivity",
+        "rust",
+        "token_optimization"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "classification_score": 89,
+      "classification_hits": [
+        "tools"
+      ],
+      "created_at": "2026-05-19T00:39:53.149527Z"
+    },
+    {
+      "id": "skill_star_sdyckjq_lab_llm_wiki_skill",
+      "title": "sdyckjq-lab/llm-wiki-skill",
+      "description": "基于 Karpathy llm-wiki 方法论的个人知识库构建 Skill，支持多平台！",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/sdyckjq-lab/llm-wiki-skill",
+      "repo_full_name": "sdyckjq-lab/llm-wiki-skill",
+      "language": "Shell",
+      "stars": 1546,
+      "tags": [
+        "memory",
+        "agent_runtime",
+        "shell"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.memory_rag_core",
+      "classification_score": 84,
+      "classification_hits": [
+        "graph"
+      ],
+      "created_at": "2026-05-19T00:39:53.149633Z"
+    },
+    {
+      "id": "skill_star_siteboon_claudecodeui",
+      "title": "siteboon/claudecodeui",
+      "description": "Use Claude Code, Cursor CLI or Codex on mobile and web with CloudCLI (aka Claude Code UI). CloudCLI is a free open source webui/GUI that helps you manage your Claude Code session and projects remotely",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/siteboon/claudecodeui",
+      "repo_full_name": "siteboon/claudecodeui",
+      "language": "TypeScript",
+      "stars": 11057,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "anthropic",
+        "anthropic_ai",
+        "anthropic_claude",
+        "claude",
+        "claude_api",
+        "claude_code",
+        "claude_code_ui",
+        "claudecode",
+        "gui",
+        "mobile_first",
+        "react",
+        "ui",
+        "typescript"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 84,
+      "classification_hits": [
+        "developer",
+        "code"
+      ],
+      "created_at": "2026-05-19T00:39:53.149759Z"
+    },
+    {
+      "id": "skill_star_slavingia_skills",
+      "title": "slavingia/skills",
+      "description": "Based on The Minimalist Entrepreneur by Sahil Lavingia",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/slavingia/skills",
+      "repo_full_name": "slavingia/skills",
+      "language": null,
+      "stars": 8753,
+      "tags": [
+        "code_agent",
+        "agent_runtime"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 84,
+      "classification_hits": [
+        "ide",
+        "code"
+      ],
+      "created_at": "2026-05-19T00:39:53.149875Z"
+    },
+    {
+      "id": "skill_star_snarktank_ralph",
+      "title": "snarktank/ralph",
+      "description": "Ralph is an autonomous AI agent loop that runs repeatedly until all PRD items are complete. ",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/snarktank/ralph",
+      "repo_full_name": "snarktank/ralph",
+      "language": "TypeScript",
+      "stars": 19228,
+      "tags": [
+        "mcp_tool",
+        "agent_runtime",
+        "typescript"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "classification_score": 89,
+      "classification_hits": [
+        "tools"
+      ],
+      "created_at": "2026-05-19T00:39:53.149978Z"
+    },
+    {
+      "id": "skill_star_soongenwong_claudecode",
+      "title": "soongenwong/claudecode",
+      "description": "Open Source ClaudeCode Leaked. Same functionalities as Claude Code by Anthropic. Written in Rust, Ready to use immediately for free. ",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/soongenwong/claudecode",
+      "repo_full_name": "soongenwong/claudecode",
+      "language": "Rust",
+      "stars": 1093,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "agentic_ai",
+        "anthropic",
+        "claude_code",
+        "coding",
+        "free",
+        "functionality",
+        "max_subscription",
+        "open_source",
+        "rust"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 92,
+      "classification_hits": [
+        "coding agent",
+        "developer",
+        "ide",
+        "code"
+      ],
+      "created_at": "2026-05-19T00:39:53.150109Z"
+    },
+    {
+      "id": "skill_star_stablyai_orca",
+      "title": "stablyai/orca",
+      "description": "Orca is the next-gen IDE for working with a fleet of parallel agents. Run any coding agent with your own subscription. Available on desktop and mobile.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/stablyai/orca",
+      "repo_full_name": "stablyai/orca",
+      "language": "TypeScript",
+      "stars": 2758,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "ade",
+        "claude_code",
+        "cli",
+        "codex",
+        "cursor_agent",
+        "ghostty",
+        "ide",
+        "mobile_app",
+        "opencode",
+        "orchestration",
+        "parallel_agents",
+        "pi",
+        "terminal",
+        "worktrees"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 88,
+      "classification_hits": [
+        "coding agent",
+        "ide",
+        "code"
+      ],
+      "created_at": "2026-05-19T00:39:53.150236Z"
+    },
+    {
+      "id": "skill_star_subsy_ralph_tui",
+      "title": "subsy/ralph-tui",
+      "description": "# Ralph TUI [![npm version](https://img.shields.io/npm/v/ralph-tui.svg)](https://www.npmjs.com/package/ralph-tui) [![CI](https://github.com/subsy/ralph-tui/actions/workflows/ci.yml/badge.svg)](https://github.com/subsy/ralph-tui/actions/work",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/subsy/ralph-tui",
+      "repo_full_name": "subsy/ralph-tui",
+      "language": "TypeScript",
+      "stars": 2323,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "typescript"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 88,
+      "classification_hits": [
+        "coding agent",
+        "ide",
+        "code"
+      ],
+      "created_at": "2026-05-19T00:39:53.150336Z"
+    },
+    {
+      "id": "skill_star_taichuy_agentmemory",
+      "title": "taichuy/agentMemory",
+      "description": "项目级的开发记忆目录",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/taichuy/agentMemory",
+      "repo_full_name": "taichuy/agentMemory",
+      "language": "PowerShell",
+      "stars": 20,
+      "tags": [
+        "mcp_tool",
+        "agent_runtime",
+        "powershell"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "classification_score": 89,
+      "classification_hits": [
+        "tools"
+      ],
+      "created_at": "2026-05-19T00:39:53.150457Z"
+    },
+    {
+      "id": "skill_star_tandpfun_skill_icons",
+      "title": "tandpfun/skill-icons",
+      "description": "Showcase your skills on your Github readme or resumé with ease ✨",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/tandpfun/skill-icons",
+      "repo_full_name": "tandpfun/skill-icons",
+      "language": "SVG",
+      "stars": 12349,
+      "tags": [
+        "browser_agent",
+        "agent_runtime",
+        "github_profile",
+        "github_readme",
+        "icons",
+        "readme_stats",
+        "svg"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.browser_operator",
+      "classification_score": 94,
+      "classification_hits": [
+        "browser"
+      ],
+      "created_at": "2026-05-19T00:39:53.150576Z"
+    },
+    {
+      "id": "skill_star_thedotmack_claude_mem",
+      "title": "thedotmack/claude-mem",
+      "description": "Persistent Context Across Sessions for Every Agent –  Captures everything your agent does during sessions, compresses it with AI, and injects relevant context back into future sessions. Works with Claude Code, OpenClaw, Codex, Gemini, Hermes, Copilot, OpenCode + More",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/thedotmack/claude-mem",
+      "repo_full_name": "thedotmack/claude-mem",
+      "language": "TypeScript",
+      "stars": 76593,
+      "tags": [
+        "memory",
+        "agent_runtime",
+        "ai",
+        "ai_agents",
+        "ai_memory",
+        "anthropic",
+        "artificial_intelligence",
+        "chromadb",
+        "claude",
+        "claude_agent_sdk",
+        "claude_agents",
+        "claude_code",
+        "claude_code_plugin",
+        "claude_skills",
+        "embeddings",
+        "long_term_memory"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.memory_rag_core",
+      "classification_score": 92,
+      "classification_hits": [
+        "rag",
+        "memory",
+        "embedding"
+      ],
+      "created_at": "2026-05-19T00:39:53.150712Z"
+    },
+    {
+      "id": "skill_star_tomojitakasu_rtklib",
+      "title": "tomojitakasu/RTKLIB",
+      "description": "-------------------------------------------------------------------------------- RTKLIB: An Open Source Program Package for GNSS Positioning -------------------------------------------------------------------------------- OVERVIEW RTKLIB is",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/tomojitakasu/RTKLIB",
+      "repo_full_name": "tomojitakasu/RTKLIB",
+      "language": "C",
+      "stars": 3034,
+      "tags": [
+        "mcp_tool",
+        "agent_runtime",
+        "c"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "classification_score": 89,
+      "classification_hits": [
+        "protocol"
+      ],
+      "created_at": "2026-05-19T00:39:53.150821Z"
+    },
+    {
+      "id": "skill_star_trailofbits_skills",
+      "title": "trailofbits/skills",
+      "description": "Trail of Bits Claude Code skills for security research, vulnerability detection, and audit workflows",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/trailofbits/skills",
+      "repo_full_name": "trailofbits/skills",
+      "language": "Python",
+      "stars": 5279,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "agent_skills",
+        "python"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 84,
+      "classification_hits": [
+        "ide",
+        "code"
+      ],
+      "created_at": "2026-05-19T00:39:53.150931Z"
+    },
+    {
+      "id": "skill_star_travisvn_awesome_claude_skills",
+      "title": "travisvn/awesome-claude-skills",
+      "description": "A curated list of awesome Claude Skills, resources, and tools for customizing Claude AI workflows — particularly Claude Code",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/travisvn/awesome-claude-skills",
+      "repo_full_name": "travisvn/awesome-claude-skills",
+      "language": null,
+      "stars": 12671,
+      "tags": [
+        "mcp_tool",
+        "agent_runtime",
+        "agentic_coding",
+        "anthropic",
+        "awesome",
+        "awesome_list",
+        "awesome_lists",
+        "claude",
+        "claude_ai",
+        "claude_code",
+        "claude_desktop",
+        "claude_skills",
+        "claudeskills"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "classification_score": 89,
+      "classification_hits": [
+        "tools"
+      ],
+      "created_at": "2026-05-19T00:39:53.151058Z"
+    },
+    {
+      "id": "skill_star_trimstray_test_your_sysadmin_skills",
+      "title": "trimstray/test-your-sysadmin-skills",
+      "description": "A collection of Linux Sysadmin Test Questions and Answers. Test your knowledge and skills in different fields with these Q/A.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/trimstray/test-your-sysadmin-skills",
+      "repo_full_name": "trimstray/test-your-sysadmin-skills",
+      "language": null,
+      "stars": 11589,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "answers",
+        "bsd",
+        "cheatsheets",
+        "cybersecurity",
+        "databases",
+        "devops",
+        "exam",
+        "interview",
+        "interview_questions",
+        "knowledge",
+        "linux",
+        "network",
+        "resources",
+        "security"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 84,
+      "classification_hits": [
+        "ide",
+        "diff"
+      ],
+      "created_at": "2026-05-19T00:39:53.151204Z"
+    },
+    {
+      "id": "skill_star_trycua_cua",
+      "title": "trycua/cua",
+      "description": "Open-source infrastructure for Computer-Use Agents. Sandboxes, SDKs, and benchmarks to train and evaluate AI agents that can control full desktops (macOS, Linux, Windows).",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/trycua/cua",
+      "repo_full_name": "trycua/cua",
+      "language": "HTML",
+      "stars": 16907,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "agent",
+        "ai_agent",
+        "apple",
+        "computer_use",
+        "computer_use_agent",
+        "containerization",
+        "cua",
+        "desktop_automation",
+        "hacktoberfest",
+        "lume",
+        "macos",
+        "manus",
+        "operator",
+        "swift"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 80,
+      "classification_hits": [
+        "code"
+      ],
+      "created_at": "2026-05-19T00:39:53.151336Z"
+    },
+    {
+      "id": "skill_star_tsuirak_skills",
+      "title": "tsuirak/skills",
+      "description": "个人的技能树仓库，主要包含个人机器学习以及深度学习的笔记",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/tsuirak/skills",
+      "repo_full_name": "tsuirak/skills",
+      "language": "Jupyter Notebook",
+      "stars": 412,
+      "tags": [
+        "prompt_framework",
+        "agent_runtime",
+        "jupyter notebook"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.prompt_skill_engine",
+      "classification_score": 70,
+      "classification_hits": [
+        "skill"
+      ],
+      "created_at": "2026-05-19T00:39:53.151382Z"
+    },
+    {
+      "id": "skill_star_umputun_ralphex",
+      "title": "umputun/ralphex",
+      "description": "Extended Ralph loop for autonomous AI-driven plan execution",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/umputun/ralphex",
+      "repo_full_name": "umputun/ralphex",
+      "language": "Go",
+      "stars": 1163,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "automation",
+        "claude_code",
+        "codex",
+        "ralph_loop",
+        "ralph_wiggum",
+        "review",
+        "go"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 84,
+      "classification_hits": [
+        "ide",
+        "code"
+      ],
+      "created_at": "2026-05-19T00:39:53.151483Z"
+    },
+    {
+      "id": "skill_star_vuejs_ai_skills",
+      "title": "vuejs-ai/skills",
+      "description": "Agent skills for Vue 3 development",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/vuejs-ai/skills",
+      "repo_full_name": "vuejs-ai/skills",
+      "language": null,
+      "stars": 2422,
+      "tags": [
+        "code_agent",
+        "agent_runtime"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 84,
+      "classification_hits": [
+        "ide",
+        "code"
+      ],
+      "created_at": "2026-05-19T00:39:53.151598Z"
+    },
+    {
+      "id": "skill_star_webzler_agentmemory",
+      "title": "webzler/agentMemory",
+      "description": "Eliminate AI hallucinations. Zero config. Works instantly with Cline, RooCode, KiloCode, and more.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/webzler/agentMemory",
+      "repo_full_name": "webzler/agentMemory",
+      "language": "TypeScript",
+      "stars": 27,
+      "tags": [
+        "mcp_tool",
+        "agent_runtime",
+        "ai_memory",
+        "antigravity_skill",
+        "antigravity_tools",
+        "mcp_server",
+        "typescript"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "classification_score": 93,
+      "classification_hits": [
+        "mcp",
+        "tools"
+      ],
+      "created_at": "2026-05-19T00:39:53.151718Z"
+    },
+    {
+      "id": "skill_star_wesammustafa_claude_code_everything_you_need_to_know",
+      "title": "wesammustafa/Claude-Code-Everything-You-Need-to-Know",
+      "description": "The ultimate all-in-one guide to mastering Claude Code. From setup, prompt engineering, commands, hooks, workflows, automation, and integrations, to MCP servers, tools, and the BMAD method—packed with step-by-step tutorials, real-world examples, and expert strategies to make this the global go-to repo for Claude mastery.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/wesammustafa/Claude-Code-Everything-You-Need-to-Know",
+      "repo_full_name": "wesammustafa/Claude-Code-Everything-You-Need-to-Know",
+      "language": "Python",
+      "stars": 1859,
+      "tags": [
+        "mcp_tool",
+        "agent_runtime",
+        "python"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "classification_score": 97,
+      "classification_hits": [
+        "mcp",
+        "tools",
+        "protocol"
+      ],
+      "created_at": "2026-05-19T00:39:53.151862Z"
+    },
+    {
+      "id": "skill_star_wlzh_skills",
+      "title": "wlzh/skills",
+      "description": "开源了Claude Code Skills等集合，大部分是自己实际需要搞得，需要的自取。欢迎star",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/wlzh/skills",
+      "repo_full_name": "wlzh/skills",
+      "language": "Python",
+      "stars": 543,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "python"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 84,
+      "classification_hits": [
+        "ide",
+        "code"
+      ],
+      "created_at": "2026-05-19T00:39:53.151963Z"
+    },
+    {
+      "id": "skill_star_wondelai_skills",
+      "title": "wondelai/skills",
+      "description": "Agent skills for Claude Code and other agentskills.io-compatible agents. See https://developertoolkit.ai for more information about skills in general.",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/wondelai/skills",
+      "repo_full_name": "wondelai/skills",
+      "language": "Shell",
+      "stars": 1008,
+      "tags": [
+        "browser_agent",
+        "agent_runtime",
+        "agent_skills",
+        "ai_skills",
+        "claude_code",
+        "claude_code_marketplace",
+        "claude_code_plugin",
+        "claude_code_skills",
+        "claude_plugins",
+        "claude_skills",
+        "skill_md",
+        "skillsmp",
+        "shell"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.browser_operator",
+      "classification_score": 94,
+      "classification_hits": [
+        "browser"
+      ],
+      "created_at": "2026-05-19T00:39:53.152080Z"
+    },
+    {
+      "id": "skill_star_xu_xiang_everything_claude_code_zh",
+      "title": "xu-xiang/everything-claude-code-zh",
+      "description": "everything-claude-code 中文翻译项目：完整的 Claude Code 配置集合（agents, skills, hooks, commands, rules, MCPs）。源自 Anthropic 黑客松获胜者的实战配置，助力中文工程师高效理解与使用 Claude Code。",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/xu-xiang/everything-claude-code-zh",
+      "repo_full_name": "xu-xiang/everything-claude-code-zh",
+      "language": "JavaScript",
+      "stars": 553,
+      "tags": [
+        "mcp_tool",
+        "agent_runtime",
+        "ai_agents",
+        "anthropic",
+        "claude",
+        "claude_code",
+        "developer_tools",
+        "everything_claude_code",
+        "llm",
+        "mcp",
+        "oneskill",
+        "productivity",
+        "javascript"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "classification_score": 93,
+      "classification_hits": [
+        "mcp",
+        "tools"
+      ],
+      "created_at": "2026-05-19T00:39:53.152200Z"
+    },
+    {
+      "id": "skill_star_yusufkaraaslan_skill_seekers",
+      "title": "yusufkaraaslan/Skill_Seekers",
+      "description": "Convert documentation websites, GitHub repositories, and PDFs into Claude AI skills with automatic conflict detection",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/yusufkaraaslan/Skill_Seekers",
+      "repo_full_name": "yusufkaraaslan/Skill_Seekers",
+      "language": "Python",
+      "stars": 13614,
+      "tags": [
+        "mcp_tool",
+        "agent_runtime",
+        "ai_tools",
+        "ast_parser",
+        "automation",
+        "claude_ai",
+        "claude_skills",
+        "code_analysis",
+        "conflict_detection",
+        "documentation",
+        "documentation_generator",
+        "github",
+        "github_scraper",
+        "mcp",
+        "mcp_server",
+        "multi_source"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "classification_score": 97,
+      "classification_hits": [
+        "mcp",
+        "tools",
+        "protocol"
+      ],
+      "created_at": "2026-05-19T00:39:53.152328Z"
+    },
+    {
+      "id": "skill_star_zai_org_glm_5",
+      "title": "zai-org/GLM-5",
+      "description": "GLM-5: From Vibe Coding to Agentic Engineering",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/zai-org/GLM-5",
+      "repo_full_name": "zai-org/GLM-5",
+      "language": null,
+      "stars": 3273,
+      "tags": [
+        "code_agent",
+        "agent_runtime",
+        "agentic_ai",
+        "coding",
+        "glm",
+        "llm"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.code_agent_core",
+      "classification_score": 80,
+      "classification_hits": [
+        "ide"
+      ],
+      "created_at": "2026-05-19T00:39:53.152445Z"
+    },
+    {
+      "id": "skill_star_zarazhangrui_frontend_slides",
+      "title": "zarazhangrui/frontend-slides",
+      "description": "Create beautiful slides on the web using Claude's frontend skills",
+      "source": "github_star_sync",
+      "source_path": "https://github.com/zarazhangrui/frontend-slides",
+      "repo_full_name": "zarazhangrui/frontend-slides",
+      "language": "Shell",
+      "stars": 18026,
+      "tags": [
+        "mcp_tool",
+        "agent_runtime",
+        "ai_slides",
+        "anthropic",
+        "claude",
+        "claude_code",
+        "claude_skill",
+        "generative_ui",
+        "html",
+        "presentation",
+        "slides",
+        "vibe_coding",
+        "shell"
+      ],
+      "enabled": true,
+      "default": true,
+      "target_builtin_module": "builtin.mcp_tool_hub",
+      "classification_score": 89,
+      "classification_hits": [
+        "tools"
+      ],
+      "created_at": "2026-05-19T00:39:53.152566Z"
     }
-  ]
+  ],
+  "updated_at": "2026-05-19T00:39:53.152592Z"
 }

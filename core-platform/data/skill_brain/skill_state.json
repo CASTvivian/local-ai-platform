@@ -1,6 +1,6 @@
 {
-  "version": "c26-ef-a",
-  "updated_at": "2026-05-16T08:56:54.258035Z",
+  "version": "c26-star-sync-fusion",
+  "updated_at": "2026-05-19T00:39:53.152601Z",
   "description": "User-controllable lifecycle state for default skills. Merged from default_skills with user overrides.",
   "skills": {
     "skill_public_apis_public_apis": {
@@ -2338,6 +2338,1534 @@
         "general_skill"
       ],
       "updated_at": "2026-05-16T08:56:54.258845Z"
+    },
+    "skill_star_1jehuang_jcode": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.122040Z"
+    },
+    "skill_star_2025emma_vibe_coding_cn": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.122514Z"
+    },
+    "skill_star_ai4bharat_openhands": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.122662Z"
+    },
+    "skill_star_amap_ml_skillclaw": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.122814Z"
+    },
+    "skill_star_agricidaniel_claude_obsidian": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.122944Z"
+    },
+    "skill_star_alishahryar1_free_claude_code": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.123076Z"
+    },
+    "skill_star_all_hands_ai_openhands_resolver": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.123111Z"
+    },
+    "skill_star_allthingssmitty_css_protips": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.123250Z"
+    },
+    "skill_star_ar9av_obsidian_wiki": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.123386Z"
+    },
+    "skill_star_bankrbot_skills": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.123500Z"
+    },
+    "skill_star_behisecc_awesome_claude_skills": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.123629Z"
+    },
+    "skill_star_bloopai_vibe_kanban": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.123758Z"
+    },
+    "skill_star_bluespire_durandal": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.123892Z"
+    },
+    "skill_star_chalarangelo_30_seconds_of_code": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.124000Z"
+    },
+    "skill_star_composiohq_awesome_claude_skills": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.124121Z"
+    },
+    "skill_star_composiohq_awesome_codex_skills": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.124256Z"
+    },
+    "skill_star_conardli_garden_skills": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.124368Z"
+    },
+    "skill_star_conway_research_automaton": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.124499Z"
+    },
+    "skill_star_dimimikadze_orca": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.124620Z"
+    },
+    "skill_star_dimillian_skills": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.124736Z"
+    },
+    "skill_star_enzed_vibe_coding": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.124852Z"
+    },
+    "skill_star_evermind_ai_everos": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.124986Z"
+    },
+    "skill_star_evoagentx_evoagentx": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.125109Z"
+    },
+    "skill_star_evomap_evolver": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.125258Z"
+    },
+    "skill_star_evoscientist_evoscientist": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.125391Z"
+    },
+    "skill_star_fulu_foundation_orcaslicer_bambulab": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.125457Z"
+    },
+    "skill_star_firstgeargames_fishnet": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.125565Z"
+    },
+    "skill_star_gudastudio_skills": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.125687Z"
+    },
+    "skill_star_hkuds_openspace": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.125808Z"
+    },
+    "skill_star_imbad0202_academic_research_skills": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.125937Z"
+    },
+    "skill_star_jeffallan_claude_skills": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.126047Z"
+    },
+    "skill_star_jimliu_baoyu_skills": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.126171Z"
+    },
+    "skill_star_jordanmccann_agentmemory": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.126291Z"
+    },
+    "skill_star_josephrp_agentmemory": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.126393Z"
+    },
+    "skill_star_kjohnson_700_cyllene": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.126499Z"
+    },
+    "skill_star_kkkkhazix_khazix_skills": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.126608Z"
+    },
+    "skill_star_keygraphhq_shannon": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.126737Z"
+    },
+    "skill_star_khazp_vibe_coding_prompt_template": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.126851Z"
+    },
+    "skill_star_kocoro_lab_shannon": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.126971Z"
+    },
+    "skill_star_mervinpraison_praisonai": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.127117Z"
+    },
+    "skill_star_minatoz997_openhands_backend": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.127241Z"
+    },
+    "skill_star_minimax_ai_skills": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.127356Z"
+    },
+    "skill_star_opengvlab_scalecua": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.127485Z"
+    },
+    "skill_star_openhands_openhands": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.127608Z"
+    },
+    "skill_star_openhands_openhands_cli": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.127727Z"
+    },
+    "skill_star_openhands_openhands_cloud": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.127803Z"
+    },
+    "skill_star_openhands_benchmarks": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.127926Z"
+    },
+    "skill_star_openhands_docs": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.127979Z"
+    },
+    "skill_star_openhands_extensions": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.128094Z"
+    },
+    "skill_star_openhands_openhands_aci": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.128207Z"
+    },
+    "skill_star_openhands_openhands_chrome_extension": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.128315Z"
+    },
+    "skill_star_openhands_software_agent_sdk": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.128431Z"
+    },
+    "skill_star_orcaslicer_orcaslicer": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.128555Z"
+    },
+    "skill_star_orchestra_research_ai_research_skills": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.128690Z"
+    },
+    "skill_star_python_world_python_mini_projects": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.128802Z"
+    },
+    "skill_star_quantaalpha_repomaster": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.128930Z"
+    },
+    "skill_star_samuraigpt_llm_wiki_agent": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.129062Z"
+    },
+    "skill_star_savagenoah_evoagentx_report": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.129083Z"
+    },
+    "skill_star_tencent_tencentdb_agent_memory": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.129212Z"
+    },
+    "skill_star_tencent_weknora": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.129340Z"
+    },
+    "skill_star_th0rgal_open_ralph_wiggum": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.129463Z"
+    },
+    "skill_star_the_cool_coders_project_ideas_and_resources": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.129603Z"
+    },
+    "skill_star_turixai_turix_cua": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.129726Z"
+    },
+    "skill_star_vamfi_claude_user_memory": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.129854Z"
+    },
+    "skill_star_voltagent_awesome_openclaw_skills": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.129989Z"
+    },
+    "skill_star_yeqing17_2026_omniagent": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.130114Z"
+    },
+    "skill_star_yuan1z0825_nature_skills": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.130230Z"
+    },
+    "skill_star_ace_agent_ace": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.130356Z"
+    },
+    "skill_star_adityasoni9998_openhands_versa": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.130486Z"
+    },
+    "skill_star_aiming_lab_agent0": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.130607Z"
+    },
+    "skill_star_aiming_lab_autoresearchclaw": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.130734Z"
+    },
+    "skill_star_aiming_lab_metaclaw": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.130860Z"
+    },
+    "skill_star_aiwaves_cn_agents": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.130981Z"
+    },
+    "skill_star_alirezarezvani_claude_skills": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.131120Z"
+    },
+    "skill_star_allegro_ralph": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.131234Z"
+    },
+    "skill_star_alxshelepenok_lumen": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.131359Z"
+    },
+    "skill_star_andreasbm_web_skills": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.131516Z"
+    },
+    "skill_star_android_skills": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.131616Z"
+    },
+    "skill_star_antfu_skills": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.131719Z"
+    },
+    "skill_star_anthropics_claude_plugins_official": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.131838Z"
+    },
+    "skill_star_apify_agent_skills": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.131935Z"
+    },
+    "skill_star_apple_servicetalk": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.132045Z"
+    },
+    "skill_star_atomicstrata_llm_wiki_compiler": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.132172Z"
+    },
+    "skill_star_autoclaw_cc_xiaohongshu_skills": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.132276Z"
+    },
+    "skill_star_bencodezen_vue_enterprise_boilerplate": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.132403Z"
+    },
+    "skill_star_browserbase_skills": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.132525Z"
+    },
+    "skill_star_catherinedevlin_ipython_sql": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.132630Z"
+    },
+    "skill_star_chen_rn_cua": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.132755Z"
+    },
+    "skill_star_cisco_ai_defense_skill_scanner": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.132861Z"
+    },
+    "skill_star_clawvader_tech_hermes_telegram_miniapp": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.132977Z"
+    },
+    "skill_star_cloudflare_pingora": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.133081Z"
+    },
+    "skill_star_cloudflare_skills": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.133185Z"
+    },
+    "skill_star_cloudflare_vibesdk": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.133311Z"
+    },
+    "skill_star_cyberagiinc_devdocs": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.133441Z"
+    },
+    "skill_star_czlonkowski_n8n_skills": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.133549Z"
+    },
+    "skill_star_datawhalechina_vibe_vibe": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.133661Z"
+    },
+    "skill_star_decolua_9router": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.133793Z"
+    },
+    "skill_star_dontbesilent2025_dbskill": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.133895Z"
+    },
+    "skill_star_dotnet_skills": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.134011Z"
+    },
+    "skill_star_expo_skills": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.134127Z"
+    },
+    "skill_star_fancyai_official_skills": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.134240Z"
+    },
+    "skill_star_filipecalegario_awesome_vibe_coding": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.134363Z"
+    },
+    "skill_star_firebug_firebug": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.134468Z"
+    },
+    "skill_star_florinpop17_app_ideas": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.134590Z"
+    },
+    "skill_star_flutter_skills": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.134705Z"
+    },
+    "skill_star_frankbria_ralph_claude_code": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.134818Z"
+    },
+    "skill_star_futurice_backend_best_practices": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.134929Z"
+    },
+    "skill_star_git_game_git_game": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.134999Z"
+    },
+    "skill_star_github_awesome_copilot": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.135121Z"
+    },
+    "skill_star_google_labs_code_stitch_skills": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.135228Z"
+    },
+    "skill_star_google_skills": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.135332Z"
+    },
+    "skill_star_grablab_openhand_hardware": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.135446Z"
+    },
+    "skill_star_grablab_openhand_node": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.135551Z"
+    },
+    "skill_star_guipsamora_pandas_exercises": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.135671Z"
+    },
+    "skill_star_heilcheng_awesome_agent_skills": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.135796Z"
+    },
+    "skill_star_hesreallyhim_awesome_claude_code": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.135890Z"
+    },
+    "skill_star_huggingface_skills": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.135991Z"
+    },
+    "skill_star_hundredrabbits_orca": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.136112Z"
+    },
+    "skill_star_iblinkq_llm_wiki_obsidian_blink": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.136219Z"
+    },
+    "skill_star_iofficeai_aionui": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.136358Z"
+    },
+    "skill_star_imbue_ai_darwinian_evolver": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.136463Z"
+    },
+    "skill_star_imthenachoman_how_to_secure_a_linux_server": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.136576Z"
+    },
+    "skill_star_iris_networks_terminator": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.136684Z"
+    },
+    "skill_star_itsmostafa_aws_agent_skills": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.136805Z"
+    },
+    "skill_star_jcodec_jcodec": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.136905Z"
+    },
+    "skill_star_jgravelle_jcodemunch_mcp": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.137037Z"
+    },
+    "skill_star_johnwheeler_flask_ask": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.137146Z"
+    },
+    "skill_star_kepano_obsidian_skills": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.137271Z"
+    },
+    "skill_star_kytmanov_obsidian_llm_wiki_local": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.137409Z"
+    },
+    "skill_star_lijigang_ljg_skills": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.137510Z"
+    },
+    "skill_star_lucasrosati_claude_code_memory_setup": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.137641Z"
+    },
+    "skill_star_markdown_viewer_skills": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.137770Z"
+    },
+    "skill_star_matt1398_claude_devtools": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.137903Z"
+    },
+    "skill_star_mattpocock_skills": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.138008Z"
+    },
+    "skill_star_mcollina_skills": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.138099Z"
+    },
+    "skill_star_memodb_io_acontext": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.138226Z"
+    },
+    "skill_star_michaelshimeles_ralphy": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.138340Z"
+    },
+    "skill_star_microsoft_fara": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.138461Z"
+    },
+    "skill_star_microsoft_magentic_ui": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.138578Z"
+    },
+    "skill_star_microsoft_skills": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.146699Z"
+    },
+    "skill_star_mikeyobrien_ralph_orchestrator": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.146811Z"
+    },
+    "skill_star_mikke89_rmlui": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.146937Z"
+    },
+    "skill_star_mistralai_mistral_vibe": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.147051Z"
+    },
+    "skill_star_modelscope_agentevolver": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.147176Z"
+    },
+    "skill_star_mrgoonie_claudekit_skills": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.147289Z"
+    },
+    "skill_star_multica_ai_andrej_karpathy_skills": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.147405Z"
+    },
+    "skill_star_muratcankoylan_agent_skills_for_context_engineering": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.147554Z"
+    },
+    "skill_star_nashsu_llm_wiki": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.147677Z"
+    },
+    "skill_star_norvig_pytudes": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.147798Z"
+    },
+    "skill_star_numman_ali_openskills": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.147912Z"
+    },
+    "skill_star_openai_openai_cua_sample_app": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.148020Z"
+    },
+    "skill_star_openai_skills": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.148101Z"
+    },
+    "skill_star_openclaw_clawhub": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.148221Z"
+    },
+    "skill_star_oracle_devrel_oracle_ai_developer_hub": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.148359Z"
+    },
+    "skill_star_paoloanzn_free_code": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.148462Z"
+    },
+    "skill_star_phuryn_pm_skills": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.148589Z"
+    },
+    "skill_star_pmotschmann_evolve": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.148700Z"
+    },
+    "skill_star_prometheus_openmetrics": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.148831Z"
+    },
+    "skill_star_red42_html5_genetic_cars": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.148879Z"
+    },
+    "skill_star_refly_ai_refly": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.149015Z"
+    },
+    "skill_star_remotion_dev_skills": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.149041Z"
+    },
+    "skill_star_rmurphey_js_assessment": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.149143Z"
+    },
+    "skill_star_rohitg00_agentmemory": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.149261Z"
+    },
+    "skill_star_router_for_me_cliproxyapi": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.149401Z"
+    },
+    "skill_star_rtk_ai_rtk": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.149529Z"
+    },
+    "skill_star_sdyckjq_lab_llm_wiki_skill": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.149635Z"
+    },
+    "skill_star_siteboon_claudecodeui": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.149761Z"
+    },
+    "skill_star_slavingia_skills": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.149877Z"
+    },
+    "skill_star_snarktank_ralph": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.149989Z"
+    },
+    "skill_star_soongenwong_claudecode": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.150111Z"
+    },
+    "skill_star_stablyai_orca": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.150238Z"
+    },
+    "skill_star_subsy_ralph_tui": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.150338Z"
+    },
+    "skill_star_taichuy_agentmemory": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.150459Z"
+    },
+    "skill_star_tandpfun_skill_icons": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.150578Z"
+    },
+    "skill_star_thedotmack_claude_mem": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.150714Z"
+    },
+    "skill_star_tomojitakasu_rtklib": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.150823Z"
+    },
+    "skill_star_trailofbits_skills": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.150933Z"
+    },
+    "skill_star_travisvn_awesome_claude_skills": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.151060Z"
+    },
+    "skill_star_trimstray_test_your_sysadmin_skills": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.151206Z"
+    },
+    "skill_star_trycua_cua": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.151338Z"
+    },
+    "skill_star_tsuirak_skills": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.151384Z"
+    },
+    "skill_star_umputun_ralphex": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.151484Z"
+    },
+    "skill_star_vuejs_ai_skills": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.151600Z"
+    },
+    "skill_star_webzler_agentmemory": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.151720Z"
+    },
+    "skill_star_wesammustafa_claude_code_everything_you_need_to_know": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.151864Z"
+    },
+    "skill_star_wlzh_skills": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.151965Z"
+    },
+    "skill_star_wondelai_skills": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.152082Z"
+    },
+    "skill_star_xu_xiang_everything_claude_code_zh": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.152202Z"
+    },
+    "skill_star_yusufkaraaslan_skill_seekers": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.152331Z"
+    },
+    "skill_star_zai_org_glm_5": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.152447Z"
+    },
+    "skill_star_zarazhangrui_frontend_slides": {
+      "enabled": true,
+      "pinned": false,
+      "usage_count": 0,
+      "rating": null,
+      "source": "github_star_sync",
+      "updated_at": "2026-05-19T00:39:53.152568Z"
     }
   }
 }
